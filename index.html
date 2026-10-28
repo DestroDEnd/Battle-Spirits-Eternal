@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Battle Spirits Eternal | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.1">
+</head>
+<body>
+
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+<header class="navbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
+  <nav class="nav-tabs">
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="landing-view">
+    
+    <!-- Hero Banner with Full Card Art Background -->
+    <section class="landing-hero">
+      <div class="hero-bg-layer">
+        <img src="/assets/hero_bg.png" alt="" class="hero-bg-img" />
+        <div class="hero-bg-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-pill">⚔️ Definitive Database &amp; Deck Laboratory</span>
+        </div>
+        <h1 class="hero-title">Battle Spirits Eternal</h1>
+        <p class="hero-subtitle">
+          The Ultimate Battle Spirits Compendium &amp; Deck Laboratory. Explore 271 official families, 299 sets, and all 14,528 cards with zero-latency streaming.
+        </p>
+
+        <!-- Quick Search Bar in Hero -->
+        <div class="hero-search-box">
+          <div class="hero-search-wrap">
+            <svg class="hero-search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" id="heroSearchInput" class="hero-search-input" placeholder="Search any card, archetype, or effect… (e.g. Makai, Siegfried, BS01)" onkeydown="if(event.key==='Enter') executeHeroSearch()"/>
+          </div>
+          <button class="hero-search-btn" onclick="executeHeroSearch()">Search Cards</button>
+        </div>
+
+        <!-- Battle Arena Quick-Launch Callout at top of Hero -->
+        <div class="hero-battle-callout">
+          <div class="hbc-glow"></div>
+          <div class="hbc-left">
+            <span class="hbc-badge"><span class="pulse-dot-red"></span> NEW • SPIRIT DUEL SIMULATOR</span>
+            <h3 class="hbc-title">Enter The Eternal Battle Arena</h3>
+            <p class="hbc-desc">Test your decks in real core-based Battle Spirits combat. Manage Life &amp; Reserve cores, summon spirits, clash with BP, and shatter enemy Life gems!</p>
+          </div>
+          <div class="hbc-actions">
+            <a class="btn-hero-battle" href="/arena">⚔️ Launch Battle Arena</a>
+            <a class="btn-hero-quick-duel" href="/arena?duel=quick">⚡ Quick Duel (Red vs Purple)</a>
+          </div>
+        </div>
+
+        <!-- Meta Feature Badges -->
+        <div class="hero-badges">
+          <span class="hero-badge-pill">🎴 14,528 Cards</span>
+          <span class="hero-badge-pill">📜 271 Official Families</span>
+          <span class="hero-badge-pill">📦 299 Sets</span>
+          <span class="hero-badge-pill">⚡ Auto Wiki Sync</span>
+          <span class="hero-badge-pill">🃏 40-Card Deck Builder</span>
+        </div>
+      </div>
+    </section>
+
+
+            <!-- ✨ SHIFTING X-RARE FEATURED CARDS SHOWCASE ✨ -->
+    <section class="featured-cards-section" id="featuredXRares">
+      <div class="featured-header">
+        <div class="featured-header-left">
+          <div class="featured-badge">
+            <span class="pulse-dot"></span>
+            <span>FEATURED ACES • X-RARE SHOWCASE</span>
+          </div>
+          <h2 class="featured-title">Legendary X-Rares of the 6 Colors</h2>
+          <p class="featured-subtitle">High-impact ace cards continuously shifting across all 6 colors. Click any card to view its full ability, BP, and stats.</p>
+        </div>
+        
+        <div class="featured-controls">
+          <!-- Color Filter Tabs -->
+          <div class="featured-color-filters">
+            <button class="color-filter-btn active" data-color="" onclick="filterFeaturedColor('', this)">
+              <span class="dot-all"></span> All Colors
+            </button>
+            <button class="color-filter-btn color-btn-red" data-color="Red" onclick="filterFeaturedColor('Red', this)">
+              <span class="color-dot dot-red"></span> Red
+            </button>
+            <button class="color-filter-btn color-btn-purple" data-color="Purple" onclick="filterFeaturedColor('Purple', this)">
+              <span class="color-dot dot-purple"></span> Purple
+            </button>
+            <button class="color-filter-btn color-btn-green" data-color="Green" onclick="filterFeaturedColor('Green', this)">
+              <span class="color-dot dot-green"></span> Green
+            </button>
+            <button class="color-filter-btn color-btn-white" data-color="White" onclick="filterFeaturedColor('White', this)">
+              <span class="color-dot dot-white"></span> White
+            </button>
+            <button class="color-filter-btn color-btn-yellow" data-color="Yellow" onclick="filterFeaturedColor('Yellow', this)">
+              <span class="color-dot dot-yellow"></span> Yellow
+            </button>
+            <button class="color-filter-btn color-btn-blue" data-color="Blue" onclick="filterFeaturedColor('Blue', this)">
+              <span class="color-dot dot-blue"></span> Blue
+            </button>
+          </div>
+
+          <!-- Actions: Shuffle, Pause, Prev, Next -->
+          <div class="featured-btn-group">
+            <button class="featured-action-btn" onclick="shuffleFeaturedCards()" title="Roll fresh random X-Rares">
+              <span class="btn-icon">🔀</span> <span class="btn-txt">Shuffle</span>
+            </button>
+            <button class="featured-circle-btn" id="featuredPlayPauseBtn" onclick="toggleFeaturedAutoShift()" title="Toggle Auto-Shift">
+              <span id="featuredPlayPauseIcon">⏸️</span>
+            </button>
+            <button class="featured-circle-btn" onclick="shiftFeaturedCards(-1)" title="Previous Cards">‹</button>
+            <button class="featured-circle-btn" onclick="shiftFeaturedCards(1)" title="Next Cards">›</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Carousel Viewport with Fade Gradient Edges -->
+      <div class="featured-carousel-viewport" id="featuredViewport" onmouseenter="pauseFeaturedHover()" onmouseleave="resumeFeaturedHover()">
+        <div class="carousel-fade-left"></div>
+        <div class="carousel-fade-right"></div>
+        
+        <div class="featured-cards-track" id="featuredCardsTrack">
+          <div class="featured-card-item card-theme-blue" data-name="The Hellsea FourDemonLord Ill-Dezal" onclick="openCardDetail(this.dataset.name)" title="Click to view The Hellsea FourDemonLord Ill-Dezal">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2d/SD65-X04.png/revision/latest?cb=20230421140758" alt="The Hellsea FourDemonLord Ill-Dezal" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2d/SD65-X04.png/revision/latest?cb=20230421140758" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The Hellsea FourDemonLord Ill-Dezal</div>
+              <div class="card-sub-info">Cost 6 • Ultimate • Evil God</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The ShinobiCommander Kurohagane X" onclick="openCardDetail(this.dataset.name)" title="Click to view The ShinobiCommander Kurohagane X">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2b/BS74-X04.png/revision/latest?cb=20251115043921" alt="The ShinobiCommander Kurohagane X" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2b/BS74-X04.png/revision/latest?cb=20251115043921" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The ShinobiCommander Kurohagane X</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Ninja Gale</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="The ArcAngelia Isfiel XV" onclick="openCardDetail(this.dataset.name)" title="Click to view The ArcAngelia Isfiel XV">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/c/c2/BSC45-XV05.png/revision/latest?cb=20240922084822" alt="The ArcAngelia Isfiel XV" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/c/c2/BSC45-XV05.png/revision/latest?cb=20240922084822" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">XV-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The ArcAngelia Isfiel XV</div>
+              <div class="card-sub-info">Cost 7 • Spirit • Gekiha</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="The TwilightAxeBeast Youalte-Puztli" onclick="openCardDetail(this.dataset.name)" title="Click to view The TwilightAxeBeast Youalte-Puztli">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/a/a0/BS62-X06.png/revision/latest?cb=20221021181702" alt="The TwilightAxeBeast Youalte-Puztli" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/a/a0/BS62-X06.png/revision/latest?cb=20221021181702" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The TwilightAxeBeast Youalte-Puztli</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Armored Beast</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="The DuskCatalyzer Nakagami" onclick="openCardDetail(this.dataset.name)" title="Click to view The DuskCatalyzer Nakagami">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/5/57/BS34-CP02.jpg/revision/latest?cb=20160104145557" alt="The DuskCatalyzer Nakagami" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/5/57/BS34-CP02.jpg/revision/latest?cb=20160104145557" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The DuskCatalyzer Nakagami</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Catalyst</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="The FlashSoulBlade Lightning-Shion" onclick="openCardDetail(this.dataset.name)" title="Click to view The FlashSoulBlade Lightning-Shion">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/f/f3/BS23-X08.jpg/revision/latest?cb=20231127142359" alt="The FlashSoulBlade Lightning-Shion" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/f/f3/BS23-X08.jpg/revision/latest?cb=20231127142359" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The FlashSoulBlade Lightning-Shion</div>
+              <div class="card-sub-info">Cost 6 • Brave • Exalted Sword</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="The MagicJewelContractor Morrigan" onclick="openCardDetail(this.dataset.name)" title="Click to view The MagicJewelContractor Morrigan">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/5/51/BS73-CX02.png/revision/latest?cb=20250822171241" alt="The MagicJewelContractor Morrigan" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/5/51/BS73-CX02.png/revision/latest?cb=20250822171241" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">Contract X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The MagicJewelContractor Morrigan</div>
+              <div class="card-sub-info">Cost 2 • Contract Nexus • Grandwalker</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-blue" data-name="Kamen Rider OOO PuToTyra Combo" onclick="openCardDetail(this.dataset.name)" title="Click to view Kamen Rider OOO PuToTyra Combo">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/c/ca/Power_to_tearer.png/revision/latest?cb=20190201184314" alt="Kamen Rider OOO PuToTyra Combo" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/c/ca/Power_to_tearer.png/revision/latest?cb=20190201184314" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Kamen Rider OOO PuToTyra Combo</div>
+              <div class="card-sub-info">Cost 6 • Spirit • Kamen</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The WindHero Dorcus-Ushiwaka" onclick="openCardDetail(this.dataset.name)" title="Click to view The WindHero Dorcus-Ushiwaka">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/a/a8/BS14-X03.jpg/revision/latest?cb=20241122184946" alt="The WindHero Dorcus-Ushiwaka" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/a/a8/BS14-X03.jpg/revision/latest?cb=20241122184946" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The WindHero Dorcus-Ushiwaka</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Supreme Hero</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-blue" data-name="The AbyssalRouseDragon Bashlomu" onclick="openCardDetail(this.dataset.name)" title="Click to view The AbyssalRouseDragon Bashlomu">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/d8/BS53-X06.png/revision/latest?cb=20200822092324" alt="The AbyssalRouseDragon Bashlomu" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/d8/BS53-X06.png/revision/latest?cb=20200822092324" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The AbyssalRouseDragon Bashlomu</div>
+              <div class="card-sub-info">Cost 6 • Spirit • Primal</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="The SunDragonGod ShineTres-Sagitto-Apollodragon" onclick="openCardDetail(this.dataset.name)" title="Click to view The SunDragonGod ShineTres-Sagitto-Apollodragon">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/dd/BSC50-X01.png/revision/latest?cb=20251219162208" alt="The SunDragonGod ShineTres-Sagitto-Apollodragon" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/dd/BSC50-X01.png/revision/latest?cb=20251219162208" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The SunDragonGod ShineTres-Sagitto-Apollodragon</div>
+              <div class="card-sub-info">Cost 9 • Spirit • Concluser</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The SevenGreatHeroBeasts ToughLionheart Herak-Leios" onclick="openCardDetail(this.dataset.name)" title="Click to view The SevenGreatHeroBeasts ToughLionheart Herak-Leios">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/7/7f/BS46-X03.png/revision/latest?cb=20181012124106" alt="The SevenGreatHeroBeasts ToughLionheart Herak-Leios" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/7/7f/BS46-X03.png/revision/latest?cb=20181012124106" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The SevenGreatHeroBeasts ToughLionheart Herak-Leios</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Worldswalker</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-" onclick="openCardDetail(this.dataset.name)" title="Click to view Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/b/bb/CB23-X06.png/revision/latest?cb=20220722095741" alt="Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/b/bb/CB23-X06.png/revision/latest?cb=20220722095741" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-</div>
+              <div class="card-sub-info">Cost 5 • Brave • Pilot</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="The Gigantic Thor" onclick="openCardDetail(this.dataset.name)" title="Click to view The Gigantic Thor">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/d3/BS02-X07.jpg/revision/latest?cb=20230506104612" alt="The Gigantic Thor" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/d3/BS02-X07.jpg/revision/latest?cb=20230506104612" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The Gigantic Thor</div>
+              <div class="card-sub-info">Cost 7 • Spirit • Armed Machine</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="The EndgameSharkEmperor Aztlan" onclick="openCardDetail(this.dataset.name)" title="Click to view The EndgameSharkEmperor Aztlan">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/6/63/BS74-X13.png/revision/latest?cb=20251115043920" alt="The EndgameSharkEmperor Aztlan" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/6/63/BS74-X13.png/revision/latest?cb=20251115043920" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The EndgameSharkEmperor Aztlan</div>
+              <div class="card-sub-info">Cost 10 • Ultimate • Devotee</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="Ryuuman-Godbreaker" onclick="openCardDetail(this.dataset.name)" title="Click to view Ryuuman-Godbreaker">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/9/92/Ryuuman-Godbreaker.png/revision/latest?cb=20131107225356" alt="Ryuuman-Godbreaker" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/9/92/Ryuuman-Godbreaker.png/revision/latest?cb=20131107225356" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Ryuuman-Godbreaker</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Dragon</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="Platinum Queen, Cattleya" onclick="openCardDetail(this.dataset.name)" title="Click to view Platinum Queen, Cattleya">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/1/1d/BS76-AX03.png/revision/latest?cb=20260522150815" alt="Platinum Queen, Cattleya" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/1/1d/BS76-AX03.png/revision/latest?cb=20260522150815" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">AX-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Platinum Queen, Cattleya</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Glow Contract</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="Kamen Rider Blade King Form ［3］" onclick="openCardDetail(this.dataset.name)" title="Click to view Kamen Rider Blade King Form ［3］">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2c/CB31-X04.png/revision/latest?cb=20240906172207" alt="Kamen Rider Blade King Form ［3］" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2c/CB31-X04.png/revision/latest?cb=20240906172207" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Kamen Rider Blade King Form ［3］</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Kamen</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-blue" data-name="The Hellsea FourDemonLord Ill-Dezal" onclick="openCardDetail(this.dataset.name)" title="Click to view The Hellsea FourDemonLord Ill-Dezal">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2d/SD65-X04.png/revision/latest?cb=20230421140758" alt="The Hellsea FourDemonLord Ill-Dezal" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2d/SD65-X04.png/revision/latest?cb=20230421140758" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The Hellsea FourDemonLord Ill-Dezal</div>
+              <div class="card-sub-info">Cost 6 • Ultimate • Evil God</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The ShinobiCommander Kurohagane X" onclick="openCardDetail(this.dataset.name)" title="Click to view The ShinobiCommander Kurohagane X">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2b/BS74-X04.png/revision/latest?cb=20251115043921" alt="The ShinobiCommander Kurohagane X" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2b/BS74-X04.png/revision/latest?cb=20251115043921" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The ShinobiCommander Kurohagane X</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Ninja Gale</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="The ArcAngelia Isfiel XV" onclick="openCardDetail(this.dataset.name)" title="Click to view The ArcAngelia Isfiel XV">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/c/c2/BSC45-XV05.png/revision/latest?cb=20240922084822" alt="The ArcAngelia Isfiel XV" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/c/c2/BSC45-XV05.png/revision/latest?cb=20240922084822" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">XV-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The ArcAngelia Isfiel XV</div>
+              <div class="card-sub-info">Cost 7 • Spirit • Gekiha</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="The TwilightAxeBeast Youalte-Puztli" onclick="openCardDetail(this.dataset.name)" title="Click to view The TwilightAxeBeast Youalte-Puztli">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/a/a0/BS62-X06.png/revision/latest?cb=20221021181702" alt="The TwilightAxeBeast Youalte-Puztli" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/a/a0/BS62-X06.png/revision/latest?cb=20221021181702" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The TwilightAxeBeast Youalte-Puztli</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Armored Beast</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="The DuskCatalyzer Nakagami" onclick="openCardDetail(this.dataset.name)" title="Click to view The DuskCatalyzer Nakagami">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/5/57/BS34-CP02.jpg/revision/latest?cb=20160104145557" alt="The DuskCatalyzer Nakagami" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/5/57/BS34-CP02.jpg/revision/latest?cb=20160104145557" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The DuskCatalyzer Nakagami</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Catalyst</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="The FlashSoulBlade Lightning-Shion" onclick="openCardDetail(this.dataset.name)" title="Click to view The FlashSoulBlade Lightning-Shion">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/f/f3/BS23-X08.jpg/revision/latest?cb=20231127142359" alt="The FlashSoulBlade Lightning-Shion" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/f/f3/BS23-X08.jpg/revision/latest?cb=20231127142359" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The FlashSoulBlade Lightning-Shion</div>
+              <div class="card-sub-info">Cost 6 • Brave • Exalted Sword</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="The MagicJewelContractor Morrigan" onclick="openCardDetail(this.dataset.name)" title="Click to view The MagicJewelContractor Morrigan">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/5/51/BS73-CX02.png/revision/latest?cb=20250822171241" alt="The MagicJewelContractor Morrigan" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/5/51/BS73-CX02.png/revision/latest?cb=20250822171241" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">Contract X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The MagicJewelContractor Morrigan</div>
+              <div class="card-sub-info">Cost 2 • Contract Nexus • Grandwalker</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-blue" data-name="Kamen Rider OOO PuToTyra Combo" onclick="openCardDetail(this.dataset.name)" title="Click to view Kamen Rider OOO PuToTyra Combo">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/c/ca/Power_to_tearer.png/revision/latest?cb=20190201184314" alt="Kamen Rider OOO PuToTyra Combo" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/c/ca/Power_to_tearer.png/revision/latest?cb=20190201184314" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Kamen Rider OOO PuToTyra Combo</div>
+              <div class="card-sub-info">Cost 6 • Spirit • Kamen</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The WindHero Dorcus-Ushiwaka" onclick="openCardDetail(this.dataset.name)" title="Click to view The WindHero Dorcus-Ushiwaka">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/a/a8/BS14-X03.jpg/revision/latest?cb=20241122184946" alt="The WindHero Dorcus-Ushiwaka" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/a/a8/BS14-X03.jpg/revision/latest?cb=20241122184946" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The WindHero Dorcus-Ushiwaka</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Supreme Hero</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-blue" data-name="The AbyssalRouseDragon Bashlomu" onclick="openCardDetail(this.dataset.name)" title="Click to view The AbyssalRouseDragon Bashlomu">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/d8/BS53-X06.png/revision/latest?cb=20200822092324" alt="The AbyssalRouseDragon Bashlomu" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/d8/BS53-X06.png/revision/latest?cb=20200822092324" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-blue">Blue</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The AbyssalRouseDragon Bashlomu</div>
+              <div class="card-sub-info">Cost 6 • Spirit • Primal</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="The SunDragonGod ShineTres-Sagitto-Apollodragon" onclick="openCardDetail(this.dataset.name)" title="Click to view The SunDragonGod ShineTres-Sagitto-Apollodragon">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/dd/BSC50-X01.png/revision/latest?cb=20251219162208" alt="The SunDragonGod ShineTres-Sagitto-Apollodragon" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/dd/BSC50-X01.png/revision/latest?cb=20251219162208" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The SunDragonGod ShineTres-Sagitto-Apollodragon</div>
+              <div class="card-sub-info">Cost 9 • Spirit • Concluser</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-green" data-name="The SevenGreatHeroBeasts ToughLionheart Herak-Leios" onclick="openCardDetail(this.dataset.name)" title="Click to view The SevenGreatHeroBeasts ToughLionheart Herak-Leios">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/7/7f/BS46-X03.png/revision/latest?cb=20181012124106" alt="The SevenGreatHeroBeasts ToughLionheart Herak-Leios" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/7/7f/BS46-X03.png/revision/latest?cb=20181012124106" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-green">Green</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The SevenGreatHeroBeasts ToughLionheart Herak-Leios</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Worldswalker</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-purple" data-name="Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-" onclick="openCardDetail(this.dataset.name)" title="Click to view Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/b/bb/CB23-X06.png/revision/latest?cb=20220722095741" alt="Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/b/bb/CB23-X06.png/revision/latest?cb=20220722095741" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-purple">Purple</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Makinami Mari Illustrious -Sorry I&#x27;m Late, Shinji-kun-</div>
+              <div class="card-sub-info">Cost 5 • Brave • Pilot</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="The Gigantic Thor" onclick="openCardDetail(this.dataset.name)" title="Click to view The Gigantic Thor">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/d/d3/BS02-X07.jpg/revision/latest?cb=20230506104612" alt="The Gigantic Thor" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/d/d3/BS02-X07.jpg/revision/latest?cb=20230506104612" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The Gigantic Thor</div>
+              <div class="card-sub-info">Cost 7 • Spirit • Armed Machine</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="The EndgameSharkEmperor Aztlan" onclick="openCardDetail(this.dataset.name)" title="Click to view The EndgameSharkEmperor Aztlan">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/6/63/BS74-X13.png/revision/latest?cb=20251115043920" alt="The EndgameSharkEmperor Aztlan" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/6/63/BS74-X13.png/revision/latest?cb=20251115043920" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">The EndgameSharkEmperor Aztlan</div>
+              <div class="card-sub-info">Cost 10 • Ultimate • Devotee</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-red" data-name="Ryuuman-Godbreaker" onclick="openCardDetail(this.dataset.name)" title="Click to view Ryuuman-Godbreaker">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/9/92/Ryuuman-Godbreaker.png/revision/latest?cb=20131107225356" alt="Ryuuman-Godbreaker" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/9/92/Ryuuman-Godbreaker.png/revision/latest?cb=20131107225356" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-red">Red</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Ryuuman-Godbreaker</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Dragon</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-white" data-name="Platinum Queen, Cattleya" onclick="openCardDetail(this.dataset.name)" title="Click to view Platinum Queen, Cattleya">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/1/1d/BS76-AX03.png/revision/latest?cb=20260522150815" alt="Platinum Queen, Cattleya" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/1/1d/BS76-AX03.png/revision/latest?cb=20260522150815" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-white">White</span>
+              <span class="card-rarity-tag">AX-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Platinum Queen, Cattleya</div>
+              <div class="card-sub-info">Cost 5 • Spirit • Glow Contract</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+          <div class="featured-card-item card-theme-yellow" data-name="Kamen Rider Blade King Form ［3］" onclick="openCardDetail(this.dataset.name)" title="Click to view Kamen Rider Blade King Form ［3］">
+            <div class="card-foil-sheen"></div>
+            <div class="card-art-wrap">
+              <img src="https://static.wikia.nocookie.net/battle-spirits/images/2/2c/CB31-X04.png/revision/latest?cb=20240906172207" alt="Kamen Rider Blade King Form ［3］" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="https://static.wikia.nocookie.net/battle-spirits/images/2/2c/CB31-X04.png/revision/latest?cb=20240906172207" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            </div>
+            <div class="card-meta-top">
+              <span class="card-color-tag color-tag-yellow">Yellow</span>
+              <span class="card-rarity-tag">X-Rare</span>
+            </div>
+            <div class="card-info-overlay">
+              <div class="card-title-name">Kamen Rider Blade King Form ［3］</div>
+              <div class="card-sub-info">Cost 8 • Spirit • Kamen</div>
+            </div>
+            <div class="card-hover-prompt">
+              <span>Inspect Card ↗</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Scroll Down Hub Sections Grid -->
+    <section class="hub-container" id="hubSections">
+      <div class="hub-header">
+        <h2 class="hub-title">Explore Battle Spirits Eternal</h2>
+        <p class="hub-subtitle">Choose a directory or tool below to get exactly what you need</p>
+      </div>
+
+      <div class="hub-grid">
+
+        <!-- Portal 1: Universal Card Browser -->
+        <div class="hub-card" onclick="window.location.href='/browse'">
+          <div>
+            <div class="hub-card-top">
+              <span class="hub-card-icon">🎴</span>
+              <span class="hub-card-badge">Universal Catalog</span>
+            </div>
+            <h3 class="hub-card-title">Browse All Cards</h3>
+            <p class="hub-card-desc">
+              Freely search, filter by color, cost, card type, or rarity, and sort every card in the Battle Spirits library with instant Wiki sync and live high-res artwork.
+            </p>
+            <div class="hub-card-highlights">
+              <span class="hub-pill">Live Keyword Search</span>
+              <span class="hub-pill">Sort by Card Number</span>
+              <span class="hub-pill">Color & Cost Filters</span>
+              <span class="hub-pill">One-click Deck Adding</span>
+            </div>
+          </div>
+          <div class="hub-btn">
+            <span>Open Card Browser</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Portal 2: Family -->
+        <div class="hub-card" onclick="window.location.href='/family'">
+          <div>
+            <div class="hub-card-top">
+              <span class="hub-card-icon">🐉</span>
+              <span class="hub-card-badge">271 Families</span>
+            </div>
+            <h3 class="hub-card-title">Family</h3>
+            <p class="hub-card-desc">
+              Complete hierarchy of Battle Spirits families organized into 12 color and collaboration categories: Red, Purple, Green, White, Yellow, Blue, Gundam, Digimon, Kamen Rider & more.
+            </p>
+            <div class="hub-card-highlights">
+              <span class="hub-pill">Ancient Dragon (274)</span>
+              <span class="hub-pill">Astroblazer (251)</span>
+              <span class="hub-pill">Divine Spirit (254)</span>
+              <span class="hub-pill">Spiritual Beast (105)</span>
+            </div>
+          </div>
+          <div class="hub-btn">
+            <span>Explore Families Directory</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Portal 3: Sets -->
+        <div class="hub-card" onclick="window.location.href='/sets'">
+          <div>
+            <div class="hub-card-top">
+              <span class="hub-card-icon">📦</span>
+              <span class="hub-card-badge">299 Sets</span>
+            </div>
+            <h3 class="hub-card-title">Card Sets Directory</h3>
+            <p class="hub-card-desc">
+              Browse all official booster releases, starter decks, collaboration sets, and promotional packs with verified card counts and instant sorting.
+            </p>
+            <div class="hub-card-highlights">
+              <span class="hub-pill">Main Boosters (BS01–BS68)</span>
+              <span class="hub-pill">Starters (SD01–SD68)</span>
+              <span class="hub-pill">Collabs (CB01–CB30)</span>
+              <span class="hub-pill">Kerokero & KFC Promo</span>
+            </div>
+          </div>
+          <div class="hub-btn">
+            <span>Browse All Card Sets</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        <!-- Portal 4: Deck Builder -->
+        <div class="hub-card" onclick="window.location.href='/deck'">
+          <div>
+            <div class="hub-card-top">
+              <span class="hub-card-icon">🃏</span>
+              <span class="hub-card-badge">Deck Lab</span>
+            </div>
+            <h3 class="hub-card-title">Deck Builder</h3>
+            <p class="hub-card-desc">
+              Construct tournament-ready Battle Spirits decks (minimum 40 cards, no upper limit) with automated mana curve charts, 3-copy limits, and clipboard export.
+            </p>
+            <div class="hub-card-highlights">
+              <span class="hub-pill">Real-time Mana Curve</span>
+              <span class="hub-pill">3-Copy Limits</span>
+              <span class="hub-pill">One-click Card Adding</span>
+              <span class="hub-pill">Copy Deck List</span>
+            </div>
+          </div>
+          <div class="hub-btn">
+            <span>Enter Deck Laboratory</span>
+            <span>→</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<!-- ════════════════ CARD DETAIL MODAL ════════════════ -->
+<div class="modal-overlay" id="cardModal" onclick="closeModalBg(event)">
+  <!-- Floating Chevron Nav: Previous Card -->
+  <button class="modal-nav-arrow modal-nav-prev" id="modalPrevBtn" onclick="event.stopPropagation(); navigateCardModal(-1)" title="Previous Card (← Left Arrow)" style="display:none;">
+    <span>‹</span>
+  </button>
+
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
+        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+      <div class="modal-actions">
+        <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
+        <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
+        <button class="btn-modal-primary" id="modalDuelSummonBtn" style="display:none;background:#22c55e;">⚡ Summon in Duel</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
+        <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
+      </div>
+    </div>
+    <div class="modal-info">
+      <div>
+        <div class="modal-jpname" id="modalJpName"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+      </div>
+      <div class="badges" id="modalBadges"></div>
+      <div class="info-box">
+        <div class="info-box-label">Levels & Battle Points</div>
+        <div class="info-box-content" id="modalLevels" style="font-family:var(--mono);font-size:0.85rem;"></div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Card Effect / Ability</div>
+        <div class="info-box-content" id="modalEffect"></div>
+      </div>
+      <div class="flavor-text" id="modalFlavor" style="display:none;"></div>
+      <div>
+        <div class="info-box-label" style="margin-bottom:0.4rem;">Sets / Printings</div>
+        <div class="modal-sets-row" id="modalSets"></div>
+      </div>
+      <a class="wiki-link" id="modalWikiLinkBottom" href="#" target="_blank">View on Battle Spirits Fandom Wiki ↗</a>
+    </div>
+  </div>
+  <!-- Floating Chevron Nav: Next Card -->
+  <button class="modal-nav-arrow modal-nav-next" id="modalNextBtn" onclick="event.stopPropagation(); navigateCardModal(1)" title="Next Card (→ Right Arrow)" style="display:none;">
+    <span>›</span>
+  </button>
+</div>
+
+<!-- ════════════════ DECK IMPORT MODAL ════════════════ -->
+<div class="modal-overlay" id="deckImportModal" onclick="closeImportModalBg(event)">
+  <div class="import-modal-box">
+    <button class="modal-close" onclick="closeDeckImportModal()">&times;</button>
+    
+    <div class="import-header">
+      <div class="import-title-row">
+        <span style="font-size:1.6rem;">📥</span>
+        <div>
+          <h2 class="import-title">Import Battle Spirits Deck</h2>
+          <p class="import-subtitle">Import your deck from a file on your computer (.json, .txt, .dec, .csv) or paste a card list below.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import Method Tabs -->
+    <div class="import-tabs">
+      <button class="import-tab-btn active" id="importTabFile" onclick="switchImportTab('file')">
+        📁 Upload File from Computer
+      </button>
+      <button class="import-tab-btn" id="importTabPaste" onclick="switchImportTab('paste')">
+        📋 Paste Deck List / Code
+      </button>
+      <button class="import-tab-btn" id="importTabStd" onclick="switchImportTab('std')">
+        ⚡ 6 Color Starter Decks
+      </button>
+    </div>
+
+    <!-- Panel 1: File Upload (Computer) -->
+    <div class="import-panel" id="importPanelFile">
+      <div class="import-dropzone" id="importDropzone" 
+           onclick="document.getElementById('deckFileInput').click()"
+           ondragover="handleImportDragOver(event)"
+           ondragleave="handleImportDragLeave(event)"
+           ondrop="handleImportDrop(event)">
+        <input type="file" id="deckFileInput" accept=".json,.txt,.dec,.csv" style="display:none;" onchange="handleDeckFileSelect(event)">
+        <div class="dropzone-icon">📁</div>
+        <div class="dropzone-text">Click to choose a file or drag & drop it here</div>
+        <div class="dropzone-sub">Supports .json, .txt, .dec, or .csv deck files from your computer</div>
+        <button type="button" class="btn-browse-file" onclick="event.stopPropagation(); document.getElementById('deckFileInput').click();">
+          Browse Computer Files
+        </button>
+      </div>
+      <div id="fileUploadStatus" class="file-upload-status" style="display:none;"></div>
+    </div>
+
+    <!-- Panel 2: Paste List -->
+    <div class="import-panel" id="importPanelPaste" style="display:none;">
+      <textarea id="importPasteArea" class="import-textarea" placeholder="Paste your card list or deck JSON here…
+e.g.
+3x The DragonEmperor Siegfried
+3x BS01-001
+2x Puppet Soldier
+1x The Decisive Battleground of Makai
+or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></textarea>
+      <div class="import-hints">
+        <span class="hint-pill">Format: 3x [Name]</span>
+        <span class="hint-pill">Format: 3 [Card Code]</span>
+        <span class="hint-pill">Format: JSON Deck</span>
+        <span class="hint-pill">Comments with # or //</span>
+      </div>
+    </div>
+
+    <div class="import-panel" id="importPanelStd" style="display:none;">
+      <div style="font-size:0.85rem;color:#cbd5e1;margin-bottom:0.75rem;">
+        Choose an official 40-card standard archetype deck to load into the preview below:
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:0.6rem;">
+        <button type="button" class="btn-page" style="border-color:rgba(239,68,68,0.4);color:#f87171;font-weight:700;" onclick="previewStandardDeck('red')">🔴 Red: Dragon Emperor</button>
+        <button type="button" class="btn-page" style="border-color:rgba(168,85,247,0.4);color:#c084fc;font-weight:700;" onclick="previewStandardDeck('purple')">🟣 Purple: Nether Curse</button>
+        <button type="button" class="btn-page" style="border-color:rgba(34,197,94,0.4);color:#4ade80;font-weight:700;" onclick="previewStandardDeck('green')">🟢 Green: Emerald Storm</button>
+        <button type="button" class="btn-page" style="border-color:rgba(255,255,255,0.4);color:#f1f5f9;font-weight:700;" onclick="previewStandardDeck('white')">⚪ White: Iron Fortress</button>
+        <button type="button" class="btn-page" style="border-color:rgba(234,179,8,0.4);color:#fde047;font-weight:700;" onclick="previewStandardDeck('yellow')">🟡 Yellow: Celestial Diva</button>
+        <button type="button" class="btn-page" style="border-color:rgba(59,130,246,0.4);color:#60a5fa;font-weight:700;" onclick="previewStandardDeck('blue')">🔵 Blue: Golem Colosseum</button>
+      </div>
+    </div>
+
+    <!-- Import Configuration & Live Preview -->
+    <div class="import-config">
+      <div class="import-config-row">
+        <div style="flex:1;">
+          <label class="import-label">Deck Name</label>
+          <input type="text" id="importDeckName" class="import-input" value="Imported Deck" placeholder="Name your deck…">
+        </div>
+        <div style="min-width:200px;">
+          <label class="import-label">Import Mode</label>
+          <div class="import-mode-radios">
+            <label class="mode-radio-label">
+              <input type="radio" name="importMode" value="replace" checked>
+              <span>Replace Deck</span>
+            </label>
+            <label class="mode-radio-label">
+              <input type="radio" name="importMode" value="merge">
+              <span>Merge Cards</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Parsed Summary -->
+      <div class="import-preview-box" id="importPreviewBox" style="display:none;">
+        <div class="preview-header">
+          <div style="display:flex;align-items:center;gap:0.5rem;">
+            <span style="font-weight:800;color:#fff;">Parsed Deck:</span>
+            <span class="preview-count-badge" id="previewTotalCount">0 Cards</span>
+            <span class="preview-count-badge badge-muted" id="previewUniqueCount">0 Unique</span>
+          </div>
+          <span id="previewStatusMsg" style="font-size:0.8rem;color:#10b981;font-weight:700;">Ready to load</span>
+        </div>
+        <div class="preview-chips-container" id="previewChipsContainer"></div>
+        <div id="previewWarnings" class="preview-warnings" style="display:none;"></div>
+      </div>
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <div class="import-modal-footer">
+      <button class="btn-cancel" onclick="closeDeckImportModal()">Cancel</button>
+      <button class="btn-import-execute" id="btnExecuteImport" onclick="executeDeckImport()" disabled>
+        📥 Load into Deck Builder
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/app.js?v=4.7"></script>
+<script>
+function executeHeroSearch() {
+  const q = document.getElementById('heroSearchInput').value.trim();
+  if (q) {
+    window.location.href = '/browse?q=' + encodeURIComponent(q);
+  } else {
+    window.location.href = '/browse';
+  }
+}
+</script>
+
+<script>
+// ═══════════════════ SHIFTING FEATURED X-RARES CONTROLLER ═══════════════════
+let featuredCards = [];
+let featuredColorFilter = '';
+let featuredAutoShift = true;
+const FEATURED_SHIFT_INTERVAL = 3200; // Shift smoothly every 3.2 seconds
+let shiftIntervalTimer = null;
+
+function escHtml(str) {
+  return (str || '').replace(/[&<>'"]/g, tag => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  }[tag] || tag));
+}
+
+async function loadFeaturedXRares(color = '') {
+  featuredColorFilter = color;
+  const track = document.getElementById('featuredCardsTrack');
+  if (!track) return;
+  track.classList.add('loading-fade');
+
+  try {
+    const url = '/api/featured-x-rares' + (color ? `?color=${encodeURIComponent(color)}` : '');
+    const res = await fetch(url);
+    const data = await res.json();
+    featuredCards = data.cards || [];
+    renderFeaturedCards(featuredCards);
+  } catch (err) {
+    console.error('Failed to load featured X-Rares:', err);
+    if (track) {
+      track.innerHTML = '<div style="padding:2.5rem;color:#94a3b8;font-size:0.95rem;">Failed to load cards. Please click Shuffle or reload.</div>';
+    }
+  } finally {
+    track.classList.remove('loading-fade');
+  }
+}
+
+function renderFeaturedCards(cards) {
+  const track = document.getElementById('featuredCardsTrack');
+  if (!track) return;
+
+  if (!cards || cards.length === 0) {
+    track.innerHTML = '<div style="padding:2.5rem;color:#94a3b8;font-size:0.95rem;">No X-Rare cards found for this selection.</div>';
+    return;
+  }
+
+  // Duplicate cards for seamless looping ribbon
+  const displayPool = cards.length > 5 ? [...cards, ...cards] : cards;
+
+  track.innerHTML = displayPool.map(c => {
+    const colorLower = (c.color || 'yellow').toLowerCase();
+    const rarityLabel = c.rarity || 'X-Rare';
+    const typeLabel = c.type || 'Spirit';
+    const costText = (c.cost !== null && c.cost !== undefined) ? `Cost ${c.cost}` : '';
+    const familyText = c.family ? ` • ${c.family}` : '';
+    const subText = [costText, typeLabel].filter(Boolean).join(' • ') + familyText;
+    const safeName = escHtml(c.name);
+
+    return `
+      <div class="featured-card-item card-theme-${colorLower}" data-name="${safeName}" onclick="openCardDetail(this.dataset.name)" title="Click to view ${safeName}">
+        <div class="card-foil-sheen"></div>
+        <div class="card-art-wrap">
+          <img src="${c.image_url}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="${c.image_url}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+        </div>
+        <div class="card-meta-top">
+          <span class="card-color-tag color-tag-${colorLower}">${c.color}</span>
+          <span class="card-rarity-tag">${rarityLabel}</span>
+        </div>
+        <div class="card-info-overlay">
+          <div class="card-title-name">${safeName}</div>
+          <div class="card-sub-info">${subText}</div>
+        </div>
+        <div class="card-hover-prompt">
+          <span>Inspect Card ↗</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  resetFeaturedProgress();
+}
+
+function shiftFeaturedCards(direction = 1) {
+  const vp = document.getElementById('featuredViewport');
+  if (!vp) return;
+  const cardItem = vp.querySelector('.featured-card-item');
+  const shiftAmount = cardItem ? (cardItem.offsetWidth + 20) * 1.5 : 320;
+  
+  const maxScroll = vp.scrollWidth - vp.clientWidth;
+  let target = vp.scrollLeft + (direction * shiftAmount);
+
+  // Seamless wrap-around
+  if (target >= maxScroll - 15) {
+    vp.scrollTo({ left: 0, behavior: 'smooth' });
+  } else if (target < 0) {
+    vp.scrollTo({ left: maxScroll, behavior: 'smooth' });
+  } else {
+    vp.scrollBy({ left: direction * shiftAmount, behavior: 'smooth' });
+  }
+
+  resetFeaturedProgress();
+}
+
+function startFeaturedShiftLoop() {
+  clearInterval(shiftIntervalTimer);
+  shiftIntervalTimer = setInterval(() => {
+    if (featuredAutoShift) {
+      shiftFeaturedCards(1);
+    }
+  }, FEATURED_SHIFT_INTERVAL);
+}
+
+function resetFeaturedProgress() {
+  if (featuredAutoShift) {
+    startFeaturedShiftLoop();
+  }
+}
+
+function toggleFeaturedAutoShift() {
+  featuredAutoShift = !featuredAutoShift;
+  const icon = document.getElementById('featuredPlayPauseIcon');
+  if (icon) icon.textContent = featuredAutoShift ? '⏸️' : '▶️';
+}
+
+function pauseFeaturedHover() {
+  featuredAutoShift = false;
+  clearInterval(shiftIntervalTimer);
+}
+
+function resumeFeaturedHover() {
+  const icon = document.getElementById('featuredPlayPauseIcon');
+  if (icon && icon.textContent === '⏸️') {
+    featuredAutoShift = true;
+    startFeaturedShiftLoop();
+  }
+}
+
+function shuffleFeaturedCards() {
+  loadFeaturedXRares(featuredColorFilter);
+}
+
+function filterFeaturedColor(color, btn) {
+  document.querySelectorAll('.color-filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  loadFeaturedXRares(color);
+}
+
+// Initialize on page load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    startFeaturedShiftLoop();
+  });
+} else {
+  startFeaturedShiftLoop();
+}
+</script>
+
+  <script src="/battle_arena.js?v=5.1"></script>
+</body>
+</html>

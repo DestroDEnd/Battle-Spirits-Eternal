@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Card Sets | Battle Spirits Eternal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.0">
+</head>
+<body>
+
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+<header class="navbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
+  <nav class="nav-tabs">
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn active" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="directory-view" id="setsView">
+
+    <section class="directory-header">
+      <div class="directory-title-row">
+        <h1 class="directory-title">
+          <span>📦 Battle Spirits Card Sets</span>
+        </h1>
+        <span class="directory-stats-badge" id="setStatsBadge">299 Official Sets</span>
+      </div>
+      <p class="directory-subtitle">
+        Explore all main booster packs, starter decks, collaboration releases, and promotional sets. Click any set to browse all its cards in the card browser.
+      </p>
+      <div class="directory-search-wrap">
+        <svg class="directory-search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="setSearchInput" class="directory-search-input" placeholder="Filter 299 sets… (e.g. BS01, SD06, Kerokero, KFC, CB02)" oninput="filterSetTags()" autocomplete="off"/>
+      </div>
+    </section>
+
+    <!-- Set Categories Container -->
+    <div id="setSectionsContainer">
+      <div style="text-align:center;padding:3rem;color:var(--muted);"><span style="animation:spin 1s linear infinite;display:inline-block;font-size:1.5rem;margin-bottom:0.5rem;">⚡</span><br>Loading 299 official sets…</div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ════════════════ CARD DETAIL MODAL ════════════════ -->
+<div class="modal-overlay" id="cardModal" onclick="closeModalBg(event)">
+  <!-- Floating Chevron Nav: Previous Card -->
+  <button class="modal-nav-arrow modal-nav-prev" id="modalPrevBtn" onclick="event.stopPropagation(); navigateCardModal(-1)" title="Previous Card (← Left Arrow)" style="display:none;">
+    <span>‹</span>
+  </button>
+
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
+        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+      <div class="modal-actions">
+        <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
+        <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
+        <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
+      </div>
+    </div>
+    <div class="modal-info">
+      <div>
+        <div class="modal-jpname" id="modalJpName"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+      </div>
+      <div class="badges" id="modalBadges"></div>
+      <div class="info-box">
+        <div class="info-box-label">Levels & Battle Points</div>
+        <div class="info-box-content" id="modalLevels" style="font-family:var(--mono);font-size:0.85rem;"></div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Card Effect / Ability</div>
+        <div class="info-box-content" id="modalEffect"></div>
+      </div>
+      <div class="flavor-text" id="modalFlavor" style="display:none;"></div>
+      <div>
+        <div class="info-box-label" style="margin-bottom:0.4rem;">Sets / Printings</div>
+        <div class="modal-sets-row" id="modalSets"></div>
+      </div>
+      <a class="wiki-link" id="modalWikiLinkBottom" href="#" target="_blank">View on Battle Spirits Fandom Wiki ↗</a>
+    </div>
+  </div>
+  <!-- Floating Chevron Nav: Next Card -->
+  <button class="modal-nav-arrow modal-nav-next" id="modalNextBtn" onclick="event.stopPropagation(); navigateCardModal(1)" title="Next Card (→ Right Arrow)" style="display:none;">
+    <span>›</span>
+  </button>
+</div>
+
+<!-- ════════════════ DECK IMPORT MODAL ════════════════ -->
+<div class="modal-overlay" id="deckImportModal" onclick="closeImportModalBg(event)">
+  <div class="import-modal-box">
+    <button class="modal-close" onclick="closeDeckImportModal()">&times;</button>
+    <div class="import-header">
+      <div class="import-title-row">
+        <span style="font-size:1.6rem;">📥</span>
+        <div>
+          <h2 class="import-title">Import Battle Spirits Deck</h2>
+          <p class="import-subtitle">Import your deck from a file on your computer (.json, .txt, .dec, .csv) or paste a card list below.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="import-tabs">
+      <button class="import-tab-btn active" id="importTabFile" onclick="switchImportTab('file')">📁 Upload File from Computer</button>
+      <button class="import-tab-btn" id="importTabPaste" onclick="switchImportTab('paste')">📋 Paste Deck List / Code</button>
+    </div>
+
+    <div class="import-panel" id="importPanelFile">
+      <div class="import-dropzone" id="importDropzone" 
+           onclick="document.getElementById('deckFileInput').click()"
+           ondragover="handleImportDragOver(event)"
+           ondragleave="handleImportDragLeave(event)"
+           ondrop="handleImportDrop(event)">
+        <input type="file" id="deckFileInput" accept=".json,.txt,.dec,.csv" style="display:none;" onchange="handleDeckFileSelect(event)">
+        <div class="dropzone-icon">📁</div>
+        <div class="dropzone-text">Click to choose a file or drag & drop it here</div>
+        <div class="dropzone-sub">Supports .json, .txt, .dec, or .csv deck files from your computer</div>
+        <button type="button" class="btn-browse-file" onclick="event.stopPropagation(); document.getElementById('deckFileInput').click();">Browse Computer Files</button>
+      </div>
+      <div id="fileUploadStatus" class="file-upload-status" style="display:none;"></div>
+    </div>
+
+    <div class="import-panel" id="importPanelPaste" style="display:none;">
+      <textarea id="importPasteArea" class="import-textarea" placeholder="Paste your card list or deck JSON here…" oninput="handlePasteInput()"></textarea>
+      <div class="import-hints">
+        <span class="hint-pill">Format: 3x [Name]</span>
+        <span class="hint-pill">Format: 3 [Card Code]</span>
+        <span class="hint-pill">Format: JSON Deck</span>
+      </div>
+    </div>
+
+    <div class="import-config">
+      <div class="import-config-row">
+        <div style="flex:1;">
+          <label class="import-label">Deck Name</label>
+          <input type="text" id="importDeckName" class="import-input" value="Imported Deck">
+        </div>
+        <div style="min-width:200px;">
+          <label class="import-label">Import Mode</label>
+          <div class="import-mode-radios">
+            <label class="mode-radio-label"><input type="radio" name="importMode" value="replace" checked><span>Replace Deck</span></label>
+            <label class="mode-radio-label"><input type="radio" name="importMode" value="merge"><span>Merge Cards</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="import-preview-box" id="importPreviewBox" style="display:none;">
+        <div class="preview-header">
+          <div style="display:flex;align-items:center;gap:0.5rem;">
+            <span style="font-weight:800;color:#fff;">Parsed Deck:</span>
+            <span class="preview-count-badge" id="previewTotalCount">0 Cards</span>
+            <span class="preview-count-badge badge-muted" id="previewUniqueCount">0 Unique</span>
+          </div>
+        </div>
+        <div class="preview-chips-container" id="previewChipsContainer"></div>
+        <div id="previewWarnings" class="preview-warnings" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="import-modal-footer">
+      <button class="btn-cancel" onclick="closeDeckImportModal()">Cancel</button>
+      <button class="btn-import-execute" id="btnExecuteImport" onclick="executeDeckImport()" disabled>📥 Load into Deck Builder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/app.js?v=4.7"></script>
+<script>
+let allCategorizedSets = [];
+
+async function loadSetsDirectory() {
+  try {
+    const res = await fetch('/api/filters');
+    const data = await res.json();
+    if (data.categorized_sets) {
+      allCategorizedSets = data.categorized_sets;
+      renderSetDirectory(allCategorizedSets);
+    }
+  } catch (err) {
+    document.getElementById('setSectionsContainer').innerHTML = `<div style="text-align:center;padding:3rem;color:#fca5a5;">Failed to load sets: ${esc(err.message)}</div>`;
+  }
+}
+
+function renderSetDirectory(categories) {
+  const container = document.getElementById('setSectionsContainer');
+  const bannerClassMap = {
+    'general': 'banner-general',
+    'red': 'banner-red',
+    'purple': 'banner-purple',
+    'green': 'banner-green',
+    'white': 'banner-white',
+    'yellow': 'banner-yellow',
+    'blue': 'banner-blue',
+    'slate': 'banner-slate'
+  };
+
+  let totalSets = 0;
+  container.innerHTML = categories.map((cat, idx) => {
+    totalSets += (cat.sets || []).length;
+    const bannerClass = bannerClassMap[cat.color_class] || 'banner-general';
+
+    const tagsHtml = (cat.sets || []).map(s => `
+      <a class="dir-tag" href="/browse?set=${encodeURIComponent(s.name)}" data-name="${esc(s.name)}">
+        <span>${esc(s.name)}</span>
+        <span class="dir-tag-count">${s.count || s.wiki_count || 0}</span>
+      </a>
+    `).join('');
+
+    return `
+      <div class="dir-section" id="set-sec-${idx}">
+        <div class="dir-banner ${bannerClass}">
+          <span>${esc(cat.title)}</span>
+          <span class="dir-banner-badge">${(cat.sets || []).length} Sets</span>
+        </div>
+        <div class="dir-body">
+          ${tagsHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('setStatsBadge').textContent = `${totalSets} Official Sets`;
+}
+
+function filterSetTags() {
+  const query = document.getElementById('setSearchInput').value.toLowerCase().trim();
+  const sections = document.querySelectorAll('#setSectionsContainer .dir-section');
+
+  sections.forEach(sec => {
+    const tags = sec.querySelectorAll('.dir-tag');
+    let visibleCount = 0;
+    tags.forEach(t => {
+      const name = t.getAttribute('data-name').toLowerCase();
+      const match = !query || name.includes(query);
+      t.classList.toggle('hidden', !match);
+      if (match) visibleCount++;
+    });
+    sec.style.display = visibleCount > 0 ? 'block' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadSetsDirectory);
+</script>
+</body>
+</html>

@@ -1,0 +1,776 @@
+    <!-- ⚔️ BATTLE ARENA & DUEL SIMULATOR SECTION ⚔️ -->
+    <section class="battle-arena-section" id="battleArena">
+      <div class="arena-header">
+        <div class="arena-badge">
+          <span class="pulse-dot-red"></span>
+          <span>OFFICIAL CORE &amp; BP DUEL SIMULATOR</span>
+        </div>
+        <h2 class="arena-title">Destro's Colosseum Battle Arena</h2>
+        <p class="arena-sub">Pit tournament decks against each other in real Battle Spirits combat. Manage Void &amp; Reserve cores, level up your Spirits, declare attacks, clash BP, and claim supreme victory!</p>
+      </div>
+
+      <!-- LOBBY / DECK SELECTOR VIEW -->
+      <div class="battle-lobby" id="battleLobby">
+        <div class="battle-lobby-grid">
+          <!-- Player 1 Box -->
+          <div class="lobby-deck-box">
+            <div class="lobby-box-title">
+              <span>Challenger (You)</span>
+              <span style="color:#60a5fa;">Player 1</span>
+            </div>
+            <label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:0.35rem;font-weight:700;">CHOOSE YOUR DECK (REGISTERED ONLY)</label>
+            <select class="arena-deck-select" id="arenaPlayerDeckSelect">
+              <!-- Injected dynamically from DeckManager -->
+            </select>
+            <div class="lobby-deck-preview" id="lobbyPlayerDeckCard">
+              <!-- Injected preview -->
+            </div>
+            <!-- Quick Add Standard Deck & Builder Controls -->
+            <div class="lobby-deck-actions-bar">
+              <select class="lobby-add-std-select" id="lobbyAddStdSelect" onchange="BattleArena.addStandardDeckToRegistered(this.value); this.value='';">
+                <option value="">+ Add Standard Deck to My Decks…</option>
+                <option value="red">🔴 Red: Hero Dragon's Blazing Soul</option>
+                <option value="purple">🟣 Purple: Netherworld Curse & Seven Shoguns</option>
+                <option value="green">🟢 Green: Emerald Gale (Kingtaurus)</option>
+                <option value="white">⚪ White: Armed Fortress</option>
+                <option value="yellow">🟡 Yellow: Celestial Symphony</option>
+                <option value="blue">🔵 Blue: Colosseum Titans</option>
+              </select>
+              <a href="/deck" class="btn-lobby-builder" title="Open Deck Builder to create custom decks">🛠️ Deck Builder</a>
+            </div>
+          </div>
+
+          <!-- VS Center Area -->
+          <div class="lobby-vs-center">
+            <div class="vs-crest">⚔️</div>
+            <button class="btn-start-duel" id="btnEnterColosseum" onclick="BattleArena.startDuel()">🔥 ENTER COLOSSEUM</button>
+            <button class="btn-random-duel" onclick="BattleArena.quickLaunchDuel()">⚡ Quick Matchup</button>
+          </div>
+
+          <!-- Opponent / AI Box -->
+          <div class="lobby-deck-box">
+            <div class="lobby-box-title">
+              <span>Colosseum Champion (AI)</span>
+              <span style="color:#f87171;">Opponent</span>
+            </div>
+            <label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:0.35rem;font-weight:700;">CHOOSE OPPONENT REALM</label>
+            <select class="arena-deck-select" id="arenaOpponentDeckSelect" onchange="BattleArena.updateLobbyPreviews()">
+              <!-- Injected dynamically -->
+            </select>
+            <div class="lobby-deck-preview" id="lobbyOpponentDeckCard">
+              <!-- Injected preview -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DUEL TABLE BATTLEFIELD VIEW -->
+      <div class="battle-duel-table" id="battleDuelTable">
+        <div class="duel-layout-grid">
+          <!-- Left Column: Main Battlefield -->
+          <div class="duel-battlefield-main">
+
+        <!-- Opponent Zone (Top) -->
+        <div class="duelist-zone-hud">
+          <div class="duelist-info-left">
+            <span class="duelist-name">👑 Opponent Champion</span>
+            <div class="life-container" id="opponentLifeContainer">
+              <!-- 5 Life Gems -->
+            </div>
+          </div>
+          <div class="duelist-cores-right">
+            <div class="opponent-hand-backs" id="opponentHandBacks"></div>
+            <div class="burst-slot-pill" id="opponentBurstSlot" onclick="BattleArena.inspectOpponentBurst()" title="Opponent Burst Zone">🔒 Burst: Empty</div>
+            <span class="core-counter-pill void-counter-pill clickable-zone-pill" onclick="BattleArena.openZoneModal('void')" title="Click to view cards in The Void (Removed Zone) & Core Reservoir">🌌 Void: <span class="core-val">∞</span></span>
+            <div class="soul-core-pill in-reserve" id="opponentSoulCorePill" title="Opponent's Soul Core">
+              <span class="sc-icon"><svg class="hex-core-svg hex-soul-core" viewBox="0 0 24 28" width="16" height="19" aria-label="Soul Core">
+    <defs>
+      <linearGradient id="oppScGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fca5a5" />
+        <stop offset="25%" stop-color="#ef4444" />
+        <stop offset="60%" stop-color="#dc2626" />
+        <stop offset="100%" stop-color="#881337" />
+      </linearGradient>
+      <radialGradient id="oppScCenter" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="35%" stop-color="#fef08a" />
+        <stop offset="70%" stop-color="#f59e0b" />
+        <stop offset="100%" stop-color="#ef4444" />
+      </radialGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#oppScGrad)" stroke="#f59e0b" stroke-width="1.3" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#881337" fill-opacity="0.6" stroke="#fbbf24" stroke-width="0.9" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#fbbf24" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#fbbf24" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#fbbf24" stroke-width="0.8" />
+    <polygon points="12,8.5 16,14 12,19.5 8,14" fill="url(#oppScCenter)" stroke="#ffffff" stroke-width="0.6" />
+    <circle cx="12" cy="14" r="1.8" fill="#ffffff" />
+  </svg></span> <span class="sc-label" id="opponentSoulCoreLabel">Soul Core: Reserve</span>
+            </div>
+            <span class="core-counter-pill"><span class="hex-icon-wrap"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="15" height="17" aria-label="Core">
+    <defs>
+      <linearGradient id="oppResGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="oppResSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#oppResGrad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#oppResSheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span> Reserve: <span class="core-val" id="opponentReserveCores">5</span></span>
+            <span class="core-counter-pill clickable-zone-pill" id="opponentTrashPill" onclick="BattleArena.openZoneModal('opponent-trash')" title="Click to view cards in Opponent's Trash (Graveyard)">🪦 Trash: <span class="core-val" id="opponentTrashCores">0</span></span>
+            <span class="core-counter-pill" id="opponentDeckCount">36 in Deck</span>
+          </div>
+        </div>
+
+        <!-- Opponent Field Row (Battle Line + Burst Zone) -->
+        <div class="battlefield-row">
+          <div class="field-zone opponent-field-zone" id="opponentField">
+            <!-- Opponent Spirits -->
+          </div>
+          <div class="burst-field-zone opponent-burst-zone" id="opponentBurstZone" onclick="BattleArena.inspectOpponentBurst()" title="Opponent Burst Zone">
+            <!-- Opponent Burst Slot -->
+          </div>
+        </div>
+
+        <!-- Center Void Core Reservoir & Clash Hub -->
+        <div class="battle-center-hub">
+          <!-- The Void: Infinite Core Pool -->
+          <div class="battle-void-zone" id="battleVoidZone" onclick="BattleArena.openZoneModal('void')" style="cursor:pointer;" title="The Void: Click to inspect Void cards & Cosmic Core Reservoir">
+            <div class="bvz-top">
+              <span class="bvz-icon">🌌</span>
+              <span class="bvz-title">THE VOID</span>
+              <span class="bvz-infinity">∞</span>
+            </div>
+            <div class="bvz-cores" id="voidCoresVisual">
+              <span class="void-hex-core" style="animation-delay: 0s;" title="Void Core 1"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="20" height="23" aria-label="Core">
+    <defs>
+      <linearGradient id="voidCore1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="voidCore1Sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#voidCore1Grad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#voidCore1Sheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span>
+              <span class="void-hex-core" style="animation-delay: 0.4s;" title="Void Core 2"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="20" height="23" aria-label="Core">
+    <defs>
+      <linearGradient id="voidCore2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="voidCore2Sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#voidCore2Grad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#voidCore2Sheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span>
+              <span class="void-hex-core" style="animation-delay: 0.8s;" title="Void Core 3"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="20" height="23" aria-label="Core">
+    <defs>
+      <linearGradient id="voidCore3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="voidCore3Sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#voidCore3Grad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#voidCore3Sheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span>
+              <span class="void-hex-core" style="animation-delay: 1.2s;" title="Void Core 4"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="20" height="23" aria-label="Core">
+    <defs>
+      <linearGradient id="voidCore4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="voidCore4Sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#voidCore4Grad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#voidCore4Sheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span>
+              <span class="void-hex-core" style="animation-delay: 1.6s;" title="Void Core 5"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="20" height="23" aria-label="Core">
+    <defs>
+      <linearGradient id="voidCore5Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="voidCore5Sheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#voidCore5Grad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#voidCore5Sheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span>
+            </div>
+            <div class="bvz-desc" id="voidStatusDesc">Infinite Core Pool • Draws from here</div>
+          </div>
+
+          <!-- Center Clash & Action Notification Zone -->
+          <div class="battle-clash-center" id="battleClashCenter">
+            <div class="clash-idle">
+              <span class="clash-idle-icon">⚔️</span>
+              <span class="clash-idle-text">Follow the Step Navigator on the right to proceed through your turn!</span>
+            </div>
+          </div>
+        
+          <!-- Center Turn Slot (Positioned Between Opponent and Player Burst Zones) -->
+          <div class="burst-center-turn-slot" id="burstCenterTurnSlot">
+            <div id="duelTurnLabel" class="turn-badge turn-player">
+              <div class="turn-badge-label">TURN 1</div>
+              <div class="turn-badge-player">Player's Turn</div>
+              <div class="turn-badge-step">[MAIN STEP]</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Player Field Row (Battle Line + Burst Zone) -->
+        <div class="battlefield-row">
+          <div class="field-zone player-field-zone" id="playerField">
+            <!-- Player Spirits -->
+          </div>
+          <div class="burst-field-zone player-burst-zone" id="playerBurstZone" onclick="BattleArena.inspectBurst()" title="Your Set Burst Zone (Click to inspect or activate)">
+            <!-- Player Burst Slot -->
+          </div>
+        </div>
+
+        <!-- Player Zone (Bottom HUD) -->
+        <div class="duelist-zone-hud">
+          <div class="duelist-info-left">
+            <span class="duelist-name">🛡️ You (Challenger)</span>
+            <div class="life-container" id="playerLifeContainer">
+              <!-- 5 Life Gems -->
+            </div>
+          </div>
+          <div class="duelist-cores-right">
+            <div class="burst-slot-pill" id="playerBurstSlot" onclick="BattleArena.inspectBurst()" title="Your Set Burst Zone (Click to inspect)">🔒 Burst: Empty</div>
+            <span class="core-counter-pill void-counter-pill clickable-zone-pill" onclick="BattleArena.openZoneModal('void')" title="Click to view cards in The Void (Removed Zone) & Core Reservoir">🌌 Void: <span class="core-val">∞</span></span>
+            <div class="soul-core-pill in-reserve" id="playerSoulCorePill" onclick="BattleArena.inspectSoulCore()" title="Click to view Soul Core rules & status">
+              <span class="sc-icon"><svg class="hex-core-svg hex-soul-core" viewBox="0 0 24 28" width="16" height="19" aria-label="Soul Core">
+    <defs>
+      <linearGradient id="playerScGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fca5a5" />
+        <stop offset="25%" stop-color="#ef4444" />
+        <stop offset="60%" stop-color="#dc2626" />
+        <stop offset="100%" stop-color="#881337" />
+      </linearGradient>
+      <radialGradient id="playerScCenter" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="35%" stop-color="#fef08a" />
+        <stop offset="70%" stop-color="#f59e0b" />
+        <stop offset="100%" stop-color="#ef4444" />
+      </radialGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#playerScGrad)" stroke="#f59e0b" stroke-width="1.3" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#881337" fill-opacity="0.6" stroke="#fbbf24" stroke-width="0.9" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#fbbf24" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#fbbf24" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#4c0519" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#fbbf24" stroke-width="0.8" />
+    <polygon points="12,8.5 16,14 12,19.5 8,14" fill="url(#playerScCenter)" stroke="#ffffff" stroke-width="0.6" />
+    <circle cx="12" cy="14" r="1.8" fill="#ffffff" />
+  </svg></span> <span class="sc-label" id="playerSoulCoreLabel">Soul Core: Reserve</span>
+            </div>
+            <span class="core-counter-pill"><span class="hex-icon-wrap"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="15" height="17" aria-label="Core">
+    <defs>
+      <linearGradient id="playerResGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="playerResSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#playerResGrad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#playerResSheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span> Reserve: <span class="core-val" id="playerReserveCores">4</span></span>
+            <span class="core-counter-pill clickable-zone-pill" id="playerTrashPill" onclick="BattleArena.openZoneModal('player-trash')" title="Click to view cards in your Trash (Graveyard)">🪦 Trash: <span class="core-val" id="playerTrashCores">0</span></span>
+            <span class="core-counter-pill" id="playerDeckCount">36 in Deck</span>
+          </div>
+        </div>
+
+        <!-- Player Hand Cards -->
+        <div class="player-hand-zone">
+          <div class="hand-label">
+            <span>Your Hand</span>
+            <span style="font-size:0.75rem;color:#94a3b8;">Click any card to inspect full stats, levels &amp; abilities</span>
+          </div>
+          <div class="hand-track" id="playerHand">
+            <!-- Injected hand cards -->
+          </div>
+        </div>
+
+        <!-- Duel Controls Toolbar -->
+        <div class="duel-toolbar">
+          <div class="toolbar-actions">
+            <button class="btn-next-phase" id="btnNextPhase" onclick="BattleArena.nextPhase()">⚔️ Enter Attack Step →</button>
+            <button class="btn-auto-duel" id="btnAutoDuel" onclick="BattleArena.toggleAutoDuel()">⚡ Auto Duel</button>
+          </div>
+          <div class="toolbar-actions">
+            <button class="btn-duel-tool btn-fullscreen-toggle" id="btnDuelFullscreen" onclick="BattleArena.toggleFullscreen()" title="Toggle Fullscreen Arena Mode">⛶ Fullscreen</button>
+            <button class="btn-duel-tool" onclick="BattleArena.openZoneModal('player-trash')" title="View cards in your Trash (Graveyard)">🪦 View Grave</button>
+            <button class="btn-duel-tool" onclick="BattleArena.openZoneModal('void')" title="View cards in The Void & Cosmic Reservoir">🌌 View Void</button>
+            <button class="btn-duel-tool" onclick="BattleArena.startDuel()">🔄 Restart Match</button>
+            <button class="btn-duel-tool" onclick="document.getElementById('battleDuelTable').style.display='none'; document.getElementById('battleLobby').style.display='block';">📋 Switch Decks</button>
+          </div>
+        </div>
+
+        <!-- Combat Events Log Feed -->
+        <div class="battle-log-wrap">
+          <div class="log-header">📜 Colosseum Combat Feed</div>
+          <div class="battle-log-list" id="battleLogList">
+            <div class="log-item log-sys">⚔️ Match initialized. Welcome to the Colosseum!</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Step Navigator (Manual Phase Progression) -->
+      <aside class="duel-step-navigator" id="duelStepNavigator">
+        <div class="step-nav-header">
+          <div class="snh-tag">PHASE CONTROL</div>
+          <h3 class="snh-title" id="navTurnTitle">Turn 1 • Player's Turn</h3>
+          <p class="snh-sub" id="navStepSubtitle">Follow steps in sequence to advance the duel.</p>
+        </div>
+
+        <div class="step-card-list">
+          <!-- Step 1: START -->
+          <div class="step-card" id="stepCard_START">
+            <div class="sc-header">
+              <span class="sc-num">1</span>
+              <span class="sc-name">START STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_START">Pending</span>
+            </div>
+            <p class="sc-desc">Begin your turn and trigger Start-of-Turn effects.</p>
+            <button class="btn-step-action" id="btnStep_START" onclick="BattleArena.manualStep('START')">▶️ Begin Turn</button>
+          </div>
+
+          <!-- Step 2: CORE -->
+          <div class="step-card" id="stepCard_CORE">
+            <div class="sc-header">
+              <span class="sc-num">2</span>
+              <span class="sc-name">CORE STEP (+1)</span>
+              <span class="sc-status status-pending" id="stepStatus_CORE">Pending</span>
+            </div>
+            <p class="sc-desc">Draw +1 Core from the Void into your Reserve.</p>
+            <button class="btn-step-action btn-step-core" id="btnStep_CORE" onclick="BattleArena.manualStep('CORE')"><span class="btn-hex-icon"><svg class="hex-core-svg hex-blue-core" viewBox="0 0 24 28" width="14" height="16" aria-label="Core">
+    <defs>
+      <linearGradient id="btnCoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#bae6fd" />
+        <stop offset="25%" stop-color="#38bdf8" />
+        <stop offset="65%" stop-color="#0284c7" />
+        <stop offset="100%" stop-color="#0369a1" />
+      </linearGradient>
+      <linearGradient id="btnCoreSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.1" />
+      </linearGradient>
+    </defs>
+    <polygon points="12,1 23,7.5 23,20.5 12,27 1,20.5 1,7.5" fill="url(#btnCoreGrad)" stroke="#7dd3fc" stroke-width="1.2" />
+    <polygon points="12,6.8 18,10.4 18,17.6 12,21.2 6,17.6 6,10.4" fill="#0369a1" fill-opacity="0.55" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="12" y1="1" x2="12" y2="6.8" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="7.5" x2="18" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <line x1="23" y1="20.5" x2="18" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="12" y1="27" x2="12" y2="21.2" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="20.5" x2="6" y2="17.6" stroke="#075985" stroke-width="0.8" />
+    <line x1="1" y1="7.5" x2="6" y2="10.4" stroke="#bae6fd" stroke-width="0.8" />
+    <polygon points="12,2 22,8 17.5,10.4 12,7.5 6.5,10.4 2,8" fill="url(#btnCoreSheen)" />
+    <circle cx="12" cy="14" r="2" fill="#ffffff" />
+  </svg></span> Take +1 Core from Void</button>
+          </div>
+
+          <!-- Step 3: DRAW -->
+          <div class="step-card" id="stepCard_DRAW">
+            <div class="sc-header">
+              <span class="sc-num">3</span>
+              <span class="sc-name">DRAW STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_DRAW">Pending</span>
+            </div>
+            <p class="sc-desc">Draw 1 card from your Deck into your Hand.</p>
+            <button class="btn-step-action" id="btnStep_DRAW" onclick="BattleArena.manualStep('DRAW')">🎴 Draw 1 Card</button>
+          </div>
+
+          <!-- Step 4: REFRESH -->
+          <div class="step-card" id="stepCard_REFRESH">
+            <div class="sc-header">
+              <span class="sc-num">4</span>
+              <span class="sc-name">REFRESH STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_REFRESH">Pending</span>
+            </div>
+            <p class="sc-desc">Return all used Cores from Trash to Reserve, and restore exhausted Spirits to Ready.</p>
+            <button class="btn-step-action" id="btnStep_REFRESH" onclick="BattleArena.manualStep('REFRESH')">🔄 Return Cores &amp; Ready Spirits</button>
+          </div>
+
+          <!-- Step 5: MAIN -->
+          <div class="step-card" id="stepCard_MAIN">
+            <div class="sc-header">
+              <span class="sc-num">5</span>
+              <span class="sc-name">MAIN STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_MAIN">Pending</span>
+            </div>
+            <p class="sc-desc">Summon Spirits, cast Magic, and allocate Cores.</p>
+            <button class="btn-step-action btn-step-proceed" id="btnStep_MAIN" onclick="BattleArena.manualStep('MAIN')">⚔️ Proceed to Attack Step →</button>
+          </div>
+
+          <!-- Step 6: ATTACK -->
+          <div class="step-card" id="stepCard_ATTACK">
+            <div class="sc-header">
+              <span class="sc-num">6</span>
+              <span class="sc-name">ATTACK STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_ATTACK">Pending</span>
+            </div>
+            <p class="sc-desc">Click your Ready Spirits to strike, or end attack phase.</p>
+            <button class="btn-step-action" id="btnStep_ATTACK" onclick="BattleArena.manualStep('ATTACK')">🛑 Done Attacking →</button>
+          </div>
+
+          <!-- Step 7: END -->
+          <div class="step-card" id="stepCard_END">
+            <div class="sc-header">
+              <span class="sc-num">7</span>
+              <span class="sc-name">END STEP</span>
+              <span class="sc-status status-pending" id="stepStatus_END">Pending</span>
+            </div>
+            <p class="sc-desc">Conclude your turn and pass initiative to opponent.</p>
+            <button class="btn-step-action btn-step-pass" id="btnStep_END" onclick="BattleArena.manualStep('END')">🛑 Pass Turn to Opponent</button>
+          </div>
+        </div>
+
+        <!-- Opponent Step Actions (when opponent is active) -->
+        <div id="navOpponentControls" style="display:none; margin-top:0.75rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:0.75rem;">
+          <div class="snh-tag">OPPONENT ACTIONS</div>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.4rem;">
+            <button class="btn-step-action" id="btnOpponentStep" onclick="BattleArena.advanceOpponentStep()">▶️ Advance Opponent Action</button>
+            <button class="btn-step-proceed" id="btnOpponentAuto" onclick="BattleArena.toggleOpponentAuto()">⚡ Auto-Play Opponent Turn</button>
+          </div>
+        </div>
+
+        <div class="step-nav-footer">
+          <button class="btn-sub-action" onclick="BattleArena.startDuel()">🔄 Restart Match</button>
+          <button class="btn-sub-action" onclick="BattleArena.toggleAutoDuel()">⚡ Auto Duel</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+      <!-- BLOCKER SELECTION MODAL -->
+      
+      <!-- COIN TOSS (FIRST TURN DETERMINATION) MODAL -->
+      <div class="battle-modal-overlay" id="battleCoinModal">
+        <div class="battle-modal-card coin-modal-card">
+          <div class="result-badge" style="background:linear-gradient(135deg, rgba(245,158,11,0.25), rgba(234,179,8,0.25)); color:#fef08a; border:1px solid #f59e0b; margin-bottom:0.75rem;">🪙 FIRST TURN DETERMINATION</div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;">Battle Spirits Coin Toss</h3>
+          <p class="modal-desc" style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
+            Official tournament rules dictate a coin flip to determine who commences Turn 1!
+          </p>
+
+          <!-- 3D Coin Stage -->
+          <div class="coin-stage">
+            <div class="coin-3d-disc" id="coinFlipCoin" onclick="BattleArena.flipCoin()" title="Click to Toss Coin">
+              <div class="coin-face coin-face-heads">
+                <div class="coin-inner-ring">
+                  <div class="coin-crest">🛡️</div>
+                  <div class="coin-label">CHALLENGER</div>
+                  <div class="coin-sub">HEADS</div>
+                </div>
+              </div>
+              <div class="coin-face coin-face-tails">
+                <div class="coin-inner-ring">
+                  <div class="coin-crest">👑</div>
+                  <div class="coin-label">CHAMPION</div>
+                  <div class="coin-sub">TAILS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Announcement Banner -->
+          <div id="coinFlipResultBox" style="display:none;"></div>
+
+          <!-- First Turn Selection Choice (when Player wins toss) -->
+          <div class="coin-choice-grid" id="coinChoiceRow" style="display:none;"></div>
+
+          <!-- Controls -->
+          <div class="coin-actions-row">
+            <button class="btn-coin-flip" id="btnTriggerCoinFlip" onclick="BattleArena.flipCoin()">🪙 Toss the Coin!</button>
+            <button class="btn-coin-proceed" id="btnCoinProceed" onclick="BattleArena.proceedWithDuel()" style="display:none;">⚔️ Enter Battle →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="battle-modal-overlay" id="battleBlockModal">
+        <div class="battle-modal-card" style="max-width:540px; text-align:left;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <div class="result-badge result-lose" style="margin-bottom:0;">INCOMING ATTACK</div>
+            <div class="flash-window-indicator">⚡ FLASH TIMING ACTIVE</div>
+          </div>
+          <h3 class="modal-title" style="margin-bottom:0.25rem;">Declare Defense &amp; Flash Magic</h3>
+          <p class="modal-desc" style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.75rem;">
+            Opponent's <strong id="blockAttackerName" style="color:#f87171;">Spirit</strong> is striking! Cast defensive Flash Magic or Flash Summon Swift Spirits before declaring your block.
+          </p>
+
+          <!-- Flash Spells Section -->
+          <div id="blockFlashSection" style="margin-bottom:1rem;">
+            <!-- Injected flash choices -->
+          </div>
+
+          <!-- Blocker Selection Section -->
+          <div style="font-size:0.78rem; font-weight:800; color:#cbd5e1; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">
+            🛡️ Intercept with Blocker or Take Damage:
+          </div>
+          <div id="blockerChoices">
+            <!-- Injected blocker choices -->
+          </div>
+        </div>
+
+      </div>
+      </div>
+
+      
+
+      <!-- TRIBUTE SPIRIT SELECTION MODAL -->
+      <div class="battle-modal-overlay" id="battleTributeModal">
+        <div class="battle-modal-card" style="max-width:540px; text-align:left;">
+          <div class="result-badge" style="background:linear-gradient(135deg, rgba(217,119,6,0.3), rgba(180,83,9,0.3)); color:#fbbf24; border:1px solid #f59e0b; margin-bottom:0.75rem;">👑 TRIBUTE SUMMON</div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;" id="tributeModalTitle">Select Spirit to Tribute</h3>
+          <p class="modal-desc" id="tributeModalDesc" style="margin-bottom:0.9rem; font-size:0.85rem; color:#94a3b8;">
+            Select an eligible Spirit to Tribute. All cores on it will be sent to the Void, and the Spirit will be sent to the Trash!
+          </p>
+          <div class="tribute-spirit-choices" id="tributeSpiritChoices">
+            <!-- Injected tribute spirit choices -->
+          </div>
+          <div style="margin-top:1rem; text-align:right;">
+            <button class="btn-cancel-tribute" onclick="BattleArena.cancelTributeSummon()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; padding:0.5rem 1rem; border-radius:0.5rem; cursor:pointer; font-weight:700;">✕ Cancel Summon</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BURST TRIGGER PROMPT MODAL -->
+      <div class="battle-modal-overlay" id="battleBurstPromptModal">
+        <div class="battle-modal-card" style="max-width:540px; text-align:left;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <div class="result-badge" style="background:linear-gradient(135deg, rgba(234,88,12,0.3), rgba(194,65,12,0.3)); color:#fb923c; border:1px solid #ea580c; margin-bottom:0;">🚨 BURST CONDITION MET</div>
+            <div class="flash-window-indicator" style="background:rgba(234,88,12,0.2); border-color:#ea580c; color:#fdba74;">BURST TIMING WINDOW</div>
+          </div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;" id="burstPromptTitle">Activate Burst Trap?</h3>
+          <p class="modal-desc" id="burstPromptDesc" style="font-size:0.85rem; color:#94a3b8; margin-bottom:0.85rem;">
+            An in-game event has satisfied your set card's Burst trigger condition! Do you wish to activate it now?
+          </p>
+          <div id="burstPromptCardPreview" style="margin-bottom:1rem; background:rgba(0,0,0,0.35); border:1px solid rgba(234,88,12,0.3); border-radius:0.6rem; padding:0.85rem;">
+            <!-- Injected card preview with condition -->
+          </div>
+          <div style="display:flex; gap:0.65rem; justify-content:flex-end;">
+            <button class="btn-cancel-target" onclick="BattleArena.declineBurstTrigger()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; padding:0.55rem 1.1rem; border-radius:0.5rem; cursor:pointer; font-weight:700;">Keep Set (Pass)</button>
+            <button class="btn-step-proceed" onclick="BattleArena.confirmBurstTrigger()" style="width:auto; padding:0.55rem 1.35rem; font-size:0.88rem; background:linear-gradient(135deg, #ea580c, #c2410c); border:1px solid #f97316; font-weight:800; cursor:pointer; border-radius:0.5rem;">⚡ Activate Burst Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BATTLE ADVENT MODAL -->
+      <div class="battle-modal-overlay" id="battleAdventModal">
+        <div class="battle-modal-card" style="max-width:560px; text-align:left;">
+          <div class="result-badge" style="background:linear-gradient(135deg, rgba(147,51,234,0.35), rgba(79,70,229,0.35)); color:#c084fc; border:1px solid #a855f7; margin-bottom:0.75rem;">🌟 FLASH - [ADVENT / 煌臨]</div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;" id="adventModalTitle">Select Target Spirit to Stack [Advent]</h3>
+          <p class="modal-desc" id="adventModalDesc" style="margin-bottom:0.9rem; font-size:0.85rem; color:#cbd5e1;">
+            To stack this Spirit, your [Soul Core] will be sent to the Trash. Select an eligible Spirit on your battlefield.
+          </p>
+          <div class="tribute-spirit-choices" id="adventSpiritChoices">
+            <!-- Injected advent target choices -->
+          </div>
+          <div style="margin-top:1rem; text-align:right;">
+            <button class="btn-cancel-advent" onclick="BattleArena.cancelAdvent()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; padding:0.5rem 1rem; border-radius:0.5rem; cursor:pointer; font-weight:700;">✕ Cancel Advent</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- MAGIC TARGET SELECTION MODAL -->
+      <div class="battle-modal-overlay" id="battleTargetModal">
+        <div class="battle-modal-card" style="max-width:540px; text-align:left;">
+          <div class="result-badge" style="background:linear-gradient(135deg, rgba(16,185,129,0.3), rgba(5,150,105,0.3)); color:#34d399; border:1px solid #10b981; margin-bottom:0.75rem;">🎯 CHOOSE TARGET SPIRIT</div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;" id="targetModalTitle">Select Target Spirit</h3>
+          <p class="modal-desc" id="targetModalDesc" style="margin-bottom:0.9rem; font-size:0.85rem; color:#94a3b8;">
+            Select which allied Spirit receives the BP boost this turn.
+          </p>
+          <div class="target-spirit-choices" id="targetSpiritChoices">
+            <!-- Injected target spirit choices -->
+          </div>
+          <div style="margin-top:1rem; text-align:right;">
+            <button class="btn-cancel-target" onclick="BattleArena.cancelTargetSelection()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#cbd5e1; padding:0.5rem 1rem; border-radius:0.5rem; cursor:pointer; font-weight:700;">✕ Cancel</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CORE SACRIFICE & SUMMON MODAL -->
+      <div class="battle-modal-overlay" id="battleSacrificeModal">
+        <div class="battle-modal-card" style="max-width:540px; text-align:left;">
+          <div class="result-badge result-win" style="background:rgba(239,68,68,0.2); color:#fca5a5; border-color:#ef4444; margin-bottom:0.75rem;">💀 CORE SACRIFICE SUMMON</div>
+          <h3 class="modal-title" style="margin-bottom:0.35rem;" id="sacrificeModalTitle">Sacrifice Field Spirits to Summon</h3>
+          <p class="modal-desc" id="sacrificeModalDesc" style="margin-bottom:0.9rem; font-size:0.85rem; color:#94a3b8;">
+            Select which Spirits on your field will give up cores to pay the summon cost. Any Spirit reduced to 0 cores will be depleted and sent to the Trash!
+          </p>
+
+          <!-- Core Budget Breakdown -->
+          <div class="sacrifice-summary-box" id="sacrificeSummaryBox" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:0.65rem; padding:0.75rem 1rem; margin-bottom:0.9rem;">
+            <!-- Injected Core math -->
+          </div>
+
+          <!-- Spirit Choices List -->
+          <div id="sacrificeSpiritChoices" style="max-height:240px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.25rem;">
+            <!-- Injected interactive spirit choices -->
+          </div>
+
+          <!-- Action buttons -->
+          <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+            <button class="btn-duel-tool" onclick="BattleArena.closeSacrificeModal()">Cancel</button>
+            <button class="btn-step-action btn-step-core" id="btnConfirmSacrifice" onclick="BattleArena.executeSacrificeSummon()" style="width:auto; padding:0.6rem 1.4rem;">⚡ Confirm Sacrifice &amp; Summon</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VICTORY / DEFEAT MODAL -->
+      <div class="battle-modal-overlay" id="battleResultModal">
+        <div class="battle-modal-card">
+          <div class="result-badge result-win" id="resultModalBadge">🏆 VICTORY ACHIEVED</div>
+          <h3 class="modal-title" id="resultModalTitle">Colosseum Champion Defeated!</h3>
+          <p class="modal-desc" id="resultModalDesc">You crushed the enemy's life gems and proved your supremacy in the Colosseum!</p>
+          <div class="modal-btn-row">
+            <button class="btn-start-duel" onclick="BattleArena.closeResultModal(); BattleArena.startDuel();" style="width:auto;padding:0.75rem 1.5rem;">🔄 Rematch</button>
+            <button class="btn-hero-quick-duel" onclick="BattleArena.closeResultModal(); window.location.href='/deck';" style="padding:0.75rem 1.5rem;">🃏 Edit in Deck Builder</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ════════════════ ZONE VIEWER MODAL (TRASH / GRAVEYARD & VOID) ════════════════ -->
+      <div class="battle-modal-overlay" id="battleZoneModal" onclick="BattleArena.closeZoneModalBg(event)">
+        <div class="battle-modal-card zone-modal-card">
+          <div class="zone-modal-header">
+            <div class="zone-modal-title-group">
+              <h3 class="zone-modal-title" id="zoneModalTitle">🪦 The Trash (Graveyard)</h3>
+              <span class="zone-modal-subtitle" id="zoneModalSubtitle">View all cards sent to the graveyard</span>
+            </div>
+            <button class="zone-modal-close" onclick="BattleArena.closeZoneModal()">&times;</button>
+          </div>
+
+          <!-- Tab navigation: Player Trash | Opponent Trash | The Void -->
+          <div class="zone-tabs-bar">
+            <button class="zone-tab-btn active" id="tabPlayerTrash" onclick="BattleArena.switchZoneTab('player-trash')">
+              🪦 Your Trash (<span id="tabCountPlayerTrash">0</span>)
+            </button>
+            <button class="zone-tab-btn" id="tabOpponentTrash" onclick="BattleArena.switchZoneTab('opponent-trash')">
+              💀 Opponent Trash (<span id="tabCountOpponentTrash">0</span>)
+            </button>
+            <button class="zone-tab-btn" id="tabVoid" onclick="BattleArena.switchZoneTab('void')">
+              🌌 The Void (<span id="tabCountVoid">0</span>)
+            </button>
+          </div>
+
+          <!-- Modal Body / Cards Gallery -->
+          <div class="zone-modal-body" id="zoneModalBody">
+            <!-- Injected list of cards or cosmic void display -->
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="zone-modal-footer">
+            <span class="zone-modal-tip" id="zoneModalTip">💡 Click any card to inspect full details, stats, levels &amp; abilities</span>
+            <button class="btn-zone-close" onclick="BattleArena.closeZoneModal()">Close Zone View</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
