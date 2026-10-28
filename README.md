@@ -34,14 +34,14 @@
 
 This system incorporates architectures, data pipelines, and toolkits across several key directories:
 
-1. **`BSP/`** (`C:\Users\namis\OneDrive\Documents\BSP`)
+1. **`BSP/` (Core Application)**
    - **Main Game Platform**: Houses the core server (`server.py`), battle arena engine (`battle_arena.js`), arena interface (`arena.html`), deck builder (`deck_builder.js` / `deck.html`), global styling (`styles.css`), and the SQLite database (`battle_spirits.db`).
-2. **`BSP_backup/`** (`C:\Users\namis\OneDrive\Documents\BSP_backup`)
-   - **Secondary Archive**: Standalone safety backup directory synchronized with all modified source files, assets, and packaged `BSP_backup.zip`.
-3. **`nlp/`** (`C:\Users\namis\OneDrive\Documents\nlp`)
+2. **`BSP_backup/` (Backup Archive)**
+   - **Secondary Archive**: Standalone safety backup directory synchronized with all modified source files, assets, and packaged project backups.
+3. **`nlp/` (Card Effect NLP Engine)**
    - **NLP & Text Mining Engine**: Document analysis and natural language processing pipelines used for parsing complex Japanese/English Battle Spirits card effect text into actionable JSON rule trees.
-4. **`Game-AI-Development-Toolkit/`** (`C:\Users\namis\OneDrive\Documents\Game-AI-Development-Toolkit`)
-   - **Game AI Architecture**: Referenced for Monte Carlo decision modeling, heuristic state evaluation, and AI weight training.
+4. **`Game-AI-Development-Toolkit/` (Game AI Architecture)**
+   - **Game AI Toolkit**: Referenced for Monte Carlo decision modeling, heuristic state evaluation, and AI weight training.
 
 ---
 
