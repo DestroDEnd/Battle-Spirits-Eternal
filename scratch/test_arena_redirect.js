@@ -35,7 +35,7 @@ function testEndpoint(path) {
 async function runHttpTests() {
   const rArena = await testEndpoint('/arena');
   assert.strictEqual(rArena.status, 200, '/arena must return 200 OK');
-  assert(rArena.body.includes('Destro\'s Colosseum Battle Arena'), '/arena must serve Colosseum Battle Arena title');
+  assert(rArena.body.includes('Battle Spirits Eternal') || rArena.body.includes('Destro\'s Colosseum Battle Arena'), '/arena must serve Battle Spirits Eternal Arena title');
   console.log('  ✅ GET /arena returned HTTP 200 OK with dedicated Battle Arena page');
 
   const rBattle = await testEndpoint('/battle');
