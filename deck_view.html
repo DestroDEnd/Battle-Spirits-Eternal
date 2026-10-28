@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battle Spirits — Deck Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.2">
+  <style>
+    .deckview-page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 4rem 1.25rem;
+    }
+    .deckview-header-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 1.25rem;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+    }
+    .deckview-header-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--accent-glow, rgba(245,158,11,0.18)) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .deckview-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .deckview-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .deckview-color-gem {
+      width: 58px;
+      height: 58px;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.85rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+    .deckview-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 0.4rem 0;
+      letter-spacing: -0.02em;
+    }
+    .deckview-meta-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+    }
+    .meta-pill-ready {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+    .meta-pill-warning {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #fde68a;
+    }
+    .meta-pill-battle {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.35));
+      border-color: #f59e0b;
+      color: #fbbf24;
+      font-weight: 800;
+    }
+    .deckview-actions-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .deckview-btn {
+      padding: 0.65rem 1.15rem;
+      border-radius: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.18s ease;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+    }
+    .deckview-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    .deckview-btn-primary {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border: none;
+      color: #000;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+    .deckview-btn-primary:hover {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+    }
+    .deckview-btn-battle {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #34d399;
+    }
+    .deckview-btn-battle:hover {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: rgba(16, 185, 129, 0.7);
+    }
+    .deckview-btn-delete {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+    .deckview-btn-delete:hover {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: rgba(239, 68, 68, 0.6);
+    }
+
+    /* Stats Grid */
+    .deckview-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    @media(max-width: 900px) {
+      .deckview-stats-row { grid-template-columns: 1fr; }
+    }
+    .deckview-stat-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+    }
+    .stat-card-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #94a3b8;
+      margin-bottom: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .type-dist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem;
+    }
+    @media(max-width: 600px) {
+      .type-dist-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .type-dist-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0.6rem;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+    }
+    .type-dist-count {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .type-dist-label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      margin-top: 0.2rem;
+      font-weight: 600;
+    }
+
+    /* Cards Gallery */
+    .deckview-gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .deckview-gallery-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .deckview-filter-tabs {
+      display: flex;
+      gap: 0.4rem;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 0.3rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .deckview-tab {
+      padding: 0.35rem 0.85rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .deckview-tab:hover {
+      color: #fff;
+    }
+    .deckview-tab.active {
+      background: #f59e0b;
+      color: #000;
+    }
+
+    /* Card Grid */
+    .deckview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.2rem;
+    }
+    @media (max-width: 600px) {
+      .deckview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+    }
+    .deckview-card-item {
+      position: relative;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.85rem;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .deckview-card-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(245, 158, 11, 0.6);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+    }
+    .deckview-art-wrap {
+      width: 100%;
+      aspect-ratio: 0.71;
+      border-radius: 0.55rem;
+      overflow: hidden;
+      position: relative;
+      background: #020617;
+    }
+    .deckview-art-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .deckview-count-badge {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.4rem;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1.5px solid #f59e0b;
+      color: #fbbf24;
+      font-weight: 900;
+      font-size: 0.85rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.45rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      z-index: 2;
+    }
+    .deckview-cost-badge {
+      position: absolute;
+      top: 0.4rem;
+      left: 0.4rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 0.4rem;
+      z-index: 2;
+    }
+    .deckview-card-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0.55rem 0 0.2rem 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .deckview-card-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      color: #94a3b8;
+    }
+    .deckview-empty-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Header -->
+<header class="navbar">
+  <div class="nav-left">
+    <a class="nav-logo" href="/">
+      <span class="logo-gem">✦</span>
+      <span class="logo-text">Battle Spirits</span>
+    </a>
+  </div>
+  <nav class="nav-tabs">
+    <a class="tab-btn" href="/">🏠 Home</a>
+    <a class="tab-btn" href="/browse">🔍 Browse Cards</a>
+    <a class="tab-btn" href="/family">🧬 Family</a>
+    <a class="tab-btn" href="/sets">📦 Sets</a>
+    <a class="tab-btn active" href="/deck">🎴 Deck Builder</a>
+    <a class="tab-btn tab-arena" href="/arena">⚔️ Battle Arena</a>
+  </nav>
+  <div class="nav-auth-slot" id="navAuthSlot"></div>
+</header>
+
+<main class="deckview-page">
+  <!-- Top Breadcrumb -->
+  <div style="margin-bottom: 1.25rem;">
+    <a href="/deck" style="color: #94a3b8; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+      ← Back to Deck Builder
+    </a>
+  </div>
+
+  <!-- Deck Header Banner -->
+  <div class="deckview-header-card" id="deckHeaderCard">
+    <div class="deckview-top-row">
+      <div class="deckview-title-wrap">
+        <div class="deckview-color-gem" id="deckColorGem">🃏</div>
+        <div>
+          <h1 class="deckview-title" id="deckTitle">Loading Deck…</h1>
+          <div class="deckview-meta-pills" id="deckMetaPills">
+            <span class="meta-pill" id="pillTotalCards">0 Cards</span>
+            <span class="meta-pill" id="pillUniqueCards">0 Unique</span>
+            <span class="meta-pill" id="pillDeckColor">Color</span>
+            <span class="meta-pill" id="pillBattleStatus">Standby Deck</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Toolbar -->
+    <div class="deckview-actions-toolbar">
+      <button class="deckview-btn deckview-btn-primary" onclick="editThisDeck()" title="Edit this deck in Deck Builder">
+        ✏️ Edit in Deck Builder
+      </button>
+      <button class="deckview-btn deckview-btn-battle" id="btnToggleBattle" onclick="toggleBattleDeck()" title="Set as Active Battle Deck in Battle Spirits Eternal">
+        ⚔️ Set as Active Battle Deck
+      </button>
+      <button class="deckview-btn" onclick="copyDeckList()" title="Copy formatted card list">
+        📋 Copy Deck List
+      </button>
+      <button class="deckview-btn" onclick="exportDeckJson()" title="Download JSON deck file">
+        💾 Export .JSON
+      </button>
+      <button class="deckview-btn" onclick="exportDeckTxt()" title="Download TXT deck file">
+        📄 Export .TXT
+      </button>
+      <button class="deckview-btn deckview-btn-delete" onclick="deleteThisDeck()" title="Delete this deck">
+        🗑️ Delete Deck
+      </button>
+    </div>
+  </div>
+
+  <!-- Deck Analytics -->
+  <div class="deckview-stats-row">
+    <!-- Type Distribution -->
+    <div class="deckview-stat-card">
+      <div class="stat-card-title">
+        <span>Card Types Breakdown</span>
+        <span id="statRatioLabel" style="color:#f59e0b;font-weight:700;"></span>
+      </div>
+      <div class="type-dist-grid">
+        <div class="type-dist-box">
+          <div class="type-dist-count" id="countSpirits">0</div>
+          <div class="type-dist-label">Spirits</div>
+        </div>
+        <div class="type-dist-box">
+          <div class="type-dist-count" id="countBraves">0</div>
+          <div class="type-dist-label">Braves</div>
+        </div>
+        <div class="type-dist-box">
+          <div class="type-dist-count" id="countMagic">0</div>
+          <div class="type-dist-label">Magic</div>
+        </div>
+        <div class="type-dist-box">
+          <div class="type-dist-count" id="countNexus">0</div>
+          <div class="type-dist-label">Nexus</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost Curve -->
+    <div class="deckview-stat-card">
+      <div class="stat-card-title">
+        <span>Mana / Cost Curve</span>
+        <span style="font-family:'JetBrains Mono', monospace;color:#94a3b8;font-size:0.75rem;">Costs 0 to 8+</span>
+      </div>
+      <div class="curve-wrap" id="curveBars" style="height: 52px; display: flex; align-items: flex-end; gap: 6px;"></div>
+    </div>
+  </div>
+
+  <!-- Cards Gallery Section -->
+  <div>
+    <div class="deckview-gallery-header">
+      <h2 class="deckview-gallery-title">
+        <span>🃏 Cards in Deck</span>
+        <span id="galleryCountTag" style="font-size:0.8rem; color:#94a3b8; font-weight:600;"></span>
+      </h2>
+      <div class="deckview-filter-tabs">
+        <button class="deckview-tab active" onclick="setGalleryFilter('all', this)">All</button>
+        <button class="deckview-tab" onclick="setGalleryFilter('spirit', this)">Spirits</button>
+        <button class="deckview-tab" onclick="setGalleryFilter('brave', this)">Braves</button>
+        <button class="deckview-tab" onclick="setGalleryFilter('magic', this)">Magic</button>
+        <button class="deckview-tab" onclick="setGalleryFilter('nexus', this)">Nexus</button>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="deckview-grid" id="deckCardsGrid"></div>
+  </div>
+</main>
+
+<!-- Card Detail Modal (Inline for standalone inspection) -->
+<div class="modal-overlay" id="cardModal" onclick="closeModalOnBg(event)">
+  <div class="modal-box" id="modalBox">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-img-col">
+        <img class="modal-img" id="modalImg" src="/assets/card_back.png" alt="Card Art">
+      </div>
+      <div class="modal-info-col">
+        <div class="modal-tag-row" id="modalTagRow"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-jp" id="modalJp"></div>
+        <div class="modal-cost-row" id="modalCostRow"></div>
+        <div class="modal-section-title">Levels &amp; BP</div>
+        <div class="modal-levels" id="modalLevels"></div>
+        <div class="modal-section-title">Effect</div>
+        <div class="modal-effect" id="modalEffect"></div>
+        <div class="modal-section-title" id="modalFlavorTitle">Flavor Text</div>
+        <div class="modal-flavor" id="modalFlavor"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js?v=5.2"></script>
+<script>
+  let currentDeck = null;
+  let currentDeckId = '';
+  let deckCardsData = {};
+  let currentFilter = 'all';
+
+  const COLOR_GEMS = {
+    red: '🔴',
+    purple: '🟣',
+    green: '🟢',
+    white: '⚪',
+    yellow: '🟡',
+    blue: '🔵'
+  };
+
+  const COLOR_GLOWS = {
+    red: 'rgba(239, 68, 68, 0.25)',
+    purple: 'rgba(168, 85, 247, 0.25)',
+    green: 'rgba(34, 197, 94, 0.25)',
+    white: 'rgba(248, 250, 252, 0.25)',
+    yellow: 'rgba(234, 179, 8, 0.25)',
+    blue: 'rgba(59, 130, 246, 0.25)'
+  };
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const params = new URLSearchParams(window.location.search);
+    currentDeckId = params.get('id');
+
+    if (!currentDeckId) {
+      // Fallback: load active deck
+      if (window.DeckManager) {
+        currentDeckId = DeckManager.getActiveDeckId();
+      }
+    }
+
+    await loadDeckView(currentDeckId);
+  });
+
+  async function loadDeckView(deckId) {
+    if (!deckId) {
+      renderEmptyDeck("No deck specified.");
+      return;
+    }
+
+    // 1. Try DeckManager
+    if (window.DeckManager) {
+      currentDeck = DeckManager.getDeck(deckId);
+    }
+
+    // 2. Fallback to API if not in local storage
+    if (!currentDeck) {
+      try {
+        const res = await fetch('/api/decks');
+        if (res.ok) {
+          const decks = await res.json();
+          currentDeck = decks.find(d => d.id === deckId);
+        }
+      } catch (e) {
+        console.warn('API decks fetch failed:', e);
+      }
+    }
+
+    if (!currentDeck) {
+      renderEmptyDeck("Deck not found or has been deleted.");
+      return;
+    }
+
+    // Normalize cards map
+    if (Array.isArray(currentDeck.cards)) {
+      const map = {};
+      currentDeck.cards.forEach(c => {
+        if (c.name) map[c.name] = (map[c.name] || 0) + (c.count || 1);
+      });
+      currentDeck.cards = map;
+    }
+
+    // Fetch batch card details
+    const cardNames = Object.keys(currentDeck.cards || {});
+    if (cardNames.length > 0) {
+      try {
+        const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(cardNames.join('|')));
+        if (res.ok) {
+          deckCardsData = await res.json();
+        }
+      } catch (err) {
+        console.error('Batch card load failed:', err);
+      }
+    }
+
+    renderDeckHeader();
+    renderDeckStats();
+    renderCardsGallery();
+  }
+
+  function renderDeckHeader() {
+    const colorKey = (currentDeck.color || 'red').toLowerCase();
+    const gem = COLOR_GEMS[colorKey] || '🃏';
+    const glow = COLOR_GLOWS[colorKey] || 'rgba(245,158,11,0.2)';
+
+    document.getElementById('deckColorGem').textContent = gem;
+    document.getElementById('deckTitle').textContent = currentDeck.name || 'Untitled Deck';
+    document.getElementById('deckHeaderCard').style.setProperty('--accent-glow', glow);
+
+    const total = Object.values(currentDeck.cards || {}).reduce((a, b) => a + b, 0);
+    const unique = Object.keys(currentDeck.cards || {}).length;
+
+    const totalPill = document.getElementById('pillTotalCards');
+    totalPill.textContent = `${total} Cards`;
+    if (total >= 40) {
+      totalPill.className = 'meta-pill meta-pill-ready';
+      totalPill.title = 'Meets Battle Spirits tournament minimum of 40 cards (no upper limit)';
+    } else {
+      totalPill.className = 'meta-pill meta-pill-warning';
+      totalPill.textContent = `${total} / 40 Min Cards`;
+      totalPill.title = 'Incomplete deck: minimum 40 cards required to battle';
+    }
+
+    document.getElementById('pillUniqueCards').textContent = `${unique} Unique`;
+    document.getElementById('pillDeckColor').textContent = (currentDeck.color || 'Red').toUpperCase();
+
+    // Battle Deck Status
+    const battlePill = document.getElementById('pillBattleStatus');
+    const battleBtn = document.getElementById('btnToggleBattle');
+    const isBattle = window.DeckManager && DeckManager.getBattleDeckId() === currentDeck.id;
+
+    if (isBattle) {
+      battlePill.textContent = '🏆 Active Battle Spirits Eternal Deck';
+      battlePill.className = 'meta-pill meta-pill-battle';
+      battleBtn.innerHTML = '✅ Current Battle Deck';
+      battleBtn.classList.add('deckview-btn-battle');
+    } else {
+      battlePill.textContent = 'Standby Deck';
+      battlePill.className = 'meta-pill';
+      battleBtn.innerHTML = '⚔️ Set as Active Battle Deck';
+      battleBtn.classList.remove('deckview-btn-battle');
+    }
+  }
+
+  function renderDeckStats() {
+    const entries = Object.entries(currentDeck.cards || {});
+    let spirits = 0, braves = 0, magic = 0, nexus = 0;
+    const curve = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 0 to 8+
+
+    entries.forEach(([name, count]) => {
+      const info = deckCardsData[name] || {};
+      const type = (info.type || 'Spirit').toLowerCase();
+      if (type.includes('spirit')) spirits += count;
+      else if (type.includes('brave')) braves += count;
+      else if (type.includes('magic')) magic += count;
+      else if (type.includes('nexus')) nexus += count;
+      else spirits += count;
+
+      const cost = typeof info.cost === 'number' ? info.cost : parseInt(info.cost, 10) || 0;
+      const bucket = Math.min(8, Math.max(0, cost));
+      curve[bucket] += count;
+    });
+
+    document.getElementById('countSpirits').textContent = spirits;
+    document.getElementById('countBraves').textContent = braves;
+    document.getElementById('countMagic').textContent = magic;
+    document.getElementById('countNexus').textContent = nexus;
+
+    const total = spirits + braves + magic + nexus;
+    document.getElementById('statRatioLabel').textContent = total > 0 
+      ? `${Math.round((spirits/total)*100)}% Spirits • ${Math.round((magic/total)*100)}% Magic`
+      : '';
+
+    // Render Mana Curve
+    const maxBar = Math.max(1, ...curve);
+    const barsContainer = document.getElementById('curveBars');
+    barsContainer.innerHTML = curve.map((c, idx) => {
+      const pct = Math.round((c / maxBar) * 100);
+      const label = idx === 8 ? '8+' : idx;
+      return `
+        <div style="flex:1; display:flex; flex-direction:column; align-items:center; height:100%;">
+          <div style="font-size:0.6rem; color:#94a3b8; font-weight:700;">${c > 0 ? c : ''}</div>
+          <div style="width:100%; flex:1; display:flex; align-items:flex-end;">
+            <div style="width:100%; height:${Math.max(4, pct)}%; background:linear-gradient(180deg,#f59e0b,#b45309); border-radius:3px 3px 0 0;" title="Cost ${label}: ${c} cards"></div>
+          </div>
+          <div style="font-size:0.65rem; color:#cbd5e1; font-weight:700; margin-top:3px;">${label}</div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function setGalleryFilter(filter, btn) {
+    currentFilter = filter;
+    document.querySelectorAll('.deckview-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderCardsGallery();
+  }
+
+  function renderCardsGallery() {
+    const grid = document.getElementById('deckCardsGrid');
+    const entries = Object.entries(currentDeck.cards || {});
+
+    if (!entries.length) {
+      grid.innerHTML = '<div class="deckview-empty-state" style="grid-column:1/-1;"><h3>No cards in this deck</h3><p>Click "Edit in Deck Builder" to add cards.</p></div>';
+      return;
+    }
+
+    // Filter
+    const filtered = entries.filter(([name]) => {
+      if (currentFilter === 'all') return true;
+      const info = deckCardsData[name] || {};
+      const type = (info.type || 'Spirit').toLowerCase();
+      return type.includes(currentFilter);
+    });
+
+    document.getElementById('galleryCountTag').textContent = `Showing ${filtered.length} of ${entries.length} cards`;
+
+    grid.innerHTML = filtered.map(([name, count]) => {
+      const info = deckCardsData[name] || { name, cost: '?', type: 'Spirit' };
+      const art = info.image_url || '/assets/card_back.png';
+      const num = info.card_number || '';
+      const cost = info.cost !== undefined ? info.cost : '';
+      const type = info.type || 'Spirit';
+
+      return `
+        <div class="deckview-card-item" onclick="openCardInspector('${name.replace(/'/g, "\\'")}')" title="Click to inspect ${name}">
+          <div class="deckview-art-wrap">
+            <span class="deckview-cost-badge">Cost ${cost}</span>
+            <span class="deckview-count-badge">${count}x</span>
+            <img class="deckview-art-img" src="${art}" alt="${name}" loading="lazy" onerror="this.src='/assets/card_back.png'">
+          </div>
+          <div class="deckview-card-name">${name}</div>
+          <div class="deckview-card-sub">
+            <span>${num}</span>
+            <span>${type}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderEmptyDeck(msg) {
+    document.getElementById('deckHeaderCard').innerHTML = `
+      <div style="text-align:center; padding:2rem 1rem;">
+        <h2 style="color:#ef4444;margin-bottom:0.75rem;">⚠️ Deck Not Found</h2>
+        <p style="color:#94a3b8;margin-bottom:1.5rem;">${msg}</p>
+        <a href="/deck" class="deckview-btn deckview-btn-primary">← Go to Deck Builder</a>
+      </div>
+    `;
+    document.querySelector('.deckview-stats-row').style.display = 'none';
+  }
+
+  // ── USER ACTIONS ──
+  function editThisDeck() {
+    if (!currentDeck) return;
+    window.location.href = `/deck?edit=${encodeURIComponent(currentDeck.id)}`;
+  }
+
+  function toggleBattleDeck() {
+    if (!currentDeck || !window.DeckManager) return;
+    const total = Object.values(currentDeck.cards || {}).reduce((a, b) => a + b, 0);
+    if (total < 40) {
+      if (typeof showToast === 'function') {
+        showToast(`⚠️ Cannot set as Battle Deck! Requires at least 40 cards (currently ${total}/40).`, 'error');
+      } else {
+        alert(`Cannot set as Battle Deck: needs at least 40 cards.`);
+      }
+      return;
+    }
+    DeckManager.setBattleDeckId(currentDeck.id);
+    renderDeckHeader();
+    if (typeof showToast === 'function') {
+      showToast(`🏆 "${currentDeck.name}" is now your Active Battle Deck for Battle Spirits Eternal!`, 'success');
+    }
+  }
+
+  function deleteThisDeck() {
+    if (!currentDeck) return;
+    if (!confirm(`Are you sure you want to permanently delete "${currentDeck.name}"?`)) return;
+
+    if (window.DeckManager) {
+      DeckManager.deleteDeck(currentDeck.id);
+    }
+    // Also call server API
+    fetch(`/api/decks?id=${encodeURIComponent(currentDeck.id)}`, { method: 'DELETE' }).catch(() => {});
+
+    alert(`Deck "${currentDeck.name}" deleted.`);
+    window.location.href = '/deck';
+  }
+
+  function copyDeckList() {
+    if (!currentDeck) return;
+    const entries = Object.entries(currentDeck.cards || {});
+    const text = entries.map(([name, count]) => `${count}x ${name}`).join('\n');
+    navigator.clipboard.writeText(text).then(() => {
+      if (typeof showToast === 'function') showToast('📋 Deck list copied to clipboard!', 'success');
+      else alert('Deck list copied to clipboard!');
+    });
+  }
+
+  function exportDeckJson() {
+    if (!currentDeck) return;
+    const payload = {
+      name: currentDeck.name,
+      color: currentDeck.color,
+      total_cards: Object.values(currentDeck.cards || {}).reduce((a, b) => a + b, 0),
+      exported_at: new Date().toISOString(),
+      cards: currentDeck.cards
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${currentDeck.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportDeckTxt() {
+    if (!currentDeck) return;
+    const entries = Object.entries(currentDeck.cards || {});
+    const text = entries.map(([name, count]) => `${count} ${name}`).join('\n');
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${currentDeck.name.replace(/[^a-zA-Z0-9_-]/g, '_')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // ── MODAL INSPECTOR ──
+  function openCardInspector(cardName) {
+    const card = deckCardsData[cardName];
+    if (!card) return;
+    document.getElementById('modalTitle').textContent = card.name;
+    document.getElementById('modalJp').textContent = card.kanji || card.jpname || '';
+    document.getElementById('modalImg').src = card.image_url || '/assets/card_back.png';
+    document.getElementById('modalEffect').innerHTML = card.effect ? card.effect.replace(/\n/g, '<br>') : 'Vanilla Spirit.';
+    document.getElementById('modalLevels').innerHTML = card.levels ? card.levels.replace(/\n/g, '<br>') : 'Level 1: 1 core';
+    document.getElementById('modalFlavor').textContent = card.flavor || '';
+    document.getElementById('cardModal').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('cardModal').classList.remove('active');
+  }
+
+  function closeModalOnBg(e) {
+    if (e.target.id === 'cardModal') closeModal();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+=== PAGE 1 ===
+Convolutional Neural Networks for Sentence Classification
+YoonKim
+NewYorkUniversity
+yhk255@nyu.edu
+Abstract local features (LeCun et al., 1998). Originally
+invented for computer vision, CNN models have
+We report on a series of experiments with
+subsequently been shown to be effective for NLP
+convolutional neural networks (CNN)
+and have achieved excellent results in semantic
+trained on top of pre-trained word vec-
+parsing (Yih et al., 2014), search query retrieval
+torsforsentence-levelclassificationtasks.
+(Shen et al., 2014), sentence modeling (Kalch-
+We show that a simple CNN with lit-
+brenner et al., 2014), and other traditional NLP
+tle hyperparameter tuning and static vec-
+tasks(Collobertetal.,2011).
+tors achieves excellent results on multi-
+Inthepresentwork,wetrainasimpleCNNwith
+ple benchmarks. Learning task-specific
+one layer of convolution on top of word vectors
+vectors through fine-tuning offers further
+obtained from an unsupervised neural language
+gains in performance. We additionally
+model. These vectors were trained by Mikolov et
+propose a simple modification to the ar-
+al. (2013) on 100 billion words of Google News, chitecture to allow for the use of both
+and are publicly available.1 We initially keep the
+task-specific and static vectors. The CNN
+wordvectorsstaticandlearnonlytheotherparam-
+modelsdiscussedhereinimproveuponthe
+eters of the model. Despite little tuning of hyper-
+state of the art on 4 out of 7 tasks, which
+parameters, this simple model achieves excellent
+include sentiment analysis and question
+results on multiple benchmarks, suggesting that
+classification.
+the pre-trained vectors are ‘universal’ feature ex-
+1 Introduction tractors that can be utilized for various classifica-
+tion tasks. Learning task-specific vectors through
+Deep learning models have achieved remarkable
+fine-tuning results in further improvements. We
+results in computer vision (Krizhevsky et al.,
+finallydescribeasimplemodificationtothearchi-
+2012)andspeechrecognition(Gravesetal.,2013)
+tecturetoallowfortheuseofbothpre-trainedand
+in recent years. Within natural language process-
+task-specificvectorsbyhavingmultiplechannels.
+ing, much of the work with deep learning meth-
+OurworkisphilosophicallysimilartoRazavian
+odshasinvolvedlearningwordvectorrepresenta-
+et al. (2014) which showed that for image clas-
+tions through neural language models (Bengio et
+sification, feature extractors obtained from a pre-
+al., 2003; Yih et al., 2011; Mikolov et al., 2013)
+traineddeeplearningmodelperformwellonava-
+andperformingcompositionoverthelearnedword
+riety of tasks—including tasks that are very dif-
+vectors for classification (Collobert et al., 2011).
+ferentfromtheoriginaltaskforwhichthefeature
+Wordvectors,whereinwordsareprojectedfroma
+extractorsweretrained.
+sparse,1-of-V encoding(hereV isthevocabulary
+size) onto a lower dimensional vector space via a
+2 Model
+hiddenlayer,areessentiallyfeatureextractorsthat
+encodesemanticfeaturesofwordsintheirdimen-
+The model architecture, shown in figure 1, is a
+sions. Insuchdenserepresentations,semantically
+slightvariantoftheCNNarchitectureofCollobert
+close words are likewise close—in euclidean or et al. (2011). Let x ∈ Rk be the k-dimensional
+i
+cosine distance—in the lower dimensional vector
+word vector corresponding to the i-th word in the
+space.
+sentence. A sentence of length n (padded where
+Convolutional neural networks (CNN) utilize
+layers with convolving filters that are applied to 1https://code.google.com/p/word2vec/
+4102
+peS
+3
+]LC.sc[
+2v2885.8041:viXra
+
+=== PAGE 2 ===
+wait
+for
+the
+video
+and
+do
+n't
+rent
+it
+n x k representation of Convolutional layer with Max-over-time Fully connected layer
+sentence with static and multiple filter widths and pooling with dropout and
+non-static channels feature maps softmax output
+Figure1:Modelarchitecturewithtwochannelsforanexamplesentence.
+necessary)isrepresentedas thatiskeptstaticthroughouttrainingandonethat
+is fine-tuned via backpropagation (section 3.2).2
+x = x ⊕x ⊕...⊕x , (1) Inthemultichannelarchitecture,illustratedinfig-
+1:n 1 2 n
+ure 1, each filter is applied to both channels and
+where ⊕ is the concatenation operator. In gen-
+the results are added to calculate c in equation
+eral, letx refertotheconcatenationofwords i
+i:i+j
+(2). The model is otherwise equivalent to the sin-
+x ,x ,...,x . A convolution operation in-
+i i+1 i+j
+glechannelarchitecture.
+volves a filter w ∈ Rhk, which is applied to a
+windowofhwordstoproduceanewfeature. For
+2.1 Regularization
+example, a feature c is generated from a window
+i
+ofwordsx by For regularization we employ dropout on the
+i:i+h−1
+penultimatelayerwithaconstraintonl -normsof
+2
+c = f(w·x +b). (2) the weight vectors (Hinton et al., 2012). Dropout
+i i:i+h−1
+prevents co-adaptation of hidden units by ran-
+Here b ∈ R is a bias term and f is a non-linear
+domly dropping out—i.e., setting to zero—a pro-
+functionsuchasthehyperbolictangent. Thisfilter
+portion p of the hidden units during foward-
+isappliedtoeachpossiblewindowofwordsinthe
+backpropagation. That is, given the penultimate
+sentence{x ,x ,...,x }toproduce
+1:h 2:h+1 n−h+1:n layer z = [cˆ ,...,cˆ ] (note that here we have m
+1 m
+afeaturemap
+filters),insteadofusing
+c = [c ,c ,...,c ], (3)
+1 2 n−h+1 y = w·z+b (4)
+with c ∈ Rn−h+1. We then apply a max-over-
+for output unit y in forward propagation, dropout
+time pooling operation (Collobert et al., 2011)
+uses
+overthefeaturemapandtakethemaximumvalue
+cˆ = max{c} as the feature corresponding to this y = w·(z◦r)+b, (5)
+particularfilter. Theideaistocapturethemostim-
+where ◦ is the element-wise multiplication opera-
+portant feature—one with the highest value—for
+torandr ∈ Rm isa‘masking’vectorofBernoulli
+each feature map. This pooling scheme naturally
+random variables with probability p of being 1.
+dealswithvariablesentencelengths.
+Gradients are backpropagated only through the
+We have described the process by which one
+unmasked units. At test time, the learned weight
+feature is extracted from one filter. The model
+vectors are scaled by p such that wˆ = pw, and
+uses multiple filters (with varying window sizes)
+wˆ is used (without dropout) to score unseen sen-
+to obtain multiple features. These features form
+tences. We additionally constrain l -norms of the
+thepenultimatelayerandarepassedtoafullycon- 2
+weight vectors by rescaling w to have ||w|| = s
+nectedsoftmaxlayerwhoseoutputistheprobabil- 2
+whenever||w|| > safteragradientdescentstep.
+itydistributionoverlabels. 2
+In one of the model variants, we experiment
+2We employ language from computer vision where a color
+with having two ‘channels’ of word vectors—one imagehasred,green,andbluechannels.
+
+=== PAGE 3 ===
+Data c l N |V| |V | Test • MPQA: Opinion polarity detection subtask
+pre
+MR 2 20 10662 18765 16448 CV oftheMPQAdataset(Wiebeetal.,2005).7
+SST-1 5 18 11855 17836 16262 2210
+SST-2 2 19 9613 16185 14838 1821 3.1 HyperparametersandTraining
+Subj 2 23 10000 21323 17913 CV
+Foralldatasetsweuse: rectifiedlinearunits,filter
+TREC 6 10 5952 9592 9125 500 windows(h)of3,4,5with100featuremapseach,
+CR 2 19 3775 5340 5046 CV dropout rate (p) of 0.5, l constraint (s) of 3, and
+2
+MPQA 2 3 10606 6246 6083 CV
+mini-batch size of 50. These values were chosen
+Table 1: Summary statistics for the datasets after tokeniza- viaagridsearchontheSST-2devset.
+tion.c:Numberoftargetclasses.l:Averagesentencelength.
+We do not otherwise perform any dataset-
+N: Datasetsize. |V|: Vocabularysize. |V |: Numberof
+pre
+specific tuning other than early stopping on dev
+words present in the set of pre-trained word vectors. Test:
+Testsetsize(CVmeanstherewasnostandardtrain/testsplit sets. For datasets without a standard dev set we
+andthus10-foldCVwasused).
+randomly select 10% of the training data as the
+dev set. Training is done through stochastic gra-
+3 DatasetsandExperimentalSetup dient descent over shuffled mini-batches with the
+Adadeltaupdaterule(Zeiler,2012).
+We test our model on various benchmarks. Sum-
+marystatisticsofthedatasetsareintable1.
+3.2 Pre-trainedWordVectors
+• MR:Moviereviewswithonesentenceperre- Initializingwordvectorswiththoseobtainedfrom
+view. Classification involves detecting posi- anunsupervisedneurallanguagemodelisapopu-
+tive/negativereviews(PangandLee,2005).3 larmethodtoimproveperformanceintheabsence
+ofa largesupervised trainingset (Collobertet al.,
+• SST-1: Stanford Sentiment Treebank—an 2011; Socher et al., 2011; Iyyer et al., 2014). We
+extensionofMRbutwithtrain/dev/testsplits usethepubliclyavailableword2vecvectorsthat
+provided and fine-grained labels (very pos- were trained on 100 billion words from Google
+itive, positive, neutral, negative, very nega- News. Thevectorshavedimensionalityof300and
+tive),re-labeledbySocheretal. (2013).4 were trained using the continuous bag-of-words
+architecture (Mikolov et al., 2013). Words not
+• SST-2: Same as SST-1 but with neutral re- present in the set of pre-trained words are initial-
+viewsremovedandbinarylabels. izedrandomly.
+• Subj: Subjectivity dataset where the task is 3.3 ModelVariations
+to classify a sentence as being subjective or
+Weexperimentwithseveralvariantsofthemodel.
+objective(PangandLee,2004).
+• CNN-rand: Our baseline model where all
+• TREC: TREC question dataset—task in-
+wordsarerandomlyinitializedandthenmod-
+volves classifying a question into 6 question
+ifiedduringtraining.
+types (whether the question is about person,
+location, numeric information, etc.) (Li and
+• CNN-static: A model with pre-trained
+Roth,2002).5
+vectors from word2vec. All words—
+including the unknown ones that are ran-
+• CR: Customer reviews of various products
+domly initialized—are kept static and only
+(cameras, MP3setc.). Taskistopredictpos-
+theotherparametersofthemodelarelearned.
+itive/negativereviews(HuandLiu,2004).6
+• CNN-non-static: Sameasabovebutthepre-
+3https://www.cs.cornell.edu/people/pabo/movie-review-data/
+4http://nlp.stanford.edu/sentiment/ Data is actually provided trainedvectorsarefine-tunedforeachtask.
+at the phrase-level and hence we train the model on both
+phrases and sentences but only score on sentences at test • CNN-multichannel: A model with two sets
+time,asinSocheretal. (2013),Kalchbrenneretal. (2014),
+ofwordvectors. Eachsetofvectorsistreated
+andLeandMikolov(2014).Thusthetrainingsetisanorder
+ofmagnitudelargerthanlistedintable1. as a ‘channel’ and each filter is applied
+5http://cogcomp.cs.illinois.edu/Data/QA/QC/
+6http://www.cs.uic.edu/∼liub/FBS/sentiment-analysis.html 7http://www.cs.pitt.edu/mpqa/
+
+=== PAGE 4 ===
+Model MR SST-1 SST-2 Subj TREC CR MPQA
+CNN-rand 76.1 45.0 82.7 89.6 91.2 79.8 83.4
+CNN-static 81.0 45.5 86.8 93.0 92.8 84.7 89.6
+CNN-non-static 81.5 48.0 87.2 93.4 93.6 84.3 89.5
+CNN-multichannel 81.1 47.4 88.1 93.2 92.2 85.0 89.4
+RAE(Socheretal.,2011) 77.7 43.2 82.4 − − − 86.4
+MV-RNN(Socheretal.,2012) 79.0 44.4 82.9 − − − −
+RNTN(Socheretal.,2013) − 45.7 85.4 − − − −
+DCNN(Kalchbrenneretal.,2014) − 48.5 86.8 − 93.0 − −
+Paragraph-Vec(LeandMikolov,2014) − 48.7 87.8 − − − −
+CCAE(HermannandBlunsom,2013) 77.8 − − − − − 87.2
+Sent-Parser(Dongetal.,2014) 79.5 − − − − − 86.3
+NBSVM(WangandManning,2012) 79.4 − − 93.2 − 81.8 86.3
+MNB(WangandManning,2012) 79.0 − − 93.6 − 80.0 86.3
+G-Dropout(WangandManning,2013) 79.0 − − 93.4 − 82.1 86.1
+F-Dropout(WangandManning,2013) 79.1 − − 93.6 − 81.9 86.3
+Tree-CRF(Nakagawaetal.,2010) 77.3 − − − − 81.4 86.1
+CRF-PR(YangandCardie,2014) − − − − − 82.7 −
+SVM (Silvaetal.,2011) − − − − 95.0 − −
+S
+Table2:ResultsofourCNNmodelsagainstothermethods.RAE:RecursiveAutoencoderswithpre-trainedwordvectorsfrom
+Wikipedia(Socheretal.,2011). MV-RNN:Matrix-VectorRecursiveNeuralNetworkwithparsetrees(Socheretal.,2012).
+RNTN:RecursiveNeuralTensorNetworkwithtensor-basedfeaturefunctionandparsetrees(Socheretal., 2013). DCNN:
+DynamicConvolutionalNeuralNetworkwithk-maxpooling(Kalchbrenneretal., 2014). Paragraph-Vec: Logisticregres-
+sionontopofparagraphvectors(LeandMikolov,2014). CCAE:CombinatorialCategoryAutoencoderswithcombinatorial
+category grammar operators (Hermann and Blunsom, 2013). Sent-Parser: Sentiment analysis-specific parser (Dong et al.,
+2014). NBSVM,MNB:NaiveBayesSVMandMultinomialNaiveBayeswithuni-bigramsfromWangandManning(2012).
+G-Dropout,F-Dropout: GaussianDropoutandFastDropoutfromWangandManning(2013). Tree-CRF:Dependencytree
+withConditionalRandomFields(Nakagawaetal.,2010).CRF-PR:ConditionalRandomFieldswithPosteriorRegularization
+(YangandCardie,2014).SVM :SVMwithuni-bi-trigrams,whword,headword,POS,parser,hypernyms,and60hand-coded
+S
+rulesasfeaturesfromSilvaetal.(2011).
+to both channels, but gradients are back- competitive results against the more sophisticated
+propagated only through one of the chan- deep learning models that utilize complex pool-
+nels. Hence the model is able to fine-tune ingschemes(Kalchbrenneretal.,2014)orrequire
+one set of vectors while keeping the other parse trees to be computed beforehand (Socher
+static. Both channels are initialized with et al., 2013). These results suggest that the pre-
+word2vec. trained vectors are good, ‘universal’ feature ex-
+tractors and can be utilized across datasets. Fine-
+In order to disentangle the effect of the above
+tuning the pre-trained vectors for each task gives
+variations versus other random factors, we elim-
+stillfurtherimprovements(CNN-non-static).
+inate other sources of randomness—CV-fold as-
+signment, initialization of unknown word vec- 4.1 Multichannelvs. SingleChannelModels
+tors, initialization of CNN parameters—by keep-
+We had initially hoped that the multichannel ar-
+ingthemuniformwithineachdataset.
+chitecture would prevent overfitting (by ensuring
+that the learned vectors do not deviate too far
+4 ResultsandDiscussion
+fromtheoriginalvalues)andthusworkbetterthan
+Results of our models against other methods are the single channel model, especially on smaller
+listed in table 2. Our baseline model with all ran- datasets. Theresults,however,aremixed,andfur-
+domlyinitializedwords(CNN-rand)doesnotper- ther work on regularizing the fine-tuning process
+formwellonitsown. Whilewehadexpectedper- is warranted. For instance, instead of using an
+formancegainsthroughtheuseofpre-trainedvec- additional channel for the non-static portion, one
+tors, we were surprised at the magnitude of the could maintain a single channel but employ extra
+gains. Even a simple model with static vectors dimensionsthatareallowedtobemodifiedduring
+(CNN-static) performs remarkably well, giving training.
+
+=== PAGE 5 ===
+MostSimilarWordsfor the same architecture as our single channel
+StaticChannel Non-staticChannel model. Forexample,theirMax-TDNN(Time
+good terrible Delay Neural Network) with randomly ini-
+terrible horrible tialized words obtains 37.4% on the SST-1
+bad
+horrible lousy dataset, compared to 45.0% for our model.
+lousy stupid We attribute such discrepancy to our CNN
+great nice having much more capacity (multiple filter
+bad decent widthsandfeaturemaps).
+good
+terrific solid
+• Dropoutprovedtobesuchagoodregularizer
+decent terrific
+thatitwasfinetousealargerthannecessary
+os not
+network and simply let dropout regularize it.
+ca never
+n’t Dropout consistently added 2%–4% relative
+ireland nothing
+performance.
+wo neither
+2,500 2,500 • When randomly initializing words not in
+entire lush word2vec, we obtained slight improve-
+!
+jez beautiful ments by sampling each dimension from
+changer terrific U[−a,a] where a was chosen such that the
+decasia but randomly initialized vectors have the same
+abysmally dragon variance as the pre-trained ones. It would be
+,
+demise a interesting to see if employing more sophis-
+valiant and ticated methods to mirror the distribution of
+Table 3: Top 4 neighboring words—based on cosine pre-trained vectors in the initialization pro-
+similarity—for vectors in the static channel (left) and fine- cessgivesfurtherimprovements.
+tunedvectorsinthenon-staticchannel(right)fromthemul-
+tichannelmodelontheSST-2datasetaftertraining. • We briefly experimented with another set of
+publicly available word vectors trained by
+4.2 Staticvs. Non-staticRepresentations Collobert et al. (2011) on Wikipedia,8 and
+foundthatword2vecgavefarsuperiorper-
+As is the case with the single channel non-static
+formance. It is not clear whether this is due
+model,themultichannelmodelisabletofine-tune
+toMikolovetal. (2013)’sarchitectureorthe
+the non-static channel to make it more specific to
+the task-at-hand. For example, good is most sim- 100billionwordGoogleNewsdataset.
+ilar to bad in word2vec, presumably because
+• Adadelta (Zeiler, 2012) gave similar results
+theyare(almost)syntacticallyequivalent. Butfor
+to Adagrad (Duchi et al., 2011) but required
+vectors in the non-static channel that were fine-
+fewerepochs.
+tuned on the SST-2 dataset, this is no longer the
+case (table 3). Similarly, good is arguably closer 5 Conclusion
+tonicethanitistogreatforexpressingsentiment,
+In the present work we have described a series of
+andthisisindeedreflectedinthelearnedvectors.
+experiments with convolutional neural networks
+For (randomly initialized) tokens not in the set
+built on top of word2vec. Despite little tuning
+of pre-trained vectors, fine-tuning allows them to
+ofhyperparameters,asimpleCNNwithonelayer
+learn more meaningful representations: the net-
+ofconvolutionperformsremarkablywell. Ourre-
+work learns that exclamation marks are associ-
+sultsaddtothewell-establishedevidencethatun-
+ated with effusive expressions and that commas
+supervised pre-training of word vectors is an im-
+areconjunctive(table3).
+portantingredientindeeplearningforNLP.
+4.3 FurtherObservations
+Acknowledgments
+Wereportonsomefurtherexperimentsandobser-
+We would like to thank Yann LeCun and the
+vations:
+anonymous reviewers for their helpful feedback
+andsuggestions.
+• Kalchbrenner et al. (2014) report much
+worseresultswithaCNNthathasessentially 8http://ronan.collobert.com/senna/
+
+=== PAGE 6 ===
+References B. Pang, L. Lee. 2004. A sentimental education:
+Sentimentanalysisusingsubjectivitysummarization
+Y. Bengio, R. Ducharme, P. Vincent. 2003. Neu-
+based on minimum cuts. In Proceedings of ACL
+ralProbabilitisticLanguageModel. JournalofMa-
+2004.
+chineLearningResearch3:1137–1155.
+B.Pang, L.Lee. 2005. Seeingstars: Exploitingclass
+R. Collobert, J. Weston, L. Bottou, M. Karlen, K.
+relationships for sentiment categorization with re-
+Kavukcuglu, P. Kuksa. 2011. Natural Language
+specttoratingscales. InProceedingsofACL2005.
+Processing (Almost) from Scratch. Journal of Ma-
+chineLearningResearch12:2493–2537.
+A.S. Razavian, H. Azizpour, J. Sullivan, S. Carlsson
+2014. CNN Features off-the-shelf: an Astounding
+J.Duchi,E.Hazan,Y.Singer. 2011 Adaptivesubgra-
+Baseline. CoRR,abs/1403.6382.
+dientmethodsforonlinelearningandstochasticop-
+timization. JournalofMachineLearningResearch,
+Y. Shen, X. He, J. Gao, L. Deng, G. Mesnil. 2014.
+12:2121–2159.
+LearningSemanticRepresentationsUsingConvolu-
+tionalNeuralNetworksforWebSearch. InProceed-
+L. Dong, F. Wei, S. Liu, M. Zhou, K. Xu. 2014. A
+ingsofWWW2014.
+StatisticalParsingFrameworkforSentimentClassi-
+fication. CoRR,abs/1401.6330.
+J. Silva, L. Coheur, A. Mendes, A. Wichert. 2011.
+A. Graves, A. Mohamed, G. Hinton. 2013. Speech Fromsymbolictosub-symbolicinformationinques-
+recognitionwithdeeprecurrentneuralnetworks. In tion classification. Artificial Intelligence Review,
+ProceedingsofICASSP2013. 35(2):137–154.
+G. Hinton, N. Srivastava, A. Krizhevsky, I. Sutskever, R. Socher, J. Pennington, E. Huang, A. Ng, C. Man-
+R. Salakhutdinov. 2012. Improving neural net- ning. 2011. Semi-Supervised Recursive Autoen-
+worksbypreventingco-adaptationoffeaturedetec- coders for Predicting Sentiment Distributions. In
+tors. CoRR,abs/1207.0580. ProceedingsofEMNLP2011.
+K.Hermann,P.Blunsom. 2013. TheRoleofSyntaxin R. Socher, B. Huval, C. Manning, A. Ng. 2012. Se-
+Vector Space Models of Compositional Semantics. manticCompositionalitythroughRecursiveMatrix-
+InProceedingsofACL2013. VectorSpaces. InProceedingsofEMNLP2012.
+M.Hu, B.Liu. 2004. MiningandSummarizingCus- R.Socher,A.Perelygin,J.Wu,J.Chuang,C.Manning,
+tomer Reviews. In Proceedings of ACM SIGKDD A.Ng,C.Potts. 2013. RecursiveDeepModelsfor
+2004. Semantic Compositionality Over a Sentiment Tree-
+bank. InProceedingsofEMNLP2013.
+M. Iyyer, P. Enns, J. Boyd-Graber, P. Resnik 2014.
+PoliticalIdeologyDetectionUsingRecursiveNeural J.Wiebe,T.Wilson,C.Cardie. 2005. AnnotatingEx-
+Networks. InProceedingsofACL2014. pressions of Opinions and Emotions in Language.
+LanguageResourcesandEvaluation,39(2-3): 165–
+N.Kalchbrenner,E.Grefenstette,P.Blunsom. 2014. A
+210.
+Convolutional Neural Network for Modelling Sen-
+tences. InProceedingsofACL2014. S. Wang, C. Manning. 2012. Baselines and Bigrams:
+Simple, Good Sentiment and Topic Classification.
+A. Krizhevsky, I. Sutskever, G. Hinton. 2012. Ima-
+InProceedingsofACL2012.
+geNetClassificationwithDeepConvolutionalNeu-
+ralNetworks. InProceedingsofNIPS2012.
+S. Wang, C. Manning. 2013. Fast Dropout Training.
+InProceedingsofICML2013.
+Q. Le, T. Mikolov. 2014. Distributed Represenations
+of Sentences and Documents. In Proceedings of
+B. Yang, C. Cardie. 2014. Context-aware Learning
+ICML2014.
+for Sentence-level Sentiment Analysis with Poste-
+riorRegularization. InProceedingsofACL2014.
+Y. LeCun, L. Bottou, Y. Bengio, P. Haffner. 1998.
+Gradient-basedlearningappliedtodocumentrecog-
+W.Yih,K.Toutanova,J.Platt,C.Meek. 2011. Learn-
+nition. In Proceedings of the IEEE, 86(11):2278–
+ing Discriminative Projections for Text Similarity
+2324,November.
+Measures. Proceedings of the Fifteenth Confer-
+enceonComputationalNaturalLanguageLearning,
+X. Li, D. Roth. 2002. Learning Question Classifiers.
+InProceedingsofACL2002.
+247–256.
+T.Mikolov,I.Sutskever,K.Chen,G.Corrado,J.Dean. W.Yih, X.He, C.Meek. 2014. SemanticParsingfor
+2013. Distributed Representations of Words and Single-Relation Question Answering. In Proceed-
+PhrasesandtheirCompositionality. InProceedings ingsofACL2014.
+ofNIPS2013.
+M. Zeiler. 2012. Adadelta: An adaptive learning rate
+T. Nakagawa, K. Inui, S. Kurohashi. 2010. De- method. CoRR,abs/1212.5701.
+pendency tree-based sentiment classification using
+CRFswithhiddenvariables. InProceedingsofACL
+2010.
+

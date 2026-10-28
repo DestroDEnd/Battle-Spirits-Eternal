@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Duelist Login | Battle Spirits Eternal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.0">
+</head>
+<body>
+
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+<header class="navbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
+  <nav class="nav-tabs">
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth active" id="tabAuth" href="/login">👤 Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+  <div class="auth-page-wrapper">
+    
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-badge">⚔️ Colosseum Entrance</div>
+        <h1 class="auth-title">Duelist Login</h1>
+        <p class="auth-subtitle">Sign in with your credentials to access your saved decks and enter the Colosseum.</p>
+      </div>
+
+      <div id="authAlert" class="auth-alert"></div>
+
+      <form class="auth-form" id="loginForm" onsubmit="handleLoginSubmit(event)">
+        <!-- Field 1: Login Handle/ID -->
+        <div class="auth-field">
+          <label class="auth-label" for="loginInput">
+            <span>👤</span> Login ID / Handle
+          </label>
+          <div class="auth-input-wrapper">
+            <span class="auth-input-icon">👤</span>
+            <input type="text" id="loginInput" class="auth-input" placeholder="Enter your login ID or handle..." required autofocus autocomplete="username">
+          </div>
+        </div>
+
+        <!-- Field 2: Password -->
+        <div class="auth-field">
+          <label class="auth-label" for="passwordInput">
+            <span>🔒</span> Password
+          </label>
+          <div class="auth-input-wrapper">
+            <span class="auth-input-icon">🔒</span>
+            <input type="password" id="passwordInput" class="auth-input" placeholder="Enter your password..." required autocomplete="current-password">
+            <button type="button" class="auth-input-toggle" onclick="togglePasswordVisibility('passwordInput', this)" title="Show or hide password">👁️</button>
+          </div>
+        </div>
+
+        <!-- Field 3: Security Captcha -->
+        <div class="auth-field">
+          <label class="auth-label">
+            <span>🛡️</span> Security Captcha Verification
+          </label>
+          <div class="auth-captcha-block">
+            <div class="auth-captcha-display">
+              <div class="auth-captcha-svg" id="captchaSvgContainer">
+                <span style="color:#64748b;font-size:0.8rem;">Loading security captcha...</span>
+              </div>
+              <button type="button" class="btn-captcha-refresh" id="btnRefreshCaptcha" onclick="refreshCaptcha()" title="Request new security captcha">
+                <span class="refresh-icon">🔄</span> Refresh
+              </button>
+            </div>
+            <div class="auth-input-wrapper">
+              <input type="text" id="captchaInput" class="auth-input no-icon" placeholder="Type the 6 characters shown above..." maxlength="6" required autocomplete="off" style="text-transform:uppercase;font-family:monospace;font-weight:700;letter-spacing:0.12em;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="auth-btn-primary" id="btnLoginSubmit">
+          <span>⚔️ Enter Colosseum (Login)</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Below Card: Register Link Option -->
+    <div class="auth-switch-card">
+      <span>Don't have a Duelist Account yet?</span>
+      <a class="auth-switch-link" href="/register">Register Here →</a>
+    </div>
+
+  </div>
+</main>
+
+<script src="/app.js?v=4.7"></script>
+<script>
+let currentCaptchaToken = '';
+
+function showAlert(message, type = 'error') {
+  const alertEl = document.getElementById('authAlert');
+  if (!alertEl) return;
+  alertEl.className = 'auth-alert ' + type;
+  alertEl.innerHTML = (type === 'error' ? '⚠️ ' : '✅ ') + message;
+  alertEl.style.display = 'flex';
+}
+
+function clearAlert() {
+  const alertEl = document.getElementById('authAlert');
+  if (alertEl) alertEl.style.display = 'none';
+}
+
+function togglePasswordVisibility(inputId, btn) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    btn.textContent = '👁️';
+  }
+}
+
+async function loadCaptcha() {
+  const container = document.getElementById('captchaSvgContainer');
+  const refreshBtn = document.getElementById('btnRefreshCaptcha');
+  if (refreshBtn) refreshBtn.classList.add('spinning');
+  try {
+    const res = await fetch('/api/captcha');
+    const data = await res.json();
+    if (data.success && data.svg) {
+      currentCaptchaToken = data.token;
+      if (container) container.innerHTML = data.svg;
+    } else {
+      if (container) container.innerHTML = '<span style="color:#f87171;font-size:0.8rem;">Captcha unavailable</span>';
+    }
+  } catch (err) {
+    console.error('Failed to load captcha:', err);
+    if (container) container.innerHTML = '<span style="color:#f87171;font-size:0.8rem;">Captcha connection error</span>';
+  } finally {
+    if (refreshBtn) {
+      setTimeout(() => refreshBtn.classList.remove('spinning'), 300);
+    }
+  }
+}
+
+function refreshCaptcha() {
+  const input = document.getElementById('captchaInput');
+  if (input) input.value = '';
+  loadCaptcha();
+}
+
+async function handleLoginSubmit(event) {
+  event.preventDefault();
+  clearAlert();
+
+  const login = document.getElementById('loginInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+  const captcha = document.getElementById('captchaInput').value.trim();
+  const btn = document.getElementById('btnLoginSubmit');
+
+  if (!login || !password) {
+    showAlert('Please fill in both your Login and Password.');
+    return;
+  }
+  if (!captcha) {
+    showAlert('Please enter the security captcha code shown.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span>⏳ Verifying Credentials...</span>';
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        login: login,
+        password: password,
+        captcha_token: currentCaptchaToken,
+        captcha_code: captcha
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      showAlert(`Welcome back, Duelist ${data.user.username}! Entering the Colosseum...`, 'success');
+      AuthManager.setUser(data.user);
+      setTimeout(() => {
+        // Redirect to Colosseum home or deck builder
+        window.location.href = '/';
+      }, 700);
+    } else {
+      showAlert(data.error || 'Authentication failed. Please check your credentials.');
+      refreshCaptcha();
+      btn.disabled = false;
+      btn.innerHTML = '<span>⚔️ Enter Colosseum (Login)</span>';
+      document.getElementById('captchaInput').focus();
+    }
+  } catch (err) {
+    console.error('Login error:', err);
+    showAlert('Server connection error. Please try again.');
+    btn.disabled = false;
+    btn.innerHTML = '<span>⚔️ Enter Colosseum (Login)</span>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadCaptcha();
+  // If already logged in, show status
+  const existingUser = AuthManager.getUser();
+  if (existingUser) {
+    showAlert(`Currently logged in as <strong>${existingUser.username}</strong>. You may continue to the <a href="/" style="color:#fbbf24;text-decoration:underline;">Colosseum</a> or sign in to another account below.`, 'success');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Browse Cards | Battle Spirits Eternal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.0">
+</head>
+<body>
+
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+<header class="navbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
+  <nav class="nav-tabs">
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn active" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="cards-view" id="browseView">
+
+    <!-- Browse Target Banner -->
+    <div class="cards-view-header">
+      <div class="cards-header-left">
+        <a class="btn-back" id="btnBackToDirectory" href="/family" style="display:none;">
+          <span>←</span>
+          <span id="btnBackText">Back to Directory</span>
+        </a>
+        <div>
+          <h2 class="cards-target-title" id="browseTargetTitle">🎴 Browse Cards Library</h2>
+          <span class="cards-target-badge" id="browseTargetBadge">Complete Battle Spirits Library</span>
+        </div>
+      </div>
+      <div>
+        <button class="btn-page" id="btnClearTarget" onclick="clearTargetFilter()" style="display:none;color:#fbbf24;border-color:rgba(245,158,11,0.4);">
+          ✕ Show All Cards
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Wiki Sync Notice -->
+    <div class="wiki-results-notice" id="browseWikiNotice">
+      <span style="animation:spin 1s linear infinite;display:inline-block;">⚡</span>
+      <span id="browseWikiNoticeText">Syncing cards from Battle Spirits Wiki…</span>
+    </div>
+
+    <!-- Search & Filters Container -->
+    <section class="search-section">
+      
+      <!-- Free Search Bar with Autocomplete -->
+      <div class="search-row">
+        <div class="search-wrap">
+          <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input type="text" id="browseSearchInput" placeholder="Search any card across Battle Spirits… (e.g. Makai, Siegfried, BS01, Puppet Soldier)" autocomplete="off"/>
+          <button class="search-clear" id="browseClearBtn" onclick="clearBrowseSearch()">&times;</button>
+          <div class="autocomplete-list" id="browseACList"></div>
+        </div>
+      </div>
+
+      <!-- Filter Groups (Keyword Scope, Color, Cost, Type, Rarity, Family) -->
+      <div class="filters-grid">
+        
+        <!-- Keyword Match Scope Filter -->
+        <div class="filter-group">
+          <span class="filter-label">Keyword Match In</span>
+          <div class="filter-pills" id="browseScopePills">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('scope','all')">Anywhere in Card</span>
+            <span class="filter-pill" data-val="name" onclick="setBrowseFilter('scope','name')">Card Name</span>
+            <span class="filter-pill" data-val="effect" onclick="setBrowseFilter('scope','effect')">Description / Effect</span>
+            <span class="filter-pill" data-val="family" onclick="setBrowseFilter('scope','family')">Family</span>
+          </div>
+        </div>
+
+        <!-- Color Filter -->
+        <div class="filter-group">
+          <span class="filter-label">Color</span>
+          <div class="filter-pills" id="browseColorPills">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('color','all')">All</span>
+            <span class="filter-pill" data-val="Red" onclick="setBrowseFilter('color','Red')">Red</span>
+            <span class="filter-pill" data-val="Purple" onclick="setBrowseFilter('color','Purple')">Purple</span>
+            <span class="filter-pill" data-val="Green" onclick="setBrowseFilter('color','Green')">Green</span>
+            <span class="filter-pill" data-val="White" onclick="setBrowseFilter('color','White')">White</span>
+            <span class="filter-pill" data-val="Yellow" onclick="setBrowseFilter('color','Yellow')">Yellow</span>
+            <span class="filter-pill" data-val="Blue" onclick="setBrowseFilter('color','Blue')">Blue</span>
+          </div>
+        </div>
+
+        <!-- Cost Filter -->
+        <div class="filter-group">
+          <span class="filter-label">Cost</span>
+          <div class="filter-pills" id="browseCostPills">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('cost','all')">All</span>
+            <span class="filter-pill" data-val="1" onclick="setBrowseFilter('cost','1')">1</span>
+            <span class="filter-pill" data-val="2" onclick="setBrowseFilter('cost','2')">2</span>
+            <span class="filter-pill" data-val="3" onclick="setBrowseFilter('cost','3')">3</span>
+            <span class="filter-pill" data-val="4" onclick="setBrowseFilter('cost','4')">4</span>
+            <span class="filter-pill" data-val="5" onclick="setBrowseFilter('cost','5')">5</span>
+            <span class="filter-pill" data-val="6" onclick="setBrowseFilter('cost','6')">6</span>
+            <span class="filter-pill" data-val="7" onclick="setBrowseFilter('cost','7')">7</span>
+            <span class="filter-pill" data-val="8+" onclick="setBrowseFilter('cost','8+')">8+</span>
+          </div>
+        </div>
+
+        <!-- Card Type Filter -->
+        <div class="filter-group">
+          <span class="filter-label">Card Type</span>
+          <div class="filter-pills" id="browseTypePills">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('type','all')">All</span>
+            <span class="filter-pill" data-val="Spirit" onclick="setBrowseFilter('type','Spirit')">Spirit</span>
+            <span class="filter-pill" data-val="Brave" onclick="setBrowseFilter('type','Brave')">Brave</span>
+            <span class="filter-pill" data-val="Magic" onclick="setBrowseFilter('type','Magic')">Magic</span>
+            <span class="filter-pill" data-val="Nexus" onclick="setBrowseFilter('type','Nexus')">Nexus</span>
+            <span class="filter-pill" data-val="Ultimate" onclick="setBrowseFilter('type','Ultimate')">Ultimate</span>
+            <span class="filter-pill" data-val="Grandwalker" onclick="setBrowseFilter('type','Grandwalker')">Grandwalker</span>
+          </div>
+        </div>
+
+        <!-- Rarity Filter -->
+        <div class="filter-group">
+          <span class="filter-label">Rarity</span>
+          <div class="filter-pills" id="browseRarityPills">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('rarity','all')">All</span>
+            <span class="filter-pill" data-val="Common" onclick="setBrowseFilter('rarity','Common')">Common</span>
+            <span class="filter-pill" data-val="Uncommon" onclick="setBrowseFilter('rarity','Uncommon')">Uncommon</span>
+            <span class="filter-pill" data-val="Rare" onclick="setBrowseFilter('rarity','Rare')">Rare</span>
+            <span class="filter-pill" data-val="Master Rare" onclick="setBrowseFilter('rarity','Master Rare')">Master Rare</span>
+            <span class="filter-pill" data-val="X-Rare" onclick="setBrowseFilter('rarity','X-Rare')">X-Rare</span>
+          </div>
+        </div>
+
+        <!-- Family Filter: Matrix-style Dropdown with Small Font -->
+        <div class="filter-group">
+          <span class="filter-label">Family</span>
+          <div class="family-dropdown-wrap" id="familyDropdownWrap">
+            <button type="button" class="family-dropdown-trigger" id="familyDropdownBtn" onclick="toggleFamilyDropdown(event)">
+              <span id="familyDropdownLabel">🐉 Family: All</span>
+              <span class="trigger-arrow">▼</span>
+            </button>
+            <div class="family-dropdown-menu" id="familyDropdownMenu" onclick="event.stopPropagation()">
+              <div class="family-menu-header">
+                <input type="text" id="familyMenuSearch" class="family-menu-search" placeholder="Search all families… (e.g. Astroblazer, Makai, Dragon)" oninput="filterDropdownFamilies()">
+                <button type="button" class="family-menu-all-btn" onclick="selectFamilyFromDropdown('all')">All Families</button>
+                <button type="button" class="family-menu-close" onclick="closeFamilyDropdown()">&times;</button>
+              </div>
+              <div class="family-menu-split" id="familyDropdownSplit">
+                <div class="family-menu-nav" id="familyMenuNav"></div>
+                <div class="family-menu-main" id="familyMenuMain">
+                  <div class="family-main-header" id="familyMainHeader"></div>
+                  <div class="family-main-list" id="familyMainList"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls Row: Results count + Sort + Reset -->
+      <div class="browse-controls-bar">
+        <span class="browse-results-count" id="browseResultsCount">Loading cards…</span>
+        <div class="browse-sort-wrap">
+          <span class="sort-label">Sort by:</span>
+          <select id="browseSortSelect" class="sort-select" onchange="handleSortChange()">
+            <option value="cost_asc">💎 Cost: Low → High</option>
+            <option value="cost_desc">💎 Cost: High → Low</option>
+            <option value="number_asc">🔢 Card Number: Ascending</option>
+            <option value="number_desc">🔢 Card Number: Descending</option>
+            <option value="name_asc">🔤 Name: A → Z</option>
+            <option value="name_desc">🔤 Name: Z → A</option>
+            <option value="rarity_desc">⭐ Rarity: High → Low</option>
+            <option value="rarity_asc">⭐ Rarity: Low → High</option>
+            <option value="type_asc">🏷️ Card Type: Spirit → Magic</option>
+          </select>
+          <button class="btn-reset-filters" onclick="resetAllBrowseFilters()">Reset Filters</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Cards Grid -->
+    <div class="card-grid" id="browseGrid"></div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination" id="browsePagination"></div>
+
+  </div>
+
+</main>
+
+<!-- ════════════════ CARD DETAIL MODAL ════════════════ -->
+<div class="modal-overlay" id="cardModal" onclick="closeModalBg(event)">
+  <!-- Floating Chevron Nav: Previous Card -->
+  <button class="modal-nav-arrow modal-nav-prev" id="modalPrevBtn" onclick="event.stopPropagation(); navigateCardModal(-1)" title="Previous Card (← Left Arrow)" style="display:none;">
+    <span>‹</span>
+  </button>
+
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
+        data-art="${esc(card.image_url || '')}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=FALLBACK_CARD_ART; }" />
+      <div class="modal-actions">
+        <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
+        <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
+        <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
+      </div>
+    </div>
+    <div class="modal-info">
+      <div>
+        <div class="modal-jpname" id="modalJpName"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+      </div>
+      <div class="badges" id="modalBadges"></div>
+      <div class="info-box">
+        <div class="info-box-label">Levels & Battle Points</div>
+        <div class="info-box-content" id="modalLevels" style="font-family:var(--mono);font-size:0.85rem;"></div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Card Effect / Ability</div>
+        <div class="info-box-content" id="modalEffect"></div>
+      </div>
+      <div class="flavor-text" id="modalFlavor" style="display:none;"></div>
+      <div>
+        <div class="info-box-label" style="margin-bottom:0.4rem;">Sets / Printings</div>
+        <div class="modal-sets-row" id="modalSets"></div>
+      </div>
+      <a class="wiki-link" id="modalWikiLinkBottom" href="#" target="_blank">View on Battle Spirits Fandom Wiki ↗</a>
+    </div>
+  </div>
+  <!-- Floating Chevron Nav: Next Card -->
+  <button class="modal-nav-arrow modal-nav-next" id="modalNextBtn" onclick="event.stopPropagation(); navigateCardModal(1)" title="Next Card (→ Right Arrow)" style="display:none;">
+    <span>›</span>
+  </button>
+</div>
+
+<!-- ════════════════ DECK IMPORT MODAL ════════════════ -->
+<div class="modal-overlay" id="deckImportModal" onclick="closeImportModalBg(event)">
+  <div class="import-modal-box">
+    <button class="modal-close" onclick="closeDeckImportModal()">&times;</button>
+    
+    <div class="import-header">
+      <div class="import-title-row">
+        <span style="font-size:1.6rem;">📥</span>
+        <div>
+          <h2 class="import-title">Import Battle Spirits Deck</h2>
+          <p class="import-subtitle">Import your deck from a file on your computer (.json, .txt, .dec, .csv) or paste a card list below.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="import-tabs">
+      <button class="import-tab-btn active" id="importTabFile" onclick="switchImportTab('file')">📁 Upload File from Computer</button>
+      <button class="import-tab-btn" id="importTabPaste" onclick="switchImportTab('paste')">📋 Paste Deck List / Code</button>
+    </div>
+
+    <div class="import-panel" id="importPanelFile">
+      <div class="import-dropzone" id="importDropzone" 
+           onclick="document.getElementById('deckFileInput').click()"
+           ondragover="handleImportDragOver(event)"
+           ondragleave="handleImportDragLeave(event)"
+           ondrop="handleImportDrop(event)">
+        <input type="file" id="deckFileInput" accept=".json,.txt,.dec,.csv" style="display:none;" onchange="handleDeckFileSelect(event)">
+        <div class="dropzone-icon">📁</div>
+        <div class="dropzone-text">Click to choose a file or drag & drop it here</div>
+        <div class="dropzone-sub">Supports .json, .txt, .dec, or .csv deck files from your computer</div>
+        <button type="button" class="btn-browse-file" onclick="event.stopPropagation(); document.getElementById('deckFileInput').click();">Browse Computer Files</button>
+      </div>
+      <div id="fileUploadStatus" class="file-upload-status" style="display:none;"></div>
+    </div>
+
+    <div class="import-panel" id="importPanelPaste" style="display:none;">
+      <textarea id="importPasteArea" class="import-textarea" placeholder="Paste your card list or deck JSON here…
+e.g.
+3x The DragonEmperor Siegfried
+3x BS01-001
+2x Puppet Soldier
+1x The Decisive Battleground of Makai
+or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></textarea>
+      <div class="import-hints">
+        <span class="hint-pill">Format: 3x [Name]</span>
+        <span class="hint-pill">Format: 3 [Card Code]</span>
+        <span class="hint-pill">Format: JSON Deck</span>
+        <span class="hint-pill">Comments with # or //</span>
+      </div>
+    </div>
+
+    <div class="import-config">
+      <div class="import-config-row">
+        <div style="flex:1;">
+          <label class="import-label">Deck Name</label>
+          <input type="text" id="importDeckName" class="import-input" value="Imported Deck" placeholder="Name your deck…">
+        </div>
+        <div style="min-width:200px;">
+          <label class="import-label">Import Mode</label>
+          <div class="import-mode-radios">
+            <label class="mode-radio-label">
+              <input type="radio" name="importMode" value="replace" checked>
+              <span>Replace Deck</span>
+            </label>
+            <label class="mode-radio-label">
+              <input type="radio" name="importMode" value="merge">
+              <span>Merge Cards</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="import-preview-box" id="importPreviewBox" style="display:none;">
+        <div class="preview-header">
+          <div style="display:flex;align-items:center;gap:0.5rem;">
+            <span style="font-weight:800;color:#fff;">Parsed Deck:</span>
+            <span class="preview-count-badge" id="previewTotalCount">0 Cards</span>
+            <span class="preview-count-badge badge-muted" id="previewUniqueCount">0 Unique</span>
+          </div>
+          <span id="previewStatusMsg" style="font-size:0.8rem;color:#10b981;font-weight:700;">Ready to load</span>
+        </div>
+        <div class="preview-chips-container" id="previewChipsContainer"></div>
+        <div id="previewWarnings" class="preview-warnings" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="import-modal-footer">
+      <button class="btn-cancel" onclick="closeDeckImportModal()">Cancel</button>
+      <button class="btn-import-execute" id="btnExecuteImport" onclick="executeDeckImport()" disabled>📥 Load into Deck Builder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifications Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/app.js?v=4.7"></script>
+<script>
+// ═══════════════════ BROWSE CONTROLLER ═══════════════════
+const browseState = {
+  q: '',
+  scope: 'all',
+  color: 'all',
+  cost: 'all',
+  type: 'all',
+  rarity: 'all',
+  family: 'all',
+  set: '',
+  sort: 'cost_asc',
+  page: 1,
+  limit: 18,
+  totalCards: 0
+};
+
+let categorizedFamiliesCache = [];
+
+// Parse URL Query Parameters on page load
+function parseUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('q')) browseState.q = params.get('q');
+  if (params.has('scope')) browseState.scope = params.get('scope');
+  if (params.has('color')) browseState.color = params.get('color');
+  if (params.has('cost')) browseState.cost = params.get('cost');
+  if (params.has('type')) browseState.type = params.get('type');
+  if (params.has('rarity')) browseState.rarity = params.get('rarity');
+  if (params.has('family')) browseState.family = params.get('family');
+  if (params.has('set')) browseState.set = params.get('set');
+  if (params.has('sort')) browseState.sort = params.get('sort');
+  if (params.has('page')) browseState.page = parseInt(params.get('page')) || 1;
+
+  // Sync inputs
+  if (browseState.q) {
+    document.getElementById('browseSearchInput').value = browseState.q;
+    document.getElementById('browseClearBtn').style.display = 'block';
+  }
+  const sortSel = document.getElementById('browseSortSelect');
+  if (sortSel && browseState.sort) sortSel.value = browseState.sort;
+
+  syncPillsFromState();
+  updateTargetHeader();
+}
+
+function syncPillsFromState() {
+  ['scope', 'color', 'cost', 'type', 'rarity'].forEach(key => {
+    const containerId = 'browse' + key.charAt(0).toUpperCase() + key.slice(1) + 'Pills';
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const val = browseState[key];
+    container.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.classList.toggle('active', pill.getAttribute('data-val') === val);
+    });
+  });
+  updateFamilyDropdownBtnState();
+}
+
+function updateTargetHeader() {
+  const backBtn = document.getElementById('btnBackToDirectory');
+  const clearBtn = document.getElementById('btnClearTarget');
+  const titleEl = document.getElementById('browseTargetTitle');
+  const badgeEl = document.getElementById('browseTargetBadge');
+
+  if (browseState.family && browseState.family.toLowerCase() !== 'all') {
+    backBtn.style.display = 'inline-flex';
+    backBtn.href = '/family';
+    document.getElementById('btnBackText').textContent = 'Back to Family Directory';
+    clearBtn.style.display = 'inline-block';
+    titleEl.textContent = `Family: ${browseState.family}`;
+    badgeEl.textContent = 'Filtered by Family';
+  } else if (browseState.set) {
+    backBtn.style.display = 'inline-flex';
+    backBtn.href = '/sets';
+    document.getElementById('btnBackText').textContent = 'Back to Card Sets';
+    clearBtn.style.display = 'inline-block';
+    titleEl.textContent = `Set: ${browseState.set}`;
+    badgeEl.textContent = 'Filtered by Set';
+  } else {
+    backBtn.style.display = 'none';
+    clearBtn.style.display = 'none';
+    titleEl.textContent = '🎴 Browse Cards Library';
+    badgeEl.textContent = 'Complete Battle Spirits Library';
+  }
+}
+
+function updateFamilyDropdownBtnState() {
+  const btn = document.getElementById('familyDropdownBtn');
+  const label = document.getElementById('familyDropdownLabel');
+  if (!btn || !label) return;
+
+  if (browseState.family && browseState.family.toLowerCase() !== 'all') {
+    btn.classList.add('has-selection');
+    label.textContent = `🐉 Family: ${browseState.family}`;
+  } else {
+    btn.classList.remove('has-selection');
+    label.textContent = '🐉 Family: All';
+  }
+}
+
+function setBrowseFilter(type, val) {
+  browseState[type] = val;
+  browseState.page = 1;
+  syncPillsFromState();
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+function handleSortChange() {
+  browseState.sort = document.getElementById('browseSortSelect').value;
+  browseState.page = 1;
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+function clearTargetFilter() {
+  browseState.family = 'all';
+  browseState.set = '';
+  browseState.page = 1;
+  updateTargetHeader();
+  updateFamilyDropdownBtnState();
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+function resetAllBrowseFilters() {
+  browseState.q = '';
+  browseState.scope = 'all';
+  browseState.color = 'all';
+  browseState.cost = 'all';
+  browseState.type = 'all';
+  browseState.rarity = 'all';
+  browseState.family = 'all';
+  browseState.set = '';
+  browseState.sort = 'cost_asc';
+  browseState.page = 1;
+
+  document.getElementById('browseSearchInput').value = '';
+  document.getElementById('browseClearBtn').style.display = 'none';
+  document.getElementById('browseSortSelect').value = 'cost_asc';
+
+  syncPillsFromState();
+  updateTargetHeader();
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+function updateUrlHistory() {
+  const params = new URLSearchParams();
+  if (browseState.q) params.set('q', browseState.q);
+  if (browseState.scope && browseState.scope !== 'all') params.set('scope', browseState.scope);
+  if (browseState.color !== 'all') params.set('color', browseState.color);
+  if (browseState.cost !== 'all') params.set('cost', browseState.cost);
+  if (browseState.type !== 'all') params.set('type', browseState.type);
+  if (browseState.rarity !== 'all') params.set('rarity', browseState.rarity);
+  if (browseState.family && browseState.family !== 'all') params.set('family', browseState.family);
+  if (browseState.set) params.set('set', browseState.set);
+  if (browseState.sort !== 'cost_asc') params.set('sort', browseState.sort);
+  if (browseState.page > 1) params.set('page', browseState.page);
+
+  const qs = params.toString();
+  const newUrl = qs ? `/browse?${qs}` : '/browse';
+  window.history.replaceState({}, '', newUrl);
+}
+
+// ═══════════════════ FAMILY DROPDOWN (MATRIX STYLE) ═══════════════════
+function toggleFamilyDropdown(e) {
+  e.stopPropagation();
+  const wrap = document.getElementById('familyDropdownWrap');
+  wrap.classList.toggle('open');
+  if (wrap.classList.contains('open')) {
+    document.getElementById('familyMenuSearch').focus();
+    if (!categorizedFamiliesCache || !categorizedFamiliesCache.length) {
+      loadFamilyDropdownData();
+    }
+  }
+}
+
+function closeFamilyDropdown() {
+  const wrap = document.getElementById('familyDropdownWrap');
+  if (wrap) wrap.classList.remove('open');
+}
+
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('familyDropdownWrap');
+  if (wrap && !wrap.contains(e.target)) {
+    closeFamilyDropdown();
+  }
+});
+
+function selectFamilyFromDropdown(familyName) {
+  browseState.family = familyName;
+  browseState.page = 1;
+  closeFamilyDropdown();
+  updateFamilyDropdownBtnState();
+  updateTargetHeader();
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+let activeFamCatIdx = 0;
+
+function renderFamilyDropdownMenu(categories) {
+  if (!categories || !categories.length) return;
+  categorizedFamiliesCache = categories;
+
+  const navEl = document.getElementById('familyMenuNav');
+  const mainHeaderEl = document.getElementById('familyMainHeader');
+  const mainListEl = document.getElementById('familyMainList');
+  if (!navEl || !mainHeaderEl || !mainListEl) return;
+
+  // If a family is currently selected, find its category and activate it
+  if (browseState.family && browseState.family.toLowerCase() !== 'all') {
+    const selFam = browseState.family.toLowerCase();
+    categories.forEach((cat, idx) => {
+      let fams = cat.families || [];
+      if (!fams.length && cat.subsections) {
+        cat.subsections.forEach(s => { fams = fams.concat(s.families || []); });
+      }
+      if (fams.some(f => f.name.toLowerCase() === selFam)) {
+        activeFamCatIdx = idx;
+      }
+    });
+  }
+
+  renderFamilyNav(categories);
+  renderFamilyCategoryContent(categories, activeFamCatIdx);
+}
+
+function renderFamilyNav(categories, searchActive = false, searchCount = 0) {
+  const navEl = document.getElementById('familyMenuNav');
+  if (!navEl) return;
+
+  let searchHtml = '';
+  if (searchActive) {
+    searchHtml = `
+      <div class="fam-nav-item active" style="border-left: 3px solid var(--accent);">
+        <span class="fam-nav-label">
+          <span>🔍</span>
+          <span>Search Results</span>
+        </span>
+        <span class="fam-nav-badge">${searchCount}</span>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,0.08);margin:0.25rem 0;"></div>
+    `;
+  }
+
+  const itemsHtml = categories.map((cat, idx) => {
+    let fams = cat.families || [];
+    if (!fams.length && cat.subsections) {
+      cat.subsections.forEach(s => { fams = fams.concat(s.families || []); });
+    }
+    const dotColor = cat.color || '#64748b';
+    const isActive = !searchActive && idx === activeFamCatIdx;
+
+    return `
+      <div class="fam-nav-item ${isActive ? 'active' : ''}" onclick="switchFamilyCategory(${idx})">
+        <span class="fam-nav-label">
+          <span class="fam-nav-dot" style="background:${dotColor};"></span>
+          <span>${esc(cat.title)}</span>
+        </span>
+        <span class="fam-nav-badge">${fams.length}</span>
+      </div>
+    `;
+  }).join('');
+
+  navEl.innerHTML = searchHtml + itemsHtml;
+}
+
+function switchFamilyCategory(idx) {
+  activeFamCatIdx = idx;
+  const searchInput = document.getElementById('familyMenuSearch');
+  if (searchInput) searchInput.value = '';
+  renderFamilyNav(categorizedFamiliesCache);
+  renderFamilyCategoryContent(categorizedFamiliesCache, idx);
+}
+
+function renderFamilyCategoryContent(categories, catIdx) {
+  const mainHeaderEl = document.getElementById('familyMainHeader');
+  const mainListEl = document.getElementById('familyMainList');
+  if (!mainHeaderEl || !mainListEl) return;
+
+  const cat = categories[catIdx];
+  if (!cat) return;
+
+  let families = cat.families || [];
+  if (!families.length && cat.subsections) {
+    cat.subsections.forEach(s => { families = families.concat(s.families || []); });
+  }
+
+  // Header
+  mainHeaderEl.innerHTML = `
+    <div class="family-main-title">
+      <span>${cat.icon ? cat.icon : '🐉'}</span>
+      <span>${esc(cat.title)}</span>
+    </div>
+    <span class="family-main-count">${families.length} Families</span>
+  `;
+
+  // Sort families alphabetically
+  const sortedFams = [...families].sort((a, b) => a.name.localeCompare(b.name));
+
+  // Cards
+  mainListEl.innerHTML = sortedFams.map(f => {
+    const isSelected = browseState.family && browseState.family.toLowerCase() === f.name.toLowerCase();
+    const count = f.count || f.wiki_count || 0;
+    return `
+      <div class="fam-item-card ${isSelected ? 'active' : ''}" onclick="selectFamilyFromDropdown('${escapeJsStr(f.name)}')">
+        <div class="fam-item-left">
+          <span class="fam-item-name" title="${esc(f.name)}">${esc(f.name)}</span>
+        </div>
+        <span class="fam-item-count">${count}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function filterDropdownFamilies() {
+  const q = document.getElementById('familyMenuSearch').value.toLowerCase().trim();
+  if (!q) {
+    renderFamilyNav(categorizedFamiliesCache);
+    renderFamilyCategoryContent(categorizedFamiliesCache, activeFamCatIdx);
+    return;
+  }
+
+  const mainHeaderEl = document.getElementById('familyMainHeader');
+  const mainListEl = document.getElementById('familyMainList');
+  if (!mainHeaderEl || !mainListEl || !categorizedFamiliesCache) return;
+
+  // Search across ALL categories
+  const matches = [];
+  categorizedFamiliesCache.forEach(cat => {
+    let fams = cat.families || [];
+    if (!fams.length && cat.subsections) {
+      cat.subsections.forEach(s => { fams = fams.concat(s.families || []); });
+    }
+    fams.forEach(f => {
+      if (f.name.toLowerCase().includes(q)) {
+        matches.push({
+          family: f,
+          category: cat
+        });
+      }
+    });
+  });
+
+  // Sort matches alphabetically
+  matches.sort((a, b) => a.family.name.localeCompare(b.family.name));
+
+  renderFamilyNav(categorizedFamiliesCache, true, matches.length);
+
+  mainHeaderEl.innerHTML = `
+    <div class="family-main-title">
+      <span>🔍</span>
+      <span>Matches for "${esc(q)}"</span>
+    </div>
+    <span class="family-main-count">${matches.length} Found</span>
+  `;
+
+  if (!matches.length) {
+    mainListEl.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--muted);">
+        <div style="font-size:1.8rem;margin-bottom:0.5rem;">🔍</div>
+        <div style="font-weight:700;color:#fff;">No families matching "${esc(q)}"</div>
+        <div style="font-size:0.75rem;margin-top:0.3rem;">Check spelling or try a broader keyword.</div>
+      </div>
+    `;
+    return;
+  }
+
+  mainListEl.innerHTML = matches.map(m => {
+    const f = m.family;
+    const cat = m.category;
+    const isSelected = browseState.family && browseState.family.toLowerCase() === f.name.toLowerCase();
+    const count = f.count || f.wiki_count || 0;
+    const catColor = cat.color || '#64748b';
+    const catTitle = cat.title.split('/')[0].trim();
+
+    return `
+      <div class="fam-item-card ${isSelected ? 'active' : ''}" onclick="selectFamilyFromDropdown('${escapeJsStr(f.name)}')">
+        <div class="fam-item-left">
+          <span class="fam-item-cat-badge" style="background:${catColor}22;color:${catColor};border:1px solid ${catColor}44;">${esc(catTitle)}</span>
+          <span class="fam-item-name" title="${esc(f.name)}">${esc(f.name)}</span>
+        </div>
+        <span class="fam-item-count">${count}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// ═══════════════════ CARD DATA FETCHING ═══════════════════
+async function loadBrowseCards() {
+  const grid = document.getElementById('browseGrid');
+  const countEl = document.getElementById('browseResultsCount');
+  const noticeEl = document.getElementById('browseWikiNotice');
+  const noticeText = document.getElementById('browseWikiNoticeText');
+
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);"><span style="animation:spin 1s linear infinite;display:inline-block;font-size:1.5rem;margin-bottom:0.5rem;">⚡</span><br>Loading cards…</div>';
+
+  let noticeMsg = '';
+  if (browseState.family && browseState.family.toLowerCase() !== 'all') {
+    noticeMsg = `Syncing cards for family "${browseState.family}"…`;
+  } else if (browseState.set) {
+    noticeMsg = `Syncing cards for set "${browseState.set}"…`;
+  } else if (browseState.q) {
+    noticeMsg = `Searching database & wiki for "${browseState.q}"…`;
+  }
+
+  if (noticeMsg) {
+    noticeText.textContent = noticeMsg;
+    noticeEl.style.display = 'flex';
+  } else {
+    noticeEl.style.display = 'none';
+  }
+
+  const offset = (browseState.page - 1) * browseState.limit;
+  const p = new URLSearchParams({
+    limit: browseState.limit,
+    offset: offset,
+    page: browseState.page,
+    sort: browseState.sort
+  });
+  if (browseState.q) p.set('q', browseState.q);
+  if (browseState.scope && browseState.scope !== 'all') p.set('scope', browseState.scope);
+  if (browseState.color !== 'all') p.set('color', browseState.color);
+  if (browseState.cost !== 'all') p.set('cost', browseState.cost);
+  if (browseState.type !== 'all') p.set('type', browseState.type);
+  if (browseState.rarity !== 'all') p.set('rarity', browseState.rarity);
+  if (browseState.family && browseState.family !== 'all') p.set('family', browseState.family);
+  if (browseState.set) p.set('set', browseState.set);
+
+  try {
+    const res = await fetch('/api/cards?' + p.toString());
+    const data = await res.json();
+    noticeEl.style.display = 'none';
+
+    browseState.totalCards = data.total || 0;
+    const cards = data.cards || [];
+    browseState.currentCards = cards.map(c => c.name);
+
+    const start = cards.length ? offset + 1 : 0;
+    const end = offset + cards.length;
+    countEl.textContent = `Showing ${start} - ${end} of ${browseState.totalCards} cards`;
+
+    if (!cards.length) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--muted);">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem;">🔍</div>
+          <div style="font-size:1.1rem;font-weight:700;color:#fff;">No cards matched your filters</div>
+          <div style="font-size:0.85rem;margin-top:0.4rem;">Try resetting filters or searching a different archetype/family.</div>
+          <button class="btn-page" style="margin-top:1rem;color:#fbbf24;border-color:rgba(245,158,11,0.4);" onclick="resetAllBrowseFilters()">Reset Filters</button>
+        </div>`;
+      renderPagination(0);
+      return;
+    }
+
+    grid.innerHTML = cards.map(c => buildCardTile(c)).join('');
+    bindCardTileEvents();
+    renderPagination(browseState.totalCards);
+
+  } catch (err) {
+    noticeEl.style.display = 'none';
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#fca5a5;">Failed to load cards: ${esc(err.message)}</div>`;
+  }
+}
+
+function getCardInDeckCount(cardName) {
+  if (typeof S !== 'undefined' && S.deck && S.deck[cardName]) {
+    return S.deck[cardName];
+  }
+  return 0;
+}
+
+function buildTileDeckActionsHtml(cardName) {
+  const inDeck = getCardInDeckCount(cardName);
+  const jsName = escapeJsStr(cardName);
+
+  if (inDeck > 0) {
+    return `
+      <div class="browse-tile-deck-ctrls">
+        <button class="btn-tile-act btn-tile-minus" onclick="handleBrowseRemoveDeck('${jsName}')" title="Remove 1 copy from deck">-</button>
+        <span class="browse-tile-count-val" title="${inDeck} of 3 in active deck">${inDeck}/3 in Deck</span>
+        <button class="btn-tile-act btn-tile-plus" onclick="handleBrowseAddDeck('${jsName}')" ${inDeck >= 3 ? 'disabled title="Max 3 copies reached"' : 'title="Add 1 more copy to deck"'}>+</button>
+        <button class="btn-tile-act btn-tile-del" onclick="handleBrowseDeleteDeck('${jsName}')" title="Remove all copies from deck">🗑</button>
+      </div>
+    `;
+  }
+  return `
+    <button class="btn-add-deck" onclick="handleBrowseAddDeck('${jsName}')">+ Add to Deck</button>
+  `;
+}
+
+function buildCardTile(card) {
+  const colors = card.colors || (card.color ? [card.color] : []);
+  const colorDots = colors.map(c => `<span class="color-dot color-dot-${esc(c)}" title="${esc(c)}"></span>`).join('');
+  const families = card.families || (card.family ? [card.family] : []);
+  const codeBadge = card.card_number ? `<span class="tile-number">${esc(card.card_number)}</span>` : '';
+  const inDeck = getCardInDeckCount(card.name);
+  const safeName = esc(card.name);
+  const deckPill = inDeck > 0
+    ? `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}">${inDeck}x in Deck</span>`
+    : `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}" style="display:none;"></span>`;
+
+  return `
+  <div class="card-tile" data-name="${safeName}">
+    <div class="tile-art">
+      <span class="tile-cost">💎 ${card.cost !== null && card.cost !== undefined ? card.cost : '—'}</span>
+      ${deckPill}
+      <div class="tile-colors">${colorDots}</div>
+      <img src="${esc(card.image_url || FALLBACK_CARD_ART)}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer"
+        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+    </div>
+    <div class="tile-info">
+      <div>
+        <div class="tile-name">${safeName}</div>
+        <div class="tile-meta">
+          <span>${esc(card.type || '—')}</span>
+          ${codeBadge}
+          <span>${esc(card.rarity || '')}</span>
+        </div>
+        ${families.length ? `<div class="tile-family">${esc(families.slice(0,2).join(' · '))}</div>` : ''}
+      </div>
+      <div class="tile-actions" id="tileActions-${safeName}" onclick="event.stopPropagation()">
+        ${buildTileDeckActionsHtml(card.name)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function handleBrowseAddDeck(name) {
+  addToDeck(name);
+  updateBrowseTileDeckStatus(name);
+}
+
+function handleBrowseRemoveDeck(name) {
+  removeFromDeck(name);
+  updateBrowseTileDeckStatus(name);
+}
+
+function handleBrowseDeleteDeck(name) {
+  deleteFromDeck(name);
+  updateBrowseTileDeckStatus(name);
+}
+
+function updateBrowseTileDeckStatus(name) {
+  const inDeck = getCardInDeckCount(name);
+  const actEl = document.getElementById('tileActions-' + name);
+  if (actEl) {
+    actEl.innerHTML = buildTileDeckActionsHtml(name);
+  }
+  const badgeEl = document.getElementById('tileDeckBadge-' + name);
+  if (badgeEl) {
+    if (inDeck > 0) {
+      badgeEl.textContent = `${inDeck}x in Deck`;
+      badgeEl.style.display = 'block';
+    } else {
+      badgeEl.style.display = 'none';
+    }
+  }
+}
+
+function updateAllBrowseTilesDeckStatus() {
+  document.querySelectorAll('.card-tile[data-name]').forEach(el => {
+    const name = el.getAttribute('data-name');
+    if (name) updateBrowseTileDeckStatus(name);
+  });
+}
+window.updateAllBrowseTilesDeckStatus = updateAllBrowseTilesDeckStatus;
+
+function bindCardTileEvents() {
+  document.querySelectorAll('.card-tile').forEach(el => {
+    el.addEventListener('click', () => openCardDetail(el.getAttribute('data-name'), browseState.currentCards));
+  });
+}
+
+function renderPagination(total) {
+  const pagEl = document.getElementById('browsePagination');
+  const totalPages = Math.ceil(total / browseState.limit) || 1;
+  if (totalPages <= 1) { pagEl.innerHTML = ''; return; }
+
+  pagEl.innerHTML = `
+    <button class="btn-page" ${browseState.page <= 1 ? 'disabled' : ''} onclick="changeBrowsePage(1)" title="First Page">« First</button>
+    <button class="btn-page" ${browseState.page <= 1 ? 'disabled' : ''} onclick="changeBrowsePage(${browseState.page - 1})" title="Previous Page">‹ Prev</button>
+
+    <div class="page-jump-wrap">
+      <span class="page-jump-label">Page</span>
+      <input type="number" id="pageJumpInput" class="page-jump-input" min="1" max="${totalPages}" value="${browseState.page}"
+             title="Type a page number and press Enter"
+             onfocus="this.select()"
+             onkeydown="if(event.key==='Enter'){event.preventDefault(); handlePageJumpInput(this.value, ${totalPages});}" />
+      <span class="page-jump-total">of ${totalPages}</span>
+      <button type="button" class="btn-jump-go" onclick="handlePageJumpBtn(${totalPages})">Go</button>
+    </div>
+
+    <button class="btn-page" ${browseState.page >= totalPages ? 'disabled' : ''} onclick="changeBrowsePage(${browseState.page + 1})" title="Next Page">Next ›</button>
+    <button class="btn-page" ${browseState.page >= totalPages ? 'disabled' : ''} onclick="changeBrowsePage(${totalPages})" title="Last Page">Last »</button>
+  `;
+}
+
+function handlePageJumpInput(val, maxPages) {
+  let p = parseInt(val, 10);
+  if (isNaN(p)) return;
+  p = Math.max(1, Math.min(maxPages, p));
+  changeBrowsePage(p);
+}
+
+function handlePageJumpBtn(maxPages) {
+  const inp = document.getElementById('pageJumpInput');
+  if (inp) handlePageJumpInput(inp.value, maxPages);
+}
+
+function changeBrowsePage(p) {
+  browseState.page = p;
+  updateUrlHistory();
+  loadBrowseCards();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ═══════════════════ AUTOCOMPLETE & SEARCH ═══════════════════
+let browseACTimer = null;
+const searchInput = document.getElementById('browseSearchInput');
+const acList = document.getElementById('browseACList');
+const clearBtn = document.getElementById('browseClearBtn');
+
+searchInput.addEventListener('input', (e) => {
+  const val = e.target.value.trim();
+  clearBtn.style.display = val ? 'block' : 'none';
+  clearTimeout(browseACTimer);
+  if (val.length < 2) { closeBrowseAC(); return; }
+  browseACTimer = setTimeout(() => fetchBrowseAC(val), 200);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    closeBrowseAC();
+    browseState.q = searchInput.value.trim();
+    browseState.page = 1;
+    updateUrlHistory();
+    loadBrowseCards();
+  }
+});
+
+function clearBrowseSearch() {
+  searchInput.value = '';
+  clearBtn.style.display = 'none';
+  closeBrowseAC();
+  browseState.q = '';
+  browseState.page = 1;
+  updateUrlHistory();
+  loadBrowseCards();
+}
+
+function closeBrowseAC() { acList.style.display = 'none'; acList.innerHTML = ''; }
+document.addEventListener('click', (e) => { if (!e.target.closest('.search-wrap')) closeBrowseAC(); });
+
+async function fetchBrowseAC(q) {
+  try {
+    const res = await fetch(`/api/autocomplete?q=${encodeURIComponent(q)}&limit=8`);
+    const cards = await res.json();
+    if (!cards.length) { closeBrowseAC(); return; }
+    acList.innerHTML = cards.map(c => `
+      <div class="ac-item" data-name="${esc(c.name)}">
+        <span class="ac-name">${esc(c.name)}</span>
+        <span class="ac-meta">${esc(c.card_number || '')} · Cost ${esc(c.cost || '—')}</span>
+      </div>`).join('');
+    acList.style.display = 'block';
+    acList.querySelectorAll('.ac-item').forEach(el => {
+      el.addEventListener('click', () => {
+        searchInput.value = el.getAttribute('data-name');
+        closeBrowseAC();
+        browseState.q = searchInput.value;
+        browseState.page = 1;
+        updateUrlHistory();
+        loadBrowseCards();
+      });
+    });
+  } catch (err) { closeBrowseAC(); }
+}
+
+// ═══════════════════ LOAD FILTERS METADATA ═══════════════════
+async function loadFamilyDropdownData() {
+  try {
+    const res = await fetch('/api/filters');
+    const data = await res.json();
+    if (data.categorized_families) {
+      renderFamilyDropdownMenu(data.categorized_families);
+    }
+  } catch (err) {
+    console.error('Failed to load filter metadata:', err);
+    const splitEl = document.getElementById('familyDropdownSplit');
+    if (splitEl) {
+      splitEl.innerHTML = '<div style="flex:1;padding:2rem 1rem;color:#f87171;text-align:center;font-size:0.78rem;">Failed to load families metadata. <button type="button" onclick="loadFamilyDropdownData()" style="color:var(--accent);background:none;border:none;cursor:pointer;text-decoration:underline;font-weight:700;">Retry</button></div>';
+    }
+  }
+}
+
+async function initBrowsePage() {
+  parseUrlParams();
+  loadBrowseCards();
+  loadFamilyDropdownData();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBrowsePage);
+} else {
+  initBrowsePage();
+}
+</script>
+</body>
+</html>
