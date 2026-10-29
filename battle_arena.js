@@ -954,6 +954,12 @@
     await loadCardEffectsDB();
     renderArenaLobby();
     renderAiDashboard();
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+      window.addEventListener('bse_auth_state_change', () => {
+        initPvpLobbyView();
+      });
+      initPvpLobbyView();
+    }
   }
 
 
@@ -8347,24 +8353,66 @@
   }
 
   function initPvpLobbyView() {
+    if (typeof document === 'undefined' || typeof document.getElementById !== 'function') return;
     const myIdEl = document.getElementById('myDuelistIdVal');
     const myNameEl = document.getElementById('pvpDuelistName');
+    const authBtn = document.getElementById('btnGoogleAuth');
+    const badgeEl = document.getElementById('pvpAuthStatusBadge');
+
     if (window.FirebaseService) {
       const user = window.FirebaseService.getUser();
-      if (user && myNameEl) myNameEl.textContent = user.displayName || user.email || 'Duelist';
+      if (user && myNameEl) {
+        myNameEl.textContent = user.displayName || user.email || 'Duelist Challenger';
+      }
       const dId = window.FirebaseService.getFormattedDuelistId();
       if (dId && myIdEl) myIdEl.textContent = dId;
+
+      if (authBtn) {
+        if (user && !user.isAnonymous) {
+          authBtn.textContent = '🚪 Sign Out';
+          authBtn.title = `Signed in as ${user.email || user.displayName}`;
+        } else {
+          authBtn.textContent = '🔑 Google Sign-In';
+          authBtn.title = 'Link your account with Google';
+        }
+      }
+
+      if (badgeEl) {
+        badgeEl.textContent = '🟢 Online';
+        badgeEl.style.background = 'rgba(34,197,94,0.2)';
+        badgeEl.style.color = '#4ade80';
+      }
     }
     populatePvpDeckSelects();
   }
 
+  async function handleAuthClick() {
+    if (!window.FirebaseService) return;
+    const user = window.FirebaseService.getUser();
+    if (user && !user.isAnonymous) {
+      if (confirm(`Currently signed in as ${user.displayName || user.email}.\nDo you want to sign out?`)) {
+        await window.FirebaseService.logout();
+        if (typeof showToast === 'function') showToast('Signed out successfully.', 'info');
+      }
+    } else {
+      try {
+        if (typeof showToast === 'function') showToast('Connecting Google Sign-In...', 'info');
+        await window.FirebaseService.loginWithGoogle();
+        if (typeof showToast === 'function') showToast('✨ Successfully connected Google Account!', 'success');
+      } catch (e) {
+        if (typeof showToast === 'function') showToast(`Sign-in note: ${e.message}`, 'error');
+      }
+    }
+  }
+
   function populatePvpDeckSelects() {
+    if (typeof document === 'undefined' || typeof document.getElementById !== 'function' || typeof document.createElement !== 'function') return;
     const hostSel = document.getElementById('pvpHostDeckSelect');
     const joinSel = document.getElementById('pvpJoinDeckSelect');
     const registered = (window.DeckManager && window.DeckManager.getRegisteredDecks) ? window.DeckManager.getRegisteredDecks() : [];
 
     [hostSel, joinSel].forEach(sel => {
-      if (!sel) return;
+      if (!sel || typeof sel.appendChild !== 'function') return;
       sel.innerHTML = '';
       if (registered && registered.length > 0) {
         registered.forEach(d => {
@@ -8699,7 +8747,8 @@
     CardEffectsDB,
     getCardEffectsDB: () => CardEffectsDB,
     loadCardEffectsDB,
-    safeEndOpponentTurn
+    safeEndOpponentTurn,
+    handleAuthClick
 };
 
   // Auto initialize on DOM ready

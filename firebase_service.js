@@ -23,6 +23,7 @@
   let auth = null;
   let db = null;
   let rtdb = null;
+  let analytics = null;
   let isConfigured = false;
   let currentUser = null;
   let currentDuelistId = null;
@@ -39,6 +40,14 @@
         auth = firebase.auth();
         db = firebase.firestore();
         rtdb = firebase.database();
+        if (typeof firebase.analytics === 'function') {
+          try {
+            analytics = firebase.analytics();
+            console.log('[Firebase] Initialized Firebase Analytics successfully.');
+          } catch(ae) {
+            console.warn('[Firebase] Analytics warning:', ae);
+          }
+        }
         isConfigured = true;
         console.log('[Firebase] Initialized Firebase Services successfully.');
 
@@ -47,12 +56,19 @@
           currentUser = user;
           if (user) {
             currentDuelistId = await getOrCreateDuelistId(user);
-            console.log(`[Firebase] Signed in as ${user.displayName || user.email} (Duelist ID: ${formatDuelistId(currentDuelistId)})`);
+            console.log(`[Firebase] Signed in as ${user.displayName || user.email || 'Duelist'} (Duelist ID: ${formatDuelistId(currentDuelistId)})`);
             // Trigger UI sync
             dispatchAuthEvent('signed_in', { user, duelistId: currentDuelistId });
           } else {
-            currentDuelistId = null;
-            dispatchAuthEvent('signed_out', null);
+            // Auto sign-in anonymously for instant multiplayer / duelist ID support
+            try {
+              await auth.signInAnonymously();
+            } catch (guestErr) {
+              // Local fallback if anonymous auth isn't enabled yet
+              currentDuelistId = localStorage.getItem('bse_local_duelist_id') || generateRandom8DigitId();
+              localStorage.setItem('bse_local_duelist_id', currentDuelistId);
+              dispatchAuthEvent('offline_guest', { duelistId: currentDuelistId });
+            }
           }
         });
       } catch (e) {
@@ -106,17 +122,19 @@
 
       if (!uniqueId) uniqueId = generateRandom8DigitId();
 
+      const duelistName = user.displayName || (user.email ? user.email.split('@')[0] : ('Duelist ' + uniqueId.slice(0, 4)));
+
       const batch = db.batch();
       batch.set(userDocRef, {
         duelistId: uniqueId,
-        username: user.displayName || user.email.split('@')[0],
+        username: duelistName,
         email: user.email || '',
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });
 
       batch.set(db.collection('duelist_ids').doc(uniqueId), {
         uid: user.uid,
-        username: user.displayName || user.email.split('@')[0],
+        username: duelistName,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       });
 
@@ -216,6 +234,12 @@
     return await auth.signInWithEmailAndPassword(email, password);
   }
 
+  async function signInWithGoogle() {
+    if (!auth) throw new Error('Firebase Auth not available');
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return await auth.signInWithPopup(provider);
+  }
+
   async function signUpWithEmail(email, password, username) {
     if (!auth) throw new Error('Firebase Auth not available');
     const cred = await auth.createUserWithEmailAndPassword(email, password);
@@ -257,11 +281,13 @@
     loadDecks: loadCloudDecks,
     deleteDeck: deleteCloudDeck,
     login: signInWithEmail,
+    loginWithGoogle: signInWithGoogle,
     register: signUpWithEmail,
     guestLogin: signInAnonymously,
     logout: signOut,
     getDatabase: () => rtdb,
-    getFirestore: () => db
+    getFirestore: () => db,
+    getAnalytics: () => analytics
   };
 
   // Auto-init on load
