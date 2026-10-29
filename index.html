@@ -1102,10 +1102,39 @@ async function loadFeaturedXRares(color = '') {
   track.classList.add('loading-fade');
 
   try {
-    const url = '/api/featured-x-rares' + (color ? `?color=${encodeURIComponent(color)}` : '');
-    const res = await fetch(url);
-    const data = await res.json();
-    featuredCards = data.cards || [];
+    let cards = [];
+    // 1. Try static featured_x_rares.json first (100% reliable on GitHub Pages)
+    try {
+      const res = await fetch('./featured_x_rares.json');
+      if (res.ok) {
+        const staticData = await res.json();
+        if (color && staticData.by_color) {
+          const capColor = color.charAt(0).toUpperCase() + color.slice(1).toLowerCase();
+          cards = staticData.by_color[capColor] || [];
+        }
+        if (!cards.length) {
+          cards = staticData.cards || [];
+        }
+        cards = [...cards].sort(() => Math.random() - 0.5);
+      }
+    } catch (e) {}
+
+    // 2. Fallback to API if running with local server
+    if (!cards.length) {
+      try {
+        const url = '/api/featured-x-rares' + (color ? `?color=${encodeURIComponent(color)}` : '');
+        const res = await fetch(url);
+        if (res.ok) {
+          const text = await res.text();
+          if (text.trim().startsWith('{')) {
+            const data = JSON.parse(text);
+            cards = data.cards || [];
+          }
+        }
+      } catch (e) {}
+    }
+
+    featuredCards = cards;
     renderFeaturedCards(featuredCards);
   } catch (err) {
     console.error('Failed to load featured X-Rares:', err);

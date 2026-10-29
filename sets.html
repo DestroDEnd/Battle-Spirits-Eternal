@@ -211,11 +211,33 @@ let allCategorizedSets = [];
 
 async function loadSetsDirectory() {
   try {
-    const res = await fetch('/api/filters');
-    const data = await res.json();
-    if (data.categorized_sets) {
+    let data = null;
+    // 1. Try static filters_data.json first (100% reliable on GitHub Pages)
+    try {
+      const res = await fetch('./filters_data.json');
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (e) {}
+
+    // 2. Fallback to API if running with local server
+    if (!data) {
+      try {
+        const res = await fetch('/api/filters');
+        if (res.ok) {
+          const text = await res.text();
+          if (text.trim().startsWith('{')) {
+            data = JSON.parse(text);
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (data && data.categorized_sets && data.categorized_sets.length > 0) {
       allCategorizedSets = data.categorized_sets;
       renderSetDirectory(allCategorizedSets);
+    } else {
+      throw new Error('Card sets directory data could not be loaded.');
     }
   } catch (err) {
     document.getElementById('setSectionsContainer').innerHTML = `<div style="text-align:center;padding:3rem;color:#fca5a5;">Failed to load sets: ${esc(err.message)}</div>`;
