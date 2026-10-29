@@ -185,6 +185,32 @@
     }
   }
 
+
+  // ── 3b. AVATAR & FRIENDS SYNC ─────────────────────────────
+  async function updateAvatar(avatarKey) {
+    if (!currentUser || !db) return;
+    try {
+      await db.collection('users').doc(currentUser.uid).set({
+        avatar: avatarKey,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    } catch (e) {
+      console.warn('[Firebase] Failed to save avatar to Firestore:', e);
+    }
+  }
+
+  async function syncFriendsToCloud(friendsList) {
+    if (!currentUser || !db) return;
+    try {
+      await db.collection('users').doc(currentUser.uid).set({
+        friends: friendsList,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    } catch (e) {
+      console.warn('[Firebase] Failed to sync friends to Firestore:', e);
+    }
+  }
+
   // ── 4. CLOUD DECK STORAGE (FIRESTORE) ──
   async function syncDeckToCloud(deck) {
     if (!currentUser || !db) return false;
@@ -277,6 +303,9 @@
     getDuelistId: () => currentDuelistId,
     getFormattedDuelistId: () => formatDuelistId(currentDuelistId),
     lookupDuelist: lookupDuelistById,
+    lookupDuelistById: lookupDuelistById,
+    updateAvatar: updateAvatar,
+    syncFriends: syncFriendsToCloud,
     syncDeck: syncDeckToCloud,
     loadDecks: loadCloudDecks,
     deleteDeck: deleteCloudDeck,
