@@ -73,7 +73,10 @@
                 <div style="font-size:0.7rem;color:#94a3b8;font-weight:700;margin-bottom:0.2rem;">UNIQUE 8-DIGIT DUELIST ID</div>
                 <div class="duelist-id-pill" id="myDuelistIdVal">8492-0153</div>
               </div>
-              <button class="btn-copy-id" onclick="BattleArena.copyMyDuelistId()" id="btnCopyDuelistId">📋 Copy ID</button>
+              <div style="display:flex;gap:0.4rem;align-items:center;">
+                <button class="btn-copy-id" onclick="BattleArena.copyMyDuelistId()" id="btnCopyDuelistId">📋 Copy ID</button>
+                <button class="btn-copy-id" id="btnGoogleAuth" onclick="BattleArena.handleAuthClick()" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:#e2e8f0;">🔑 Google Sign-In</button>
+              </div>
             </div>
           </div>
 
@@ -1041,7 +1044,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-<script src="./firebase_service.js?v=1.0"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+<script src="./firebase_service.js?v=1.1"></script>
 <script src="./multiplayer_service.js?v=1.0"></script>
 <script src="./app.js?v=5.0"></script>
 <script src="./battle_arena.js?v=5.1"></script>
