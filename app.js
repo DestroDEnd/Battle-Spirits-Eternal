@@ -2097,17 +2097,55 @@ const AuthManager = {
     this.renderNavbar();
   },
 
+  clearBrowserUserData() {
+    // Normal cleanup of user profile, decks, friends, and session without wiping the offline card database
+    const USER_KEYS = [
+      'bsp_duelist_user',              // Current user auth session
+      'bs_user_decks_v2',              // Stored user custom decks
+      'battle_spirits_deck_v1',         // In-progress deck builder state
+      'bs_deck',                       // Active deck cache
+      'deckbuilder_selected_deck_id',  // Selected deck cursor
+      'bse_user_avatar',               // Chosen avatar
+      'bse_duelist_friends',           // Friends list
+      'bse_local_duelist_id',          // Local assigned duelist ID
+      'bse_keep_std_red',              // Seeding flag
+      'colosseum_p1_deck_id',          // Selected arena player deck
+      'colosseum_opponent_deck_id'     // Selected arena opponent deck
+    ];
+
+    USER_KEYS.forEach(k => {
+      try { localStorage.removeItem(k); } catch(e) {}
+      try { sessionStorage.removeItem(k); } catch(e) {}
+    });
+
+    // Reset in-memory deck state
+    if (typeof S !== 'undefined') {
+      S.deck = {};
+    }
+    if (typeof updateDeckBadge === 'function') {
+      updateDeckBadge();
+    }
+    if (typeof renderDeckList === 'function') {
+      renderDeckList();
+    }
+  },
+
   async logout() {
-    localStorage.removeItem(this.STORAGE_KEY);
+    this.clearBrowserUserData();
     if (window.FirebaseService) {
       try { await window.FirebaseService.logout(); } catch(e) {}
     }
     this.renderNavbar();
     if (typeof showToast === 'function') {
-      showToast('🛡️ Signed out of Colosseum account.', 'info');
+      showToast('Signed out. Local decks and user session data have been cleared.', 'info');
     }
-    if (window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('register.html')) {
-      window.location.reload();
+    if (window.location.pathname.endsWith('login.html') || 
+        window.location.pathname.endsWith('register.html') || 
+        window.location.pathname.endsWith('deck.html') || 
+        window.location.pathname.endsWith('arena.html')) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 350);
     }
   },
 
