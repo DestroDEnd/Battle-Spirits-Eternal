@@ -8452,7 +8452,9 @@
     }
   }
 
-  async function trackDuelist() {
+  let trackedDuelistObj = null;
+
+  async function findDuelist() {
     const input = document.getElementById('trackerInputId');
     if (!input || !input.value.trim()) return;
     const rawId = input.value.trim().replace(/[^0-9]/g, '');
@@ -8461,21 +8463,52 @@
       return;
     }
 
-    if (window.FirebaseService) {
-      const res = await window.FirebaseService.lookupDuelist(rawId);
-      const resBox = document.getElementById('trackerResultBox');
-      const nameEl = document.getElementById('trackResultName');
-      const statsEl = document.getElementById('trackResultStats');
+    let duelist = null;
+    if (window.FirebaseService && window.FirebaseService.lookupDuelist) {
+      try {
+        const res = await window.FirebaseService.lookupDuelist(rawId);
+        if (res.success && res.duelist) {
+          duelist = res.duelist;
+        }
+      } catch (e) {}
+    }
 
-      if (res.success && res.duelist) {
-        trackedDuelistId = res.duelist.id;
-        if (nameEl) nameEl.textContent = `${res.duelist.username} (ID: #${res.duelist.formattedId})`;
-        if (statsEl) statsEl.textContent = `Deck: ${res.duelist.activeDeckName} • Record: ${res.duelist.victories} Wins`;
-        if (resBox) resBox.style.display = 'block';
-        if (typeof showToast === 'function') showToast(`Found Duelist ${res.duelist.username}!`, 'success');
+    const formatted = rawId.slice(0, 4) + '-' + rawId.slice(4);
+    if (!duelist) {
+      duelist = {
+        id: rawId,
+        formattedId: formatted,
+        username: `Duelist #${formatted}`,
+        avatar: '⚔️'
+      };
+    }
+
+    trackedDuelistId = duelist.id;
+    trackedDuelistObj = duelist;
+
+    const resBox = document.getElementById('trackerResultBox');
+    const nameEl = document.getElementById('trackResultName');
+    const statsEl = document.getElementById('trackResultStats');
+
+    if (nameEl) nameEl.textContent = `${duelist.username} (#${duelist.formattedId || formatted})`;
+    if (statsEl) statsEl.textContent = '🟢 Ready to Duel';
+    if (resBox) resBox.style.display = 'block';
+    if (typeof showToast === 'function') showToast(`Found Duelist ${duelist.username}!`, 'success');
+  }
+
+  function addTrackedFriend() {
+    if (!trackedDuelistObj) return;
+    if (window.DuelistSocial) {
+      const res = window.DuelistSocial.addFriend({
+        id: trackedDuelistObj.id,
+        formattedId: trackedDuelistObj.formattedId,
+        name: trackedDuelistObj.username,
+        avatar: trackedDuelistObj.avatar || '⚔️'
+      });
+      if (res.success) {
+        if (typeof showToast === 'function') showToast(`🤝 Added ${trackedDuelistObj.username} to your friends!`, 'success');
       } else {
-        if (typeof showToast === 'function') showToast(res.error || 'Duelist not found', 'error');
-        if (resBox) resBox.style.display = 'none';
+        if (typeof showToast === 'function') showToast(res.error || 'Could not add friend', 'warning');
       }
     }
   }
@@ -8592,7 +8625,9 @@
   window.BattleArena = {
     switchMode: switchArenaMode,
     copyMyDuelistId,
-    trackDuelist,
+    trackDuelist: findDuelist,
+    findDuelist,
+    addTrackedFriend,
     challengeTrackedDuelist,
     hostOnlineDuel,
     joinOnlineDuel,
@@ -8756,6 +8791,20 @@
     document.addEventListener('DOMContentLoaded', initBattleArena);
   } else {
     initBattleArena();
+  // Check if opened with ?duelWith=
+  if (typeof window !== 'undefined' && window.location && window.location.search && typeof URLSearchParams !== 'undefined') {
+    const urlParams = new URLSearchParams(window.location.search);
+    const duelWithParam = urlParams.get('duelWith');
+    if (duelWithParam) {
+      setTimeout(() => {
+        const input = document.getElementById('trackerInputId');
+        if (input) {
+          input.value = duelWithParam.slice(0, 4) + '-' + duelWithParam.slice(4);
+          findDuelist();
+        }
+      }, 400);
+    }
+  }
   }
 
 })();
