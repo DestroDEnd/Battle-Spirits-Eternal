@@ -60,15 +60,9 @@
             // Trigger UI sync
             dispatchAuthEvent('signed_in', { user, duelistId: currentDuelistId });
           } else {
-            // Auto sign-in anonymously for instant multiplayer / duelist ID support
-            try {
-              await auth.signInAnonymously();
-            } catch (guestErr) {
-              // Local fallback if anonymous auth isn't enabled yet
-              currentDuelistId = localStorage.getItem('bse_local_duelist_id') || generateRandom8DigitId();
-              localStorage.setItem('bse_local_duelist_id', currentDuelistId);
-              dispatchAuthEvent('offline_guest', { duelistId: currentDuelistId });
-            }
+            currentUser = null;
+            currentDuelistId = null;
+            dispatchAuthEvent('signed_out', {});
           }
         });
       } catch (e) {
@@ -414,8 +408,13 @@
   }
 
   async function signOut() {
-    if (!auth) return;
-    return await auth.signOut();
+    currentUser = null;
+    currentDuelistId = null;
+    if (auth) {
+      try { await auth.signOut(); } catch(e) {}
+    }
+    dispatchAuthEvent('signed_out', {});
+    return true;
   }
 
   function dispatchAuthEvent(eventName, payload) {
