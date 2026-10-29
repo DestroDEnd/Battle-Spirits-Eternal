@@ -175,13 +175,22 @@
     },
 
     getCardByName(name) {
-      if (!dbInstance) return null;
+      if (!dbInstance || !name) return null;
       try {
-        const stmt = dbInstance.prepare("SELECT * FROM cards WHERE name = ? LIMIT 1");
-        stmt.bind([name]);
+        const stmt = dbInstance.prepare("SELECT * FROM cards WHERE LOWER(name) = LOWER(?) LIMIT 1");
+        stmt.bind([name.trim()]);
         if (stmt.step()) {
           const row = stmt.getAsObject();
           stmt.free();
+          if (row.colors_json) {
+            try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+          }
+          if (row.families_json) {
+            try { row.families = JSON.parse(row.families_json); } catch(e) {}
+          }
+          if (row.sets_json) {
+            try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
+          }
           return row;
         }
         stmt.free();
@@ -200,7 +209,17 @@
         stmt.bind(names);
         const results = [];
         while (stmt.step()) {
-          results.push(stmt.getAsObject());
+          const row = stmt.getAsObject();
+          if (row.colors_json) {
+            try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+          }
+          if (row.families_json) {
+            try { row.families = JSON.parse(row.families_json); } catch(e) {}
+          }
+          if (row.sets_json) {
+            try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
+          }
+          results.push(row);
         }
         stmt.free();
         return results;
@@ -402,7 +421,7 @@
         if (path.endsWith('/api/card')) {
           const card = WasmDB.getCardByName(params.name || '');
           if (card) {
-            return new Response(JSON.stringify({ card }), {
+            return new Response(JSON.stringify(card), {
               status: 200,
               headers: { 'Content-Type': 'application/json' }
             });

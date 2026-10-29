@@ -62,6 +62,21 @@ const DeckManager = {
     if (!data || !Array.isArray(data.decks) || data.decks.length === 0) {
       data = this._migrateInitialDecks();
     } else {
+      // If the user's only deck is the default auto-seeded red standard deck, convert to clean empty custom deck
+      if (data.decks && data.decks.length === 1 && data.decks[0].id === 'deck_std_red' && !localStorage.getItem('bse_keep_std_red')) {
+        data.decks[0] = {
+          id: 'deck_custom_1',
+          name: 'My Custom Deck',
+          color: 'Red',
+          isStandard: false,
+          cards: {},
+          updatedAt: Date.now()
+        };
+        data.activeDeckId = 'deck_custom_1';
+        data.battleDeckId = 'deck_custom_1';
+        this.saveAllData(data);
+      }
+
       // Auto-repair any standard decks that have 0 cards (e.g. from previous empty migration)
       let repaired = false;
       for (const d of data.decks) {
@@ -102,23 +117,20 @@ const DeckManager = {
         cards: { ...legacyCards },
         updatedAt: Date.now()
       });
+    } else {
+      // Default: clean empty custom deck!
+      decks.push({
+        id: 'deck_custom_1',
+        name: 'My Custom Deck',
+        color: 'Red',
+        isStandard: false,
+        cards: {},
+        updatedAt: Date.now()
+      });
     }
 
-    // Always ensure at least the Red Starter Deck is registered by default with all 40 cards!
-    const redPreset = this.CANONICAL_STANDARD_DECKS.red;
-    decks.push({
-      id: 'deck_std_red',
-      name: redPreset.name,
-      color: redPreset.color,
-      isStandard: true,
-      standardKey: 'red',
-      cards: { ...redPreset.cards },
-      updatedAt: Date.now()
-    });
-
     const activeId = decks[0].id;
-    const battleDeck = decks.find(d => Object.values(d.cards || {}).reduce((a, b) => a + b, 0) >= 40) || decks[decks.length - 1];
-    const battleId = battleDeck ? battleDeck.id : activeId;
+    const battleId = activeId;
     const initialData = {
       activeDeckId: activeId,
       battleDeckId: battleId,
@@ -1241,19 +1253,20 @@ async function openCardDetail(name, contextList) {
 
   try {
     const res = await fetch('/api/card?name=' + encodeURIComponent(name));
-    const card = await res.json();
-    if (card.error) {
-      document.getElementById('modalEffect').textContent = card.error;
+    const rawData = await res.json();
+    const card = rawData.card || rawData;
+    if (!card || card.error) {
+      document.getElementById('modalEffect').textContent = (card && card.error) || 'Card not found.';
       return;
     }
     S.currentCard = card;
-    updateModalDeckButtons(card.name);
+    updateModalDeckButtons(card.name || name);
 
-    document.getElementById('modalTitle').textContent = card.name;
+    document.getElementById('modalTitle').textContent = card.name || name;
     document.getElementById('modalJpName').textContent = card.kanji || card.jpname || '';
-    document.getElementById('modalArt').src = card.image_url || '';
-    document.getElementById('modalDownload').href = '/api/download-art?name=' + encodeURIComponent(card.name);
-    const wikiHref = 'https://battle-spirits.fandom.com/wiki/' + encodeURIComponent((card.name || '').replace(/ /g, '_'));
+    document.getElementById('modalArt').src = card.image_url || './assets/card_back.png';
+    document.getElementById('modalDownload').href = card.image_url || ('./api/download-art?name=' + encodeURIComponent(card.name || name));
+    const wikiHref = 'https://battle-spirits.fandom.com/wiki/' + encodeURIComponent((card.name || name || '').replace(/ /g, '_'));
     document.getElementById('modalWikiLink').href = wikiHref;
     document.getElementById('modalWikiLinkBottom').href = wikiHref;
 
