@@ -1048,9 +1048,29 @@ async function fetchBrowseAC(q) {
 // ═══════════════════ LOAD FILTERS METADATA ═══════════════════
 async function loadFamilyDropdownData() {
   try {
-    const res = await fetch('/api/filters');
-    const data = await res.json();
-    if (data.categorized_families) {
+    let data = null;
+    // 1. Try static filters_data.json first (100% reliable on GitHub Pages)
+    try {
+      const res = await fetch('./filters_data.json');
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (e) {}
+
+    // 2. Fallback to API if running with local server
+    if (!data) {
+      try {
+        const res = await fetch('/api/filters');
+        if (res.ok) {
+          const text = await res.text();
+          if (text.trim().startsWith('{')) {
+            data = JSON.parse(text);
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (data && data.categorized_families) {
       renderFamilyDropdownMenu(data.categorized_families);
     }
   } catch (err) {

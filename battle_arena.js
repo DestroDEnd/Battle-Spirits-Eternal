@@ -7,6 +7,8 @@
 
 (function () {
   'use strict';
+  const FALLBACK_CARD_ART = (typeof window !== 'undefined' && window.FALLBACK_CARD_ART) ? window.FALLBACK_CARD_ART : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='210' height='300' viewBox='0 0 210 300'><rect width='210' height='300' rx='10' fill='%23111827'/><rect x='8' y='8' width='194' height='284' rx='6' fill='%231f2937' stroke='%23374151' stroke-width='2'/><circle cx='105' cy='140' r='40' fill='%23374151'/><text x='105' y='148' font-family='sans-serif' font-size='28' fill='%239ca3af' text-anchor='middle'>⚔️</text><text x='105' y='210' font-family='sans-serif' font-size='12' font-weight='bold' fill='%236b7280' text-anchor='middle'>BATTLE SPIRITS</text></svg>";
+
 
   // ── SOUND FX SYNTHESIS (Zero External Audio Files) ──
   const _RawAudioFX = {
@@ -574,12 +576,22 @@
   async function loadTrainedAiWeights() {
     try {
       if (typeof window !== 'undefined' && window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
-        const res = await fetch('/api/ai-weights');
-        if (res.ok) {
-          const data = await res.json();
-          if (data && typeof data === 'object' && Object.keys(data).length > 0) {
-            DuelState.aiWeights = data;
-          }
+        let data = null;
+        try {
+          const sRes = await fetch('./ai_weights.json');
+          if (sRes.ok) data = await sRes.json();
+        } catch (e) {}
+        if (!data) {
+          try {
+            const res = await fetch('/api/ai-weights');
+            if (res.ok) {
+              const text = await res.text();
+              if (text.trim().startsWith('{')) data = JSON.parse(text);
+            }
+          } catch (e) {}
+        }
+        if (data && typeof data === 'object' && Object.keys(data).length > 0) {
+          DuelState.aiWeights = data;
         }
       }
     } catch (e) {
@@ -600,14 +612,27 @@
   async function loadCardEffectsDB() {
     if (typeof fetch === 'function' && typeof window !== 'undefined' && window.location && window.location.origin) {
       try {
-        const res = await fetch(window.location.origin + '/api/card-effects-db');
-        if (res.ok) {
-          CardEffectsDB = await res.json();
+        let data = null;
+        try {
+          const sRes = await fetch('./card_effects_db.json');
+          if (sRes.ok) data = await sRes.json();
+        } catch (e) {}
+        if (!data) {
+          try {
+            const res = await fetch(window.location.origin + '/api/card-effects-db');
+            if (res.ok) {
+              const text = await res.text();
+              if (text.trim().startsWith('{')) data = JSON.parse(text);
+            }
+          } catch (e) {}
+        }
+        if (data && typeof data === 'object') {
+          CardEffectsDB = data;
           if (typeof window !== 'undefined' && window.BattleArena) window.BattleArena.CardEffectsDB = CardEffectsDB;
           console.log(`[NLP Effects Engine] Loaded operational database for ${Object.keys(CardEffectsDB).length} cards.`);
         }
       } catch (e) {
-        console.warn('[NLP Effects Engine] Failed to fetch /api/card-effects-db:', e);
+        console.warn('[NLP Effects Engine] Failed to load card effects db:', e);
       }
     } else if (typeof require === 'function') {
       try {
@@ -966,10 +991,22 @@
   async function initBattleArena() {
     try {
       if (typeof window !== 'undefined' && window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
-        const res = await fetch('/api/standard-decks');
-        if (res.ok) {
-          const data = await res.json();
-          const list = data.decks || [];
+        let stdData = null;
+        try {
+          const sRes = await fetch('./standard_decks_data.json');
+          if (sRes.ok) stdData = await sRes.json();
+        } catch (e) {}
+        if (!stdData) {
+          try {
+            const res = await fetch('/api/standard-decks');
+            if (res.ok) {
+              const text = await res.text();
+              if (text.trim().startsWith('{')) stdData = JSON.parse(text);
+            }
+          } catch (e) {}
+        }
+        if (stdData) {
+          const list = stdData.decks || (Array.isArray(stdData) ? stdData : []);
           list.forEach(d => {
             DuelState.standardDecks[d.color.toLowerCase()] = d;
           });
@@ -2333,15 +2370,16 @@
       else if (!canAfford) cls += ' cannot-afford';
 
       let actionBtnHtml = '';
-      // Burst can only be set during the MAIN step
+      // Burst can only be set during the MAIN step (or replaced if one is already set)
       const isBurstCard = card.effect && card.effect.includes('[Burst:');
-      const canSetBurst = isMainStep && !DuelState.player.burst && isBurstCard;
+      const canSetBurst = isMainStep && isBurstCard;
       // Advent Action Button - ONLY active when step/turn timing requirements are met (Official Rule: Attack Step only, never Main Step)
       const adventReq = getCardAdventRequirement(card);
       const canAdvent = canPerformAdvent(card, 'player');
       const adventBtnHtml = canAdvent ? `<button class="btn-quick-advent" onclick="event.stopPropagation(); BattleArena.openAdventPrompt('${card.uid}')">🌟 [Advent]</button>` : '';
 
-      const burstBtnHtml = canSetBurst ? `<button class="btn-set-burst" onclick="event.stopPropagation(); BattleArena.setBurst('${card.uid}')">🔒 Set as Burst</button>` : '';
+      const burstBtnLabel = DuelState.player.burst ? '🔄 Replace Burst' : '🔒 Set as Burst';
+      const burstBtnHtml = canSetBurst ? `<button class="btn-set-burst" onclick="event.stopPropagation(); BattleArena.setBurst('${card.uid}')">${burstBtnLabel}</button>` : '';
 
       if (canPlayStep && isBrave && isMainStep) {
         const eligibleHosts = DuelState.player.field.filter(s => !s.brave);
@@ -2384,7 +2422,7 @@
           <button class="hc-zoom-btn" onclick="event.stopPropagation(); openCardDetail('${safeCardName}')" title="View Full Card Details">🔍</button>
           <div class="hc-cost-badge">${card.cost}</div>
           <div class="hc-img-wrap">
-            <img src="${card.image_url || './assets/card_back.png'}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
+            <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
           <div class="hc-info">
             <div class="hc-name">${card.name}</div>
@@ -2908,10 +2946,11 @@
     const isInHand = (DuelState.player.hand || []).some(c => c.uid === card.uid);
     const isSetBurst = DuelState.player.burst && card.uid === DuelState.player.burst.uid;
     const isBurstCard = card.effect && card.effect.includes('[Burst:');
-    const canSetBurst = isInHand && isPlayerTurn && !DuelState.player.burst && isBurstCard;
+    const canSetBurst = isInHand && isPlayerTurn && isMainStep && isBurstCard;
+    const burstBtnLabel = DuelState.player.burst ? '🔄 Replace Burst' : '🔒 Set as Burst';
     const burstBtnHtml = canSetBurst ? `
       <button class="btn-inspector-action btn-inspect-burst" onclick="BattleArena.setBurst('${card.uid}')">
-        🔒 Set as Burst
+        ${burstBtnLabel}
       </button>
     ` : '';
 
@@ -3039,7 +3078,7 @@
         <!-- Left: Card Artwork Thumbnail & Enlarge -->
         <div class="inspector-art-col">
           <div class="inspector-art-wrap">
-            <img src="${card.image_url || './assets/card_back.png'}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
+            <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
           <button class="btn-inspector-zoom" onclick="openCardDetail('${safeName}')" title="Open Fullscreen Card Modal">
             🔍 Enlarge
@@ -6326,12 +6365,20 @@
       if (typeof showToast === 'function') showToast("Cannot set Burst on opponent's turn!", 'warning');
       return;
     }
-    if (DuelState.player.burst) {
-      if (typeof showToast === 'function') showToast("You already have a Burst set in your Burst Zone! Only 1 Burst allowed.", 'warning');
-      return;
-    }
     const idx = DuelState.player.hand.findIndex(c => c.uid === uid);
     if (idx === -1) return;
+
+    // Official Rule: Player can replace an existing set Burst during Main Step.
+    // The previous Burst card is sent to the Trash (Graveyard).
+    if (DuelState.player.burst) {
+      const oldBurst = DuelState.player.burst;
+      sendToTrash(oldBurst, 'player', 'Replaced by setting a new Burst');
+      addLog(`♻️ **[BURST REPLACED]**: Previous Burst "${oldBurst.name}" sent to Trash to set new Burst!`, 'step');
+      if (typeof showToast === 'function') {
+        showToast(`♻️ Replaced Burst: "${oldBurst.name}" sent to Trash.`, 'info');
+      }
+    }
+
     const card = DuelState.player.hand.splice(idx, 1)[0];
     DuelState.player.burst = card;
 
@@ -6519,18 +6566,28 @@
 
   function confirmBurstTrigger() {
     closeBurstPromptModal();
+    const resume = DuelState.pendingBurstResume;
+    DuelState.pendingBurstResume = null;
     if (DuelState.activeBurstTrigger && DuelState.activeBurstTrigger.side === 'player') {
       activateBurst('player', true);
+    }
+    if (typeof resume === 'function') {
+      safeTimeout(resume, 700);
     }
   }
 
   function declineBurstTrigger() {
     closeBurstPromptModal();
+    const resume = DuelState.pendingBurstResume;
+    DuelState.pendingBurstResume = null;
     if (DuelState.activeBurstTrigger) {
       const cardName = DuelState.activeBurstTrigger.card?.name || 'Burst';
       addLog(`🛡️ **[BURST HELD]**: Player chose not to trigger "${cardName}" this time. Card remains safely set in Burst Area.`, 'step');
       DuelState.activeBurstTrigger = null;
       renderBurstZones();
+    }
+    if (typeof resume === 'function') {
+      safeTimeout(resume, 300);
     }
   }
 
@@ -6643,7 +6700,7 @@
     }
   }
 
-  function checkBurstTrigger(side, eventType = 'AFTER_LIFE_DECREASED', eventContext = {}) {
+  function checkBurstTrigger(side, eventType = 'AFTER_LIFE_DECREASED', eventContext = {}, onResume = null) {
     const isPlayer = side === 'player';
     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
     if (!burstCard) return false;
@@ -6658,12 +6715,16 @@
     }
 
     if (isPlayer) {
+      DuelState.pendingBurstResume = onResume || null;
       openBurstPromptModal(burstCard, cond, eventType, eventContext);
       return true;
     } else {
       // Opponent AI automatically resolves
       addLog(`🃏 Opponent's Burst Trap met condition [${cond.label}]!`, 'magic');
-      safeTimeout(() => activateBurst('opponent', true), 500);
+      safeTimeout(() => {
+        activateBurst('opponent', true);
+        if (typeof onResume === 'function') onResume();
+      }, 500);
       return true;
     }
   }
@@ -7567,26 +7628,32 @@
         checkGameOver();
 
         if (DuelState.player.life > 0) {
-          checkBurstTrigger('player', 'AFTER_LIFE_DECREASED');
-          const isAttackerAlive = DuelState.opponent.field.some(s => s.uid === attacker.uid);
-          const finishAiTurn = () => {
-            const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
-            const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= aggroThreshold);
-            if (viable.length > 0) {
-              safeTimeout(runAiAttackStep, 1000);
+          const continueAfterDamage = () => {
+            const isAttackerAlive = DuelState.opponent.field.some(s => s.uid === attacker.uid);
+            const finishAiTurn = () => {
+              const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+              const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= aggroThreshold);
+              if (viable.length > 0) {
+                safeTimeout(runAiAttackStep, 1000);
+              } else {
+                safeTimeout(endTurn, 900);
+              }
+            };
+
+            if (isAttackerAlive) {
+              checkEndOfBattleEffects([attacker], 'opponent', 'player', () => {
+                endOfBattleBpReset(attacker);
+                finishAiTurn();
+              });
             } else {
-              safeTimeout(endTurn, 900);
+              endOfBattleBpReset(attacker);
+              finishAiTurn();
             }
           };
 
-          if (isAttackerAlive) {
-            checkEndOfBattleEffects([attacker], 'opponent', 'player', () => {
-              endOfBattleBpReset(attacker);
-              finishAiTurn();
-            });
-          } else {
-            endOfBattleBpReset(attacker);
-            finishAiTurn();
+          const burstTriggered = checkBurstTrigger('player', 'AFTER_LIFE_DECREASED', {}, continueAfterDamage);
+          if (!burstTriggered) {
+            continueAfterDamage();
           }
         }
       }, 900);
@@ -7816,7 +7883,6 @@
 
     if (DuelState.player.life > 0) {
       checkLifeDecreasedEffects('player');
-      checkBurstTrigger('player', 'AFTER_LIFE_DECREASED');
       const isAttackerAlive = attacker && DuelState.opponent.field.some(s => s.uid === attacker.uid);
       const continueOpponent = () => {
         if (DuelState.activePlayer === 'opponent') {
@@ -7831,14 +7897,21 @@
         }
       };
 
-      if (isAttackerAlive) {
-        checkEndOfBattleEffects([attacker], 'opponent', 'player', () => {
+      const finishBlockDamage = () => {
+        if (isAttackerAlive) {
+          checkEndOfBattleEffects([attacker], 'opponent', 'player', () => {
+            if (attacker) endOfBattleBpReset(attacker);
+            continueOpponent();
+          });
+        } else {
           if (attacker) endOfBattleBpReset(attacker);
           continueOpponent();
-        });
-      } else {
-        if (attacker) endOfBattleBpReset(attacker);
-        continueOpponent();
+        }
+      };
+
+      const burstTriggered = checkBurstTrigger('player', 'AFTER_LIFE_DECREASED', {}, finishBlockDamage);
+      if (!burstTriggered) {
+        finishBlockDamage();
       }
     }
   }

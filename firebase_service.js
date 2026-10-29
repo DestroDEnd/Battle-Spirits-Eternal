@@ -296,18 +296,25 @@
     // Lookup email associated with this username
     let resolvedEmail = null;
     const lower = clean.toLowerCase();
+    const noSpaceLower = lower.replace(/\s+/g, '');
 
     if (db) {
       try {
-        // 1. Check usernames collection
-        const doc = await db.collection('usernames').doc(lower).get();
+        // 1. Check usernames collection (both verbatim and space-stripped)
+        let doc = await db.collection('usernames').doc(lower).get();
+        if (!doc.exists && noSpaceLower !== lower) {
+          doc = await db.collection('usernames').doc(noSpaceLower).get();
+        }
         if (doc.exists && doc.data() && doc.data().email) {
           resolvedEmail = doc.data().email;
         }
 
         // 2. Check users collection
         if (!resolvedEmail) {
-          const snap = await db.collection('users').where('username_lower', '==', lower).limit(1).get();
+          let snap = await db.collection('users').where('username_lower', '==', lower).limit(1).get();
+          if (snap.empty && noSpaceLower !== lower) {
+            snap = await db.collection('users').where('username_lower', '==', noSpaceLower).limit(1).get();
+          }
           if (!snap.empty && snap.docs[0].data() && snap.docs[0].data().email) {
             resolvedEmail = snap.docs[0].data().email;
           }
@@ -319,10 +326,10 @@
 
     // 3. Fallback: common cases
     if (!resolvedEmail) {
-      if (lower === 'destrodend') {
+      if (noSpaceLower === 'destrodend') {
         resolvedEmail = 'destrodend@gmail.com';
       } else {
-        resolvedEmail = `${lower}@bsp-eternal.com`;
+        resolvedEmail = `${noSpaceLower}@bsp-eternal.com`;
       }
     }
 

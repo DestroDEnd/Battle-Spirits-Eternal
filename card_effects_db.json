@@ -193103,13 +193103,15 @@
     "type": "Brave",
     "color": "Purple",
     "cost": 2,
+    "brave_cost_boost": 0,
+    "brave_bp_boost": 1000,
+    "brave_condition": "Cost 3 or more Ultimate",
     "triggers": {
-      "WHEN_ATTACKS": [
+      "WHEN_DESTROYED_IN_BATTLE": [
         {
-          "type": "DESTROY_SPIRIT_DIRECT",
-          "count": 1,
-          "require_exhausted": false,
-          "desc": "Destroy 1 opposing Spirit(s)",
+          "type": "DESTROY_OPPOSING_BATTLER_WHEN_ONLY_HOST_DESTROYED_BY_BP",
+          "require_braved": true,
+          "desc": "When only this Ultimate is destroyed by comparing BP, destroy an opposing Spirit/Ultimate that was in battle with this Ultimate.",
           "min_level": 1
         }
       ]
