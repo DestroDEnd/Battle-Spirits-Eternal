@@ -7,8 +7,8 @@ console.log('🧪 Starting Battle Arena Dedicated Redirect Test Suite...\n');
 // 1. Check index.html
 const indexHtml = fs.readFileSync('index.html', 'utf-8');
 assert(!indexHtml.includes('id="battleArena"'), 'index.html MUST NOT contain embedded #battleArena');
-assert(indexHtml.includes('href="/arena"'), 'index.html must link to /arena in navbar and hero');
-assert(indexHtml.includes('href="/arena?duel=quick"'), 'index.html hero must link to /arena?duel=quick for Quick Duel');
+assert(indexHtml.includes('arena.html') || indexHtml.includes('href="/arena"'), 'index.html must link to arena in navbar and hero');
+assert(indexHtml.includes('arena.html?duel=quick') || indexHtml.includes('/arena?duel=quick'), 'index.html hero must link to arena Quick Duel');
 console.log('  ✅ index.html is clean of battle elements and links directly to /arena & /arena?duel=quick');
 
 // 2. Check arena.html
@@ -45,7 +45,7 @@ async function runHttpTests() {
 
   const rHome = await testEndpoint('/');
   assert.strictEqual(rHome.status, 200, '/ must return 200 OK');
-  assert(rHome.body.includes('href="/arena"'), 'Home page must have redirect link to /arena');
+  assert(rHome.body.includes('arena.html') || rHome.body.includes('href="/arena"'), 'Home page must have redirect link to arena');
   assert(!rHome.body.includes('id="battleArena"'), 'Home page must not contain #battleArena section');
   console.log('  ✅ GET / home page returned HTTP 200 OK without in-page battle elements');
 

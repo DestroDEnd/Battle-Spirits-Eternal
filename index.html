@@ -11,24 +11,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.1">
+  <link rel="stylesheet" href="./styles.css?v=5.1">
 </head>
 <body>
 
 <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
-  <a class="brand" href="/">
+  <a class="brand" href="./index.html">
     <span class="brand-icon">⚔️</span>
     <span class="brand-title">Battle Spirits Eternal</span>
   </a>
   <nav class="nav-tabs">
-    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
-    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
-    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
-    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
-    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="./arena.html">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="./browse.html">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="./family.html">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="./sets.html">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="./deck.html">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
     <div class="nav-auth-slot" id="navAuthSlot">
-      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="./login.html">👤 Login</a>
     </div>
   </nav>
 </header>
@@ -40,7 +40,7 @@
     <!-- Hero Banner with Full Card Art Background -->
     <section class="landing-hero">
       <div class="hero-bg-layer">
-        <img src="/assets/hero_bg.png" alt="" class="hero-bg-img" />
+        <img src="./assets/hero_bg.png" alt="" class="hero-bg-img" />
         <div class="hero-bg-overlay"></div>
       </div>
       <div class="hero-content">
@@ -72,8 +72,8 @@
             <p class="hbc-desc">Test your decks in real core-based Battle Spirits combat. Manage Life &amp; Reserve cores, summon spirits, clash with BP, and shatter enemy Life gems!</p>
           </div>
           <div class="hbc-actions">
-            <a class="btn-hero-battle" href="/arena">⚔️ Launch Battle Arena</a>
-            <a class="btn-hero-quick-duel" href="/arena?duel=quick">⚡ Quick Duel (Red vs Purple)</a>
+            <a class="btn-hero-battle" href="./arena.html">⚔️ Launch Battle Arena</a>
+            <a class="btn-hero-quick-duel" href="./arena.html?duel=quick">⚡ Quick Duel (Red vs Purple)</a>
           </div>
         </div>
 
@@ -1059,8 +1059,8 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="/wasm_db.js?v=1.0"></script>
-  <script src="/app.js?v=4.7"></script>
+  <script src="./wasm_db.js?v=1.0"></script>
+  <script src="./app.js?v=4.7"></script>
 <script>
 function executeHeroSearch() {
   const q = document.getElementById('heroSearchInput').value.trim();
@@ -1228,6 +1228,6 @@ if (document.readyState === 'loading') {
 }
 </script>
 
-  <script src="/battle_arena.js?v=5.1"></script>
+  <script src="./battle_arena.js?v=5.1"></script>
 </body>
 </html>

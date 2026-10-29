@@ -11,24 +11,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.0">
+  <link rel="stylesheet" href="./styles.css?v=5.0">
 </head>
 <body>
 
 <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
-  <a class="brand" href="/">
+  <a class="brand" href="./index.html">
     <span class="brand-icon">⚔️</span>
     <span class="brand-title">Battle Spirits Eternal</span>
   </a>
   <nav class="nav-tabs">
-    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
-    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
-    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
-    <a class="tab-btn active" id="tabSets" href="/sets">📦 Card Sets</a>
-    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="./arena.html">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="./browse.html">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="./family.html">📖 Family</a>
+    <a class="tab-btn active" id="tabSets" href="./sets.html">📦 Card Sets</a>
+    <a class="tab-btn" id="tabDeck" href="./deck.html">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
     <div class="nav-auth-slot" id="navAuthSlot">
-      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="./login.html">👤 Login</a>
     </div>
   </nav>
 </header>
@@ -196,8 +196,8 @@
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="/wasm_db.js?v=1.0"></script>
-  <script src="/app.js?v=4.7"></script>
+  <script src="./wasm_db.js?v=1.0"></script>
+  <script src="./app.js?v=4.7"></script>
 <script>
 let allCategorizedSets = [];
 
@@ -233,7 +233,7 @@ function renderSetDirectory(categories) {
     const bannerClass = bannerClassMap[cat.color_class] || 'banner-general';
 
     const tagsHtml = (cat.sets || []).map(s => `
-      <a class="dir-tag" href="/browse?set=${encodeURIComponent(s.name)}" data-name="${esc(s.name)}">
+      <a class="dir-tag" href="./browse.html?set=${encodeURIComponent(s.name)}" data-name="${esc(s.name)}">
         <span>${esc(s.name)}</span>
         <span class="dir-tag-count">${s.count || s.wiki_count || 0}</span>
       </a>
