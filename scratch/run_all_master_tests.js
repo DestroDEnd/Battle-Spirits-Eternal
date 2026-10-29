@@ -19,7 +19,8 @@ const testSuites = [
   'test_turn_relocation.js',
   'test_step_navigator_reset.js',
   'test_ai_recovery_and_step_sync.js',
-  'test_universal_effects_engine.js'
+  'test_universal_effects_engine.js',
+  'test_brave_and_nexus.js'
 ];
 
 console.log(`🚀 RUNNING MASTER VERIFICATION ACROSS ALL ${testSuites.length} SUITES...\n`);
