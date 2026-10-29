@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.2">
+  <link rel="stylesheet" href="./styles.css?v=5.2">
   <style>
     .deckview-page {
       max-width: 1400px;
@@ -355,18 +355,18 @@
 <!-- Navigation Header -->
 <header class="navbar">
   <div class="nav-left">
-    <a class="nav-logo" href="/">
+    <a class="nav-logo" href="./index.html">
       <span class="logo-gem">✦</span>
       <span class="logo-text">Battle Spirits</span>
     </a>
   </div>
   <nav class="nav-tabs">
-    <a class="tab-btn" href="/">🏠 Home</a>
-    <a class="tab-btn" href="/browse">🔍 Browse Cards</a>
-    <a class="tab-btn" href="/family">🧬 Family</a>
-    <a class="tab-btn" href="/sets">📦 Sets</a>
-    <a class="tab-btn active" href="/deck">🎴 Deck Builder</a>
-    <a class="tab-btn tab-arena" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" href="./index.html">🏠 Home</a>
+    <a class="tab-btn" href="./browse.html">🔍 Browse Cards</a>
+    <a class="tab-btn" href="./family.html">🧬 Family</a>
+    <a class="tab-btn" href="./sets.html">📦 Sets</a>
+    <a class="tab-btn active" href="./deck.html">🎴 Deck Builder</a>
+    <a class="tab-btn tab-arena" href="./arena.html">⚔️ Battle Arena</a>
   </nav>
   <div class="nav-auth-slot" id="navAuthSlot"></div>
 </header>
@@ -374,7 +374,7 @@
 <main class="deckview-page">
   <!-- Top Breadcrumb -->
   <div style="margin-bottom: 1.25rem;">
-    <a href="/deck" style="color: #94a3b8; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+    <a href="./deck.html" style="color: #94a3b8; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
       ← Back to Deck Builder
     </a>
   </div>
@@ -484,7 +484,7 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-body" id="modalBody">
       <div class="modal-img-col">
-        <img class="modal-img" id="modalImg" src="/assets/card_back.png" alt="Card Art">
+        <img class="modal-img" id="modalImg" src="./assets/card_back.png" alt="Card Art">
       </div>
       <div class="modal-info-col">
         <div class="modal-tag-row" id="modalTagRow"></div>
@@ -502,7 +502,7 @@
   </div>
 </div>
 
-<script src="/app.js?v=5.2"></script>
+<script src="./app.js?v=5.2"></script>
 <script>
   let currentDeck = null;
   let currentDeckId = '';
@@ -743,7 +743,7 @@
       <div style="text-align:center; padding:2rem 1rem;">
         <h2 style="color:#ef4444;margin-bottom:0.75rem;">⚠️ Deck Not Found</h2>
         <p style="color:#94a3b8;margin-bottom:1.5rem;">${msg}</p>
-        <a href="/deck" class="deckview-btn deckview-btn-primary">← Go to Deck Builder</a>
+        <a href="./deck.html" class="deckview-btn deckview-btn-primary">← Go to Deck Builder</a>
       </div>
     `;
     document.querySelector('.deckview-stats-row').style.display = 'none';
