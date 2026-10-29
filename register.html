@@ -53,62 +53,29 @@
           </label>
           <div class="auth-input-wrapper">
             <span class="auth-input-icon">👑</span>
-            <input type="text" id="regUsername" class="auth-input" placeholder="e.g. Dan Bashin / DragonKing" required autofocus autocomplete="nickname">
+            <input type="text" id="regUsername" class="auth-input" placeholder="e.g. Dan Bashin" required autofocus autocomplete="nickname">
           </div>
         </div>
 
-        <!-- Field 2: Unique Login ID / Handle -->
+        <!-- Field 2: Email -->
         <div class="auth-field">
-          <label class="auth-label" for="regLogin">
-            <span>👤</span> Login ID / Handle
+          <label class="auth-label" for="regEmail">
+            <span>✉️</span> Email Address
           </label>
           <div class="auth-input-wrapper">
-            <span class="auth-input-icon">👤</span>
-            <input type="text" id="regLogin" class="auth-input" placeholder="e.g. dan_bashin99 (used to log in)" required autocomplete="username">
+            <span class="auth-input-icon">✉️</span>
+            <input type="email" id="regEmail" class="auth-input" placeholder="duelist@example.com" required autocomplete="email">
           </div>
         </div>
 
         <!-- Field 3: Password -->
         <div class="auth-field">
           <label class="auth-label" for="regPassword">
-            <span>🔒</span> Password
+            <span>🔒</span> Password (min 6 characters)
           </label>
           <div class="auth-input-wrapper">
             <span class="auth-input-icon">🔒</span>
-            <input type="password" id="regPassword" class="auth-input" placeholder="Create a secure password (min 4 characters)..." required autocomplete="new-password">
-            <button type="button" class="auth-input-toggle" onclick="togglePasswordVisibility('regPassword', this)" title="Show or hide password">👁️</button>
-          </div>
-        </div>
-
-        <!-- Field 4: Confirm Password -->
-        <div class="auth-field">
-          <label class="auth-label" for="regConfirmPassword">
-            <span>✔️</span> Confirm Password
-          </label>
-          <div class="auth-input-wrapper">
-            <span class="auth-input-icon">✔️</span>
-            <input type="password" id="regConfirmPassword" class="auth-input" placeholder="Re-enter your password..." required autocomplete="new-password">
-            <button type="button" class="auth-input-toggle" onclick="togglePasswordVisibility('regConfirmPassword', this)" title="Show or hide password">👁️</button>
-          </div>
-        </div>
-
-        <!-- Field 5: Security Captcha -->
-        <div class="auth-field">
-          <label class="auth-label">
-            <span>🛡️</span> Security Captcha Verification
-          </label>
-          <div class="auth-captcha-block">
-            <div class="auth-captcha-display">
-              <div class="auth-captcha-svg" id="captchaSvgContainer">
-                <span style="color:#64748b;font-size:0.8rem;">Loading security captcha...</span>
-              </div>
-              <button type="button" class="btn-captcha-refresh" id="btnRefreshCaptcha" onclick="refreshCaptcha()" title="Request new security captcha">
-                <span class="refresh-icon">🔄</span> Refresh
-              </button>
-            </div>
-            <div class="auth-input-wrapper">
-              <input type="text" id="regCaptcha" class="auth-input no-icon" placeholder="Type the 6 characters shown above..." maxlength="6" required autocomplete="off" style="text-transform:uppercase;font-family:monospace;font-weight:700;letter-spacing:0.12em;">
-            </div>
+            <input type="password" id="regPassword" class="auth-input" placeholder="Create a strong password..." minlength="6" required autocomplete="new-password">
           </div>
         </div>
 
@@ -119,19 +86,25 @@
       </form>
     </div>
 
-    <!-- Below Card: Back to Login Option -->
+    <!-- Below Card: Return to Login -->
     <div class="auth-switch-card">
-      <span>Already have an active duelist account?</span>
-      <a class="auth-switch-link" href="./login.html">Log in here →</a>
+      <span>Already have a Duelist Account?</span>
+      <a class="auth-switch-link" href="./login.html">Sign In Here →</a>
     </div>
 
   </div>
 </main>
 
+<!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+<script src="./firebase_service.js?v=1.1"></script>
 <script src="./app.js?v=4.7"></script>
-<script>
-let currentCaptchaToken = '';
 
+<script>
 function showAlert(message, type = 'error') {
   const alertEl = document.getElementById('authAlert');
   if (!alertEl) return;
@@ -145,76 +118,21 @@ function clearAlert() {
   if (alertEl) alertEl.style.display = 'none';
 }
 
-function togglePasswordVisibility(inputId, btn) {
-  const input = document.getElementById(inputId);
-  if (!input) return;
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.textContent = '🙈';
-  } else {
-    input.type = 'password';
-    btn.textContent = '👁️';
-  }
-}
-
-async function loadCaptcha() {
-  const container = document.getElementById('captchaSvgContainer');
-  const refreshBtn = document.getElementById('btnRefreshCaptcha');
-  if (refreshBtn) refreshBtn.classList.add('spinning');
-  try {
-    const res = await fetch('/api/captcha');
-    const data = await res.json();
-    if (data.success && data.svg) {
-      currentCaptchaToken = data.token;
-      if (container) container.innerHTML = data.svg;
-    } else {
-      if (container) container.innerHTML = '<span style="color:#f87171;font-size:0.8rem;">Captcha unavailable</span>';
-    }
-  } catch (err) {
-    console.error('Failed to load captcha:', err);
-    if (container) container.innerHTML = '<span style="color:#f87171;font-size:0.8rem;">Captcha connection error</span>';
-  } finally {
-    if (refreshBtn) {
-      setTimeout(() => refreshBtn.classList.remove('spinning'), 300);
-    }
-  }
-}
-
-function refreshCaptcha() {
-  const input = document.getElementById('regCaptcha');
-  if (input) input.value = '';
-  loadCaptcha();
-}
-
 async function handleRegisterSubmit(event) {
   event.preventDefault();
   clearAlert();
 
   const username = document.getElementById('regUsername').value.trim();
-  const login = document.getElementById('regLogin').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
-  const confirmPassword = document.getElementById('regConfirmPassword').value;
-  const captcha = document.getElementById('regCaptcha').value.trim();
   const btn = document.getElementById('btnRegisterSubmit');
 
-  if (!username || username.length < 2) {
-    showAlert('Username must be at least 2 characters long.');
+  if (!username || !email || !password) {
+    showAlert('Please fill in all registration fields.');
     return;
   }
-  if (!login || login.length < 3) {
-    showAlert('Login ID must be at least 3 characters long.');
-    return;
-  }
-  if (!password || password.length < 4) {
-    showAlert('Password must be at least 4 characters long.');
-    return;
-  }
-  if (password !== confirmPassword) {
-    showAlert('Passwords do not match. Please verify both password entries.');
-    return;
-  }
-  if (!captcha) {
-    showAlert('Please enter the security captcha code shown.');
+  if (password.length < 6) {
+    showAlert('Password must be at least 6 characters.');
     return;
   }
 
@@ -222,44 +140,23 @@ async function handleRegisterSubmit(event) {
   btn.innerHTML = '<span>⏳ Creating Account...</span>';
 
   try {
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: username,
-        login: login,
-        password: password,
-        captcha_token: currentCaptchaToken,
-        captcha_code: captcha
-      })
-    });
-
-    const data = await res.json();
-
-    if (res.ok && data.success) {
-      showAlert(`Duelist registration successful! Welcome, ${data.user.username}! Logging you in...`, 'success');
-      AuthManager.setUser(data.user);
+    if (window.FirebaseService) {
+      await window.FirebaseService.register(email, password, username);
+      const duelistId = window.FirebaseService.getFormattedDuelistId();
+      showAlert(`🎉 Account created! Welcome, Duelist ${username} (ID: #${duelistId})`, 'success');
       setTimeout(() => {
-        window.location.href = '/';
-      }, 900);
+        window.location.href = './arena.html';
+      }, 800);
     } else {
-      showAlert(data.error || 'Registration failed. Please check the provided information.');
-      refreshCaptcha();
-      btn.disabled = false;
-      btn.innerHTML = '<span>✨ Create Duelist Account</span>';
-      document.getElementById('regCaptcha').focus();
+      throw new Error('Firebase Authentication is initializing.');
     }
   } catch (err) {
     console.error('Registration error:', err);
-    showAlert('Server connection error during registration. Please try again.');
+    showAlert(err.message || 'Failed to create account. Please verify your details.');
     btn.disabled = false;
     btn.innerHTML = '<span>✨ Create Duelist Account</span>';
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadCaptcha();
-});
 </script>
 </body>
 </html>
