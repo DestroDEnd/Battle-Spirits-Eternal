@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting | Battle Spirits Eternal</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+  <script>
+    (function() {
+      const loc = window.location;
+      const path = loc.pathname.toLowerCase();
+      const search = loc.search || '';
+      const hash = loc.hash || '';
+
+      let targetPage = 'index.html';
+      if (path.includes('browse')) {
+        targetPage = 'browse.html';
+      } else if (path.includes('deck-view')) {
+        targetPage = 'deck_view.html';
+      } else if (path.includes('deck')) {
+        targetPage = 'deck.html';
+      } else if (path.includes('arena') || path.includes('duel') || path.includes('battle')) {
+        targetPage = 'arena.html';
+      } else if (path.includes('family')) {
+        targetPage = 'family.html';
+      } else if (path.includes('set')) {
+        targetPage = 'sets.html';
+      } else if (path.includes('login')) {
+        targetPage = 'login.html';
+      }
+
+      let destination = './' + targetPage + search + hash;
+      // If opened at root domain without repository path on GitHub Pages
+      if (loc.hostname.includes('github.io') && !path.toLowerCase().includes('battle-spirits-eternal')) {
+        destination = '/Battle-Spirits-Eternal/' + targetPage + search + hash;
+      }
+
+      window.location.replace(destination);
+    })();
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #090d16;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 480px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    }
+    .icon { font-size: 3rem; margin-bottom: 1rem; animation: pulse 1.5s infinite; }
+    h1 { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; color: #60a5fa; }
+    p { font-size: 0.9rem; color: #94a3b8; margin-bottom: 1.5rem; line-height: 1.5; }
+    a {
+      display: inline-block;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">⚡</div>
+    <h1>Redirecting Duelist...</h1>
+    <p>Navigating to the requested Battle Spirits Eternal chamber.</p>
+    <a href="./index.html">Return to Colosseum Home</a>
+  </div>
+</body>
+</html>
