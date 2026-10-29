@@ -9,14 +9,14 @@
   // ── 1. FIREBASE CONFIGURATION (REPLACE WITH YOUR PROJECT SETTINGS) ──
   // Users can update these keys from Firebase Console -> Project Settings -> General -> Web App
   const firebaseConfig = window.FIREBASE_CONFIG || {
-    apiKey: "AIzaSyAmp36RPQWGEeP-cZetOxNFy-dXtkmboMA",
-    authDomain: "battle-spirits-eternal.firebaseapp.com",
-    projectId: "battle-spirits-eternal",
-    storageBucket: "battle-spirits-eternal.firebasestorage.app",
-    messagingSenderId: "228731522931",
-    appId: "1:228731522931:web:8dfd58f4766c92047eff06",
-    measurementId: "G-XRXXBMTPQE",
-    databaseURL: "https://battle-spirits-eternal-default-rtdb.firebaseio.com"
+    apiKey: "AIzaSyDMU1qTTHHVztMR1pBLCyKuBf_1dxaYTzs",
+    authDomain: "battle-spirits-eternal-2b00a.firebaseapp.com",
+    projectId: "battle-spirits-eternal-2b00a",
+    storageBucket: "battle-spirits-eternal-2b00a.firebasestorage.app",
+    messagingSenderId: "985745798835",
+    appId: "1:985745798835:web:707d1f66d5550b0f68e2c6",
+    measurementId: "G-PNBM6SGFZ5",
+    databaseURL: "https://battle-spirits-eternal-2b00a-default-rtdb.firebaseio.com"
   };
 
   let app = null;
