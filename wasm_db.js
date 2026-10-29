@@ -402,6 +402,21 @@
       const path = url.pathname;
       const params = Object.fromEntries(url.searchParams.entries());
 
+      // Immediate static JSON route interception (does not need SQLite WASM engine)
+      if (path.endsWith('/api/filters')) {
+        try {
+          const rawRes = await window._originalFetch(getBaseDir() + 'filters_data.json');
+          if (rawRes.ok) return rawRes;
+        } catch (e) {}
+      }
+
+      if (path.endsWith('/api/standard-decks')) {
+        try {
+          const rawRes = await window._originalFetch(getBaseDir() + 'standard_decks_data.json');
+          if (rawRes.ok) return rawRes;
+        } catch (e) {}
+      }
+
       // If database is currently initializing, wait for it!
       if (!isReady && initPromise) {
         try {

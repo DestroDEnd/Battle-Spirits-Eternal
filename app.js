@@ -1800,14 +1800,16 @@ const AuthManager = {
     this.renderNavbar();
   },
 
-  logout() {
+  async logout() {
     localStorage.removeItem(this.STORAGE_KEY);
+    if (window.FirebaseService) {
+      try { await window.FirebaseService.logout(); } catch(e) {}
+    }
     this.renderNavbar();
     if (typeof showToast === 'function') {
       showToast('🛡️ Signed out of Colosseum account.', 'info');
     }
-    if (window.location.pathname === '/login' || window.location.pathname === '/login.html' ||
-        window.location.pathname === '/register' || window.location.pathname === '/register.html') {
+    if (window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('register.html')) {
       window.location.reload();
     }
   },
@@ -1815,31 +1817,47 @@ const AuthManager = {
   renderNavbar() {
     const slot = document.getElementById('navAuthSlot');
     if (!slot) return;
-    const user = this.getUser();
-    if (user && user.username) {
-      const safeName = String(user.username || 'Duelist').replace(/[<>&"']/g, '');
-      const safeLogin = String(user.login || '').replace(/[<>&"']/g, '');
+
+    let fbUser = null;
+    let duelistId = null;
+    if (window.FirebaseService) {
+      fbUser = window.FirebaseService.getUser();
+      duelistId = window.FirebaseService.getFormattedDuelistId();
+    }
+    const localUser = this.getUser();
+    const user = fbUser || localUser;
+
+    if (user && (!user.isAnonymous || duelistId)) {
+      const displayName = user.displayName || user.username || (user.email ? user.email.split('@')[0] : ('Duelist #' + (duelistId || '0000-0000')));
+      const safeName = String(displayName).replace(/[<>&"']/g, '');
+      const idBadge = duelistId ? `<span style="font-size:0.7rem;background:rgba(59,130,246,0.3);padding:1px 6px;border-radius:4px;color:#93c5fd;font-family:monospace;font-weight:700;">#${duelistId}</span>` : '';
       slot.innerHTML = `
-        <span class="nav-user-pill" title="Logged in as ${safeName} (${safeLogin})">
+        <span class="nav-user-pill" title="Signed in as ${safeName}">
           <span class="user-shield">🛡️</span>
           <span class="user-name">${safeName}</span>
+          ${idBadge}
         </span>
-        <button class="tab-btn-logout" id="btnLogout" onclick="AuthManager.logout()" title="Logout of Colosseum">
+        <button class="tab-btn-logout" id="btnLogout" onclick="AuthManager.logout()" title="Logout / Switch Account">
           <span>🚪 Logout</span>
         </button>
       `;
     } else {
-      const isLoginPage = window.location.pathname === '/login' || window.location.pathname === '/login.html';
-      const isRegPage = window.location.pathname === '/register' || window.location.pathname === '/register.html';
+      const isLoginPage = window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('/login');
+      const isRegPage = window.location.pathname.endsWith('register.html') || window.location.pathname.endsWith('/register');
       const activeClass = (isLoginPage || isRegPage) ? ' active' : '';
       slot.innerHTML = `
-        <a class="tab-btn tab-btn-auth${activeClass}" id="tabAuth" href="/login">👤 Login</a>
+        <a class="tab-btn tab-btn-auth${activeClass}" id="tabAuth" href="./login.html">👤 Login</a>
       `;
     }
   },
 
   init() {
     this.renderNavbar();
+    if (typeof window !== 'undefined') {
+      window.addEventListener('bse_auth_state_change', () => {
+        this.renderNavbar();
+      });
+    }
   }
 };
 
