@@ -644,7 +644,7 @@ const DeckQuickView = {
         </div>
 
         <div class="deck-quick-flyout-footer">
-          <a href="/deck" class="btn-quick-deck-view">
+          <a href="./deck.html" class="btn-quick-deck-view">
             <span>🃏 Open in Deck Builder ↗</span>
           </a>
           <button class="btn-quick-deck-clear" onclick="clearDeck()" title="Clear all cards from active deck">Clear</button>
@@ -1266,7 +1266,7 @@ async function openCardDetail(name, contextList) {
     if (card.type) bb.innerHTML += `<span class="badge badge-type">${esc(card.type)}</span>`;
     if (card.rarity) bb.innerHTML += `<span class="badge badge-rarity">${esc(card.rarity)}</span>`;
     const families = card.families || (card.family ? [card.family] : []);
-    families.forEach(f => bb.innerHTML += `<a class="badge badge-family" href="/browse?family=${encodeURIComponent(f)}" style="cursor:pointer;text-decoration:none;" title="Explore ${esc(f)} family">${esc(f)} ↗</a>`);
+    families.forEach(f => bb.innerHTML += `<a class="badge badge-family" href="./browse.html?family=${encodeURIComponent(f)}" style="cursor:pointer;text-decoration:none;" title="Explore ${esc(f)} family">${esc(f)} ↗</a>`);
 
     document.getElementById('modalLevels').textContent = card.levels || 'No level data.';
     document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(card.effect || card.summary || '');
@@ -1280,7 +1280,7 @@ async function openCardDetail(name, contextList) {
     const setsEl = document.getElementById('modalSets');
     const sets = card.sets || [];
     if (sets.length) {
-      setsEl.innerHTML = sets.map(s => `<a class="badge badge-set" href="/browse?set=${encodeURIComponent(s)}" style="cursor:pointer;text-decoration:none;" title="Explore set ${esc(s)}">${esc(s)} ↗</a>`).join('');
+      setsEl.innerHTML = sets.map(s => `<a class="badge badge-set" href="./browse.html?set=${encodeURIComponent(s)}" style="cursor:pointer;text-decoration:none;" title="Explore set ${esc(s)}">${esc(s)} ↗</a>`).join('');
     } else {
       setsEl.innerHTML = '<span style="color:var(--muted);font-size:0.82rem;">No set data available.</span>';
     }
@@ -1679,13 +1679,13 @@ async function executeDeckImport() {
   const finalTotal = Object.values(S.deck).reduce((a, b) => a + b, 0);
   closeDeckImportModal();
 
-  // If we are currently on deck.html, re-render; otherwise redirect to /deck
-  if (window.location.pathname === '/deck' || window.location.pathname === '/deck.html') {
+  // If we are currently on deck.html, re-render; otherwise redirect to deck.html
+  if (window.location.pathname.endsWith('deck.html') || window.location.pathname.endsWith('/deck')) {
     if (typeof renderDeckView === 'function') renderDeckView();
     showToast(`🎉 Imported ${finalTotal} cards into "${deckName}"!`, 'success');
   } else {
-    // Real page redirect to /deck
-    window.location.href = '/deck';
+    // Real page redirect to deck.html
+    window.location.href = './deck.html';
   }
 }
 
@@ -1722,14 +1722,14 @@ async function loadStandardDeck(colorKey) {
       });
     } catch (e) {}
 
-    // If on /deck page, re-render
-    if (window.location.pathname === '/deck' || window.location.pathname === '/deck.html') {
+    // If on deck page, re-render
+    if (window.location.pathname.endsWith('deck.html') || window.location.pathname.endsWith('/deck')) {
       if (typeof DeckManagerUI !== 'undefined') DeckManagerUI.init();
       if (typeof renderDeckView === 'function') renderDeckView();
       const listEl = document.getElementById('deckList');
       if (listEl && typeof listEl.scrollIntoView === 'function') listEl.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.href = '/deck';
+      window.location.href = './deck.html';
     }
 
     showToast(`⚡ Registered & Loaded 40-Card Standard ${deckData.color} Deck: "${deckData.name}"!`, 'success');

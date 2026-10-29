@@ -498,7 +498,7 @@ const DeckManagerUI = {
       }).join('');
 
       return `
-        <div class="saved-deck-card card-theme-${colorKey}" onclick="window.location.href='/deck-view?id=${encodeURIComponent(d.id)}'" title="Click to view all cards in ${esc(d.name)}">
+        <div class="saved-deck-card card-theme-${colorKey}" onclick="window.location.href='./deck_view.html?id=${encodeURIComponent(d.id)}'" title="Click to view all cards in ${esc(d.name)}">
           <div class="saved-deck-top">
             <div class="saved-deck-title-row">
               <span class="saved-deck-icon">${icon}</span>
@@ -518,7 +518,7 @@ const DeckManagerUI = {
           </div>
 
           <div class="saved-deck-actions" onclick="event.stopPropagation()">
-            <button class="btn-saved-action btn-saved-view" onclick="window.location.href='/deck-view?id=${encodeURIComponent(d.id)}'" title="View all cards in separate page">
+            <button class="btn-saved-action btn-saved-view" onclick="window.location.href='./deck_view.html?id=${encodeURIComponent(d.id)}'" title="View all cards in separate page">
               👁️ View
             </button>
             <button class="btn-saved-action btn-saved-edit" onclick="DeckManagerUI.editDeck('${esc(d.id)}')" title="Load deck into builder to edit">

@@ -423,14 +423,14 @@ function updateTargetHeader() {
 
   if (browseState.family && browseState.family.toLowerCase() !== 'all') {
     backBtn.style.display = 'inline-flex';
-    backBtn.href = '/family';
+    backBtn.href = './family.html';
     document.getElementById('btnBackText').textContent = 'Back to Family Directory';
     clearBtn.style.display = 'inline-block';
     titleEl.textContent = `Family: ${browseState.family}`;
     badgeEl.textContent = 'Filtered by Family';
   } else if (browseState.set) {
     backBtn.style.display = 'inline-flex';
-    backBtn.href = '/sets';
+    backBtn.href = './sets.html';
     document.getElementById('btnBackText').textContent = 'Back to Card Sets';
     clearBtn.style.display = 'inline-block';
     titleEl.textContent = `Set: ${browseState.set}`;
@@ -518,7 +518,8 @@ function updateUrlHistory() {
   if (browseState.page > 1) params.set('page', browseState.page);
 
   const qs = params.toString();
-  const newUrl = qs ? `/browse?${qs}` : '/browse';
+  const currentFile = window.location.pathname.split('/').pop() || 'browse.html';
+  const newUrl = qs ? `${currentFile}?${qs}` : currentFile;
   window.history.replaceState({}, '', newUrl);
 }
 
