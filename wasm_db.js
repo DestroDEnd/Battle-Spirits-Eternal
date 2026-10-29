@@ -10,12 +10,24 @@
   let SQL = null;
   let dbInstance = null;
   let isReady = false;
+  let initPromise = null;
   let readyCallbacks = [];
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
   const STORE_NAME = 'db_binary';
-  const DB_KEY = 'battle_spirits.db';
-  const DB_URL = '/battle_spirits.db';
+  const DB_KEY = 'battle_spirits.db_v1';
+
+  function getBaseDir() {
+    if (typeof window === 'undefined' || !window.location) return './';
+    const loc = window.location;
+    const pathname = loc.pathname || '';
+    const dir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+    return loc.origin + (dir || '/');
+  }
+
+  function getDbUrl() {
+    return getBaseDir() + 'battle_spirits.db';
+  }
 
   // ── 1. INDEXED_DB PERSISTENT CACHE ──
   function openIndexedDB() {
@@ -75,8 +87,27 @@
 
       if (!dbBuffer) {
         showLoadingBanner("Initializing Battle Spirits Card Database (23 MB)...");
-        const res = await window._originalFetch(DB_URL);
-        if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${DB_URL}`);
+        let res = null;
+        const candidateUrls = [
+          getDbUrl(),
+          './battle_spirits.db',
+          'battle_spirits.db',
+          '/battle_spirits.db'
+        ];
+
+        for (const u of candidateUrls) {
+          try {
+            const testRes = await window._originalFetch(u);
+            const ct = (testRes.headers && testRes.headers.get('content-type')) || '';
+            if (testRes.ok && !ct.includes('text/html')) {
+              res = testRes;
+              console.log(`[WasmDB] Successfully loaded database binary from ${u}`);
+              break;
+            }
+          } catch(e) {}
+        }
+
+        if (!res) throw new Error("Could not fetch battle_spirits.db from any path candidate.");
         dbBuffer = await res.arrayBuffer();
         await setCachedDbBuffer(dbBuffer);
         hideLoadingBanner();
@@ -352,8 +383,15 @@
       const path = url.pathname;
       const params = Object.fromEntries(url.searchParams.entries());
 
+      // If database is currently initializing, wait for it!
+      if (!isReady && initPromise) {
+        try {
+          await initPromise;
+        } catch(e) {}
+      }
+
       if (isReady) {
-        if (path === '/api/cards') {
+        if (path.endsWith('/api/cards')) {
           const data = WasmDB.searchCards(params);
           return new Response(JSON.stringify(data), {
             status: 200,
@@ -361,7 +399,7 @@
           });
         }
 
-        if (path === '/api/card') {
+        if (path.endsWith('/api/card')) {
           const card = WasmDB.getCardByName(params.name || '');
           if (card) {
             return new Response(JSON.stringify({ card }), {
@@ -375,7 +413,7 @@
           });
         }
 
-        if (path === '/api/cards-batch') {
+        if (path.endsWith('/api/cards-batch')) {
           const names = (params.names || '').split('|').filter(Boolean);
           const cards = WasmDB.getCardsBatch(names);
           return new Response(JSON.stringify({ cards }), {
@@ -384,7 +422,7 @@
           });
         }
 
-        if (path === '/api/autocomplete') {
+        if (path.endsWith('/api/autocomplete')) {
           const results = WasmDB.getAutocomplete(params.q || '', parseInt(params.limit || 8, 10));
           return new Response(JSON.stringify({ results }), {
             status: 200,
@@ -392,11 +430,20 @@
           });
         }
 
-        if (path === '/api/card-effects-db') {
+        if (path.endsWith('/api/card-effects-db')) {
           try {
-            const rawRes = await window._originalFetch('/card_effects_db.json');
+            const rawRes = await window._originalFetch(getBaseDir() + 'card_effects_db.json');
             return rawRes;
           } catch (e) {}
+        }
+      } else {
+        // If on static hosting (e.g. GitHub Pages) and backend is not running, return safe empty JSON
+        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+          console.warn(`[WasmDB] Intercepted static API call to ${path} before DB ready.`);
+          return new Response(JSON.stringify({ total: 0, cards: [] }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
         }
       }
     }
@@ -408,11 +455,16 @@
   // Expose globally
   window.WasmDB = WasmDB;
 
-  // Auto-boot on load
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWasmDatabase);
-  } else {
-    initWasmDatabase();
+  function startInit() {
+    if (!initPromise) {
+      initPromise = initWasmDatabase();
+    }
+    return initPromise;
+  }
+
+  // Auto-boot immediately
+  if (typeof window !== 'undefined') {
+    startInit();
   }
 
 })(window);

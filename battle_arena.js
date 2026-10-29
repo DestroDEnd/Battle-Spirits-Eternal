@@ -1146,7 +1146,7 @@
           <div class="lobby-deck-warning-box">
             ⚠️ <strong>Incomplete Deck (${totalCount} / 40 Min Cards)</strong><br>
             Battle Spirits rules require at least 40 cards (no upper limit) to enter battle.<br>
-            <a href="/deck" class="lobby-goto-builder">🎴 Build / Add Cards in Deck Builder →</a>
+            <a href="./deck.html" class="lobby-goto-builder">🎴 Build / Add Cards in Deck Builder →</a>
           </div>
         ` : '';
 
@@ -7498,7 +7498,7 @@
   // ── QUICK LAUNCH & ARENA REDIRECT ──
   function quickLaunchDuel() {
     if (!isArenaPage()) {
-      window.location.href = '/arena?duel=quick';
+      window.location.href = './arena.html?duel=quick';
       return;
     }
     startDuel('red', 'purple');
@@ -7507,7 +7507,7 @@
   function scrollToBattleArena(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (!isArenaPage()) {
-      window.location.href = '/arena';
+      window.location.href = './arena.html';
       return;
     }
     const arenaEl = document.getElementById('battleArena');
