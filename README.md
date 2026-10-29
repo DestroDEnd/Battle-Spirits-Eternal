@@ -26,7 +26,7 @@
   - Native Drag-and-Drop spirit repositioning on the battlefield.
   - Contained, smooth horizontal mouse wheel scrolling across battle lines without layout shift.
 - **Universal Card Effect Engine**:
-  - NLP-powered database covering 8,892 official Battle Spirits cards with over 12,000 parsed actions.
+  - NLP-powered database covering 11,515 official Battle Spirits cards with over 22,600 parsed actions across 26 operational categories.
 
 ---
 

@@ -1,7 +1,6 @@
 """
-NLP Card Effect Categorization & Extraction Engine
-Inspired by Yoon Kim (2014) Convolutional Neural Networks for Sentence Classification.
-Processes all cards in battle_spirits.db, tokenizes effect sentences, classifies them into
+Comprehensive NLP Card Effect Categorization & Extraction Engine
+Parses all 14,529 cards in battle_spirits.db, tokenizes effect sentences, classifies them into
 semantic action categories, extracts parameters, and compiles a universal effects database.
 """
 
@@ -24,24 +23,18 @@ def word_to_num(w):
         return int(w)
     return mapping.get(w, 1)
 
-def extract_level_req(block_header):
-    levels = []
-    for m in re.finditer(r'\[LV(\d+)\]', block_header, re.IGNORECASE):
-        levels.append(int(m.group(1)))
+def extract_level_req(text):
+    levels = [int(m.group(1)) for m in re.finditer(r'\[LV(\d+)\]', text, re.I)]
     return min(levels) if levels else 1
 
 def categorize_clause(clause, header_timing):
-    """
-    NLP semantic classifier for an effect clause.
-    Uses n-gram pattern detectors (analogous to TextCNN feature filters)
-    to classify the clause into an action category and extract parameters.
-    """
     text = clause.strip()
+    text = re.sub(r'^[◆•\-\*\s]+', '', text)
     lower = text.lower()
     actions = []
 
-    # 1. DRAW CARDS: "draw X card(s) from your deck" / "you can draw X card" / "reveal X cards"
-    draw_match = re.search(r'(?:you can\s+)?draw\s+(a|an|one|two|three|four|five|\d+)\s+cards?', lower)
+    # 1. DRAW CARDS / DRAW UNTIL / SEARCH DECK
+    draw_match = re.search(r'(?:you can\s+)?draw\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?', lower)
     if draw_match:
         count = word_to_num(draw_match.group(1))
         actions.append({
@@ -49,8 +42,16 @@ def categorize_clause(clause, header_timing):
             'count': count,
             'desc': f'Draw {count} card(s) from deck'
         })
-    elif re.search(r'reveal\s+(a|an|one|two|three|four|five|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower):
-        m = re.search(r'reveal\s+(a|an|one|two|three|four|five|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower)
+    elif re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', lower):
+        m = re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', lower)
+        target_hand = int(m.group(1))
+        actions.append({
+            'type': 'DRAW_UNTIL',
+            'target_hand': target_hand,
+            'desc': f'Draw until you have {target_hand} cards in Hand'
+        })
+    elif re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower):
+        m = re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower)
         count = word_to_num(m.group(1))
         actions.append({
             'type': 'SEARCH_DECK',
@@ -58,12 +59,16 @@ def categorize_clause(clause, header_timing):
             'desc': f'Reveal {count} cards from decktop and add matching cards to Hand'
         })
 
-    # 2. CORE BOOST: "put/place/add X core(s) from the void/trash to your reserve/this spirit/nexus"
-    core_boost_match = re.search(r'(?:put|place|add|move|send)\s+(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:the\s+)?(void|trash|reserve)\s+to\s+(?:your\s+)?(reserve|this spirit|this nexus|a spirit|your life)', lower)
+    # 2. CORE BOOST
+    core_boost_match = (
+        re.search(r'(?:you can\s+)?(?:put|place|add|move|send)\s+(a|an|one|two|three|four|\d+)?\s*cores?\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?(?:on|onto|to)\s+(?:your\s+)?(reserve|this spirit|this nexus|this ultimate|any of your spirit|any of your spirits|a spirit|your nexus|your life)', lower) or
+        re.search(r'(?:put|place|add|move|send)\s+a\s+core\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?to\s+(?:your\s+)?(.*)', lower)
+    )
     if core_boost_match:
-        count = word_to_num(core_boost_match.group(1))
-        src = core_boost_match.group(2)
-        dst = core_boost_match.group(3)
+        c_str = core_boost_match.group(1) if core_boost_match.lastindex >= 3 else '1'
+        count = word_to_num(c_str) if c_str else 1
+        src = core_boost_match.group(2) if core_boost_match.lastindex >= 3 else core_boost_match.group(1)
+        dst = core_boost_match.group(3) if core_boost_match.lastindex >= 3 else core_boost_match.group(2)
         actions.append({
             'type': 'CORE_BOOST',
             'count': count,
@@ -72,8 +77,11 @@ def categorize_clause(clause, header_timing):
             'desc': f'Move {count} core(s) from {src} to {dst}'
         })
 
-    # 3. CORE DRAIN: "send X core(s) from an opposing spirit/nexus to reserve/trash/void"
-    core_drain_match = re.search(r'send\s+(?:up to\s+)?(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:an|any|one|\d+)?\s*opposing\s+(spirit|nexus|ultimate).*?to\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower)
+    # 3. CORE DRAIN
+    core_drain_match = (
+        re.search(r'(?:you can\s+)?(?:send|move)\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)\s+cores?\s+(?:each\s+)?from\s+(?:an|any|one|two|three|four|five|\d+)?\s*opposing\s+(spirit|nexus|ultimate|spirit\/ultimate|spirit\/nexus).*?(?:on|onto|to)\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower) or
+        re.search(r'(?:send|move)\s+(a|an|one|two|three|four|\d+)\s+cores?\s+each\s+from\s+.*?opposing\s+(spirit|nexus|ultimate|spirits\/ultimates).*?to\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower)
+    )
     if core_drain_match:
         count = word_to_num(core_drain_match.group(1))
         target_kind = core_drain_match.group(2)
@@ -86,50 +94,74 @@ def categorize_clause(clause, header_timing):
             'desc': f'Send {count} core(s) from opposing {target_kind} to {dest}'
         })
 
-    # 4. DESTROY SPIRIT: "destroy X opposing spirit(s) with Y BP or less / cost Y or less"
-    destroy_bp_match = re.search(r'destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+spirits?\s+(?:with\s+)?(\d+)\s*bp\s+or\s+(?:less|lower)', lower)
+    # 4. DESTROY SPIRIT BY BP
+    destroy_bp_match = (
+        re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(?:an\s+|the\s+)?opposing\s+(?:spirits?|ultimates?)\s+(?:with\s+)?(\d+)\s*bp\s+or\s+(?:less|lower)', lower) or
+        re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(?:an\s+|the\s+)?opposing\s+(\d+)\s*bp\s+or\s+(?:less|lower)\s+(?:spirits?|ultimates?)', lower) or
+        re.search(r'destroy\s+any\s+number\s+of\s+opposing\s+(?:spirits?|ultimates?)\s+(?:up to\s+(?:a total of\s+)?)?(\d+)\s*bp', lower)
+    )
     if destroy_bp_match:
-        count = word_to_num(destroy_bp_match.group(1)) if destroy_bp_match.group(1) else 1
-        max_bp = int(destroy_bp_match.group(2))
+        count = word_to_num(destroy_bp_match.group(1)) if destroy_bp_match.group(1) and not destroy_bp_match.group(1).isdigit() else 1
+        max_bp = int([g for g in destroy_bp_match.groups() if g and g.isdigit()][0])
         actions.append({
             'type': 'DESTROY_SPIRIT_BP',
             'count': count,
             'max_bp': max_bp,
-            'desc': f'Destroy {count} opposing Spirit(s) with {max_bp} BP or less'
+            'desc': f'Destroy opposing Spirit(s) up to {max_bp} BP'
         })
-    elif re.search(r'destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+spirits?\s+(?:with\s+)?cost\s+(\d+)\s+or\s+(?:less|lower)', lower):
-        m = re.search(r'destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+spirits?\s+(?:with\s+)?cost\s+(\d+)\s+or\s+(?:less|lower)', lower)
-        count = word_to_num(m.group(1)) if m.group(1) else 1
-        max_cost = int(m.group(2))
+    elif re.search(r'(?:you can\s+)?destroy\s+(?:an|one)?\s*opposing\s+(?:spirit|ultimate)\s+with\s+the\s+(highest|lowest)\s+bp', lower):
+        m = re.search(r'(?:you can\s+)?destroy\s+(?:an|one)?\s*opposing\s+(?:spirit|ultimate)\s+with\s+the\s+(highest|lowest)\s+bp', lower)
+        mode = m.group(1)
+        actions.append({
+            'type': 'DESTROY_SPIRIT_EXTREME_BP',
+            'mode': mode,
+            'desc': f'Destroy 1 opposing Spirit with the {mode} BP'
+        })
+
+    # 5. DESTROY SPIRIT BY COST
+    destroy_cost_match = (
+        re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(?:an\s+|the\s+)?opposing\s+(?:spirits?|ultimates?)\s+(?:with\s+)?cost\s+(\d+)\s+or\s+(?:less|lower)', lower) or
+        re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(?:an\s+|the\s+)?opposing\s+cost\s+(\d+)\s+or\s+(?:less|lower)\s+(?:spirits?|ultimates?)', lower) or
+        re.search(r'destroy\s+any\s+number\s+of\s+opposing\s+(?:spirits?|ultimates?)\s+up\s+to\s+(?:a\s+total\s+cost\s+of|cost)\s+(\d+)', lower)
+    )
+    if destroy_cost_match:
+        c_val = [g for g in destroy_cost_match.groups() if g and g.isdigit()][0]
+        max_cost = int(c_val)
         actions.append({
             'type': 'DESTROY_SPIRIT_COST',
-            'count': count,
+            'count': 1,
             'max_cost': max_cost,
-            'desc': f'Destroy {count} opposing Spirit(s) with Cost {max_cost} or less'
-        })
-    elif re.search(r'destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*(?:exhausted\s+)?opposing\s+spirits?', lower):
-        m = re.search(r'destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*(exhausted\s+)?opposing\s+spirits?', lower)
-        count = word_to_num(m.group(1)) if m.group(1) else 1
-        is_exhausted = bool(m.group(2))
-        actions.append({
-            'type': 'DESTROY_SPIRIT_DIRECT',
-            'count': count,
-            'require_exhausted': is_exhausted,
-            'desc': f'Destroy {count} {"exhausted " if is_exhausted else ""}opposing Spirit(s)'
+            'desc': f'Destroy opposing Spirit(s) with Cost {max_cost} or less'
         })
 
-    # 5. DESTROY NEXUS: "destroy an opposing nexus"
-    if re.search(r'destroy\s+(?:an|one|\d+)?\s*opposing\s+nexus', lower):
+    # 6. DESTROY SPIRIT DIRECT / EXHAUSTED
+    if not destroy_bp_match and not destroy_cost_match:
+        direct_match = re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(exhausted\s+)?opposing\s+(?:spirits?|ultimates?)', lower)
+        if direct_match:
+            count = word_to_num(direct_match.group(1)) if direct_match.group(1) else 1
+            is_exhausted = bool(direct_match.group(2))
+            actions.append({
+                'type': 'DESTROY_SPIRIT_DIRECT',
+                'count': count,
+                'require_exhausted': is_exhausted,
+                'desc': f'Destroy {count} {"exhausted " if is_exhausted else ""}opposing Spirit(s)'
+            })
+
+    # 7. DESTROY NEXUS
+    if re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+nexuse?s?', lower):
+        m = re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+nexuse?s?', lower)
+        count = word_to_num(m.group(1)) if m.group(1) else 1
         actions.append({
             'type': 'DESTROY_NEXUS',
-            'desc': 'Destroy 1 opposing Nexus'
+            'count': count,
+            'desc': f'Destroy {count} opposing Nexus'
         })
 
-    # 6. BP BUFF: "gains +X BP" / "this spirit gets +X BP"
-    bp_buff_match = re.search(r'(?:gains?|gets?)\s*\+?(\d+)\s*bp', lower)
+    # 8. BP BUFF
+    bp_buff_match = re.search(r'(?:gains?|gets?)\s*\+?(\d+)\s*bp', lower) or re.search(r'give\s+(?:this\s+spirit|a\s+spirit|all\s+your\s+spirits).*?\+(\d+)\s*bp', lower)
     if bp_buff_match:
         bp_amount = int(bp_buff_match.group(1))
-        target = 'self' if 'this spirit' in lower or 'self' in lower else ('all' if 'all' in lower else 'target')
+        target = 'self' if ('this spirit' in lower or 'self' in lower or 'gets +' in lower) else ('all' if 'all' in lower else 'target')
         actions.append({
             'type': 'BP_BUFF',
             'amount': bp_amount,
@@ -137,18 +169,30 @@ def categorize_clause(clause, header_timing):
             'desc': f'{target.capitalize()} gains +{bp_amount} BP'
         })
 
-    # 7. BP DEBUFF: "give an opposing spirit -X BP" / "opposing spirits get -Y BP"
-    bp_debuff_match = re.search(r'(?:give\s+(?:an?\s+)?opposing\s+(?:spirit|ultimate).*?-\s*(\d+)\s*bp)|(?:opposing\s+spirits?\s+(?:gets?|gains?)\s*-(\d+)\s*bp)', lower)
+    # 9. BP DEBUFF
+    bp_debuff_match = (
+        re.search(r'(?:give\s+(?:every|an?|up to \d+)?\s*opposing\s+(?:spirits?|ultimates?).*?-\s*(\d+)\s*bp)', lower) or
+        re.search(r'(?:opposing\s+(?:spirits?|ultimates?)\s+(?:gets?|gains?)\s*-(\d+)\s*bp)', lower) or
+        re.search(r'(?:decreases?\s+(?:an?\s+)?opposing\s+(?:spirit|ultimate).*?by\s+(\d+)\s*bp)', lower) or
+        re.search(r'(-\s*(\d+)\s*bp\s+to\s+(?:an?\s+)?opposing\s+spirit)', lower) or
+        re.search(r'give\s+every\s+opposing\s+spirit\s+-(\d+)\s*bp', lower)
+    )
     if bp_debuff_match:
-        bp_down = int(bp_debuff_match.group(1) or bp_debuff_match.group(2))
+        vals = [g for g in bp_debuff_match.groups() if g and g.isdigit()]
+        bp_down = int(vals[0]) if vals else 3000
+        destroy_on_zero = 'brought to 0' in lower or '0 bp' in lower or 'reaches 0' in lower
         actions.append({
             'type': 'BP_DEBUFF',
             'amount': bp_down,
-            'desc': f'Opposing Spirit gets -{bp_down} BP'
+            'destroy_on_zero': destroy_on_zero,
+            'desc': f'Opposing Spirit gets -{bp_down} BP{" (destroyed at 0 BP)" if destroy_on_zero else ""}'
         })
 
-    # 8. RETURN TO HAND: "return X opposing spirits to hand" / "return to hand"
-    bounce_match = re.search(r'return\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+spirits?\s+to\s+(?:the\s+|their\s+)?hand', lower)
+    # 10. RETURN TO HAND (Bounce)
+    bounce_match = (
+        re.search(r'(?:you can\s+)?return\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*opposing\s+(?:[^\.]*?)?(?:spirits?|ultimates?|nexuse?s?)\s+to\s+(?:the\s+|their\s+)?hand', lower) or
+        re.search(r'return\s+an\s+opposing\s+(?:[^\.]*?)?spirit\s+to\s+(?:the\s+|their\s+)?hand', lower)
+    )
     if bounce_match:
         count = word_to_num(bounce_match.group(1)) if bounce_match.group(1) else 1
         actions.append({
@@ -157,15 +201,21 @@ def categorize_clause(clause, header_timing):
             'desc': f'Return {count} opposing Spirit(s) to Hand'
         })
 
-    # 9. RETURN TO DECKBOTTOM: "return X opposing spirits to the bottom of the deck"
-    if re.search(r'return\s+.*?opposing\s+spirits?\s+to\s+(?:the\s+)?bottom\s+of\s+(?:the\s+)?deck', lower):
+    # 11. RETURN TO DECKBOTTOM
+    deckbottom_match = (
+        re.search(r'(?:you can\s+)?return\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*opposing\s+(?:[^\.]*?)?(?:spirits?|ultimates?|nexuse?s?)\s+to\s+(?:the\s+)?(?:bottom\s+of\s+(?:the\s+)?deck|deckbottom)', lower) or
+        re.search(r'return\s+an\s+opposing\s+(?:[^\.]*?)?(?:spirit|ultimate|nexus)\s+to\s+(?:the\s+)?deckbottom', lower)
+    )
+    if deckbottom_match:
+        count = word_to_num(deckbottom_match.group(1)) if deckbottom_match.group(1) else 1
         actions.append({
             'type': 'RETURN_TO_DECKBOTTOM',
-            'desc': 'Return opposing Spirit to bottom of Deck'
+            'count': count,
+            'desc': f'Return {count} opposing Spirit(s) to bottom of Deck'
         })
 
-    # 10. EXHAUST OPPOSING SPIRIT: "exhaust X opposing spirit(s)"
-    exhaust_match = re.search(r'exhaust\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*opposing\s+spirits?', lower)
+    # 12. EXHAUST OPPOSING SPIRIT / ALL
+    exhaust_match = re.search(r'(?:you can\s+)?exhaust\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*opposing\s+(?:spirits?|ultimates?)', lower)
     if exhaust_match:
         count = word_to_num(exhaust_match.group(1)) if exhaust_match.group(1) else 1
         actions.append({
@@ -173,31 +223,48 @@ def categorize_clause(clause, header_timing):
             'count': count,
             'desc': f'Exhaust {count} opposing Spirit(s)'
         })
+    elif re.search(r'exhaust\s+(?:every|all)\s+spirit', lower):
+        actions.append({
+            'type': 'EXHAUST_ENEMY',
+            'count': 99,
+            'desc': 'Exhaust all Spirits'
+        })
 
-    # 11. REFRESH: "refresh this spirit" / "refresh X of your spirits"
-    if re.search(r'refresh\s+this\s+spirit', lower):
+    # 13. REFRESH SPIRITS
+    if re.search(r'(?:you can\s+)?refresh\s+this\s+(?:spirit|ultimate|nexus)', lower) or re.search(r'this\s+spirit\s+refreshes', lower):
         actions.append({
             'type': 'REFRESH_SELF',
             'desc': 'Refresh this Spirit'
         })
-    elif re.search(r'refresh\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*(?:of\s+your\s+)?spirits?', lower):
-        m = re.search(r'refresh\s+(?:up to\s+)?(a|an|one|two|three|\d+)?\s*(?:of\s+your\s+)?spirits?', lower)
-        count = word_to_num(m.group(1)) if m.group(1) else 1
+    elif re.search(r'refresh\s+(?:all\s+(?:your\s+)?|up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+your\s+)?.*?spirits?', lower):
+        m = re.search(r'refresh\s+(?:all\s+(?:your\s+)?|up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+your\s+)?.*?spirits?', lower)
+        is_all = 'all' in lower
+        count = word_to_num(m.group(1)) if m.group(1) else (99 if is_all else 1)
         actions.append({
             'type': 'REFRESH_ALLIES',
             'count': count,
-            'desc': f'Refresh {count} Spirit(s)'
+            'is_all': is_all,
+            'desc': f'Refresh {"all" if is_all else str(count)} friendly Spirit(s)'
         })
 
-    # 12. DIRECT LIFE DAMAGE: "send 1 core from opposing life to reserve/void" / "deal 1 damage to opposing life"
-    if re.search(r'(?:send|move)\s+(a|an|one|two|\d+)\s+cores?\s+from\s+(?:the\s+)?opposing\s+life\s+to\s+(?:the\s+)?(reserve|trash|void)', lower) or re.search(r'deal\s+(\d+)\s+damage\s+to\s+opposing\s+life', lower):
+    # 14. BURST DISCARD REFRESH
+    if re.search(r'by\s+discarding\s+(?:one|1|a)\s+burst\s+card.*?refresh\s+this\s+spirit', lower):
+        actions.append({
+            'type': 'BURST_DISCARD_REFRESH',
+            'desc': 'At end of battle, discard 1 Burst card to refresh this Spirit'
+        })
+
+    # 15. DIRECT LIFE DAMAGE
+    if (re.search(r'(?:send|move)\s+(a|an|one|two|\d+)\s+cores?\s+from\s+(?:the\s+)?opposing\s+life\s+to\s+(?:the\s+)?(reserve|trash|void)', lower) or
+        re.search(r'deal\s+(\d+)\s+damage\s+to\s+opposing\s+life', lower) or
+        re.search(r'send\s+an\s+opposing\s+life\s+to\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower)):
         actions.append({
             'type': 'LIFE_BURN',
             'amount': 1,
             'desc': 'Inflict 1 direct damage to opposing Life'
         })
 
-    # 13. HOLY LIFE / LIFE HEAL: "put 1 core from the void to your life"
+    # 16. HOLY LIFE / LIFE HEAL
     if re.search(r'(?:put|place|add)\s+(a|an|one|two|\d+)\s+cores?\s+from\s+(?:the\s+)?void\s+to\s+(?:your\s+)?life', lower):
         actions.append({
             'type': 'HOLY_LIFE_HEAL',
@@ -205,30 +272,34 @@ def categorize_clause(clause, header_timing):
             'desc': 'Channeled Sacred Light: Place 1 core from Void to Life'
         })
 
-    # 14. CANNOT BE BLOCKED / UNBLOCKABLE: "cannot be blocked" / "can't be blocked"
-    if re.search(r'(?:cannot|can\'t)\s+be\s+blocked', lower) or re.search(r'unblockable', lower):
+    # 17. CANNOT BE BLOCKED / UNBLOCKABLE
+    if re.search(r'(?:cannot|can\'t)\s+be\s+blocked', lower) or re.search(r'\bunblockable\b', lower):
         actions.append({
             'type': 'CANNOT_BE_BLOCKED',
             'desc': 'This Spirit cannot be blocked'
         })
 
-    # 15. CANNOT BLOCK / CANNOT ATTACK OPPOSING
-    if re.search(r'opposing\s+spirits?\s+(?:cannot|can\'t)\s+attack', lower):
+    # 18. CANNOT BLOCK / CANNOT ATTACK OPPOSING
+    if re.search(r'opposing\s+spirits?\s+(?:cannot|can\'t)\s+attack', lower) or re.search(r'an\s+opposing\s+spirit.*?can\'t\s+attack', lower):
         actions.append({
             'type': 'OPPONENT_CANNOT_ATTACK',
             'desc': 'Opposing Spirits cannot attack'
         })
-    elif re.search(r'opposing\s+spirits?\s+(?:cannot|can\'t)\s+block', lower):
+    if re.search(r'opposing\s+spirits?\s+(?:cannot|can\'t)\s+block', lower) or re.search(r'an\s+opposing\s+spirit.*?can\'t\s+block', lower) or re.search(r'that\s+spirit\s+can\'t\s+block', lower) or re.search(r'they\s+can\'t\s+block', lower):
         actions.append({
             'type': 'OPPONENT_CANNOT_BLOCK',
             'desc': 'Opposing Spirits cannot block'
         })
 
-    # 16. FREE SUMMON: "summon X from trash/hand without paying the cost" / "summon this card without paying the cost"
-    free_summon_match = re.search(r'summon\s+(?:this\s+card|a|an|one|\d+)?\s*(.*?)\s*(?:card\s+)?from\s+(?:your\s+)?(trash|hand|deck)?\s*,?\s*without\s+paying\s+(?:the\s+)?cost', lower)
+    # 19. FREE SUMMON
+    free_summon_match = (
+        re.search(r'(?:you can\s+)?summon\s+(?:this\s+card|a|an|one|\d+)?\s*(.*?)\s*(?:card\s+)?from\s+(?:your\s+)?(trash|hand|deck)?\s*,?\s*without\s+paying\s+(?:the\s+)?cost', lower) or
+        re.search(r'by\s+summoning\s+(?:one|\d+)?\s*(.*?)\s*without\s+paying\s+(?:the\s+)?cost', lower) or
+        re.search(r'summon\s+this\s+card\s+without\s+paying\s+(?:the\s+)?cost', lower)
+    )
     if free_summon_match:
-        card_desc = free_summon_match.group(1).strip()
-        src = free_summon_match.group(2) or 'hand'
+        card_desc = free_summon_match.group(1).strip() if free_summon_match.groups() and free_summon_match.group(1) else 'This Card'
+        src = (free_summon_match.group(2) if len(free_summon_match.groups()) > 1 and free_summon_match.group(2) else 'hand')
         actions.append({
             'type': 'SUMMON_FREE',
             'source': src,
@@ -236,8 +307,8 @@ def categorize_clause(clause, header_timing):
             'desc': f'Summon {card_desc or "Card"} from {src} without paying cost'
         })
 
-    # 17. SYMBOL GRANT: "gains 1 additional symbol" / "gains a red/purple symbol"
-    symbol_match = re.search(r'gains?\s+(?:an?\s+)?(?:additional\s+)?(red|purple|green|white|yellow|blue)?\s*symbols?', lower)
+    # 20. SYMBOL GRANT
+    symbol_match = re.search(r'gains?\s+(?:an?\s+)?(?:additional\s+)?(red|purple|green|white|yellow|blue)?\s*symbols?', lower) or re.search(r'gains?\s+\+1\s*(red|purple|green|white|yellow|blue)?\s*symbol', lower)
     if symbol_match:
         sym_col = symbol_match.group(1) or 'self'
         actions.append({
@@ -246,26 +317,50 @@ def categorize_clause(clause, header_timing):
             'desc': f'Gains +1 {sym_col.capitalize()} Symbol'
         })
 
-    # 18. IMMUNITY / UNAFFECTED
-    if re.search(r'unaffected\s+by\s+(?:opposing\s+)?(spirits?|magics?|effects?)', lower):
+    # 21. IMMUNITY / UNAFFECTED
+    if re.search(r'unaffected\s+by\s+(?:opposing\s+)?(spirits?|magics?|nexuse?s?|effects?)', lower) or re.search(r'this\s+spirit\s+is\s+unaffected', lower):
         actions.append({
             'type': 'IMMUNITY',
             'desc': 'Unaffected by opposing effects'
         })
 
+    # 22. SALVAGE (Return card from Trash to Hand)
+    salvage_match = re.search(r'return\s+(?:a|an|one|two|\d+)?\s*(.*?)\s*(?:card\s+)?from\s+(?:the\s+|your\s+)?trash\s+to\s+(?:the\s+|your\s+)?hand', lower)
+    if salvage_match:
+        c_desc = salvage_match.group(1).strip()
+        actions.append({
+            'type': 'SALVAGE',
+            'target_desc': c_desc,
+            'desc': f'Return {c_desc or "card"} from Trash to Hand'
+        })
+
+    # 23. COUNTER PLUS
+    counter_match = re.search(r'your\s+counter\s+(?:can\s+)?\+(\d+)', lower)
+    if counter_match:
+        cnt_val = int(counter_match.group(1))
+        actions.append({
+            'type': 'COUNTER_PLUS',
+            'count': cnt_val,
+            'desc': f'Your Counter +{cnt_val}'
+        })
+
+    # 24. DAMAGE CAP / LIFE PROTECTION
+    if re.search(r'your\s+life\s+can\s+only\s+be\s+reduced\s+by\s+(\d+|one)', lower) or re.search(r'your\s+life\s+cannot\s+be\s+reduced', lower):
+        actions.append({
+            'type': 'DAMAGE_CAP',
+            'desc': 'During this turn, your Life cannot be reduced or reduced by more than 1'
+        })
+
     return actions
 
 def parse_card_effects(card_name, card_type, effect_text):
-    """
-    Parses a full card's effect string into structured trigger-keyed actions.
-    """
     if not effect_text or not effect_text.strip():
         return {}
 
     lines = effect_text.split('\n')
     parsed_triggers = {}
 
-    current_timing = 'PASSIVE'
+    current_timings = ['PASSIVE']
     current_level = 1
     current_burst_cond = None
 
@@ -275,75 +370,88 @@ def parse_card_effects(card_name, card_type, effect_text):
             continue
 
         # Check Burst declaration
-        burst_match = re.match(r'\[Burst:\s*([^\]]+)\]', line, re.IGNORECASE)
+        burst_match = re.search(r'\[Burst:\s*([^\]]+)\]', line, re.I)
         if burst_match:
-            current_timing = 'BURST'
+            current_timings = ['BURST']
             current_burst_cond = burst_match.group(1).strip()
-            continue
 
-        # Check timing headers like: [LV1][LV2] (When Summoned)
-        # or [LV2] (When Attacks), (When Deployed), [Flash], etc.
-        header_match = re.match(r'^((\[LV\d+\])+)?\s*(\([^\)]+\)|\[Flash\]|\[Main\])?', line, re.IGNORECASE)
-        line_body = line
-        timing_found = None
-        min_lvl = 1
+        # Check Grand Skill
+        gs_match = re.search(r'\[Grand Skill:\s*(\d+)\]', line, re.I)
+        if gs_match:
+            current_timings = ['GRAND_SKILL']
+            current_level = 1
 
-        if header_match:
-            lvl_part = header_match.group(1)
-            tim_part = header_match.group(3)
+        # Check for level headers anywhere on line
+        lvl_matches = [int(m.group(1)) for m in re.finditer(r'\[LV(\d+)\]', line, re.I)]
+        if lvl_matches:
+            current_level = min(lvl_matches)
 
-            if lvl_part:
-                min_lvl = extract_level_req(lvl_part)
+        # Look for explicit timing keywords
+        found_timings = []
+        # Check parentheses
+        for m in re.finditer(r'\(([^\)]+)\)', line):
+            content = m.group(1).lower()
+            if 'summon' in content and 'attack' in content:
+                found_timings.extend(['WHEN_SUMMONED', 'WHEN_ATTACKS'])
+            elif 'summon' in content and 'advent' in content:
+                found_timings.extend(['WHEN_SUMMONED', 'WHEN_ADVENTS'])
+            elif 'summon' in content:
+                found_timings.append('WHEN_SUMMONED')
+            elif 'attack' in content and 'block' in content:
+                found_timings.extend(['WHEN_ATTACKS', 'WHEN_BLOCKS'])
+            elif 'advent' in content and 'attack' in content:
+                found_timings.extend(['WHEN_ADVENTS', 'WHEN_ATTACKS'])
+            elif 'attack step' in content or 'your attack' in content or 'opposing attack' in content:
+                found_timings.append('WHEN_ATTACKS')
+            elif 'attack' in content:
+                found_timings.append('WHEN_ATTACKS')
+            elif 'block' in content:
+                found_timings.append('WHEN_BLOCKS')
+            elif 'battles' in content:
+                found_timings.extend(['WHEN_ATTACKS', 'WHEN_BLOCKS'])
+            elif 'destroy' in content or 'deplet' in content:
+                found_timings.append('WHEN_DESTROYED')
+            elif 'deploy' in content:
+                found_timings.append('WHEN_DEPLOYED')
+            elif 'advent' in content:
+                found_timings.append('WHEN_ADVENTS')
+            elif 'flash' in content:
+                found_timings.append('FLASH')
+            elif 'start of' in content:
+                found_timings.append('START_OF_TURN')
+            elif 'end of the battle' in content or 'end of battle' in content:
+                found_timings.append('END_OF_BATTLE')
+            elif 'end of' in content:
+                found_timings.append('END_OF_TURN')
 
-            timings_list = []
-            if tim_part:
-                tp_lower = tim_part.lower()
-                if 'when summoned' in tp_lower or 'summon' in tp_lower:
-                    timings_list.append('WHEN_SUMMONED')
-                if 'when attacks' in tp_lower or 'attack' in tp_lower:
-                    timings_list.append('WHEN_ATTACKS')
-                if 'when blocks' in tp_lower or 'block' in tp_lower or 'battles' in tp_lower:
-                    timings_list.append('WHEN_BLOCKS')
-                    if 'battles' in tp_lower and 'WHEN_ATTACKS' not in timings_list:
-                        timings_list.append('WHEN_ATTACKS')
-                if 'when destroyed' in tp_lower or 'destroyed' in tp_lower:
-                    timings_list.append('WHEN_DESTROYED')
-                if 'when deployed' in tp_lower or 'deployed' in tp_lower:
-                    timings_list.append('WHEN_DEPLOYED')
-                if 'when advents' in tp_lower or 'advent' in tp_lower:
-                    timings_list.append('WHEN_ADVENTS')
-                if 'flash' in tp_lower:
-                    timings_list.append('FLASH')
-                if 'start of' in tp_lower:
-                    timings_list.append('START_OF_TURN')
-                if 'end of battle' in tp_lower or 'at the end of the battle' in tp_lower:
-                    timings_list.append('END_OF_BATTLE')
-                elif 'end of' in tp_lower:
-                    timings_list.append('END_OF_TURN')
+        # Check brackets & flash
+        if re.search(r'\[Flash\]|\bFlash\s*[-:\(]', line, re.I):
+            found_timings.append('FLASH')
+        if re.search(r'\[Main\]|\bMain\s*[-:\(]', line, re.I):
+            found_timings.append('MAIN')
 
-            if timings_list:
-                current_timings = timings_list
-                current_level = min_lvl
-                line_body = line[header_match.end():].strip()
-            else:
-                current_timings = [current_timing]
-        else:
-            current_timings = [current_timing]
-
-        # If card is Nexus and no explicit timing, default to WHEN_DEPLOYED for deploy triggers or PASSIVE
-        if 'nexus' in (card_type or '').lower():
-            if 'when deployed' in line.lower() and 'WHEN_DEPLOYED' not in current_timings:
-                current_timings = ['WHEN_DEPLOYED']
-
-        # If card is Magic and no header:
+        # Heuristic for magic / nexus
         if (card_type or '').lower() == 'magic':
-            if '[flash]' in line.lower() or '(flash)' in line.lower():
-                current_timings = ['FLASH']
-            elif '[main]' in line.lower() or '(main)' in line.lower():
-                current_timings = ['MAIN']
+            if not found_timings and current_timings == ['PASSIVE']:
+                found_timings = ['FLASH']
 
-        # Break line_body into sentences/clauses
-        clauses = re.split(r'\.\s+|\n|;', line_body)
+        if 'nexus' in (card_type or '').lower():
+            if 'when deployed' in line.lower() and 'WHEN_DEPLOYED' not in found_timings:
+                found_timings.append('WHEN_DEPLOYED')
+
+        if found_timings:
+            # Deduplicate preserving order
+            seen = set()
+            current_timings = [t for t in found_timings if not (t in seen or seen.add(t))]
+
+        # Strip header markers from line body
+        clean_body = re.sub(r'\[LV\d+\]', '', line)
+        clean_body = re.sub(r'\[Burst:[^\]]+\]', '', clean_body)
+        clean_body = re.sub(r'\[Grand Skill:[^\]]+\]', '', clean_body)
+        clean_body = re.sub(r'\[Flash\]|\[Main\]', '', clean_body, flags=re.I)
+        clean_body = clean_body.strip()
+
+        clauses = re.split(r'\.\s+|\n|;', clean_body)
         for c in clauses:
             c = c.strip()
             if not c:
@@ -362,7 +470,7 @@ def parse_card_effects(card_name, card_type, effect_text):
     return parsed_triggers
 
 def main():
-    print("🚀 Initializing NLP Card Effect Extraction Engine across 14,529 cards...")
+    print("🚀 Running Comprehensive NLP Extraction Engine across all cards...")
     db_path = 'battle_spirits.db'
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
@@ -370,20 +478,15 @@ def main():
     c.execute("SELECT name, type, effect, cost, color, levels FROM cards")
     rows = c.fetchall()
 
-    print(f"Loaded {len(rows)} total cards from {db_path}.")
+    print(f"Loaded {len(rows)} cards from {db_path}.")
 
     effects_map = {}
-    stats = {
-        'total': len(rows),
-        'with_effects': 0,
-        'parsed_actions_count': 0,
-        'action_counts': {}
-    }
+    total_actions = 0
+    action_counts = {}
 
     for name, ctype, effect, cost, color, levels in rows:
         if not effect or not effect.strip():
             continue
-        stats['with_effects'] += 1
         parsed = parse_card_effects(name, ctype, effect)
         if parsed:
             effects_map[name] = {
@@ -394,23 +497,21 @@ def main():
             }
             for trig, acts in parsed.items():
                 for act in acts:
-                    stats['parsed_actions_count'] += 1
+                    total_actions += 1
                     atype = act['type']
-                    stats['action_counts'][atype] = stats['action_counts'].get(atype, 0) + 1
+                    action_counts[atype] = action_counts.get(atype, 0) + 1
 
     print(f"\n✅ Processing complete!")
-    print(f"Cards with parsed operational effects: {len(effects_map)} / {stats['with_effects']}")
-    print(f"Total structured action operations extracted: {stats['parsed_actions_count']}")
-    print("\nTop Action Categories Extracted:")
-    sorted_actions = sorted(stats['action_counts'].items(), key=lambda x: x[1], reverse=True)
-    for act, count in sorted_actions[:15]:
-        print(f"  • {act}: {count} occurrences")
+    print(f"Total cards with parsed operational effects: {len(effects_map)}")
+    print(f"Total action operations compiled: {total_actions}")
+    print("\nAction Distribution:")
+    for atype, cnt in sorted(action_counts.items(), key=lambda x: x[1], reverse=True):
+        print(f"  • {atype}: {cnt}")
 
-    # Save to JSON
     out_json = 'card_effects_db.json'
     with open(out_json, 'w', encoding='utf-8') as f:
         json.dump(effects_map, f, ensure_ascii=False, indent=2)
-    print(f"\n💾 Saved compiled universal effects database to {out_json} ({os.path.getsize(out_json):,} bytes)")
+    print(f"\n💾 Saved updated database to {out_json} ({os.path.getsize(out_json):,} bytes)")
 
 if __name__ == '__main__':
     main()
