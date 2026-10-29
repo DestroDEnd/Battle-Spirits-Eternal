@@ -966,17 +966,18 @@
   // ── FULLSCREEN ARENA CONTROLLER ──
   function enterFullscreen() {
     try {
-      const arenaEl = document.getElementById('battleArena') || (typeof document !== 'undefined' ? document.documentElement : null);
-      if (!arenaEl) return;
+      // Prefer document.documentElement so modals (#cardModal, #battleResultModal, etc.) are included in fullscreen
+      const fsTarget = (typeof document !== 'undefined' ? document.documentElement : null) || document.getElementById('battleArena');
+      if (!fsTarget) return;
       if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        if (arenaEl.requestFullscreen) {
-          arenaEl.requestFullscreen().catch(err => {
+        if (fsTarget.requestFullscreen) {
+          fsTarget.requestFullscreen().catch(err => {
             console.log('Fullscreen request bypassed by browser security policy:', err);
           });
-        } else if (arenaEl.webkitRequestFullscreen) {
-          arenaEl.webkitRequestFullscreen();
-        } else if (arenaEl.msRequestFullscreen) {
-          arenaEl.msRequestFullscreen();
+        } else if (fsTarget.webkitRequestFullscreen) {
+          fsTarget.webkitRequestFullscreen();
+        } else if (fsTarget.msRequestFullscreen) {
+          fsTarget.msRequestFullscreen();
         }
       }
     } catch (e) {
@@ -1460,7 +1461,19 @@
             const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
             const batchData = await res.json();
             for (const [name, count] of Object.entries(userDeck.cards)) {
-              const cInfo = batchData[name] || { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red' };
+              let cInfo = batchData[name] || batchData[name.toLowerCase()];
+              if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+                cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+              }
+              if (!cInfo && typeof window !== 'undefined' && window.WasmDB && window.WasmDB.getCardByName) {
+                cInfo = window.WasmDB.getCardByName(name);
+              }
+              if (!cInfo) {
+                cInfo = { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red', image_url: './assets/card_back.png' };
+              }
+              if (!cInfo.image_url) {
+                cInfo.image_url = './assets/card_back.png';
+              }
               for (let i = 0; i < count; i++) {
                 pCards.push({ ...cInfo });
               }
@@ -1488,7 +1501,19 @@
           const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
           const batchData = await res.json();
           for (const [name, count] of Object.entries(saved)) {
-            const cInfo = batchData[name] || { name, cost: 2, type: 'Spirit', color: 'Red' };
+            let cInfo = batchData[name] || batchData[name.toLowerCase()];
+            if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+              cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+            }
+            if (!cInfo && typeof window !== 'undefined' && window.WasmDB && window.WasmDB.getCardByName) {
+              cInfo = window.WasmDB.getCardByName(name);
+            }
+            if (!cInfo) {
+              cInfo = { name, cost: 2, type: 'Spirit', color: 'Red', image_url: './assets/card_back.png' };
+            }
+            if (!cInfo.image_url) {
+              cInfo.image_url = './assets/card_back.png';
+            }
             for (let i = 0; i < count; i++) {
               pCards.push({ ...cInfo });
             }
@@ -1544,7 +1569,7 @@
           rarity: c.rarity || '',
           flavor: c.flavor || '',
           card_number: c.card_number || '',
-          image_url: c.image_url || '/assets/card_back.png',
+          image_url: c.image_url || './assets/card_back.png',
           levels: pLevels,
           raw_levels: c.levels || '',
           effect: c.effect || '',
@@ -1918,7 +1943,7 @@
             </div>
             <div class="burst-card-display">
               <div class="burst-card-thumb card-theme-${colorLower}">
-                <img src="${b.image_url}" alt="${b.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='/assets/card_back.png';" />
+                <img src="${b.image_url}" alt="${b.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
                 <div class="burst-card-overlay">
                   <span class="burst-lock-tag">${isReady ? '⚡ READY' : '🔒 SET'}</span>
                 </div>
@@ -2122,7 +2147,7 @@
         </div>
         ${coreStepperHtml}
         <div class="fsc-img-wrap">
-          <img src="${spirit.image_url}" alt="${spirit.name}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+          <img src="${spirit.image_url}" alt="${spirit.name}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='./assets/card_back.png'; }" />
         </div>
         <div class="fsc-name" title="${spirit.name}">${spirit.name}</div>
         <div class="fsc-status-pill">${spirit.isExhausted ? 'EXHAUSTED' : 'READY'}</div>
@@ -2302,7 +2327,7 @@
           <button class="hc-zoom-btn" onclick="event.stopPropagation(); openCardDetail('${safeCardName}')" title="View Full Card Details">🔍</button>
           <div class="hc-cost-badge">${card.cost}</div>
           <div class="hc-img-wrap">
-            <img src="${card.image_url}" alt="${card.name}" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            <img src="${card.image_url || './assets/card_back.png'}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
           </div>
           <div class="hc-info">
             <div class="hc-name">${card.name}</div>
@@ -2931,7 +2956,7 @@
         <!-- Left: Card Artwork Thumbnail & Enlarge -->
         <div class="inspector-art-col">
           <div class="inspector-art-wrap">
-            <img src="${card.image_url}" alt="${card.name}" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='/assets/card_back.png'; }" />
+            <img src="${card.image_url || './assets/card_back.png'}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
           </div>
           <button class="btn-inspector-zoom" onclick="openCardDetail('${safeName}')" title="Open Fullscreen Card Modal">
             🔍 Enlarge
@@ -6037,7 +6062,7 @@
     if (previewEl) {
       previewEl.innerHTML = `
         <div style="display:flex; gap:1rem; align-items:center;">
-          <img src="${card.image_url}" alt="${card.name}" style="width:72px; height:101px; object-fit:cover; border-radius:0.4rem; border:1px solid rgba(234,88,12,0.5); box-shadow:0 0 10px rgba(234,88,12,0.3);" onerror="this.onerror=null; this.src='/assets/card_back.png';" />
+          <img src="${card.image_url}" alt="${card.name}" style="width:72px; height:101px; object-fit:cover; border-radius:0.4rem; border:1px solid rgba(234,88,12,0.5); box-shadow:0 0 10px rgba(234,88,12,0.3);" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
           <div style="flex:1;">
             <div style="font-weight:800; font-size:1rem; color:#fff; margin-bottom:0.25rem;">${card.name}</div>
             <div style="font-size:0.75rem; color:#cbd5e1; margin-bottom:0.4rem;">${card.type} • ${card.color} • Cost ${card.cost}</div>
