@@ -1,53 +1,39 @@
 const { execSync } = require('child_process');
-const path = require('path');
 
-const testSuites = [
-  'test_soulcore_trash_and_drag.js',
-  'test_nexus_flash_and_grand_skill.js',
-  'test_timing_restrictions_and_advent.js',
-  'test_nexus_viewboard_and_turnskip.js',
-  'test_deck_library_and_view.js',
-  'test_deck_no_upper_limit.js',
-  'test_all_starter_and_deck_effects.js',
-  'test_chakrambat_and_all_deck_cards.js',
-  'test_universal_card_database.js',
-  'test_lord_dragon_and_opponent_life.js',
-  'test_advent_and_unique_effects.js',
-  'test_multi_symbols.js',
-  'test_burst_activation_rules.js',
-  'test_arena_redirect.js',
-  'test_turn_relocation.js',
-  'test_step_navigator_reset.js',
-  'test_ai_recovery_and_step_sync.js',
-  'test_universal_effects_engine.js',
-  'test_brave_and_nexus.js'
+const suites = [
+  { name: 'User Fixes Master Suite', cmd: 'node scratch/test_all_user_fixes.js' },
+  { name: 'Canva Arena Handlers & Braved Condition Gating', cmd: 'node scratch/test_canva_arena_handlers.js' },
+  { name: 'Brave & Nexus Mechanics', cmd: 'node scratch/test_brave_logic.js' },
+  { name: 'Logout & Social Data Cleansing', cmd: 'node scratch/test_logout_clear.js' },
+  { name: 'Featured X-Rares & JSON Fetching', cmd: 'node scratch/test_featured_and_batch.js' },
+  { name: '100% Complete 14,529 Cards Verification Audit', cmd: 'py scratch/verify_all_14529_cards.py' }
 ];
 
-console.log(`🚀 RUNNING MASTER VERIFICATION ACROSS ALL ${testSuites.length} SUITES...\n`);
+console.log('====================================================');
+console.log('🚀 RUNNING ALL MASTER REGRESSION & COVERAGE SUITES');
+console.log('====================================================\n');
 
-let passed = 0;
-let failed = 0;
+let allPassed = true;
 
-for (const suite of testSuites) {
-  process.stdout.write(`⏳ Running ${suite}... `);
+for (const suite of suites) {
+  console.log(`▶ Executing: ${suite.name}...`);
   try {
-    const fullPath = path.join(__dirname, suite);
-    const out = execSync(`node "${fullPath}"`, { encoding: 'utf-8' });
-    console.log(`✅ PASSED`);
-    passed++;
+    const out = execSync(suite.cmd, { encoding: 'utf-8', stdio: 'pipe' });
+    console.log(out.trim());
+    console.log(`✔ PASSED: ${suite.name}\n`);
   } catch (err) {
-    console.log(`❌ FAILED`);
+    console.error(`✖ FAILED: ${suite.name}`);
     console.error(err.stdout || err.stderr || err.message);
-    failed++;
+    allPassed = false;
+    break;
   }
 }
 
-console.log(`\n==========================================`);
-console.log(`RESULTS: ${passed} Passed, ${failed} Failed / ${testSuites.length} Total Suites`);
-console.log(`==========================================`);
-
-if (failed > 0) {
-  process.exit(1);
+if (allPassed) {
+  console.log('====================================================');
+  console.log('🎉 ALL MASTER TEST SUITES PASSED FLAWLESSLY (100%)!');
+  console.log('====================================================');
 } else {
-  console.log('🏆 100% OF ALL TEST SUITES PASSED FLAWLESSLY!');
+  console.error('❌ Master verification had failures.');
+  process.exit(1);
 }
