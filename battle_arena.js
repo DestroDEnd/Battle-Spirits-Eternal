@@ -661,6 +661,10 @@
 
     for (const act of actions) {
       if (act.min_level && curLevel < act.min_level) continue;
+      // Canva Rule: When Braved condition gating
+      if ((act.is_braved || act.require_braved) && !card.isBraved && !card.brave && !card.braveCard && !context.isBraved) {
+        continue;
+      }
 
       const actType = act.type;
       if (actType === 'DRAW_CARDS') {
@@ -984,6 +988,50 @@
         card.bonusSymbols = (card.bonusSymbols || 0) + 1;
         AudioFX.coreChime();
         addLog(`💎 **[${card.name}]**: Empowered! Gained +1 ${act.color || ''} Symbol!`, 'step');
+      } else if (actType === 'DECK_DISCARD') {
+        const count = act.count || 1;
+        let discarded = 0;
+        for (let i = 0; i < count; i++) {
+          if (!enemyState.deck || enemyState.deck.length === 0) break;
+          const milled = enemyState.deck.shift();
+          sendToTrash(milled, enemySide, `Milled by ${card.name}`);
+          discarded++;
+        }
+        if (discarded > 0) {
+          AudioFX.magic();
+          addLog(`📚 **[${card.name}]**: Sent ${discarded} card(s) from opposing deck to Trash!`, 'magic');
+        }
+      } else if (actType === 'CRUSH') {
+        const millCount = curLevel;
+        let discarded = 0;
+        for (let i = 0; i < millCount; i++) {
+          if (!enemyState.deck || enemyState.deck.length === 0) break;
+          const milled = enemyState.deck.shift();
+          sendToTrash(milled, enemySide, `Crush by ${card.name}`);
+          discarded++;
+        }
+        if (discarded > 0) {
+          AudioFX.destroy();
+          addLog(`🔨 **[${card.name}] [Crush LV${curLevel}]**: Smashed ${discarded} card(s) from opposing deck into Trash!`, 'damage');
+        }
+      } else if (actType === 'BURST_LOCK') {
+        const targetRule = (act.canva_rules && act.canva_rules.burst_lock_target) || 'PLAYER';
+        if (targetRule === 'PLAYER') {
+          enemyState.cannotActivateBurstEffects = true;
+          addLog(`🔒 **[${card.name}]**: Absolute Lock! Opposing player cannot activate Burst effects!`, 'step');
+        } else {
+          enemyState.burstCardsLocked = true;
+          addLog(`🔒 **[${card.name}]**: Lock! Opposing Burst cannot activate!`, 'step');
+        }
+      } else if (actType === 'ARMOR' || actType === 'HEAVY ARMOR') {
+        const colors = act.colors || ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+        card.armorColors = (card.armorColors || []).concat(colors);
+        AudioFX.shield();
+        addLog(`🛡️ **[${card.name}] [${actType}]**: Divine barrier active against [${colors.join(', ')}] effects!`, 'step');
+      } else if (actType === 'SPECIAL_EFFECT') {
+        if (act.desc && act.desc.length > 3 && !act.desc.startsWith('[LV') && !act.desc.startsWith('(')) {
+          addLog(`✨ **[${card.name}]**: ${act.desc}`, 'step');
+        }
       }
     }
   }
