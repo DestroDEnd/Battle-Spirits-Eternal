@@ -40,7 +40,8 @@ def parse_canva_rules_from_clause(text):
     lower = text.lower()
     
     # 1. Optional vs Mandatory (Canva Section 2: Basic wordings)
-    is_optional = bool(re.search(r'\b(?:you can|can|may|optional|choose to)\b', lower))
+    # "can't"/"cannot" are restrictions, NOT optional effects.
+    is_optional = bool(re.search(r"\b(?:you may|may|optional|choose to)\b|\bcan\b(?!['\u2019]t|not)", lower))
     is_mandatory = not is_optional
     do_as_much_as_possible = is_mandatory
 

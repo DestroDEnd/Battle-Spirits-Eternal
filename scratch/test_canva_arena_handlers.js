@@ -93,7 +93,7 @@ global.CardEffectsDB = {
 
 // Extract executeUniversalCardEffect from battle_arena.js
 const arenaCode = fs.readFileSync(path.join(__dirname, '../battle_arena.js'), 'utf-8');
-const startIdx = arenaCode.indexOf('function executeUniversalCardEffect');
+const startIdx = arenaCode.indexOf('function isOptionalEffectText');
 const endIdx = arenaCode.indexOf('async function initBattleArena');
 const funcCode = arenaCode.substring(startIdx, endIdx);
 

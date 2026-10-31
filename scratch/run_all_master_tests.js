@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 const suites = [
   { name: 'User Fixes Master Suite', cmd: 'node scratch/test_all_user_fixes.js' },
   { name: 'Canva Arena Handlers & Braved Condition Gating', cmd: 'node scratch/test_canva_arena_handlers.js' },
+  { name: 'Optional Popup, Dedupe & Flash Window', cmd: 'node scratch/test_optional_flash_dedupe.js' },
   { name: 'Brave & Nexus Mechanics', cmd: 'node scratch/test_brave_logic.js' },
   { name: 'Logout & Social Data Cleansing', cmd: 'node scratch/test_logout_clear.js' },
   { name: 'Featured X-Rares & JSON Fetching', cmd: 'node scratch/test_featured_and_batch.js' },
