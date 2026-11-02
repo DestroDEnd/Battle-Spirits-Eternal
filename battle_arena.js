@@ -2775,22 +2775,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     function isContractPartnerCard(c) {
     if (!c) return false;
+    if (c.is_contract_partner === true || c.isContractPartner === true) return true;
+
     const name = (c.name || '').toLowerCase();
+    const kanji = (c.kanji || c.jpname || '');
     const type = (c.type || '').toLowerCase();
-    const effect = (c.effect || '').toLowerCase();
-    const family = ((c.family || '') + ' ' + (c.families ? c.families.join(' ') : '')).toLowerCase();
-    return (
-      type.includes('contract') ||
-      type.includes('partner') ||
-      name.includes('partner') ||
-      name.includes('contract') ||
-      name.includes('javad') ||
-      effect.includes('[contract') ||
-      effect.includes('contract advent') ||
-      effect.includes('[soul state]') ||
-      effect.includes('契約') ||
-      effect.includes('パートナー')
-    );
+    const rarity = (c.rarity || '').toLowerCase();
+    const num = (c.card_number || c.cardNumber || '');
+
+    // Strictly exclude Contract Advent / Evolution cards that are not the partner themselves
+    if (name.includes('advent') || name.includes('煌臨')) return false;
+
+    const isContractType = type.startsWith('contract ') || type === 'contract' || type.includes('contractor');
+    const hasPartnerName = name.includes('partner') || kanji.includes('相棒') || kanji.includes('契約者');
+    const hasContractRarity = rarity.includes('contract') || rarity === 'cx';
+    const hasContractNumber = /-(?:cx|cp)\d+/i.test(num);
+
+    if (hasPartnerName && (isContractType || hasContractRarity || hasContractNumber)) return true;
+    if (hasContractRarity && isContractType) return true;
+    if (hasContractNumber && isContractType) return true;
+    if (hasPartnerName && (type.includes('ultimate') || type.includes('spirit') || type.includes('nexus'))) return true;
+
+    return false;
   }
 
   async function executeStartDuel(pDeckKey, oDeckKey, firstPlayer = 'player') {
@@ -2951,13 +2957,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           currentLevel: 1,
           currentBp: pLevels[0]?.bp || 2000,
           isExhausted: false,
-          hasAttacked: false
+          hasAttacked: false,
+          isContractPartner: isContractPartnerCard(c),
+          is_contract_partner: isContractPartnerCard(c)
         };
       });
     };
 
-    const shuffledP = shuffle(prepareDeck(pCards));
-    const shuffledO = shuffle(prepareDeck(oCards));
+
 
     // Clear any previous running timers to prevent ghost turns/core spikes!
     clearAllTimers();
@@ -2965,23 +2972,35 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (finishedBar) finishedBar.style.display = 'none';
 
     // Deal 4 initial cards each
-    // Contract Partner Rule: Look for Contract card in deck to guarantee in starting hand
-    const pContractIdx = shuffledP.findIndex(c => isContractPartnerCard(c));
+    // Contract Partner Rule (Eternal Format R39): Extract Contract Partner BEFORE shuffling the rest of deck!
+    const pPreparedCards = prepareDeck(pCards);
+    const oPreparedCards = prepareDeck(oCards);
+
+    const pContractIdx = pPreparedCards.findIndex(c => isContractPartnerCard(c));
     let pHand = [];
+    let pPartnerCard = null;
+    let shuffledP = [];
     if (pContractIdx !== -1) {
-      const contractCard = shuffledP.splice(pContractIdx, 1)[0];
-      pHand = [contractCard, ...shuffledP.splice(0, 3)];
-      addLog(`🃏 **CONTRACT PARTNER**: Revealed "${contractCard.name}" from your deck as your Contract Partner!`, 'system');
+      pPartnerCard = pPreparedCards.splice(pContractIdx, 1)[0];
+      shuffledP = shuffle(pPreparedCards);
+      pHand = [pPartnerCard, ...shuffledP.splice(0, 3)];
+      addLog(`🃏 **CONTRACT PARTNER**: Guaranteed "${pPartnerCard.name}" as your Contract Partner in your starting hand!`, 'system');
     } else {
+      shuffledP = shuffle(pPreparedCards);
       pHand = shuffledP.splice(0, 4);
     }
 
-    const oContractIdx = shuffledO.findIndex(c => isContractPartnerCard(c));
+    const oContractIdx = oPreparedCards.findIndex(c => isContractPartnerCard(c));
     let oHand = [];
+    let oPartnerCard = null;
+    let shuffledO = [];
     if (oContractIdx !== -1) {
-      const oContractCard = shuffledO.splice(oContractIdx, 1)[0];
-      oHand = [oContractCard, ...shuffledO.splice(0, 3)];
+      oPartnerCard = oPreparedCards.splice(oContractIdx, 1)[0];
+      shuffledO = shuffle(oPreparedCards);
+      oHand = [oPartnerCard, ...shuffledO.splice(0, 3)];
+      addLog(`🃏 **CONTRACT PARTNER**: Opponent revealed "${oPartnerCard.name}" as their Contract Partner!`, 'system');
     } else {
+      shuffledO = shuffle(oPreparedCards);
       oHand = shuffledO.splice(0, 4);
     }
 
@@ -3016,6 +3035,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       deck: shuffledP,
       hand: pHand,
       field: [],
+      contractCard: pPartnerCard || null,
+      soulStateCards: [],
       hasConfirmedHand: false,
       hasMulliganed: false
     };
@@ -3036,7 +3057,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       burst: null,
       deck: shuffledO,
       hand: oHand,
-      field: []
+      field: [],
+      contractCard: oPartnerCard || null,
+      soulStateCards: []
     };
     DuelState.currentZoneTab = 'player-trash';
 
@@ -3100,9 +3123,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.player.deck = shuffle(DuelState.player.deck);
 
     // Re-guarantee Contract Partner in the redrawn hand!
-    const pContractIdx = DuelState.player.deck.findIndex(c => isContractPartnerCard(c));
+    const partnerCardUid = DuelState.player.contractCard ? DuelState.player.contractCard.uid : null;
+    const pContractIdx = DuelState.player.deck.findIndex(c => (partnerCardUid && c.uid === partnerCardUid) || isContractPartnerCard(c));
     if (pContractIdx !== -1) {
       const contractCard = DuelState.player.deck.splice(pContractIdx, 1)[0];
+      DuelState.player.contractCard = contractCard;
       DuelState.player.hand = [contractCard, ...DuelState.player.deck.splice(0, 3)];
       addLog(`🃏 **CONTRACT PARTNER**: Guaranteed "${contractCard.name}" in your redrawn hand!`, 'system');
     } else {
@@ -4105,6 +4130,77 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return { allowed: true, condText };
   }
 
+
+  // ── CONTRACT PARTNER SELECTION & MODAL CONTROLLERS ──
+  function openPartnerSelectionModal() {
+    if (!DuelState.player) return;
+    const allCards = [...(DuelState.player.hand || []), ...(DuelState.player.deck || [])];
+    const partners = allCards.filter(c => isContractPartnerCard(c));
+    if (!partners.length) {
+      if (typeof showToast === 'function') showToast('No Contract Partner cards found in deck.', 'info');
+      return;
+    }
+    const modal = document.getElementById('battlePartnerModal');
+    if (!modal) return;
+    const listEl = document.getElementById('partnerModalList');
+    if (listEl) {
+      listEl.innerHTML = partners.map(p => {
+        const isCurrent = DuelState.player.contractCard && DuelState.player.contractCard.uid === p.uid;
+        return `
+          <div class="partner-select-card ${isCurrent ? 'is-active-partner' : ''}" style="display:flex;align-items:center;justify-content:space-between;background:rgba(30,41,59,0.9);border:1.5px solid ${isCurrent ? '#f59e0b' : '#334155'};border-radius:8px;padding:10px 14px;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-size:1.2rem;">🌟</span>
+              <div>
+                <div style="font-weight:700;color:#f8fafc;font-size:0.95rem;">${(p.name || '').replace(/</g, '&lt;')}</div>
+                <div style="font-size:0.75rem;color:#94a3b8;">${(p.type || 'Contract Card')} • Cost ${p.cost} • ${(p.card_number || '')}</div>
+              </div>
+            </div>
+            <button onclick="BattleArena.selectContractPartner('${p.uid}')" style="background:${isCurrent ? '#10b981' : '#f59e0b'};border:none;color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.8rem;">
+              ${isCurrent ? '✓ Designated Partner' : 'Select as Partner'}
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+    modal.classList.add('active');
+  }
+
+  function closePartnerModal() {
+    const modal = document.getElementById('battlePartnerModal');
+    if (modal) modal.classList.remove('active');
+  }
+
+  function selectContractPartner(uid) {
+    if (!DuelState.inDuel || DuelState.player.hasConfirmedHand) return;
+    const allCards = [...(DuelState.player.hand || []), ...(DuelState.player.deck || [])];
+    const chosen = allCards.find(c => c.uid === uid);
+    if (!chosen) return;
+
+    // Remove from current position
+    const handIdx = (DuelState.player.hand || []).findIndex(c => c.uid === uid);
+    if (handIdx !== -1) {
+      DuelState.player.hand.splice(handIdx, 1);
+    } else {
+      const deckIdx = (DuelState.player.deck || []).findIndex(c => c.uid === uid);
+      if (deckIdx !== -1) DuelState.player.deck.splice(deckIdx, 1);
+    }
+
+    // If there was an old partner in hand[0], send it back to deck
+    if (DuelState.player.hand.length >= 4) {
+      const old = DuelState.player.hand.shift();
+      DuelState.player.deck.push(old);
+    }
+
+    // Place newly designated partner at hand[0]
+    DuelState.player.hand.unshift(chosen);
+    DuelState.player.contractCard = chosen;
+    addLog(`🃏 **CONTRACT PARTNER**: Selected "${chosen.name}" as your designated Contract Partner!`, 'system');
+    closePartnerModal();
+    renderDuelTable();
+    renderPlayerHand();
+    if (typeof showToast === 'function') showToast(`Contract Partner set to "${chosen.name}"!`, 'success');
+  }
+
   function renderPlayerHand() {
     const handEl = document.getElementById('playerHand');
     if (!handEl) return;
@@ -4123,10 +4219,22 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         : 'Not satisfied with your cards? Redraw 4 fresh cards once!';
       const keepBtnText = isOppFirst ? '✓ Keep Hand & Begin Match' : '✓ Keep Hand';
 
+      const partnerBadgeHtml = DuelState.player.contractCard
+        ? `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+             <span style="background:rgba(245,158,11,0.25);border:1px solid #f59e0b;padding:3px 10px;border-radius:6px;color:#fef08a;font-size:0.8rem;font-weight:800;letter-spacing:0.3px;">
+               🌟 Contract Partner: ${(DuelState.player.contractCard.name || '').replace(/</g, '&lt;')} (In Starting Hand)
+             </span>
+             <button onclick="event.stopPropagation(); BattleArena.openPartnerSelectionModal()" style="background:rgba(245,158,11,0.3);border:1px solid #fde047;color:#fff;font-weight:700;padding:3px 9px;border-radius:5px;cursor:pointer;font-size:0.75rem;">🔄 Choose Partner</button>
+           </div>`
+        : '';
+
       mulliganHtml = `
-        <div class="mulligan-prompt-bar" style="grid-column:1/-1;width:100%;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(88,28,135,0.95));border:1.5px solid #818cf8;border-radius:10px;padding:10px 16px;margin-bottom:10px;box-shadow:0 6px 18px rgba(99,102,241,0.35);">
-          <span style="font-size:0.86rem;font-weight:700;color:#e0e7ff;">🃏 <strong>Starting Hand:</strong> ${subText}</span>
-          <div style="display:flex;gap:8px;">
+        <div class="mulligan-prompt-bar" style="grid-column:1/-1;width:100%;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(88,28,135,0.95));border:1.5px solid #818cf8;border-radius:10px;padding:10px 16px;margin-bottom:10px;box-shadow:0 6px 18px rgba(99,102,241,0.35);flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-size:0.86rem;font-weight:700;color:#e0e7ff;">🃏 <strong>Starting Hand:</strong> ${subText}</div>
+            ${partnerBadgeHtml}
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
             ${!DuelState.player.hasMulliganed ? `<button onclick="event.stopPropagation(); BattleArena.performMulligan()" style="background:#4f46e5;border:1px solid #a5b4fc;color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">🔄 Redraw 4 Cards</button>` : ''}
             <button onclick="event.stopPropagation(); BattleArena.keepStartingHand()" style="background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">${keepBtnText}</button>
           </div>
@@ -4264,6 +4372,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         <div class="${cls}" onclick="BattleArena.selectHandCard('${card.uid}')">
           <button class="hc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeCardName}', 'hand')" title="View Full Card Details">🔍</button>
           ${costBadgeHtml}
+          ${(card.isContractPartner || (DuelState.player && DuelState.player.contractCard && DuelState.player.contractCard.uid === card.uid)) ? `<div class="hc-partner-badge" title="Designated Contract Partner" style="position:absolute;top:6px;left:6px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:0.6rem;font-weight:900;padding:2px 6px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,0.6);z-index:3;letter-spacing:0.5px;">🌟 PARTNER</div>` : ''}
           <div class="hc-img-wrap">
             <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
@@ -6893,6 +7002,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (target.hand) target.hand.push(card);
       AudioFX.magic();
       addLog(`🍃 **[AXEMOTH RECOVERY: ${card.name}]**: Returned to Hand upon destruction by opposing effect!`, 'magic');
+      return;
+    }
+
+    // Contract Soul State Rule: If a Contract Partner would be sent to Trash, it transitions to Soul State!
+    if (card.isContractPartner || (target.contractCard && target.contractCard.uid === card.uid)) {
+      if (!target.soulStateCards) target.soulStateCards = [];
+      card.isSoulState = true;
+      if (target.contractCard) target.contractCard.inSoulState = true;
+      if (!target.soulStateCards.some(c => c.uid === card.uid)) {
+        target.soulStateCards.push(card);
+      }
+      addLog(`✨ **[SOUL STATE TRANSITION]**: Contract Partner "${card.name}" placed in Soul State instead of Trash!`, 'system');
+      renderDuelTable();
       return;
     }
 
@@ -12207,6 +12329,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     activateBurst,
     confirmStartingHandAndBegin,
     performMulligan,
+    openPartnerSelectionModal,
+    closePartnerModal,
+    selectContractPartner,
     keepStartingHand,
     executeMulligan: performMulligan,
     confirmOpeningHand: keepStartingHand,
