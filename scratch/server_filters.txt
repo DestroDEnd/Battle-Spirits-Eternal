@@ -1,0 +1,80 @@
+421:                 return
+422: 
+423:         # 7. GET /api/filters — return distinct values for filter dropdowns
+424:         if path == '/api/filters':
+425:             global _FILTERS_CACHE
+426:             if _FILTERS_CACHE is None:
+427:                 _FILTERS_CACHE = database.get_distinct_values()
+428:             self.send_json(_FILTERS_CACHE)
+429:             return
+430: 
+431:         # 8. GET /api/stats
+432:         if path == '/api/stats':
+433:             self.send_json(database.get_stats())
+434:             return
+435: 
+436:         # 9. GET /api/decks
+437:         if path == '/api/decks':
+438:             self.send_json(database.get_decks())
+439:             return
+440: 
+441:         # 10. GET /api/standard-decks — 6 canonical color starter decks
+442:         if path == '/api/standard-decks':
+443:             import standard_decks
+444:             color_param = query.get('color', [''])[0]
+445:             if color_param:
+446:                 deck = standard_decks.get_standard_deck(color_param)
+447:                 if deck:
+448:                     self.send_json(deck)
+449:                 else:
+450:                     self.send_json({'error': f'Standard deck for color {color_param} not found'}, status=404)
+451:             else:
+452:                 self.send_json({'decks': standard_decks.get_all_standard_decks()})
+453:             return
+454: 
+455:         # 11. GET /api/featured-x-rares — random color X-Rare feature cards
+456:         if path == '/api/featured-x-rares':
+457:             color_param = query.get('color', [''])[0].strip()
+458:             conn = database.get_connection()
+459:             c = conn.cursor()
+460:             colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue']
+461:             if color_param and color_param.capitalize() in colors:
+462:                 target_colors = [color_param.capitalize()]
+463:                 per_color = 12
+464:             else:
+465:                 target_colors = colors
+466:                 per_color = 3
+467: 
+468:             cards = []
+469:             for col in target_colors:
+470:                 c.execute("""
+471:                     SELECT name, cost, color, type, family, rarity, image_url, card_number
+472:                     FROM cards
+473:                     WHERE color = ?
+474:                       AND (rarity LIKE '%X%' OR rarity LIKE '%XX%')
+475:                       AND image_url IS NOT NULL AND image_url != ''
+476:                     ORDER BY RANDOM() LIMIT ?
+477:                 """, (col, per_color))
+478:                 for r in c.fetchall():
+479:                     cards.append({
+480:                         'name': r[0],
+481:                         'cost': r[1],
+482:                         'color': r[2],
+483:                         'type': r[3],
+484:                         'family': r[4],
+485:                         'rarity': r[5],
+486:                         'image_url': r[6],
+487:                         'card_number': r[7]
+488:                     })
+489:             conn.close()
+490:             if len(target_colors) > 1:
+491:                 import random
+492:                 random.shuffle(cards)
+493:             self.send_json({'cards': cards, 'total': len(cards)})
+494:             return
+495: 
+496:         super().do_GET()
+497: 
+498:     def do_POST(self):
+499:         parsed = urllib.parse.urlparse(self.path)
+500:         path = parsed.path

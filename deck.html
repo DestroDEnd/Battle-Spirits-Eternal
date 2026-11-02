@@ -328,7 +328,7 @@
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=1.0"></script>
+  <script src="./wasm_db.js?v=2.2"></script>
 
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -493,8 +493,9 @@ const DeckManagerUI = {
       const coverCards = Object.keys(d.cards || {}).slice(0, 3);
       const coverHtml = coverCards.map(cName => {
         const cached = deckCardCache[cName];
-        const art = cached ? (cached.image_url || '/assets/card_back.png') : '/assets/card_back.png';
-        return `<img class="saved-deck-mini-art" src="${art}" alt="${esc(cName)}" title="${esc(cName)}" onerror="this.src='/assets/card_back.png'">`;
+        const rawArt = cached ? (cached.image_url || '/assets/card_back.png') : '/assets/card_back.png';
+        const art = (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(rawArt) : (rawArt ? rawArt.split('/revision/latest')[0] : '/assets/card_back.png');
+        return `<img class="saved-deck-mini-art" src="${art}" alt="${esc(cName)}" title="${esc(cName)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='/assets/card_back.png'">`;
       }).join('');
 
       return `

@@ -1,0 +1,80 @@
+8771:     modal.classList.add('active');
+8772:   }
+8773: 
+8774:   function confirmBurstDiscard(index) {
+8775:     const state = pendingBurstDiscardState;
+8776:     closeBurstDiscardModal();
+8777:     if (state && state.options[index] && state.onConfirm) {
+8778:       state.onConfirm(state.options[index]);
+8779:     }
+8780:   }
+8781: 
+8782:   function declineBurstDiscard() {
+8783:     const state = pendingBurstDiscardState;
+8784:     closeBurstDiscardModal();
+8785:     if (state && state.onDecline) {
+8786:       state.onDecline();
+8787:     }
+8788:   }
+8789: 
+8790:   function closeBurstDiscardModal() {
+8791:     pendingBurstDiscardState = null;
+8792:     const modal = document.getElementById('battleBurstDiscardModal');
+8793:     if (modal) modal.classList.remove('active');
+8794:   }
+8795: 
+8796: 
+8797:   // ── ONLINE 1v1 MULTIPLAYER & 8-DIGIT DUELIST ID CONTROLLER ──
+8798:   let activeArenaMode = 'ai';
+8799:   let trackedDuelistId = null;
+8800: 
+8801:   function switchArenaMode(mode) {
+8802:     activeArenaMode = mode;
+8803:     const tabAi = document.getElementById('tabModeAi');
+8804:     const tabPvp = document.getElementById('tabModePvp');
+8805:     const lobbyAi = document.getElementById('battleLobby');
+8806:     const lobbyPvp = document.getElementById('onlinePvpLobby');
+8807: 
+8808:     if (mode === 'pvp') {
+8809:       if (tabAi) tabAi.classList.remove('active');
+8810:       if (tabPvp) tabPvp.classList.add('active');
+8811:       if (lobbyAi) lobbyAi.style.display = 'none';
+8812:       if (lobbyPvp) lobbyPvp.classList.add('active');
+8813:       initPvpLobbyView();
+8814:     } else {
+8815:       if (tabPvp) tabPvp.classList.remove('active');
+8816:       if (tabAi) tabAi.classList.add('active');
+8817:       if (lobbyPvp) lobbyPvp.classList.remove('active');
+8818:       if (lobbyAi) lobbyAi.style.display = 'block';
+8819:     }
+8820:   }
+8821: 
+8822:   function initPvpLobbyView() {
+8823:     if (typeof document === 'undefined' || typeof document.getElementById !== 'function') return;
+8824:     const myIdEl = document.getElementById('myDuelistIdVal');
+8825:     const myNameEl = document.getElementById('pvpDuelistName');
+8826:     const authBtn = document.getElementById('btnGoogleAuth');
+8827:     const badgeEl = document.getElementById('pvpAuthStatusBadge');
+8828: 
+8829:     if (window.FirebaseService) {
+8830:       const user = window.FirebaseService.getUser();
+8831:       if (user && myNameEl) {
+8832:         myNameEl.textContent = user.displayName || user.email || 'Duelist Challenger';
+8833:       }
+8834:       const dId = window.FirebaseService.getFormattedDuelistId();
+8835:       if (dId && myIdEl) myIdEl.textContent = dId;
+8836: 
+8837:       if (authBtn) {
+8838:         if (user && !user.isAnonymous) {
+8839:           authBtn.textContent = '🚪 Sign Out';
+8840:           authBtn.title = `Signed in as ${user.email || user.displayName}`;
+8841:         } else {
+8842:           authBtn.textContent = '🔑 Google Sign-In';
+8843:           authBtn.title = 'Link your account with Google';
+8844:         }
+8845:       }
+8846: 
+8847:       if (badgeEl) {
+8848:         badgeEl.textContent = '🟢 Online';
+8849:         badgeEl.style.background = 'rgba(34,197,94,0.2)';
+8850:         badgeEl.style.color = '#4ade80';

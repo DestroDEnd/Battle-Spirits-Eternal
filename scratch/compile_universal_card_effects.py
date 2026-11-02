@@ -23,17 +23,18 @@ def word_to_num(w):
     return mapping.get(w, 1)
 
 def extract_level_range(text):
-    """Extracts minimum and maximum level requirement from a header like [LV1][LV2] or [LV2-3]."""
+    """Extracts minimum level requirement from a header like [LV1][LV2] or [LV2-3].
+    Returns (None, None) when a line has no [LV] tag so the previous header's level is preserved!"""
     levels = [int(m.group(1)) for m in re.finditer(r'\[LV(\d+)\]', text, re.I)]
     m_range = re.search(r'\[LV(\d+)-(\d+)\]', text, re.I)
     if m_range:
         levels.extend([int(m_range.group(1)), int(m_range.group(2))])
     if not levels:
         if re.search(r'\[When Braved\]|\[During (?:Spirit |Ultimate )?Brave\]', text, re.I):
-            return 1, 'BRAVED'
+            return None, 'BRAVED'
         if re.search(r'\[During Set\]|\[Mirage\]', text, re.I):
-            return 1, 'MIRAGE_SET'
-        return 1, None
+            return None, 'MIRAGE_SET'
+        return None, None
     return min(levels), None
 
 def parse_canva_rules_from_clause(text):
@@ -46,8 +47,9 @@ def parse_canva_rules_from_clause(text):
     do_as_much_as_possible = is_mandatory
 
     # 2. Conditional "By [A], do [B]" (Canva Section 2)
+    # Exclude "by this effect", "by comparing BP", "by an opposing effect" which are passive prepositions, NOT "By [cost], [effect]"!
     by_condition = None
-    by_match = re.search(r'\bby\s+([^,]+?),\s*(.*)', text, re.I)
+    by_match = re.search(r'(?:^|\.\s+|,\s*)\bby\s+(?!(?:this\s+effect|comparing\s+bp|an?\s+opposing))([^,]+?),\s*(.*)', text, re.I)
     if by_match:
         cond_text = by_match.group(1).strip()
         action_text = by_match.group(2).strip()
@@ -59,14 +61,43 @@ def parse_canva_rules_from_clause(text):
         cond_lower = cond_text.lower()
         if 'discarding' in cond_lower and 'burst' in cond_lower:
             by_condition['cost_type'] = 'DISCARD_BURST'
+        elif 'discarding' in cond_lower and 'pre-advent' in cond_lower:
+            by_condition['cost_type'] = 'DISCARD_PRE_ADVENT'
+        elif 'discarding' in cond_lower and 'hand' in cond_lower:
+            by_condition['cost_type'] = 'DISCARD_HAND'
+        elif ('sending' in cond_lower or 'moving' in cond_lower) and 'opposing' in cond_lower and ('reserve' in cond_lower or 'trash' in cond_lower or 'void' in cond_lower):
+            by_condition['cost_type'] = 'DRAIN_OPPOSING_CORE'
+            by_condition['dest'] = 'trash' if 'trash' in cond_lower else ('void' if 'void' in cond_lower else 'reserve')
         elif 'sending' in cond_lower and 'trash' in cond_lower:
             by_condition['cost_type'] = 'SEND_CORE_TO_TRASH'
+        elif 'sending' in cond_lower and 'void' in cond_lower:
+            by_condition['cost_type'] = 'SEND_CORE_TO_VOID'
         elif 'destroying' in cond_lower:
             by_condition['cost_type'] = 'DESTROY_FRIENDLY'
+        elif 'exhausting' in cond_lower:
+            by_condition['cost_type'] = 'EXHAUST_FRIENDLY'
         elif 'paying' in cond_lower and 'cost' in cond_lower:
             by_condition['cost_type'] = 'PAY_CORE_COST'
         elif 'returning' in cond_lower and 'hand' in cond_lower:
             by_condition['cost_type'] = 'BOUNCE_FRIENDLY'
+
+    # 2b. "If [condition], [action]" detection
+    if_condition = None
+    if_match = re.search(r'^(?:also,\s*|then,\s*)?if\s+([^,]+?),\s*(.*)', text, re.I)
+    if if_match:
+        if_raw = if_match.group(1).strip()
+        if_lower = if_raw.lower()
+        if_condition = {'condition_raw': if_raw}
+        if 'nexus' in if_lower and ('you or the opponent' in if_lower or 'either' in if_lower):
+            if_condition['check_type'] = 'ANY_NEXUS_ON_FIELD'
+        elif 'nexus' in if_lower and ('opponent' in if_lower or 'opposing' in if_lower):
+            if_condition['check_type'] = 'OPPONENT_HAS_NEXUS'
+        elif 'nexus' in if_lower:
+            if_condition['check_type'] = 'PLAYER_HAS_NEXUS'
+        elif 'soul core' in if_lower:
+            if_condition['check_type'] = 'HAS_SOUL_CORE'
+        elif 'braved' in if_lower:
+            if_condition['check_type'] = 'IS_BRAVED'
 
     # 3. Timing Wordings (Canva Section 3)
     timing_relation = 'STANDARD'
@@ -116,6 +147,7 @@ def parse_canva_rules_from_clause(text):
         'is_optional': is_optional,
         'do_as_much_as_possible': do_as_much_as_possible,
         'by_condition': by_condition,
+        'if_condition': if_condition,
         'timing_relation': timing_relation,
         'limit': limit,
         'burst_lock_target': burst_lock_target,
@@ -131,13 +163,20 @@ def classify_clause_actions(clause, timing, min_level, is_braved=False):
     canva = parse_canva_rules_from_clause(text)
     actions = []
 
+    # Strip "By [cost]," prefix when matching main action regexes so the cost is not mistaken for an effect!
+    action_body = text
+    by_m = re.search(r'(?:^|\.\s+|,\s*)\bby\s+(?!(?:this\s+effect|comparing\s+bp|an?\s+opposing))([^,]+?),\s*(.*)', text, re.I)
+    if by_m:
+        action_body = by_m.group(2).strip()
+    action_lower = action_body.lower()
+
     # Helper to construct action dict
     def make_action(act_type, desc, extra=None):
         a = {
             'type': act_type,
             'desc': desc,
             'raw_text': text,
-            'min_level': min_level,
+            'min_level': min_level if min_level is not None else 1,
             'is_braved': is_braved,
             'require_braved': is_braved,
             'canva_rules': canva
@@ -146,24 +185,59 @@ def classify_clause_actions(clause, timing, min_level, is_braved=False):
             a.update(extra)
         return a
 
+    # 0. HAND DISCARD & EXCHANGE (e.g. "You can discard up to two 'Makai'-named cards from your Hand. For each card discarded by this effect, draw a card." or "Discard X card from your Hand")
+    hand_exchange_m = re.search(
+        r'(?:you can\s+)?discard\s+(?:(up to)\s+)?(a|an|one|two|three|four|five|\d+)\s+(?:(["“][^"”]+["”]-named)\s+)?(.*?)cards?\s+from\s+(?:your\s+)?hand.*?(?:for each card discarded.*?)?draw\s+(a|an|one|two|three|\d+)\s+cards?',
+        action_lower
+    )
+    if hand_exchange_m:
+        up_to = bool(hand_exchange_m.group(1)) or canva['is_optional']
+        max_disc = word_to_num(hand_exchange_m.group(2))
+        named_raw = hand_exchange_m.group(3)
+        name_req = re.sub(r'["””-]|named', '', named_raw).strip() if named_raw else (canva['name_filter']['value'] if canva['name_filter'] else None)
+        per_draw = word_to_num(hand_exchange_m.group(5))
+        for_each = 'for each card discarded' in action_lower
+        actions.append(make_action('HAND_DISCARD_DRAW', f'Discard {"up to " if up_to else ""}{max_disc} {f"{name_req}-named " if name_req else ""}card(s) from Hand to draw {"1 card per discard" if for_each else f"{per_draw} card(s)"}', {
+            'max_discard': max_disc,
+            'up_to': up_to,
+            'name_filter': name_req,
+            'for_each': for_each,
+            'draw_count': per_draw
+        }))
+        return actions
+
+    hand_disc_m = re.search(r'(?:you can\s+)?discard\s+(?:(up to)\s+)?(a|an|one|two|three|four|five|\d+)\s+(?:(["“][^"”]+["”]-named)\s+)?(.*?)cards?\s+from\s+(?:your\s+|the\s+)?(opposing\s+)?hand', action_lower)
+    if hand_disc_m:
+        up_to = bool(hand_disc_m.group(1)) or canva['is_optional']
+        cnt = word_to_num(hand_disc_m.group(2))
+        named_raw = hand_disc_m.group(3)
+        name_req = re.sub(r'["””-]|named', '', named_raw).strip() if named_raw else (canva['name_filter']['value'] if canva['name_filter'] else None)
+        is_opp = bool(hand_disc_m.group(5)) or 'opponent discards' in action_lower
+        actions.append(make_action('HAND_DISCARD', f'Discard {cnt} card(s) from {"opposing" if is_opp else "your"} Hand', {
+            'count': cnt,
+            'up_to': up_to,
+            'name_filter': name_req,
+            'target': 'opponent' if is_opp else 'self'
+        }))
+
     # 1. DRAW CARDS / DRAW UNTIL / SEARCH DECK
-    draw_match = re.search(r'(?:you can\s+)?draw\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?', lower)
-    if draw_match:
+    draw_match = re.search(r'(?:you can\s+)?draw\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?', action_lower)
+    if draw_match and 'for each card discarded' not in action_lower:
         count = word_to_num(draw_match.group(1))
         actions.append(make_action('DRAW_CARDS', f'Draw {count} card(s) from deck', {'count': count}))
-    elif re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', lower):
-        m = re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', lower)
+    elif re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', action_lower):
+        m = re.search(r'draw\s+until\s+you\s+have\s+(\d+)\s+cards', action_lower)
         target_hand = int(m.group(1))
         actions.append(make_action('DRAW_UNTIL', f'Draw until you have {target_hand} cards in Hand', {'target_hand': target_hand}))
-    elif re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower):
-        m = re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', lower)
+    elif re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', action_lower):
+        m = re.search(r'(?:you can\s+)?(?:reveal|look at)\s+(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?', action_lower)
         count = word_to_num(m.group(1))
         actions.append(make_action('SEARCH_DECK', f'Reveal {count} cards from decktop and add matching cards to Hand', {'count': count}))
 
     # 2. CORE BOOST
     core_boost_match = (
-        re.search(r'(?:you can\s+)?(?:put|place|add|move|send)\s+(a|an|one|two|three|four|\d+)?\s*cores?\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?(?:on|onto|to)\s+(?:your\s+)?(reserve|this spirit|this nexus|this ultimate|any of your spirit|any of your spirits|a spirit|your nexus|your life)', lower) or
-        re.search(r'(?:put|place|add|move|send)\s+a\s+core\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?to\s+(?:your\s+)?(.*)', lower)
+        re.search(r'(?:you can\s+)?(?:put|place|add|move|send)\s+(a|an|one|two|three|four|\d+)?\s*cores?\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?(?:on|onto|to)\s+(?:your\s+)?(reserve|this spirit|this nexus|this ultimate|any of your spirit|any of your spirits|a spirit|your nexus|your life)', action_lower) or
+        re.search(r'(?:put|place|add|move|send)\s+a\s+core\s+from\s+(?:the\s+)?(void|trash|reserve)\s+(?:each\s+)?to\s+(?:your\s+)?(.*)', action_lower)
     )
     if core_boost_match:
         c_str = core_boost_match.group(1) if core_boost_match.lastindex >= 3 else '1'
@@ -175,8 +249,8 @@ def classify_clause_actions(clause, timing, min_level, is_braved=False):
 
     # 3. CORE DRAIN
     core_drain_match = (
-        re.search(r'(?:you can\s+)?(?:send|move)\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)\s+cores?\s+(?:each\s+)?from\s+(?:an|any|one|two|three|four|five|\d+)?\s*opposing\s+(spirit|nexus|ultimate|spirit\/ultimate|spirit\/nexus).*?(?:on|onto|to)\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower) or
-        re.search(r'(?:send|move)\s+(a|an|one|two|three|four|\d+)\s+cores?\s+each\s+from\s+.*?opposing\s+(spirit|nexus|ultimate|spirits\/ultimates).*?to\s+(?:the\s+|their\s+)?(reserve|trash|void)', lower)
+        re.search(r'(?:you can\s+)?(?:send|move)\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)\s+cores?\s+(?:each\s+)?from\s+(?:an|any|one|two|three|four|five|\d+)?\s*opposing\s+(spirit|nexus|ultimate|spirit\/ultimate|spirit\/nexus).*?(?:on|onto|to)\s+(?:the\s+|their\s+)?(reserve|trash|void)', action_lower) or
+        re.search(r'(?:send|move)\s+(a|an|one|two|three|four|\d+)\s+cores?\s+each\s+from\s+.*?opposing\s+(spirit|nexus|ultimate|spirits\/ultimates).*?to\s+(?:the\s+|their\s+)?(reserve|trash|void)', action_lower)
     )
     if core_drain_match:
         count = word_to_num(core_drain_match.group(1))
@@ -212,10 +286,10 @@ def classify_clause_actions(clause, timing, min_level, is_braved=False):
 
     # 6. DESTROY SPIRIT DIRECT / EXHAUSTED
     if not destroy_bp_match and not destroy_cost_match:
-        direct_match = re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(exhausted\s+)?opposing\s+(?:spirits?|ultimates?)', lower)
+        direct_match = re.search(r'(?:you can\s+)?destroy\s+(?:up to\s+)?(a|an|one|two|three|four|\d+)?\s*(?:of\s+)?(?:(opposing)\s+(exhausted)\s+|(exhausted)\s+(opposing)\s+|(opposing)\s+)(?:spirits?|ultimates?)', action_lower)
         if direct_match:
             count = word_to_num(direct_match.group(1)) if direct_match.group(1) else 1
-            is_exhausted = bool(direct_match.group(2))
+            is_exhausted = bool(direct_match.group(3) or direct_match.group(4))
             actions.append(make_action('DESTROY_SPIRIT_DIRECT', f'Destroy {count} {"exhausted " if is_exhausted else ""}opposing Spirit(s)', {'count': count, 'require_exhausted': is_exhausted}))
 
     # 7. DESTROY NEXUS
@@ -337,11 +411,14 @@ def classify_clause_actions(clause, timing, min_level, is_braved=False):
     if re.search(r'your\s+life\s+can\s+only\s+be\s+reduced\s+by\s+(\d+|one)', lower) or re.search(r'your\s+life\s+cannot\s+be\s+reduced', lower):
         actions.append(make_action('DAMAGE_CAP', 'During this turn, your Life cannot be reduced or reduced by more than 1'))
 
-    # 24. DECK DISCARD / MILL (Canva Section 2: "discard X cards from opposing decktop")
-    discard_match = re.search(r'(?:you can\s+)?discard\s+(?:up to\s+)?(a|an|one|two|three|four|five|\d+)\s+cards?\s+(?:but\s+up\s+to\s+as\s+many\s+as\s+possible\s+)?from\s+(?:the\s+)?opposing\s+deck(?:top)?', lower)
+    # 24. DECK DISCARD / MILL (Canva Section 2: "discard X cards from opposing decktop" OR self-mill "discard X cards from your decktop" / "send X cards from your decktop to the Trash")
+    discard_match = re.search(r'(?:you can\s+)?(?:discard|send)\s+(?:up to\s+)?(a|an|one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+cards?\s+(?:but\s+up\s+to\s+as\s+many\s+as\s+possible\s+)?from\s+(?:the\s+|your\s+)?(?:top\s+of\s+(?:your\s+|the\s+)?)?(opposing\s+)?deck(?:top)?(?:\s+to\s+(?:the\s+)?trash)?', lower)
     if discard_match:
         cnt = word_to_num(discard_match.group(1))
-        actions.append(make_action('DECK_DISCARD', f'Discard {cnt} cards from opposing decktop (as much as possible)', {'count': cnt, 'as_much_as_possible': True}))
+        is_opp = bool(discard_match.group(2)) or 'opposing' in lower
+        target = 'opponent' if is_opp else 'self'
+        target_name = 'opposing' if is_opp else 'your'
+        actions.append(make_action('DECK_DISCARD', f'Discard {cnt} cards from {target_name} decktop (as much as possible)', {'count': cnt, 'target': target, 'as_much_as_possible': True}))
 
     # 25. BURST-LOCK
     if canva['burst_lock_target']:
@@ -432,7 +509,12 @@ def parse_card_full(name, ctype, color, cost, symbol, family, families_json, lev
             elif 'advent' in c_text and 'attack' in c_text:
                 found_timings.extend(['WHEN_ADVENTS', 'WHEN_ATTACKS'])
             elif 'attack step' in c_text or 'your attack' in c_text or 'opposing attack' in c_text:
-                found_timings.append('WHEN_ATTACKS')
+                if 'nexus' in (ctype or '').lower():
+                    found_timings.append('PASSIVE')
+                else:
+                    found_timings.append('WHEN_ATTACKS')
+            elif 'main step' in c_text or 'your turn' in c_text or 'opposing turn' in c_text or "opponent's turn" in c_text or 'either turn' in c_text or 'core step' in c_text or 'draw step' in c_text or 'refresh step' in c_text:
+                found_timings.append('PASSIVE')
             elif 'attack' in c_text:
                 found_timings.append('WHEN_ATTACKS')
             elif 'block' in c_text:
@@ -481,19 +563,38 @@ def parse_card_full(name, ctype, color, cost, symbol, family, families_json, lev
         clean_body = re.sub(r'\[Grand Skill:[^\]]+\]', '', clean_body)
         clean_body = re.sub(r'\[Grand Field\]', '', clean_body)
         clean_body = re.sub(r'\[When Braved\]|\[During (?:Spirit |Ultimate )?Brave\]', '', clean_body, flags=re.I)
-        clean_body = re.sub(r'\(When Brave Attacks\)|\(When Attacks\)|\(When Summoned\)|\(When Advents\)|\(When Destroyed\)|\(When Attacks\/Blocks\)', '', clean_body, flags=re.I)
+        clean_body = re.sub(r'\(When Brave Attacks\)|\(When Attacks\)|\(When Summoned\)|\(When Advents\)|\(When Destroyed\)|\(When Attacks\/Blocks\)|\(When Deployed\)|\(Your Main Step\)|\(Your Attack Step\)|\(Opposing Attack Step\)|\(Opponent\'s Attack Step\)|\(Either Attack Step\)|\(Your Turn\)|\(Opposing Turn\)|\(Opponent\'s Turn\)', '', clean_body, flags=re.I)
         clean_body = re.sub(r'\[Flash\]|\[Main\]', '', clean_body, flags=re.I)
         clean_body = clean_body.strip()
 
-        clauses = re.split(r'\.\s+|\n|;', clean_body)
+        raw_clauses = [s.strip() for s in re.split(r'\.\s+|\n|;', clean_body) if s and len(s.strip()) >= 3]
+        clauses = []
+        for rc in raw_clauses:
+            rc_low = rc.lower()
+            if clauses and (
+                rc_low.startswith('for each card discarded') or
+                rc_low.startswith('for each spirit depleted') or
+                rc_low.startswith('for each spirit destroyed') or
+                rc_low.startswith('for each target card') or
+                rc_low.startswith('when this effect depletes') or
+                rc_low.startswith('when this effect destroys') or
+                rc_low.startswith('if you do,') or
+                rc_low.startswith('by doing so,')
+            ):
+                clauses[-1] = clauses[-1] + '. ' + rc
+            else:
+                clauses.append(rc)
+
         for c in clauses:
             c = c.strip()
             if not c or len(c) < 3:
                 continue
             clause_lower = c.lower()
             c_timings = list(current_timings)
-            if 'destroyed by comparing bp' in clause_lower or 'destroyed in battle' in clause_lower:
+            if 'destroyed by comparing bp' in clause_lower or 'destroyed via bp comparison' in clause_lower or 'destroyed in battle' in clause_lower:
                 c_timings = ['WHEN_DESTROYED_IN_BATTLE']
+            elif re.match(r'^when you \[?advents?\]?', clause_lower):
+                c_timings = ['ON_ALLY_ADVENT']
             for t_time in c_timings:
                 actions = classify_clause_actions(c, t_time, current_level, is_braved=current_is_braved)
                 if actions:

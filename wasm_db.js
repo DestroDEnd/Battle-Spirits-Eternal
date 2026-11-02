@@ -15,7 +15,7 @@
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
   const STORE_NAME = 'db_binary';
-  const DB_KEY = 'battle_spirits.db_v1';
+  const DB_KEY = 'battle_spirits.db_v2';
 
   function getBaseDir() {
     if (typeof window === 'undefined' || !window.location) return './';
@@ -83,16 +83,46 @@
         locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
       });
 
-      let dbBuffer = await getCachedDbBuffer();
+      // Proactively purge old v1 cache if present
+      try {
+        const idb = await openIndexedDB();
+        const tx = idb.transaction(STORE_NAME, 'readwrite');
+        tx.objectStore(STORE_NAME).delete('battle_spirits.db_v1');
+      } catch (e) {}
 
-      if (!dbBuffer) {
-        showLoadingBanner("Initializing Battle Spirits Card Database (23 MB)...");
+      let dbBuffer = await getCachedDbBuffer();
+      let needsFreshFetch = !dbBuffer;
+
+      // Self-healing check: Verify cached buffer contains the latest cards (e.g. Javad SD65-CX01)
+      if (dbBuffer) {
+        try {
+          const testDb = new SQL.Database(new Uint8Array(dbBuffer));
+          const testStmt = testDb.prepare("SELECT COUNT(*) as cnt FROM cards WHERE name = 'The PartnerDemonLord Javad'");
+          if (testStmt.step()) {
+            const count = testStmt.getAsObject().cnt;
+            if (!count || count < 1) {
+              console.warn('[WasmDB] Cached database is missing latest updates (e.g. Javad). Refreshing...');
+              needsFreshFetch = true;
+            }
+          } else {
+            needsFreshFetch = true;
+          }
+          testStmt.free();
+          testDb.close();
+        } catch (e) {
+          console.warn('[WasmDB] Cache validation error, re-fetching:', e);
+          needsFreshFetch = true;
+        }
+      }
+
+      if (needsFreshFetch) {
+        showLoadingBanner("Updating Battle Spirits Card Database (23 MB)...");
         let res = null;
         const candidateUrls = [
-          getDbUrl(),
-          './battle_spirits.db',
-          'battle_spirits.db',
-          '/battle_spirits.db'
+          getDbUrl() + '?v=2.2',
+          './battle_spirits.db?v=2.2',
+          'battle_spirits.db?v=2.2',
+          '/battle_spirits.db?v=2.2'
         ];
 
         for (const u of candidateUrls) {
@@ -153,6 +183,14 @@
   }
 
   // ── 3. QUERY HELPER UTILITIES ──
+  function cleanFandomImageUrl(url) {
+    if (!url || typeof url !== 'string') return url;
+    if (url.includes('static.wikia.nocookie.net') && url.includes('/revision/latest')) {
+      return url.split('/revision/latest')[0];
+    }
+    return url;
+  }
+
   function rowToObject(columns, values) {
     const obj = {};
     for (let i = 0; i < columns.length; i++) {
@@ -161,6 +199,9 @@
         try { val = JSON.parse(val); } catch (e) {}
       }
       obj[columns[i]] = val;
+    }
+    if (obj.image_url) {
+      obj.image_url = cleanFandomImageUrl(obj.image_url);
     }
     return obj;
   }
@@ -182,6 +223,9 @@
         if (stmt.step()) {
           const row = stmt.getAsObject();
           stmt.free();
+          if (row.image_url) {
+            row.image_url = cleanFandomImageUrl(row.image_url);
+          }
           if (row.colors_json) {
             try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
           }
@@ -212,6 +256,9 @@
         const results = [];
         while (stmt.step()) {
           const row = stmt.getAsObject();
+          if (row.image_url) {
+            row.image_url = cleanFandomImageUrl(row.image_url);
+          }
           if (row.colors_json) {
             try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
           }
@@ -257,6 +304,9 @@
           stmt.bind([col, perColor]);
           while (stmt.step()) {
             const row = stmt.getAsObject();
+            if (row.image_url) {
+              row.image_url = cleanFandomImageUrl(row.image_url);
+            }
             if (row.levels && typeof row.levels === 'string') {
               try { row.levels = JSON.parse(row.levels); } catch(e) {}
             }
@@ -419,7 +469,11 @@
         const selectStmt = dbInstance.prepare(`SELECT * FROM cards ${whereClause} ${orderClause} LIMIT ? OFFSET ?`);
         selectStmt.bind([...sqlParams, limit, offset]);
         while (selectStmt.step()) {
-          cards.push(selectStmt.getAsObject());
+          const row = selectStmt.getAsObject();
+          if (row.image_url) {
+            row.image_url = cleanFandomImageUrl(row.image_url);
+          }
+          cards.push(row);
         }
         selectStmt.free();
       } catch (e) {

@@ -208,6 +208,7 @@
       voidCards: [],
       nexus: [],
       nexusCards: [],
+      mirage: null,
       soulCoreLocation: 'reserve', // 'reserve' | 'field' | 'trash' | 'void'
       soulCoreSpiritUid: null,
       burst: null,
@@ -226,6 +227,7 @@
       voidCards: [],
       nexus: [],
       nexusCards: [],
+      mirage: null,
       soulCoreLocation: 'reserve',
       soulCoreSpiritUid: null,
       burst: null,
@@ -709,20 +711,888 @@
 
   // Marks which universal action types the legacy text engine already resolves for this
   // card/trigger so the same effect is never executed twice (e.g. double draw).
+  function isConditionalLegacyDrawText(bodyLower) {
+    return /when this effect depletes|when depleted|by sending|by destroying|by discarding|by returning|by exhausting|by paying|for each card discarded|via bp comparison|comparing bp|destroyed in battle/i.test(bodyLower || '');
+  }
+
   function markLegacyHandled(card, bodyLower) {
     const types = new Set();
-    if (/draw\s+(a|an|one|two|three|\d+)\s+cards?/i.test(bodyLower) && !/when this effect depletes/i.test(bodyLower)) types.add('DRAW_CARDS');
-    if (/destroy\s+(?:an?|one|all|\d+)?\s*(?:opposing\s+)?exhausted\s+(?:spirit|ultimate)/i.test(bodyLower)) types.add('DESTROY_SPIRIT_DIRECT');
-    if (/destroy\s+(?:an?|one|\d+)?\s*opposing\s+(\d+)\s*bp\s+or\s+less\s+(?:spirit|ultimate)/i.test(bodyLower)) types.add('DESTROY_SPIRIT_BP');
+    if (/draw\s+(a|an|one|two|three|\d+)\s+cards?/i.test(bodyLower) && !isConditionalLegacyDrawText(bodyLower)) types.add('DRAW_CARDS');
+    if (/destroy\s+(?:an?|one|all|\d+)?\s*(?:opposing\s+)?exhausted\s+(?:spirit|ultimate)/i.test(bodyLower) ||
+        /destroy\s+(a|an|one|two|three|\d+)\s+opposing\s+one-symbol\s+(?:spirits|ultimates|spirits\/ultimates)/i.test(bodyLower)) types.add('DESTROY_SPIRIT_DIRECT');
+    if (/destroy\s+(?:an?|one|\d+)?\s*opposing\s+(\d+)\s*bp\s+or\s+less\s+(?:spirit|ultimate)/i.test(bodyLower) ||
+        /destroy\s+(?:up\s+to\s+)?(an?|one|two|three|\d+)?\s*opposing\s+(?:(?:(?:spirits?\/ultimates?|spirits?|ultimates?)\s+(?:with\s+)?(\d+)\s*bp\s+or\s+less)|(?:(\d+)\s*bp\s+or\s+less\s+(?:spirits?\/ultimates?|spirits?|ultimates?)))/i.test(bodyLower) ||
+        /destroy any number of opposing (?:spirits|ultimates|spirits\/ultimates) up to a total of/i.test(bodyLower)) types.add('DESTROY_SPIRIT_BP');
     if (/exhaust\s+(an?|one|\d+)?\s*opposing\s+spirit/i.test(bodyLower)) types.add('EXHAUST_ENEMY');
     if (/this spirit can't be blocked|this spirit cannot be blocked|cannot be blocked by opposing|can't be blocked by opposing/i.test(bodyLower)) types.add('CANNOT_BE_BLOCKED');
+    if (/(?:discard|send)\s+(?:up to\s+)?(?:a|an|one|two|three|four|five|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?deck(?:top)?/i.test(bodyLower)) types.add('DECK_DISCARD');
+    if (/send\s+(?:up to\s+)?(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:an|any|one|\d+)?\s*opposing\s+(?:spirit|ultimate|nexus).*?to\s+(?:the\s+|their\s+)?(reserve|trash)/i.test(bodyLower) && !/\bby\s+sending\b/i.test(bodyLower)) types.add('CORE_DRAIN');
+    if (/put\s+(a|an|one|two|three|\d+)\s+cores?\s+from\s+the\s+void\s+to\s+(?:this\s+spirit|(?:your\s+)?reserve)/i.test(bodyLower)) types.add('CORE_BOOST');
     if (!types.size) return;
     const prev = (card.__legacyHandled && Date.now() - card.__legacyHandled.ts < 300) ? card.__legacyHandled.types : new Set();
     types.forEach(t => prev.add(t));
     card.__legacyHandled = { types: prev, ts: Date.now() };
   }
 
-  const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY ARMOR', 'DAMAGE_CAP', 'GRANT_SYMBOL']);
+  
+  // ?? UNIVERSAL INTERACTIVE TARGETING ENGINE (PHASE 2) ??
+    // ── CUMULATIVE COST DESTRUCTION TARGETING MODAL ──
+  function promptCumulativeCostTargetModal(card, side, candidates, budgetCost, onConfirm) {
+    if (typeof document === 'undefined' || !document.body) {
+      if (typeof onConfirm === 'function') onConfirm([]);
+      return;
+    }
+
+    const box = document.createElement('div');
+    box.className = 'optional-effect-popup cumulative-cost-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100003;width:min(520px,94vw);background:#0f172a;border:2px solid #ea580c;border-radius:14px;padding:16px 18px;box-shadow:0 20px 50px rgba(0,0,0,.85);color:#e2e8f0;font-size:.86rem;font-family:sans-serif;pointer-events:auto;';
+
+    const selectedUids = new Set();
+
+    const getSelectedCost = () => {
+      let sum = 0;
+      candidates.forEach(c => {
+        if (selectedUids.has(c.item.uid)) sum += c.cost;
+      });
+      return sum;
+    };
+
+    const cleanup = () => {
+      if (box && box.parentNode) box.parentNode.removeChild(box);
+    };
+
+    const render = () => {
+      const curCost = getSelectedCost();
+      const listHtml = candidates.map(c => {
+        const isSel = selectedUids.has(c.item.uid);
+        const wouldExceed = !isSel && (curCost + c.cost > budgetCost);
+        const bpText = c.item.currentBp ? ` • ${c.item.currentBp} BP` : '';
+        const coreText = c.item.currentCores !== undefined ? ` • ${c.item.currentCores}c` : '';
+        const kindLabel = c.kind === 'nexus' ? '🏛️ Nexus' : '⚔️ Spirit';
+        return `
+          <div class="cct-item" data-uid="${c.item.uid}" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;margin:4px 0;background:${isSel ? 'rgba(234,88,12,0.25)' : 'rgba(255,255,255,0.04)'};border:1px solid ${isSel ? '#f97316' : (wouldExceed ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.15)')};border-radius:8px;cursor:${wouldExceed ? 'not-allowed' : 'pointer'};opacity:${wouldExceed ? 0.45 : 1};">
+            <div>
+              <div style="font-weight:700;color:${isSel ? '#fdba74' : '#fff'};">${isSel ? '☑️ ' : '⬜ '}${c.item.name}</div>
+              <div style="font-size:0.75rem;color:#94a3b8;">${kindLabel} • Cost ${c.cost}${bpText}${coreText}</div>
+            </div>
+            <span style="font-size:0.8rem;font-weight:800;color:#f97316;">Cost ${c.cost}</span>
+          </div>
+        `;
+      }).join('');
+
+      box.innerHTML = `
+        <div style="font-weight:800;font-size:1.02rem;color:#fdba74;margin-bottom:4px;">💥 Select Opposing Targets to Destroy</div>
+        <div style="font-size:0.82rem;color:#cbd5e1;margin-bottom:10px;">
+          "${card.name}": Destroy opposing Spirits/Ultimates/Nexuses up to a total cost of <strong>${budgetCost}</strong>.
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.3);padding:6px 12px;border-radius:6px;margin-bottom:10px;font-size:0.84rem;font-weight:700;">
+          <span>Allocated Cost:</span>
+          <span style="color:${curCost > 0 ? '#fb923c' : '#94a3b8'};">${curCost} / ${budgetCost}</span>
+        </div>
+        <div style="max-height:240px;overflow-y:auto;margin-bottom:12px;">${listHtml}</div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;">
+          <button class="cct-skip" style="padding:6px 14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);border-radius:6px;color:#cbd5e1;cursor:pointer;font-weight:700;">Skip</button>
+          <button class="cct-confirm" style="padding:6px 16px;background:linear-gradient(135deg,#ea580c,#c2410c);border:1px solid #f97316;border-radius:6px;color:#fff;cursor:pointer;font-weight:800;">
+            Destroy Selected (${selectedUids.size})
+          </button>
+        </div>
+      `;
+
+      box.querySelectorAll('.cct-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const uid = el.getAttribute('data-uid');
+          const cand = candidates.find(c => c.item.uid === uid);
+          if (!cand) return;
+          if (selectedUids.has(uid)) {
+            selectedUids.delete(uid);
+          } else {
+            if (curCost + cand.cost <= budgetCost) {
+              selectedUids.add(uid);
+            } else {
+              if (typeof showToast === 'function') showToast(`Cannot select "${cand.item.name}" (Cost ${cand.cost})! Would exceed total cost limit of ${budgetCost}.`, 'warning');
+            }
+          }
+          render();
+        });
+      });
+
+      box.querySelector('.cct-skip').addEventListener('click', () => {
+        cleanup();
+        if (typeof onConfirm === 'function') onConfirm([]);
+      });
+
+      box.querySelector('.cct-confirm').addEventListener('click', () => {
+        cleanup();
+        const chosen = candidates.filter(c => selectedUids.has(c.item.uid));
+        if (typeof onConfirm === 'function') onConfirm(chosen);
+      });
+    };
+
+    render();
+    document.body.appendChild(box);
+  }
+
+  
+  // ── INTERACTIVE CHOICE BRANCH MODAL ──
+  function promptChoiceModal(options, onChoice) {
+    const { card, side = 'player', title = 'Choose Option', description = '', choices = [] } = options;
+    if (side !== 'player' || typeof document === 'undefined' || !document.body) {
+      if (typeof onChoice === 'function') onChoice(0);
+      return;
+    }
+    const box = document.createElement('div');
+    box.className = 'optional-effect-popup choice-branch-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100005;width:min(480px,94vw);background:#0f172a;border:2px solid #a855f7;border-radius:14px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.9);color:#e2e8f0;font-size:.88rem;font-family:sans-serif;pointer-events:auto;';
+
+    // Background overlay with pointer-events: none so user can scroll background and view cards!
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:100004;pointer-events:none;';
+    document.body.appendChild(overlay);
+
+    const closeBox = () => {
+      if (box.parentNode) box.parentNode.removeChild(box);
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    };
+
+    box.innerHTML = `
+      <div style="font-size:1.05rem;font-weight:700;color:#c084fc;margin-bottom:6px;">${title}</div>
+      <div style="font-size:0.82rem;color:#94a3b8;margin-bottom:14px;">${description || 'Select an effect branch to resolve:'}</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+        ${choices.map((c, idx) => `
+          <button class="choice-opt-btn" data-idx="${idx}" style="background:#1e293b;border:1px solid #475569;border-radius:8px;padding:10px 14px;color:#f8fafc;text-align:left;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;gap:8px;transition:all 0.15s ease;">
+            <span style="font-size:1.1rem;">${c.icon || '✨'}</span>
+            <div>
+              <div style="font-weight:700;color:#e2e8f0;">${c.label}</div>
+              ${c.desc ? `<div style="font-size:0.75rem;color:#94a3b8;">${c.desc}</div>` : ''}
+            </div>
+          </button>
+        `).join('')}
+      </div>
+    `;
+    box.querySelectorAll('.choice-opt-btn').forEach(btn => {
+      btn.onmouseenter = () => { btn.style.borderColor = '#c084fc'; btn.style.background = '#334155'; };
+      btn.onmouseleave = () => { btn.style.borderColor = '#475569'; btn.style.background = '#1e293b'; };
+      btn.onclick = () => {
+        const chosenIdx = parseInt(btn.getAttribute('data-idx'), 10);
+        closeBox();
+        if (typeof onChoice === 'function') onChoice(chosenIdx);
+      };
+    });
+    document.body.appendChild(box);
+  }
+
+  // ── THE EARTHDEITYSWORD GAIANOHOKO TRIGGER ──
+  function checkHandOnUltimateSummon(summonedUltimate, side = 'player') {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const gaiaIdx = (friendlyState.hand || []).findIndex(c => 
+      (c.name || '').includes('Gaianohoko') ||
+      (/when your ultimate is summoned.*?(?:you can\s+)?summon this card from (?:the\s+|your\s+)?hand without paying the cost/i.test(c.effect || ''))
+    );
+    if (gaiaIdx === -1) return;
+    const gaiaCard = friendlyState.hand[gaiaIdx];
+    if (side === 'player') {
+      promptChoiceModal({
+        card: gaiaCard,
+        side: 'player',
+        title: 'The EarthDeitySword Gaianohoko: Free Summon',
+        description: `Your Ultimate "${summonedUltimate.name}" was summoned! Summon "${gaiaCard.name}" from Hand without paying the cost?`,
+        choices: [
+          { icon: '⚔️', label: 'Summon as Spirit (0 Cost)', desc: 'Summon to field for 0 cost (places 1 core to sustain)' },
+          { icon: '🔗', label: `Brave onto "${summonedUltimate.name}"`, desc: 'Directly combine onto the summoned Ultimate for 0 cost' },
+          { icon: '⏭️', label: 'Do not summon (Skip)', desc: 'Keep Gaianohoko in hand' }
+        ]
+      }, (choiceIdx) => {
+        if (choiceIdx === 0) {
+          friendlyState.hand.splice(gaiaIdx, 1);
+          const coresToPlace = (friendlyState.reserve > 0) ? 1 : 0;
+          if (coresToPlace > 0) friendlyState.reserve -= 1;
+          gaiaCard.currentCores = coresToPlace;
+          gaiaCard.currentLevel = 1;
+          gaiaCard.currentBp = 3000;
+          gaiaCard.isExhausted = false;
+          friendlyState.field.push(gaiaCard);
+          AudioFX.slash();
+          addLog(`⚔️ **[GAIANOHOKO FREE SUMMON]**: "${gaiaCard.name}" summoned to field for free!`, 'magic');
+          renderDuelTable();
+          renderPlayerHand();
+        } else if (choiceIdx === 1) {
+          friendlyState.hand.splice(gaiaIdx, 1);
+          summonedUltimate.brave = gaiaCard;
+          summonedUltimate.isBraved = true;
+          summonedUltimate.currentBp = (summonedUltimate.currentBp || 0) + 5000;
+          AudioFX.magic();
+          addLog(`🔗 **[GAIANOHOKO BRAVED]**: Combined onto "${summonedUltimate.name}" (+5000 BP, burst protection active)!`, 'magic');
+          renderDuelTable();
+          renderPlayerHand();
+        }
+      });
+    } else {
+      // Opponent AI braves onto Ultimate
+      friendlyState.hand.splice(gaiaIdx, 1);
+      summonedUltimate.brave = gaiaCard;
+      summonedUltimate.isBraved = true;
+      summonedUltimate.currentBp = (summonedUltimate.currentBp || 0) + 5000;
+      addLog(`🔗 **[OPPONENT GAIANOHOKO]**: Combined onto "${summonedUltimate.name}"!`, 'magic');
+      renderDuelTable();
+    }
+  }
+
+  // ── SUMMON FROM OPEN (REMOVED) ZONE (ACCEL RECOVERY) ──
+  function summonCardFromOpen(cardUid, side = 'player') {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    if (!friendlyState.openCards) return;
+    const cardIdx = friendlyState.openCards.findIndex(c => c.uid === cardUid);
+    if (cardIdx === -1) return;
+    const card = friendlyState.openCards[cardIdx];
+
+    const isMainStep = (DuelState.activePlayer === side && DuelState.phases[DuelState.phaseIndex] === 'MAIN');
+    if (!isMainStep) {
+      if (typeof showToast === 'function') showToast("Cards in the Open Zone can only be summoned during the Main Step!", "warning");
+      return;
+    }
+
+    const cost = getCardEffectiveCost(card, side);
+    const totalNeeded = cost + 1;
+    if ((friendlyState.reserve || 0) < totalNeeded) {
+      if (typeof showToast === 'function') showToast(`Need ${totalNeeded} cores in reserve to summon "${card.name}" from Open Zone!`, "warning");
+      return;
+    }
+
+    friendlyState.reserve -= totalNeeded;
+    friendlyState.trash = (friendlyState.trash || 0) + cost;
+    friendlyState.openCards.splice(cardIdx, 1);
+
+    card.currentCores = 1;
+    card.currentLevel = 1;
+    card.currentBp = (card.levels && card.levels[0]?.bp) || 3000;
+    card.isExhausted = false;
+    card.hasAttacked = false;
+    friendlyState.field.push(card);
+
+    AudioFX.slash();
+    addLog(`⚔️ **[OPEN ZONE SUMMON]**: "${card.name}" summoned from Open Zone to the field! Paid ${cost} cores.`, 'step');
+    renderDuelTable();
+    closeZoneModal();
+  }
+
+  function promptUniversalTargetModal(options, onConfirm) {
+    const {
+      card,
+      side = 'player',
+      targetSide = 'opponent',
+      targetKind = 'spirit', // 'spirit' | 'nexus'
+      title = 'Select Target',
+      description = '',
+      minCount = 1,
+      maxCount = 1,
+      filter = null,
+      allowSkip = true
+    } = options;
+
+    const targetPlayerState = targetSide === 'player' ? DuelState.player : DuelState.opponent;
+    let pool = targetKind === 'nexus' ? (targetPlayerState.nexus || []) : (targetPlayerState.field || []);
+
+    if (typeof filter === 'function') {
+      pool = pool.filter(filter);
+    }
+
+    if (!pool.length) {
+      if (typeof onConfirm === 'function') onConfirm([]);
+      return;
+    }
+
+    // AI or headless environment: evaluate target greedily
+    if (side !== 'player' || typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+      let chosen = [];
+      if (targetKind === 'nexus') {
+        chosen = pool.slice(0, maxCount);
+      } else {
+        const sorted = [...pool].sort((a, b) => (b.battleBp || b.currentBp || 0) - (a.battleBp || a.currentBp || 0));
+        chosen = sorted.slice(0, maxCount);
+      }
+      if (typeof onConfirm === 'function') onConfirm(chosen);
+      return;
+    }
+
+    const box = document.createElement('div');
+    box.className = 'optional-effect-popup universal-target-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100002;width:min(480px,94vw);background:#0f172a;border:2px solid #38bdf8;border-radius:14px;padding:16px 18px;box-shadow:0 20px 50px rgba(0,0,0,.85);color:#e2e8f0;font-size:.86rem;font-family:sans-serif;pointer-events:auto;';
+
+    const selectedUids = new Set();
+    const isSingle = maxCount === 1;
+
+    const renderModalContent = () => {
+      const listHtml = pool.map(item => {
+        const isSel = selectedUids.has(item.uid);
+        const bpText = item.currentBp ? ` ? ${item.currentBp} BP` : '';
+        const coreText = item.currentCores !== undefined ? ` ? ${item.currentCores} Core(s)` : '';
+        const costText = item.cost !== undefined ? `Cost ${item.cost}` : '';
+        const borderCol = isSel ? '#38bdf8' : '#334155';
+        const bgCol = isSel ? 'rgba(56,189,248,0.2)' : '#1e293b';
+
+        return `
+          <div data-uid="${_optEsc(item.uid)}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:6px;border-radius:8px;cursor:pointer;border:1px solid ${borderCol};background:${bgCol};transition:all 0.15s ease;">
+            <div>
+              <div style="font-weight:700;color:${isSel ? '#bae6fd' : '#f8fafc'};">${isSel ? '?? ' : '? '}${_optEsc(item.name)}</div>
+              <div style="font-size:0.75rem;color:#94a3b8;">${costText}${bpText}${coreText}${item.isExhausted ? ' (Exhausted)' : ''}</div>
+            </div>
+            <span style="font-size:0.75rem;font-weight:700;padding:4px 8px;border-radius:6px;background:${isSel ? '#0284c7' : '#334155'};color:#fff;">
+              ${isSel ? 'Selected' : 'Target'}
+            </span>
+          </div>
+        `;
+      }).join('');
+
+      box.innerHTML = `
+        <div style="font-weight:800;font-size:1rem;color:#38bdf8;margin-bottom:6px;">?? ${_optEsc(title)}</div>
+        <div style="margin-bottom:10px;color:#cbd5e1;font-size:0.83rem;">${_optEsc(description || `Select up to ${maxCount} target(s):`)}</div>
+        <div style="max-height:240px;overflow-y:auto;margin-bottom:14px;padding-right:4px;">${listHtml}</div>
+        <div style="display:flex;gap:10px;">
+          <button data-act="confirm" style="flex:1;padding:9px 0;border-radius:8px;border:none;background:linear-gradient(135deg,#0284c7,#0369a1);color:#fff;font-weight:800;cursor:pointer;">
+            Confirm (${selectedUids.size})
+          </button>
+          ${allowSkip ? `
+            <button data-act="skip" style="flex:1;padding:9px 0;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#cbd5e1;font-weight:700;cursor:pointer;">
+              Skip Selection
+            </button>
+          ` : ''}
+        </div>
+      `;
+
+      pool.forEach(item => {
+        const row = box.querySelector(`[data-uid="${item.uid}"]`);
+        if (row) {
+          row.onclick = () => {
+            if (selectedUids.has(item.uid)) {
+              selectedUids.delete(item.uid);
+            } else {
+              if (isSingle) selectedUids.clear();
+              if (selectedUids.size < maxCount) {
+                selectedUids.add(item.uid);
+              }
+            }
+            renderModalContent();
+          };
+        }
+      });
+
+      const confirmBtn = box.querySelector('[data-act="confirm"]');
+      if (confirmBtn) {
+        confirmBtn.onclick = () => {
+          if (box.parentNode) box.parentNode.removeChild(box);
+          const targets = pool.filter(p => selectedUids.has(p.uid));
+          if (typeof onConfirm === 'function') onConfirm(targets);
+        };
+      }
+
+      const skipBtn = box.querySelector('[data-act="skip"]');
+      if (skipBtn) {
+        skipBtn.onclick = () => {
+          if (box.parentNode) box.parentNode.removeChild(box);
+          if (typeof onConfirm === 'function') onConfirm([]);
+        };
+      }
+    };
+
+    renderModalContent();
+    document.body.appendChild(box);
+  }
+
+  // ?? CONTINUOUS RULES & BOARD AURAS ENGINE (PHASE 3) ??
+  function dispatchContinuousRules() {
+    if (!DuelState.inDuel) return;
+    const currentPhase = DuelState.phases[DuelState.phaseIndex] || 'MAIN';
+    const activeSide = DuelState.activePlayer;
+
+    for (const side of ['player', 'opponent']) {
+      const state = DuelState[side];
+      const enemySide = side === 'player' ? 'opponent' : 'player';
+      const enemyState = DuelState[enemySide];
+      const nexuses = state.nexus || [];
+      const spirits = state.field || [];
+
+      // 1. Evaluate Nexus continuous auras
+      for (const n of nexuses) {
+        const eff = (n.effect || '').toLowerCase();
+        const curLevel = n.currentLevel || 1;
+
+        // BP Boost Aura to friendly spirits
+        if (eff.includes('all your spirits get +1000 bp') || eff.includes('all your spirits gain +1000 bp')) {
+          for (const s of spirits) {
+            s.turnBpBoost = (s.turnBpBoost || 0) + 1000;
+            recalculateSpiritBp(s);
+          }
+        }
+        if (eff.includes('all your spirits get +2000 bp') || eff.includes('all your spirits gain +2000 bp')) {
+          for (const s of spirits) {
+            s.turnBpBoost = (s.turnBpBoost || 0) + 2000;
+            recalculateSpiritBp(s);
+          }
+        }
+      }
+
+      // 2. Evaluate Mirage continuous auras
+      const mirageCard = state.mirage;
+      if (mirageCard) {
+        const mEff = (mirageCard.effect || '').toLowerCase();
+        if (mEff.includes('[during set]')) {
+          // Check mirage static buffs
+          if (mEff.includes('all your spirits get +') || mEff.includes('all your spirits gain +')) {
+            const bpMatch = mEff.match(/all your spirits (?:get|gain)\s+\+(\d+)\s*bp/i);
+            if (bpMatch) {
+              const boost = parseInt(bpMatch[1], 10);
+              for (const s of spirits) {
+                s.turnBpBoost = (s.turnBpBoost || 0) + boost;
+                recalculateSpiritBp(s);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ?? MIRAGE & ACCEL MECHANICS ENGINE (PHASE 4) ??
+  function canSetMirage(card, side = 'player') {
+    if (!card || !card.effect) return { allowed: false, cost: 0 };
+    const m = card.effect.match(/\[Mirage:\s*Cost\s*(\d+)\]/i);
+    if (!m) return { allowed: false, cost: 0 };
+    const mirageCost = parseInt(m[1], 10);
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const canAfford = (friendlyState.reserve || 0) >= mirageCost;
+    return { allowed: canAfford, cost: mirageCost };
+  }
+
+  function setMirage(cardUid, side = 'player') {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const cardIdx = (friendlyState.hand || []).findIndex(c => c.uid === cardUid);
+    if (cardIdx === -1) return;
+    const card = friendlyState.hand[cardIdx];
+
+    const check = canSetMirage(card, side);
+    if (!check.allowed) {
+      if (typeof showToast === 'function') showToast(`Cannot set Mirage: need ${check.cost} cores in reserve!`, 'warning');
+      return;
+    }
+
+    friendlyState.reserve -= check.cost;
+    friendlyState.trash += check.cost;
+    friendlyState.hand.splice(cardIdx, 1);
+
+    // If an existing Mirage card was set, send it to Trash
+    if (friendlyState.mirage) {
+      sendToTrash(friendlyState.mirage, side, 'Replaced by new Mirage card');
+    }
+    friendlyState.mirage = card;
+
+    AudioFX.magic();
+    addLog(`??? **[MIRAGE SET]**: "${card.name}" placed in Mirage Zone! Paid Cost ${check.cost}.`, 'magic');
+    if (typeof showToast === 'function') showToast(`?? Set "${card.name}" in Mirage Zone!`, 'success');
+
+    dispatchContinuousRules();
+    renderDuelTable();
+    if (side === 'player') renderPlayerHand();
+  }
+
+  function canCastAccel(card, side = 'player') {
+    if (!card || !card.effect) return { allowed: false, cost: 0, baseCost: 0 };
+    const m = card.effect.match(/\[Accel:\s*Cost\s*(\d+)(?:\s*\(([^)]+)\))?\]|【アクセル】コスト(\d+)/i);
+    if (!m) return { allowed: false, cost: 0, baseCost: 0 };
+    const rawCost = parseInt(m[1] || m[3], 10);
+    const friendly = (typeof getFriendlySymbols === 'function') ? getFriendlySymbols(side) : { total: 0, byColor: {}, rainbow: 0 };
+    const cardColors = (typeof parseCardColors === 'function') ? parseCardColors(card) : ['red'];
+    let matchedSymbols = 0;
+    for (const col of cardColors) {
+      if (friendly.byColor && friendly.byColor[col]) matchedSymbols += friendly.byColor[col];
+    }
+    matchedSymbols += (friendly.rainbow || 0);
+
+    const redMatch = (m[2] || '').match(/(\d+)/);
+    const maxReduction = redMatch ? parseInt(redMatch[1], 10) : Math.min(Math.max(0, rawCost - 1), matchedSymbols);
+    const actualReduction = Math.min(matchedSymbols, maxReduction);
+    const effCost = Math.max(1, rawCost - actualReduction);
+
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const canAfford = (friendlyState.reserve || 0) >= effCost;
+    return { allowed: canAfford, cost: effCost, baseCost: rawCost };
+  }
+
+  function castAccel(cardUid, side = 'player') {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const cardIdx = (friendlyState.hand || []).findIndex(c => c.uid === cardUid);
+    if (cardIdx === -1) return;
+    const card = friendlyState.hand[cardIdx];
+
+    const check = canCastAccel(card, side);
+    if (!check.allowed) {
+      if (typeof showToast === 'function') showToast(`Need ${check.cost} cores to cast Accel!`, 'warning');
+      return;
+    }
+
+    friendlyState.reserve -= check.cost;
+    friendlyState.trash += check.cost;
+
+    AudioFX.magic();
+    addLog(`? **[ACCEL ACTIVATED]**: "${card.name}" activated [Accel: Cost ${check.cost}]!`, 'magic');
+    if (typeof showToast === 'function') showToast(`? Cast Accel: "${card.name}"!`, 'success');
+
+    // Extract Accel effect block and execute
+    const accelBlockMatch = card.effect.match(/\[Accel:[^\]]+\]([\s\S]*?)(?=\[LV|\(When|$)/i);
+    const accelText = accelBlockMatch ? accelBlockMatch[1].trim() : card.effect;
+
+    executeAbilityActions(accelText, card, side, 'MAGIC');
+    executeUniversalCardEffect(card, side, 'FLASH');
+
+    // Official Rule: After Accel resolves, card is placed face-up in Open Zone (Removed from Game Zone), NOT Trash!
+    friendlyState.hand.splice(cardIdx, 1);
+    if (!friendlyState.openCards) friendlyState.openCards = [];
+    friendlyState.openCards.push(card);
+    addLog(`🎴 **[ACCEL RESOLVED]**: "${card.name}" placed face-up into the Open / Removed from Game Zone. (Usable to summon normally in Main Step!)`, 'magic');
+
+    renderDuelTable();
+    if (side === 'player') renderPlayerHand();
+  }
+
+  function triggerUTrigger(card, side = 'player') {
+    if (!card || !card.effect) return;
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const enemySide = side === 'player' ? 'opponent' : 'player';
+    const enemyState = DuelState[enemySide];
+
+    if (!enemyState.deck || !enemyState.deck.length) {
+      addLog(`?? **[U-TRIGGER: ${card.name}]**: Opposing deck is empty! U-Trigger cannot resolve.`, 'step');
+      return;
+    }
+
+    // Opponent reveals top card of deck to Trash
+    const revealed = enemyState.deck.shift();
+    sendToTrash(revealed, enemySide, `U-Trigger check for ${card.name}`);
+
+    const ourCost = card.cost || 0;
+    const oppCost = revealed.cost || 0;
+    const isHit = ourCost > oppCost;
+    const isCritical = isHit && oppCost === 0;
+
+    AudioFX.burstIgnite ? AudioFX.burstIgnite() : AudioFX.magic();
+
+    if (isCritical) {
+      addLog(`???? **[U-TRIGGER CRITICAL HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! Critical Hit activated!`, 'damage');
+      if (typeof showToast === 'function') showToast(`?? [U-Trigger Critical Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
+    } else if (isHit) {
+      addLog(`?? **[U-TRIGGER HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! U-Trigger Hit activated!`, 'magic');
+      if (typeof showToast === 'function') showToast(`?? [U-Trigger Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
+    } else {
+      addLog(`??? **[U-TRIGGER GUARD: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} >= Your Cost ${ourCost})! Opponent guarded U-Trigger.`, 'step');
+      if (typeof showToast === 'function') showToast(`??? [U-Trigger Guard]: Opponent Cost ${oppCost} guarded.`, 'info');
+    }
+
+    renderDuelTable();
+  }
+const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY ARMOR', 'DAMAGE_CAP', 'GRANT_SYMBOL', 'HAND_DISCARD_DRAW', 'HAND_DISCARD']);
+
+  function promptHandDiscardModal(card, side, maxDiscard, nameFilter, upTo, onConfirm) {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const hand = friendlyState.hand || [];
+    const filterLow = nameFilter ? nameFilter.toLowerCase() : null;
+    const eligible = hand.filter(c => {
+      if (!filterLow) return true;
+      const cName = (c.name || '').toLowerCase();
+      const cFam = ((c.family || '') + ' ' + (Array.isArray(c.families) ? c.families.join(' ') : '')).toLowerCase();
+      return cName.includes(filterLow) || cFam.includes(filterLow);
+    });
+
+    if (eligible.length === 0) {
+      addLog(`ℹ️ **[${card.name}]**: No eligible ${nameFilter ? `"${nameFilter}" ` : ''}cards in Hand to discard.`, 'step');
+      if (onConfirm) onConfirm([]);
+      return;
+    }
+
+    if (side !== 'player' || typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+      const autoPick = eligible.slice(0, maxDiscard);
+      if (onConfirm) onConfirm(autoPick);
+      return;
+    }
+
+    const box = document.createElement('div');
+    box.className = 'optional-effect-popup hand-discard-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100001;width:min(440px,94vw);background:#111827;border:2px solid #a855f7;border-radius:14px;padding:16px 18px;box-shadow:0 16px 40px rgba(0,0,0,.8);color:#e5e7eb;font-size:.86rem;';
+    const selectedUids = new Set();
+    const labelStr = upTo ? `up to ${maxDiscard}` : `${Math.min(maxDiscard, eligible.length)}`;
+    const filterLabel = nameFilter ? `"${_optEsc(nameFilter)}"-named ` : '';
+
+    const renderChoices = () => {
+      const listHtml = eligible.map(c => {
+        const isSel = selectedUids.has(c.uid);
+        return `<div data-uid="${_optEsc(c.uid)}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;margin-bottom:6px;border-radius:8px;cursor:pointer;border:1px solid ${isSel ? '#c084fc' : '#374151'};background:${isSel ? 'rgba(147,51,234,0.28)' : '#1f2937'};">
+          <div>
+            <div style="font-weight:800;color:${isSel ? '#f3e8ff' : '#e5e7eb'};">${isSel ? '☑️ ' : '⬜ '}${_optEsc(c.name)}</div>
+            <div style="font-size:0.74rem;color:#9ca3af;">Cost ${c.cost || 0} • ${_optEsc(c.type || 'Card')} • ${_optEsc(c.family || '')}</div>
+          </div>
+          <span style="font-size:0.75rem;font-weight:700;color:${isSel ? '#c084fc' : '#6b7280'};">${isSel ? 'Selected' : 'Select'}</span>
+        </div>`;
+      }).join('');
+
+      box.innerHTML =
+        `<div style="font-weight:800;font-size:0.95rem;color:#c084fc;margin-bottom:6px;">🗑️ ${_optEsc(card.name)} — Discard from Hand</div>` +
+        `<div style="margin-bottom:10px;color:#cbd5e1;">Select ${labelStr} ${filterLabel}card(s) from your Hand to discard (${selectedUids.size}/${maxDiscard} selected):</div>` +
+        `<div style="max-height:220px;overflow-y:auto;margin-bottom:12px;">${listHtml}</div>` +
+        `<div style="display:flex;gap:8px;">` +
+        `<button data-act="confirm" style="flex:1;padding:8px 0;border-radius:8px;border:none;background:#7c3aed;color:#fff;font-weight:800;cursor:pointer;">Discard (${selectedUids.size})</button>` +
+        (upTo ? `<button data-act="cancel" style="flex:1;padding:8px 0;border-radius:8px;border:1px solid #475569;background:#1f2937;color:#e5e7eb;font-weight:800;cursor:pointer;">Skip (0)</button>` : '') +
+        `</div>`;
+
+      const confirmBtn = box.querySelector('[data-act="confirm"]');
+      const cancelBtn = box.querySelector('[data-act="cancel"]');
+      if (!confirmBtn) {
+        if (box.parentNode) box.parentNode.removeChild(box);
+        if (onConfirm) onConfirm(eligible.slice(0, maxDiscard));
+        return;
+      }
+      const rows = box.querySelectorAll('[data-uid]');
+      if (rows && rows.forEach) {
+        rows.forEach(r => {
+          r.onclick = () => {
+            const u = r.getAttribute('data-uid');
+            if (selectedUids.has(u)) {
+              selectedUids.delete(u);
+            } else {
+              if (selectedUids.size >= maxDiscard) {
+                if (maxDiscard === 1) {
+                  selectedUids.clear();
+                  selectedUids.add(u);
+                }
+              } else {
+                selectedUids.add(u);
+              }
+            }
+            renderChoices();
+          };
+        });
+      }
+
+      confirmBtn.onclick = () => {
+        if (!upTo && selectedUids.size < Math.min(maxDiscard, eligible.length)) {
+          if (typeof showToast === 'function') showToast(`Please select ${Math.min(maxDiscard, eligible.length)} card(s) to discard.`, 'warning');
+          return;
+        }
+        if (box.parentNode) box.parentNode.removeChild(box);
+        const chosen = eligible.filter(c => selectedUids.has(c.uid));
+        if (onConfirm) onConfirm(chosen);
+      };
+      if (cancelBtn) {
+        cancelBtn.onclick = () => {
+          if (box.parentNode) box.parentNode.removeChild(box);
+          if (onConfirm) onConfirm([]);
+        };
+      }
+    };
+
+    document.body.appendChild(box);
+    renderChoices();
+  }
+
+  function checkAndPayByCondition(act, card, side, friendlyState, enemySide, enemyState) {
+    const byCond = act && act.canva_rules && act.canva_rules.by_condition;
+    if (!byCond || !byCond.is_cost_gated) return true;
+    const costType = byCond.cost_type || '';
+    const rawCond = (byCond.condition_raw || '').toLowerCase();
+
+    if (costType === 'DRAIN_OPPOSING_CORE' || (rawCond.includes('sending') && rawCond.includes('opposing') && rawCond.includes('core'))) {
+      const dest = byCond.dest || (rawCond.includes('trash') ? 'trash' : (rawCond.includes('void') ? 'void' : 'reserve'));
+      const candidates = (enemyState.field || []).filter(s => (s.currentCores || 0) >= 1 && !s.isImmuneToOpposingEffects);
+      if (candidates.length === 0) {
+        addLog(`ℹ️ **[${card.name}]**: Cost condition ("By ${byCond.condition_raw}") could not be fulfilled — no opposing Spirit with cores on field.`, 'step');
+        return false;
+      }
+      candidates.sort((a, b) => (a.currentCores || 1) - (b.currentCores || 1));
+      const targetSp = candidates[0];
+      targetSp.currentCores -= 1;
+      if (dest === 'reserve') enemyState.reserve += 1;
+      else if (dest === 'trash') enemyState.trash += 1;
+      recalculateSpiritBp(targetSp);
+      AudioFX.coreChime();
+      addLog(`🔮 **[${card.name}]**: Paid cost — sent 1 Core from opposing "${targetSp.name}" to ${dest}!`, 'magic');
+      if (targetSp.currentCores <= 0) {
+        const spIdx = enemyState.field.findIndex(s => s.uid === targetSp.uid);
+        if (spIdx !== -1) {
+          const depleted = enemyState.field.splice(spIdx, 1)[0];
+          sendToTrash(depleted, enemySide, `Depleted by ${card.name}`);
+          addLog(`💀 **DEPLETED**: Opposing "${depleted.name}" was depleted of cores and sent to Trash!`, 'damage');
+        }
+      }
+      return true;
+    }
+
+    if (costType === 'DISCARD_BURST') {
+      const bCard = friendlyState.burst || friendlyState.burstCard;
+      if (!bCard) return false;
+      friendlyState.burst = null;
+      friendlyState.burstCard = null;
+      sendToTrash(bCard, side, `Discarded Burst for ${card.name}`);
+      addLog(`🔮 **[${card.name}]**: Discarded set Burst "${bCard.name}" to pay cost!`, 'step');
+      return true;
+    }
+
+    if (costType === 'DISCARD_PRE_ADVENT') {
+      const under = card.underlyingCards || [];
+      if (!under.length) return false;
+      const popped = under.shift();
+      sendToTrash(popped, side, `Discarded pre-Advent card for ${card.name}`);
+      addLog(`🔮 **[${card.name}]**: Discarded pre-Advent card "${popped.name}" to pay cost!`, 'step');
+      return true;
+    }
+
+    if (costType === 'SEND_CORE_TO_TRASH' || costType === 'SEND_CORE_TO_VOID') {
+      const fromReserve = rawCond.includes('reserve');
+      const fromLife = rawCond.includes('life');
+      if (fromLife) {
+        if ((friendlyState.life || 0) < 1) return false;
+        friendlyState.life -= 1;
+        if (costType === 'SEND_CORE_TO_TRASH') friendlyState.trash += 1;
+        return true;
+      }
+      if (fromReserve || (card.currentCores || 0) <= 1) {
+        if ((friendlyState.reserve || 0) < 1) return false;
+        friendlyState.reserve -= 1;
+        if (costType === 'SEND_CORE_TO_TRASH') friendlyState.trash += 1;
+        return true;
+      }
+      if ((card.currentCores || 0) >= 2) {
+        card.currentCores -= 1;
+        if (costType === 'SEND_CORE_TO_TRASH') friendlyState.trash += 1;
+        recalculateSpiritBp(card);
+        return true;
+      }
+      return false;
+    }
+
+    if (costType === 'DESTROY_FRIENDLY') {
+      const allies = (friendlyState.field || []).filter(s => s.uid !== card.uid);
+      if (!allies.length) return false;
+      const sac = allies[0];
+      const idx = friendlyState.field.findIndex(s => s.uid === sac.uid);
+      if (idx !== -1) friendlyState.field.splice(idx, 1);
+      recycleSpiritCoresToReserve(sac, side);
+      sendToTrash(sac, side, `Destroyed to pay cost for ${card.name}`);
+      return true;
+    }
+
+    if (costType === 'EXHAUST_FRIENDLY') {
+      const readyAllies = (friendlyState.field || []).filter(s => !s.isExhausted);
+      if (!readyAllies.length) return false;
+      readyAllies[0].isExhausted = true;
+      return true;
+    }
+
+    if (costType === 'BOUNCE_FRIENDLY') {
+      const allies = (friendlyState.field || []).filter(s => s.uid !== card.uid);
+      if (!allies.length) return false;
+      const b = allies[0];
+      const idx = friendlyState.field.findIndex(s => s.uid === b.uid);
+      if (idx !== -1) friendlyState.field.splice(idx, 1);
+      recycleSpiritCoresToReserve(b, side);
+      friendlyState.hand.push(b);
+      return true;
+    }
+
+    return true;
+  }
+
+  function checkIfConditionMet(act, card, side, friendlyState, enemyState) {
+    const ifCond = act && act.canva_rules && act.canva_rules.if_condition;
+    if (!ifCond) return true;
+    const ct = ifCond.check_type;
+    if (ct === 'ANY_NEXUS_ON_FIELD') {
+      return ((friendlyState.nexus && friendlyState.nexus.length > 0) || (enemyState.nexus && enemyState.nexus.length > 0));
+    }
+    if (ct === 'OPPONENT_HAS_NEXUS') {
+      return !!(enemyState.nexus && enemyState.nexus.length > 0);
+    }
+    if (ct === 'PLAYER_HAS_NEXUS') {
+      return !!(friendlyState.nexus && friendlyState.nexus.length > 0);
+    }
+    if (ct === 'HAS_SOUL_CORE') {
+      const condRaw = (ifCond.condition_raw || '').toLowerCase();
+      if (condRaw.includes('used to pay the cost') || condRaw.includes('paid as cost') || condRaw.includes('paid the cost')) {
+        return !!card.paidWithSoulCore;
+      }
+      return !!(card.hasSoulCore || card.paidWithSoulCore);
+    }
+    if (ct === 'IS_BRAVED') {
+      return !!(card.isBraved || card.brave);
+    }
+
+    const condRaw = (ifCond.condition_raw || '').toLowerCase();
+    if (condRaw) {
+      const parseWordNum = (w, def = 1) => {
+        if (!w) return def;
+        const map = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+        const parsed = parseInt(w, 10);
+        return isNaN(parsed) ? (map[w.toLowerCase()] || def) : parsed;
+      };
+
+      if (condRaw.includes('you control no spirit') || condRaw.includes('control no spirits')) {
+        return (friendlyState.field || []).filter(s => s.type === 'Spirit' || (s.type || '').includes('Spirit')).length === 0;
+      }
+      if (condRaw.includes('used to pay the cost') || condRaw.includes('paid as cost') || condRaw.includes('paid the cost')) {
+        return !!card.paidWithSoulCore;
+      }
+      if (condRaw.includes('soul core')) {
+        return !!(card.hasSoulCore || card.paidWithSoulCore);
+      }
+      const lifeMatch = condRaw.match(/your life is (?:at\s+)?(\w+)\s+or\s+less/i);
+      if (lifeMatch) {
+        const num = parseWordNum(lifeMatch[1], 3);
+        return (friendlyState.life || 0) <= num;
+      }
+      const oppSpiritsMatch = condRaw.match(/opponent controls (\w+) or more spirits/i);
+      if (oppSpiritsMatch) {
+        const num = parseWordNum(oppSpiritsMatch[1], 1);
+        return (enemyState.field || []).length >= num;
+      }
+      const countersMatch = condRaw.match(/you have (\w+) or more counters|one counter or more/i);
+      if (countersMatch) {
+        const num = countersMatch[1] ? parseWordNum(countersMatch[1], 1) : 1;
+        return (friendlyState.counters || 0) >= num;
+      }
+    }
+
+    return true;
+  }
+
+  function checkAndRecordOncePerTurnLimit(act, card, friendlyState) {
+    const limit = act && act.canva_rules && act.canva_rules.limit;
+    if (!limit) return true;
+    const curTurn = DuelState.turn || 1;
+    const actKey = `${act.type}_${(act.raw_text || '').slice(0, 32)}`;
+    if (limit === 'HARD_ONCE_PER_TURN') {
+      if (!friendlyState.__hardOptUsed || friendlyState.__hardOptTurn !== curTurn) {
+        friendlyState.__hardOptUsed = new Set();
+        friendlyState.__hardOptTurn = curTurn;
+      }
+      const key = `${card.name}::${actKey}`;
+      if (friendlyState.__hardOptUsed.has(key)) return false;
+      friendlyState.__hardOptUsed.add(key);
+      return true;
+    }
+    if (limit === 'SOFT_ONCE_PER_TURN') {
+      if (!card.__softOptUsed || card.__softOptTurn !== curTurn) {
+        card.__softOptUsed = new Set();
+        card.__softOptTurn = curTurn;
+      }
+      if (card.__softOptUsed.has(actKey)) return false;
+      card.__softOptUsed.add(actKey);
+      return true;
+    }
+    if (limit === 'ONCE_PER_GAME') {
+      if (!friendlyState.__oncePerGameUsed) friendlyState.__oncePerGameUsed = new Set();
+      const key = `${card.name}::${actKey}`;
+      if (friendlyState.__oncePerGameUsed.has(key)) return false;
+      friendlyState.__oncePerGameUsed.add(key);
+      return true;
+    }
+    return true;
+  }
   const NO_PROMPT_TRIGGERS = new Set(['PASSIVE', 'BURST', 'FLASH', 'GRAND_SKILL', 'GRAND_FIELD']);
 
   function executeUniversalCardEffect(card, side, trigger, context = {}) {
@@ -777,7 +1647,14 @@
     const enemyState = side === 'player' ? DuelState.opponent : DuelState.player;
     const curLevel = card.currentLevel || 1;
 
-    for (const act of actions) {
+    for (let i = 0; i < actions.length; i++) {
+      const act = actions[i];
+      if (actions[i + 1] && /\binstead\b/i.test(actions[i + 1].raw_text || '') &&
+          actions[i + 1].canva_rules && actions[i + 1].canva_rules.if_condition) {
+        if (checkIfConditionMet(actions[i + 1], card, side, friendlyState, enemyState)) {
+          continue;
+        }
+      }
       if (act.min_level && curLevel < act.min_level) continue;
       if (context.__skipTypes && context.__skipTypes.has(act.type)) continue;
       if (context.__declined && context.__declined.has(act)) continue;
@@ -787,7 +1664,60 @@
       }
 
       const actType = act.type;
-      if (actType === 'DRAW_CARDS') {
+      if (!checkIfConditionMet(act, card, side, friendlyState, enemyState)) continue;
+      if (!checkAndRecordOncePerTurnLimit(act, card, friendlyState)) continue;
+      if (!checkAndPayByCondition(act, card, side, friendlyState, enemySide, enemyState)) continue;
+
+      if (actType === 'HAND_DISCARD_DRAW') {
+        const maxDisc = act.max_discard || 1;
+        const nameFilt = act.name_filter || (act.canva_rules && act.canva_rules.name_filter && act.canva_rules.name_filter.value) || null;
+        const upTo = act.up_to !== undefined ? act.up_to : true;
+        const forEach = act.for_each !== undefined ? act.for_each : true;
+        const perDraw = act.draw_count || 1;
+        promptHandDiscardModal(card, side, maxDisc, nameFilt, upTo, (discardedCards) => {
+          if (!discardedCards || !discardedCards.length) return;
+          for (const dc of discardedCards) {
+            const hIdx = friendlyState.hand.findIndex(h => h.uid === dc.uid);
+            if (hIdx !== -1) {
+              const removed = friendlyState.hand.splice(hIdx, 1)[0];
+              sendToTrash(removed, side, `Discarded from Hand by ${card.name}`);
+            }
+          }
+          addLog(`🗑️ **[${card.name}]**: Discarded ${discardedCards.length} card(s) from Hand (${discardedCards.map(c => `"${c.name}"`).join(', ')})!`, 'magic');
+          const totalDraw = forEach ? discardedCards.length * perDraw : perDraw;
+          for (let i = 0; i < totalDraw; i++) {
+            const drawn = friendlyState.deck.shift();
+            if (drawn) {
+              friendlyState.hand.push(drawn);
+              if (side === 'player') {
+                AudioFX.playTone(390, 'sine', 0.15, 0.08);
+                addLog(`🎴 **[${card.name}]**: Drew "${drawn.name}" into your hand!`, 'magic');
+              }
+            }
+          }
+          renderDuelTable();
+          if (side === 'player') renderPlayerHand();
+        });
+      } else if (actType === 'HAND_DISCARD') {
+        const cnt = act.count || 1;
+        const targetSide = act.target === 'opponent' ? enemySide : side;
+        const nameFilt = act.name_filter || (act.canva_rules && act.canva_rules.name_filter && act.canva_rules.name_filter.value) || null;
+        const upTo = act.up_to !== undefined ? act.up_to : false;
+        promptHandDiscardModal(card, targetSide, cnt, nameFilt, upTo, (discardedCards) => {
+          if (!discardedCards || !discardedCards.length) return;
+          const tState = targetSide === 'player' ? DuelState.player : DuelState.opponent;
+          for (const dc of discardedCards) {
+            const hIdx = tState.hand.findIndex(h => h.uid === dc.uid);
+            if (hIdx !== -1) {
+              const removed = tState.hand.splice(hIdx, 1)[0];
+              sendToTrash(removed, targetSide, `Discarded from Hand by ${card.name}`);
+            }
+          }
+          addLog(`🗑️ **[${card.name}]**: Discarded ${discardedCards.length} card(s) from ${targetSide === 'player' ? 'your' : "opponent's"} Hand!`, 'magic');
+          renderDuelTable();
+          if (targetSide === 'player') renderPlayerHand();
+        });
+      } else if (actType === 'DRAW_CARDS') {
         const count = act.count || 1;
         for (let i = 0; i < count; i++) {
           const drawn = friendlyState.deck.shift();
@@ -796,6 +1726,8 @@
             if (side === 'player') {
               AudioFX.playTone(390, 'sine', 0.15, 0.08);
               addLog(`🎴 **[${card.name}]**: Channeled ability! Drew "${drawn.name}" into your hand.`, 'magic');
+              renderPlayerHand();
+              renderDuelTable();
             }
           }
         }
@@ -861,26 +1793,68 @@
           }
           addLog(`⚡ **[${card.name}]**: Granted +${boost} BP to all friendly Spirits!`, 'magic');
         } else {
-          card.battleBpBoost = (card.battleBpBoost || 0) + boost;
-          card.battleBp = (card.baseBp || card.currentBp) + card.battleBpBoost;
-          card.currentBp = card.battleBp;
-          addLog(`⚡ **[${card.name}]**: Powered up with +${boost} BP! (Current BP: ${card.currentBp})`, 'magic');
+          let buffTarget = card;
+          if (card.type === 'Magic' || !(friendlyState.field || []).some(s => s.uid === card.uid)) {
+            buffTarget = (context.targetSpiritUid && friendlyState.field.find(s => s.uid === context.targetSpiritUid)) ||
+                         (DuelState.combatEvent && friendlyState.field.find(s => s.uid === DuelState.combatEvent.attacker?.uid || s.uid === DuelState.combatEvent.blocker?.uid)) ||
+                         (friendlyState.field && friendlyState.field[0]);
+          }
+          if (buffTarget) {
+            buffTarget.battleBpBoost = (buffTarget.battleBpBoost || 0) + boost;
+            buffTarget.battleBp = (buffTarget.baseBp || buffTarget.currentBp) + buffTarget.battleBpBoost;
+            buffTarget.currentBp = buffTarget.battleBp;
+            addLog(`⚡ **[${card.name}]**: Granted +${boost} BP to "${buffTarget.name}"! (Current BP: ${buffTarget.currentBp})`, 'magic');
+          }
         }
       } else if (actType === 'DESTROY_SPIRIT_BP') {
-        const maxBp = act.max_bp || 5000;
-        const count = act.count || 1;
-        let destroyed = 0;
-        const victims = (enemyState.field || []).filter(s => (s.battleBp || s.currentBp || 0) <= maxBp);
-        for (const vic of victims) {
-          if (destroyed >= count) break;
-          const vIdx = enemyState.field.findIndex(s => s.uid === vic.uid);
-          if (vIdx !== -1) {
-            const popped = enemyState.field.splice(vIdx, 1)[0];
-            recycleSpiritCoresToReserve(popped, enemySide);
-            sendToTrash(popped, enemySide, `Destroyed by ${card.name} (${maxBp} BP or less)`);
-            AudioFX.destroy();
-            addLog(`💥 **[${card.name}]**: Obliterated opposing "${popped.name}" (${popped.currentBp} BP <= ${maxBp} BP limit)!`, 'damage');
-            destroyed++;
+        const rawText = act.raw_text || '';
+        const isCumulative = /up to a total of\s+(\d+)\s*bp/i.test(rawText);
+        if (isCumulative) {
+          const m = rawText.match(/up to a total of\s+(\d+)\s*bp/i);
+          const maxBp = m ? parseInt(m[1], 10) : (act.max_bp || 5000);
+          let remainingBp = maxBp;
+          const destroyedNames = [];
+          const candidates = (enemyState.field || [])
+            .map(s => ({ spirit: s, bp: s.battleBp || s.currentBp || 0 }))
+            .filter(item => item.bp <= remainingBp)
+            .sort((a, b) => b.bp - a.bp);
+
+          for (const item of candidates) {
+            if (item.bp <= remainingBp) {
+              const vIdx = enemyState.field.findIndex(s => s.uid === item.spirit.uid);
+              if (vIdx !== -1) {
+                const popped = enemyState.field.splice(vIdx, 1)[0];
+                remainingBp -= item.bp;
+                recycleSpiritCoresToReserve(popped, enemySide);
+                sendToTrash(popped, enemySide, `Destroyed by ${card.name} (Total ${maxBp} BP limit)`);
+                AudioFX.destroy();
+                destroyedNames.push(`"${popped.name}" (${item.bp} BP)`);
+              }
+            }
+          }
+
+          const usedBp = maxBp - remainingBp;
+          if (destroyedNames.length > 0) {
+            addLog(`💥 **[${card.name}]**: Destroyed ${destroyedNames.join(', ')} (Total ${usedBp}/${maxBp} BP)!`, 'damage');
+          } else {
+            addLog(`ℹ️ **[${card.name}]**: No opposing Spirits within the ${maxBp} BP limit to destroy.`, 'info');
+          }
+        } else {
+          const maxBp = act.max_bp || 5000;
+          const count = act.count || 1;
+          let destroyed = 0;
+          const victims = (enemyState.field || []).filter(s => (s.battleBp || s.currentBp || 0) <= maxBp);
+          for (const vic of victims) {
+            if (destroyed >= count) break;
+            const vIdx = enemyState.field.findIndex(s => s.uid === vic.uid);
+            if (vIdx !== -1) {
+              const popped = enemyState.field.splice(vIdx, 1)[0];
+              recycleSpiritCoresToReserve(popped, enemySide);
+              sendToTrash(popped, enemySide, `Destroyed by ${card.name} (${maxBp} BP or less)`);
+              AudioFX.destroy();
+              addLog(`💥 **[${card.name}]**: Obliterated opposing "${popped.name}" (${popped.currentBp} BP <= ${maxBp} BP limit)!`, 'damage');
+              destroyed++;
+            }
           }
         }
       } else if (actType === 'DESTROY_SPIRIT_DIRECT') {
@@ -1042,7 +2016,17 @@
           }
         }
       } else if (actType === 'SUMMON_FREE') {
-        const pool = act.source === 'trash' ? (friendlyState.trashPile || []) : friendlyState.hand;
+        if ((card.effect || '').toLowerCase().includes('twinkle necromancy') || (card.name || '').includes('Siegfried-Necro')) {
+          // Handled specifically with interactive choice / one-of-each constraint by Twinkle Necromancy
+          continue;
+        }
+        if (trigger === 'BURST' || act.burst_condition || act.target_desc === 'This Card' || (act.raw_text || '').toLowerCase().includes('summon this card')) {
+          // In Battle Spirits, "After this effect resolves, summon this card without paying the cost"
+          // refers to the Burst card itself being summoned to the field from the Burst Zone.
+          // This is handled by activateBurst directly. Never duplicate/pluck a card from the player's Hand!
+          continue;
+        }
+        const pool = act.source === 'trash' ? (friendlyState.trashCards || friendlyState.trashPile || []) : friendlyState.hand;
         const candIdx = pool.findIndex(c => (c.type || '').toLowerCase() === 'spirit' && c.uid !== card.uid);
         if (candIdx !== -1) {
           const summonedCard = pool.splice(candIdx, 1)[0];
@@ -1088,12 +2072,30 @@
           addLog(`🎴 **[${card.name}]**: Refilled Hand! Drew ${drawnCount} card(s) (Hand: ${friendlyState.hand.length}/${targetHand}).`, 'magic');
         }
       } else if (actType === 'SALVAGE') {
-        const trashPile = friendlyState.trashPile || [];
-        if (trashPile.length > 0) {
-          const picked = trashPile.pop();
-          friendlyState.hand.push(picked);
-          AudioFX.magic();
-          addLog(`♻️ **[${card.name}]**: Salvaged "${picked.name}" from Trash to Hand!`, 'magic');
+        const trashList = friendlyState.trashCards || friendlyState.trashPile || [];
+        if (trashList.length > 0) {
+          let pickedIdx = -1;
+          const targetDesc = (act.target_desc || act.desc || '').toLowerCase();
+          if (targetDesc.includes('[advent]') || targetDesc.includes('advent')) {
+            pickedIdx = trashList.findIndex(c => (c.type === 'Spirit' || (c.type || '').includes('Spirit')) && ((c.effect || '').includes('[Advent') || (c.effect || '').includes('煌臨') || (c.levels && String(c.levels).includes('Advent'))));
+          } else if (targetDesc.includes('spirit')) {
+            pickedIdx = trashList.findIndex(c => c.type === 'Spirit' || (c.type || '').includes('Spirit'));
+          } else if (targetDesc.includes('magic')) {
+            pickedIdx = trashList.findIndex(c => c.type === 'Magic');
+          } else if (targetDesc.includes('nexus')) {
+            pickedIdx = trashList.findIndex(c => (c.type || '').includes('Nexus'));
+          } else if (targetDesc.includes('brave')) {
+            pickedIdx = trashList.findIndex(c => (c.type || '').includes('Brave'));
+          }
+          if (pickedIdx === -1) pickedIdx = 0; // fallback to most recently discarded card
+          const picked = trashList.splice(pickedIdx, 1)[0];
+          if (picked) {
+            friendlyState.hand.push(picked);
+            AudioFX.magic();
+            addLog(`♻️ **[${card.name}]**: Salvaged "${picked.name}" from Trash to Hand!`, 'magic');
+            renderDuelTable();
+            if (side === 'player') renderPlayerHand();
+          }
         }
       } else if (actType === 'COUNTER_PLUS') {
         const amt = act.count || 1;
@@ -1110,16 +2112,21 @@
         addLog(`💎 **[${card.name}]**: Empowered! Gained +1 ${act.color || ''} Symbol!`, 'step');
       } else if (actType === 'DECK_DISCARD') {
         const count = act.count || 1;
+        const isSelf = (act.target === 'self');
+        const targetSide = isSelf ? side : enemySide;
+        const targetState = isSelf ? friendlyState : enemyState;
         let discarded = 0;
         for (let i = 0; i < count; i++) {
-          if (!enemyState.deck || enemyState.deck.length === 0) break;
-          const milled = enemyState.deck.shift();
-          sendToTrash(milled, enemySide, `Milled by ${card.name}`);
+          if (!targetState.deck || targetState.deck.length === 0) break;
+          const milled = targetState.deck.shift();
+          sendToTrash(milled, targetSide, `Discarded from decktop by ${card.name}`);
           discarded++;
         }
         if (discarded > 0) {
           AudioFX.magic();
-          addLog(`📚 **[${card.name}]**: Sent ${discarded} card(s) from opposing deck to Trash!`, 'magic');
+          addLog(`📚 **[${card.name}]**: Sent ${discarded} card(s) from ${isSelf ? 'your' : 'opposing'} decktop to Trash (Graveyard)!`, 'magic');
+          renderDuelTable();
+          if (targetSide === 'player') renderPlayerHand();
         }
       } else if (actType === 'CRUSH') {
         const millCount = curLevel;
@@ -1149,8 +2156,121 @@
         AudioFX.shield();
         addLog(`🛡️ **[${card.name}] [${actType}]**: Divine barrier active against [${colors.join(', ')}] effects!`, 'step');
       } else if (actType === 'SPECIAL_EFFECT') {
-        if (act.desc && act.desc.length > 3 && !act.desc.startsWith('[LV') && !act.desc.startsWith('(')) {
-          addLog(`✨ **[${card.name}]**: ${act.desc}`, 'step');
+        const descText = (act.raw_text || act.desc || '').toLowerCase();
+        
+        // 1. Decktop Mill
+        const millMatch = descText.match(/(?:discard|send)\s+(?:up to\s+)?(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?(?:top\s+of\s+(?:your\s+)?)?(opposing\s+)?decktop(?:\s+to\s+(?:the\s+)?trash)?/i);
+        if (millMatch) {
+          const mCount = parseWordNumber(millMatch[1]);
+          const isOpp = Boolean(millMatch[2]) || descText.includes('opposing');
+          const targetSide = isOpp ? enemySide : side;
+          const targetState = isOpp ? enemyState : friendlyState;
+          let discarded = 0;
+          for (let i = 0; i < mCount; i++) {
+            if (!targetState.deck || targetState.deck.length === 0) break;
+            const milled = targetState.deck.shift();
+            sendToTrash(milled, targetSide, `Discarded from decktop by ${card.name}`);
+            discarded++;
+          }
+          if (discarded > 0) {
+            AudioFX.magic();
+            addLog(`?? **[${card.name}]**: Sent ${discarded} card(s) from ${isOpp ? 'opposing' : 'your'} decktop to Trash (Graveyard)!`, 'magic');
+            renderDuelTable();
+            if (targetSide === 'player') renderPlayerHand();
+          }
+        }
+        // 2. Core Ramp: "put 1/2 cores from Void to your Reserve/Field/Spirit"
+        else if (descText.includes('core') && descText.includes('from the void')) {
+          const coreMatch = descText.match(/(?:put|send|place|move)\s+(a|an|one|two|three|four|five|\d+)\s+cores?\s+from\s+(?:the\s+)?void/i);
+          const coreCount = coreMatch ? parseWordNumber(coreMatch[1], 1) : 1;
+          friendlyState.reserve = (friendlyState.reserve || 0) + coreCount;
+          AudioFX.coreChime();
+          addLog(`?? **[${card.name}]**: Put ${coreCount} core(s) from the Void into your Reserve! (Total Reserve: ${friendlyState.reserve})`, 'magic');
+          renderDuelTable();
+        }
+        // 3. Draw & Filter: "draw X cards" in special effect
+        else if (descText.includes('draw') && descText.includes('card')) {
+          const drawMatch = descText.match(/draw\s+(a|an|one|two|three|four|\d+)\s+cards?/i);
+          const drawCount = drawMatch ? parseWordNumber(drawMatch[1], 1) : 1;
+          let drawnCards = 0;
+          for (let i = 0; i < drawCount; i++) {
+            if (!friendlyState.deck || !friendlyState.deck.length) break;
+            const d = friendlyState.deck.shift();
+            friendlyState.hand.push(d);
+            drawnCards++;
+          }
+          if (drawnCards > 0) {
+            AudioFX.magic();
+            addLog(`?? **[${card.name}]**: Drew ${drawnCards} card(s) from your deck!`, 'magic');
+            renderDuelTable();
+            if (side === 'player') renderPlayerHand();
+          }
+        }
+        // 4. Exhaust enemy spirits
+        else if (descText.includes('exhaust') && (descText.includes('opposing') || descText.includes('enemy'))) {
+          const exMatch = descText.match(/exhaust\s+(a|an|one|two|three|\d+)?\s*(?:opposing|enemy)?\s*(?:exhausted|ready)?\s*spirits?/i);
+          const exCount = exMatch && exMatch[1] ? parseWordNumber(exMatch[1], 1) : 1;
+          const readies = (enemyState.field || []).filter(s => !s.isExhausted);
+          if (readies.length > 0) {
+            promptUniversalTargetModal({
+              card,
+              side,
+              targetSide: enemySide,
+              targetKind: 'spirit',
+              title: `Exhaust Opposing Spirit (${card.name})`,
+              description: `Select up to ${exCount} opposing Spirit(s) to Exhaust:`,
+              minCount: 1,
+              maxCount: exCount,
+              filter: s => !s.isExhausted
+            }, (targets) => {
+              for (const t of targets) {
+                t.isExhausted = true;
+                AudioFX.slash();
+                addLog(`?? **[${card.name}]**: Exhausted opposing "${t.name}"!`, 'magic');
+              }
+              renderDuelTable();
+            });
+          }
+        }
+        // 5. Bounce enemy spirits: "return an opposing spirit to hand"
+        else if (descText.includes('return') && descText.includes('hand') && (descText.includes('opposing') || descText.includes('enemy'))) {
+          const bCandidates = enemyState.field || [];
+          if (bCandidates.length > 0) {
+            promptUniversalTargetModal({
+              card,
+              side,
+              targetSide: enemySide,
+              targetKind: 'spirit',
+              title: `Return Opposing Spirit to Hand (${card.name})`,
+              description: `Select an opposing Spirit to return to its owner's Hand:`,
+              minCount: 1,
+              maxCount: 1
+            }, (targets) => {
+              if (targets && targets.length > 0) {
+                const target = targets[0];
+                const idx = enemyState.field.findIndex(s => s.uid === target.uid);
+                if (idx !== -1) {
+                  const popped = enemyState.field.splice(idx, 1)[0];
+                  recycleSpiritCoresToReserve(popped, enemySide);
+                  enemyState.hand.push(popped);
+                  AudioFX.magic();
+                  addLog(`?? **[${card.name}]**: Returned opposing "${popped.name}" to Hand!`, 'magic');
+                  renderDuelTable();
+                }
+              }
+            });
+          }
+        }
+        // 6. Cumulative Cost Destruction (e.g. The SacredEmperor Siegfrieden XV)
+        else if (
+          descText.includes('destroy') &&
+          (descText.includes('total cost') || descText.includes('total of cost'))
+        ) {
+          executeAbilityActions(act.raw_text || act.desc, card, side, trigger, context);
+        }
+        // Fallback: informational log
+        else if (act.desc && act.desc.length > 3 && !act.desc.startsWith('[LV') && !act.desc.startsWith('(')) {
+          addLog(`? **[${card.name}]**: ${act.desc}`, 'step');
         }
       }
     }
@@ -1653,6 +2773,26 @@
     return await executeStartDuel(pDeckKey, oDeckKey, firstPlayer);
   }
 
+    function isContractPartnerCard(c) {
+    if (!c) return false;
+    const name = (c.name || '').toLowerCase();
+    const type = (c.type || '').toLowerCase();
+    const effect = (c.effect || '').toLowerCase();
+    const family = ((c.family || '') + ' ' + (c.families ? c.families.join(' ') : '')).toLowerCase();
+    return (
+      type.includes('contract') ||
+      type.includes('partner') ||
+      name.includes('partner') ||
+      name.includes('contract') ||
+      name.includes('javad') ||
+      effect.includes('[contract') ||
+      effect.includes('contract advent') ||
+      effect.includes('[soul state]') ||
+      effect.includes('契約') ||
+      effect.includes('パートナー')
+    );
+  }
+
   async function executeStartDuel(pDeckKey, oDeckKey, firstPlayer = 'player') {
     pDeckKey = pDeckKey || document.getElementById('arenaPlayerDeckSelect')?.value || (window.DeckManager ? window.DeckManager.getBattleDeckId() : null) || 'deck_std_red';
     oDeckKey = oDeckKey || document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
@@ -1825,8 +2965,25 @@
     if (finishedBar) finishedBar.style.display = 'none';
 
     // Deal 4 initial cards each
-    const pHand = shuffledP.splice(0, 4);
-    const oHand = shuffledO.splice(0, 4);
+    // Contract Partner Rule: Look for Contract card in deck to guarantee in starting hand
+    const pContractIdx = shuffledP.findIndex(c => isContractPartnerCard(c));
+    let pHand = [];
+    if (pContractIdx !== -1) {
+      const contractCard = shuffledP.splice(pContractIdx, 1)[0];
+      pHand = [contractCard, ...shuffledP.splice(0, 3)];
+      addLog(`🃏 **CONTRACT PARTNER**: Revealed "${contractCard.name}" from your deck as your Contract Partner!`, 'system');
+    } else {
+      pHand = shuffledP.splice(0, 4);
+    }
+
+    const oContractIdx = shuffledO.findIndex(c => isContractPartnerCard(c));
+    let oHand = [];
+    if (oContractIdx !== -1) {
+      const oContractCard = shuffledO.splice(oContractIdx, 1)[0];
+      oHand = [oContractCard, ...shuffledO.splice(0, 3)];
+    } else {
+      oHand = shuffledO.splice(0, 4);
+    }
 
     DuelState.inDuel = true;
     DuelState.turn = 1;
@@ -1852,12 +3009,15 @@
       voidCards: [],
       nexus: [],
       nexusCards: [],
+      mirage: null,
       soulCoreLocation: 'reserve',
       soulCoreSpiritUid: null,
       burst: null,
       deck: shuffledP,
       hand: pHand,
-      field: []
+      field: [],
+      hasConfirmedHand: false,
+      hasMulliganed: false
     };
 
     DuelState.opponent = {
@@ -1870,6 +3030,7 @@
       voidCards: [],
       nexus: [],
       nexusCards: [],
+      mirage: null,
       soulCoreLocation: 'reserve',
       soulCoreSpiritUid: null,
       burst: null,
@@ -1897,8 +3058,8 @@
     if (arenaEl && typeof arenaEl.scrollIntoView === 'function') arenaEl.scrollIntoView({ behavior: 'smooth' });
 
     if (firstPlayer === 'opponent') {
-      addLog(`▶️ **OPPONENT TURN 1**: Opponent won coin toss and begins Turn 1 phases.`, 'step');
-      safeTimeout(advanceOpponentStep, 1000);
+      addLog(`▶️ **OPPONENT TURN 1**: Opponent won coin toss and will take Turn 1 once you confirm your starting hand.`, 'step');
+      // DO NOT auto-advance opponent yet! Wait for player to confirm hand / mulligan!
     } else {
       addLog(`▶️ **START STEP**: Turn 1 begins! Click "Begin Turn" on the Step Navigator to proceed.`, 'step');
     }
@@ -1925,6 +3086,57 @@
   }
 
   // ── DUEL TABLE RENDERER ──
+  // ── MULLIGAN & STARTING HAND ENGINE ──
+  function performMulligan() {
+    if (!DuelState.inDuel || DuelState.player.hasConfirmedHand || DuelState.player.hasMulliganed) return;
+    const hand = DuelState.player.hand || [];
+    if (!hand.length) return;
+
+    const returnedCount = hand.length;
+    DuelState.player.deck.push(...hand);
+    DuelState.player.hand = [];
+
+    // Shuffle deck thoroughly
+    DuelState.player.deck = shuffle(DuelState.player.deck);
+
+    // Re-guarantee Contract Partner in the redrawn hand!
+    const pContractIdx = DuelState.player.deck.findIndex(c => isContractPartnerCard(c));
+    if (pContractIdx !== -1) {
+      const contractCard = DuelState.player.deck.splice(pContractIdx, 1)[0];
+      DuelState.player.hand = [contractCard, ...DuelState.player.deck.splice(0, 3)];
+      addLog(`🃏 **CONTRACT PARTNER**: Guaranteed "${contractCard.name}" in your redrawn hand!`, 'system');
+    } else {
+      DuelState.player.hand = DuelState.player.deck.splice(0, 4);
+    }
+
+    DuelState.player.hasMulliganed = true;
+    AudioFX.coreChime();
+    addLog(`🔄 **[MULLIGAN PERFORMED]**: Returned ${returnedCount} cards to deck, shuffled, and redrew 4 fresh cards!`, 'magic');
+    if (typeof showToast === 'function') showToast('Redrew starting hand! (Mulligan used)', 'success');
+    confirmStartingHandAndBegin();
+  }
+
+  function keepStartingHand() {
+    if (!DuelState.inDuel || DuelState.player.hasConfirmedHand) return;
+    DuelState.player.hasConfirmedHand = true;
+    DuelState.player.hasMulliganed = true;
+    addLog('✓ **[STARTING HAND KEPT]**: Player confirmed starting hand for the duel.', 'step');
+    confirmStartingHandAndBegin();
+  }
+
+  function confirmStartingHandAndBegin() {
+    DuelState.player.hasConfirmedHand = true;
+    renderDuelTable();
+    renderPlayerHand();
+
+    if (DuelState.firstPlayer === 'opponent') {
+      addLog(`▶️ **OPPONENT TURN 1**: Hand confirmed. Opponent begins Turn 1 phases.`, 'step');
+      safeTimeout(advanceOpponentStep, 800);
+    } else {
+      addLog(`▶️ **START STEP**: Turn 1 begins! Click "Begin Turn" on the Step Navigator to proceed.`, 'step');
+    }
+  }
+
   function renderDuelTable() {
     if (!DuelState.inDuel) return;
 
@@ -1964,7 +3176,7 @@
       } else {
         nexusZoneContent.innerHTML = pNexuses.map(n => `
           <div class="bnz-nexus-mini" onclick="event.stopPropagation(); BattleArena.openZoneModal('player-nexus');" title="${n.name} (Lv${n.currentLevel || 1} • ${n.currentCores || 0} Cores) - Click to inspect">
-            <img src="${n.image_url || '/placeholder.png'}" class="bnz-card-thumb" alt="${n.name}" onerror="this.src='/placeholder.png';">
+            <img src="${n.image_url || '/placeholder.png'}" class="bnz-card-thumb" alt="${n.name}" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';">
             <div class="bnz-nexus-info">
               <span class="bnz-nexus-name">${n.name}</span>
               <div class="bnz-nexus-stats">
@@ -2136,6 +3348,17 @@
         pScPill.className = 'soul-core-pill in-void';
       }
     }
+        // Render Count & Open Zone counts
+    const pCountVal = document.getElementById('playerCountVal');
+    if (pCountVal) pCountVal.textContent = DuelState.player.counters || 0;
+    const oCountVal = document.getElementById('opponentCountVal');
+    if (oCountVal) oCountVal.textContent = DuelState.opponent.counters || 0;
+
+    const pOpenVal = document.getElementById('playerOpenCount');
+    if (pOpenVal) pOpenVal.textContent = (DuelState.player.openCards || []).length;
+    const oOpenVal = document.getElementById('opponentOpenCount');
+    if (oOpenVal) oOpenVal.textContent = (DuelState.opponent.openCards || []).length;
+
     const pDeckCount = document.getElementById('playerDeckCount');
     if (pDeckCount) pDeckCount.textContent = `${(DuelState.player.deck || []).length} in Deck`;
 
@@ -2306,7 +3529,40 @@
     el.innerHTML = html;
   }
 
+  function openCardDetailContext(cardName, zone = 'auto') {
+    let contextList = null;
+    if (zone === 'hand') {
+      contextList = (DuelState.player && DuelState.player.hand ? DuelState.player.hand : []).map(c => c.name);
+    } else if (zone === 'field') {
+      const list = [];
+      const pField = (DuelState.player && DuelState.player.field) || [];
+      pField.forEach(s => {
+        if (!s) return;
+        list.push(s.name);
+        if (s.underlyingCards && s.underlyingCards.length > 0) {
+          s.underlyingCards.forEach(u => u && list.push(u.name));
+        }
+      });
+      contextList = list;
+    } else if (zone === 'opp-field') {
+      const list = [];
+      const oppField = (DuelState.opponent && DuelState.opponent.field) || [];
+      oppField.forEach(s => {
+        if (!s) return;
+        list.push(s.name);
+        if (s.underlyingCards && s.underlyingCards.length > 0) {
+          s.underlyingCards.forEach(u => u && list.push(u.name));
+        }
+      });
+      contextList = list;
+    }
+    if (typeof openCardDetail === 'function') {
+      openCardDetail(cardName, contextList);
+    }
+  }
+
   function renderFieldSpirit(spirit, side) {
+    recalculateSpiritBp(spirit);
     const isAttacker = DuelState.selectedAttacker && DuelState.selectedAttacker.uid === spirit.uid;
     let classes = `field-spirit-card card-color-${(spirit.color || "Red").toLowerCase()}`;
     if (spirit.isExhausted) classes += ' is-exhausted';
@@ -2388,7 +3644,7 @@
         ${dragHandleHtml}
         ${braveFieldBadge}
         ${hasSC ? `<div class="spirit-soul-core-badge" title="Soul Core is placed on this Spirit!">${getHexCoreSvg('soul', 13)} SOUL CORE</div>` : ''}
-        <button class="fsc-zoom-btn" onclick="event.stopPropagation(); openCardDetail('${safeSpName}')" title="Inspect Card Details">🔍</button>
+        <button class="fsc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeSpName}', 'field')" title="Inspect Card Details">🔍</button>
         <div class="fsc-header-row">
           <span class="fsc-level-tag">LV${spirit.currentLevel}</span>
           <span class="fsc-bp-tag">${spirit.currentBp} BP</span>
@@ -2504,6 +3760,351 @@
     };
   }
 
+// =========================================================================
+  // 🔮 SYMBOL COST REDUCTION & ULTIMATE SUMMON CONDITION ENGINE
+  // =========================================================================
+
+  function parseCardSymbols(target) {
+    if (target === undefined || target === null) return 1;
+    let symStr = '';
+    if (typeof target === 'object') {
+      symStr = String(target.symbol || '').trim();
+      if (!symStr) {
+        const type = String(target.type || '').toLowerCase();
+        if (type.includes('magic')) return 0;
+        return 1;
+      }
+    } else {
+      symStr = String(target).trim();
+    }
+    if (symStr === '' || symStr === '-' || symStr === '0' || symStr.toLowerCase() === 'none') return 0;
+    const px20 = (symStr.match(/20px/g) || []).length;
+    const px25 = (symStr.match(/25px/g) || []).length;
+    if (px20 + px25 > 0) return px20 + px25;
+    if (/^\d+$/.test(symStr)) return parseInt(symStr, 10);
+    if (symStr.includes(',') || symStr.includes('/')) {
+      const tokens = symStr.split(/[,/]/).map(t => t.trim()).filter(Boolean);
+      if (tokens.length > 0) return tokens.length;
+    }
+    return 1;
+  }
+
+  function parseCardColors(card) {
+    if (!card) return ['red'];
+    const raw = card.colors || card.color || 'red';
+    if (Array.isArray(raw)) return raw.map(c => String(c).toLowerCase().trim()).filter(Boolean);
+    const str = String(raw).toLowerCase();
+    if (str.includes(',')) return str.split(',').map(s => s.trim()).filter(Boolean);
+    if (str.includes('/')) return str.split('/').map(s => s.trim()).filter(Boolean);
+    return [str.trim()];
+  }
+
+  function getFriendlySymbols(side) {
+    const friendlyState = (side === 'opponent') ? DuelState.opponent : DuelState.player;
+    if (!friendlyState) return { total: 0, byColor: {}, rainbow: 0 };
+
+    const byColor = { red: 0, purple: 0, green: 0, white: 0, yellow: 0, blue: 0 };
+    let rainbow = 0;
+
+    // 1. Spirits / Ultimates on field
+    const field = friendlyState.field || [];
+    for (const s of field) {
+      let symCount = parseCardSymbols(s);
+      if (s.extraSymbols) symCount += s.extraSymbols;
+      if (symCount > 0) {
+        const eff = (s.effect || '').toLowerCase();
+        const isRainbow = eff.includes('treated as red/purple/green/yellow/blue') ||
+                          eff.includes('treated as red/purple/green/white/yellow/blue') ||
+                          eff.includes('treated as all colors') ||
+                          eff.includes('all-color') ||
+                          eff.includes('6 colors');
+
+        if (isRainbow) {
+          rainbow += symCount;
+        } else {
+          const colors = parseCardColors(s);
+          for (const col of colors) {
+            if (byColor[col] !== undefined) {
+              byColor[col] += symCount;
+            }
+          }
+        }
+      }
+
+      // Brave attached to spirit
+      if (s.brave) {
+        let bCount = parseCardSymbols(s.brave);
+        if (bCount > 0) {
+          const bEff = (s.brave.effect || '').toLowerCase();
+          const bIsRainbow = bEff.includes('treated as red/purple/green/yellow/blue') ||
+                             bEff.includes('treated as red/purple/green/white/yellow/blue') ||
+                             bEff.includes('treated as all colors');
+          if (bIsRainbow) {
+            rainbow += bCount;
+          } else {
+            const bColors = parseCardColors(s.brave);
+            for (const bCol of bColors) {
+              if (byColor[bCol] !== undefined) {
+                byColor[bCol] += bCount;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 2. Nexuses on field
+    const nexuses = friendlyState.nexus || [];
+    for (const n of nexuses) {
+      let symCount = parseCardSymbols(n);
+      if (symCount <= 0 && n.symbol !== '-' && n.symbol !== '0') {
+        symCount = 1;
+      }
+      if (symCount > 0) {
+        const nEff = (n.effect || '').toLowerCase();
+        const isRainbow = nEff.includes('treated as red/purple/green/yellow/blue') ||
+                          nEff.includes('treated as red/purple/green/white/yellow/blue') ||
+                          nEff.includes('treated as all colors');
+
+        if (isRainbow) {
+          rainbow += symCount;
+        } else {
+          const colors = parseCardColors(n);
+          for (const col of colors) {
+            if (byColor[col] !== undefined) {
+              byColor[col] += symCount;
+            }
+          }
+        }
+      }
+    }
+
+    const total = Object.values(byColor).reduce((a, b) => a + b, 0) + rainbow;
+    return { total, byColor, rainbow };
+  }
+
+  function calculateSymbolReduction(card, side = 'player') {
+    if (!card) return { reduction: 0, effectiveCost: 0, baseCost: 0, minCost: 0, maxReduction: 0, matchedSymbols: 0 };
+    const baseCost = card.cost !== undefined ? Number(card.cost) : 0;
+    if (baseCost <= 1) {
+      return { reduction: 0, effectiveCost: baseCost, baseCost, minCost: baseCost, maxReduction: 0, matchedSymbols: 0 };
+    }
+
+    // Standard official Battle Spirits reduction curve
+    let maxReduction = 0;
+    let minCost = 1;
+    if (baseCost === 2) {
+      maxReduction = 1; minCost = 1;
+    } else if (baseCost === 3) {
+      maxReduction = 2; minCost = 1;
+    } else if (baseCost === 4) {
+      maxReduction = 3; minCost = 1; // e.g. Leading Sieg (4 cost, 3 red reduction symbols -> min cost 1)
+    } else if (baseCost === 5) {
+      maxReduction = 3; minCost = 2;
+    } else if (baseCost === 6) {
+      maxReduction = 4; minCost = 2;
+    } else if (baseCost === 7) {
+      maxReduction = 4; minCost = 3;
+    } else if (baseCost === 8) {
+      maxReduction = 5; minCost = 3; // e.g. Ultimate-Seiryubi (8 cost, 5 reduction symbols -> min cost 3)
+    } else if (baseCost >= 9) {
+      maxReduction = Math.min(6, Math.floor(baseCost * 0.65));
+      minCost = Math.max(1, baseCost - maxReduction);
+    }
+
+    // Effect overrides for reduction
+    const eff = (card.effect || '').toLowerCase();
+    const redMatch = eff.match(/(?:reduction|軽減)(?:シンボル)?[:\s]+(\d+)/i);
+    if (redMatch) {
+      maxReduction = Math.min(baseCost - 1, parseInt(redMatch[1], 10));
+      minCost = Math.max(1, baseCost - maxReduction);
+    }
+    if (card.reduction !== undefined && card.reduction !== null && !isNaN(Number(card.reduction))) {
+      maxReduction = Math.min(baseCost - 1, Number(card.reduction));
+      minCost = Math.max(1, baseCost - maxReduction);
+    }
+
+    // Card colors
+    const cardColors = parseCardColors(card);
+    const isCardRainbow = eff.includes('reduction symbols of this card') &&
+      (eff.includes('treated as red/purple/green/white/yellow/blue') || eff.includes('all colors') || eff.includes('red/purple/green/yellow/blue'));
+
+    const friendly = getFriendlySymbols(side);
+
+    // Calculate matching friendly symbols
+    let matchedSymbols = 0;
+    if (isCardRainbow) {
+      matchedSymbols = friendly.total;
+    } else {
+      let specificSymbols = 0;
+      for (const col of cardColors) {
+        if (friendly.byColor[col]) {
+          specificSymbols += friendly.byColor[col];
+        }
+      }
+      matchedSymbols = specificSymbols + friendly.rainbow;
+    }
+
+    const actualReduction = Math.min(matchedSymbols, maxReduction, Math.max(0, baseCost - minCost));
+    const effectiveCost = Math.max(minCost, baseCost - actualReduction);
+
+    return {
+      reduction: actualReduction,
+      effectiveCost,
+      baseCost,
+      minCost,
+      maxReduction,
+      matchedSymbols
+    };
+  }
+
+  function getCardEffectiveCost(card, side = 'player') {
+    return calculateSymbolReduction(card, side).effectiveCost;
+  }
+
+  function validateUltimateSummonCondition(card, side = 'player') {
+    if (!card) return { allowed: true };
+    const type = String(card.type || '');
+    if (type !== 'Ultimate' && !type.includes('Ultimate')) {
+      return { allowed: true };
+    }
+
+    const eff = card.effect || '';
+    const m = eff.match(/(?:\[(?:Summon Condition|SuAdcon):?|【(?:召喚条件|召喚\/煌臨条件)：?)\s*([^\]】\n]+)/i);
+    if (!m) return { allowed: true };
+
+    const condText = m[1].trim();
+    if (!condText || /^(?:none|なし|無し)\.?$/i.test(condText)) {
+      return { allowed: true, condText };
+    }
+
+    const friendlyState = (side === 'opponent') ? DuelState.opponent : DuelState.player;
+    if (!friendlyState) return { allowed: true, condText };
+
+    const field = friendlyState.field || [];
+    const spirits = field.filter(s => s.type === 'Spirit' || (s.type || '').includes('Spirit'));
+    const ultimates = field.filter(s => s.type === 'Ultimate' || (s.type || '').includes('Ultimate'));
+    const life = friendlyState.life !== undefined ? friendlyState.life : 5;
+    const counters = friendlyState.counters || friendlyState.counter || 0;
+
+    const cl = condText.toLowerCase();
+
+    function wordToNum(str) {
+      const map = {
+        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,
+        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10
+      };
+      const s = String(str || '').toLowerCase().trim();
+      if (map[s] !== undefined) return map[s];
+      const n = parseInt(s, 10);
+      return isNaN(n) ? 1 : n;
+    }
+
+    // 1. Counter conditions
+    if (cl.includes('counter') || cl.includes('カウント')) {
+      const cMatch = cl.match(/(?:at least|have)\s+(\w+|\d+)\s+counter/i) || cl.match(/(\w+|\d+)\s+or more\s+counter/i) || cl.match(/c(\d+)\s+or\s+more/i);
+      const req = cMatch ? wordToNum(cMatch[1]) : 1;
+      if (counters < req) {
+        return { allowed: false, reason: `Requires ${req} or more Counters (Current: ${counters})`, condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    // 2. Life conditions
+    if (cl.includes('life') || cl.includes('ライフ')) {
+      const lessMatch = cl.match(/life\s+is\s+(?:at\s+)?(\w+|\d+)\s+or\s+less/i) || cl.match(/(\w+|\d+)\s+lives?\s+or\s+less/i);
+      if (lessMatch) {
+        const maxLife = wordToNum(lessMatch[1]);
+        if (life > maxLife) {
+          return { allowed: false, reason: `Requires Life to be ${maxLife} or less (Current: ${life})`, condText };
+        }
+        return { allowed: true, condText };
+      }
+      const moreMatch = cl.match(/life\s+is\s+(?:at\s+)?(\w+|\d+)\s+or\s+more/i) || cl.match(/at\s+least\s+(\w+|\d+)\s+lives?/i) || cl.match(/(\w+|\d+)\s+lives?\s+or\s+more/i);
+      if (moreMatch) {
+        const minLife = wordToNum(moreMatch[1]);
+        if (life < minLife) {
+          return { allowed: false, reason: `Requires Life to be ${minLife} or more (Current: ${life})`, condText };
+        }
+        return { allowed: true, condText };
+      }
+    }
+
+    // 3. Spirits & Trash empty check
+    if (cl.includes('no spirits') || cl.includes('0 spirit cards in your trash')) {
+      const trashSpirits = (friendlyState.trashCards || friendlyState.trash || []).filter(c => (c.type || '').includes('Spirit'));
+      if (spirits.length > 0 || trashSpirits.length > 0) {
+        return { allowed: false, reason: 'Requires controlling no Spirits and having 0 Spirits in Trash', condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    // 4. Ultimates on field
+    if (cl.includes('one or more ultimates') || cl.includes('1 or more ultimates') || cl.includes('at least one ultimate')) {
+      if (ultimates.length < 1) {
+        return { allowed: false, reason: 'Requires controlling at least 1 Ultimate on field', condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    // 5. Cost N or higher Spirit / Unit
+    const costMatch = cl.match(/cost\s+(\d+)\s+or\s+(?:higher|more)\s+(?:spirit|ultimate)/i);
+    if (costMatch) {
+      const reqCost = parseInt(costMatch[1], 10);
+      const countMatch = cl.match(/(?:control|have)\s+(\w+|\d+)\s+or\s+more\s+cost/i);
+      const reqCount = countMatch ? wordToNum(countMatch[1]) : 1;
+      const matching = field.filter(u => (u.cost || 0) >= reqCost);
+      if (matching.length < reqCount) {
+        return { allowed: false, reason: `Requires controlling at least ${reqCount} Cost ${reqCost}+ Spirit/Ultimate`, condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    // 6. Color-specific Spirits
+    const colorMatch = cl.match(/(?:have|control)\s+(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+spirit/i) ||
+                       cl.match(/(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+spirits?\s+on\s+your\s+field/i);
+    if (colorMatch) {
+      const reqCount = wordToNum(colorMatch[1]);
+      const reqColor = colorMatch[2].toLowerCase();
+      const matching = spirits.filter(s => (s.color || '').toLowerCase().includes(reqColor));
+      if (matching.length < reqCount) {
+        return { allowed: false, reason: `Requires controlling ${reqCount} or more ${colorMatch[2]} Spirits on field`, condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    // 7. Family-specific Spirit/Ultimate
+    const famMatch = cl.match(/(?:control|have)\s+(\w+|\d+)\s+or\s+more\s+([a-zA-Z\s]+?)\s+(?:spirit|ultimate)/i);
+    if (famMatch) {
+      const reqCount = wordToNum(famMatch[1]);
+      const fam = famMatch[2].trim().toLowerCase();
+      if (!['red', 'purple', 'green', 'white', 'yellow', 'blue', 'cost'].includes(fam)) {
+        const matching = field.filter(u => {
+          const uFam = ((u.family || '') + ' ' + (u.families ? u.families.join(' ') : '')).toLowerCase();
+          return uFam.includes(fam);
+        });
+        if (matching.length < reqCount) {
+          return { allowed: false, reason: `Requires controlling ${reqCount}+ "${famMatch[2].trim()}" Spirits/Ultimates`, condText };
+        }
+        return { allowed: true, condText };
+      }
+    }
+
+    // 8. Named card / Partner
+    const nameMatch = condText.match(/["'“‘]([^"'”’]+)["'”’]/);
+    if (nameMatch) {
+      const targetName = nameMatch[1].trim().toLowerCase();
+      const hasOnField = field.some(u => (u.name || '').toLowerCase().includes(targetName));
+      const isContractPartner = (friendlyState.contractCard && (friendlyState.contractCard.name || '').toLowerCase().includes(targetName));
+      if (!hasOnField && !isContractPartner) {
+        return { allowed: false, reason: `Requires controlling "${nameMatch[1].trim()}" on field or in Soul State`, condText };
+      }
+      return { allowed: true, condText };
+    }
+
+    return { allowed: true, condText };
+  }
+
   function renderPlayerHand() {
     const handEl = document.getElementById('playerHand');
     if (!handEl) return;
@@ -2514,27 +4115,57 @@
 
     const { reserve, fieldCores, total: totalAvailableCores } = getPlayerAvailableCores();
 
-    handEl.innerHTML = DuelState.player.hand.map(card => {
+    let mulliganHtml = '';
+    if (!DuelState.player.hasConfirmedHand) {
+      const isOppFirst = (DuelState.firstPlayer === 'opponent');
+      const subText = isOppFirst 
+        ? 'Opponent won coin toss and takes Turn 1. Check your starting hand: Redraw once or Keep Hand to start the duel.'
+        : 'Not satisfied with your cards? Redraw 4 fresh cards once!';
+      const keepBtnText = isOppFirst ? '✓ Keep Hand & Begin Match' : '✓ Keep Hand';
+
+      mulliganHtml = `
+        <div class="mulligan-prompt-bar" style="grid-column:1/-1;width:100%;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(30,58,138,0.95),rgba(88,28,135,0.95));border:1.5px solid #818cf8;border-radius:10px;padding:10px 16px;margin-bottom:10px;box-shadow:0 6px 18px rgba(99,102,241,0.35);">
+          <span style="font-size:0.86rem;font-weight:700;color:#e0e7ff;">🃏 <strong>Starting Hand:</strong> ${subText}</span>
+          <div style="display:flex;gap:8px;">
+            ${!DuelState.player.hasMulliganed ? `<button onclick="event.stopPropagation(); BattleArena.performMulligan()" style="background:#4f46e5;border:1px solid #a5b4fc;color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">🔄 Redraw 4 Cards</button>` : ''}
+            <button onclick="event.stopPropagation(); BattleArena.keepStartingHand()" style="background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.35);color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;">${keepBtnText}</button>
+          </div>
+        </div>
+      `;
+    }
+
+    handEl.innerHTML = mulliganHtml + DuelState.player.hand.map(card => {
       const isSelected = DuelState.selectedPlayerCard && DuelState.selectedPlayerCard.uid === card.uid;
       const isBrave = card.type === 'Brave' || (card.type || '').includes('Brave');
-      const isSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isBrave;
+      const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+      const isSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isBrave && !isUltimate;
       const isMagic = card.type === 'Magic';
       const isNexus = (card.type || '').includes('Nexus');
-      const cost = card.cost || 0;
-      const totalNeeded = (isSpirit || isBrave) ? cost + 1 : cost;
+      const baseCost = card.cost !== undefined ? Number(card.cost) : 0;
+      const reductionInfo = calculateSymbolReduction(card, 'player');
+      const cost = reductionInfo.effectiveCost;
+      const isReduced = cost < baseCost;
+      const reductionText = isReduced ? ` [Reduced from ${baseCost}]` : '';
+      const totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
 
       // Strict Battle Spirits Rule: Attack step ONLY permits Flash cards!
       const canPlayStep = canPlayCardInCurrentPhase(card);
       const tributeReq = getCardTributeRequirement(card);
       const eligibleTributes = tributeReq ? getEligibleTributeSpirits(tributeReq, DuelState.player.field) : [];
       const hasTributeCondition = !tributeReq || (eligibleTributes.length > 0);
-      const canAfford = canPlayStep && hasTributeCondition && (totalAvailableCores >= totalNeeded);
-      const canAffordDirect = canPlayStep && (reserve >= totalNeeded);
+
+      // Ultimate summon condition check
+      const ultCheck = isUltimate ? validateUltimateSummonCondition(card, 'player') : { allowed: true };
+      const meetsCondition = ultCheck.allowed;
+
+      const canAfford = canPlayStep && hasTributeCondition && meetsCondition && (totalAvailableCores >= totalNeeded);
+      const canAffordDirect = canPlayStep && meetsCondition && (reserve >= totalNeeded);
       const needsSacrifice = canAfford && !canAffordDirect;
 
       let cls = `hand-card-item card-theme-${(card.color || 'red').toLowerCase()}`;
       if (isSelected) cls += ' selected-hand-card';
       if (!canPlayStep) cls += ' cannot-play-step';
+      else if (!meetsCondition) cls += ' cannot-play-condition';
       else if (!canAfford) cls += ' cannot-afford';
 
       let actionBtnHtml = '';
@@ -2549,46 +4180,90 @@
       const burstBtnLabel = DuelState.player.burst ? '🔄 Replace Burst' : '🔒 Set as Burst';
       const burstBtnHtml = canSetBurst ? `<button class="btn-set-burst" onclick="event.stopPropagation(); BattleArena.setBurst('${card.uid}')">${burstBtnLabel}</button>` : '';
 
-      if (canPlayStep && isBrave && isMainStep) {
+      // Mirage Action Button
+      const mirageCheck = canSetMirage(card, 'player');
+      const mirageBtnHtml = (isMainStep && mirageCheck.allowed) ? `<button class="btn-quick-mirage" style="background:linear-gradient(135deg, #06b6d4, #0891b2); border-color:#22d3ee; margin-top:4px;" onclick="event.stopPropagation(); BattleArena.setMirage('${card.uid}')">?? Set Mirage (${mirageCheck.cost})</button>` : '';
+
+      // Accel Action Button
+      const accelCheck = canCastAccel(card, 'player');
+      const accelBtnHtml = (canPlayStep && accelCheck.allowed) ? `<button class="btn-quick-accel" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24; margin-top:4px;" onclick="event.stopPropagation(); BattleArena.castAccel('${card.uid}')">? Accel (${accelCheck.cost})</button>` : '';
+
+      if (isUltimate && !meetsCondition) {
+        actionBtnHtml = `<button class="btn-quick-disabled" disabled title="Summon Condition: ${ultCheck.reason}">🔒 ${ultCheck.reason || 'Summon Condition Not Met'}</button>`;
+      } else if (canPlayStep && isBrave && isMainStep) {
         const eligibleHosts = DuelState.player.field.filter(s => !s.brave);
         let braveBtns = '';
         if (canAffordDirect) {
-          braveBtns += `<button class="btn-quick-summon" onclick="event.stopPropagation(); BattleArena.summonBraveAsSpirit('${card.uid}')" title="Summon as Spirit (Cost ${cost} + 1 Core)">⚔️ Spirit</button>`;
+          braveBtns += `<button class="btn-quick-summon" onclick="event.stopPropagation(); BattleArena.summonBraveAsSpirit('${card.uid}')" title="Summon as Spirit (Cost ${cost} + 1 Core)">⚔️ Spirit (${cost})</button>`;
         } else if (needsSacrifice) {
-          braveBtns += `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">⚡ Sac</button>`;
+          braveBtns += `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">⚡ Sac (${cost})</button>`;
         }
         if (eligibleHosts.length > 0 && reserve >= cost) {
-          braveBtns += `<button class="btn-quick-brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${card.uid}', 'hand')" title="Combine with field Spirit (Cost ${cost})">🔗 Brave</button>`;
+          braveBtns += `<button class="btn-quick-brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${card.uid}', 'hand')" title="Combine with field Spirit (Cost ${cost})">🔗 Brave (${cost})</button>`;
         }
         actionBtnHtml = `<div class="brave-actions-duo">${braveBtns}</div>`;
-      } else if (canPlayStep && isSpirit) {
-        const btnLabel = isAttackStep ? '⚡ Flash Summon' : '⚡ Summon';
+      } else if (canPlayStep && (isSpirit || isUltimate)) {
+        const btnLabel = isAttackStep
+          ? (isUltimate ? '⚡ Flash Summon' : '⚡ Flash Summon')
+          : (isUltimate ? '⚔️ Summon' : '⚡ Summon');
+        const btnStyle = isUltimate ? 'style="background:linear-gradient(135deg, #eab308, #ca8a04); border-color:#fde047;"' : '';
         if (canAffordDirect) {
-          actionBtnHtml = `<button class="btn-quick-summon" onclick="event.stopPropagation(); BattleArena.summonCard('${card.uid}')">${btnLabel}</button>`;
+          actionBtnHtml = `<button class="btn-quick-summon" ${btnStyle} onclick="event.stopPropagation(); BattleArena.summonCard('${card.uid}')">${btnLabel} (${cost})</button>`;
         } else if (needsSacrifice) {
-          actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; ${isAttackStep ? 'Flash Summon' : 'Summon'} (${cost})</button>`;
+          actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">💀 Sac &amp; ${isAttackStep ? 'Flash Summon' : 'Summon'} (${cost})</button>`;
         }
       } else if (canPlayStep && isMagic) {
-        const btnLabel = isAttackStep ? '✨ Flash Cast' : '✨ Cast';
-        if (canAffordDirect) {
-          actionBtnHtml = `<button class="btn-quick-magic" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}')">${btnLabel} (${cost})</button>`;
-        } else if (needsSacrifice) {
-          actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; ${isAttackStep ? 'Flash Cast' : 'Cast'} (${cost})</button>`;
+        const eff = card.effect || '';
+        const hasMainTiming = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
+        const hasFlashTimingInCard = /\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff);
+
+        if (isAttackStep) {
+          // Attack Step only permits Flash timing
+          if (canAffordDirect) {
+            actionBtnHtml = `<button class="btn-quick-magic" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}', null, null, 'flash')">⚡ Flash (${cost})</button>`;
+          } else if (needsSacrifice) {
+            actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}', 'flash')">💀 Sac &amp; Flash (${cost})</button>`;
+          }
+        } else if (isMainStep && hasMainTiming && hasFlashTimingInCard) {
+          // Main Step with both Main and Flash options: render TWO distinct buttons!
+          let mainBtn = '';
+          let flashBtn = '';
+          if (canAffordDirect) {
+            mainBtn = `<button class="btn-quick-magic" style="background:linear-gradient(135deg, #0284c7, #0369a1); border-color:#38bdf8; font-size:0.75rem; padding:4px 6px;" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}', null, null, 'main')">📜 Main (${cost})</button>`;
+            flashBtn = `<button class="btn-quick-magic" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24; font-size:0.75rem; padding:4px 6px;" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}', null, null, 'flash')">⚡ Flash (${cost})</button>`;
+          } else if (needsSacrifice) {
+            mainBtn = `<button class="btn-quick-sacrifice" style="background:linear-gradient(135deg, #0284c7, #0369a1); border-color:#38bdf8; font-size:0.72rem; padding:4px 6px;" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}', 'main')">💀 Main (${cost})</button>`;
+            flashBtn = `<button class="btn-quick-sacrifice" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24; font-size:0.72rem; padding:4px 6px;" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}', 'flash')">💀 Flash (${cost})</button>`;
+          }
+          actionBtnHtml = `<div style="display:flex; gap:3px; width:100%; margin-top:3px;">${mainBtn}${flashBtn}</div>`;
+        } else {
+          // Single timing magic card
+          const timingLabel = hasFlashTimingInCard ? `⚡ Flash (${cost})` : `📜 Cast (${cost})`;
+          const mode = hasFlashTimingInCard ? 'flash' : 'main';
+          if (canAffordDirect) {
+            actionBtnHtml = `<button class="btn-quick-magic" onclick="event.stopPropagation(); BattleArena.castMagic('${card.uid}', null, null, '${mode}')">${timingLabel}</button>`;
+          } else if (needsSacrifice) {
+            actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}', '${mode}')">💀 Sac &amp; Cast (${cost})</button>`;
+          }
         }
       } else if (canPlayStep && isNexus && isMainStep) {
         const btnLabel = '🏛️ Deploy';
         if (canAffordDirect) {
           actionBtnHtml = `<button class="btn-quick-summon" style="background:linear-gradient(135deg, #0284c7, #0369a1); border-color:#38bdf8;" onclick="event.stopPropagation(); BattleArena.deployNexus('${card.uid}')">${btnLabel} (${cost})</button>`;
         } else if (needsSacrifice) {
-          actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; ${btnLabel} (${cost})</button>`;
+          actionBtnHtml = `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">💀 Sac &amp; ${btnLabel} (${cost})</button>`;
         }
       }
+
+      const costBadgeHtml = isReduced
+        ? `<div class="hc-cost-badge hc-cost-badge-reduced" title="Reduced from ${baseCost} to ${cost} by field symbols">${cost}</div>`
+        : `<div class="hc-cost-badge">${baseCost}</div>`;
 
       const safeCardName = (card.name || '').replace(/'/g, "\\'");
       return `
         <div class="${cls}" onclick="BattleArena.selectHandCard('${card.uid}')">
-          <button class="hc-zoom-btn" onclick="event.stopPropagation(); openCardDetail('${safeCardName}')" title="View Full Card Details">🔍</button>
-          <div class="hc-cost-badge">${card.cost}</div>
+          <button class="hc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeCardName}', 'hand')" title="View Full Card Details">🔍</button>
+          ${costBadgeHtml}
           <div class="hc-img-wrap">
             <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
@@ -2597,7 +4272,7 @@
             <div class="hc-type">${card.type} • ${card.color}</div>
           </div>
           ${actionBtnHtml}
-          ${adventBtnHtml}${burstBtnHtml}
+          ${adventBtnHtml}${burstBtnHtml}${mirageBtnHtml}${accelBtnHtml}
         </div>
       `;
     }).join('');
@@ -2856,10 +4531,11 @@
       return false;
     }
 
-    // 2. Spirits can only be summoned from Hand during Flash timing if they have Swift (神速) or an explicit Flash-summon ability
+    // 2. Spirits can only be summoned from Hand during Flash timing if they have Swift (神速), Violent High Speed (烈神速), Accel, or an explicit Flash-summon ability
     if (cardType.includes('spirit')) {
-      if (eff.includes('swift') || eff.includes('神速')) return true;
-      if (/flash.*?(?:you can\s+)?summon this (?:spirit\s+)?card from (?:your\s+)?hand/i.test(card.effect)) return true;
+      if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
+      if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
+      if (eff.includes('[accel:') && /flash/i.test(eff)) return true;
       return false;
     }
 
@@ -2869,8 +4545,9 @@
     }
 
     // 4. Braves / Ultimates
-    if (eff.includes('swift') || eff.includes('神速')) return true;
-    if (/flash.*?(?:you can\s+)?summon this card from (?:your\s+)?hand/i.test(card.effect)) return true;
+    if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
+    if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
+    if (eff.includes('[accel:') && /flash/i.test(eff)) return true;
 
     return false;
   }
@@ -3053,6 +4730,26 @@
       else if (low.includes('grand')) cls = 'kw-grand';
       return `<span class="effect-keyword-pill ${cls}">${match}</span>`;
     });
+
+    // 5. Card Name References: Make referenced card names in quotes clickable!
+    safe = safe.replace(/(?:&quot;|"|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|"|[”"」])/gu, (match, cardName) => {
+      const trimmed = cardName.trim();
+      const exclude = new Set([
+        'Ancient Dragon', 'Astral Dragon', 'Ogre Wizard', 'Evil God', 'DemonLord',
+        'Hell Contract', 'Purple', 'Red', 'Green', 'White', 'Yellow', 'Blue',
+        'Your Turn', "Opponent's Turn", 'Either Attack Step', 'Your Attack Step', "Opponent's Attack Step"
+      ]);
+      if (exclude.has(trimmed)) return match;
+      const isKnownCard = trimmed.startsWith('The ') ||
+        (typeof CardEffectsDB !== 'undefined' && CardEffectsDB[trimmed]) ||
+        (typeof WasmDB !== 'undefined' && WasmDB.getCardByName && WasmDB.getCardByName(trimmed));
+      if (isKnownCard) {
+        const safeJs = trimmed.replace(/'/g, "\\'");
+        return `"<span class="card-ref-link" onclick="event.stopPropagation(); if (typeof openCardDetail === 'function') openCardDetail('${safeJs}')" style="color:#60a5fa; text-decoration:underline; font-weight:700; cursor:pointer;" title="Click to inspect ${trimmed}">${trimmed}</span>"`;
+      }
+      return match;
+    });
+
     return safe;
   }
 
@@ -3074,19 +4771,30 @@
       return;
     }
 
-    const isSpirit = card.type === 'Spirit' || (card.type || '').includes('Spirit');
+    const isBrave = card.type === 'Brave' || (card.type || '').includes('Brave');
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    const isSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isBrave && !isUltimate;
     const isMagic = card.type === 'Magic';
     const isNexus = (card.type || '').includes('Nexus');
-    const cost = card.cost !== undefined ? card.cost : 0;
-    const totalNeeded = isSpirit ? cost + 1 : cost;
+
+    const baseCost = card.cost !== undefined ? Number(card.cost) : 0;
+    const reductionInfo = calculateSymbolReduction(card, 'player');
+    const cost = reductionInfo.effectiveCost;
+    const isReduced = cost < baseCost;
+    const reductionText = isReduced ? ` [Reduced from ${baseCost}]` : '';
+    const totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
 
     const isPlayerTurn = DuelState.activePlayer === 'player';
     const phase = DuelState.phases[DuelState.phaseIndex];
     const canPlayStep = canPlayCardInCurrentPhase(card);
 
+    const isInspectUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    const ultCheck = isInspectUltimate ? validateUltimateSummonCondition(card, 'player') : { allowed: true };
+    const meetsCondition = ultCheck.allowed;
+
     const available = getPlayerAvailableCores();
-    const canAffordDirect = canPlayStep && (available.reserve >= totalNeeded);
-    const canAffordWithSacrifice = canPlayStep && (available.total >= totalNeeded);
+    const canAffordDirect = canPlayStep && meetsCondition && (available.reserve >= totalNeeded);
+    const canAffordWithSacrifice = canPlayStep && meetsCondition && (available.total >= totalNeeded);
 
     // Levels breakdown HTML
     let levelsHtml = '';
@@ -3140,8 +4848,11 @@
       }
     } else if (isInHand) {
       const isInspectBrave = card.type === 'Brave' || (card.type || '').includes('Brave');
-      const isInspectSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isInspectBrave;
-      if (canPlayStep && isInspectBrave) {
+      const isInspectSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isInspectBrave && !isInspectUltimate;
+      const isInspectUnit = isInspectSpirit || isInspectUltimate;
+      if (isInspectUltimate && !meetsCondition) {
+        actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled title="Summon Condition: ${ultCheck.reason}">🔒 ${ultCheck.reason || 'Summon Condition Not Met'}</button>`;
+      } else if (canPlayStep && isInspectBrave) {
         const eligibleHosts = DuelState.player.field.filter(s => !s.brave);
         let bBtns = '';
         if (canAffordDirect) {
@@ -3155,23 +4866,49 @@
           bBtns += `<button class="btn-inspector-action btn-inspect-brave" onclick="BattleArena.openBraveCombineModal('${card.uid}', 'hand')">🔗 Brave onto Spirit (Cost ${cost})</button>`;
         }
         actionBtnHtml = bBtns;
-      } else if (canPlayStep && isInspectSpirit) {
-        const btnText = (phase === 'ATTACK') ? `⚡ Flash Summon (${cost})` : `⚡ Summon Spirit (Cost ${cost})`;
+      } else if (canPlayStep && isInspectUnit) {
+        const btnText = (phase === 'ATTACK')
+          ? `⚡ Flash Summon (${cost})`
+          : (isInspectUltimate ? `⚔️ Summon Ultimate (Cost ${cost})` : `⚡ Summon Spirit (Cost ${cost})`);
+        const btnStyle = isInspectUltimate ? 'style="background:linear-gradient(135deg, #eab308, #ca8a04); border-color:#fde047;"' : '';
         if (canAffordDirect) {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-summon" onclick="BattleArena.summonCard('${card.uid}')">${btnText}</button>`;
+          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-summon" ${btnStyle} onclick="BattleArena.summonCard('${card.uid}')">${btnText}</button>`;
         } else if (canAffordWithSacrifice) {
           actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; Summon (${cost})</button>`;
         } else {
           actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${totalNeeded} Cores</button>`;
         }
       } else if (canPlayStep && isMagic) {
-        const btnText = (phase === 'ATTACK') ? `✨ Flash Cast (${cost})` : `✨ Cast Magic (Cost ${cost})`;
-        if (canAffordDirect) {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-magic" onclick="BattleArena.castMagic('${card.uid}')">${btnText}</button>`;
-        } else if (canAffordWithSacrifice) {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; Cast (${cost})</button>`;
+        const eff = card.effect || '';
+        const hasMain = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
+        const hasFlash = /\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff);
+
+        if (phase === 'ATTACK') {
+          if (canAffordDirect) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-magic" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24;" onclick="BattleArena.castMagic('${card.uid}', null, null, 'flash')">⚡ Flash Cast (${cost})</button>`;
+          } else if (canAffordWithSacrifice) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}', 'flash')">💀 Sacrifice &amp; Flash (${cost})</button>`;
+          } else {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${cost} Cores</button>`;
+          }
+        } else if (isMainStep && hasMain && hasFlash) {
+          let mainBtn = canAffordDirect
+            ? `<button class="btn-inspector-action btn-inspect-magic" style="flex:1; background:linear-gradient(135deg, #0284c7, #0369a1); border-color:#38bdf8;" onclick="BattleArena.castMagic('${card.uid}', null, null, 'main')">📜 Cast Main (${cost})</button>`
+            : (canAffordWithSacrifice ? `<button class="btn-inspector-action btn-inspect-sac" style="flex:1;" onclick="BattleArena.openSacrificeModal('${card.uid}', 'main')">💀 Main (${cost})</button>` : `<button class="btn-inspector-action btn-inspect-disabled" disabled style="flex:1;">Need ${cost}c</button>`);
+          let flashBtn = canAffordDirect
+            ? `<button class="btn-inspector-action btn-inspect-magic" style="flex:1; background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24;" onclick="BattleArena.castMagic('${card.uid}', null, null, 'flash')">⚡ Flash Cast (${cost})</button>`
+            : (canAffordWithSacrifice ? `<button class="btn-inspector-action btn-inspect-sac" style="flex:1;" onclick="BattleArena.openSacrificeModal('${card.uid}', 'flash')">💀 Flash (${cost})</button>` : `<button class="btn-inspector-action btn-inspect-disabled" disabled style="flex:1;">Need ${cost}c</button>`);
+          actionBtnHtml = `<div style="display:flex; gap:6px; width:100%;">${mainBtn}${flashBtn}</div>`;
         } else {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${cost} Cores</button>`;
+          const mode = hasFlash ? 'flash' : 'main';
+          const btnText = hasFlash ? `⚡ Flash Cast (${cost})` : `📜 Cast Magic (${cost})`;
+          if (canAffordDirect) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-magic" onclick="BattleArena.castMagic('${card.uid}', null, null, '${mode}')">${btnText}</button>`;
+          } else if (canAffordWithSacrifice) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}', '${mode}')">💀 Sacrifice &amp; Cast (${cost})</button>`;
+          } else {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${cost} Cores</button>`;
+          }
         }
       } else if (canPlayStep && isNexus) {
         const btnText = (phase === 'ATTACK') ? `🏛️ Flash Deploy Nexus (${cost})` : `🏛️ Deploy Nexus (Cost ${cost})`;
@@ -3351,7 +5088,7 @@
 
   function getCardAbilityBlocks(cardEffect) {
     if (!cardEffect) return [];
-    const rawBlocks = cardEffect.split(/(?=\n\s*(?:\[LV\d+\]|LV\d+))/i);
+    const rawBlocks = cardEffect.split(/(?=\n\s*(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?(?:\[LV\d+\]|LV\d+))/i);
     return rawBlocks.map(b => b.trim()).filter(Boolean);
   }
 
@@ -3366,11 +5103,70 @@
     return map[s] !== undefined ? map[s] : defaultVal;
   }
 
+  function extractMagicTimingBlock(effectText, phase, mode = 'hand', forcedEffectType = null) {
+    if (!effectText || typeof effectText !== 'string') return '';
+    const text = effectText.trim();
+
+    if (forcedEffectType === 'main') {
+      const mMatch = text.match(/\[(?:Main|MAIN)\]([\s\S]*?)(?=\[(?:Flash|FLASH)\]|$)/i);
+      if (mMatch) return mMatch[1].trim();
+    } else if (forcedEffectType === 'flash') {
+      const fMatch = text.match(/\[(?:Flash|FLASH)\]([\s\S]*?)$/i);
+      if (fMatch) return fMatch[1].trim();
+    }
+
+    if (mode === 'burst') {
+      const burstMatch = text.match(/(\[(?:Burst|BURST)[^\]]*\][\s\S]*?)(?=\[(?:Main|MAIN|Flash|FLASH)\]|$)/i);
+      if (burstMatch) return burstMatch[1].trim();
+      const bAltMatch = text.match(/((?:Burst|BURST):[\s\S]*?)(?=\[(?:Main|MAIN|Flash|FLASH)\]|$)/i);
+      if (bAltMatch) return bAltMatch[1].trim();
+      return text;
+    }
+
+    // mode === 'hand'
+    let nonBurst = text.replace(/\[(?:Burst|BURST)[^\]]*\][\s\S]*?(?=\[(?:Main|MAIN|Flash|FLASH)\])/gi, '').trim();
+    if (nonBurst.startsWith('[Burst') || nonBurst.startsWith('[BURST')) {
+      nonBurst = nonBurst.replace(/^\[(?:Burst|BURST)[^\]]*\][^\n]*\n?/i, '').trim();
+    }
+
+    const hasMain = /\[(?:Main|MAIN)\]/i.test(nonBurst);
+    const hasFlash = /\[(?:Flash|FLASH)\]/i.test(nonBurst);
+
+    if (phase === 'MAIN') {
+      if (hasMain) {
+        const mMatch = nonBurst.match(/\[(?:Main|MAIN)\]([\s\S]*?)(?=\[(?:Flash|FLASH)\]|$)/i);
+        return mMatch ? mMatch[1].trim() : nonBurst;
+      }
+      if (hasFlash) {
+        const fMatch = nonBurst.match(/\[(?:Flash|FLASH)\]([\s\S]*?)$/i);
+        return fMatch ? fMatch[1].trim() : nonBurst;
+      }
+      return nonBurst;
+    }
+
+    // phase === 'ATTACK' (Flash)
+    if (hasFlash) {
+      const fMatch = nonBurst.match(/\[(?:Flash|FLASH)\]([\s\S]*?)$/i);
+      return fMatch ? fMatch[1].trim() : nonBurst;
+    }
+
+    return nonBurst;
+  }
+
   // ── UNIVERSAL CARD ABILITY DISPATCHER ──
   // Resolves core abilities across all 14,500+ cards for all triggers: SUMMON, ATTACK, BLOCK, DESTROYED, ADVENT, MAGIC
   function executeAbilityActions(bodyText, card, side = 'player', triggerName = 'SUMMON', context = {}) {
     if (!bodyText || !card) return;
     const bodyLower = bodyText.toLowerCase();
+
+    // STRICT LEVEL CHECK: If ability block explicitly requires a level higher than current, DO NOT execute!
+    const lvlMatch = bodyText.match(/(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+    if (lvlMatch && lvlMatch[1]) {
+      const curLvl = card.currentLevel || 1;
+      if (!isEffectLevelMet(lvlMatch[1], curLvl)) {
+        return;
+      }
+    }
 
     // STRICT BRAVE GATING: [When Braved], [During Brave], or 合体時 abilities are strictly inactive unless the card is Braved!
     const isBraveAbility = /\[(?:when|during)\s+braved?\]|合体時|合体中/i.test(bodyText);
@@ -3453,23 +5249,209 @@
         }
       }
     }
-    // 4. DESTROY OPPOSING SPIRIT BY BP
-    else if (/destroy\s+(?:an?|one|\d+)?\s*opposing\s+(\d+)\s*bp\s+or\s+less\s+(?:spirit|ultimate)/i.test(bodyLower)) {
-      const match = bodyLower.match(/destroy\s+(?:an?|one|\d+)?\s*opposing\s+(\d+)\s*bp\s+or\s+less\s+(?:spirit|ultimate)/i);
-      const maxBp = parseInt(match[1], 10);
-      const eligible = enemyField.filter(s => (s.currentBp || 0) <= maxBp);
-      if (eligible.length > 0) {
-        eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
-        const dest = eligible[0];
-        const tIdx = enemyField.findIndex(s => s.uid === dest.uid);
+    // 4A2. CUMULATIVE COST DESTRUCTION (e.g. The SacredEmperor Siegfrieden XV, BS66-XV02)
+    // "Once per turn, ignoring the cost of Braves, you can destroy any number of opposing Spirits/Ultimates/Nexuses up to a total cost of 9"
+    // "Destroy any number of opposing Spirits up to a total of cost 5"
+    else if (
+      /destroy\s+(?:any number of\s+)?opposing\s+(?:(?:spirits?\/ultimates?\/nexuses?|spirits?\/ultimates?|spirits?|ultimates?|nexuses?)\s+)?up to a total\s+(?:of\s+)?(?:cost\s+)?(\d+)/i.test(bodyLower) ||
+      /destroy any number of opposing (?:spirits|ultimates|nexuses|spirits\/ultimates|spirits\/ultimates\/nexuses) up to a total cost of (\d+)/i.test(bodyLower) ||
+      /destroy any number of opposing (?:spirits|ultimates|nexuses|spirits\/ultimates|spirits\/ultimates\/nexuses) up to a total of cost (\d+)/i.test(bodyLower)
+    ) {
+      const match = bodyLower.match(/up to a total\s+(?:of\s+)?(?:cost\s+)?(\d+)/i) ||
+                    bodyLower.match(/up to a total cost of (\d+)/i) ||
+                    bodyLower.match(/up to a total of cost (\d+)/i);
+      const budgetCost = match ? parseInt(match[1], 10) : 9;
+
+      const includesNexus = bodyLower.includes('nexus') || bodyLower.includes('nexuses');
+      const enemyUnits = enemyField.map(s => ({ item: s, kind: 'spirit', cost: s.cost || 0 }));
+      const enemyNexuses = includesNexus ? (enemyReserve.nexus || []).map(n => ({ item: n, kind: 'nexus', cost: n.cost || 0 })) : [];
+      const allCandidates = [...enemyUnits, ...enemyNexuses].filter(c => c.cost <= budgetCost);
+
+      if (!allCandidates.length) {
+        addLog(`ℹ️ **[${card.name}]**: No opposing Spirits${includesNexus ? '/Ultimates/Nexuses' : ''} with Cost ≤ ${budgetCost} to destroy.`, 'info');
+      } else if (isPlayer && typeof document !== 'undefined' && document.body) {
+        promptCumulativeCostTargetModal(card, side, allCandidates, budgetCost, (selectedItems) => {
+          if (!selectedItems || !selectedItems.length) return;
+          const destroyedNames = [];
+          for (const cand of selectedItems) {
+            if (cand.kind === 'nexus') {
+              const nIdx = (enemyReserve.nexus || []).findIndex(n => n.uid === cand.item.uid);
+              if (nIdx !== -1) {
+                const popped = enemyReserve.nexus.splice(nIdx, 1)[0];
+                enemyReserve.reserve = (enemyReserve.reserve || 0) + (popped.currentCores || 0);
+                sendToTrash(popped, enemySide, `Destroyed by ${card.name} (Total Cost ≤ ${budgetCost})`);
+                destroyedNames.push(`"${popped.name}" (Nexus Cost ${cand.cost})`);
+              }
+            } else {
+              const sIdx = enemyField.findIndex(s => s.uid === cand.item.uid);
+              if (sIdx !== -1) {
+                const popped = enemyField.splice(sIdx, 1)[0];
+                enemyReserve.reserve = (enemyReserve.reserve || 0) + (popped.currentCores || 0);
+                handleDestroyedSpiritCores(popped, enemySide);
+                sendToTrash(popped, enemySide, `Destroyed by ${card.name} (Total Cost ≤ ${budgetCost})`);
+                destroyedNames.push(`"${popped.name}" (Cost ${cand.cost})`);
+              }
+            }
+          }
+          if (destroyedNames.length > 0) {
+            AudioFX.destroy();
+            addLog(`💥 **[${card.name}]**: Destroyed ${destroyedNames.join(', ')} (Total Cost limit: ${budgetCost})! Cores returned to enemy reserve.`, 'kill');
+            if (typeof showToast === 'function') showToast(`Destroyed ${destroyedNames.length} target(s) (Cost ≤ ${budgetCost})!`, 'success');
+            renderDuelTable();
+          }
+        });
+      } else {
+        // AI greedy resolution: destroy highest cost eligible targets within budget
+        allCandidates.sort((a, b) => b.cost - a.cost);
+        let remBudget = budgetCost;
+        const destroyedNames = [];
+        for (const cand of allCandidates) {
+          if (cand.cost <= remBudget) {
+            remBudget -= cand.cost;
+            if (cand.kind === 'nexus') {
+              const nIdx = (enemyReserve.nexus || []).findIndex(n => n.uid === cand.item.uid);
+              if (nIdx !== -1) {
+                const popped = enemyReserve.nexus.splice(nIdx, 1)[0];
+                enemyReserve.reserve = (enemyReserve.reserve || 0) + (popped.currentCores || 0);
+                sendToTrash(popped, enemySide, `Destroyed by ${card.name} (Total Cost ≤ ${budgetCost})`);
+                destroyedNames.push(`"${popped.name}" (Nexus Cost ${cand.cost})`);
+              }
+            } else {
+              const sIdx = enemyField.findIndex(s => s.uid === cand.item.uid);
+              if (sIdx !== -1) {
+                const popped = enemyField.splice(sIdx, 1)[0];
+                enemyReserve.reserve = (enemyReserve.reserve || 0) + (popped.currentCores || 0);
+                handleDestroyedSpiritCores(popped, enemySide);
+                sendToTrash(popped, enemySide, `Destroyed by ${card.name} (Total Cost ≤ ${budgetCost})`);
+                destroyedNames.push(`"${popped.name}" (Cost ${cand.cost})`);
+              }
+            }
+          }
+        }
+        if (destroyedNames.length > 0) {
+          AudioFX.destroy();
+          addLog(`💥 **[${card.name}]**: Destroyed ${destroyedNames.join(', ')} (Total Cost limit: ${budgetCost})! Cores returned to enemy reserve.`, 'kill');
+          renderDuelTable();
+        }
+      }
+    }
+    // 4A. CUMULATIVE BP DESTRUCTION (e.g. Evil Flame Flash effect)
+    else if (/destroy any number of opposing (?:spirits|ultimates|spirits\/ultimates) up to a total of (\d+)\s*bp/i.test(bodyLower)) {
+      const match = bodyLower.match(/destroy any number of opposing (?:spirits|ultimates|spirits\/ultimates) up to a total of (\d+)\s*bp/i);
+      let budget = parseInt(match[1], 10);
+      const insteadMatch = bodyLower.match(/if you control no spirits,\s*instead,\s*destroy any number of opposing (?:spirits|ultimates|spirits\/ultimates) up to a total of (\d+)\s*bp/i);
+      const friendlySpiritCount = myField.filter(s => s.type === 'Spirit' || (s.type || '').includes('Spirit')).length;
+      if (insteadMatch && friendlySpiritCount === 0) {
+        budget = parseInt(insteadMatch[1], 10);
+      }
+      let remainingBp = budget;
+      const destroyedList = [];
+      const candidates = [...enemyField].filter(s => (s.currentBp || 0) <= remainingBp).sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+      for (const candidate of candidates) {
+        const bp = candidate.currentBp || 0;
+        if (bp <= remainingBp) {
+          const tIdx = enemyField.findIndex(s => s.uid === candidate.uid);
+          if (tIdx !== -1) {
+            const dest = enemyField.splice(tIdx, 1)[0];
+            remainingBp -= bp;
+            enemyReserve.reserve += dest.currentCores;
+            handleDestroyedSpiritCores(dest, enemySide);
+            sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName} - Cumulative ${budget} BP)`);
+            destroyedList.push(`"${dest.name}" (${bp} BP)`);
+          }
+        }
+      }
+      AudioFX.slash();
+      const usedBp = budget - remainingBp;
+      if (destroyedList.length > 0) {
+        addLog(`💥 **[${card.name}]**: Destroyed ${destroyedList.join(', ')} (Total ${usedBp}/${budget} BP)! Cores returned to enemy reserve.`, 'kill');
+        if (typeof showToast === 'function') showToast(`Destroyed ${destroyedList.length} spirit(s) (${usedBp}/${budget} BP)!`, 'success');
+      } else {
+        addLog(`ℹ️ **[${card.name}]**: No opposing Spirits within the ${budget} BP limit to destroy.`, 'info');
+      }
+    }
+    // 4B. ONE-SYMBOL DESTRUCTION (e.g. Evil Flame Burst effect)
+    else if (/destroy\s+(a|an|one|two|three|\d+)\s+opposing\s+one-symbol\s+(?:spirits|ultimates|spirits\/ultimates)/i.test(bodyLower)) {
+      const match = bodyLower.match(/destroy\s+(a|an|one|two|three|\d+)\s+opposing\s+one-symbol\s+(?:spirits|ultimates|spirits\/ultimates)/i);
+      const count = parseWordNumber(match[1], 1);
+      const eligible = enemyField.filter(s => (s.symbol === undefined || s.symbol === null || s.symbol === 1 || (typeof s.symbol === 'number' && s.symbol === 1)));
+      eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+      const toDestroy = eligible.slice(0, count);
+      const destroyedList = [];
+      for (const target of toDestroy) {
+        const tIdx = enemyField.findIndex(s => s.uid === target.uid);
         if (tIdx !== -1) {
-          enemyField.splice(tIdx, 1);
+          const dest = enemyField.splice(tIdx, 1)[0];
           enemyReserve.reserve += dest.currentCores;
           handleDestroyedSpiritCores(dest, enemySide);
-          sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
-          AudioFX.slash();
-          addLog(`💀 **[BP DESTRUCTION: ${card.name}]**: Destroyed opposing "${dest.name}" (${dest.currentBp} BP <= ${maxBp} BP)! Cores returned to enemy reserve.`, 'kill');
-          if (typeof showToast === 'function') showToast(`Destroyed "${dest.name}" (<= ${maxBp} BP)!`, 'success');
+          sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName} - One-Symbol)`);
+          destroyedList.push(`"${dest.name}" (${dest.currentBp} BP)`);
+        }
+      }
+      if (destroyedList.length > 0) {
+        AudioFX.slash();
+        addLog(`💀 **[SYMBOL DESTRUCTION: ${card.name}]**: Destroyed opposing one-symbol ${destroyedList.join(', ')}! Cores returned to enemy reserve.`, 'kill');
+        if (typeof showToast === 'function') showToast(`Destroyed ${destroyedList.length} one-symbol Spirit(s)!`, 'success');
+      }
+    }
+    // 4C. DESTROY OPPOSING SPIRIT BY BP (Broadened regex)
+    else if (/destroy\s+(?:up\s+to\s+)?(an?|one|two|three|\d+)?\s*opposing\s+(?:(?:(?:spirits?\/ultimates?|spirits?|ultimates?)\s+(?:with\s+)?(\d+)\s*bp\s+or\s+less)|(?:(\d+)\s*bp\s+or\s+less\s+(?:spirits?\/ultimates?|spirits?|ultimates?)))/i.test(bodyLower)) {
+      const match = bodyLower.match(/destroy\s+(?:up\s+to\s+)?(an?|one|two|three|\d+)?\s*opposing\s+(?:(?:(?:spirits?\/ultimates?|spirits?|ultimates?)\s+(?:with\s+)?(\d+)\s*bp\s+or\s+less)|(?:(\d+)\s*bp\s+or\s+less\s+(?:spirits?\/ultimates?|spirits?|ultimates?)))/i);
+      const count = match[1] ? parseWordNumber(match[1], 1) : 1;
+      const maxBp = parseInt(match[2] || match[3], 10);
+      const eligible = enemyField.filter(s => (s.currentBp || 0) <= maxBp);
+      if (eligible.length > 0) {
+        if (side === 'player' && typeof promptUniversalTargetModal === 'function') {
+          promptUniversalTargetModal({
+            card,
+            side: 'player',
+            targetSide: enemySide,
+            targetKind: 'spirit',
+            title: `${card.name}: Destroy Spirit/Ultimate`,
+            description: `Select up to ${count} opposing Spirit(s)/Ultimate(s) with ${maxBp} BP or less to destroy:`,
+            filter: s => (s.currentBp || s.battleBp || 0) <= maxBp,
+            minCount: 1,
+            maxCount: count,
+            allowSkip: false
+          }, (selectedSpirits) => {
+            if (!selectedSpirits || !selectedSpirits.length) return;
+            const destroyedList = [];
+            for (const dest of selectedSpirits) {
+              const tIdx = enemyField.findIndex(s => s.uid === dest.uid);
+              if (tIdx !== -1) {
+                enemyField.splice(tIdx, 1);
+                enemyReserve.reserve += (dest.currentCores || 0);
+                handleDestroyedSpiritCores(dest, enemySide);
+                sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
+                destroyedList.push(`"${dest.name}" (${dest.currentBp} BP)`);
+              }
+            }
+            if (destroyedList.length > 0) {
+              AudioFX.slash();
+              addLog(`💀 **[BP DESTRUCTION: ${card.name}]**: Destroyed opposing ${destroyedList.join(', ')} (≤ ${maxBp} BP)! Cores returned to enemy reserve.`, 'kill');
+              if (typeof showToast === 'function') showToast(`Destroyed ${destroyedList.length} spirit(s) (≤ ${maxBp} BP)!`, 'success');
+              renderDuelTable();
+            }
+          });
+        } else {
+          eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+          const toDestroy = eligible.slice(0, count);
+          const destroyedList = [];
+          for (const dest of toDestroy) {
+            const tIdx = enemyField.findIndex(s => s.uid === dest.uid);
+            if (tIdx !== -1) {
+              enemyField.splice(tIdx, 1);
+              enemyReserve.reserve += (dest.currentCores || 0);
+              handleDestroyedSpiritCores(dest, enemySide);
+              sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
+              destroyedList.push(`"${dest.name}" (${dest.currentBp} BP)`);
+            }
+          }
+          if (destroyedList.length > 0) {
+            AudioFX.slash();
+            addLog(`💀 **[BP DESTRUCTION: ${card.name}]**: Destroyed opposing ${destroyedList.join(', ')} (≤ ${maxBp} BP)! Cores returned to enemy reserve.`, 'kill');
+            renderDuelTable();
+          }
         }
       }
     }
@@ -3567,7 +5549,7 @@
       }
     }
 
-    if (/send\s+(?:up to\s+)?(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:an|any|one|\d+)?\s*opposing\s+(?:spirit|ultimate|nexus).*?to\s+(?:the\s+|their\s+)?(reserve|trash)/i.test(bodyLower)) {
+    if (/send\s+(?:up to\s+)?(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:an|any|one|\d+)?\s*opposing\s+(?:spirit|ultimate|nexus).*?to\s+(?:the\s+|their\s+)?(reserve|trash)/i.test(bodyLower) && !/\bby\s+sending\b/i.test(bodyLower)) {
       const match = bodyLower.match(/send\s+(?:up to\s+)?(a|an|one|two|three|\d+)\s+cores?\s+from\s+(?:an|any|one|\d+)?\s*opposing\s+(?:spirit|ultimate|nexus).*?to\s+(?:the\s+|their\s+)?(reserve|trash)/i);
       const count = parseWordNumber(match[1]);
       const dest = match[2].toLowerCase();
@@ -3663,7 +5645,7 @@
     }
 
     // 10. DRAW CARDS (when not part of unfulfilled condition)
-    if (/draw\s+(a|an|one|two|three|\d+)\s+cards?/i.test(bodyLower) && !/when this effect depletes/i.test(bodyLower)) {
+    if (/draw\s+(a|an|one|two|three|\d+)\s+cards?/i.test(bodyLower) && !isConditionalLegacyDrawText(bodyLower)) {
       const match = bodyLower.match(/draw\s+(a|an|one|two|three|\d+)\s+cards?/i);
       const count = parseWordNumber(match[1]);
       let drawn = 0;
@@ -3675,6 +5657,10 @@
         AudioFX.playTone(440, 'sine', 0.15, 0.1);
         addLog(`🎴 **[DRAW EFFECT: ${card.name}]**: Drew ${drawn} card(s) from deck into Hand!`, 'step');
         if (typeof showToast === 'function') showToast(`Drew ${drawn} card(s)!`, 'info');
+        if (side === 'player') {
+          renderPlayerHand();
+          renderDuelTable();
+        }
       }
     }
 
@@ -3981,6 +5967,17 @@
       }
     }
 
+        // 28. COUNTERS / COUNT INCREMENT (e.g. your counter +1, your counters +2, カウント+)
+    if (/your counter(?:s)?\s*\+(\d+)|your count\s*\+(\d+)|カウント\+(\d+)/i.test(bodyLower)) {
+      const match = bodyLower.match(/your counter(?:s)?\s*\+(\d+)|your count\s*\+(\d+)|カウント\+(\d+)/i);
+      const amt = match ? parseInt(match[1] || match[2] || match[3], 10) : 1;
+      const friendlyState = isPlayer ? DuelState.player : DuelState.opponent;
+      friendlyState.counters = (friendlyState.counters || 0) + amt;
+      AudioFX.coreChime();
+      addLog(`💠 **[${card.name}]**: Count +${amt}! (Total Count: ${friendlyState.counters})`, 'step');
+      renderDuelTable();
+    }
+
     // 27. ZOMBIE-SNAKE ANCIENT DRAGON REVENGE (When Destroyed)
     if (/destroy an opposing\s+["']?ancient dragon["']?\s+family spirit/i.test(bodyLower)) {
       const target = enemyField.find(s => ((s.family || '') + ' ' + (s.families ? s.families.join(' ') : '')).toLowerCase().includes('ancient dragon'));
@@ -3994,32 +5991,144 @@
     }
   }
 
-  function executeWhenSummonedEffects(spirit, side = 'player') {
-    if (!spirit || !spirit.effect) return;
-
-    const blocks = getCardAbilityBlocks(spirit.effect);
-    const eligibleBlocks = blocks.filter(b => /\(When Summoned(?:[^)]*)\)|\(When [^)]*\/Summoned(?:[^)]*)\)|\(When Summoned\/[^\)]*\)/i.test(b));
-    if (!eligibleBlocks.length) return;
-
+    function hasWhenSummonedEffect(spirit) {
+    if (!spirit || !spirit.effect) return false;
+    const eff = spirit.effect;
+    if (!/\(When (?:[^)]*\/)?Summoned(?:\/[^)]*)?\)/i.test(eff) && !/召喚時/i.test(eff)) {
+      return false;
+    }
+    const blocks = getCardAbilityBlocks(eff);
+    const eligibleBlocks = blocks.filter(b => /\(When (?:[^)]*\/)?Summoned(?:\/[^)]*)?\)/i.test(b) || /召喚時/i.test(b));
     for (const b of eligibleBlocks) {
-      const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
       const levelTag = lvlMatch ? lvlMatch[1] : '';
-      if (isEffectLevelMet(levelTag, spirit.currentLevel)) {
-        executeAbilityActions(b, spirit, side, 'SUMMON');
+      if (!levelTag || isEffectLevelMet(levelTag, spirit.currentLevel)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function executeWhenSummonedEffects(spirit, side = 'player') {
+    // Birgoyle (SD36-001) branch choice: Destroy 5000 BP spirit OR put core from Void
+    if ((spirit.name || '').includes('Birgoyle') && /Destroy an opposing 5000 BP or less Spirit\. Or, put a core from the Void/i.test(spirit.effect || '')) {
+      if (side === 'player') {
+        promptChoiceModal({
+          card: spirit,
+          side: 'player',
+          title: 'Birgoyle: (When Summoned) Choice',
+          description: 'Select which effect to activate:',
+          choices: [
+            { icon: '💀', label: 'Destroy Opposing Spirit (≤ 5000 BP)', desc: 'Choose an opposing Spirit with 5000 BP or less to destroy' },
+            { icon: '🔮', label: 'Put Core from Void to this Ultimate', desc: 'Place 1 core from Void onto Birgoyle' }
+          ]
+        }, (choiceIdx) => {
+          if (choiceIdx === 0) {
+            promptUniversalTargetModal({
+              card: spirit,
+              side: 'player',
+              targetSide: 'opponent',
+              targetKind: 'spirit',
+              title: 'Birgoyle: Destroy Spirit',
+              description: 'Select an opposing Spirit with 5000 BP or less to destroy:',
+              filter: s => (s.battleBp || s.currentBp || 0) <= 5000,
+              minCount: 1,
+              maxCount: 1,
+              allowSkip: false
+            }, (selectedSpirits) => {
+              if (selectedSpirits && selectedSpirits.length > 0) {
+                const target = selectedSpirits[0];
+                const oppField = DuelState.opponent.field || [];
+                const sIdx = oppField.findIndex(s => s.uid === target.uid);
+                if (sIdx !== -1) {
+                  const dest = oppField.splice(sIdx, 1)[0];
+                  DuelState.opponent.reserve = (DuelState.opponent.reserve || 0) + (dest.currentCores || 0);
+                  handleDestroyedSpiritCores(dest, 'opponent');
+                  sendToTrash(dest, 'opponent', `Destroyed by Birgoyle (When Summoned)`);
+                  AudioFX.destroy();
+                  addLog(`💀 **[BP DESTRUCTION: Birgoyle]**: Destroyed opposing "${dest.name}" (${dest.currentBp} BP ≤ 5000 BP)! Cores returned to opponent reserve.`, 'kill');
+                  renderDuelTable();
+                }
+              } else {
+                addLog(`ℹ️ **[Birgoyle]**: No opposing Spirit ≤ 5000 BP destroyed.`, 'info');
+              }
+            });
+          } else {
+            spirit.currentCores = (spirit.currentCores || 0) + 1;
+            recalculateSpiritBp(spirit);
+            AudioFX.coreChime();
+            addLog(`🔮 **[CORE BOOST: Birgoyle]**: Put 1 core from Void onto "${spirit.name}"!`, 'magic');
+            renderDuelTable();
+          }
+        });
+        return;
+      } else {
+        // Opponent AI choice
+        const victims = (DuelState.player.field || []).filter(s => (s.battleBp || s.currentBp || 0) <= 5000);
+        if (victims.length > 0) {
+          victims.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+          const dest = victims[0];
+          const pIdx = DuelState.player.field.findIndex(s => s.uid === dest.uid);
+          if (pIdx !== -1) {
+            DuelState.player.field.splice(pIdx, 1);
+            DuelState.player.reserve = (DuelState.player.reserve || 0) + (dest.currentCores || 0);
+            handleDestroyedSpiritCores(dest, 'player');
+            sendToTrash(dest, 'player', `Destroyed by Birgoyle (When Summoned)`);
+            AudioFX.destroy();
+            addLog(`💀 **[OPPONENT BIRGOYLE]**: Destroyed your "${dest.name}" (${dest.currentBp} BP ≤ 5000 BP)!`, 'kill');
+            renderDuelTable();
+          }
+        } else {
+          spirit.currentCores = (spirit.currentCores || 0) + 1;
+          recalculateSpiritBp(spirit);
+          addLog(`🔮 **[OPPONENT BIRGOYLE]**: Put 1 core from Void onto "${spirit.name}"!`, 'magic');
+          renderDuelTable();
+        }
+        return;
+      }
+    }
+
+    if (!spirit) return;
+
+    if (spirit.effect) {
+      const blocks = getCardAbilityBlocks(spirit.effect);
+      const eligibleBlocks = blocks.filter(b => /\(When Summoned(?:[^)]*)\)|\(When [^)]*\/Summoned(?:[^)]*)\)|\(When Summoned\/[^\)]*\)/i.test(b));
+      for (const b of eligibleBlocks) {
+        const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
+        const levelTag = lvlMatch ? lvlMatch[1] : '';
+        if (isEffectLevelMet(levelTag, spirit.currentLevel)) {
+          executeAbilityActions(b, spirit, side, 'SUMMON');
+        }
       }
     }
     executeUniversalCardEffect(spirit, side, 'WHEN_SUMMONED');
 
     // Allied Field triggers on summon (e.g. Shugraus):
     const myField = side === 'player' ? DuelState.player.field : DuelState.opponent.field;
+    const oppField = side === 'player' ? DuelState.opponent.field : DuelState.player.field;
+    const oppTarget = side === 'player' ? DuelState.opponent : DuelState.player;
     for (const ally of myField) {
       if (!ally || ally.uid === spirit.uid) continue;
       const allyEff = (ally.effect || '').toLowerCase();
-      if ((allyEff.includes('when your "makai"-named spirits') || allyEff.includes('when your makai-named spirits')) && ((spirit.name || '').toLowerCase().includes('makai') || (spirit.family || '').toLowerCase().includes('makai'))) {
-        ally.currentCores = (ally.currentCores || 0) + 1;
-        recalculateSpiritBp(ally);
-        AudioFX.coreChime();
-        addLog(`🔮 **[MAURICE HARVEST: ${ally.name}]**: Harvested +1 Core from Void upon summoning "${spirit.name}"!`, 'magic');
+      const isMakaiSummoned = (spirit.name || '').toLowerCase().includes('makai') || (spirit.family || '').toLowerCase().includes('makai');
+      if (isMakaiSummoned && ((ally.name || '').includes('Shugraus') || (allyEff.includes('when your "makai"-named spirits') && allyEff.includes('other than this spirit')))) {
+        const targets = oppField.filter(s => s && (s.currentCores || 0) > 0);
+        if (targets.length > 0) {
+          const oppSp = targets[0];
+          oppSp.currentCores -= 1;
+          oppTarget.reserve = (oppTarget.reserve || 0) + 1;
+          recalculateSpiritBp(oppSp);
+          AudioFX.coreChime();
+          addLog(`🔮 **[${ally.name}]**: Sent 1 core from opposing "${oppSp.name}" to their Reserve upon summoning "${spirit.name}"!`, 'magic');
+          if (oppSp.currentCores <= 0) {
+            addLog(`💀 "${oppSp.name}" was depleted to 0 Cores by ${ally.name}!`, 'destroy');
+            sendToTrash(oppSp, side === 'player' ? 'opponent' : 'player', `Depleted by ${ally.name}`);
+            const oppIdx = oppField.indexOf(oppSp);
+            if (oppIdx !== -1) oppField.splice(oppIdx, 1);
+          }
+        } else {
+          addLog(`🔮 **[${ally.name}]**: Triggered upon summoning "${spirit.name}", but opponent controls no Spirits with cores!`, 'info');
+        }
       }
     }
 
@@ -4028,7 +6137,7 @@
     if (side === 'player') renderPlayerHand();
 
     const enemySide = side === 'player' ? 'opponent' : 'player';
-    checkBurstTrigger(enemySide, 'AFTER_OPPONENT_SUMMON_EFFECT', { spirit });
+    if (hasWhenSummonedEffect(spirit)) { checkBurstTrigger(enemySide, "AFTER_OPPONENT_SUMMON_EFFECT", { spirit }); }
     const sideNexuses = (side === 'player' ? DuelState.player.nexus : DuelState.opponent.nexus) || [];
     for (const n of sideNexuses) {
       executeCoreCharge(n, side, 'SUMMON', { spirit });
@@ -4036,8 +6145,49 @@
   }
 
   function executeWhenAttacksEffects(attacker, side = 'player') {
+    // The Four Towers of Limbo trigger on Evil God Ultimate attack:
+    const attackingSideNexuses = (side === 'player' ? DuelState.player.nexus : DuelState.opponent.nexus) || [];
+    const limbo = attackingSideNexuses.find(n => (n.name || '').includes('Four Towers of Limbo'));
+    const isEvilGodAttacker = ((attacker.family || '') + ' ' + (attacker.families ? attacker.families.join(' ') : '')).toLowerCase().includes('evil god');
+    const isAttackerUlt = attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate');
+    if (limbo && isEvilGodAttacker && isAttackerUlt) {
+      const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+      friendlyState.counters = (friendlyState.counters || 0) + 1;
+      addLog(`💠 **[The Four Towers of Limbo]**: Count +1 upon "${attacker.name}" attack! (Total Count: ${friendlyState.counters})`, 'step');
+      if (side === 'player') {
+        promptChoiceModal({
+          card: limbo,
+          side: 'player',
+          title: 'The Four Towers of Limbo: Choose Effect',
+          description: 'Once per turn, choose one of the following:',
+          choices: [
+            { icon: '🎴', label: 'Draw a Card', desc: 'Draw 1 card from your deck' },
+            { icon: '🔮', label: `Core Boost to "${attacker.name}"`, desc: `Put 1 core from Void onto "${attacker.name}"` }
+          ]
+        }, (choiceIdx) => {
+          if (choiceIdx === 0) {
+            const drawn = DuelState.player.deck.shift();
+            if (drawn) {
+              DuelState.player.hand.push(drawn);
+              AudioFX.magic();
+              addLog(`🎴 **[The Four Towers of Limbo]**: Drew "${drawn.name}"!`, 'magic');
+              renderPlayerHand();
+            }
+          } else {
+            attacker.currentCores = (attacker.currentCores || 0) + 1;
+            recalculateSpiritBp(attacker);
+            AudioFX.coreChime();
+            addLog(`🔮 **[The Four Towers of Limbo]**: Put 1 core from Void onto "${attacker.name}"!`, 'magic');
+            renderDuelTable();
+          }
+        });
+      } else {
+        const drawn = DuelState.opponent.deck.shift();
+        if (drawn) DuelState.opponent.hand.push(drawn);
+      }
+    }
+
     if (!attacker || !attacker.effect) return;
-    executeUniversalCardEffect(attacker, side, 'WHEN_ATTACKS');
 
     // 1. Windstorm
     const windCount = hasWindstorm(attacker);
@@ -4076,17 +6226,18 @@
       }
     }
 
-    // 3. Ability blocks
+    // 3. Ability blocks (run BEFORE executeUniversalCardEffect so markLegacyHandled prevents duplicate execution!)
     const blocks = getCardAbilityBlocks(attacker.effect);
     const eligibleBlocks = blocks.filter(b => /\(When Attacks(?:[^)]*)\)|\(When [^)]*\/Attacks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|\(When Brave Attacks(?:[^)]*)\)/i.test(b));
     for (const b of eligibleBlocks) {
-      const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      const lvlMatch = b.match(/(?:(?:^\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
       const levelTag = lvlMatch ? lvlMatch[1] : '';
       if (isEffectLevelMet(levelTag, attacker.currentLevel)) {
         executeAbilityActions(b, attacker, side, 'ATTACK');
       }
     }
 
+    executeUniversalCardEffect(attacker, side, 'WHEN_ATTACKS');
     renderDuelTable();
   }
 
@@ -4162,7 +6313,7 @@
     const blocks = getCardAbilityBlocks(blocker.effect);
     const eligibleBlocks = blocks.filter(b => /\(When Blocks(?:[^)]*)\)|\(When Attacks\/Blocks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)/i.test(b));
     for (const b of eligibleBlocks) {
-      const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
       const levelTag = lvlMatch ? lvlMatch[1] : '';
       if (isEffectLevelMet(levelTag, blocker.currentLevel)) {
         executeAbilityActions(b, blocker, defSide, 'BLOCK', { attacker });
@@ -4178,7 +6329,7 @@
     const blocks = getCardAbilityBlocks(destroyedSpirit.effect);
     const eligibleBlocks = blocks.filter(b => /\(When (?:(?:Depleted\/)?Destroyed(?:[^)]*)|[^)]*\/Destroyed(?:[^)]*))\)/i.test(b));
     for (const b of eligibleBlocks) {
-      const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
       const levelTag = lvlMatch ? lvlMatch[1] : '';
       if (isEffectLevelMet(levelTag, destroyedSpirit.currentLevel)) {
         executeAbilityActions(b, destroyedSpirit, side, 'DESTROYED');
@@ -4186,6 +6337,18 @@
     }
     executeUniversalCardEffect(destroyedSpirit, side, 'WHEN_DESTROYED');
     renderDuelTable();
+  }
+
+    function isViolentHighSpeedCard(card) {
+    if (!card || !card.effect) return false;
+    const eff = card.effect.toLowerCase();
+    return eff.includes('violent high speed') || eff.includes('烈神速');
+  }
+
+  function canActivateViolentHighSpeed(card, side = 'player') {
+    if (!isViolentHighSpeedCard(card)) return false;
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    return (friendlyState.trash || 0) >= 5;
   }
 
   function summonCard(uid, customCoresToPlace) {
@@ -4199,16 +6362,52 @@
 
     const phase = DuelState.phases[DuelState.phaseIndex];
     if (phase !== 'MAIN' && phase !== 'ATTACK') {
-      showToast("Spirits can only be summoned during MAIN or ATTACK (Flash) steps!", 'warning');
+      showToast("Spirits & Ultimates can only be summoned during MAIN or ATTACK (Flash) steps!", 'warning');
       return;
     }
 
     if (phase === 'ATTACK' && !hasFlashTiming(card)) {
-      if (typeof showToast === 'function') showToast(`Official Rule: Normal Spirits cannot be summoned during the Attack Step! "${card.name}" does not have [Flash] timing.`, 'warning');
+      if (typeof showToast === 'function') showToast(`Official Rule: Normal Spirits & Ultimates cannot be summoned during the Attack Step! "${card.name}" does not have [Flash] timing.`, 'warning');
       return;
     }
 
-    const cost = card.cost || 0;
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+        // Violent High Speed check: If Ultimate-Seiryubi / Violent High Speed and trash >= 5, summon for 0 cost using Trash cores!
+    const isVhs = isViolentHighSpeedCard(card) && canActivateViolentHighSpeed(card, 'player') && (phase === 'ATTACK');
+    if (isVhs) {
+      const trashCount = DuelState.player.trash || 0;
+      DuelState.player.hand.splice(cardIdx, 1);
+      // Place 1 core on Seiryubi to sustain it, remaining cores return to Reserve
+      card.currentCores = 1;
+      card.currentLevel = 3;
+      card.currentBp = 10000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      DuelState.player.field.push(card);
+      DuelState.player.reserve = (DuelState.player.reserve || 0) + (trashCount - 1);
+      DuelState.player.trash = 0;
+      AudioFX.slash();
+      addLog(`⚡ **[VIOLENT HIGH SPEED]**: "${card.name}" Flash-summoned from Hand for 0 cost! Moved all ${trashCount} cores from Trash to Field/Reserve!`, 'magic');
+      executeWhenSummonedEffects(card, 'player');
+      checkHandOnUltimateSummon(card, 'player');
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    if (isUltimate) {
+      const ultCheck = validateUltimateSummonCondition(card, 'player');
+      if (!ultCheck.allowed) {
+        if (typeof showToast === 'function') {
+          showToast(`Official Rule: Cannot summon Ultimate "${card.name}"! Condition not met: ${ultCheck.reason}`, 'warning');
+        }
+        return;
+      }
+    }
+
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
+    const isCostReduced = cost < baseCost;
     const coresToPlace = customCoresToPlace || 1; // Default 1 core to stay alive on field
     const totalNeeded = cost + coresToPlace;
     const hasScInReserve = (DuelState.player.soulCoreLocation === 'reserve');
@@ -4282,8 +6481,13 @@
     DuelState.selectedPlayerCard = null;
 
     AudioFX.summon();
-    addLog(`✨ **SUMMONED**: "${card.name}" placed on field! Paid ${cost} cores, allocated ${coresToPlace} core (Lv${level}, ${bp} BP).`, 'step');
+    const cardKind = card.type || 'Spirit';
+    addLog(`✨ **SUMMONED**: "${card.name}" (${cardKind}) placed on field! Paid ${cost} cores${isCostReduced ? ` (reduced from ${baseCost} via field symbols)` : ''}, allocated ${coresToPlace} core (Lv${level}, ${bp} BP).`, 'step');
     executeWhenSummonedEffects(card, 'player');
+    const isSummonedUlt = (card.type === 'Ultimate' || (card.type || '').includes('Ultimate'));
+    if (isSummonedUlt) {
+      checkHandOnUltimateSummon(card, 'player');
+    }
     renderDuelTable();
   }
 
@@ -4303,7 +6507,9 @@
       return;
     }
 
-    const cost = card.cost || 0;
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
+    const isCostReduced = cost < baseCost;
     const coresOnNexus = customCoresToPlace || (card.levels && card.levels[0]?.cores !== undefined ? card.levels[0].cores : 0);
     const totalNeeded = cost + coresOnNexus;
 
@@ -4336,7 +6542,7 @@
     DuelState.selectedPlayerCard = null;
 
     AudioFX.summon();
-    addLog(`🏛️ **DEPLOYED**: Nexus "${card.name}" placed in the Center Field Nexus Zone! Paid ${cost} cores (Lv${card.currentLevel}, ${card.currentCores} cores).`, 'step');
+    addLog(`🏛️ **DEPLOYED**: Nexus "${card.name}" placed in the Center Field Nexus Zone! Paid ${cost} cores${isCostReduced ? ` (reduced from ${baseCost} via field symbols)` : ''} (Lv${card.currentLevel}, ${card.currentCores} cores).`, 'step');
     if (typeof showToast === 'function') {
       showToast(`🏛️ Deployed Nexus: ${card.name}!`, 'success');
     }
@@ -4651,49 +6857,6 @@
 
   function executeWhenDeployedEffects(nexusCard, side = 'player') {
     if (!nexusCard || !nexusCard.effect) return;
-    const eff = nexusCard.effect;
-    const sideState = side === 'player' ? DuelState.player : DuelState.opponent;
-    const enemySide = side === 'player' ? 'opponent' : 'player';
-    const enemyState = side === 'player' ? DuelState.opponent : DuelState.player;
-
-    if (/when deployed/i.test(eff)) {
-      const coreMatch = eff.match(/place\s+(\d+|a|an|one|two)\s+cores?\s+from\s+(?:the\s+)?(void|trash)\s+(?:onto|to)\s+(?:this\s+nexus|your\s+reserve)/i);
-      if (coreMatch) {
-        const count = parseWordNumber(coreMatch[1]);
-        if (/this nexus/i.test(coreMatch[0])) {
-          nexusCard.currentCores = (nexusCard.currentCores || 0) + count;
-          addLog(`✨ **[WHEN DEPLOYED: ${nexusCard.name}]**: Placed ${count} Core from Void onto this Nexus!`, 'step');
-        } else {
-          sideState.reserve += count;
-          addLog(`✨ **[WHEN DEPLOYED: ${nexusCard.name}]**: Placed ${count} Core from Void into Reserve!`, 'step');
-        }
-        AudioFX.coreChime();
-      }
-
-      if (/draw\s+(\d+|a|an|one|two)\s+cards?/i.test(eff)) {
-        const m = eff.match(/draw\s+(\d+|a|an|one|two)\s+cards?/i);
-        const count = parseWordNumber(m[1]);
-        for (let i = 0; i < count; i++) {
-          const c = sideState.deck.shift();
-          if (c) {
-            sideState.hand.push(c);
-            addLog(`✨ **[WHEN DEPLOYED: ${nexusCard.name}]**: Drew "${c.name}" from deck!`, 'magic');
-          }
-        }
-        AudioFX.magic();
-      }
-
-      if (/destroy\s+(?:an|one|\d+)?\s*opposing\s+spirit/i.test(eff)) {
-        if (enemyState.field && enemyState.field.length > 0) {
-          const popped = enemyState.field.shift();
-          recycleSpiritCoresToReserve(popped, enemySide);
-          sendToTrash(popped, enemySide, `Destroyed by ${nexusCard.name}`);
-          AudioFX.destroy();
-          addLog(`💥 **[WHEN DEPLOYED: ${nexusCard.name}]**: Obliterated opposing "${popped.name}"!`, 'damage');
-        }
-      }
-    }
-
     executeCoreCharge(nexusCard, side, 'DEPLOY');
     if (typeof executeUniversalCardEffect === 'function') {
       executeUniversalCardEffect(nexusCard, side, 'WHEN_DEPLOYED');
@@ -4762,6 +6925,18 @@
     card.graveyardTurn = DuelState.turn;
     target.trashCards.unshift(card);
 
+    // Send all pre-advent cards stacked under an Advent spirit to Trash
+    if (card.underlyingCards && card.underlyingCards.length > 0) {
+      const stacked = card.underlyingCards;
+      card.underlyingCards = [];
+      stacked.forEach(u => {
+        u.graveyardReason = `Pre-Advent card under fallen ${card.name}`;
+        u.graveyardTurn = DuelState.turn;
+        target.trashCards.unshift(u);
+        addLog(`🪦 **[PRE-ADVENT TRASHED]**: "${u.name}" stacked under "${card.name}" sent to Trash.`, 'info');
+      });
+    }
+
     // Check Shadow Yatagarasu: "When an opposing Spirit is depleted, this card in your Trash can return to your Hand"
     if (rLower.includes('deplet') && enemyTarget) {
       const enemyTrash = enemyTarget.trashCards || enemyTarget.trash;
@@ -4792,8 +6967,29 @@
     }
 
     // Trigger Burst: [After your Spirit is depleted/destroyed by the Opponent]
-    if (card.type === 'Spirit' && (rLower.includes('destroy') || rLower.includes('curse') || rLower.includes('deplet') || rLower.includes('combat') || rLower.includes('fell in battle'))) {
+    const isSelfInflicted = rLower.includes('core sacrifice') || rLower.includes('self-sacrifice') || rLower.includes('for summon') || rLower.includes('tribute') || rLower.includes('friendly') || rLower.includes('paid cost') || rLower.includes('cost payment');
+    const isByOpponent = !isSelfInflicted && (
+      rLower.includes('opponent') || rLower.includes('opposing') || rLower.includes('combat') || rLower.includes('fell in battle') || rLower.includes('curse') || rLower.includes('destroyed by') || (DuelState.activePlayer !== side)
+    );
+    if (card.type === 'Spirit' && isByOpponent) {
       checkBurstTrigger(side, 'AFTER_YOUR_SPIRIT_DESTROYED', { destroyedSpirit: card, reason });
+    }
+
+    // Check Shugraus LV2: When your "Makai"-named Spirits are destroyed by the opponent, draw one card from your deck.
+    if (isByOpponent && ((card.name || '').toLowerCase().includes('makai') || (card.family || '').toLowerCase().includes('makai'))) {
+      const allies = (side === 'player' ? DuelState.player.field : DuelState.opponent.field) || [];
+      for (const ally of allies) {
+        if (!ally || ally.uid === card.uid) continue;
+        if ((ally.name || '').includes('Shugraus') && (ally.currentLevel || 1) >= 2) {
+          if (target.deck && target.deck.length > 0) {
+            const drawn = target.deck.shift();
+            if (target.hand) target.hand.push(drawn);
+            AudioFX.draw();
+            addLog(`🔮 **[${ally.name} Lv2]**: Drew "${drawn.name}" because allied Makai "${card.name}" was destroyed by opponent!`, 'draw');
+            if (side === 'player') renderPlayerHand();
+          }
+        }
+      }
     }
   }
 
@@ -5091,18 +7287,144 @@
     }
 
     renderDuelTable();
-    if (isPlayer) renderPlayerHand();
 
     // 5. Trigger (When Advents) / [Twinkle ...] effects
     executeWhenAdventsEffects(targetSpirit, side);
 
+    // 5b. Trigger allied Nexus / Spirit ON_ALLY_ADVENT effects (e.g. The SevenShogun Resting Mausoleum LV2)
+    for (const nex of (st.nexus || [])) {
+      executeUniversalCardEffect(nex, side, 'ON_ALLY_ADVENT', { adventSpirit: targetSpirit });
+      executeCoreCharge(nex, side, 'SUMMON', { spirit: targetSpirit });
+    }
+    for (const ally of (st.field || [])) {
+      if (ally.uid !== targetSpirit.uid) {
+        executeUniversalCardEffect(ally, side, 'ON_ALLY_ADVENT', { adventSpirit: targetSpirit });
+      }
+    }
+
     // 6. Also trigger any general (When Summoned) effects
     executeWhenSummonedEffects(targetSpirit, side);
+
+    renderDuelTable();
+    if (isPlayer) renderPlayerHand();
 
     // 7. Check opponent Burst: [Burst: After an opposing Spirit's (When Summoned/Advents) effect resolves]
     const enemySide = isPlayer ? 'opponent' : 'player';
     checkBurstTrigger(enemySide, 'AFTER_OPPONENT_SUMMON_EFFECT', { spirit: targetSpirit, isAdvent: true });
   }
+
+  function promptTwinkleNecromancyModal(spirit, side, costGroups, onConfirm) {
+    if (side !== 'player' || typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+      const selected = [];
+      for (const cost of [0, 1, 3, 6, 9]) {
+        if (costGroups[cost] && costGroups[cost].length > 0) {
+          const sorted = [...costGroups[cost]].sort((a, b) => (b.lv1Bp || b.currentBp || 0) - (a.lv1Bp || a.currentBp || 0));
+          selected.push(sorted[0]);
+        }
+      }
+      if (onConfirm) onConfirm(selected);
+      return;
+    }
+
+    const box = document.createElement('div');
+    box.className = 'optional-effect-popup twinkle-necromancy-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100001;width:min(480px,94vw);max-height:85vh;overflow-y:auto;background:#111827;border:2px solid #ec4899;border-radius:14px;padding:18px 20px;box-shadow:0 16px 45px rgba(0,0,0,.85);color:#e5e7eb;font-size:.88rem;';
+
+    const selections = {};
+    for (const cost of [0, 1, 3, 6, 9]) {
+      if (costGroups[cost] && costGroups[cost].length > 0) {
+        selections[cost] = costGroups[cost][0].uid;
+      }
+    }
+
+    const render = () => {
+      let costSectionsHtml = '';
+      for (const cost of [0, 1, 3, 6, 9]) {
+        const cards = costGroups[cost];
+        if (!cards || !cards.length) continue;
+        costSectionsHtml += `
+          <div style="margin-bottom:12px;background:rgba(255,255,255,0.03);border:1px solid #374151;border-radius:8px;padding:10px;">
+            <div style="font-weight:800;color:#f472b6;font-size:0.85rem;margin-bottom:6px;display:flex;justify-content:space-between;">
+              <span>COST ${cost} SPIRIT (Pick at most 1)</span>
+              <span style="font-size:0.75rem;color:#9ca3af;">${cards.length} available</span>
+            </div>
+            ${cards.map(c => {
+              const isSel = selections[cost] === c.uid;
+              return `
+                <div class="twinkle-opt-row" data-cost="${cost}" data-uid="${_optEsc(c.uid)}" style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;margin-bottom:4px;border-radius:6px;cursor:pointer;background:${isSel ? 'rgba(236,72,153,0.22)' : 'rgba(0,0,0,0.2)'};border:1px solid ${isSel ? '#ec4899' : '#374151'};">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="display:inline-block;width:16px;height:16px;border-radius:50%;border:2px solid ${isSel ? '#ec4899' : '#6b7280'};background:${isSel ? '#ec4899' : 'transparent'};"></span>
+                    <span style="font-weight:700;color:${isSel ? '#fdf2f8' : '#e5e7eb'};font-size:0.84rem;">${_optEsc(c.name)}</span>
+                  </div>
+                  <span style="font-size:0.75rem;color:#cbd5e1;">Lv1 ${c.lv1Bp || 1000} BP</span>
+                </div>
+              `;
+            }).join('')}
+            <div class="twinkle-opt-none" data-cost="${cost}" style="display:flex;align-items:center;gap:8px;padding:4px 10px;cursor:pointer;font-size:0.75rem;color:${selections[cost] === null ? '#ec4899' : '#9ca3af'};">
+              <span style="display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid ${selections[cost] === null ? '#ec4899' : '#4b5563'};background:${selections[cost] === null ? '#ec4899' : 'transparent'};"></span>
+              <span>Do not summon Cost ${cost}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      box.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-weight:900;font-size:1.05rem;color:#f472b6;">🌟 Twinkle Necromancy</div>
+          <span style="font-size:0.75rem;background:#831843;color:#fbcfe8;padding:2px 8px;border-radius:10px;">[When Advents]</span>
+        </div>
+        <div style="font-size:0.8rem;color:#cbd5e1;line-height:1.35;margin-bottom:12px;">
+          You can summon Cost 0/1/3/6/9 Spirit cards, <strong>one of each</strong>, from your Trash without paying cost:
+        </div>
+        ${costSectionsHtml}
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;">
+          <button id="btnTwinkleSkip" style="padding:7px 14px;background:#374151;color:#e5e7eb;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-size:0.82rem;">Skip All</button>
+          <button id="btnTwinkleConfirm" style="padding:7px 16px;background:linear-gradient(135deg,#db2777,#ec4899);color:#fff;border:none;border-radius:6px;font-weight:800;cursor:pointer;font-size:0.82rem;box-shadow:0 0 10px rgba(236,72,153,0.4);">Confirm Summon</button>
+        </div>
+      `;
+
+      box.querySelectorAll('.twinkle-opt-row').forEach(row => {
+        row.onclick = () => {
+          const cost = row.dataset.cost;
+          const uid = row.dataset.uid;
+          selections[cost] = uid;
+          render();
+        };
+      });
+
+      box.querySelectorAll('.twinkle-opt-none').forEach(row => {
+        row.onclick = () => {
+          const cost = row.dataset.cost;
+          selections[cost] = null;
+          render();
+        };
+      });
+
+      const btnSkip = box.querySelector('#btnTwinkleSkip');
+      if (btnSkip) btnSkip.onclick = () => {
+        if (box.parentNode) box.parentNode.removeChild(box);
+        if (onConfirm) onConfirm([]);
+      };
+
+      const btnConfirm = box.querySelector('#btnTwinkleConfirm');
+      if (btnConfirm) btnConfirm.onclick = () => {
+        if (box.parentNode) box.parentNode.removeChild(box);
+        const selectedCards = [];
+        for (const cost of [0, 1, 3, 6, 9]) {
+          const selUid = selections[cost];
+          if (selUid) {
+            const card = costGroups[cost].find(c => c.uid === selUid);
+            if (card) selectedCards.push(card);
+          }
+        }
+        if (onConfirm) onConfirm(selectedCards);
+      };
+    };
+
+    render();
+    document.body.appendChild(box);
+  }
+
 
   function executeWhenAdventsEffects(spirit, side = 'player') {
     if (!spirit || !spirit.effect) return;
@@ -5116,7 +7438,7 @@
     const blocks = getCardAbilityBlocks(spirit.effect);
     const adventBlocks = blocks.filter(b => /(?:When Advents|When [^)]*\/Advents|When Advents\/[^\)]*|煌臨時)/i.test(b));
     for (const b of adventBlocks) {
-      const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
       const levelTag = lvlMatch ? lvlMatch[1] : '';
       if (isEffectLevelMet(levelTag, spirit.currentLevel || 1)) {
         executeAbilityActions(b, spirit, side, 'ADVENT');
@@ -5128,42 +7450,55 @@
     // "You can summon Cost 0/1/3/6/9 Spirit cards, one of each, from your Trash, without paying the cost."
     if (effLower.includes('twinkle necromancy') || (effLower.includes('when advents') && /cost\s*(?:0\/1\/3\/6\/9|[\d\/]+)\s*spirit\s*cards/i.test(effLower))) {
       const allowedCosts = [0, 1, 3, 6, 9];
-      const reanimated = [];
-
-      for (const targetCost of allowedCosts) {
-        const tIdx = myTrash.findIndex(c => (c.type === 'Spirit' || !c.type) && (c.cost === targetCost));
-        if (tIdx !== -1) {
-          const card = myTrash.splice(tIdx, 1)[0];
-          const spiritInstance = {
-            ...card,
-            uid: 'sp_' + Math.random().toString(36).slice(2, 9),
-            currentCores: 1,
-            hasSoulCore: false,
-            isExhausted: false,
-            hasAttacked: false,
-            battleBp: 0
-          };
-          if (myReserve.reserve > 0) {
-            myReserve.reserve -= 1;
-          }
-          const { level, bp } = calculateBpAndLevel(spiritInstance.levels, spiritInstance.currentCores, false, spiritInstance.effect);
-          spiritInstance.currentLevel = level;
-          spiritInstance.currentBp = bp;
-          myField.push(spiritInstance);
-          reanimated.push(`${spiritInstance.name} (Cost ${targetCost})`);
-          executeWhenSummonedEffects(spiritInstance, side);
+      const costGroups = { 0: [], 1: [], 3: [], 6: [], 9: [] };
+      myTrash.forEach(c => {
+        if ((c.type === 'Spirit' || !c.type) && costGroups[c.cost] !== undefined) {
+          costGroups[c.cost].push(c);
         }
-      }
+      });
 
-      if (reanimated.length > 0) {
-        AudioFX.summon();
-        addLog(`💀 **[TWINKLE NECROMANCY: ${spirit.name}]**: Reanimated ${reanimated.length} Spirit(s) from Trash onto the battlefield: ${reanimated.join(', ')}!`, 'magic');
-        if (typeof showToast === 'function') {
-          showToast(`💀 [Twinkle Necromancy]: Reanimated ${reanimated.length} Spirits from Trash!`, 'success');
-        }
-        renderDuelTable();
-      } else {
+      const hasAny = allowedCosts.some(cost => costGroups[cost] && costGroups[cost].length > 0);
+      if (!hasAny) {
         addLog(`ℹ️ **[TWINKLE NECROMANCY: ${spirit.name}]**: No Cost 0/1/3/6/9 Spirits found in Trash to reanimate.`, 'step');
+      } else {
+        promptTwinkleNecromancyModal(spirit, side, costGroups, (selectedSpirits) => {
+          if (!selectedSpirits || !selectedSpirits.length) return;
+          const reanimated = [];
+          for (const card of selectedSpirits) {
+            const tIdx = myTrash.findIndex(c => c.uid === card.uid);
+            if (tIdx !== -1) {
+              myTrash.splice(tIdx, 1);
+            }
+            const spiritInstance = {
+              ...card,
+              uid: 'sp_' + Math.random().toString(36).slice(2, 9),
+              currentCores: 1,
+              hasSoulCore: false,
+              isExhausted: false,
+              hasAttacked: false,
+              battleBp: 0
+            };
+            if (myReserve.reserve > 0) {
+              myReserve.reserve -= 1;
+            }
+            const { level, bp } = calculateBpAndLevel(spiritInstance.levels, spiritInstance.currentCores, false, spiritInstance.effect);
+            spiritInstance.currentLevel = level;
+            spiritInstance.currentBp = bp;
+            myField.push(spiritInstance);
+            reanimated.push(`${spiritInstance.name} (Cost ${card.cost})`);
+            executeWhenSummonedEffects(spiritInstance, side);
+          }
+
+          if (reanimated.length > 0) {
+            AudioFX.summon();
+            addLog(`💀 **[TWINKLE NECROMANCY: ${spirit.name}]**: Reanimated ${reanimated.length} Spirit(s) from Trash (one per cost tier): ${reanimated.join(', ')}!`, 'magic');
+            if (typeof showToast === 'function') {
+              showToast(`💀 [Twinkle Necromancy]: Reanimated ${reanimated.length} Spirits!`, 'success');
+            }
+            renderDuelTable();
+            if (side === 'player') renderPlayerHand();
+          }
+        });
       }
     }
   }
@@ -5406,11 +7741,16 @@
     return card.summary || (card.effect ? card.effect.substring(0, 50) + '...' : 'Flash Timing');
   }
 
-  function isSingleTargetBpBuff(card) {
+  function isSingleTargetBpBuff(card, castMode = null) {
     if (!card) return false;
     const name = card.name || '';
     if (name.includes('Defensive Aura')) return false; // Defensive Aura affects all blocking spirits
-    const eff = (card.effect || '').toLowerCase();
+    
+    // Strict timing isolation: when casting specifically in 'main' or 'flash' mode, ONLY check that specific timing block!
+    const phase = (DuelState && DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+    const textToCheck = extractMagicTimingBlock(card.effect || '', phase, 'hand', castMode);
+    const eff = (textToCheck || card.effect || '').toLowerCase();
+    
     const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(eff) || /bp\s*(?:\+|plus\s*)\d+/i.test(eff);
     if (!hasBpBoost) return false;
     if (eff.includes('all your spirits') || eff.includes('all spirits') || eff.includes('all your blocking') || eff.includes('すべてのスピリット') || eff.includes('全スピリット')) {
@@ -5451,7 +7791,8 @@
       return;
     }
 
-    const cost = card.cost || 0;
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
     const coresToPlace = customCoresToPlace || 1;
     const totalNeeded = cost + coresToPlace;
 
@@ -5567,7 +7908,8 @@
     braveCard.bpBonus = bpBonus;
 
     if (source === 'hand') {
-      const cost = braveCard.cost || 0;
+      const baseCost = braveCard.cost || 0;
+      const cost = getCardEffectiveCost(braveCard, 'player');
       if (DuelState.player.reserve < cost) {
         const { total } = getPlayerAvailableCores();
         if (total >= cost) {
@@ -5712,8 +8054,8 @@
     }
   }
 
-  function openTargetModal(card, mode = 'magic', attackerUid = null) {
-    pendingTargetSelection = { card, mode, attackerUid };
+  function openTargetModal(card, mode = 'magic', attackerUid = null, castMode = null) {
+    pendingTargetSelection = { card, mode, attackerUid, castMode };
     const modalEl = document.getElementById('battleTargetModal');
     if (!modalEl) {
       // Fallback: smart default target
@@ -5806,7 +8148,8 @@
 
     const attacker = DuelState.opponent.field.find(s => s.uid === attackerUid) || DuelState.selectedAttacker;
     const isSpirit = card.type === 'Spirit';
-    const cost = card.cost || 0;
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
     const totalNeeded = isSpirit ? cost + 1 : cost;
 
     // Check affordability
@@ -5875,7 +8218,7 @@
     }
   }
 
-  function applyMagicEffect(card, side = 'player', contextAttacker = null, targetSpiritUid = null) {
+  function applyMagicEffect(card, side = 'player', contextAttacker = null, targetSpiritUid = null, forcedEffectType = null) {
     let effectDesc = '';
     const isPlayer = side === 'player';
     const myDeck = isPlayer ? DuelState.player.deck : DuelState.opponent.deck;
@@ -5888,8 +8231,62 @@
     const eff = (card.effect || '').toLowerCase();
     const currentPhase = DuelState.phases[DuelState.phaseIndex] || 'MAIN';
     const isCombat = (currentPhase === 'ATTACK') || (DuelState.combatEvent !== null);
+    const isFlashTiming = (forcedEffectType === 'flash') || (!forcedEffectType && isCombat);
+    const activeEffectText = extractMagicTimingBlock(card.effect || '', currentPhase, 'hand', forcedEffectType);
 
-    if (name.includes('Blizzard Wall')) {
+    if (name.includes('Evil Draw')) {
+      if (isFlashTiming) {
+        // Flash: During this turn, give a Spirit/Ultimate +2000 BP.
+        const bpAmount = 2000;
+        let target = null;
+        if (targetSpiritUid) {
+          target = myField.find(s => s.uid === targetSpiritUid);
+        }
+        if (!target) {
+          if (DuelState.combatEvent) {
+            if (DuelState.combatEvent.attacker && myField.some(s => s.uid === DuelState.combatEvent.attacker.uid)) {
+              target = DuelState.combatEvent.attacker;
+            } else if (DuelState.combatEvent.blocker && myField.some(s => s.uid === DuelState.combatEvent.blocker.uid)) {
+              target = DuelState.combatEvent.blocker;
+            }
+          }
+          if (!target && contextAttacker && myField.some(s => s.uid === contextAttacker.uid)) {
+            target = contextAttacker;
+          }
+          if (!target && myField.length > 0) {
+            target = [...myField].sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0))[0];
+          }
+        }
+        if (target) {
+          target.currentBp += bpAmount;
+          target.battleBp = (target.battleBp || target.currentBp);
+          effectDesc = `Granted +${bpAmount} BP to "${target.name}" (now ${target.currentBp} BP)!`;
+        } else {
+          effectDesc = `Activated Flash timing, but no allied Spirits or Ultimates were on the field.`;
+        }
+      } else {
+        // Main: Draw two cards. Also, if [Soul Core] was used to pay the cost, destroy an opposing 4000 BP or less Spirit.
+        const d1 = myDeck.shift();
+        const d2 = myDeck.shift();
+        if (d1) myHand.push(d1);
+        if (d2) myHand.push(d2);
+        effectDesc = `${isPlayer ? 'You drew' : 'Opponent drew'} 2 cards from deck!`;
+
+        if (card.paidWithSoulCore) {
+          const target = enemyField.find(s => (s.battleBp || s.currentBp || 0) <= 4000);
+          if (target) {
+            const idx = enemyField.indexOf(target);
+            enemyField.splice(idx, 1);
+            recycleSpiritCoresToReserve(target, isPlayer ? 'opponent' : 'player');
+            sendToTrash(target, isPlayer ? 'opponent' : 'player', `Destroyed by ${card.name} [Soul Core Paid]`);
+            AudioFX.destroy();
+            effectDesc += ` Also, Soul Core was used to pay the cost: destroyed opposing "${target.name}" (${target.currentBp} BP)!`;
+          } else {
+            effectDesc += ` Soul Core was used to pay the cost, but there was no opposing Spirit with 4000 BP or less to destroy.`;
+          }
+        }
+      }
+    } else if (name.includes('Blizzard Wall')) {
       effectDesc = 'Ended the Attack Step! No further life damage can be inflicted this turn.';
     } else if (name.includes('Defensive Aura') || (eff.includes('all your blocking spirits') && eff.includes('+3000 bp'))) {
       // Team-wide blocking buff (official text: "give all your blocking Spirits +3000 BP")
@@ -5911,18 +8308,18 @@
       if (d1) myHand.push(d1);
       if (d2) myHand.push(d2);
       effectDesc = `${isPlayer ? 'You drew' : 'Opponent drew'} 2 cards from deck!`;
-    } else if (name.includes('Flame Dance') || (eff.includes('destroy') && eff.includes('4000 bp or less'))) {
+    } else if (name.includes('Flame Dance')) {
       const target = enemyField.find(s => s.currentBp <= 4000);
       if (target) {
         const idx = enemyField.indexOf(target);
         enemyField.splice(idx, 1);
-        enemyReserve.reserve += target.currentCores;
+        recycleSpiritCoresToReserve(target, isPlayer ? 'opponent' : 'player');
         sendToTrash(target, isPlayer ? 'opponent' : 'player', `Destroyed by ${card.name}`);
         effectDesc = `Destroyed enemy "${target.name}" (${target.currentBp} BP)! Cores returned to reserve.`;
       } else {
         effectDesc = 'No enemy spirit with 4000 BP or less to destroy.';
       }
-    } else if (name.includes('Flame Tempest') || (eff.includes('destroy all') && eff.includes('3000 bp or less'))) {
+    } else if (name.includes('Flame Tempest')) {
       const destroyed = [];
       for (let i = enemyField.length - 1; i >= 0; i--) {
         if (enemyField[i].currentBp <= 3000) {
@@ -5940,7 +8337,8 @@
       effectDesc = 'Refreshed an allied spirit and erected a protective shield against life damage!';
     } else {
       // Dynamic BP Boost or general effect resolution
-      const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(eff) || /bp\s*(?:\+|plus\s*)\d+/i.test(eff) || name.includes('Double Draw') || name.includes('Insect Aura');
+      const activeLower = activeEffectText.toLowerCase();
+      const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(activeLower) || /bp\s*(?:\+|plus\s*)\d+/i.test(activeLower);
       const isTeamWide = eff.includes('all your spirits') || eff.includes('all spirits') || eff.includes('all your blocking') || eff.includes('すべてのスピリット') || eff.includes('全スピリット');
 
       if (hasBpBoost) {
@@ -6001,15 +8399,18 @@
           }
         }
       } else {
-        executeAbilityActions(card.effect, card, side, 'MAGIC', { contextAttacker, targetSpiritUid });
-        effectDesc = `Cast "${card.name}" and unleashed its magical effects!`;
+        const trigger = (forcedEffectType === 'flash') ? 'FLASH' : ((forcedEffectType === 'main') ? 'MAIN' : (isCombat ? 'FLASH' : (/\b\[main\]/i.test(card.effect || '') ? 'MAIN' : 'FLASH')));
+        executeAbilityActions(activeEffectText, card, side, 'MAGIC', { contextAttacker, targetSpiritUid });
+        executeUniversalCardEffect(card, side, trigger, { contextAttacker, targetSpiritUid });
+        const cleanSummary = activeEffectText.replace(/^\s*\[(Main|Flash)\]\s*/i, '').trim();
+        effectDesc = cleanSummary ? `Activated: "${cleanSummary.length > 90 ? cleanSummary.slice(0, 87) + '...' : cleanSummary}"` : `Cast "${card.name}" and unleashed its magical effects!`;
       }
     }
 
     return effectDesc;
   }
 
-  function castMagic(uid, targetSpiritUid = null) {
+  function castMagic(uid, targetSpiritUid = null, useSoulCore = null, castMode = null) {
     const cardIdx = DuelState.player.hand.findIndex(c => c.uid === uid);
     if (cardIdx === -1) return;
     const card = DuelState.player.hand[cardIdx];
@@ -6039,25 +8440,55 @@
       return;
     }
 
-    // Single-target BP buff check: if player has > 1 spirit and no target specified yet, open target selector!
-    if (isSingleTargetBpBuff(card) && DuelState.player.field.length > 1 && !targetSpiritUid) {
-      openTargetModal(card, 'magic');
+    // Single-target BP buff check: ONLY check if the CURRENT cast mode actually grants a single-target BP buff!
+    if (isSingleTargetBpBuff(card, castMode) && DuelState.player.field.length > 1 && !targetSpiritUid) {
+      openTargetModal(card, 'magic', null, castMode);
       return;
     }
 
-    if (DuelState.player.reserve < card.cost) {
+    // Check if card has a "[Soul Core] was used to pay the cost" bonus effect
+    const hasSoulCoreBonus = /\[soul core\] was used to pay the cost|if \[soul core\] was used to pay the cost/i.test(card.effect || '');
+    const hasSoulCoreInReserve = (DuelState.player.soulCoreLocation === 'reserve');
+
+    if (hasSoulCoreBonus && hasSoulCoreInReserve && useSoulCore === null) {
+      askOptionalEffect(
+        card,
+        `Pay cost using [Soul Core] from Reserve to activate bonus effect? ("${card.name}")`,
+        () => castMagic(uid, targetSpiritUid, true, castMode),
+        () => castMagic(uid, targetSpiritUid, false, castMode)
+      );
+      return;
+    }
+
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
+    const payingWithSc = (useSoulCore === true) && hasSoulCoreInReserve;
+    const availableReserve = DuelState.player.reserve + (hasSoulCoreInReserve ? 1 : 0);
+
+    if ((payingWithSc ? availableReserve : DuelState.player.reserve) < cost) {
       const { total } = getPlayerAvailableCores();
-      if (total >= card.cost) {
+      if (total >= cost) {
         openSacrificeModal(uid);
         return;
       }
-      if (typeof showToast === 'function') showToast(`Need ${card.cost} cores to cast "${card.name}", but only have ${total} across Reserve and Field!`, 'warning');
+      if (typeof showToast === 'function') showToast(`Need ${cost} cores to cast "${card.name}"${cost < baseCost ? ` (reduced from ${baseCost})` : ''}, but only have ${total} across Reserve and Field!`, 'warning');
       return;
     }
 
-    DuelState.player.reserve -= card.cost;
-    DuelState.player.trash += card.cost;
-    DuelState.player.hand.splice(cardIdx, 1);
+    if (payingWithSc) {
+      DuelState.player.soulCoreLocation = 'trash';
+      card.paidWithSoulCore = true;
+      const regularCost = Math.max(0, cost - 1);
+      DuelState.player.reserve -= regularCost;
+      DuelState.player.trash += cost;
+      DuelState.player.hand.splice(cardIdx, 1);
+      addLog(`🔥 **[SOUL CORE PAID]**: Paid [Soul Core] as part of cost for "${card.name}"!`, 'magic');
+    } else {
+      card.paidWithSoulCore = false;
+      DuelState.player.reserve -= cost;
+      DuelState.player.trash += cost;
+      DuelState.player.hand.splice(cardIdx, 1);
+    }
     
     // Check if card is banished from game after resolving (e.g. Purple Flash's Extreme)
     const isBanished = /banished from the game after its effect resolves|除外される/i.test(card.effect || '');
@@ -6069,13 +8500,13 @@
     }
 
     AudioFX.coreChime();
-    const effectDesc = applyMagicEffect(card, 'player', null, targetSpiritUid);
+    const effectDesc = applyMagicEffect(card, 'player', null, targetSpiritUid, castMode);
     addLog(`🔮 **MAGIC CAST**: "${card.name}" activated! ${effectDesc}`, 'magic');
     renderDuelTable();
   }
 
     // ── CORE SACRIFICE MODAL CONTROLLER ──
-  function openSacrificeModal(uid) {
+  function openSacrificeModal(uid, castMode = null) {
     const card = DuelState.player.hand.find(c => c.uid === uid);
     if (!card) return;
 
@@ -6086,12 +8517,12 @@
     }
 
     const { reserve, fieldCores, total: totalAvailable } = getPlayerAvailableCores();
-    const isSpirit = card.type === 'Spirit';
-    const cost = card.cost || 0;
-    const totalNeeded = isSpirit ? cost + 1 : cost;
+    const isUnit = card.type === 'Spirit' || card.type === 'Ultimate' || (card.type || '').includes('Spirit') || (card.type || '').includes('Ultimate') || (card.type || '').includes('Brave');
+    const cost = getCardEffectiveCost(card, 'player');
+    const totalNeeded = isUnit ? cost + 1 : cost;
 
     if (totalAvailable < totalNeeded) {
-      showToast(`Need ${totalNeeded} total cores (Cost ${cost} + ${isSpirit ? '1 on Spirit' : '0'}), but you only have ${totalAvailable} across Reserve and Field!`, 'warning');
+      showToast(`Need ${totalNeeded} total cores (Cost ${cost} + ${isUnit ? '1 on Unit' : '0'}), but you only have ${totalAvailable} across Reserve and Field!`, 'warning');
       return;
     }
 
@@ -6117,12 +8548,13 @@
 
     pendingSacrifice = {
       card,
-      isSpirit,
+      isSpirit: isUnit,
       cost,
       totalNeeded,
       reserveUsed,
       fieldNeeded,
-      allocations
+      allocations,
+      castMode
     };
 
     renderSacrificeModal();
@@ -6329,8 +8761,12 @@
     if (isSpirit) {
       addLog(`✨ **SUMMONED**: "${card.name}" entered the battlefield with 1 Core (Lv${newLevel}, ${newBp} BP)!`, 'step');
       executeWhenSummonedEffects(card, 'player');
+      const isSacUlt = (card.type === 'Ultimate' || (card.type || '').includes('Ultimate'));
+      if (isSacUlt) {
+        checkHandOnUltimateSummon(card, 'player');
+      }
     } else {
-      const effectDesc = applyMagicEffect(card);
+      const effectDesc = applyMagicEffect(card, 'player', null, null, pendingSacrifice?.castMode || null);
       addLog(`🔮 **MAGIC CAST**: "${card.name}" activated using field cores! ${effectDesc}`, 'magic');
     }
 
@@ -6458,6 +8894,31 @@
     }
 
     let total = base + (spirit.extraSymbols || 0);
+
+    // 1b. Brave symbols addition: if spirit.brave, parse and add the Brave card's symbol count
+    if (spirit.brave) {
+      const bSymStr = String(spirit.brave.symbol || '').trim();
+      let braveSymbols = 0;
+      if (bSymStr === '-' || bSymStr.toLowerCase() === 'none' || bSymStr === '0') {
+        braveSymbols = 0;
+      } else {
+        const bPx20 = (bSymStr.match(/20px/g) || []).length;
+        const bPx25 = (bSymStr.match(/25px/g) || []).length;
+        if (bPx20 + bPx25 > 0) {
+          braveSymbols = bPx20 + bPx25;
+        } else if (/^\d+$/.test(bSymStr)) {
+          braveSymbols = parseInt(bSymStr, 10);
+        } else if (bSymStr.includes(',') || bSymStr.includes('/')) {
+          braveSymbols = bSymStr.split(/[,/]/).map(t => t.trim()).filter(Boolean).length;
+        } else if (spirit.brave.symbol !== undefined && spirit.brave.symbol !== null && !isNaN(Number(spirit.brave.symbol))) {
+          braveSymbols = Number(spirit.brave.symbol);
+        } else {
+          braveSymbols = 1;
+        }
+      }
+      total += braveSymbols;
+    }
+
     const eff = spirit.effect || '';
     const level = spirit.currentLevel || 1;
 
@@ -6465,7 +8926,7 @@
     if (eff) {
       const blocks = getCardAbilityBlocks(eff);
       for (const b of blocks) {
-        const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+        const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
         if (lvlMatch && !isEffectLevelMet(lvlMatch[1], level)) {
           continue;
         }
@@ -6579,19 +9040,40 @@
     } else {
       const jm = effect.match(/【バースト[：:]([^】]+)】/);
       if (jm) raw = jm[1].trim();
+      else {
+        const firstLine = effect.split('\n')[0] || '';
+        if (/burst/i.test(firstLine)) raw = firstLine.trim();
+      }
     }
 
     const rawLower = raw.toLowerCase();
-    const effLower = effect.toLowerCase();
 
-    // 1. AFTER_LIFE_DECREASED
+    // 1. AFTER_YOUR_SPIRIT_DESTROYED (Strict check on raw condition: depleted or destroyed)
+    if (
+      rawLower.includes('destroyed by the opponent') ||
+      rawLower.includes('destroyed by the oopponent') ||
+      rawLower.includes('depleted/destroyed') ||
+      rawLower.includes('depleted / destroyed') ||
+      rawLower.includes('destroyed or depleted') ||
+      rawLower.includes('left the field') ||
+      rawLower.includes('leaves the field') ||
+      rawLower.includes('破壊後') ||
+      rawLower.includes('消滅/破壊後') ||
+      rawLower.includes('フィールドを離れた後')
+    ) {
+      return {
+        type: 'AFTER_YOUR_SPIRIT_DESTROYED',
+        label: 'After your Spirit is depleted/destroyed by the Opponent',
+        raw: raw || 'After your Spirit is depleted/destroyed by the Opponent'
+      };
+    }
+
+    // 2. AFTER_LIFE_DECREASED
     if (
       rawLower.includes('life is reduced') ||
       rawLower.includes('life is decreased') ||
       rawLower.includes('life is reeduced') ||
-      rawLower.includes('ライフ減少後') ||
-      effLower.includes('自分のライフ減少後') ||
-      /\[burst:[^\]]*\]\s*\(?[^)]*life is reduced/i.test(effLower)
+      rawLower.includes('ライフ減少後')
     ) {
       return {
         type: 'AFTER_LIFE_DECREASED',
@@ -6600,34 +9082,12 @@
       };
     }
 
-    // 2. AFTER_OPPONENT_SUMMON_EFFECT
-    if (
-      rawLower.includes('when summoned') ||
-      rawLower.includes('summoned/advents') ||
-      rawLower.includes('summoned/deployed') ||
-      rawLower.includes('summoned/reborn') ||
-      rawLower.includes('summoned/advent') ||
-      rawLower.includes('summoned by an opposing effect') ||
-      rawLower.includes('summoned via an opposing effect') ||
-      rawLower.includes('召喚時') ||
-      rawLower.includes('煌臨時') ||
-      rawLower.includes('配置時') ||
-      /\[burst:[^\]]*\]\s*\(?[^)]*(?:when summoned|召喚時|煌臨時|配置時)/i.test(effLower)
-    ) {
-      return {
-        type: 'AFTER_OPPONENT_SUMMON_EFFECT',
-        label: "After an opposing Spirit's (When Summoned) effect resolves",
-        raw: raw || "After an opposing Spirit's (When Summoned) effect resolves"
-      };
-    }
-
     // 3. AFTER_OPPONENT_ATTACKS
     if (
-      ((rawLower.includes('attack') || rawLower.includes('attacks')) && (rawLower.includes('opposing') || rawLower.includes('opponent'))) ||
+      ((rawLower.includes('attack') || rawLower.includes('attacks')) && (rawLower.includes('opposing') || rawLower.includes('opponent') || rawLower.includes('spirit') || rawLower.includes('ultimate'))) ||
       rawLower.includes('相手のアタック後') ||
       rawLower.includes('相手のスピリットのアタック後') ||
-      rawLower.includes('アタック後') ||
-      /\[burst:[^\]]*\]\s*\(?[^)]*opposing (?:spirit|ultimate).*attacks/i.test(effLower)
+      rawLower.includes('アタック後')
     ) {
       return {
         type: 'AFTER_OPPONENT_ATTACKS',
@@ -6636,22 +9096,23 @@
       };
     }
 
-    // 4. AFTER_YOUR_SPIRIT_DESTROYED
+    // 4. AFTER_OPPONENT_SUMMON_EFFECT
     if (
-      rawLower.includes('destroyed by the opponent') ||
-      rawLower.includes('destroyed by the oopponent') ||
-      rawLower.includes('depleted/destroyed') ||
-      rawLower.includes('left the field') ||
-      rawLower.includes('leaves the field') ||
-      rawLower.includes('破壊後') ||
-      rawLower.includes('消滅/破壊後') ||
-      rawLower.includes('フィールドを離れた後') ||
-      /\[burst:[^\]]*\]\s*\(?[^)]*(?:destroyed by the opponent|depleted\/destroyed|left the field)/i.test(effLower)
+      rawLower.includes('when summoned') ||
+      rawLower.includes('summoned/advents') ||
+      rawLower.includes('summoned/deployed') ||
+      rawLower.includes('summoned/reborn') ||
+      rawLower.includes('summoned/advent') ||
+      rawLower.includes('summoned by an opposing') ||
+      rawLower.includes('summoned via an opposing') ||
+      rawLower.includes('召喚時') ||
+      rawLower.includes('煌臨時') ||
+      rawLower.includes('配置時')
     ) {
       return {
-        type: 'AFTER_YOUR_SPIRIT_DESTROYED',
-        label: 'After your Spirit is depleted/destroyed by the Opponent',
-        raw: raw || 'After your Spirit is depleted/destroyed by the Opponent'
+        type: 'AFTER_OPPONENT_SUMMON_EFFECT',
+        label: "After an opposing Spirit's (When Summoned) effect resolves",
+        raw: raw || "After an opposing Spirit's (When Summoned) effect resolves"
       };
     }
 
@@ -6663,8 +9124,7 @@
       rawLower.includes('increases the opposing hand') ||
       rawLower.includes('手札が増加後') ||
       rawLower.includes('手札増加後') ||
-      rawLower.includes('手札が増えた後') ||
-      /\[burst:[^\]]*\]\s*\(?[^)]*opposing hand increases/i.test(effLower)
+      rawLower.includes('手札が増えた後')
     ) {
       return {
         type: 'AFTER_OPPONENT_HAND_INCREASED',
@@ -6724,7 +9184,7 @@
     if (previewEl) {
       previewEl.innerHTML = `
         <div style="display:flex; gap:1rem; align-items:center;">
-          <img src="${card.image_url}" alt="${card.name}" style="width:72px; height:101px; object-fit:cover; border-radius:0.4rem; border:1px solid rgba(234,88,12,0.5); box-shadow:0 0 10px rgba(234,88,12,0.3);" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
+          <img src="${card.image_url}" alt="${card.name}" referrerpolicy="no-referrer" style="width:72px; height:101px; object-fit:cover; border-radius:0.4rem; border:1px solid rgba(234,88,12,0.5); box-shadow:0 0 10px rgba(234,88,12,0.3);" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
           <div style="flex:1;">
             <div style="font-weight:800; font-size:1rem; color:#fff; margin-bottom:0.25rem;">${card.name}</div>
             <div style="font-size:0.75rem; color:#cbd5e1; margin-bottom:0.4rem;">${card.type} • ${card.color} • Cost ${card.cost}</div>
@@ -6806,27 +9266,152 @@
     addLog(`🚨 **[BURST ACTIVATED]**: "${burstCard.name}" triggered by ${isPlayer ? 'Player' : 'Opponent'} [Condition: ${cond.label}]!`, 'magic');
 
     // 2. Resolve effect based on card type without duplicating
-    if (burstCard.type === 'Spirit') {
+    if (burstCard.type === 'Spirit' || burstCard.type === 'Ultimate') {
       const targetField = isPlayer ? DuelState.player.field : DuelState.opponent.field;
-      // Prevent duplicate spirits if already on field
-      if (!targetField.some(s => s.uid === burstCard.uid)) {
-        const coresToPlace = 1;
-        const { level, bp } = calculateBpAndLevel(burstCard.levels, coresToPlace);
-        burstCard.currentCores = coresToPlace;
-        burstCard.currentLevel = level;
-        burstCard.currentBp = bp;
-        burstCard.isExhausted = false;
-        burstCard.hasAttacked = false;
-        targetField.push(burstCard);
-        setTimeout(() => AudioFX.summon(), 180);
-        addLog(`✨ **BURST SUMMON**: "${burstCard.name}" summoned to the battle line for free (Lv${level}, ${bp} BP)!`, 'step');
-        executeWhenSummonedEffects(burstCard, side);
+      const targetState = isPlayer ? DuelState.player : DuelState.opponent;
+
+      // First, resolve the Burst Effect itself!
+      let burstEffectResolved = false;
+
+      if ((burstCard.name || '').includes('Renegada') || /summon up to two Cost 6 or less Purple Spirit cards from your Trash/i.test(burstCard.effect || '')) {
+        // Renegada Burst Effect:
+        // "You can summon up to two Cost 6 or less Purple Spirit cards from your Trash, paying one cost each, and during this turn, treat their LV1 cost as 0. Every Spirit summoned by this effect is destroyed during this turn's End Step."
+        const trash = targetState.trashCards || [];
+        const eligible = trash.filter(c => (c.type === 'Spirit' || !c.type) && (c.color === 'Purple' || !c.color) && (c.cost <= 6));
+        let summonedCount = 0;
+        for (const reanimCard of [...eligible]) {
+          if (summonedCount >= 2) break;
+          const hasCost = (targetState.reserve >= 1 || targetState.cores >= 1 || !isPlayer);
+          if (hasCost) {
+            if (targetState.reserve >= 1) targetState.reserve -= 1;
+            else if (targetState.cores >= 1) targetState.cores -= 1;
+            const idx = trash.indexOf(reanimCard);
+            if (idx !== -1) trash.splice(idx, 1);
+            const reanimatedSpirit = {
+              ...reanimCard,
+              uid: 'sp_' + Math.random().toString(36).slice(2, 9),
+              currentCores: 1,
+              hasSoulCore: false,
+              isExhausted: false,
+              hasAttacked: false,
+              battleBp: 0,
+              destroyAtEndStep: true
+            };
+            const { level, bp } = calculateBpAndLevel(reanimatedSpirit.levels, 1, false, reanimatedSpirit.effect);
+            reanimatedSpirit.currentLevel = level;
+            reanimatedSpirit.currentBp = bp;
+            targetField.push(reanimatedSpirit);
+            summonedCount++;
+            AudioFX.summon();
+            addLog(`💀 **[RENEGADA REANIMATION]**: Summoned "${reanimatedSpirit.name}" from Trash (Cost ${reanimCard.cost}, 1 Core paid)! Will be destroyed at End Step.`, 'magic');
+            executeWhenSummonedEffects(reanimatedSpirit, side);
+          }
+        }
+        burstEffectResolved = true;
+      } else if ((burstCard.name || '').includes('BurguHearts') || /Send two cores each from every non-"Makai"-named Spirits to the Reserve/i.test(burstCard.effect || '')) {
+        // BurguHearts Burst Effect:
+        let depletedCount = 0;
+        const allSpirits = [...(DuelState.player.field || []), ...(DuelState.opponent.field || [])];
+        for (const sp of allSpirits) {
+          const spMakai = (sp.name || '').toLowerCase().includes('makai') || (sp.family || '').toLowerCase().includes('makai');
+          if (!spMakai && (sp.currentCores || 0) > 0) {
+            const drain = Math.min(2, sp.currentCores);
+            sp.currentCores -= drain;
+            const spOwner = (DuelState.player.field || []).includes(sp) ? DuelState.player : DuelState.opponent;
+            spOwner.reserve = (spOwner.reserve || 0) + drain;
+            recalculateSpiritBp(sp);
+            if (sp.currentCores <= 0) {
+              depletedCount++;
+              const spSide = (DuelState.player.field || []).includes(sp) ? 'player' : 'opponent';
+              sendToTrash(sp, spSide, `Depleted by ${burstCard.name}`);
+              const fld = spSide === 'player' ? DuelState.player.field : DuelState.opponent.field;
+              const idx = fld.indexOf(sp);
+              if (idx !== -1) fld.splice(idx, 1);
+            }
+          }
+        }
+        addLog(`💥 **[${burstCard.name} BURST]**: Drained 2 cores each from non-Makai spirits to their Reserve!`, 'magic');
+        if (DuelState.activePlayer === side && depletedCount > 0) {
+          targetState.reserve = (targetState.reserve || 0) + depletedCount;
+          addLog(`✨ **[${burstCard.name}]**: Placed +${depletedCount} Core(s) from Void to Reserve for depleted spirits!`, 'magic');
+        }
+        burstEffectResolved = true;
+      } else {
+        // Generic Spirit Burst effects
+        executeUniversalCardEffect(burstCard, side, 'BURST');
+        const burstBlocks = getCardAbilityBlocks(burstCard.effect).filter(b => /\[Burst:/i.test(b) || /^Burst:/i.test(b));
+        for (const b of burstBlocks) {
+          executeAbilityActions(b, burstCard, side, 'BURST');
+        }
+        burstEffectResolved = true;
+      }
+
+      // Battle Spirits Rule: "After this effect resolves, summon this card without paying the cost."
+      const canSummonFree = /summon this (?:spirit|ultimate)?\s*card without paying the cost/i.test(burstCard.effect || '') ||
+                            /after this effect resolves/i.test(burstCard.effect || '') ||
+                            burstCard.type === 'Spirit' || burstCard.type === 'Ultimate';
+
+      if (canSummonFree && burstEffectResolved) {
+        if (!targetField.some(s => s.uid === burstCard.uid)) {
+          const coresToPlace = 1;
+          const { level, bp } = calculateBpAndLevel(burstCard.levels, coresToPlace);
+          burstCard.currentCores = coresToPlace;
+          burstCard.currentLevel = level;
+          burstCard.currentBp = bp;
+          burstCard.isExhausted = false;
+          burstCard.hasAttacked = false;
+          targetField.push(burstCard);
+          setTimeout(() => AudioFX.summon(), 180);
+          addLog(`✨ **BURST SUMMON**: "${burstCard.name}" (${burstCard.type || 'Spirit'}) summoned to the battle line for free (Lv${level}, ${bp} BP)!`, 'step');
+          executeWhenSummonedEffects(burstCard, side);
+        }
+      } else {
+        sendToTrash(burstCard, side, 'Burst resolved without summon');
+        addLog(`🪦 **[BURST RESOLVED]**: "${burstCard.name}" sent to Trash after resolving effect.`, 'info');
       }
     } else if (burstCard.type === 'Magic') {
       setTimeout(() => AudioFX.coreChime(), 180);
-      const desc = applyMagicEffect(burstCard, side);
+      const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+      const burstText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'burst');
+      executeAbilityActions(burstText, burstCard, side, 'BURST');
+      executeUniversalCardEffect(burstCard, side, 'BURST');
       sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);
-      addLog(`🔮 **BURST MAGIC**: "${burstCard.name}" resolved its effect! ${desc}`, 'magic');
+      addLog(`🔮 **BURST MAGIC**: "${burstCard.name}" resolved its burst effect!`, 'magic');
+
+      if (/then,\s*by paying the cost,\s*activate this card's flash effect/i.test(burstText || burstCard.effect || '')) {
+        const cost = burstCard.cost || 0;
+        const targetState = isPlayer ? DuelState.player : DuelState.opponent;
+        if (isPlayer) {
+          if ((targetState.reserve || 0) >= cost) {
+            askOptionalEffect(
+              burstCard,
+              `Pay ${cost} core${cost === 1 ? '' : 's'} from Reserve to activate "${burstCard.name}"'s [Flash] effect?`,
+              () => {
+                targetState.reserve -= cost;
+                targetState.trash += cost;
+                addLog(`💎 **[${burstCard.name}]**: Paid ${cost} core(s) from Reserve to activate [Flash] effect from Burst!`, 'magic');
+                const flashText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'hand');
+                executeAbilityActions(flashText, burstCard, side, 'FLASH');
+                executeUniversalCardEffect(burstCard, side, 'FLASH');
+                renderDuelTable();
+              },
+              null
+            );
+          } else {
+            addLog(`ℹ️ **[${burstCard.name}]**: Not enough cores in Reserve (${targetState.reserve || 0}/${cost}) to pay cost for Flash effect.`, 'info');
+          }
+        } else {
+          // Opponent AI
+          if ((targetState.reserve || 0) >= cost) {
+            targetState.reserve -= cost;
+            targetState.trash += cost;
+            addLog(`💎 **[${burstCard.name}]**: Opponent paid ${cost} core(s) to activate [Flash] effect from Burst!`, 'magic');
+            const flashText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'hand');
+            executeAbilityActions(flashText, burstCard, side, 'FLASH');
+            executeUniversalCardEffect(burstCard, side, 'FLASH');
+          }
+        }
+      }
     }
 
     // Trigger universal (After Your Burst Activates) across all allied Spirits on field!
@@ -6848,7 +9433,7 @@
       if (!eligibleBlocks.length) continue;
 
       for (const b of eligibleBlocks) {
-        const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+        const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
         const levelTag = lvlMatch ? lvlMatch[1] : '';
         if (!isEffectLevelMet(levelTag, spirit.currentLevel)) continue;
 
@@ -6884,7 +9469,7 @@
     const cond = parseBurstCondition(burstCard.effect);
 
     // Strict validation: eventType must match the card's specific condition
-    const matches = (cond.type === eventType) || (cond.type === 'GENERIC_BURST');
+    const matches = (cond.type === eventType);
     if (!matches) {
       // Condition does NOT match: card remains securely set in Burst Area
       return false;
@@ -7279,6 +9864,8 @@
     if (step === 'START') {
       AudioFX.init();
       AudioFX.playTone(330, 'triangle', 0.15, 0.08);
+      DuelState.player.hasMulliganed = true;
+      DuelState.player.hasConfirmedHand = true;
       addLog(`▶️ **START STEP**: Turn ${DuelState.turn} commenced! Next: Claim your Core from the Void.`, 'step');
       DuelState.phaseIndex = 1; // to CORE
       renderDuelTable();
@@ -7384,6 +9971,7 @@
   }
 
   function nextPhase() {
+    dispatchContinuousRules();
     if (DuelState.activePlayer !== 'player') return;
     const currentPhase = DuelState.phases[DuelState.phaseIndex];
     manualStep(currentPhase);
@@ -7409,7 +9997,21 @@
       recalculateSpiritBp(s);
     }
 
+    // Destroy spirits with destroyAtEndStep (e.g. Renegada reanimation)
+    for (const side of ['player', 'opponent']) {
+      const fld = DuelState[side].field || [];
+      for (let i = fld.length - 1; i >= 0; i--) {
+        const s = fld[i];
+        if (s && s.destroyAtEndStep) {
+          fld.splice(i, 1);
+          addLog(`💀 **[END STEP DESTRUCTION]**: "${s.name}" was destroyed at End Step as required by Renegada's effect!`, 'destroy');
+          sendToTrash(s, side, 'Destroyed at End Step by Renegada effect');
+        }
+      }
+    }
+
     DuelState.turn++;
+    dispatchContinuousRules();
     if (DuelState.activePlayer === 'player') {
       addLog(`🛑 **END STEP**: Turn passed to Player! Commencing Turn ${DuelState.turn}. Click "Begin Turn" on the Step Navigator to start.`, 'step');
       renderDuelTable();
@@ -7597,7 +10199,15 @@
     while (summonedCount < 3) {
       const availableReserve = DuelState.opponent.reserve;
       const summonable = DuelState.opponent.hand.filter(c => {
-        if (c.type !== 'Spirit' || availableReserve < ((c.cost || 0) + 1)) return false;
+        const isUlt = c.type === 'Ultimate' || (c.type || '').includes('Ultimate');
+        if (isUlt) {
+          const ultCheck = validateUltimateSummonCondition(c, 'opponent');
+          if (!ultCheck.allowed) return false;
+        } else if (c.type !== 'Spirit' && !(c.type || '').includes('Spirit')) {
+          return false;
+        }
+        const effCost = getCardEffectiveCost(c, 'opponent');
+        if (availableReserve < (effCost + 1)) return false;
         const req = getCardTributeRequirement(c);
         if (req && !getEligibleTributeSpirits(req, DuelState.opponent.field).length) return false;
         return true;
@@ -7609,7 +10219,7 @@
       let bestCoresToPlace = 1;
 
       for (const c of summonable) {
-        const cost = c.cost || 0;
+        const cost = getCardEffectiveCost(c, 'opponent');
         const maxCoresAffordable = availableReserve - cost;
         if (maxCoresAffordable < 1) continue;
 
@@ -7652,7 +10262,8 @@
       if (idx === -1) break;
       DuelState.opponent.hand.splice(idx, 1);
 
-      const cost = bestCard.cost || 0;
+      const baseCost = bestCard.cost || 0;
+      const cost = getCardEffectiveCost(bestCard, 'opponent');
       DuelState.opponent.reserve -= (cost + bestCoresToPlace);
       DuelState.opponent.trash += cost;
 
@@ -7752,19 +10363,19 @@
 
     const battleBp = attacker.battleBp || attacker.currentBp;
     addLog(`⚔️ **OPPONENT ATTACK** [Expectimax EV +${bestScore.toFixed(2)}]: "${attacker.name}" (${battleBp} BP) attacks your Life!${(attacker.battleBpBoost || 0) > 0 ? ` (+${attacker.battleBpBoost} BP When Attacks bonus)` : ''}`, 'damage');
-    checkBurstTrigger('player', 'AFTER_OPPONENT_ATTACKS', { attacker });
 
-    // Defending field triggers (e.g. Strike-Siegwurm refresh)
-    checkOpposingAttackDeclarationEffects('opponent');
+    const proceedToDefenseStep = () => {
+      // Defending field triggers (e.g. Strike-Siegwurm refresh)
+      checkOpposingAttackDeclarationEffects('opponent');
 
-    // Check player blockers
-    const playerBlockers = DuelState.player.field.filter(s => !s.isExhausted);
+      // Check player blockers
+      const playerBlockers = DuelState.player.field.filter(s => !s.isExhausted);
 
-    // Pause the game so the player can use Flash effects, even with no blockers available.
-    if (playerBlockers.length > 0 || playerHasFlashOptions()) {
-      showBlockPrompt(attacker, playerBlockers);
-    } else {
-      // Unblocked direct hit to Player Life!
+      // Always show block/flash prompt if player has ready blockers or playable flash options!
+      if (playerBlockers.length > 0 || playerHasFlashOptions()) {
+        showBlockPrompt(attacker, playerBlockers);
+      } else {
+        // Unblocked direct hit to Player Life!
       DuelState.combatEvent = {
         attacker,
         targetType: 'life',
@@ -7835,6 +10446,13 @@
         }
       }, 900);
     }
+    };
+
+    // If Burst triggers on opponent attack, pause and wait for burst resolution before defense!
+    const burstTriggered = checkBurstTrigger('player', 'AFTER_OPPONENT_ATTACKS', { attacker }, proceedToDefenseStep);
+    if (!burstTriggered) {
+      proceedToDefenseStep();
+    }
   }
 
   function playerHasFlashOptions() {
@@ -7845,7 +10463,7 @@
       return DuelState.player.hand.some(c => {
         if (!hasFlashTiming(c)) return false;
         if (!checkCardUsageRestriction(c, 'player').allowed) return false;
-        const need = (c.cost || 0) + (c.type === 'Spirit' ? 1 : 0);
+        const need = getCardEffectiveCost(c, 'player') + (c.type === 'Spirit' ? 1 : 0);
         return total >= need;
       });
     } catch (e) {
@@ -7886,7 +10504,7 @@
     const { total: totalAvailableCores } = getPlayerAvailableCores();
     const flashCards = DuelState.player.hand.filter(c => {
       if (!hasFlashTiming(c)) return false;
-      const cost = c.cost || 0;
+      const cost = getCardEffectiveCost(c, 'player');
       const isSpirit = c.type === 'Spirit';
       const totalNeeded = isSpirit ? cost + 1 : cost;
       return totalAvailableCores >= totalNeeded;
@@ -8207,7 +10825,7 @@
       const phase = DuelState.phases[DuelState.phaseIndex];
       if (phase === 'MAIN') {
         // Try summon
-        const card = DuelState.player.hand.find(c => c.type === 'Spirit' && DuelState.player.reserve >= (c.cost + 1));
+        const card = DuelState.player.hand.find(c => c.type === 'Spirit' && DuelState.player.reserve >= (getCardEffectiveCost(c, 'player') + 1));
         if (card) {
           summonCard(card.uid, 1);
         } else {
@@ -8303,6 +10921,12 @@
     const btnON = document.getElementById('tabOpponentNexus');
     if (btnON) btnON.classList.toggle('active', tab === 'opponent-nexus');
 
+        const pOpenCards = DuelState.player.openCards || [];
+    const oOpenCards = DuelState.opponent.openCards || [];
+    const pOpenCountEl = document.getElementById('tabCountPlayerOpen');
+    if (pOpenCountEl) pOpenCountEl.textContent = pOpenCards.length;
+    const btnPO = document.getElementById('tabPlayerOpen');
+    if (btnPO) btnPO.classList.toggle('active', tab === 'player-open');
     const pCountEl = document.getElementById('tabCountPlayerTrash');
     if (pCountEl) pCountEl.textContent = pTrash.length;
     const oCountEl = document.getElementById('tabCountOpponentTrash');
@@ -8340,7 +10964,7 @@
           <div class="zone-cards-grid">
             ${pTrash.map(c => `
               <div class="zone-card-item" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')" title="Click to inspect full details of ${c.name}">
-                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" onerror="this.src='/placeholder.png';">
+                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
                   <div class="zone-card-name">${c.name}</div>
                   <div class="zone-card-sub">
@@ -8370,7 +10994,7 @@
           <div class="zone-cards-grid">
             ${oTrash.map(c => `
               <div class="zone-card-item" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')" title="Click to inspect full details of ${c.name}">
-                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" onerror="this.src='/placeholder.png';">
+                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
                   <div class="zone-card-name">${c.name}</div>
                   <div class="zone-card-sub">
@@ -8423,7 +11047,7 @@
           <div class="zone-cards-grid">
             ${allVoidCards.map(c => `
               <div class="zone-card-item" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')" title="Click to inspect ${c.name}">
-                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" onerror="this.src='/placeholder.png';">
+                <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
                   <div class="zone-card-name">${c.name}</div>
                   <div class="zone-card-sub">
@@ -8448,6 +11072,46 @@
 
       voidHtml += `</div>`;
       bodyEl.innerHTML = voidHtml;
+        } else if (tab === 'player-open') {
+      if (titleEl) titleEl.textContent = '🎴 Your Open Zone (Removed from Game)';
+      if (subEl) subEl.textContent = `Cards placed face-up in the Open Zone (e.g. from Accel abilities). Can be summoned normally during your Main Step! (${pOpenCards.length} Open Card${pOpenCards.length === 1 ? '' : 's'})`;
+      if (!pOpenCards.length) {
+        bodyEl.innerHTML = `
+          <div class="zone-empty-state">
+            <div class="zone-empty-icon">🎴</div>
+            <div class="zone-empty-text">Your Open Zone is Empty</div>
+            <div class="zone-empty-subtext">When Spirit or Brave cards activate their [Accel] abilities from hand, they are placed face-up in the Open Zone instead of Trash.</div>
+          </div>
+        `;
+      } else {
+        const isMain = DuelState.activePlayer === 'player' && DuelState.phases[DuelState.phaseIndex] === 'MAIN';
+        bodyEl.innerHTML = `
+          <div class="zone-cards-grid">
+            ${pOpenCards.map(c => {
+              const effCost = getCardEffectiveCost(c, 'player');
+              const canAfford = (DuelState.player.reserve || 0) >= (effCost + 1);
+              const actionBtn = isMain
+                ? (canAfford
+                    ? `<button onclick="event.stopPropagation(); BattleArena.summonCardFromOpen('${c.uid}')" style="margin-top:6px;width:100%;background:linear-gradient(135deg,#f59e0b,#d97706);border:1px solid #fbbf24;color:#fff;border-radius:6px;padding:5px 8px;font-size:0.75rem;cursor:pointer;font-weight:700;">⚔️ Summon (${effCost})</button>`
+                    : `<button disabled style="margin-top:6px;width:100%;background:#334155;border:1px solid #475569;color:#94a3b8;border-radius:6px;padding:5px 8px;font-size:0.72rem;">⚠️ Need ${effCost + 1} Cores</button>`)
+                : `<span style="font-size:0.72rem;color:#94a3b8;display:block;margin-top:6px;text-align:center;">Main Step Only</span>`;
+              return `
+                <div class="zone-card-item" style="border:1.5px solid #f59e0b;">
+                  <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" referrerpolicy="no-referrer" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')" onerror="this.src='/placeholder.png';">
+                  <div class="zone-card-info">
+                    <div class="zone-card-name" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')">${c.name}</div>
+                    <div class="zone-card-sub">
+                      <span>${c.type || 'Card'}</span>
+                      <span style="color:#fbbf24;font-weight:700;">Cost ${c.cost ?? 0}</span>
+                    </div>
+                    ${actionBtn}
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
     } else if (tab === 'player-nexus') {
       if (titleEl) titleEl.textContent = '🏛️ Your Active Nexuses';
       if (subEl) subEl.textContent = `Continuous field facilities providing persistent symbols and effects (${pNexuses.length} Active Nexus${pNexuses.length === 1 ? '' : 'es'})`;
@@ -8465,7 +11129,7 @@
           <div class="zone-cards-grid">
             ${pNexuses.map(n => `
               <div class="zone-card-item" style="border:1.5px solid #38bdf8;">
-                <img src="${n.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${n.name}" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')" onerror="this.src='/placeholder.png';">
+                <img src="${n.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${n.name}" referrerpolicy="no-referrer" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
                   <div class="zone-card-name" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')">${n.name}</div>
                   <div class="zone-card-sub">
@@ -8504,7 +11168,7 @@
           <div class="zone-cards-grid">
             ${oNexuses.map(n => `
               <div class="zone-card-item" style="border:1.5px solid #c084fc;">
-                <img src="${n.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${n.name}" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')" onerror="this.src='/placeholder.png';">
+                <img src="${n.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${n.name}" referrerpolicy="no-referrer" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
                   <div class="zone-card-name" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(n.name)}')">${n.name}</div>
                   <div class="zone-card-sub">
@@ -8885,7 +11549,7 @@
       let handledAsync = false;
 
       for (const b of battleBlocks) {
-        const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+        const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
         const levelTag = lvlMatch ? lvlMatch[1] : '';
         if (!isEffectLevelMet(levelTag, spirit.currentLevel)) continue;
 
@@ -9391,6 +12055,21 @@
     hasArmor,
     getWhenAttacksBpBoost,
     getAttackSymbols,
+    calculateSymbolReduction,
+        promptChoiceModal,
+    summonCardFromOpen,
+    checkHandOnUltimateSummon,
+    isContractPartnerCard,
+    promptUniversalTargetModal,
+    dispatchContinuousRules,
+    canSetMirage,
+    setMirage,
+    canCastAccel,
+    castAccel,
+    triggerUTrigger,
+    getCardEffectiveCost,
+    validateUltimateSummonCondition,
+    getFriendlySymbols,
     selectHandCard,
     deselectCard,
     renderCardInspector,
@@ -9521,6 +12200,17 @@
     executeUniversalCardEffect,
     CardEffectsDB,
     getCardEffectsDB: () => CardEffectsDB,
+    openCardDetailContext,
+    sendToTrash,
+    executeWhenSummonedEffects,
+    executeAbilityActions,
+    activateBurst,
+    confirmStartingHandAndBegin,
+    performMulligan,
+    keepStartingHand,
+    promptCumulativeCostTargetModal,
+    endTurn,
+    renderPlayerHand,
     loadCardEffectsDB,
     safeEndOpponentTurn,
     handleAuthClick

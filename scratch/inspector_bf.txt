@@ -1,0 +1,21 @@
+2930: '      // On battlefield spirit\n'
+2931: '      const isPlayerSpirit = (DuelState.player.field || []).some(s => s.uid === card.uid);\n'
+2932: "      const isMainStep = isPlayerTurn && phase === 'MAIN';\n"
+2933: "      let scBtn = '';\n"
+2934: '      if (isPlayerSpirit && isMainStep) {\n'
+2935: '        if (card.hasSoulCore) {\n'
+2936: '          scBtn = `<button class="btn-inspector-action btn-remove-soul-core" onclick="BattleArena.removeSoulCoreFromSpirit(\'${card.uid}\')">🔥 Return Soul Core to Reserve</button>`;\n'
+2937: "        } else if (DuelState.player.soulCoreLocation === 'reserve') {\n"
+2938: '          scBtn = `<button class="btn-inspector-action btn-place-soul-core" onclick="BattleArena.placeSoulCoreOnSpirit(\'${card.uid}\')">🔥 Place Soul Core on this Spirit</button>`;\n'
+2939: "        } else if (DuelState.player.soulCoreLocation === 'field') {\n"
+2940: '          scBtn = `<button class="btn-inspector-action btn-place-soul-core" onclick="BattleArena.placeSoulCoreOnSpirit(\'${card.uid}\')">🔥 Transfer Soul Core to this Spirit</button>`;\n'
+2941: '        }\n'
+2942: '      }\n'
+2943: '      actionBtnHtml = `\n'
+2944: '        <div style="font-size:0.75rem;text-align:center;color:#60a5fa;font-weight:700;padding:0.2rem 0;">\n'
+2945: "          ⚔️ Current BP: ${card.currentBp || card.bp || '—'} BP (LV${card.currentLevel || 1})\n"
+2946: '          ${card.hasSoulCore ? \' • <span style="color:#f59e0b;font-weight:800;">🔥 SOUL CORE ACTIVE</span>\' : \'\'}\n'
+2947: '        </div>\n'
+2948: '        ${scBtn}\n'
+2949: '      `;\n'
+2950: '    }\n'

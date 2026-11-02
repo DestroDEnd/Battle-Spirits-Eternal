@@ -1,0 +1,35 @@
+1093:   return (str || '').replace(/[&<>'"]/g, tag => ({
+1094:     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+1095:   }[tag] || tag));
+1096: }
+1097: 
+1098: async function loadFeaturedXRares(color = '') {
+1099:   featuredColorFilter = color;
+1100:   const track = document.getElementById('featuredCardsTrack');
+1101:   if (!track) return;
+1102:   track.classList.add('loading-fade');
+1103: 
+1104:   try {
+1105:     const url = '/api/featured-x-rares' + (color ? `?color=${encodeURIComponent(color)}` : '');
+1106:     const res = await fetch(url);
+1107:     const data = await res.json();
+1108:     featuredCards = data.cards || [];
+1109:     renderFeaturedCards(featuredCards);
+1110:   } catch (err) {
+1111:     console.error('Failed to load featured X-Rares:', err);
+1112:     if (track) {
+1113:       track.innerHTML = '<div style="padding:2.5rem;color:#94a3b8;font-size:0.95rem;">Failed to load cards. Please click Shuffle or reload.</div>';
+1114:     }
+1115:   } finally {
+1116:     track.classList.remove('loading-fade');
+1117:   }
+1118: }
+1119: 
+1120: function renderFeaturedCards(cards) {
+1121:   const track = document.getElementById('featuredCardsTrack');
+1122:   if (!track) return;
+1123: 
+1124:   if (!cards || cards.length === 0) {
+1125:     track.innerHTML = '<div style="padding:2.5rem;color:#94a3b8;font-size:0.95rem;">No X-Rare cards found for this selection.</div>';
+1126:     return;
+1127:   }

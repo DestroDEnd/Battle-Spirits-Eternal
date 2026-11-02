@@ -1,0 +1,50 @@
+2249:       const avatarIcon = window.DuelistSocial ? window.DuelistSocial.getAvatar() : '🐉';
+2250:       const friendCount = window.DuelistSocial ? window.DuelistSocial.getFriends().length : 0;
+2251:       const displayId = duelistId || '0000-0000';
+2252: 
+2253:       slot.innerHTML = `
+2254:         <div class="nav-avatar-wrapper" id="navAvatarWrapper">
+2255:           <button class="nav-avatar-btn" id="navAvatarBtn" onclick="DuelistSocial.toggleDropdown(event)" title="My Duelist Profile">
+2256:             <span class="nav-avatar-circle" id="navAvatarCircle">${avatarIcon}</span>
+2257:             <span class="nav-avatar-name">${safeName}</span>
+2258:             <span class="nav-avatar-caret">▼</span>
+2259:           </button>
+2260:           <div class="duelist-dropdown" id="duelistDropdown">
+2261:             <div class="dd-header">
+2262:               <div class="dd-avatar-row">
+2263:                 <div class="dd-avatar-circle" id="ddAvatarCircle">${avatarIcon}</div>
+2264:                 <div class="dd-user-meta">
+2265:                   <div class="dd-name">${safeName}</div>
+2266:                   <div class="dd-duelist-id">
+2267:                     <span>ID: #${displayId}</span>
+2268:                     <button class="dd-btn-copy" onclick="DuelistSocial.copyId('${displayId}')" title="Copy ID">📋</button>
+2269:                   </div>
+2270:                 </div>
+2271:               </div>
+2272:             </div>
+2273:             <div class="dd-divider"></div>
+2274:             <div class="dd-menu">
+2275:               <button class="dd-item" onclick="DuelistSocial.openAvatarPicker()">
+2276:                 <span class="dd-icon">🎨</span>
+2277:                 <span>Change Avatar</span>
+2278:               </button>
+2279:               <button class="dd-item" onclick="DuelistSocial.openFriendsModal()">
+2280:                 <span class="dd-icon">👥</span>
+2281:                 <span>See Friends</span>
+2282:                 <span class="dd-badge" id="ddFriendCount">${friendCount}</span>
+2283:               </button>
+2284:               <a class="dd-item" href="./deck.html">
+2285:                 <span class="dd-icon">🃏</span>
+2286:                 <span>Check Decks</span>
+2287:               </a>
+2288:               <div class="dd-divider"></div>
+2289:               <button class="dd-item dd-logout" onclick="DuelistSocial.signOut()">
+2290:                 <span class="dd-icon">🚪</span>
+2291:                 <span>Sign Out</span>
+2292:               </button>
+2293:             </div>
+2294:           </div>
+2295:         </div>
+2296:       `;
+2297:       if (window.DuelistSocial) window.DuelistSocial.ensureModals();
+2298:     } else {

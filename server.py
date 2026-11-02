@@ -483,7 +483,7 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
                         'type': r[3],
                         'family': r[4],
                         'rarity': r[5],
-                        'image_url': r[6],
+                        'image_url': (r[6].split('/revision/latest')[0] if r[6] and 'static.wikia.nocookie.net' in r[6] and '/revision/latest' in r[6] else r[6]),
                         'card_number': r[7]
                     })
             conn.close()

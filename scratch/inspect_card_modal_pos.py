@@ -1,0 +1,7 @@
+f = open('arena.html', encoding='utf-8').read()
+arena_end = f.find('</section>')
+card_modal_start = f.find('id="cardModal"')
+card_modal_end = f.find('</div>\n    </div>\n  </div>', card_modal_start)
+print('arena_end:', arena_end)
+print('card_modal_start:', card_modal_start)
+print('card_modal_end:', card_modal_end)

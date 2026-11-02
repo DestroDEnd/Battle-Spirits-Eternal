@@ -1,0 +1,32 @@
+446: 
+447:       // Immediate static JSON route interception (does not need SQLite WASM engine)
+448:       if (path.endsWith('/api/filters')) {
+449:         try {
+450:           const rawRes = await window._originalFetch(getBaseDir() + 'filters_data.json');
+451:           if (rawRes.ok) return rawRes;
+452:         } catch (e) {}
+453:       }
+454: 
+455:       if (path.endsWith('/api/standard-decks')) {
+456:         try {
+457:           const rawRes = await window._originalFetch(getBaseDir() + 'standard_decks_data.json');
+458:           if (rawRes.ok) return rawRes;
+459:         } catch (e) {}
+460:       }
+461: 
+462:       // If database is currently initializing, wait for it!
+463:       if (!isReady && initPromise) {
+464:         try {
+465:           await initPromise;
+466:         } catch(e) {}
+467:       }
+468: 
+469:       if (isReady) {
+470:         if (path.endsWith('/api/cards')) {
+471:           const data = WasmDB.searchCards(params);
+472:           return new Response(JSON.stringify(data), {
+473:             status: 200,
+474:             headers: { 'Content-Type': 'application/json' }
+475:           });
+476:         }
+477: 

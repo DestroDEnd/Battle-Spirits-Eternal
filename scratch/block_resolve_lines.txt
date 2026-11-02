@@ -1,0 +1,70 @@
+7661:               </button>
+7662:             `).join('')}
+7663:           </div>
+7664:         `;
+7665:       } else {
+7666:         flashSectionEl.innerHTML = '';
+7667:       }
+7668:     }
+7669: 
+7670:     const choicesEl = document.getElementById('blockerChoices');
+7671:     let blockerHtml = '';
+7672:     if (isUnblockable) {
+7673:       blockerHtml = `
+7674:         <div style="padding:0.75rem; background:rgba(239,68,68,0.18); border:1px solid #ef4444; border-radius:0.5rem; color:#fca5a5; font-size:0.82rem; font-weight:800; text-align:center; margin-bottom:0.75rem;">
+7675:           ⚡ [UNBLOCKABLE ATTACK]: "${attacker.name}" cannot be intercepted! You must take Life damage.
+7676:         </div>
+7677:       `;
+7678:     } else if (blockSacrificeReq && DuelState.player.field.length < 2) {
+7679:       blockerHtml = `
+7680:         <div style="padding:0.75rem; background:rgba(168,85,247,0.18); border:1px solid #a855f7; border-radius:0.5rem; color:#e9d5ff; font-size:0.82rem; font-weight:800; text-align:center; margin-bottom:0.75rem;">
+7681:           ⚠️ [BLOCK RESTRICTION]: ${blockSacrificeReq.sourceSpirit.name} requires you to destroy 1 of your Spirits to block! You have no other Spirit to sacrifice.
+7682:         </div>
+7683:       `;
+7684:     } else {
+7685:       let sacrificeNotice = '';
+7686:       if (blockSacrificeReq) {
+7687:         sacrificeNotice = `
+7688:           <div style="padding:0.6rem; background:rgba(168,85,247,0.15); border:1px solid #a855f7; border-radius:0.5rem; color:#e9d5ff; font-size:0.78rem; font-weight:800; margin-bottom:0.6rem;">
+7689:             ⚠️ [BLOCK SACRIFICE REQUIREMENT]: ${blockSacrificeReq.sourceSpirit.name} requires destroying one of your Spirits! Blocking will sacrifice your lowest-cost allied Spirit.
+7690:           </div>
+7691:         `;
+7692:       }
+7693:       blockerHtml = sacrificeNotice + readyBlockers.map(s => `
+7694:         <div class="blocker-choice-card" onclick="BattleArena.chooseBlocker('${s.uid}', '${attacker.uid}')">
+7695:           <div class="bc-name">${s.name}</div>
+7696:           <div class="bc-bp">${s.currentBp} BP (Lv${s.currentLevel})</div>
+7697:           <button class="btn-block-action">🛡️ Block With This Spirit</button>
+7698:         </div>
+7699:       `).join('');
+7700:     }
+7701: 
+7702:     if (isClash && readyBlockers.length > 0) {
+7703:       blockerHtml += `
+7704:         <div style="padding:0.75rem; background:rgba(239,68,68,0.15); border:1px solid #ef4444; border-radius:0.5rem; color:#fca5a5; font-size:0.8rem; font-weight:800; text-align:center; margin-top:0.5rem;">
+7705:           ⚠️ [CLASH ACTIVE]: "${attacker.name}" forces you to block! You cannot take Life damage while you control Ready Spirits.
+7706:         </div>
+7707:       `;
+7708:     } else {
+7709:       const attSymbols = getAttackSymbols(attacker, 'opponent');
+7710:       if (attSymbols > 1) {
+7711:         blockerHtml = `
+7712:           <div style="padding:0.5rem; background:rgba(239,68,68,0.2); border:1px solid #ef4444; border-radius:0.4rem; color:#fca5a5; font-size:0.8rem; font-weight:800; text-align:center; margin-bottom:0.6rem;">
+7713:             ⚡ [MULTI-SYMBOL THREAT]: "${attacker.name}" attacks with ${attSymbols} Symbols! Passing will inflict ${attSymbols} Life Damage!
+7714:           </div>
+7715:         ` + blockerHtml;
+7716:       }
+7717:       blockerHtml += `
+7718:         <button class="btn-pass-block" onclick="BattleArena.takeLifeDamage('${attacker.uid}')">💥 Take ${attSymbols} Life Damage (${attSymbols} Symbol${attSymbols > 1 ? 's' : ''})</button>
+7719:       `;
+7720:     }
+7721:     choicesEl.innerHTML = blockerHtml;
+7722: 
+7723:     document.getElementById('blockAttackerName').textContent = `${attacker.name} (${attacker.currentBp} BP)`;
+7724:     modalEl.classList.add('active');
+7725:   }
+7726: 
+7727:   function chooseBlocker(blockerUid, attackerUid) {
+7728:     closeBlockModal();
+7729:     const blocker = DuelState.player.field.find(s => s.uid === blockerUid);
+7730:     const attacker = DuelState.opponent.field.find(s => s.uid === attackerUid);

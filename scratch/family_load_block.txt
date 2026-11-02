@@ -1,0 +1,18 @@
+209: <script>
+210: let allCategorizedFamilies = [];
+211: 
+212: async function loadFamilyDirectory() {
+213:   try {
+214:     const res = await fetch('/api/filters');
+215:     const data = await res.json();
+216:     if (data.categorized_families) {
+217:       allCategorizedFamilies = data.categorized_families;
+218:       renderFamilyDirectory(allCategorizedFamilies);
+219:     }
+220:   } catch (err) {
+221:     document.getElementById('familySectionsContainer').innerHTML = `<div style="text-align:center;padding:3rem;color:#fca5a5;">Failed to load families: ${esc(err.message)}</div>`;
+222:   }
+223: }
+224: 
+225: function renderFamilyDirectory(categories) {
+226:   const container = document.getElementById('familySectionsContainer');

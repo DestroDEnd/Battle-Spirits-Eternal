@@ -1,6 +1,12 @@
 // ═══════════════════ GLOBAL APP STATE & SHARED UTILS ═══════════════════
 const FALLBACK_CARD_ART = window.FALLBACK_CARD_ART = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='215' height='301' viewBox='0 0 215 301'><rect width='215' height='301' fill='%230f172a'/><rect x='8' y='8' width='199' height='285' rx='10' fill='%23141e33' stroke='%23f59e0b' stroke-width='1.5' stroke-opacity='0.4'/><circle cx='107' cy='125' r='36' fill='%231e293b' stroke='%23f59e0b' stroke-width='1.2'/><text x='107' y='133' font-size='22' text-anchor='middle' fill='%23fbbf24' font-family='sans-serif'>⚔️</text><text x='107' y='185' font-size='11' font-weight='bold' text-anchor='middle' fill='%23fbbf24' font-family='sans-serif' letter-spacing='1'>BATTLE SPIRITS</text><text x='107' y='205' font-size='10' text-anchor='middle' fill='%2394a3b8' font-family='sans-serif'>Card Art Pending</text></svg>";
 
+window.cleanCardImageUrl = function(url) {
+  if (!url || typeof url !== 'string') return url || FALLBACK_CARD_ART;
+  if (url.includes('static.wikia.nocookie.net') && url.includes('/revision/latest')) return url.split('/revision/latest')[0];
+  return url;
+};
+
 // ═══════════════════ MULTI-DECK MANAGER & REPOSITORIES ═══════════════════
 const DeckManager = {
   STORAGE_KEY: 'bs_user_decks_v2',
@@ -590,6 +596,26 @@ function formatEffectKeywordsInModal(text) {
     else if (low.includes('grand')) cls = 'kw-grand';
     return `<span class="effect-keyword-pill ${cls}">${match}</span>`;
   });
+
+  // 5. Card Name References: Make referenced card names in quotes clickable!
+  safe = safe.replace(/(?:&quot;|"|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|"|[”"」])/gu, (match, cardName) => {
+    const trimmed = cardName.trim();
+    const exclude = new Set([
+      'Ancient Dragon', 'Astral Dragon', 'Ogre Wizard', 'Evil God', 'DemonLord',
+      'Hell Contract', 'Purple', 'Red', 'Green', 'White', 'Yellow', 'Blue',
+      'Your Turn', "Opponent's Turn", 'Either Attack Step', 'Your Attack Step', "Opponent's Attack Step"
+    ]);
+    if (exclude.has(trimmed)) return match;
+    const isKnownCard = trimmed.startsWith('The ') ||
+      (typeof CardEffectsDB !== 'undefined' && CardEffectsDB[trimmed]) ||
+      (typeof WasmDB !== 'undefined' && WasmDB.getCardByName && WasmDB.getCardByName(trimmed));
+    if (isKnownCard) {
+      const safeJs = trimmed.replace(/'/g, "\\'");
+      return `"<span class="card-ref-link" onclick="event.stopPropagation(); if (typeof openCardDetail === 'function') openCardDetail('${safeJs}')" style="color:#60a5fa; text-decoration:underline; font-weight:700; cursor:pointer;" title="Click to inspect ${trimmed}">${trimmed}</span>"`;
+    }
+    return match;
+  });
+
   return safe;
 }
 
@@ -938,6 +964,66 @@ const ModalCardNavigator = {
     const collected = [];
     const path = (typeof window !== 'undefined' && window.location && window.location.pathname) ? window.location.pathname : '';
 
+    // 0. Priority: Battle Arena Context (Hand or Field or Burst)
+    if (typeof DuelState !== 'undefined' && DuelState.inDuel) {
+      const targetNameLow = (cardName || '').trim().toLowerCase();
+
+      // Check Player Field (including underlyingCards stacked under Advent spirits)
+      const pField = (DuelState.player && DuelState.player.field) || [];
+      const pFieldList = [];
+      let foundOnPField = false;
+      pField.forEach(s => {
+        if (!s) return;
+        pFieldList.push(s.name);
+        if ((s.name || '').trim().toLowerCase() === targetNameLow) foundOnPField = true;
+        if (s.underlyingCards && s.underlyingCards.length > 0) {
+          s.underlyingCards.forEach(u => {
+            if (!u) return;
+            pFieldList.push(u.name);
+            if ((u.name || '').trim().toLowerCase() === targetNameLow) foundOnPField = true;
+          });
+        }
+      });
+
+      // Check Player Hand
+      const pHand = (DuelState.player && DuelState.player.hand) || [];
+      const foundInHand = pHand.some(c => (c.name || '').trim().toLowerCase() === targetNameLow);
+
+      if (foundInHand && !foundOnPField) {
+        return pHand.map(c => c.name);
+      }
+      if (foundOnPField && !foundInHand) {
+        return pFieldList;
+      }
+      if (foundOnPField && foundInHand) {
+        const sel = DuelState.selectedPlayerCard;
+        if (sel && pField.some(s => s.uid === sel.uid)) {
+          return pFieldList;
+        }
+        return pHand.map(c => c.name);
+      }
+
+      // Check Opponent Field (including underlyingCards)
+      const oppField = (DuelState.opponent && DuelState.opponent.field) || [];
+      const oppFieldList = [];
+      let foundOnOppField = false;
+      oppField.forEach(s => {
+        if (!s) return;
+        oppFieldList.push(s.name);
+        if ((s.name || '').trim().toLowerCase() === targetNameLow) foundOnOppField = true;
+        if (s.underlyingCards && s.underlyingCards.length > 0) {
+          s.underlyingCards.forEach(u => {
+            if (!u) return;
+            oppFieldList.push(u.name);
+            if ((u.name || '').trim().toLowerCase() === targetNameLow) foundOnOppField = true;
+          });
+        }
+      });
+      if (foundOnOppField && oppFieldList.length > 0) {
+        return oppFieldList;
+      }
+    }
+
     // 1. If on Deck Builder page (/deck), prioritize current deck cards
     if (path.includes('/deck') && typeof S !== 'undefined' && S.deck && Object.keys(S.deck).length > 0) {
       const deckCards = Object.keys(S.deck);
@@ -1159,9 +1245,10 @@ async function openCardDetail(name, contextList) {
         const isBrave = handCard.type === 'Brave' || (handCard.type || '').includes('Brave');
         const isNexus = (handCard.type || '').includes('Nexus');
         const isMagic = handCard.type === 'Magic';
-        const isSpirit = (handCard.type === 'Spirit' || (handCard.type || '').includes('Spirit')) && !isBrave;
-        const cost = handCard.cost || 0;
-        const totalNeeded = (isSpirit || isBrave) ? cost + 1 : cost;
+        const isUltimate = handCard.type === 'Ultimate' || (handCard.type || '').includes('Ultimate');
+        const isSpirit = (handCard.type === 'Spirit' || (handCard.type || '').includes('Spirit')) && !isBrave && !isUltimate;
+        const cost = (typeof BattleArena !== 'undefined' && BattleArena.getCardEffectiveCost) ? BattleArena.getCardEffectiveCost(handCard, 'player') : (handCard.cost || 0);
+        const totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
         const isPlayerTurn = DuelState.activePlayer === 'player';
         const phase = DuelState.phases[DuelState.phaseIndex];
         const isAttackStep = phase === 'ATTACK';
@@ -1227,13 +1314,66 @@ async function openCardDetail(name, contextList) {
               closeModal();
               BattleArena.summonCard(handCard.uid);
             };
-          } else {
-            btnLabel = isAttackStep ? `✨ Flash Cast (Cost ${cost})` : `✨ Cast Magic (Cost ${cost})`;
-            btnBg = '#8b5cf6';
+
+            const accelCheck = (typeof BattleArena !== 'undefined' && BattleArena.canCastAccel) ? BattleArena.canCastAccel(handCard, 'player') : { allowed: false, cost: 0 };
+            if (modalBraveBtn && accelCheck.allowed) {
+              modalBraveBtn.style.display = 'block';
+              modalBraveBtn.textContent = `⚡ Cast Accel (${accelCheck.cost})`;
+              modalBraveBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+              modalBraveBtn.disabled = false;
+              modalBraveBtn.style.opacity = '1';
+              modalBraveBtn.onclick = () => {
+                closeModal();
+                BattleArena.castAccel(handCard.uid, 'player');
+              };
+            }
+          } else if (isUltimate) {
+            btnLabel = isAttackStep ? `⚡ Flash Summon Ultimate (Cost ${cost})` : `⚔️ Summon Ultimate (Cost ${cost})`;
+            btnBg = 'linear-gradient(135deg, #eab308, #ca8a04)';
             btnAction = () => {
               closeModal();
-              BattleArena.castMagic(handCard.uid);
+              BattleArena.summonCard(handCard.uid);
             };
+          } else {
+            const eff = handCard.effect || '';
+            const hasMain = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
+            const hasFlash = /\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff);
+
+            if (isAttackStep) {
+              btnLabel = `⚡ Flash Cast (${cost})`;
+              btnBg = 'linear-gradient(135deg, #f59e0b, #d97706)';
+              btnAction = () => {
+                closeModal();
+                BattleArena.castMagic(handCard.uid, null, null, 'flash');
+              };
+            } else if (phase === 'MAIN' && hasMain && hasFlash) {
+              btnLabel = `📜 Cast Main (${cost})`;
+              btnBg = 'linear-gradient(135deg, #0284c7, #0369a1)';
+              btnAction = () => {
+                closeModal();
+                BattleArena.castMagic(handCard.uid, null, null, 'main');
+              };
+
+              if (modalBraveBtn) {
+                modalBraveBtn.style.display = 'block';
+                modalBraveBtn.textContent = `⚡ Flash Cast (${cost})`;
+                modalBraveBtn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+                modalBraveBtn.disabled = false;
+                modalBraveBtn.style.opacity = '1';
+                modalBraveBtn.onclick = () => {
+                  closeModal();
+                  BattleArena.castMagic(handCard.uid, null, null, 'flash');
+                };
+              }
+            } else {
+              const mode = hasFlash ? 'flash' : 'main';
+              btnLabel = hasFlash ? `⚡ Flash Cast (${cost})` : `📜 Cast Magic (${cost})`;
+              btnBg = hasFlash ? 'linear-gradient(135deg, #f59e0b, #d97706)' : 'linear-gradient(135deg, #0284c7, #0369a1)';
+              btnAction = () => {
+                closeModal();
+                BattleArena.castMagic(handCard.uid, null, null, mode);
+              };
+            }
           }
 
           duelBtn.textContent = btnLabel;
@@ -1242,14 +1382,62 @@ async function openCardDetail(name, contextList) {
           duelBtn.style.background = btnBg;
           duelBtn.onclick = btnAction;
         } else if (avail.total >= totalNeeded) {
-          duelBtn.textContent = `💀 Sacrifice & Summon (${cost})`;
-          duelBtn.disabled = false;
-          duelBtn.style.opacity = '1';
-          duelBtn.style.background = '#ea580c';
-          duelBtn.onclick = () => {
-            closeModal();
-            BattleArena.openSacrificeModal(handCard.uid);
-          };
+          if (isMagic) {
+            const eff = handCard.effect || '';
+            const hasMain = /\[(?:Main|MAIN)\]|【メイン】/i.test(eff);
+            const hasFlash = /\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff);
+
+            if (isAttackStep) {
+              duelBtn.textContent = `💀 Sac & Flash (${cost})`;
+              duelBtn.disabled = false;
+              duelBtn.style.opacity = '1';
+              duelBtn.style.background = '#ea580c';
+              duelBtn.onclick = () => {
+                closeModal();
+                BattleArena.openSacrificeModal(handCard.uid, 'flash');
+              };
+            } else if (phase === 'MAIN' && hasMain && hasFlash) {
+              duelBtn.textContent = `💀 Sac & Main (${cost})`;
+              duelBtn.disabled = false;
+              duelBtn.style.opacity = '1';
+              duelBtn.style.background = '#0284c7';
+              duelBtn.onclick = () => {
+                closeModal();
+                BattleArena.openSacrificeModal(handCard.uid, 'main');
+              };
+
+              if (modalBraveBtn) {
+                modalBraveBtn.style.display = 'block';
+                modalBraveBtn.textContent = `💀 Sac & Flash (${cost})`;
+                modalBraveBtn.style.background = '#ea580c';
+                modalBraveBtn.disabled = false;
+                modalBraveBtn.style.opacity = '1';
+                modalBraveBtn.onclick = () => {
+                  closeModal();
+                  BattleArena.openSacrificeModal(handCard.uid, 'flash');
+                };
+              }
+            } else {
+              const mode = hasFlash ? 'flash' : 'main';
+              duelBtn.textContent = `💀 Sac & Cast (${cost})`;
+              duelBtn.disabled = false;
+              duelBtn.style.opacity = '1';
+              duelBtn.style.background = '#ea580c';
+              duelBtn.onclick = () => {
+                closeModal();
+                BattleArena.openSacrificeModal(handCard.uid, mode);
+              };
+            }
+          } else {
+            duelBtn.textContent = `💀 Sacrifice & Summon (${cost})`;
+            duelBtn.disabled = false;
+            duelBtn.style.opacity = '1';
+            duelBtn.style.background = '#ea580c';
+            duelBtn.onclick = () => {
+              closeModal();
+              BattleArena.openSacrificeModal(handCard.uid);
+            };
+          }
         } else {
           duelBtn.textContent = `⚠️ Need ${totalNeeded} Cores`;
           duelBtn.disabled = true;
@@ -1314,7 +1502,7 @@ async function openCardDetail(name, contextList) {
     ];
     const memCard = allCards.find(c => (c.name || '').toLowerCase() === (name || '').toLowerCase());
     if (memCard) {
-      if (memCard.image_url) document.getElementById('modalArt').src = memCard.image_url;
+      if (memCard.image_url) document.getElementById('modalArt').src = window.cleanCardImageUrl(memCard.image_url);
       if (memCard.kanji) document.getElementById('modalJpName').textContent = memCard.kanji;
       if (memCard.raw_levels) {
         document.getElementById('modalLevels').textContent = memCard.raw_levels;
@@ -1343,8 +1531,9 @@ async function openCardDetail(name, contextList) {
 
     document.getElementById('modalTitle').textContent = card.name || name;
     document.getElementById('modalJpName').textContent = card.kanji || card.jpname || '';
-    document.getElementById('modalArt').src = card.image_url || './assets/card_back.png';
-    document.getElementById('modalDownload').href = card.image_url || ('./api/download-art?name=' + encodeURIComponent(card.name || name));
+    const cleanedModalArt = window.cleanCardImageUrl(card.image_url || './assets/card_back.png');
+    document.getElementById('modalArt').src = cleanedModalArt;
+    document.getElementById('modalDownload').href = cleanedModalArt || ('./api/download-art?name=' + encodeURIComponent(card.name || name));
     const wikiHref = 'https://battle-spirits.fandom.com/wiki/' + encodeURIComponent((card.name || name || '').replace(/ /g, '_'));
     document.getElementById('modalWikiLink').href = wikiHref;
     document.getElementById('modalWikiLinkBottom').href = wikiHref;

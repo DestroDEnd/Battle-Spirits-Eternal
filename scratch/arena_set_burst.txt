@@ -1,0 +1,47 @@
+6322: 
+6323:   // ── BURST SYSTEM (DEDICATED BURST ZONE & SINGLE-USE ACTIVATION) ──
+6324:   function setBurst(uid) {
+6325:     if (DuelState.activePlayer !== 'player') {
+6326:       if (typeof showToast === 'function') showToast("Cannot set Burst on opponent's turn!", 'warning');
+6327:       return;
+6328:     }
+6329:     if (DuelState.player.burst) {
+6330:       if (typeof showToast === 'function') showToast("You already have a Burst set in your Burst Zone! Only 1 Burst allowed.", 'warning');
+6331:       return;
+6332:     }
+6333:     const idx = DuelState.player.hand.findIndex(c => c.uid === uid);
+6334:     if (idx === -1) return;
+6335:     const card = DuelState.player.hand.splice(idx, 1)[0];
+6336:     DuelState.player.burst = card;
+6337: 
+6338:     // Immediately update inspector to the set burst card so it reflects its new status
+6339:     DuelState.selectedPlayerCard = card;
+6340: 
+6341:     AudioFX.shield();
+6342:     addLog(`🔒 **BURST SET**: Set "${card.name}" face-down in your Burst Zone!`, 'step');
+6343:     renderDuelTable();
+6344:   }
+6345: 
+6346:   // ── BURST CONDITION CLASSIFICATION & PARSER ──
+6347:   function parseBurstCondition(effect) {
+6348:     if (!effect) return { type: 'NONE', label: 'None', raw: '' };
+6349: 
+6350:     const m = effect.match(/\[Burst:\s*([^\]]+)\](?:\s*\(([^)]+)\))?/i);
+6351:     let raw = '';
+6352:     if (m) {
+6353:       const p1 = m[1].trim();
+6354:       const p2 = m[2] ? m[2].trim() : '';
+6355:       raw = (p1.length > 2) ? p1 : (p2 || p1);
+6356:     } else {
+6357:       const jm = effect.match(/【バースト[：:]([^】]+)】/);
+6358:       if (jm) raw = jm[1].trim();
+6359:     }
+6360: 
+6361:     const rawLower = raw.toLowerCase();
+6362:     const effLower = effect.toLowerCase();
+6363: 
+6364:     // 1. AFTER_LIFE_DECREASED
+6365:     if (
+6366:       rawLower.includes('life is reduced') ||
+6367:       rawLower.includes('life is decreased') ||
+6368:       rawLower.includes('life is reeduced') ||

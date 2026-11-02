@@ -1,0 +1,200 @@
+6481: 
+6482:   function openBurstPromptModal(card, cond, eventType, eventContext = {}) {
+6483:     DuelState.activeBurstTrigger = { side: 'player', card, cond, eventType, eventContext };
+6484:     AudioFX.burstIgnite();
+6485: 
+6486:     const modal = document.getElementById('battleBurstPromptModal');
+6487:     if (!modal) {
+6488:       activateBurst('player', true);
+6489:       return;
+6490:     }
+6491: 
+6492:     const titleEl = document.getElementById('burstPromptTitle');
+6493:     const descEl = document.getElementById('burstPromptDesc');
+6494:     const previewEl = document.getElementById('burstPromptCardPreview');
+6495: 
+6496:     if (titleEl) titleEl.textContent = `⚡ Trigger Burst: "${card.name}"?`;
+6497:     if (descEl) {
+6498:       descEl.innerHTML = `Condition Met: <strong style="color:#fdba74;">${cond.label}</strong>! Do you want to activate your set Burst trap now?`;
+6499:     }
+6500: 
+6501:     if (previewEl) {
+6502:       previewEl.innerHTML = `
+6503:         <div style="display:flex; gap:1rem; align-items:center;">
+6504:           <img src="${card.image_url}" alt="${card.name}" style="width:72px; height:101px; object-fit:cover; border-radius:0.4rem; border:1px solid rgba(234,88,12,0.5); box-shadow:0 0 10px rgba(234,88,12,0.3);" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
+6505:           <div style="flex:1;">
+6506:             <div style="font-weight:800; font-size:1rem; color:#fff; margin-bottom:0.25rem;">${card.name}</div>
+6507:             <div style="font-size:0.75rem; color:#cbd5e1; margin-bottom:0.4rem;">${card.type} • ${card.color} • Cost ${card.cost}</div>
+6508:             <div style="font-size:0.78rem; color:#fed7aa; background:rgba(234,88,12,0.15); border:1px solid rgba(234,88,12,0.3); padding:0.35rem 0.5rem; border-radius:0.35rem; line-height:1.35;">
+6509:               <strong style="color:#fb923c;">[BURST CONDITION MET]:</strong> ${cond.raw || cond.label}
+6510:             </div>
+6511:           </div>
+6512:         </div>
+6513:       `;
+6514:     }
+6515: 
+6516:     modal.classList.add('active');
+6517:     renderBurstZones();
+6518:   }
+6519: 
+6520:   function confirmBurstTrigger() {
+6521:     closeBurstPromptModal();
+6522:     if (DuelState.activeBurstTrigger && DuelState.activeBurstTrigger.side === 'player') {
+6523:       activateBurst('player', true);
+6524:     }
+6525:   }
+6526: 
+6527:   function declineBurstTrigger() {
+6528:     closeBurstPromptModal();
+6529:     if (DuelState.activeBurstTrigger) {
+6530:       const cardName = DuelState.activeBurstTrigger.card?.name || 'Burst';
+6531:       addLog(`🛡️ **[BURST HELD]**: Player chose not to trigger "${cardName}" this time. Card remains safely set in Burst Area.`, 'step');
+6532:       DuelState.activeBurstTrigger = null;
+6533:       renderBurstZones();
+6534:     }
+6535:   }
+6536: 
+6537:   function closeBurstPromptModal() {
+6538:     const modal = document.getElementById('battleBurstPromptModal');
+6539:     if (modal) modal.classList.remove('active');
+6540:   }
+6541: 
+6542:   function activateBurst(side = 'player', isConfirmed = false) {
+6543:     const isPlayer = side === 'player';
+6544:     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
+6545:     if (!burstCard) {
+6546:       if (isPlayer && typeof showToast === 'function') showToast("No Burst card is currently set!", 'info');
+6547:       return;
+6548:     }
+6549: 
+6550:     const cond = parseBurstCondition(burstCard.effect);
+6551: 
+6552:     // Official Rule Protection: Player cannot manually activate Burst unless the trigger condition has been met!
+6553:     if (isPlayer && !isConfirmed && !DuelState.activeBurstTrigger) {
+6554:       if (typeof showToast === 'function') {
+6555:         showToast(`🔒 Cannot trigger Burst! Condition not met: "${cond.label}". Bursts can only activate when their specific trigger condition occurs in battle.`, 'warning');
+6556:       }
+6557:       return;
+6558:     }
+6559: 
+6560:     // Clear active trigger state and close modal
+6561:     DuelState.activeBurstTrigger = null;
+6562:     closeBurstPromptModal();
+6563: 
+6564:     // 1. Immediately consume from Burst Zone to guarantee it cannot be duplicated or re-triggered
+6565:     if (isPlayer) DuelState.player.burst = null;
+6566:     else DuelState.opponent.burst = null;
+6567: 
+6568:     if (DuelState.selectedPlayerCard && DuelState.selectedPlayerCard.uid === burstCard.uid) {
+6569:       DuelState.selectedPlayerCard = null;
+6570:     }
+6571: 
+6572:     AudioFX.burstIgnite();
+6573:     addLog(`🚨 **[BURST ACTIVATED]**: "${burstCard.name}" triggered by ${isPlayer ? 'Player' : 'Opponent'} [Condition: ${cond.label}]!`, 'magic');
+6574: 
+6575:     // 2. Resolve effect based on card type without duplicating
+6576:     if (burstCard.type === 'Spirit') {
+6577:       const targetField = isPlayer ? DuelState.player.field : DuelState.opponent.field;
+6578:       // Prevent duplicate spirits if already on field
+6579:       if (!targetField.some(s => s.uid === burstCard.uid)) {
+6580:         const coresToPlace = 1;
+6581:         const { level, bp } = calculateBpAndLevel(burstCard.levels, coresToPlace);
+6582:         burstCard.currentCores = coresToPlace;
+6583:         burstCard.currentLevel = level;
+6584:         burstCard.currentBp = bp;
+6585:         burstCard.isExhausted = false;
+6586:         burstCard.hasAttacked = false;
+6587:         targetField.push(burstCard);
+6588:         setTimeout(() => AudioFX.summon(), 180);
+6589:         addLog(`✨ **BURST SUMMON**: "${burstCard.name}" summoned to the battle line for free (Lv${level}, ${bp} BP)!`, 'step');
+6590:         executeWhenSummonedEffects(burstCard, side);
+6591:       }
+6592:     } else if (burstCard.type === 'Magic') {
+6593:       setTimeout(() => AudioFX.coreChime(), 180);
+6594:       const desc = applyMagicEffect(burstCard, side);
+6595:       sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);
+6596:       addLog(`🔮 **BURST MAGIC**: "${burstCard.name}" resolved its effect! ${desc}`, 'magic');
+6597:     }
+6598: 
+6599:     // Trigger universal (After Your Burst Activates) across all allied Spirits on field!
+6600:     checkAfterBurstEffects(side, burstCard);
+6601: 
+6602:     renderDuelTable();
+6603:   }
+6604: 
+6605:   function checkAfterBurstEffects(side, activatedBurstCard) {
+6606:     if (!activatedBurstCard) return;
+6607:     const isPlayer = side === 'player';
+6608:     const myField = isPlayer ? DuelState.player.field : DuelState.opponent.field;
+6609:     if (!myField || !myField.length) return;
+6610: 
+6611:     for (const spirit of [...myField]) {
+6612:       if (!spirit || !spirit.effect) continue;
+6613:       const blocks = getCardAbilityBlocks(spirit.effect);
+6614:       const eligibleBlocks = blocks.filter(b => /(?:After Your Burst Activates|After a Burst Activates)/i.test(b));
+6615:       if (!eligibleBlocks.length) continue;
+6616: 
+6617:       for (const b of eligibleBlocks) {
+6618:         const lvlMatch = b.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+6619:         const levelTag = lvlMatch ? lvlMatch[1] : '';
+6620:         if (!isEffectLevelMet(levelTag, spirit.currentLevel)) continue;
+6621: 
+6622:         // Check Cost condition (e.g. "If the card activated was Cost 5 or less")
+6623:         const costMatch = b.match(/If the card activated was Cost\s*(\d+)\s*or\s*(less|more)/i);
+6624:         if (costMatch) {
+6625:           const reqCost = parseInt(costMatch[1], 10);
+6626:           const isLess = costMatch[2].toLowerCase() === 'less';
+6627:           const cardCost = activatedBurstCard.cost !== undefined ? activatedBurstCard.cost : 0;
+6628:           if (isLess && cardCost > reqCost) continue;
+6629:           if (!isLess && cardCost < reqCost) continue;
+6630:         }
+6631: 
+6632:         // Check Family condition (e.g. "if the activated Burst was a 'Primordial'/'Cloudbuilt' family card")
+6633:         const famMatch = b.match(/if the activated Burst was a\s+["']?([^"']+)["']?\s+family/i);
+6634:         if (famMatch) {
+6635:           const reqFam = famMatch[1].toLowerCase();
+6636:           const cardFams = (activatedBurstCard.family || '').toLowerCase();
+6637:           if (!cardFams.includes(reqFam)) continue;
+6638:         }
+6639: 
+6640:         addLog(`⚡ **[AFTER BURST ACTIVATES: ${spirit.name}]**: Resonating with activated Burst "${activatedBurstCard.name}"!`, 'magic');
+6641:         executeAbilityActions(b, spirit, side, 'AFTER_BURST_ACTIVATES', { burstCard: activatedBurstCard });
+6642:       }
+6643:     }
+6644:   }
+6645: 
+6646:   function checkBurstTrigger(side, eventType = 'AFTER_LIFE_DECREASED', eventContext = {}) {
+6647:     const isPlayer = side === 'player';
+6648:     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
+6649:     if (!burstCard) return false;
+6650: 
+6651:     const cond = parseBurstCondition(burstCard.effect);
+6652: 
+6653:     // Strict validation: eventType must match the card's specific condition
+6654:     const matches = (cond.type === eventType) || (cond.type === 'GENERIC_BURST');
+6655:     if (!matches) {
+6656:       // Condition does NOT match: card remains securely set in Burst Area
+6657:       return false;
+6658:     }
+6659: 
+6660:     if (isPlayer) {
+6661:       openBurstPromptModal(burstCard, cond, eventType, eventContext);
+6662:       return true;
+6663:     } else {
+6664:       // Opponent AI automatically resolves
+6665:       addLog(`🃏 Opponent's Burst Trap met condition [${cond.label}]!`, 'magic');
+6666:       safeTimeout(() => activateBurst('opponent', true), 500);
+6667:       return true;
+6668:     }
+6669:   }
+6670: 
+6671:   function checkOpposingAttackDeclarationEffects(attackingSide) {
+6672:     const defendingSide = attackingSide === 'player' ? 'opponent' : 'player';
+6673:     const defField = defendingSide === 'player' ? DuelState.player.field : DuelState.opponent.field;
+6674:     for (const s of defField) {
+6675:       if (!s || !s.effect) continue;
+6676:       const effLower = s.effect.toLowerCase();
+6677:       // Strike-Siegwurm: "When an opposing Spirit attacks, refresh this Spirit"
+6678:       if ((effLower.includes('when an opposing spirit attacks') || effLower.includes('when opposing spirit attacks')) && effLower.includes('refresh this spirit')) {
+6679:         if (s.isExhausted) {
+6680:           s.isExhausted = false;

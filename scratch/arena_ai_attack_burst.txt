@@ -1,0 +1,110 @@
+7511:       const base = attacker.baseBp !== undefined ? attacker.baseBp : (attacker.currentBp || 0);
+7512:       attacker.battleBp = base + fallbackBoost;
+7513:       attacker.currentBp = attacker.battleBp;
+7514:     }
+7515: 
+7516:     const battleBp = attacker.battleBp || attacker.currentBp;
+7517:     addLog(`⚔️ **OPPONENT ATTACK** [Expectimax EV +${bestScore.toFixed(2)}]: "${attacker.name}" (${battleBp} BP) attacks your Life!${(attacker.battleBpBoost || 0) > 0 ? ` (+${attacker.battleBpBoost} BP When Attacks bonus)` : ''}`, 'damage');
+7518:     checkBurstTrigger('player', 'AFTER_OPPONENT_ATTACKS', { attacker });
+7519: 
+7520:     // Defending field triggers (e.g. Strike-Siegwurm refresh)
+7521:     checkOpposingAttackDeclarationEffects('opponent');
+7522: 
+7523:     // Check player blockers
+7524:     const playerBlockers = DuelState.player.field.filter(s => !s.isExhausted);
+7525: 
+7526:     if (playerBlockers.length > 0) {
+7527:       showBlockPrompt(attacker, playerBlockers);
+7528:     } else {
+7529:       // Unblocked direct hit to Player Life!
+7530:       DuelState.combatEvent = {
+7531:         attacker,
+7532:         targetType: 'life',
+7533:         blocker: null,
+7534:         result: 'DIRECT HIT TO PLAYER LIFE!'
+7535:       };
+7536:       renderDuelTable();
+7537: 
+7538:       setTimeout(() => {
+7539:         AudioFX.lifeDamage();
+7540:         const symbols = getAttackSymbols(attacker, 'opponent');
+7541:         const damageToDeal = Math.min(symbols, DuelState.player.life);
+7542:         for (let s = 0; s < damageToDeal; s++) {
+7543:           DuelState.player.life = Math.max(0, DuelState.player.life - 1);
+7544:           DuelState.player.reserve += 1;
+7545:         }
+7546: 
+7547:         if (symbols > 1) {
+7548:           const symName = symbols === 2 ? 'DOUBLE SYMBOL' : (symbols === 3 ? 'TRIPLE SYMBOL' : `${symbols}-SYMBOL`);
+7549:           addLog(`💥💥 **[${symName}: ${attacker.name}]**: Opponent attacked with ${symbols} Symbols inflicting ${damageToDeal} Life Damage! (Your Life: ${DuelState.player.life})`, 'damage');
+7550:           if (typeof showToast === 'function') {
+7551:             showToast(`⚠️ Took ${damageToDeal} Life Damage from ${symName}!`, 'warning');
+7552:           }
+7553:         } else {
+7554:           addLog(`💥 **DIRECT HIT**: Player loses 1 Life! (Remaining Life: ${DuelState.player.life})`, 'damage');
+7555:         }
+7556: 
+7557:         // [Holy Life / 聖命]: Opponent Trigger
+7558:         if (hasHolyLife(attacker)) {
+7559:           if (DuelState.opponent.life < 5) {
+7560:             DuelState.opponent.life += 1;
+7561:             AudioFX.coreChime();
+7562:             addLog(`✨ **[HOLY LIFE ACTIVATED: ${attacker.name}]**: Opponent channeled sacred light from the Void! Restored +1 Core to their Life! (Opponent Life: ${DuelState.opponent.life})`, 'magic');
+7563:           }
+7564:         }
+7565:         DuelState.combatEvent = null;
+7566:         renderDuelTable();
+7567:         checkGameOver();
+7568: 
+7569:         if (DuelState.player.life > 0) {
+7570:           checkBurstTrigger('player', 'AFTER_LIFE_DECREASED');
+7571:           const isAttackerAlive = DuelState.opponent.field.some(s => s.uid === attacker.uid);
+7572:           const finishAiTurn = () => {
+7573:             const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+7574:             const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= aggroThreshold);
+7575:             if (viable.length > 0) {
+7576:               safeTimeout(runAiAttackStep, 1000);
+7577:             } else {
+7578:               safeTimeout(endTurn, 900);
+7579:             }
+7580:           };
+7581: 
+7582:           if (isAttackerAlive) {
+7583:             checkEndOfBattleEffects([attacker], 'opponent', 'player', () => {
+7584:               endOfBattleBpReset(attacker);
+7585:               finishAiTurn();
+7586:             });
+7587:           } else {
+7588:             endOfBattleBpReset(attacker);
+7589:             finishAiTurn();
+7590:           }
+7591:         }
+7592:       }, 900);
+7593:     }
+7594:   }
+7595: 
+7596:   function showBlockPrompt(attacker, readyBlockers) {
+7597:     const modalEl = document.getElementById('battleBlockModal');
+7598:     if (!modalEl) {
+7599:       // Fallback: auto resolve
+7600:       AudioFX.lifeDamage();
+7601:       DuelState.player.life = Math.max(0, DuelState.player.life - 1);
+7602:       renderDuelTable();
+7603:       checkGameOver();
+7604:       if (DuelState.player.life > 0) {
+7605:         checkBurstTrigger('player', 'AFTER_LIFE_DECREASED');
+7606:       }
+7607:       safeTimeout(endTurn, 900);
+7608:       return;
+7609:     }
+7610: 
+7611:     const isUnblockable = hasCantBeBlocked(attacker);
+7612:     const blockSacrificeReq = getBlockSacrificeRequirement(attacker, 'opponent');
+7613:     const isClash = hasClash(attacker);
+7614:     const attNameEl = document.getElementById('blockAttackerName');
+7615:     if (attNameEl) {
+7616:       attNameEl.textContent = `${attacker.name} (${attacker.battleBp || attacker.currentBp} BP)`;
+7617:     }
+7618: 
+7619:     // Identify playable on-field Nexuses with Grand Skill Flash
+7620:     const fieldFlashNexuses = (DuelState.player.nexus || []).filter(n => {

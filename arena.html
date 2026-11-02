@@ -284,6 +284,12 @@
             <span class="core-counter-pill grave-counter-pill clickable-zone-pill" id="opponentGravePill" onclick="BattleArena.openZoneModal('opponent-trash')" title="Click to view cards in Opponent's Graveyard (Defeated Cards)">
               <span class="grave-icon">🪦</span> Grave: <span class="core-val" id="opponentGraveCount">0</span>
             </span>
+                        <span class="core-counter-pill count-counter-pill" id="opponentCountPill" title="Opponent's Contract Counters (Count)">
+              <span class="count-icon">💠</span> Count: <span class="core-val" id="opponentCountVal">0</span>
+            </span>
+            <span class="core-counter-pill open-counter-pill clickable-zone-pill" id="opponentOpenPill" onclick="BattleArena.openZoneModal('opponent-open')" title="Opponent's Cards in Open / Removed from Game Zone">
+              <span class="open-icon">🎴</span> Open: <span class="core-val" id="opponentOpenCount">0</span>
+            </span>
             <span class="core-counter-pill" id="opponentDeckCount">36 in Deck</span>
           </div>
         </div>
@@ -546,6 +552,12 @@
             </span>
             <span class="core-counter-pill grave-counter-pill clickable-zone-pill" id="playerGravePill" onclick="BattleArena.openZoneModal('player-trash')" title="Click to view cards in your Graveyard (Defeated Cards)">
               <span class="grave-icon">🪦</span> Grave: <span class="core-val" id="playerGraveCount">0</span>
+            </span>
+                        <span class="core-counter-pill count-counter-pill" id="playerCountPill" title="Your Contract Counters (Count)">
+              <span class="count-icon">💠</span> Count: <span class="core-val" id="playerCountVal">0</span>
+            </span>
+            <span class="core-counter-pill open-counter-pill clickable-zone-pill" id="playerOpenPill" onclick="BattleArena.openZoneModal('player-open')" title="Cards in Open / Removed from Game Zone (e.g. from Accel)">
+              <span class="open-icon">🎴</span> Open: <span class="core-val" id="playerOpenCount">0</span>
             </span>
             <span class="core-counter-pill" id="playerDeckCount">36 in Deck</span>
           </div>
@@ -960,6 +972,9 @@
             <button class="zone-tab-btn" id="tabVoid" onclick="BattleArena.switchZoneTab('void')">
               🌌 The Void (<span id="tabCountVoid">0</span>)
             </button>
+                        <button class="zone-tab-btn" id="tabPlayerOpen" onclick="BattleArena.switchZoneTab('player-open')">
+              🎴 Your Open Zone (<span id="tabCountPlayerOpen">0</span>)
+            </button>
             <button class="zone-tab-btn" id="tabPlayerNexus" onclick="BattleArena.switchZoneTab('player-nexus')">
               🏛️ Your Nexuses (<span id="tabCountPlayerNexus">0</span>)
             </button>
@@ -1048,7 +1063,7 @@
 <!-- Scripts -->
 <!-- WebAssembly SQLite Engine (sql.js) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-<script src="./wasm_db.js?v=1.0"></script>
+<script src="./wasm_db.js?v=2.2"></script>
 
 <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1058,8 +1073,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
 <script src="./firebase_service.js?v=1.1"></script>
 <script src="./multiplayer_service.js?v=1.0"></script>
-<script src="./app.js?v=5.0"></script>
-<script src="./battle_arena.js?v=5.1"></script>
+<script src="./app.js?v=5.3"></script>
+<script src="./battle_arena.js?v=5.3"></script>
 <script>
   // Check for auto-start or query parameters on dedicated arena page
   (function() {

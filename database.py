@@ -263,6 +263,17 @@ def save_card(card_data):
     conn.close()
     return card_data.get('name')
 
+def row_to_dict(row):
+    if not row:
+        return None
+    d = dict(row)
+    d['colors'] = json.loads(d.get('colors_json') or '[]')
+    d['families'] = json.loads(d.get('families_json') or '[]')
+    d['sets'] = json.loads(d.get('sets_json') or '[]')
+    if d.get('image_url') and 'static.wikia.nocookie.net' in d['image_url'] and '/revision/latest' in d['image_url']:
+        d['image_url'] = d['image_url'].split('/revision/latest')[0]
+    return d
+
 def get_card_by_name(name):
     conn = get_connection()
     cursor = conn.cursor()
@@ -271,11 +282,7 @@ def get_card_by_name(name):
     conn.close()
     if not row:
         return None
-    d = dict(row)
-    d['colors'] = json.loads(d.get('colors_json') or '[]')
-    d['families'] = json.loads(d.get('families_json') or '[]')
-    d['sets'] = json.loads(d.get('sets_json') or '[]')
-    return d
+    return row_to_dict(row)
 
 def get_distinct_values():
     """Get all distinct colors, families, sets for filter dropdowns."""
@@ -645,11 +652,7 @@ def search_cards_db(query='', color='', card_type='', rarity='', cost=None,
 
     cards_out = []
     for r in rows:
-        d = dict(r)
-        d['colors'] = json.loads(d.get('colors_json') or '[]')
-        d['families'] = json.loads(d.get('families_json') or '[]')
-        d['sets'] = json.loads(d.get('sets_json') or '[]')
-        cards_out.append(d)
+        cards_out.append(row_to_dict(r))
 
     return {
         'total': total_count,

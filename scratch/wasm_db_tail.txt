@@ -1,0 +1,60 @@
+536:             list.forEach(c => {
+537:               if (c && c.name) {
+538:                 batchMap[c.name] = c;
+539:                 batchMap[c.name.toLowerCase()] = c;
+540:                 batchMap.cards.push(c);
+541:               }
+542:             });
+543:           }
+544:           return new Response(JSON.stringify(batchMap), {
+545:             status: 200,
+546:             headers: { 'Content-Type': 'application/json' }
+547:           });
+548:         }
+549: 
+550:         if (path.endsWith('/api/autocomplete')) {
+551:           const results = WasmDB.getAutocomplete(params.q || '', parseInt(params.limit || 8, 10));
+552:           return new Response(JSON.stringify({ results }), {
+553:             status: 200,
+554:             headers: { 'Content-Type': 'application/json' }
+555:           });
+556:         }
+557: 
+558:         if (path.endsWith('/api/card-effects-db')) {
+559:           try {
+560:             const rawRes = await window._originalFetch(getBaseDir() + 'card_effects_db.json');
+561:             return rawRes;
+562:           } catch (e) {}
+563:         }
+564:       } else {
+565:         // If on static hosting (e.g. GitHub Pages) and backend is not running, return safe empty JSON
+566:         if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
+567:           console.warn(`[WasmDB] Intercepted static API call to ${path} before DB ready.`);
+568:           return new Response(JSON.stringify({ total: 0, cards: [] }), {
+569:             status: 200,
+570:             headers: { 'Content-Type': 'application/json' }
+571:           });
+572:         }
+573:       }
+574:     }
+575: 
+576:     // Default fallback to native fetch
+577:     return window._originalFetch.apply(this, arguments);
+578:   };
+579: 
+580:   // Expose globally
+581:   window.WasmDB = WasmDB;
+582: 
+583:   function startInit() {
+584:     if (!initPromise) {
+585:       initPromise = initWasmDatabase();
+586:     }
+587:     return initPromise;
+588:   }
+589: 
+590:   // Auto-boot immediately
+591:   if (typeof window !== 'undefined') {
+592:     startInit();
+593:   }
+594: 
+595: })(window);

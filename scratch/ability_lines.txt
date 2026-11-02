@@ -1,0 +1,32 @@
+3164: "  function executeAbilityActions(bodyText, card, side = 'player', triggerName = 'SUMMON', context = {}) {\n"
+3165: '    if (!bodyText || !card) return;\n'
+3166: '    const bodyLower = bodyText.toLowerCase();\n'
+3167: '\n'
+3168: '    // STRICT BRAVE GATING: [When Braved], [During Brave], or 合体時 abilities are strictly inactive unless the card is Braved!\n'
+3169: '    const isBraveAbility = /\\[(?:when|during)\\s+braved?\\]|合体時|合体中/i.test(bodyText);\n'
+3170: '    if (isBraveAbility && !card.isBraved && !card.brave) {\n'
+3171: '      return;\n'
+3172: '    }\n'
+3173: '\n'
+3174: '    // TIMING RESTRICTION: (When Attacks) or (When Brave Attacks) can NEVER trigger on SUMMON or MAGIC!\n'
+3175: "    if (/\\(When (?:Brave )?Attacks(?:\\/[^)]+)?\\)/i.test(bodyText) && triggerName !== 'ATTACK') {\n"
+3176: '      return;\n'
+3177: '    }\n'
+3178: '\n'
+3179: '    // DESTRUCTION RESTRICTION: (When Destroyed) or "destroyed by comparing BP" can NEVER trigger on SUMMON or MAGIC!\n'
+3180: "    if (/(?:When (?:only )?this (?:Spirit|Ultimate|Brave) is destroyed|\\(When Destroyed(?:\\/[^)]+)?\\))/i.test(bodyText) && triggerName !== 'DESTROY' && triggerName !== 'BP_DESTRUCTION') {\n"
+3181: '      return;\n'
+3182: '    }\n'
+3183: "    const isPlayer = side === 'player';\n"
+3184: '    const myField = isPlayer ? DuelState.player.field : DuelState.opponent.field;\n'
+3185: '    const myReserve = isPlayer ? DuelState.player : DuelState.opponent;\n'
+3186: '    const enemyField = isPlayer ? DuelState.opponent.field : DuelState.player.field;\n'
+3187: "    const enemySide = isPlayer ? 'opponent' : 'player';\n"
+3188: '    const enemyReserve = isPlayer ? DuelState.opponent : DuelState.player;\n'
+3189: '    const myDeck = isPlayer ? DuelState.player.deck : DuelState.opponent.deck;\n'
+3190: '    const myHand = isPlayer ? DuelState.player.hand : DuelState.opponent.hand;\n'
+3191: '    const myTrash = (isPlayer ? (DuelState.player.trashCards || DuelState.player.trash) : (DuelState.opponent.trashCards || DuelState.opponent.trash)) || [];\n'
+3192: '\n'
+3193: '    // 1. UNBLOCKABLE STATUS\n'
+3194: "    if (/this spirit can't be blocked|this spirit cannot be blocked|cannot be blocked by opposing|can't be blocked by opposing/i.test(bodyLower)) {\n"
+3195: '      card.cantBeBlocked = true;\n'

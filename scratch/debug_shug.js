@@ -1,0 +1,16 @@
+const fs = require('fs');
+global.window = global;
+global.window.location = { pathname: '/battle_arena' };
+global.document = { getElementById: () => ({ style: {}, classList: { add: ()=>{}, remove: ()=>{} } }), querySelectorAll: () => [], addEventListener: () => {} };
+global.localStorage = { getItem: () => null, setItem: () => {} };
+global.AudioContext = function() {};
+eval(fs.readFileSync('battle_arena.js', 'utf-8'));
+const ds = BattleArena.getState();
+const shug = { name: 'The MakaiPriest Shugraus', uid: 'shug', effect: '[LV1][LV2] When your "Makai"-named Spirits, other than this Spirit, are summoned, send one core from any opposing Spirit(s) to the reserve.' };
+const salz = { name: 'The MakaiSwordsman Salzerk', uid: 'salz', effect: '' };
+const opp = { name: 'Opp', uid: 'opp', currentCores: 2 };
+ds.player.field = [shug, salz];
+ds.opponent.field = [opp];
+ds.opponent.reserve = 0;
+BattleArena.executeWhenSummonedEffects(salz, 'player');
+console.log('Opp cores:', opp.currentCores, 'reserve:', ds.opponent.reserve);

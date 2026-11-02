@@ -1,0 +1,55 @@
+7596:   function showBlockPrompt(attacker, readyBlockers) {
+7597:     const modalEl = document.getElementById('battleBlockModal');
+7598:     if (!modalEl) {
+7599:       // Fallback: auto resolve
+7600:       AudioFX.lifeDamage();
+7601:       DuelState.player.life = Math.max(0, DuelState.player.life - 1);
+7602:       renderDuelTable();
+7603:       checkGameOver();
+7604:       if (DuelState.player.life > 0) {
+7605:         checkBurstTrigger('player', 'AFTER_LIFE_DECREASED');
+7606:       }
+7607:       safeTimeout(endTurn, 900);
+7608:       return;
+7609:     }
+7610: 
+7611:     const isUnblockable = hasCantBeBlocked(attacker);
+7612:     const blockSacrificeReq = getBlockSacrificeRequirement(attacker, 'opponent');
+7613:     const isClash = hasClash(attacker);
+7614:     const attNameEl = document.getElementById('blockAttackerName');
+7615:     if (attNameEl) {
+7616:       attNameEl.textContent = `${attacker.name} (${attacker.battleBp || attacker.currentBp} BP)`;
+7617:     }
+7618: 
+7619:     // Identify playable on-field Nexuses with Grand Skill Flash
+7620:     const fieldFlashNexuses = (DuelState.player.nexus || []).filter(n => {
+7621:       const check = canActivateGrandSkill(n, 'player');
+7622:       return check.allowed;
+7623:     });
+7624: 
+7625:     // Identify playable Flash cards in hand (both Magic & Swift spirits)
+7626:     const { total: totalAvailableCores } = getPlayerAvailableCores();
+7627:     const flashCards = DuelState.player.hand.filter(c => {
+7628:       if (!hasFlashTiming(c)) return false;
+7629:       const cost = c.cost || 0;
+7630:       const isSpirit = c.type === 'Spirit';
+7631:       const totalNeeded = isSpirit ? cost + 1 : cost;
+7632:       return totalAvailableCores >= totalNeeded;
+7633:     });
+7634: 
+7635:     // Render Flash Timing section
+7636:     const flashSectionEl = document.getElementById('blockFlashSection');
+7637:     if (flashSectionEl) {
+7638:       if (flashCards.length > 0) {
+7639:         flashSectionEl.innerHTML = `
+7640:           <div class="flash-spells-container">
+7641:             <div class="flash-spells-title">⚡ FLASH TIMING WINDOW (Cast spells or activate on-field Grand Skills):</div>
+7642:             ${fieldFlashNexuses.map(n => {
+7643:               const gs = parseGrandSkill(n);
+7644:               return `
+7645:                 <button class="flash-spell-btn flash-nexus-btn" onclick="BattleArena.activateGrandSkill('${n.uid}')" title="${n.effect}">
+7646:                   <div class="fsb-left">
+7647:                     <span class="fsb-name">🏛️ ${n.name} [Grand Skill: ${gs ? gs.cost : 4}]</span>
+7648:                     <span class="fsb-desc">Send ${gs ? gs.cost : 4} Cores from Nexus to Void → Destroy an opposing exhausted Spirit</span>
+7649:                   </div>
+7650:                   <span class="fsb-cost">🔮 ${n.currentCores}c on Nexus</span>

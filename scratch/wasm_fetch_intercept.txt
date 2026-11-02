@@ -1,0 +1,40 @@
+431:     }
+432:   };
+433: 
+434:   // ── 5. TRANSPARENT CLIENT-SIDE FETCH INTERCEPTOR ──
+435:   // Automatically routes API calls to WebAssembly SQLite on static sites!
+436:   window._originalFetch = window._originalFetch || window.fetch;
+437: 
+438:   window.fetch = async function(resource, init) {
+439:     const urlStr = typeof resource === 'string' ? resource : (resource && resource.url ? resource.url : '');
+440:     
+441:     // Only intercept /api/ requests if WasmDB is active
+442:     if (urlStr.startsWith('/api/') || urlStr.includes('/api/')) {
+443:       const url = new URL(urlStr, window.location.origin);
+444:       const path = url.pathname;
+445:       const params = Object.fromEntries(url.searchParams.entries());
+446: 
+447:       // Immediate static JSON route interception (does not need SQLite WASM engine)
+448:       if (path.endsWith('/api/filters')) {
+449:         try {
+450:           const rawRes = await window._originalFetch(getBaseDir() + 'filters_data.json');
+451:           if (rawRes.ok) return rawRes;
+452:         } catch (e) {}
+453:       }
+454: 
+455:       if (path.endsWith('/api/standard-decks')) {
+456:         try {
+457:           const rawRes = await window._originalFetch(getBaseDir() + 'standard_decks_data.json');
+458:           if (rawRes.ok) return rawRes;
+459:         } catch (e) {}
+460:       }
+461: 
+462:       // If database is currently initializing, wait for it!
+463:       if (!isReady && initPromise) {
+464:         try {
+465:           await initPromise;
+466:         } catch(e) {}
+467:       }
+468: 
+469:       if (isReady) {
+470:         if (path.endsWith('/api/cards')) {

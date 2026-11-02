@@ -1,0 +1,62 @@
+6644:   }
+6645: 
+6646:   function checkBurstTrigger(side, eventType = 'AFTER_LIFE_DECREASED', eventContext = {}) {
+6647:     const isPlayer = side === 'player';
+6648:     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
+6649:     if (!burstCard) return false;
+6650: 
+6651:     const cond = parseBurstCondition(burstCard.effect);
+6652: 
+6653:     // Strict validation: eventType must match the card's specific condition
+6654:     const matches = (cond.type === eventType) || (cond.type === 'GENERIC_BURST');
+6655:     if (!matches) {
+6656:       // Condition does NOT match: card remains securely set in Burst Area
+6657:       return false;
+6658:     }
+6659: 
+6660:     if (isPlayer) {
+6661:       openBurstPromptModal(burstCard, cond, eventType, eventContext);
+6662:       return true;
+6663:     } else {
+6664:       // Opponent AI automatically resolves
+6665:       addLog(`🃏 Opponent's Burst Trap met condition [${cond.label}]!`, 'magic');
+6666:       safeTimeout(() => activateBurst('opponent', true), 500);
+6667:       return true;
+6668:     }
+6669:   }
+6670: 
+6671:   function checkOpposingAttackDeclarationEffects(attackingSide) {
+6672:     const defendingSide = attackingSide === 'player' ? 'opponent' : 'player';
+6673:     const defField = defendingSide === 'player' ? DuelState.player.field : DuelState.opponent.field;
+6674:     for (const s of defField) {
+6675:       if (!s || !s.effect) continue;
+6676:       const effLower = s.effect.toLowerCase();
+6677:       // Strike-Siegwurm: "When an opposing Spirit attacks, refresh this Spirit"
+6678:       if ((effLower.includes('when an opposing spirit attacks') || effLower.includes('when opposing spirit attacks')) && effLower.includes('refresh this spirit')) {
+6679:         if (s.isExhausted) {
+6680:           s.isExhausted = false;
+6681:           AudioFX.refresh();
+6682:           addLog(`🛡️ **[OPPOSING ATTACK REFRESH: ${s.name}]**: Readied and refreshed for defense against incoming strike!`, 'magic');
+6683:           if (defendingSide === 'player' && typeof showToast === 'function') {
+6684:             showToast(`🛡️ "${s.name}" refreshed on opposing attack!`, 'info');
+6685:           }
+6686:         }
+6687:       }
+6688:     }
+6689:   }
+6690: 
+6691:   function checkLifeDecreasedEffects(damagedSide) {
+6692:     const myField = damagedSide === 'player' ? DuelState.player.field : DuelState.opponent.field;
+6693:     for (const s of myField) {
+6694:       if (!s || !s.effect) continue;
+6695:       const effLower = s.effect.toLowerCase();
+6696:       // Oozuchi: "When your Life is reduced by opposing Spirits, refresh a White Spirit you control"
+6697:       if (effLower.includes('when your life is reduced') && effLower.includes('refresh')) {
+6698:         const whiteSpirits = myField.filter(ally => ((ally.color || '').toLowerCase() === 'white') && ally.isExhausted);
+6699:         const targetToRefresh = whiteSpirits.length > 0 ? whiteSpirits[0] : (s.isExhausted ? s : null);
+6700:         if (targetToRefresh) {
+6701:           targetToRefresh.isExhausted = false;
+6702:           AudioFX.refresh();
+6703:           addLog(`🛡️ **[LIFE DAMAGE REFRESH: ${s.name}]**: Refreshed "${targetToRefresh.name}" upon Life reduction!`, 'magic');
+6704:           if (damagedSide === 'player' && typeof showToast === 'function') {
+6705:             showToast(`🛡️ Refreshed "${targetToRefresh.name}"!`, 'info');

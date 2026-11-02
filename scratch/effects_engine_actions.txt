@@ -1,0 +1,170 @@
+681:         const dst = act.destination || 'reserve';
+682:         if (dst === 'life') {
+683:           if (friendlyState.life < 5) {
+684:             friendlyState.life = Math.min(5, friendlyState.life + count);
+685:             AudioFX.coreChime();
+686:             addLog(`✨ **[${card.name}]**: Restored +${count} Life Core from the Void!`, 'magic');
+687:           }
+688:         } else if (dst === 'spirit' && card.uid) {
+689:           card.currentCores = (card.currentCores || 1) + count;
+690:           recalculateSpiritBp(card);
+691:           AudioFX.coreChime();
+692:           addLog(`🔮 **[${card.name}]**: Placed +${count} Core onto this Spirit (Total: ${card.currentCores}).`, 'step');
+693:         } else {
+694:           friendlyState.reserve += count;
+695:           AudioFX.coreChime();
+696:           addLog(`🔮 **[${card.name}]**: Added +${count} Core from ${src} to Reserve (Reserve: ${friendlyState.reserve}).`, 'step');
+697:         }
+698:       } else if (actType === 'CORE_DRAIN') {
+699:         const count = act.count || 1;
+700:         const dest = act.destination || 'reserve';
+701:         const targetKind = act.target || 'spirit';
+702:         if (targetKind === 'nexus' && enemyState.nexus && enemyState.nexus.length > 0) {
+703:           const targetNex = enemyState.nexus.find(n => (n.currentCores || 0) >= 1) || enemyState.nexus[0];
+704:           if (targetNex && targetNex.currentCores > 0) {
+705:             const num = Math.min(count, targetNex.currentCores);
+706:             targetNex.currentCores -= num;
+707:             if (dest === 'reserve') enemyState.reserve += num;
+708:             else if (dest === 'trash') enemyState.trash += num;
+709:             addLog(`🔮 **[${card.name}]**: Sent ${num} Core from opposing Nexus "${targetNex.name}" to ${dest}!`, 'magic');
+710:           }
+711:         } else if (enemyState.field && enemyState.field.length > 0) {
+712:           const targetSp = enemyState.field.find(s => (s.currentCores || 0) >= 1) || enemyState.field[0];
+713:           if (targetSp && targetSp.currentCores > 0) {
+714:             const num = Math.min(count, targetSp.currentCores);
+715:             targetSp.currentCores -= num;
+716:             if (dest === 'reserve') enemyState.reserve += num;
+717:             else if (dest === 'trash') enemyState.trash += num;
+718:             recalculateSpiritBp(targetSp);
+719:             addLog(`🔮 **[${card.name}]**: Drained ${num} Core from opposing "${targetSp.name}" to ${dest}!`, 'magic');
+720:             if (targetSp.currentCores <= 0) {
+721:               const spIdx = enemyState.field.findIndex(s => s.uid === targetSp.uid);
+722:               if (spIdx !== -1) {
+723:                 const depleted = enemyState.field.splice(spIdx, 1)[0];
+724:                 sendToTrash(depleted, enemySide, `Depleted by ${card.name}`);
+725:                 addLog(`💀 **DEPLETED**: Opposing "${depleted.name}" depleted of cores and sent to Trash!`, 'damage');
+726:               }
+727:             }
+728:           }
+729:         }
+730:       } else if (actType === 'BP_BUFF') {
+731:         const boost = act.amount || 1000;
+732:         if (act.target === 'all') {
+733:           for (const s of friendlyState.field || []) {
+734:             s.battleBpBoost = (s.battleBpBoost || 0) + boost;
+735:             s.battleBp = (s.baseBp || s.currentBp) + s.battleBpBoost;
+736:             s.currentBp = s.battleBp;
+737:           }
+738:           addLog(`⚡ **[${card.name}]**: Granted +${boost} BP to all friendly Spirits!`, 'magic');
+739:         } else {
+740:           card.battleBpBoost = (card.battleBpBoost || 0) + boost;
+741:           card.battleBp = (card.baseBp || card.currentBp) + card.battleBpBoost;
+742:           card.currentBp = card.battleBp;
+743:           addLog(`⚡ **[${card.name}]**: Powered up with +${boost} BP! (Current BP: ${card.currentBp})`, 'magic');
+744:         }
+745:       } else if (actType === 'DESTROY_SPIRIT_BP') {
+746:         const maxBp = act.max_bp || 5000;
+747:         const count = act.count || 1;
+748:         let destroyed = 0;
+749:         const victims = (enemyState.field || []).filter(s => (s.battleBp || s.currentBp || 0) <= maxBp);
+750:         for (const vic of victims) {
+751:           if (destroyed >= count) break;
+752:           const vIdx = enemyState.field.findIndex(s => s.uid === vic.uid);
+753:           if (vIdx !== -1) {
+754:             const popped = enemyState.field.splice(vIdx, 1)[0];
+755:             recycleSpiritCoresToReserve(popped, enemySide);
+756:             sendToTrash(popped, enemySide, `Destroyed by ${card.name} (${maxBp} BP or less)`);
+757:             AudioFX.destroy();
+758:             addLog(`💥 **[${card.name}]**: Obliterated opposing "${popped.name}" (${popped.currentBp} BP <= ${maxBp} BP limit)!`, 'damage');
+759:             destroyed++;
+760:           }
+761:         }
+762:       } else if (actType === 'DESTROY_SPIRIT_DIRECT') {
+763:         const count = act.count || 1;
+764:         const requireExhausted = act.require_exhausted || false;
+765:         let destroyed = 0;
+766:         const candidates = (enemyState.field || []).filter(s => !requireExhausted || s.isExhausted);
+767:         for (const vic of candidates) {
+768:           if (destroyed >= count) break;
+769:           const vIdx = enemyState.field.findIndex(s => s.uid === vic.uid);
+770:           if (vIdx !== -1) {
+771:             const popped = enemyState.field.splice(vIdx, 1)[0];
+772:             recycleSpiritCoresToReserve(popped, enemySide);
+773:             sendToTrash(popped, enemySide, `Destroyed by ${card.name}`);
+774:             AudioFX.destroy();
+775:             addLog(`💥 **[${card.name}]**: Destroyed opposing "${popped.name}"!`, 'damage');
+776:             destroyed++;
+777:           }
+778:         }
+779:       } else if (actType === 'DESTROY_NEXUS') {
+780:         if (enemyState.nexus && enemyState.nexus.length > 0) {
+781:           const popped = enemyState.nexus.shift();
+782:           sendToTrash(popped, enemySide, `Nexus destroyed by ${card.name}`);
+783:           AudioFX.destroy();
+784:           addLog(`💥 **[${card.name}]**: Smashed opposing Nexus "${popped.name}"!`, 'damage');
+785:         }
+786:       } else if (actType === 'RETURN_TO_HAND') {
+787:         const count = act.count || 1;
+788:         for (let i = 0; i < count; i++) {
+789:           if (!enemyState.field || !enemyState.field.length) break;
+790:           const popped = enemyState.field.shift();
+791:           recycleSpiritCoresToReserve(popped, enemySide);
+792:           enemyState.hand.push(popped);
+793:           AudioFX.magic();
+794:           addLog(`🍃 **[${card.name}]**: Bounced opposing "${popped.name}" back to opponent's Hand!`, 'magic');
+795:         }
+796:       } else if (actType === 'EXHAUST_ENEMY') {
+797:         const count = act.count || 1;
+798:         const readyEnemies = (enemyState.field || []).filter(s => !s.isExhausted);
+799:         for (let i = 0; i < Math.min(count, readyEnemies.length); i++) {
+800:           readyEnemies[i].isExhausted = true;
+801:           AudioFX.slash();
+802:           addLog(`💤 **[${card.name}]**: Forced opposing "${readyEnemies[i].name}" into Exhausted rest state!`, 'step');
+803:         }
+804:       } else if (actType === 'REFRESH_SELF') {
+805:         card.isExhausted = false;
+806:         AudioFX.shield();
+807:         addLog(`🔄 **[${card.name}]**: Refreshed to Ready state!`, 'step');
+808:       } else if (actType === 'REFRESH_ALLIES') {
+809:         for (const s of friendlyState.field || []) {
+810:           s.isExhausted = false;
+811:         }
+812:         AudioFX.shield();
+813:         addLog(`🔄 **[${card.name}]**: Refreshed all friendly Spirits to Ready state!`, 'step');
+814:       } else if (actType === 'LIFE_BURN') {
+815:         if (enemyState.life > 0) {
+816:           enemyState.life = Math.max(0, enemyState.life - 1);
+817:           enemyState.reserve += 1;
+818:           AudioFX.lifeDamage();
+819:           addLog(`💥 **[${card.name}]**: Inflicted 1 direct Life Damage to opponent! (Opponent Life: ${enemyState.life})`, 'damage');
+820:           checkGameOver();
+821:         }
+822:       } else if (actType === 'CANNOT_BE_BLOCKED') {
+823:         card.cannotBeBlocked = true;
+824:         addLog(`💨 **[${card.name}]**: Became Unblockable for this battle!`, 'step');
+825:       } else if (actType === 'BP_DEBUFF') {
+826:         const amount = act.amount || 3000;
+827:         const targetSp = (enemyState.field || [])[0];
+828:         if (targetSp) {
+829:           targetSp.battleBpBoost = (targetSp.battleBpBoost || 0) - amount;
+830:           targetSp.battleBp = Math.max(0, (targetSp.baseBp || targetSp.currentBp) + targetSp.battleBpBoost);
+831:           targetSp.currentBp = targetSp.battleBp;
+832:           AudioFX.magic();
+833:           addLog(`🔻 **[${card.name}]**: Weakened opposing "${targetSp.name}" by -${amount} BP (Current: ${targetSp.currentBp} BP).`, 'damage');
+834:           if (targetSp.currentBp <= 0) {
+835:             const spIdx = enemyState.field.findIndex(s => s.uid === targetSp.uid);
+836:             if (spIdx !== -1) {
+837:               const popped = enemyState.field.splice(spIdx, 1)[0];
+838:               recycleSpiritCoresToReserve(popped, enemySide);
+839:               sendToTrash(popped, enemySide, `BP reduced to 0 by ${card.name}`);
+840:               AudioFX.destroy();
+841:               addLog(`💥 **0-BP DEPLETED**: Opposing "${popped.name}" had its BP reduced to 0 and was destroyed to Trash!`, 'damage');
+842:             }
+843:           }
+844:         }
+845:       } else if (actType === 'DESTROY_SPIRIT_COST') {
+846:         const maxCost = act.max_cost || 4;
+847:         const count = act.count || 1;
+848:         let destroyed = 0;
+849:         const victims = (enemyState.field || []).filter(s => (s.cost || 0) <= maxCost);
+850:         for (const vic of victims) {

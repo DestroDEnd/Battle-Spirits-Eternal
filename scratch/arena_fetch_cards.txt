@@ -1,0 +1,11 @@
+1489:             const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
+1490:             const batchData = await res.json();
+1492:               let cInfo = batchData[name] || batchData[name.toLowerCase()];
+1493:               if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+1494:                 cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+1510:             console.warn('Failed to load card batch for user deck:', e);
+1529:           const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
+1530:           const batchData = await res.json();
+1532:             let cInfo = batchData[name] || batchData[name.toLowerCase()];
+1533:             if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+1534:               cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());

@@ -1,0 +1,42 @@
+202:     },
+203: 
+204:     getCardsBatch(names) {
+205:       if (!dbInstance || !names || !names.length) return [];
+206:       try {
+207:         const cleanNames = names.map(n => String(n).trim()).filter(Boolean);
+208:         if (!cleanNames.length) return [];
+209:         const placeholders = cleanNames.map(() => 'LOWER(?)').join(',');
+210:         const stmt = dbInstance.prepare(`SELECT * FROM cards WHERE LOWER(name) IN (${placeholders})`);
+211:         stmt.bind(cleanNames.map(n => n.toLowerCase()));
+212:         const results = [];
+213:         while (stmt.step()) {
+214:           const row = stmt.getAsObject();
+215:           if (row.colors_json) {
+216:             try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+217:           }
+218:           if (row.families_json) {
+219:             try { row.families = JSON.parse(row.families_json); } catch(e) {}
+220:           }
+221:           if (row.sets_json) {
+222:             try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
+223:           }
+224:           if (row.levels && typeof row.levels === 'string') {
+225:             try { row.levels = JSON.parse(row.levels); } catch(e) {}
+226:           }
+227:           results.push(row);
+228:         }
+229:         stmt.free();
+230:         return results;
+231:       } catch (e) {
+232:         console.error('[WasmDB] getCardsBatch error:', e);
+233:         return [];
+234:       }
+235:     },
+236: 
+237:     getFeaturedXRares(color = '') {
+238:       if (!dbInstance) return [];
+239:       try {
+240:         const colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+241:         let targetColors = colors;
+242:         let perColor = 4;
+243:         if (color && colors.map(c => c.toLowerCase()).includes(color.toLowerCase())) {

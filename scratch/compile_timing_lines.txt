@@ -1,0 +1,55 @@
+411:         if min_lvl is not None:
+412:             current_level = min_lvl
+413:         if special_tag == 'BRAVED':
+414:             current_is_braved = True
+415:         elif 'LV' in line:
+416:             current_is_braved = False
+417: 
+418:         # Look for explicit timing keywords in parentheses or brackets
+419:         found_timings = []
+420:         for m in re.finditer(r'\(([^\)]+)\)', line):
+421:             c_text = m.group(1).lower()
+422:             if 'summon' in c_text and 'attack' in c_text:
+423:                 found_timings.extend(['WHEN_SUMMONED', 'WHEN_ATTACKS'])
+424:             elif 'summon' in c_text and 'advent' in c_text:
+425:                 found_timings.extend(['WHEN_SUMMONED', 'WHEN_ADVENTS'])
+426:             elif 'summon' in c_text:
+427:                 found_timings.append('WHEN_SUMMONED')
+428:             elif 'attack' in c_text and 'block' in c_text:
+429:                 found_timings.extend(['WHEN_ATTACKS', 'WHEN_BLOCKS'])
+430:             elif 'advent' in c_text and 'attack' in c_text:
+431:                 found_timings.extend(['WHEN_ADVENTS', 'WHEN_ATTACKS'])
+432:             elif 'attack step' in c_text or 'your attack' in c_text or 'opposing attack' in c_text:
+433:                 found_timings.append('WHEN_ATTACKS')
+434:             elif 'attack' in c_text:
+435:                 found_timings.append('WHEN_ATTACKS')
+436:             elif 'block' in c_text:
+437:                 found_timings.append('WHEN_BLOCKS')
+438:             elif 'battles' in c_text:
+439:                 found_timings.extend(['WHEN_ATTACKS', 'WHEN_BLOCKS'])
+440:             elif 'destroyed in battle' in c_text or 'comparing bp' in c_text:
+441:                 found_timings.append('WHEN_DESTROYED_IN_BATTLE')
+442:             elif 'destroy' in c_text or 'deplet' in c_text:
+443:                 found_timings.append('WHEN_DESTROYED')
+444:             elif 'deploy' in c_text:
+445:                 found_timings.append('WHEN_DEPLOYED')
+446:             elif 'advent' in c_text:
+447:                 found_timings.append('WHEN_ADVENTS')
+448:             elif 'reborn' in c_text:
+449:                 found_timings.append('WHEN_REBORN')
+450:             elif 'flash' in c_text:
+451:                 found_timings.append('FLASH')
+452:             elif 'start of' in c_text:
+453:                 found_timings.append('START_OF_TURN')
+454:             elif 'end of the battle' in c_text or 'end of battle' in c_text:
+455:                 found_timings.append('END_OF_BATTLE')
+456:             elif 'end of' in c_text:
+457:                 found_timings.append('END_OF_TURN')
+458: 
+459:         if re.search(r'\[Flash\]|\bFlash\s*[-:\(]', line, re.I):
+460:             found_timings.append('FLASH')
+461:         if re.search(r'\[Main\]|\bMain\s*[-:\(]', line, re.I):
+462:             found_timings.append('MAIN')
+463: 
+464:         if (ctype or '').lower() == 'magic':
+465:             if not found_timings and current_timings == ['PASSIVE']:
