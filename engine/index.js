@@ -14,6 +14,7 @@ import { moveCard, moveCore } from './zones.js';
 import { calculateEffectiveCost, canAffordCost, payCost } from './payment.js';
 import { computeEffectiveBP, canAttack, canBlock } from './continuous.js';
 import { checkStateBasedActions } from './sba.js';
+import { createDefaultKeywordRegistry } from './keywords/index.js';
 
 export function createGame(options = {}) {
   const playerDeckCards = (options.playerDeck || []).map(c => createCardInstance(c, 'player'));
@@ -24,6 +25,7 @@ export function createGame(options = {}) {
   const events = new EventBus();
   const flow = new FlowController(state, events);
   const resolver = new AsyncResolver(options.promptResolver || new DefaultPromptResolver());
+  const keywords = options.keywordRegistry || createDefaultKeywordRegistry();
 
   // Initial draw: 4 cards each
   for (let i = 0; i < ETERNAL_RULES.setup.initialHandSize; i++) {
@@ -35,11 +37,12 @@ export function createGame(options = {}) {
     }
   }
 
-  return {
+  const game = {
     state,
     events,
     flow,
     resolver,
+    keywords,
 
     async advanceStep() {
       return await flow.advanceStep();
@@ -186,7 +189,8 @@ export function createGame(options = {}) {
       });
 
       // Resolve battle BP comparison
-      const attackerStack = state.players[playerSide === 'player' ? 'player' : 'opponent'].field.find(st => st.id === state.combat.attackerStackId);
+      const attackerSide = blockerSide === 'opponent' ? 'player' : 'opponent';
+      const attackerStack = state.players[attackerSide].field.find(st => st.id === state.combat.attackerStackId);
       const attackerBp = computeEffectiveBP(state, attackerStack);
       const blockerBp = computeEffectiveBP(state, stack);
 
@@ -231,4 +235,7 @@ export function createGame(options = {}) {
       return { success: true, defenderLife: defPlayer.life };
     }
   };
+
+  keywords.attachToGame(game);
+  return game;
 }
