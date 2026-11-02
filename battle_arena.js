@@ -182,9 +182,96 @@
     }
   };
 
+  // ── CANONICAL STANDARD STARTER DECKS (SYNCHRONOUS PREVIEWS & FALLBACKS) ──
+  const DEFAULT_REALM_PREVIEWS = {
+    purple: {
+      color: "Purple",
+      name: "Netherworld Curse & Seven Shoguns",
+      badge: "🟣 PURPLE CONTROL",
+      desc: "Seven Shoguns & Netherworld drain control. Drains enemy cores with Desperado and Dark-Clymenus, recurses from trash, and locks down the field.",
+      validated_cards: [
+        { name: "Foger", count: 3 }, { name: "Camelot-Pawn", count: 3 }, { name: "Puppet Soldier", count: 3 },
+        { name: "Skulldevil", count: 3 }, { name: "Zombie-Snake", count: 3 }, { name: "Shadow Yatagarasu", count: 3 },
+        { name: "The PoisonSnakeScythe Alphard", count: 3 }, { name: "The NetherCorpseKnight Ajaccio", count: 3 },
+        { name: "The SevenShogun Desperado", count: 3 }, { name: "The SorcererInfernalKing Dark-Clymenus", count: 2 },
+        { name: "The WhiteSnakeEmperor Aldius-Viper", count: 2 }, { name: "Brave Cemetery", count: 3 },
+        { name: "Curse of Hades", count: 3 }, { name: "Bomburst", count: 3 }
+      ]
+    },
+    red: {
+      color: "Red",
+      name: "Hero Dragon's Blazing Soul",
+      badge: "🔴 RED AGGRO",
+      desc: "Lord-Dragon & Sengoku Dragonoid assault. Rapid early game swarming with Goradon and Lizardedge, backed by Lord-Dragon and Burning-Souldragon finishers.",
+      validated_cards: [
+        { name: "Goradon", count: 3 }, { name: "Rokceratops", count: 3 }, { name: "Lizardedge", count: 3 },
+        { name: "DarkGoradon", count: 3 }, { name: "Dragonhead", count: 3 }, { name: "Chakrambat", count: 3 },
+        { name: "Jurassickle", count: 3 }, { name: "The HeroDragon Lord-Dragon", count: 3 },
+        { name: "The ExplosionHero Lord-Dragon-Bazzel", count: 2 }, { name: "The SengokuDragonEmperor Burning-Souldragon", count: 2 },
+        { name: "Double Draw", count: 3 }, { name: "Flame Dance", count: 3 }, { name: "Burst Draw", count: 3 },
+        { name: "Flame Tempest", count: 3 }
+      ]
+    },
+    green: {
+      color: "Green",
+      name: "Emerald Gale of Insect Sovereigns",
+      badge: "🟢 GREEN RAMP",
+      desc: "Blade Insect & Winged Beast core ramp. Rapid Swift summoning, resource acceleration, and overwhelming boss attacks with Kingtaurus and Kaiseratlas.",
+      validated_cards: [
+        { name: "Beatbeetle", count: 3 }, { name: "Axemoth", count: 3 }, { name: "BladeG", count: 3 },
+        { name: "The ForestBird Sekkohkiji", count: 3 }, { name: "The Singing Makigale", count: 3 },
+        { name: "Anaguma-Kosuke", count: 3 }, { name: "ChickenKnight", count: 3 }, { name: "The WingedBlade Gruid", count: 3 },
+        { name: "The Duke Kingtaurus", count: 3 }, { name: "The Emperor Kaiseratlas", count: 2 },
+        { name: "The Providence Hououga X", count: 2 }, { name: "Divine Wind", count: 3 },
+        { name: "Breeze Ride", count: 3 }, { name: "Insect Aura", count: 3 }
+      ]
+    },
+    white: {
+      color: "White",
+      name: "Armed Fortress & Mobile Machine Deity",
+      badge: "⚪ WHITE DEFENSE",
+      desc: "Armed Machine & Mobile Fortress ironclad defense. Bounces attackers, deflects damage with Blizzard Wall, and crushes with Grand-Woden and Enterprise.",
+      validated_cards: [
+        { name: "Icemaiden", count: 3 }, { name: "Ray-Bullet", count: 3 }, { name: "The ImperialMachine Ohsu-Mi", count: 3 },
+        { name: "The ArmoredBeast Oozuchi", count: 3 }, { name: "Diamond Betta", count: 3 }, { name: "Bobcats", count: 3 },
+        { name: "The Silver Guardian Blade", count: 3 }, { name: "The SixAbsoluteDeities Impenetrable-Chrome-Riservar", count: 2 },
+        { name: "The WingDeity Grand-Woden", count: 3 }, { name: "The ArmoredDragonBattleship Enterprise", count: 2 },
+        { name: "Blizzard Wall", count: 3 }, { name: "Defensive Aura", count: 3 }, { name: "Ice Age Shield", count: 3 },
+        { name: "Co-op Barrier", count: 3 }
+      ]
+    },
+    yellow: {
+      color: "Yellow",
+      name: "Celestial Symphony of Seraphs",
+      badge: "🟡 YELLOW MAGIC",
+      desc: "Divine Angelia & Celestial Spirit synergy. Bypasses blocking spirits, heals life with magical choruses, and strikes from above with Tzaphkiel and Mikafar.",
+      validated_cards: [
+        { name: "Koristal", count: 3 }, { name: "Piyon", count: 3 }, { name: "Melofuurin", count: 3 },
+        { name: "The Angelia Spiele", count: 3 }, { name: "The Angelia Archiel", count: 3 }, { name: "Chocorone", count: 3 },
+        { name: "Haneppo", count: 3 }, { name: "Angeloid", count: 3 }, { name: "The GreatAngeliaOfThrones Tzaphkiel", count: 3 },
+        { name: "The ArcAngelia Raraphael", count: 2 }, { name: "The ArcAngelia Mikafar XV", count: 2 },
+        { name: "After Image", count: 3 }, { name: "Defense Nebula", count: 3 }, { name: "Additional Color", count: 3 }
+      ]
+    },
+    blue: {
+      color: "Blue",
+      name: "Colosseum Titans & Golem Mill",
+      badge: "🔵 BLUE MILL",
+      desc: "Colosseum Fighting Spirit & Golem deck destruction. Controls the nexus arena and dismantles the opponent's deck with Titus and Alexander.",
+      validated_cards: [
+        { name: "The BattleBeast Bulltop", count: 3 }, { name: "Rammer-Golem", count: 3 }, { name: "Drian", count: 3 },
+        { name: "Mechanic-Corgi", count: 3 }, { name: "The GreenBird Douji", count: 3 }, { name: "Chacopecca", count: 3 },
+        { name: "Dolphino", count: 3 }, { name: "The GiantEmperor Alexander", count: 3 },
+        { name: "The GiantHero Titus", count: 3 }, { name: "The GiantHero Titus XV", count: 2 },
+        { name: "Spinning Sword", count: 3 }, { name: "Lead Wall", count: 3 }, { name: "Ptolemaios", count: 3 },
+        { name: "The Giants of Light", count: 2 }
+      ]
+    }
+  };
+
   // ── DUEL STATE ──
   const DuelState = {
-    standardDecks: {},
+    standardDecks: { ...DEFAULT_REALM_PREVIEWS },
     aiWeights: { ...DEFAULT_AI_WEIGHTS },
     playerDeckData: null,
     opponentDeckData: null,
@@ -2278,6 +2365,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   async function initBattleArena() {
+    // 1. Immediately render the lobby synchronously so selectors and previews appear in frame 0!
+    try {
+      renderArenaLobby();
+      renderAiDashboard();
+    } catch (e) {
+      console.warn('Lobby initial render note:', e);
+    }
+
+    // 2. Fetch full standard decks data in background to supplement previews
     try {
       if (typeof window !== 'undefined' && window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
         let stdData = null;
@@ -2297,17 +2393,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if (stdData) {
           const list = stdData.decks || (Array.isArray(stdData) ? stdData : []);
           list.forEach(d => {
-            DuelState.standardDecks[d.color.toLowerCase()] = d;
+            if (d && d.color) {
+              DuelState.standardDecks[d.color.toLowerCase()] = d;
+            }
           });
+          updateLobbyPreviews();
         }
       }
     } catch (e) {
       // Graceful fallback in test or offline environment
     }
-    await loadTrainedAiWeights();
-    await loadCardEffectsDB();
-    renderArenaLobby();
-    renderAiDashboard();
+
+    // 3. Load trained AI weights and NLP card database asynchronously in background
+    loadTrainedAiWeights().catch(() => {});
+    loadCardEffectsDB().catch(() => {});
+
     if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
       window.addEventListener('bse_auth_state_change', () => {
         initPvpLobbyView();
@@ -2383,7 +2483,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     document.addEventListener('webkitfullscreenchange', updateFullscreenButtonState);
   }
 
-  // ── LOBBY RENDERER ──
+  // ── LOBBY RENDERER & CARD COUNTER HELPERS ──
+  function getSafeDeckCardCount(d) {
+    if (!d) return 0;
+    if (Array.isArray(d.cards)) {
+      return d.cards.reduce((sum, c) => sum + (typeof c === 'object' && c ? (c.count || 1) : 1), 0);
+    }
+    if (d.cards && typeof d.cards === 'object') {
+      return Object.values(d.cards).reduce((sum, c) => sum + (typeof c === 'number' ? c : (c?.count || 1)), 0);
+    }
+    if (Array.isArray(d.validated_cards)) {
+      return d.validated_cards.reduce((sum, c) => sum + (c.count || 1), 0);
+    }
+    return 0;
+  }
+
   function renderArenaLobby() {
     const lobbyEl = document.getElementById('battleLobby');
     const duelEl = document.getElementById('battleDuelTable');
@@ -2403,157 +2517,233 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const oSelect = document.getElementById('arenaOpponentDeckSelect');
     if (!pSelect || !oSelect) return;
 
-    // 1. CHALLENGER (PLAYER 1): ONLY SHOW USER'S REGISTERED DECKS
-    const decksData = window.DeckManager ? window.DeckManager.getAllData() : { decks: [] };
-    const registeredDecks = decksData.decks || [];
-    const battleDeckId = window.DeckManager ? window.DeckManager.getBattleDeckId() : null;
+    // 1. CHALLENGER (PLAYER 1): USER'S REGISTERED DECKS + ACTIVE BUILDER DECK + STANDARD DECKS
+    try {
+      const decksData = window.DeckManager ? window.DeckManager.getAllData() : { decks: [] };
+      let registeredDecks = (decksData.decks || []).filter(d => d && typeof d === 'object');
+      const battleDeckId = window.DeckManager ? window.DeckManager.getBattleDeckId() : null;
 
-    // Retrieve previously selected deck cursor from localStorage
-    const savedP1DeckId = safeGetStorage('colosseum_p1_deck_id', battleDeckId);
+      // Auto-sync active builder deck if it has cards
+      let activeBuilderCards = {};
+      try {
+        activeBuilderCards = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
+      } catch (e) {}
+      const activeBuilderCount = Object.values(activeBuilderCards).reduce((a, b) => a + (typeof b === 'number' ? b : 1), 0);
 
-    let pOptions = '';
-    if (registeredDecks.length === 0) {
-      pOptions = `<option value="" disabled selected>No registered decks found — add one below</option>`;
-    } else {
-      pOptions = registeredDecks.map(d => {
-        const count = Object.values(d.cards || {}).reduce((a, b) => a + b, 0);
-        const colorIcons = { red: '🔴', purple: '🟣', green: '🟢', white: '⚪', yellow: '🟡', blue: '🔵' };
-        const icon = colorIcons[(d.color || 'red').toLowerCase()] || '🃏';
-        const isBattle = d.id === battleDeckId;
-        const battleTag = isBattle ? ' ⚔️ [Battle Deck]' : '';
-        if (count < 40) {
-          return `<option value="${d.id}" data-count="${count}">⚠️ ${d.name} (${count}/40 min Cards - Incomplete)${battleTag}</option>`;
+      if (activeBuilderCount > 0) {
+        const existingActive = registeredDecks.find(d => d.id === 'deck_builder_active' || (d.cards && Object.keys(d.cards).length === Object.keys(activeBuilderCards).length));
+        if (existingActive) {
+          existingActive.cards = { ...activeBuilderCards };
+        } else {
+          registeredDecks.unshift({
+            id: 'deck_builder_active',
+            name: 'Deck Builder Active Deck',
+            color: 'Red',
+            isStandard: false,
+            cards: { ...activeBuilderCards },
+            updatedAt: Date.now()
+          });
         }
-        return `<option value="${d.id}" data-count="${count}">${icon} ${d.name} (${count} Cards)${battleTag}</option>`;
-      }).join('');
-    }
-    pSelect.innerHTML = pOptions;
+      }
 
-    // Set cursor on previously chosen deck!
-    if (savedP1DeckId && registeredDecks.some(d => d.id === savedP1DeckId)) {
-      pSelect.value = savedP1DeckId;
-    } else if (registeredDecks[0]) {
-      pSelect.value = registeredDecks[0].id;
+      // Retrieve previously selected deck cursor from localStorage
+      const savedP1DeckId = safeGetStorage('colosseum_p1_deck_id', battleDeckId);
+
+      let pOptions = '';
+      if (registeredDecks.length > 0) {
+        pOptions += `<optgroup label="Your Custom &amp; Registered Decks">`;
+        pOptions += registeredDecks.map(d => {
+          const count = getSafeDeckCardCount(d);
+          const colorIcons = { red: '🔴', purple: '🟣', green: '🟢', white: '⚪', yellow: '🟡', blue: '🔵' };
+          const icon = colorIcons[(d.color || 'red').toLowerCase()] || '🃏';
+          const isBattle = d.id === battleDeckId || d.id === 'deck_builder_active';
+          const battleTag = isBattle ? ' ⚔️ [Battle Deck]' : '';
+          if (count < 40) {
+            return `<option value="${d.id}" data-count="${count}">⚠️ ${d.name || 'Deck'} (${count}/40 min Cards - Incomplete)${battleTag}</option>`;
+          }
+          return `<option value="${d.id}" data-count="${count}">${icon} ${d.name || 'Deck'} (${count} Cards)${battleTag}</option>`;
+        }).join('');
+        pOptions += `</optgroup>`;
+      }
+
+      // Append Colosseum Standard Starter Decks so the player is never blocked from battling
+      pOptions += `
+        <optgroup label="Colosseum Standard Decks">
+          <option value="purple">🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
+          <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
+          <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
+          <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
+          <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
+          <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
+        </optgroup>
+      `;
+      pSelect.innerHTML = pOptions;
+
+      // Set cursor on previously chosen deck or valid complete deck!
+      if (savedP1DeckId && (registeredDecks.some(d => d.id === savedP1DeckId) || ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedP1DeckId))) {
+        pSelect.value = savedP1DeckId;
+      } else {
+        const completeDeck = registeredDecks.find(d => getSafeDeckCardCount(d) >= 40);
+        if (completeDeck) {
+          pSelect.value = completeDeck.id;
+        } else if (registeredDecks[0]) {
+          pSelect.value = registeredDecks[0].id;
+        } else {
+          pSelect.value = 'purple';
+        }
+      }
+
+      pSelect.onchange = () => {
+        safeSetStorage('colosseum_p1_deck_id', pSelect.value);
+        if (window.DeckManager && typeof window.DeckManager.setBattleDeckId === 'function') {
+          window.DeckManager.setBattleDeckId(pSelect.value);
+        }
+        updateLobbyPreviews();
+      };
+    } catch (errP1) {
+      console.warn('Error populating player deck select:', errP1);
     }
 
     // 2. OPPONENT (AI CHAMPION): ALL COLOSSEUM REALMS AVAILABLE
-    const savedOppDeckId = safeGetStorage('colosseum_opponent_deck_id', 'purple');
-    let oOptions = `
-      <option value="purple">🟣 Purple: Netherworld Curse & Seven Shoguns (40 Cards)</option>
-      <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
-      <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
-      <option value="white">⚪ White: Armed Fortress & Mobile Machine Deity (40 Cards)</option>
-      <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
-      <option value="blue">🔵 Blue: Colosseum Titans & Golem Mill (40 Cards)</option>
-    `;
-    oSelect.innerHTML = oOptions;
+    try {
+      const savedOppDeckId = safeGetStorage('colosseum_opponent_deck_id', 'purple');
+      let oOptions = `
+        <option value="purple">🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
+        <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
+        <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
+        <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
+        <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
+        <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
+      `;
+      oSelect.innerHTML = oOptions;
 
-    // Set cursor on previously chosen opponent realm!
-    if (savedOppDeckId && ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedOppDeckId)) {
-      oSelect.value = savedOppDeckId;
-    } else {
-      oSelect.value = 'purple';
+      // Set cursor on previously chosen opponent realm!
+      if (savedOppDeckId && ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedOppDeckId)) {
+        oSelect.value = savedOppDeckId;
+      } else {
+        oSelect.value = 'purple';
+      }
+
+      oSelect.onchange = () => {
+        safeSetStorage('colosseum_opponent_deck_id', oSelect.value);
+        updateLobbyPreviews();
+      };
+    } catch (errOpp) {
+      console.warn('Error populating opponent deck select:', errOpp);
     }
-
-    // Hook listeners to persist cursor on change
-    pSelect.onchange = () => {
-      safeSetStorage('colosseum_p1_deck_id', pSelect.value);
-      if (window.DeckManager) window.window.DeckManager.setBattleDeckId(pSelect.value);
-      updateLobbyPreviews();
-    };
-
-    oSelect.onchange = () => {
-      safeSetStorage('colosseum_opponent_deck_id', oSelect.value);
-      updateLobbyPreviews();
-    };
 
     updateLobbyPreviews();
   }
 
   function updateLobbyPreviews() {
-    const pKey = document.getElementById('arenaPlayerDeckSelect')?.value;
-    const oKey = document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
+    try {
+      const pKey = document.getElementById('arenaPlayerDeckSelect')?.value;
+      const oKey = document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
 
-    const pCardEl = document.getElementById('lobbyPlayerDeckCard');
-    const oCardEl = document.getElementById('lobbyOpponentDeckCard');
+      const pCardEl = document.getElementById('lobbyPlayerDeckCard');
+      const oCardEl = document.getElementById('lobbyOpponentDeckCard');
 
-    if (pCardEl) {
-      const userDeck = window.DeckManager ? window.DeckManager.getDeck(pKey) : null;
-      if (userDeck) {
-        const color = (userDeck.color || 'Red').toLowerCase();
-        let totalCount = 40;
-        if (!userDeck.isStandard || (userDeck.cards && Object.keys(userDeck.cards).length > 0)) {
-          totalCount = Object.values(userDeck.cards || {}).reduce((a, b) => a + b, 0);
+      if (pCardEl) {
+        let userDeck = window.DeckManager ? window.DeckManager.getDeck(pKey) : null;
+        if (!userDeck && pKey === 'deck_builder_active') {
+          let activeBuilderCards = {};
+          try {
+            activeBuilderCards = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
+          } catch (e) {}
+          userDeck = {
+            id: 'deck_builder_active',
+            name: 'Deck Builder Active Deck',
+            color: 'Red',
+            isStandard: false,
+            cards: activeBuilderCards
+          };
         }
 
-        let desc = userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]
-          ? DuelState.standardDecks[userDeck.standardKey].desc
-          : `Custom registered deck configured in Deck Builder with ${totalCount} cards.`;
+        if (userDeck) {
+          const color = (userDeck.color || 'Red').toLowerCase();
+          let totalCount = getSafeDeckCardCount(userDeck);
 
-        let aces = [];
-        if (userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]) {
-          aces = (DuelState.standardDecks[userDeck.standardKey].validated_cards || []).slice(7, 10).map(c => c.name);
-        } else if (userDeck.cards) {
-          aces = Object.keys(userDeck.cards).slice(0, 3);
-        }
+          let desc = userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]
+            ? DuelState.standardDecks[userDeck.standardKey].desc
+            : `Custom registered deck configured in Deck Builder with ${totalCount} cards.`;
 
-        const warningHtml = totalCount < 40 ? `
-          <div class="lobby-deck-warning-box">
-            ⚠️ <strong>Incomplete Deck (${totalCount} / 40 Min Cards)</strong><br>
-            Battle Spirits rules require at least 40 cards (no upper limit) to enter battle.<br>
-            <a href="./deck.html" class="lobby-goto-builder">🎴 Build / Add Cards in Deck Builder →</a>
-          </div>
-        ` : '';
+          let aces = [];
+          if (userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]) {
+            aces = (DuelState.standardDecks[userDeck.standardKey].validated_cards || []).slice(7, 10).map(c => c.name);
+          } else if (Array.isArray(userDeck.cards)) {
+            aces = userDeck.cards.slice(0, 3).map(c => typeof c === 'object' ? c.name : c);
+          } else if (userDeck.cards) {
+            aces = Object.keys(userDeck.cards).slice(0, 3);
+          }
 
-        pCardEl.innerHTML = `
-          <div class="deck-preview-badge color-badge-${color}">${userDeck.color.toUpperCase()} • ${totalCount} CARDS</div>
-          <div class="deck-preview-name">${userDeck.name}</div>
-          <div class="deck-preview-desc">${desc}</div>
-          <div class="deck-preview-aces">
-            ${aces.map(name => `<span class="preview-ace-pill">${name}</span>`).join('')}
-          </div>
-          ${warningHtml}
-        `;
+          const warningHtml = totalCount < 40 ? `
+            <div class="lobby-deck-warning-box">
+              ⚠️ <strong>Incomplete Deck (${totalCount} / 40 Min Cards)</strong><br>
+              Battle Spirits rules require at least 40 cards (no upper limit) to enter battle.<br>
+              <a href="./deck.html" class="lobby-goto-builder">🎴 Build / Add Cards in Deck Builder →</a>
+            </div>
+          ` : '';
 
-        const startBtn = document.getElementById('btnEnterColosseum') || document.querySelector('.btn-start-duel');
-        if (startBtn) {
-          if (totalCount < 40) {
-            startBtn.classList.add('btn-blocked');
-            startBtn.innerHTML = `⚠️ Deck Incomplete (${totalCount}/40 Min Cards)`;
-            startBtn.title = 'Cannot enter battle with less than 40 cards (minimum 40 cards required, no upper limit)!';
-          } else {
-            startBtn.classList.remove('btn-blocked');
-            startBtn.innerHTML = '🔥 ENTER BATTLE';
-            startBtn.title = 'Enter the Colosseum Arena!';
+          pCardEl.innerHTML = `
+            <div class="deck-preview-badge color-badge-${color}">${(userDeck.color || color || 'RED').toUpperCase()} • ${totalCount} CARDS</div>
+            <div class="deck-preview-name">${userDeck.name || 'Custom Deck'}</div>
+            <div class="deck-preview-desc">${desc}</div>
+            <div class="deck-preview-aces">
+              ${aces.map(name => `<span class="preview-ace-pill">${name}</span>`).join('')}
+            </div>
+            ${warningHtml}
+          `;
+
+          const startBtn = document.getElementById('btnEnterColosseum') || document.querySelector('.btn-start-duel');
+          if (startBtn) {
+            if (totalCount < 40) {
+              startBtn.classList.add('btn-blocked');
+              startBtn.innerHTML = `⚠️ Deck Incomplete (${totalCount}/40 Min Cards)`;
+              startBtn.title = 'Cannot enter battle with less than 40 cards (minimum 40 cards required, no upper limit)!';
+            } else {
+              startBtn.classList.remove('btn-blocked');
+              startBtn.innerHTML = '🔥 ENTER BATTLE';
+              startBtn.title = 'Enter the Colosseum Arena!';
+            }
+          }
+        } else {
+          const pDeck = DuelState.standardDecks[pKey];
+          if (pDeck) {
+            const pColor = (pDeck.color || 'red').toLowerCase();
+            pCardEl.innerHTML = `
+              <div class="deck-preview-badge color-badge-${pColor}">${pDeck.badge || (pDeck.color.toUpperCase() + ' REALM')}</div>
+              <div class="deck-preview-name">${pDeck.name}</div>
+              <div class="deck-preview-desc">${pDeck.desc}</div>
+              <div class="deck-preview-aces">
+                ${(pDeck.validated_cards || []).slice(7, 10).map(c => `<span class="preview-ace-pill">${c.name}</span>`).join('')}
+              </div>
+            `;
+            const startBtn = document.getElementById('btnEnterColosseum') || document.querySelector('.btn-start-duel');
+            if (startBtn) {
+              startBtn.classList.remove('btn-blocked');
+              startBtn.innerHTML = '🔥 ENTER BATTLE';
+              startBtn.title = 'Enter the Colosseum Arena!';
+            }
           }
         }
-      } else {
-        const pDeck = DuelState.standardDecks[pKey];
-        if (pDeck) {
-          pCardEl.innerHTML = `
-            <div class="deck-preview-badge color-badge-${pDeck.color.toLowerCase()}">${pDeck.badge || pDeck.color}</div>
-            <div class="deck-preview-name">${pDeck.name}</div>
-            <div class="deck-preview-desc">${pDeck.desc}</div>
+      }
+
+      if (oCardEl) {
+        const oDeck = DuelState.standardDecks[oKey] || DuelState.standardDecks['purple'];
+        if (oDeck) {
+          const oColor = (oDeck.color || 'purple').toLowerCase();
+          oCardEl.innerHTML = `
+            <div class="deck-preview-badge color-badge-${oColor}">${oDeck.badge || (oDeck.color.toUpperCase() + ' REALM')}</div>
+            <div class="deck-preview-name">${oDeck.name}</div>
+            <div class="deck-preview-desc">${oDeck.desc}</div>
             <div class="deck-preview-aces">
-              ${(pDeck.validated_cards || []).slice(7, 10).map(c => `<span class="preview-ace-pill">${c.name}</span>`).join('')}
+              ${(oDeck.validated_cards || []).slice(7, 10).map(c => `<span class="preview-ace-pill">${c.name}</span>`).join('')}
             </div>
           `;
         }
       }
-    }
-
-    if (oCardEl) {
-      const oDeck = DuelState.standardDecks[oKey];
-      if (oDeck) {
-        oCardEl.innerHTML = `
-          <div class="deck-preview-badge color-badge-${oDeck.color.toLowerCase()}">${oDeck.badge || oDeck.color}</div>
-          <div class="deck-preview-name">${oDeck.name}</div>
-          <div class="deck-preview-desc">${oDeck.desc}</div>
-          <div class="deck-preview-aces">
-            ${(oDeck.validated_cards || []).slice(7, 10).map(c => `<span class="preview-ace-pill">${c.name}</span>`).join('')}
-          </div>
-        `;
-      }
+    } catch (errPrev) {
+      console.warn('Error in updateLobbyPreviews:', errPrev);
     }
   }
 
@@ -2760,10 +2950,30 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     pDeckKey = pDeckKey || document.getElementById('arenaPlayerDeckSelect')?.value || (window.DeckManager ? window.DeckManager.getBattleDeckId() : null) || 'deck_std_red';
     oDeckKey = oDeckKey || document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
 
-    const userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
-    const pCount = userDeck ? Object.values(userDeck.cards || {}).reduce((a, b) => a + b, 0) : 0;
+    let userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
+    if (!userDeck && pDeckKey === 'deck_builder_active') {
+      let activeBuilderCards = {};
+      try {
+        activeBuilderCards = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
+      } catch (e) {}
+      userDeck = {
+        id: 'deck_builder_active',
+        name: 'Deck Builder Active Deck',
+        color: 'Red',
+        cards: activeBuilderCards
+      };
+    }
+
+    const stdDeck = DuelState.standardDecks[pDeckKey];
+    let pCount = 0;
+    if (userDeck) {
+      pCount = getSafeDeckCardCount(userDeck);
+    } else if (stdDeck) {
+      pCount = getSafeDeckCardCount(stdDeck);
+    }
+
     if (pCount < 40) {
-      triggerToast(`⚠️ Cannot battle! "${userDeck ? userDeck.name : 'Deck'}" only has ${pCount}/40 cards. Battle Spirits requires at least 40 cards (no upper limit)!`, 'error');
+      triggerToast(`⚠️ Cannot battle! "${userDeck ? userDeck.name : (stdDeck ? stdDeck.name : 'Deck')}" only has ${pCount}/40 cards. Battle Spirits requires at least 40 cards (no upper limit)!`, 'error');
       return false;
     }
 
@@ -2814,9 +3024,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let pColor = 'Red';
 
     // 1. Check DeckManager registered decks
-    const userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
+    let userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
     if (userDeck) {
-      const userDeckCount = Object.values(userDeck.cards || {}).reduce((a, b) => a + b, 0);
+      const userDeckCount = getSafeDeckCardCount(userDeck);
       if (userDeckCount < 40) {
         triggerToast(`⚠️ Cannot start battle! Deck "${userDeck.name}" has only ${userDeckCount}/40 cards. Minimum 40 cards required (no upper limit)!`, 'error');
         return false;
@@ -2873,9 +3083,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
-    if (!pCards.length && pDeckKey === 'custom') {
+    if (!pCards.length && (pDeckKey === 'custom' || pDeckKey === 'deck_builder_active')) {
       try {
-        const saved = JSON.parse(safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
+        const saved = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
         const names = Object.keys(saved);
         if (names.length) {
           const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
@@ -12411,7 +12621,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     openPartnerSelectionModal,
     closePartnerModal,
     selectContractPartner,
-    executeUltimateTrigger,
+    executeUltimateTrigger: triggerUTrigger,
     canUnitAttack,
     canUnitBlock,
     keepStartingHand,
@@ -12422,14 +12632,24 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderPlayerHand,
     loadCardEffectsDB,
     safeEndOpponentTurn,
-    handleAuthClick
+    handleAuthClick,
+    renderArenaLobby,
+    renderLobbyDeckPreview: updateLobbyPreviews,
+    updateLobbyPreviews
 };
 
   // Auto initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initBattleArena);
-  } else {
-    initBattleArena();
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        renderArenaLobby();
+        initBattleArena();
+      });
+    } else {
+      renderArenaLobby();
+      initBattleArena();
+    }
+  }
   // Check if opened with ?duelWith=
   if (typeof window !== 'undefined' && window.location && window.location.search && typeof URLSearchParams !== 'undefined') {
     const urlParams = new URLSearchParams(window.location.search);
@@ -12443,7 +12663,6 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         }
       }, 400);
     }
-  }
   }
 
 })();

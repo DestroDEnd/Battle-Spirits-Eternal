@@ -100,6 +100,23 @@ const DeckManager = {
       if (repaired) {
         this.saveAllData(data);
       }
+
+      // Auto-sync cards from active builder cache (bs_deck) if active deck is empty
+      try {
+        const legacyRaw = localStorage.getItem('bs_deck') || localStorage.getItem('battle_spirits_deck_v1');
+        if (legacyRaw) {
+          const legacyCards = JSON.parse(legacyRaw);
+          const legacyTotal = Object.values(legacyCards || {}).reduce((a, b) => a + (typeof b === 'number' ? b : 1), 0);
+          if (legacyTotal > 0) {
+            const active = data.decks.find(d => d.id === data.activeDeckId) || data.decks[0];
+            if (active && (!active.cards || Object.keys(active.cards).length === 0)) {
+              active.cards = { ...legacyCards };
+              active.updatedAt = Date.now();
+              this.saveAllData(data);
+            }
+          }
+        }
+      } catch (e) {}
     }
     return data;
   },

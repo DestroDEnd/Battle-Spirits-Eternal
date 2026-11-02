@@ -162,7 +162,12 @@
             </div>
             <label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:0.35rem;font-weight:700;">CHOOSE YOUR DECK (REGISTERED ONLY)</label>
             <select class="arena-deck-select" id="arenaPlayerDeckSelect">
-              <!-- Injected dynamically from DeckManager -->
+              <option value="purple" selected>🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
+              <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
+              <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
+              <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
+              <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
+              <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
             </select>
             <div class="lobby-deck-preview" id="lobbyPlayerDeckCard">
               <!-- Injected preview -->
@@ -197,7 +202,12 @@
             </div>
             <label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:0.35rem;font-weight:700;">CHOOSE OPPONENT REALM</label>
             <select class="arena-deck-select" id="arenaOpponentDeckSelect" onchange="BattleArena.updateLobbyPreviews()">
-              <!-- Injected dynamically -->
+              <option value="purple" selected>🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
+              <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
+              <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
+              <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
+              <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
+              <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
             </select>
             <div class="lobby-deck-preview" id="lobbyOpponentDeckCard">
               <!-- Injected preview -->
@@ -1122,6 +1132,7 @@
           const sel = document.getElementById('arenaPlayerDeckSelect');
           if (sel) {
             sel.value = playerDeck;
+            if (BattleArena.updateLobbyPreviews) BattleArena.updateLobbyPreviews();
             if (BattleArena.renderLobbyDeckPreview) BattleArena.renderLobbyDeckPreview();
           }
         }
