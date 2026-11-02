@@ -898,16 +898,19 @@ function buildCardTile(card) {
 function handleBrowseAddDeck(name) {
   addToDeck(name);
   updateBrowseTileDeckStatus(name);
+  updateFloatingDeckDrawer();
 }
 
 function handleBrowseRemoveDeck(name) {
   removeFromDeck(name);
   updateBrowseTileDeckStatus(name);
+  updateFloatingDeckDrawer();
 }
 
 function handleBrowseDeleteDeck(name) {
   deleteFromDeck(name);
   updateBrowseTileDeckStatus(name);
+  updateFloatingDeckDrawer();
 }
 
 function updateBrowseTileDeckStatus(name) {
@@ -1093,6 +1096,64 @@ if (document.readyState === 'loading') {
 } else {
   initBrowsePage();
 }
+
+function toggleFloatingDeckDrawer() {
+  const panel = document.getElementById('fddPanel');
+  const pill = document.getElementById('fddPill');
+  if (!panel || !pill) return;
+  const isHidden = panel.style.display === 'none';
+  panel.style.display = isHidden ? 'flex' : 'none';
+  pill.classList.toggle('is-open', isHidden);
+}
+
+function updateFloatingDeckDrawer() {
+  const drawer = document.getElementById('floatingDeckDrawer');
+  const countBadge = document.getElementById('fddCountBadge');
+  const totalCards = document.getElementById('fddTotalCards');
+  const listEl = document.getElementById('fddCardsList');
+  const nameEl = document.getElementById('fddDeckName');
+  if (!drawer || !countBadge) return;
+
+  const deck = (typeof S !== 'undefined' && S.deck) ? S.deck : {};
+  const entries = Object.entries(deck).filter(([_, qty]) => qty > 0);
+  const total = entries.reduce((sum, [_, qty]) => sum + qty, 0);
+
+  countBadge.textContent = `${total}/40`;
+  if (totalCards) totalCards.textContent = `${total} cards`;
+  if (nameEl && typeof DeckManager !== 'undefined') {
+    const active = DeckManager.getActiveDeck();
+    if (active) nameEl.textContent = active.name || 'Active Deck';
+  }
+
+  if (total > 0) {
+    drawer.style.display = 'block';
+  } else {
+    drawer.style.display = 'none';
+    const panel = document.getElementById('fddPanel');
+    if (panel) panel.style.display = 'none';
+  }
+
+  if (listEl) {
+    if (entries.length === 0) {
+      listEl.innerHTML = '<div style="color:#94a3b8; font-size:0.8rem; text-align:center; padding:1rem;">Your deck is empty. Click "+ Add to Deck" on any card!</div>';
+    } else {
+      listEl.innerHTML = entries.map(([name, qty]) => {
+        const safeName = escapeJsStr(name);
+        return `
+          <div class="fdd-item">
+            <span class="fdd-item-name" title="${esc(name)}">${esc(name)}</span>
+            <div class="fdd-item-ctrls">
+              <button class="fdd-btn-qty" onclick="handleBrowseRemoveDeck('${safeName}')" title="Remove 1">-</button>
+              <span style="font-weight:700; color:#60a5fa; min-width:18px; text-align:center;">${qty}x</span>
+              <button class="fdd-btn-qty" onclick="handleBrowseAddDeck('${safeName}')" ${qty >= 3 ? 'disabled' : ''} title="Add 1">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+}
+
 </script>
 </body>
 </html>

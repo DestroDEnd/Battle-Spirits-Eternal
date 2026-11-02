@@ -12208,6 +12208,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     confirmStartingHandAndBegin,
     performMulligan,
     keepStartingHand,
+    executeMulligan: performMulligan,
+    confirmOpeningHand: keepStartingHand,
     promptCumulativeCostTargetModal,
     endTurn,
     renderPlayerHand,

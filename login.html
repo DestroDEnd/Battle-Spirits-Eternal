@@ -128,6 +128,25 @@
         </div>
 
         <!-- Submit Button -->
+        
+        <!-- Security Verification Captcha Widget -->
+        <div class="auth-field captcha-field" style="margin-bottom:1.2rem;">
+          <label class="auth-label" for="captchaInput">
+            <span>🛡️</span> Security Verification
+          </label>
+          <div class="captcha-row" style="display:flex; gap:0.5rem; align-items:center;">
+            <div id="captchaSvgContainer" style="background:#0d1117; border-radius:6px; border:1px solid #30363d; overflow:hidden; display:flex; align-items:center; min-width:180px; min-height:50px; cursor:pointer;" onclick="loadCaptcha()" title="Click to refresh captcha code">
+              <!-- SVG captcha will be loaded here -->
+            </div>
+            <button type="button" class="btn-refresh-captcha" onclick="loadCaptcha()" title="Refresh verification code" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); border-radius:6px; color:#94a3b8; padding:10px 14px; cursor:pointer; font-size:1rem;">🔄</button>
+          </div>
+          <div class="auth-input-wrapper" style="margin-top:0.5rem;">
+            <span class="auth-input-icon">⌨️</span>
+            <input type="text" id="captchaInput" class="auth-input" placeholder="Enter characters shown above" required autocomplete="off" maxlength="8">
+          </div>
+          <input type="hidden" id="captchaToken" value="">
+        </div>
+
         <button type="submit" class="auth-btn-primary" id="btnLoginSubmit">
           <span>⚔️ Enter Colosseum (Login)</span>
         </button>
@@ -262,6 +281,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+let currentCaptchaExpected = '';
+
+async function loadCaptcha() {
+  const container = document.getElementById('captchaSvgContainer');
+  const tokenInput = document.getElementById('captchaToken');
+  if (!container) return;
+
+  try {
+    const res = await fetch('/api/captcha');
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.svg) {
+        container.innerHTML = data.svg;
+        if (tokenInput) tokenInput.value = data.token || '';
+        currentCaptchaExpected = (data.code || '').toUpperCase();
+        return;
+      }
+    }
+  } catch (e) {}
+
+  const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+  let code = '';
+  for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+  currentCaptchaExpected = code;
+  if (tokenInput) tokenInput.value = 'client_' + Date.now();
+
+  const colors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#c084fc', '#38bdf8'];
+  let linesSvg = '';
+  for (let i = 0; i < 5; i++) {
+    const x1 = Math.floor(Math.random() * 180), y1 = Math.floor(Math.random() * 50);
+    const x2 = Math.floor(Math.random() * 180), y2 = Math.floor(Math.random() * 50);
+    linesSvg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${colors[i % colors.length]}" stroke-width="1.5" stroke-opacity="0.35"/>`;
+  }
+  let textSvg = '';
+  const xPos = [18, 44, 70, 96, 122, 148];
+  for (let i = 0; i < 6; i++) {
+    const rot = Math.floor(Math.random() * 30) - 15;
+    const y = 35 + Math.floor(Math.random() * 6) - 3;
+    textSvg += `<text x="${xPos[i]}" y="${y}" fill="${colors[i]}" font-family="JetBrains Mono, monospace" font-size="24" font-weight="bold" transform="rotate(${rot} ${xPos[i]} ${y})">${code[i]}</text>`;
+  }
+  container.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><rect width="180" height="50" fill="#0d1117" rx="6" stroke="#30363d" stroke-width="1"/>${linesSvg}${textSvg}</svg>`;
+}
+
+function verifyCaptchaLocal() {
+  const input = document.getElementById('captchaInput');
+  if (!input) return true;
+  const val = (input.value || '').trim().toUpperCase();
+  if (!val) {
+    showAlert('⚠️ Please enter the security captcha code.');
+    return false;
+  }
+  if (currentCaptchaExpected && val !== currentCaptchaExpected) {
+    showAlert('⚠️ Invalid captcha code. Please try again.');
+    loadCaptcha();
+    input.value = '';
+    input.focus();
+    return false;
+  }
+  return true;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadCaptcha();
+});
+
 </script>
 </body>
 </html>

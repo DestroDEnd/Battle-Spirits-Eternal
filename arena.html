@@ -569,6 +569,19 @@
             <span>Your Hand</span>
             <span style="font-size:0.75rem;color:#94a3b8;">Click any card to inspect full stats, levels &amp; abilities</span>
           </div>
+
+          <!-- Turn 1 Mulligan Banner -->
+          <div class="mulligan-banner" id="turn1MulliganBanner" style="display:none;">
+            <div class="mb-info">
+              <span class="mb-badge">Turn 1 Mulligan</span>
+              <span class="mb-text">Review your 4 opening cards. Official Eternal rules permit a one-time hand redraw before taking Turn 1 actions.</span>
+            </div>
+            <div class="mb-actions">
+              <button class="btn-mulligan-redraw" onclick="BattleArena.executeMulligan()">🔄 Redraw 4 Cards</button>
+              <button class="btn-mulligan-keep" onclick="BattleArena.confirmOpeningHand()">✓ Keep Hand</button>
+            </div>
+          </div>
+
           <div class="hand-track" id="playerHand">
             <!-- Injected hand cards -->
           </div>

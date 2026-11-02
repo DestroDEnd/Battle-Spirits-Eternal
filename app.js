@@ -2504,7 +2504,25 @@ const AuthManager = {
   }
 };
 
+function initCleanRouting() {
+  if (typeof window === 'undefined' || !window.history || !window.location) return;
+  const loc = window.location;
+  if (loc.pathname && loc.pathname.endsWith('.html')) {
+    let cleanPath = loc.pathname;
+    if (cleanPath.endsWith('/index.html') || cleanPath === 'index.html') {
+      cleanPath = cleanPath.replace(/\/index\.html$/, '/') || '/';
+    } else {
+      cleanPath = cleanPath.replace(/\.html$/, '/');
+    }
+    const newUrl = cleanPath + loc.search + loc.hash;
+    try {
+      window.history.replaceState(null, '', newUrl);
+    } catch (e) {}
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  initCleanRouting();
   updateDeckBadge();
   AuthManager.init();
   DeckQuickView.init();
@@ -2518,6 +2536,7 @@ if (typeof module !== 'undefined' && module.exports) {
     AuthManager,
     DuelistSocial,
     ModalCardNavigator,
+    initCleanRouting,
     DeckQuickView,
     deleteFromDeck,
     addToDeck,
