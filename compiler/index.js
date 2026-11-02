@@ -1,0 +1,128 @@
+/**
+ * compiler/index.js
+ * 
+ * Main Effect Grammar Compiler for Battle Spirits Eternal.
+ * Compiles raw card effect text into structured Intermediate Representation (IR).
+ */
+
+import { parseAbilityHeaders } from './header_parser.js';
+import { splitClauses } from './clause_splitter.js';
+import { compileClauseToOp } from './clause_patterns.js';
+import { extractKeywords } from './keyword_compiler.js';
+
+export function compileCard(card) {
+  if (!card) return null;
+
+  const cardNumber = card.card_number || card.cardNumber || card.id || 'UNKNOWN';
+  const name = card.name || 'Unknown';
+  const rawEffect = card.effect || '';
+
+  const keywords = extractKeywords(rawEffect);
+
+  if (!rawEffect.trim()) {
+    return {
+      cardNumber,
+      name,
+      keywords: [],
+      abilities: [],
+      compiledClausesCount: 0,
+      unsupportedClausesCount: 0,
+      isFullySupported: true
+    };
+  }
+
+  // Split effect text into distinct ability blocks.
+  // Ability blocks in Battle Spirits are separated by double newlines or clear headers.
+  const rawBlocks = splitAbilityBlocks(rawEffect);
+
+  const abilities = [];
+  let totalCompiled = 0;
+  let totalUnsupported = 0;
+
+  for (let idx = 0; idx < rawBlocks.length; idx++) {
+    const blockText = rawBlocks[idx];
+    const header = parseAbilityHeaders(blockText);
+    const abilityId = `${cardNumber}#a${idx}`;
+
+    // If block is solely a summon condition or reminder text without actions
+    if (/^\[Summon Condition:/i.test(blockText) || /^\[SuAdcon:/i.test(blockText)) {
+      abilities.push({
+        id: abilityId,
+        type: 'SUMMON_CONDITION',
+        header,
+        rawText: blockText,
+        clauses: [],
+        unsupported: []
+      });
+      continue;
+    }
+
+    const clauses = splitClauses(header.cleanBody);
+    const compiledClauses = [];
+    const unsupported = [];
+
+    for (const c of clauses) {
+      const op = compileClauseToOp(c);
+      const clauseEntry = {
+        rawText: c.rawText,
+        cleanText: c.cleanText,
+        link: c.link,
+        isOptional: c.isOptional,
+        isCost: c.isCost,
+        condition: c.condition,
+        duration: c.duration,
+        op
+      };
+
+      if (!op || op.op === 'UNSUPPORTED') {
+        unsupported.push(c.rawText);
+        totalUnsupported++;
+      } else {
+        totalCompiled++;
+      }
+
+      compiledClauses.push(clauseEntry);
+    }
+
+    abilities.push({
+      id: abilityId,
+      type: 'ABILITY',
+      header,
+      clauses: compiledClauses,
+      unsupported
+    });
+  }
+
+  const isFullySupported = totalUnsupported === 0;
+
+  return {
+    cardNumber,
+    name,
+    keywords,
+    abilities,
+    compiledClausesCount: totalCompiled,
+    unsupportedClausesCount: totalUnsupported,
+    isFullySupported
+  };
+}
+
+function splitAbilityBlocks(effectText) {
+  // Normalize line breaks
+  const normalized = effectText.replace(/\r\n/g, '\n').trim();
+
+  // Split by double newlines
+  const paragraphs = normalized.split(/\n\s*\n+/).map(p => p.trim()).filter(Boolean);
+
+  const blocks = [];
+
+  for (const para of paragraphs) {
+    // If multiple abilities are within a single paragraph separated by sentence end before a header
+    // e.g. "some effect text. [LV2] ..."
+    const subMatches = para.split(/(?<=\.)\s+(?=\[(?:LV\d+|During|Flash|Main|Burst:))/g);
+    for (const sub of subMatches) {
+      if (sub.trim()) blocks.push(sub.trim());
+    }
+  }
+
+  return blocks.length > 0 ? blocks : [normalized];
+}
