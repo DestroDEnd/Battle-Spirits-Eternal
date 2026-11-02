@@ -129,7 +129,42 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
-        # Normalize trailing slashes (e.g. /arena/ -> /arena)
+        # 301 Redirect for duplicate sub-routes (e.g. /arena/index.html -> /, /arena/browse.html -> /browse)
+        CLEAN_REDIRECTS = {
+            '/arena/index.html': '/',
+            '/arena/browse.html': '/browse',
+            '/arena/arena.html': '/arena',
+            '/arena/deck.html': '/deck',
+            '/arena/family.html': '/family',
+            '/arena/sets.html': '/sets',
+            '/browse/index.html': '/',
+            '/browse/arena.html': '/arena',
+            '/browse/browse.html': '/browse',
+            '/deck/index.html': '/',
+            '/deck/arena.html': '/arena',
+            '/deck/browse.html': '/browse',
+            '/arena/': '/arena',
+            '/browse/': '/browse',
+            '/deck/': '/deck',
+            '/family/': '/family',
+            '/sets/': '/sets',
+        }
+        if path in CLEAN_REDIRECTS:
+            target = CLEAN_REDIRECTS[path] + (('?' + parsed.query) if parsed.query else '')
+            self.send_response(301)
+            self.send_header('Location', target)
+            self.end_headers()
+            return
+
+        # Strip sub-path prefixes from static assets (e.g. /arena/styles.css -> /styles.css)
+        for prefix in ['/arena/', '/battle/', '/deck/', '/browse/', '/sets/', '/family/']:
+            if path.startswith(prefix):
+                sub = path[len(prefix):]
+                path = '/' + sub
+                # CRITICAL: update self.path so super().do_GET() reads the rewritten root path!
+                self.path = path + (('?' + parsed.query) if parsed.query else '')
+                break
+
         trimmed_path = path.rstrip('/') if len(path) > 1 else path
 
         # Clean URL sub-route fallback (e.g. /arena/browse.html -> /browse.html, /arena/standard_decks_data.json -> /standard_decks_data.json)
