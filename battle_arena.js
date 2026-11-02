@@ -1247,7 +1247,8 @@
     friendlyState.hand.splice(cardIdx, 1);
     if (!friendlyState.openCards) friendlyState.openCards = [];
     friendlyState.openCards.push(card);
-    addLog(`🎴 **[ACCEL RESOLVED]**: "${card.name}" placed face-up into the Open / Removed from Game Zone. (Usable to summon normally in Main Step!)`, 'magic');
+    addLog(`🎴 **[ACCEL RESOLVED]**: "${card.name}" placed face-up into your Open Zone. You can click "Open: ${friendlyState.openCards.length}" on your HUD to summon it during your Main Step!`, 'magic');
+  if (side === 'player' && typeof showToast === 'function') showToast(`🎴 Accel resolved: "${card.name}" moved to Open Zone!`, 'success');
 
     renderDuelTable();
     if (side === 'player') renderPlayerHand();
@@ -6119,6 +6120,34 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function executeWhenSummonedEffects(spirit, side = 'player') {
+    // The Hellwind Searcher Kagerou-Seeker (BS38-CP05) / Soul Core Searcher:
+    if (/Kagerou-Seeker/i.test(spirit.name || '') || /If \[Soul Core\] was used to pay the summon cost, reveal three cards from your decktop/i.test(spirit.effect || '')) {
+      if (spirit.usedSoulCore || spirit.paidWithSoulCore) {
+        const friendlyDeck = DuelState[side].deck || [];
+        const revealCount = Math.min(3, friendlyDeck.length);
+        if (revealCount > 0) {
+          const revealed = friendlyDeck.splice(0, revealCount);
+          addLog(`🎴 **[KAGEROU-SEEKER: When Summoned]**: Revealed ${revealCount} cards: ${revealed.map(c => `"${c.name}"`).join(', ')}!`, 'magic');
+          const ultIdx = revealed.findIndex(c => (c.type || '').includes('Ultimate'));
+          if (ultIdx !== -1) {
+            const chosenUlt = revealed.splice(ultIdx, 1)[0];
+            DuelState[side].hand.push(chosenUlt);
+            addLog(`✨ **[KAGEROU-SEEKER]**: Added Ultimate card "${chosenUlt.name}" to Hand!`, 'step');
+          } else {
+            addLog(`ℹ️ **[KAGEROU-SEEKER]**: No Ultimate cards found among revealed cards.`, 'info');
+          }
+          // Discard remaining revealed cards to Trash
+          for (const rem of revealed) {
+            sendToTrash(rem, side, 'Discarded by Kagerou-Seeker');
+          }
+          renderDuelTable();
+          if (side === 'player') renderPlayerHand();
+        }
+      } else {
+        addLog(`ℹ️ **[Kagerou-Seeker]**: Soul Core was not used for summon payment; search effect does not trigger.`, 'info');
+      }
+    }
+
     // Birgoyle (SD36-001) branch choice: Destroy 5000 BP spirit OR put core from Void
     if ((spirit.name || '').includes('Birgoyle') && /Destroy an opposing 5000 BP or less Spirit\. Or, put a core from the Void/i.test(spirit.effect || '')) {
       if (side === 'player') {
@@ -6460,7 +6489,33 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return (friendlyState.trash || 0) >= 5;
   }
 
-  function summonCard(uid, customCoresToPlace) {
+
+  // ── BRAVE RULES (Rule 7.2): Uncombined Braves in Spirit Form cannot Attack or Block ──
+  function canUnitAttack(unit) {
+    if (!unit || unit.isExhausted) return false;
+    const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
+    if (isBrave && !unit.isBraved && !unit.braveHost) {
+      const eff = (unit.effect || '').toLowerCase();
+      if (!eff.includes('can attack') && !eff.includes('can also attack')) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function canUnitBlock(unit) {
+    if (!unit || unit.isExhausted) return false;
+    const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
+    if (isBrave && !unit.isBraved && !unit.braveHost) {
+      const eff = (unit.effect || '').toLowerCase();
+      if (!eff.includes('can block') && !eff.includes('can also block')) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function summonCard(uid, customCoresToPlace, useSoulCore = null) {
     if (DuelState.activePlayer !== 'player') {
       if (typeof showToast === 'function') showToast("Cannot summon during opponent's turn!", 'warning');
       return;
@@ -6518,31 +6573,53 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const cost = getCardEffectiveCost(card, 'player');
     const isCostReduced = cost < baseCost;
     const coresToPlace = customCoresToPlace || 1; // Default 1 core to stay alive on field
-    const totalNeeded = cost + coresToPlace;
     const hasScInReserve = (DuelState.player.soulCoreLocation === 'reserve');
-    const totalReserveWithSc = DuelState.player.reserve + (hasScInReserve ? 1 : 0);
 
-    let usedSoulCoreFromReserve = false;
-
-    if (DuelState.player.reserve < totalNeeded) {
-      if (totalReserveWithSc >= totalNeeded) {
-        // Can afford directly by using the Soul Core in Reserve!
-        usedSoulCoreFromReserve = true;
-        const regularNeeded = totalNeeded - 1;
-        DuelState.player.reserve -= regularNeeded;
-        DuelState.player.trash += cost;
-        DuelState.player.hand.splice(cardIdx, 1);
-      } else {
-        const { total } = getPlayerAvailableCores();
-        if (total >= totalNeeded) {
-          openSacrificeModal(uid);
-          return;
-        }
-        showToast(`Not enough cores! Need ${totalNeeded} (Cost ${cost} + ${coresToPlace} on Spirit), but only have ${total} across Reserve and Field Spirits.`, 'warning');
+    // Soul Core Payment Option (e.g. Kagerou-Seeker or general Soul Core payment):
+    const hasSoulCoreBonus = /if \[soul core\] was used to pay the summon cost|\[soul core\] was used to pay/i.test(card.effect || '');
+    if (cost > 0 && hasScInReserve && useSoulCore === null) {
+      if (hasSoulCoreBonus) {
+        askOptionalEffect(
+          card,
+          `Pay summon cost using [Soul Core] from Reserve to activate bonus effect? ("${card.name}")`,
+          () => summonCard(uid, customCoresToPlace, true),
+          () => summonCard(uid, customCoresToPlace, false)
+        );
         return;
       }
+    }
+
+    const payingWithSoulCore = (useSoulCore === true) && hasScInReserve;
+    const availableReserve = DuelState.player.reserve + (hasScInReserve ? 1 : 0);
+    const totalNeeded = cost + coresToPlace;
+
+    if (payingWithSoulCore ? (availableReserve < totalNeeded) : (DuelState.player.reserve < totalNeeded)) {
+      if (availableReserve >= totalNeeded && !payingWithSoulCore) {
+        // Must use Soul Core to meet total cores
+        return summonCard(uid, customCoresToPlace, true);
+      }
+      const { total } = getPlayerAvailableCores();
+      if (total >= totalNeeded) {
+        openSacrificeModal(uid);
+        return;
+      }
+      showToast(`Not enough cores! Need ${totalNeeded} (Cost ${cost} + ${coresToPlace} on Spirit), but only have ${total} across Reserve and Field Spirits.`, 'warning');
+      return;
+    }
+
+    let usedSoulCoreFromReserve = false;
+    if (payingWithSoulCore) {
+      usedSoulCoreFromReserve = true;
+      card.usedSoulCore = true;
+      card.paidWithSoulCore = true;
+      DuelState.player.soulCoreLocation = 'trash';
+      // Soul Core paid as 1 cost core to Trash, remaining (cost - 1) cores to Trash, plus coresToPlace to card
+      const regularCostToPay = Math.max(0, cost - 1);
+      DuelState.player.reserve -= (regularCostToPay + coresToPlace);
+      DuelState.player.trash += cost;
+      DuelState.player.hand.splice(cardIdx, 1);
+      addLog(`🔮 **[SOUL CORE PAID]**: Used [Soul Core] from Reserve to pay summon cost for "${card.name}"!`, 'magic');
     } else {
-      // Direct summon from regular Reserve
       DuelState.player.reserve -= totalNeeded;
       DuelState.player.trash += cost;
       DuelState.player.hand.splice(cardIdx, 1);
@@ -6843,7 +6920,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const blockModal = document.getElementById('battleBlockModal');
     if (blockModal && blockModal.classList.contains('active')) {
       const attacker = DuelState.selectedAttacker || (DuelState.opponent.field || [])[0];
-      const readyBlockers = (DuelState.player.field || []).filter(s => !s.isExhausted);
+      const readyBlockers = (DuelState.player.field || []).filter(s => canUnitBlock(s));
       if (attacker) {
         showBlockPrompt(attacker, readyBlockers);
       }
@@ -8258,7 +8335,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (saved && saved.mode === 'flash_battle' && saved.attackerUid) {
       const attacker = DuelState.opponent.field.find(s => s.uid === saved.attackerUid);
       if (attacker) {
-        const readyBlockers = DuelState.player.field.filter(s => !s.isExhausted);
+        const readyBlockers = (DuelState.player.field || []).filter(s => canUnitBlock(s));
         showBlockPrompt(attacker, readyBlockers);
       }
     }
@@ -8334,7 +8411,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderDuelTable();
 
     // Re-render the block prompt so updated BP or newly summoned Swift spirit appears!
-    const readyBlockers = DuelState.player.field.filter(s => !s.isExhausted);
+    const readyBlockers = (DuelState.player.field || []).filter(s => canUnitBlock(s));
     if (attacker) {
       showBlockPrompt(attacker, readyBlockers);
     }
@@ -9670,6 +9747,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'player');
+    executeUltimateTrigger(attacker, 'player');
 
     // Fallback if not processed via ability blocks
     const fallbackBoost = getWhenAttacksBpBoost(attacker);
@@ -9710,7 +9788,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     // AI chooses to Block or take Life Damage
     const isClash = hasClash(attacker);
-    const readyBlockers = DuelState.opponent.field.filter(s => !s.isExhausted);
+    const readyBlockers = (DuelState.opponent.field || []).filter(s => canUnitBlock(s));
     let chosenBlocker = null;
 
     // Check Unblockable status
@@ -10246,7 +10324,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!profile) profile = getActiveAiProfile('opponent');
 
     const attBp = att.battleBp || att.currentBp || 2000;
-    const readyBlockers = (playerField || []).filter(s => !s.isExhausted);
+    const readyBlockers = (playerField || []).filter(s => canUnitBlock(s));
     const wLife = profile.w_life !== undefined ? profile.w_life : 2.5;
     const wBp = profile.w_field_bp !== undefined ? profile.w_field_bp : 1.4;
 
@@ -10474,6 +10552,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'opponent');
+    executeUltimateTrigger(attacker, 'opponent');
 
     const fallbackBoost = getWhenAttacksBpBoost(attacker);
     if (fallbackBoost > 0 && !attacker.battleBpBoost) {
@@ -12332,6 +12411,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     openPartnerSelectionModal,
     closePartnerModal,
     selectContractPartner,
+    executeUltimateTrigger,
+    canUnitAttack,
+    canUnitBlock,
     keepStartingHand,
     executeMulligan: performMulligan,
     confirmOpeningHand: keepStartingHand,

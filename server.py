@@ -129,6 +129,19 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
+        # Normalize trailing slashes (e.g. /arena/ -> /arena)
+        trimmed_path = path.rstrip('/') if len(path) > 1 else path
+
+        # Clean URL sub-route fallback (e.g. /arena/browse.html -> /browse.html, /arena/standard_decks_data.json -> /standard_decks_data.json)
+        for prefix in ['/arena/', '/battle/', '/deck/', '/browse/', '/sets/', '/family/']:
+            if path.startswith(prefix):
+                sub = path[len(prefix):]
+                candidate = '/' + sub
+                if candidate in ['/arena', '/browse', '/family', '/sets', '/deck', '/login', '/register', '/deck-view'] or os.path.exists(os.path.join(DIRECTORY, sub)):
+                    path = candidate
+                    trimmed_path = path.rstrip('/') if len(path) > 1 else path
+                    break
+
         # 1. Clean Page Routes
         PAGE_ROUTES = {
             '/': 'index.html',
@@ -153,6 +166,7 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
             '/register': 'register.html',
             '/register.html': 'register.html',
         }
+        path = trimmed_path if trimmed_path in PAGE_ROUTES else path
         if path in PAGE_ROUTES:
             filepath = os.path.join(DIRECTORY, PAGE_ROUTES[path])
             if os.path.exists(filepath):
