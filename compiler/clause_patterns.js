@@ -535,6 +535,54 @@ export function compileClauseToOp(clause) {
     return { op: 'SET_RESTRICTION', restriction: 'CANNOT_BLOCK' };
   }
 
+  // 22. CORE TO NEXUS FOR EACH
+  m = text.match(/for each (?:target )?card among them,\s+put (?:a|an|one|\d+)?\s*cores? from (?:the )?void onto this nexus/i);
+  if (m) {
+    return {
+      op: 'MOVE_CORE',
+      count: 1,
+      source: 'VOID',
+      destination: 'THIS_NEXUS',
+      forEach: 'TARGET_CARDS_COUNT'
+    };
+  }
+
+  // 23. SEND CARDS FROM DECKTOP TO TRASH (MILL)
+  m = text.match(/(?:(?:when this nexus is deployed|once per turn[^:]*),?\s*)?(?:you can\s+)?send (a|an|one|two|three|four|five|\d+)\s+cards? from (?:your\s+)?decktop to the trash/i);
+  if (m) {
+    return {
+      op: 'MILL_DECK',
+      count: parseNumber(m[1]),
+      source: 'DECK_TOP',
+      destination: 'TRASH'
+    };
+  }
+
+  // 24. RUSH & BRAVE SYMBOL KEYWORD PATTERNS
+  m = text.match(/^\[?Rush:\s*([^\]]+)\]?/i);
+  if (m) {
+    return { op: 'KEYWORD_ABILITY', keyword: 'Rush', condition: { colorSymbol: m[1].trim() } };
+  }
+  m = text.match(/^\[?Brave Symbol\s*\+\s*(\d+)\]?/i);
+  if (m) {
+    return { op: 'GRANT_BRAVE_SYMBOLS', count: parseInt(m[1], 10) };
+  }
+
+  // 25. PUT CORES ONTO ADVENT CARD
+  if (/put (?:any number of|all) cores from your field(?:\/reserve)? to the (?:advent|contract) card/i.test(text)) {
+    return { op: 'MOVE_CORE', count: 'ANY', source: 'FIELD_RESERVE', destination: 'ADVENT_CARD' };
+  }
+
+  // 26. A.T. FIELD
+  if (/^\[?A\.T\.\s*Field\]?/i.test(text)) {
+    return { op: 'KEYWORD_ABILITY', keyword: 'A.T. Field' };
+  }
+
+  // 27. LEGACY FORMAT MARKER
+  if (/^Legacy$/i.test(text)) {
+    return { op: 'FORMAT_MARKER', marker: 'LEGACY' };
+  }
+
   // If unrecognized, return generic unsupported clause for compiler tracking
   return {
     op: 'UNSUPPORTED',

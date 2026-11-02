@@ -379,6 +379,20 @@ export async function executeOp(state, op, context, promptResolver, events = nul
       return { success: true, currentCounters: state.players[controller].counters };
     }
 
+    case 'MILL_DECK': {
+      const count = op.count || 1;
+      const targetSide = op.side === 'opp' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const milled = [];
+      for (let i = 0; i < count; i++) {
+        if (p.deck.length === 0) break;
+        const topCard = p.deck[0];
+        await moveCard(state, topCard, 'grave', targetSide, { cause: 'mill', sourceCard }, events);
+        milled.push(topCard);
+      }
+      return { success: milled.length > 0, milledCount: milled.length, cards: milled };
+    }
+
     case 'BURST_LOCK': {
       state.modifiers.push({
         id: `mod_${Date.now()}_burst_lock`,

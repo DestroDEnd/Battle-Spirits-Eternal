@@ -110,8 +110,9 @@ function splitAbilityBlocks(effectText) {
   // Normalize line breaks
   const normalized = effectText.replace(/\r\n/g, '\n').trim();
 
-  // Split by double newlines
-  const paragraphs = normalized.split(/\n\s*\n+/).map(p => p.trim()).filter(Boolean);
+  // Split by double newlines OR single newlines preceding ability headers
+  const headerSplitRegex = /\n+(?=\[(?:LV\d+|During|When|Flash|Main|Burst|Contract|Soul State|Grand|Summon Condition|SuAdcon)|Flash\s*[-–]|Main\s*[-–]|Legacy\b|◆)/gi;
+  const paragraphs = normalized.split(headerSplitRegex).map(p => p.trim()).filter(Boolean);
 
   const blocks = [];
 
@@ -120,7 +121,11 @@ function splitAbilityBlocks(effectText) {
     // e.g. "some effect text. [LV2] ..."
     const subMatches = para.split(/(?<=\.)\s+(?=\[(?:LV\d+|During|Flash|Main|Burst:))/g);
     for (const sub of subMatches) {
-      if (sub.trim()) blocks.push(sub.trim());
+      const trimmed = sub.trim();
+      if (trimmed) {
+        if (/^Legacy$/i.test(trimmed)) continue;
+        blocks.push(trimmed);
+      }
     }
   }
 
