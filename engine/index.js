@@ -15,6 +15,8 @@ import { calculateEffectiveCost, canAffordCost, payCost } from './payment.js';
 import { computeEffectiveBP, canAttack, canBlock } from './continuous.js';
 import { checkStateBasedActions } from './sba.js';
 import { createDefaultKeywordRegistry } from './keywords/index.js';
+import { TimingWindowManager } from './windows.js';
+import { PromptManager } from './prompt_manager.js';
 
 export function createGame(options = {}) {
   const playerDeckCards = (options.playerDeck || []).map(c => createCardInstance(c, 'player'));
@@ -24,7 +26,24 @@ export function createGame(options = {}) {
   const state = createGameState(playerDeckCards, opponentDeckCards, firstPlayer);
   const events = new EventBus();
   const flow = new FlowController(state, events);
-  const resolver = new AsyncResolver(options.promptResolver || new DefaultPromptResolver());
+  const promptManager = options.promptManager || new PromptManager();
+  const defaultFallback = new DefaultPromptResolver();
+
+  // If a custom promptResolver is passed (like AIDecider), use it; otherwise use promptManager or DefaultPromptResolver
+  const resolverDelegate = options.promptResolver || {
+    choose: async (prompt) => {
+      // If AI is the chooser and an AI decider exists, route to AI decider
+      if (options.ai && prompt.chooser === 'opponent') {
+        return await options.ai.decide(prompt, state);
+      }
+      if (options.usePromptManager) {
+        return await promptManager.request(prompt);
+      }
+      return await defaultFallback.choose(prompt);
+    }
+  };
+
+  const resolver = new AsyncResolver(resolverDelegate);
   const keywords = options.keywordRegistry || createDefaultKeywordRegistry();
 
   // Initial draw: 4 cards each
@@ -53,7 +72,18 @@ export function createGame(options = {}) {
       const card = p.hand.find(c => c.id === cardId);
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
 
+      // Timing check: During Attack Step, cannot summon spirits without Flash ability (R27)
+      if (state.step === 'ATTACK' && (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave')) {
+        const hasFlash = card.compiledIr && card.compiledIr.abilities && card.compiledIr.abilities.some(a => a.header.isFlash);
+        if (!hasFlash && (!card.effect || !card.effect.includes('Flash'))) {
+          return { success: false, reason: 'CANNOT_SUMMON_DURING_ATTACK_STEP' };
+        }
+      }
+
       const cost = calculateEffectiveCost(state, card, playerSide);
+      if (!canAffordCost(state, cost, playerSide)) {
+        return { success: false, reason: 'INSUFFICIENT_CORES' };
+      }
 
       // Auto-populate default payment from reserve if not provided
       const actualPayment = payment.length > 0 ? payment : [
@@ -237,5 +267,17 @@ export function createGame(options = {}) {
   };
 
   keywords.attachToGame(game);
+
+  const windows = new TimingWindowManager(game);
+  game.windows = windows;
+  game.promptManager = promptManager;
+
+  events.on('LIFE_REDUCED', async (ev) => {
+    await windows.openBurstWindow(ev);
+  });
+  events.on('DESTROYED', async (ev) => {
+    await windows.openBurstWindow(ev);
+  });
+
   return game;
 }

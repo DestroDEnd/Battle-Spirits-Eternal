@@ -120,6 +120,18 @@ export class DefaultPromptResolver {
     if (prompt.type === 'CHOOSE_OR_BRANCH') {
       return prompt.options[0];
     }
+    if (prompt.type === 'BURST_TRIGGER') {
+      return { activate: true };
+    }
+    if (prompt.type === 'FLASH_ACTION') {
+      return { action: 'PASS' };
+    }
+    if (prompt.type === 'BLOCK_CHOICE') {
+      return { block: false };
+    }
+    if (prompt.type === 'MULLIGAN_CHOICE') {
+      return { mulligan: false };
+    }
     if (prompt.candidates && prompt.candidates.length > 0) {
       const count = prompt.count || 1;
       return prompt.candidates.slice(0, count);
