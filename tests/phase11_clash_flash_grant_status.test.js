@@ -196,3 +196,199 @@ test('Phase 11 - Temporary granted Clash and BP boosts expire at end of turn', (
   assert.equal(BattleArena.hasClash(spirit), false, 'Clash expired after endTurn');
   assert.equal(spirit.currentBp, 3000, 'BP buff reset to base after endTurn');
 });
+
+test('Phase 11 - Brave BP Bonus calculation & Accel clause exclusion', () => {
+  const { BattleArena } = setupTestEnvironment();
+
+  // The SacredEmperorWeapon Siegfrieden-Cannon: Accel destroys 7000 BP or less, but printed brave bonus is 5000 BP
+  const siegfriedenCannon = {
+    name: 'The SacredEmperorWeapon Siegfrieden-Cannon',
+    type: 'Brave',
+    cost: 5,
+    levels: { LV1: { level: 1, cost: 1, bp: 5000 } },
+    effect: 'Flash- [Accel: Cost 4 ([Red Core][White Core])]\nDestroy two opposing 7000 BP or less Spirits. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1] [Reload]\nYou can [Advent] onto this Spirit-condition Brave.\n\n[During Brave] (When Attacks)\nDestroy any number of opposing Spirits up to a total of Cost 8.'
+  };
+
+  const cannonBonus = BattleArena.parseBraveBonus(siegfriedenCannon.levels, siegfriedenCannon.effect, siegfriedenCannon);
+  assert.equal(cannonBonus, 5000, 'Siegfrieden-Cannon must calculate +5000 BP bonus (not +7000 BP from Accel)');
+
+  // The BullGreatAxe Golden-Taurus-Axe: levels object with LV1 5000 BP
+  const goldenAxe = {
+    name: 'The BullGreatAxe Golden-Taurus-Axe',
+    type: 'Brave',
+    cost: 5,
+    levels: { LV1: { level: 1, cost: 1, bp: 5000 } },
+    effect: '[During Spirit Brave] (When Attacks)\nWhen only the opposing Spirit is destroyed by BP comparison, for each symbol on this Spirit, send an opposing Life to the Reserve.'
+  };
+
+  const axeBonus = BattleArena.parseBraveBonus(goldenAxe.levels, goldenAxe.effect, goldenAxe);
+  assert.equal(axeBonus, 5000, 'Golden-Taurus-Axe must calculate +5000 BP bonus from levels object (not fallback 1000 BP)');
+});
+
+test('Phase 11 - Brave combining rules: cannot combine onto another Brave and obeys Double Brave', () => {
+  const { BattleArena } = setupTestEnvironment();
+
+  const brave1 = {
+    uid: 'b_1',
+    name: 'The BullGreatAxe Golden-Taurus-Axe',
+    type: 'Brave',
+    isBraveCard: true,
+    cost: 5
+  };
+
+  const brave2 = {
+    uid: 'b_2',
+    name: 'The SacredEmperorWeapon Siegfrieden-Cannon',
+    type: 'Brave',
+    isBraveCard: true,
+    cost: 5
+  };
+
+  const normalSpirit = {
+    uid: 's_normal',
+    name: 'Normal Knight',
+    type: 'Spirit',
+    isBraveCard: false,
+    cost: 6,
+    brave: null
+  };
+
+  const alreadyBravedSpirit = {
+    uid: 's_braved',
+    name: 'Already Braved Dragon',
+    type: 'Spirit',
+    isBraveCard: false,
+    cost: 6,
+    brave: brave1
+  };
+
+  const doubleBraveSpirit = {
+    uid: 's_double_brave',
+    name: 'The SuperEmperor Dragon',
+    type: 'Spirit',
+    isBraveCard: false,
+    cost: 8,
+    brave: brave1,
+    effect: '[LV1][LV2] This Spirit can combine with up to two Braves.'
+  };
+
+  // Rule 1: A Brave cannot combine onto another Brave in Spirit form
+  const braveOntoBraveCheck = BattleArena.isEligibleBraveHost(brave1, brave2);
+  assert.equal(braveOntoBraveCheck.eligible, false, 'Cannot combine Brave onto another Brave');
+  assert.ok(braveOntoBraveCheck.reason.includes('Brave cannot combine onto another Brave'));
+
+  // Rule 2: Cannot combine onto itself
+  const selfCheck = BattleArena.isEligibleBraveHost(brave1, brave1);
+  assert.equal(selfCheck.eligible, false, 'Cannot combine onto itself');
+
+  // Rule 3: Can combine onto normal spirit
+  const normalCheck = BattleArena.isEligibleBraveHost(brave1, normalSpirit);
+  assert.equal(normalCheck.eligible, true, 'Can combine onto normal eligible spirit');
+
+  // Rule 4: Cannot combine onto already braved spirit lacking Double Brave
+  const bravedCheck = BattleArena.isEligibleBraveHost(brave2, alreadyBravedSpirit);
+  assert.equal(bravedCheck.eligible, false, 'Cannot combine onto spirit that already has a Brave');
+
+  // Rule 5: CAN combine onto already braved spirit if it has Double Brave
+  const doubleCheck = BattleArena.isEligibleBraveHost(brave2, doubleBraveSpirit);
+  assert.equal(doubleCheck.eligible, true, 'Can combine onto spirit with Double Brave');
+});
+
+test('Phase 11 - Braved Spirit attack triggers Brave When Attacks destruction', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const cannonBrave = {
+    uid: 'brave_cannon',
+    name: 'The SacredEmperorWeapon Siegfrieden-Cannon',
+    type: 'Brave',
+    isBraveCard: true,
+    effect: '[During Brave] (When Attacks)\nDestroy any number of opposing Spirits up to a total of Cost 8.'
+  };
+
+  const attacker = {
+    uid: 'spirit_attacker',
+    name: 'The DragonEmperorWaterShield Clio-Wasser',
+    currentLevel: 2,
+    currentBp: 10000,
+    baseBp: 5000,
+    isExhausted: false,
+    isBraved: true,
+    brave: cannonBrave,
+    effect: 'Cards can\'t be discarded from either deck.'
+  };
+
+  const enemySpirit1 = {
+    uid: 'enemy_sp_1',
+    name: 'Shadow Yatagarasu',
+    cost: 2,
+    currentBp: 1000,
+    currentCores: 1
+  };
+
+  const enemySpirit2 = {
+    uid: 'enemy_sp_2',
+    name: 'Puppet Soldier',
+    cost: 4,
+    currentBp: 3000,
+    currentCores: 1
+  };
+
+  DuelState.player.field = [attacker];
+  DuelState.opponent.field = [enemySpirit1, enemySpirit2];
+  DuelState.opponent.trash = 0;
+  DuelState.opponent.reserve = 0;
+
+  // Execute attack effects for braved attacker
+  BattleArena.executeWhenAttacksEffects(attacker, 'player');
+
+  // Both enemy spirits (Cost 2 + Cost 4 = Cost 6 <= Cost 8 budget) should be destroyed
+  assert.equal(DuelState.opponent.field.length, 0, 'Both enemy spirits destroyed by Siegfrieden-Cannon Cost 8 budget');
+});
+
+test('Phase 11 - Golden-Taurus-Axe braved spirit burns opposing Life on BP comparison victory', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const goldenAxeBrave = {
+    uid: 'brave_axe',
+    name: 'The BullGreatAxe Golden-Taurus-Axe',
+    type: 'Brave',
+    isBraveCard: true,
+    symbols: ['Red'],
+    symbol: 'Red',
+    effect: '[During Spirit Brave] (When Attacks)\nWhen only the opposing Spirit is destroyed by BP comparison, for each symbol on this Spirit, send an opposing Life to the Reserve.'
+  };
+
+  const hostSpirit = {
+    uid: 'host_spirit',
+    name: 'Red Dragon',
+    type: 'Spirit',
+    currentLevel: 2,
+    currentBp: 10000,
+    symbols: ['Red'],
+    symbol: 'Red',
+    isBraved: true,
+    brave: goldenAxeBrave,
+    effect: ''
+  };
+
+  const defendingSpirit = {
+    uid: 'def_spirit',
+    name: 'Shadow Yatagarasu',
+    cost: 2,
+    currentBp: 1000,
+    currentCores: 1
+  };
+
+  DuelState.player.field = [hostSpirit];
+  DuelState.opponent.field = [defendingSpirit];
+  DuelState.opponent.life = 5;
+  DuelState.opponent.reserve = 0;
+
+  // Execute BP comparison victory
+  BattleArena.executeBpComparisonEffects(hostSpirit, defendingSpirit, 'player', 'opponent');
+
+  // Golden-Taurus-Axe + Red Dragon has 2 symbols (1 base + 1 brave)
+  // Opponent Life was 5, now burns 2 Life to Reserve -> Life = 3, Reserve = 2
+  assert.equal(DuelState.opponent.life, 3, 'Opponent life reduced by 2 (1 per symbol)');
+  assert.equal(DuelState.opponent.reserve, 2, 'Life sent to opponent Reserve');
+});

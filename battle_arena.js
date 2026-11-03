@@ -546,22 +546,93 @@
     return (card.type || '').includes('Brave');
   }
 
-  function parseBraveBonus(levelsStr, effectStr) {
-    if (levelsStr && typeof levelsStr === 'string') {
-      const m = levelsStr.match(/(?:Brave|Braved)\s*:\s*\d+\s*cores?,\s*\+?(\d+)\s*BP/i);
-      if (m) return parseInt(m[1], 10);
+  function hasDoubleBrave(spirit) {
+    if (!spirit) return false;
+    if (spirit.doubleBrave) return true;
+    const eff = (spirit.effect || '').toLowerCase();
+    return eff.includes('double brave') || eff.includes('ダブルブレイヴ') || eff.includes('can combine with up to two braves') || eff.includes('can be braved with up to two braves');
+  }
+
+  function parseBraveBonus(levelsInput, effectStr, card = null) {
+    // 1. Direct levels object check: { LV1: { bp: 5000 } }
+    if (levelsInput && typeof levelsInput === 'object') {
+      if (Array.isArray(levelsInput) && levelsInput.length > 0 && levelsInput[0].bp) {
+        return levelsInput[0].bp;
+      }
+      if (levelsInput.LV1 && levelsInput.LV1.bp) {
+        return levelsInput.LV1.bp;
+      }
+      for (const k of Object.keys(levelsInput)) {
+        if (levelsInput[k] && levelsInput[k].bp) {
+          return levelsInput[k].bp;
+        }
+      }
     }
+
+    // 2. String levels check: "Braved: 0 cores, +5000 BP" or "合体+5000BP" or "LV1: 1 core, 5000 BP"
+    if (levelsInput && typeof levelsInput === 'string') {
+      const mBrave = levelsInput.match(/(?:Brave|Braved|合体)\s*:\s*(?:\d+\s*cores?,\s*)?\+?(\d+)\s*BP/i) ||
+                     levelsInput.match(/合体\s*\+?(\d+)\s*BP/i);
+      if (mBrave) return parseInt(mBrave[1], 10);
+
+      const mLvl1 = levelsInput.match(/(?:LV1|Level\s*1)\s*:\s*\d+\s*cores?,\s*(\d+)\s*BP/i);
+      if (mLvl1) return parseInt(mLvl1[1], 10);
+    }
+
+    // 3. Fallback to effect string, CAREFULLY ignoring "BP or less" / "BP以下" / "BP or more" / "BP以上"
     if (effectStr && typeof effectStr === 'string') {
-      const mEff = effectStr.match(/(?:give|gains?|\+)\s*(\d{3,5})\s*BP/i) || effectStr.match(/(\d{3,5})\s*BP/i);
+      const sanitized = effectStr.replace(/\d{3,6}\s*BP\s*(?:or\s*(?:less|more)|以下|以上)/gi, '');
+      const mEff = sanitized.match(/(?:\[(?:During\s+Brave|When\s+Braved|During\s+Spirit\s+Brave)\][^\n]*?)?(?:gives?|gains?|\+)\s*(\d{3,5})\s*BP/i) ||
+                   sanitized.match(/\+(\d{3,5})\s*BP/i);
       if (mEff) return parseInt(mEff[1], 10);
     }
-    return 1000;
+
+    // 4. Card object BP fallback
+    if (card && card.bp && !isNaN(Number(card.bp))) {
+      return Number(card.bp);
+    }
+
+    return 5000;
+  }
+
+  function checkBraveCondition(braveCard, hostCard) {
+    if (!braveCard || !hostCard) return { eligible: false, reason: 'Invalid cards' };
+    const text = (braveCard.effect || '') + ' ' + (braveCard.flavor || '');
+    const m = text.match(/\[Brave Condition:\s*([^\]]+)\]|【合体条件：([^】]+)】/i);
+    if (!m) return { eligible: true };
+    const condStr = (m[1] || m[2]).trim();
+
+    const costMatch = condStr.match(/Cost\s*(\d+)\s*or\s*more|コスト(\d+)以上/i);
+    if (costMatch) {
+      const minCost = parseInt(costMatch[1] || costMatch[2], 10);
+      const hostCost = hostCard.cost || 0;
+      if (hostCost < minCost) {
+        return { eligible: false, reason: `Requires host Cost ${minCost}+ (Target has Cost ${hostCost})` };
+      }
+    }
+
+    const famMatch = condStr.match(/"([^"]+)"\s*(?:family)?/i);
+    if (famMatch) {
+      const reqFam = famMatch[1].toLowerCase();
+      const hostFamilies = (hostCard.families || [hostCard.family || '']).map(f => (f || '').toLowerCase());
+      if (!hostFamilies.some(f => f.includes(reqFam))) {
+        return { eligible: false, reason: `Requires "${famMatch[1]}" family` };
+      }
+    }
+
+    return { eligible: true };
   }
 
   function isEligibleBraveHost(braveCard, hostCard) {
     if (!hostCard) return { eligible: false, reason: 'No host selected' };
-    if (hostCard.brave) return { eligible: false, reason: 'Spirit already has a Brave' };
     if (braveCard.uid === hostCard.uid) return { eligible: false, reason: 'Cannot combine onto itself' };
+    const isHostBrave = isBraveCard(hostCard);
+    if (isHostBrave) return { eligible: false, reason: 'A Brave cannot combine onto another Brave' };
+    if (hostCard.brave && !hasDoubleBrave(hostCard)) {
+      return { eligible: false, reason: 'Target is already combined with a Brave and lacks Double Brave' };
+    }
+    const condResult = checkBraveCondition(braveCard, hostCard);
+    if (!condResult.eligible) return condResult;
     return { eligible: true };
   }
 
@@ -837,12 +908,32 @@
   // ?? UNIVERSAL INTERACTIVE TARGETING ENGINE (PHASE 2) ??
     // ── CUMULATIVE COST DESTRUCTION TARGETING MODAL ──
   function promptCumulativeCostTargetModal(card, side, candidates, budgetCost, onConfirm) {
-    if (typeof document === 'undefined' || !document.body) {
-      if (typeof onConfirm === 'function') onConfirm([]);
+    if (typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+      const chosen = [];
+      let cur = 0;
+      for (const c of candidates) {
+        if (cur + c.cost <= budgetCost) {
+          chosen.push(c);
+          cur += c.cost;
+        }
+      }
+      if (typeof onConfirm === 'function') onConfirm(chosen);
       return;
     }
 
     const box = document.createElement('div');
+    if (!box || typeof box.querySelectorAll !== 'function') {
+      const chosen = [];
+      let cur = 0;
+      for (const c of candidates) {
+        if (cur + c.cost <= budgetCost) {
+          chosen.push(c);
+          cur += c.cost;
+        }
+      }
+      if (typeof onConfirm === 'function') onConfirm(chosen);
+      return;
+    }
     box.className = 'optional-effect-popup cumulative-cost-modal';
     box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100003;width:min(520px,94vw);background:#0f172a;border:2px solid #ea580c;border-radius:14px;padding:16px 18px;box-shadow:0 20px 50px rgba(0,0,0,.85);color:#e2e8f0;font-size:.86rem;font-family:sans-serif;pointer-events:auto;';
 
@@ -6604,82 +6695,120 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     // 3. Ability blocks (run BEFORE executeUniversalCardEffect so markLegacyHandled prevents duplicate execution!)
-    const blocks = getCardAbilityBlocks(attacker.effect);
-    const eligibleBlocks = blocks.filter(b => /\(When Attacks(?:[^)]*)\)|\(When [^)]*\/Attacks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|\(When Brave Attacks(?:[^)]*)\)/i.test(b));
-    for (const b of eligibleBlocks) {
-      const lvlMatch = b.match(/(?:(?:^\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
-      const levelTag = lvlMatch ? lvlMatch[1] : '';
-      if (isEffectLevelMet(levelTag, attacker.currentLevel)) {
-        executeAbilityActions(b, attacker, side, 'ATTACK');
+    if (attacker && attacker.effect) {
+      const blocks = getCardAbilityBlocks(attacker.effect);
+      const eligibleBlocks = blocks.filter(b => /\(When Attacks(?:[^)]*)\)|\(When [^)]*\/Attacks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|\(When Brave Attacks(?:[^)]*)\)/i.test(b));
+      for (const b of eligibleBlocks) {
+        const lvlMatch = b.match(/(?:(?:^\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
+        const levelTag = lvlMatch ? lvlMatch[1] : '';
+        if (isEffectLevelMet(levelTag, attacker.currentLevel)) {
+          executeAbilityActions(b, attacker, side, 'ATTACK');
+        }
       }
     }
 
-    executeUniversalCardEffect(attacker, side, 'WHEN_ATTACKS');
+    // 4. Brave Ability Blocks: If attacker has a combined Brave, execute its [During Brave] attack abilities!
+    if (attacker && attacker.brave && attacker.brave.effect) {
+      const braveBlocks = getCardAbilityBlocks(attacker.brave.effect);
+      const braveEligible = braveBlocks.filter(b =>
+        /\(When Attacks(?:[^)]*)\)|\(When [^)]*\/Attacks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|\(When Brave Attacks(?:[^)]*)\)/i.test(b) ||
+        /\[During Brave\]|\[When Braved\]|\[During Spirit Brave\]/i.test(b)
+      );
+      for (const b of braveEligible) {
+        executeAbilityActions(b, attacker, side, 'ATTACK', { isBraved: true, braveCard: attacker.brave });
+      }
+      executeUniversalCardEffect(attacker.brave, side, 'WHEN_ATTACKS', { isBraved: true, hostSpirit: attacker });
+    }
+
+    if (attacker && attacker.effect) {
+      executeUniversalCardEffect(attacker, side, 'WHEN_ATTACKS');
+    }
     renderDuelTable();
   }
 
   function executeBpComparisonEffects(att, blk, attSide, defSide) {
-    if (!att || !att.effect) return;
-    const eff = att.effect;
+    if (!att) return;
+    const sources = [];
+    if (att.effect) sources.push({ card: att, effect: att.effect, isHost: true });
+    if (att.brave && att.brave.effect) sources.push({ card: att.brave, effect: att.brave.effect, isBrave: true });
 
-    if (!eff.toLowerCase().includes('bp comparison') && !eff.includes('BPを比べ')) return;
+    for (const src of sources) {
+      const eff = src.effect;
+      if (!eff.toLowerCase().includes('bp comparison') && !eff.includes('BPを比べ')) continue;
 
-    // Isolate the ability block containing BP comparison
-    const blocks = getCardAbilityBlocks(eff);
-    const bpBlock = blocks.find(b => /bp comparison|BPを比べ/i.test(b));
-    if (!bpBlock) return;
+      const blocks = getCardAbilityBlocks(eff);
+      const bpBlocks = blocks.filter(b => /bp comparison|BPを比べ/i.test(b));
+      for (const bpBlock of bpBlocks) {
+        const lvlMatch = bpBlock.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+        const levelTag = lvlMatch ? lvlMatch[1] : '';
 
-    const lvlMatch = bpBlock.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
-    const levelTag = lvlMatch ? lvlMatch[1] : '';
-
-    // Check level requirement (e.g. Kingtaurus requires [LV2][LV3])
-    if (!isEffectLevelMet(levelTag, att.currentLevel)) {
-      return;
-    }
-
-    const bodyLower = bpBlock.toLowerCase();
-    const defState = defSide === 'player' ? DuelState.player : DuelState.opponent;
-    const isPlayerAttacking = attSide === 'player';
-
-    // 1. THE DUKE KINGTAURUS: "When only the opposing Spirit is destroyed via BP comparison, send an opposing Life to their Reserve."
-    if (/when only the opposing spirit is destroyed via bp comparison.*?send an opposing life to their reserve/i.test(bodyLower) ||
-        /BPを比べ相手のスピリットだけを破壊したとき.*?相手のライフにあるコア1個を相手のリザーブに置く/i.test(bpBlock)) {
-      if (defState.life > 0) {
-        defState.life -= 1;
-        defState.reserve += 1;
-        AudioFX.lifeDamage();
-        addLog(`👑💥 **[BP COMPARISON VICTORY: ${att.name}]**: "Gae Bolg" pierced through opposing defense! Sent 1 opposing Life directly to their Reserve! (${defSide === 'player' ? 'Player' : 'Opponent'} Life remaining: ${defState.life})`, 'damage');
-        if (typeof showToast === 'function') {
-          showToast(`👑 ${att.name}: Life Burn triggered! Opposing Life -1`, 'error');
+        // If block has level requirement and this is the host, check level
+        if (src.isHost && levelTag && !isEffectLevelMet(levelTag, att.currentLevel)) {
+          continue;
         }
-        renderDuelTable();
-        checkGameOver();
-      }
-    }
-    // 2. THE EMPEROR KAISERATLAS: "When only the opposing Spirit is destroyed via BP comparison, by sending a core from your Reserve to the Void, send two opposing Lives to their Reserve."
-    else if (/when only the opposing spirit is destroyed via bp comparison.*?by sending a core from your reserve to the void.*?send two opposing lives to their reserve/i.test(bodyLower)) {
-      const attReserve = isPlayerAttacking ? DuelState.player : DuelState.opponent;
-      if (attReserve.reserve >= 1 && defState.life > 0) {
-        attReserve.reserve -= 1; // sent to void
-        const dmg = Math.min(2, defState.life);
-        defState.life -= dmg;
-        defState.reserve += dmg;
-        AudioFX.lifeDamage();
-        addLog(`👑💥 **[BP COMPARISON VICTORY: ${att.name}]**: Kaiseratlas channeled 1 core to the Void and shattered 2 opposing Lives to their Reserve! (${defSide === 'player' ? 'Player' : 'Opponent'} Life remaining: ${defState.life})`, 'damage');
-        renderDuelTable();
-        checkGameOver();
-      }
-    }
-    // 3. THE DARKDRAGONEMPEROR SIEGFRIED: "When only the opposing Spirit is destroyed via BP comparison, draw a card."
-    else if (/when only the opposing spirit is destroyed via bp comparison.*?draw a card/i.test(bodyLower)) {
-      const attDeck = isPlayerAttacking ? DuelState.player.deck : DuelState.opponent.deck;
-      const attHand = isPlayerAttacking ? DuelState.player.hand : DuelState.opponent.hand;
-      const card = attDeck.shift();
-      if (card) {
-        attHand.push(card);
-        AudioFX.playTone(440, 'sine', 0.15, 0.1);
-        addLog(`🎴 **[BP COMPARISON VICTORY: ${att.name}]**: Drew 1 card from deck for victory in BP comparison!`, 'step');
-        renderDuelTable();
+
+        const bodyLower = bpBlock.toLowerCase();
+        const defState = defSide === 'player' ? DuelState.player : DuelState.opponent;
+        const isPlayerAttacking = attSide === 'player';
+
+        // 1. Symbol-based Life Burn (e.g. Golden-Taurus-Axe: "for each symbol on this Spirit, send an opposing Life to the Reserve")
+        if (/for each symbol on this (?:spirit|ultimate|card),?\s*send an opposing life to (?:the|their) reserve/i.test(bodyLower) ||
+            /このスピリットのシンボル1つにつき、相手のライフのコア1個を相手のリザーブに置く/i.test(bpBlock)) {
+          if (defState.life > 0) {
+            const symbols = getAttackSymbols(att, attSide);
+            const dmg = Math.min(symbols, defState.life);
+            defState.life -= dmg;
+            defState.reserve += dmg;
+            AudioFX.lifeDamage();
+            addLog(`👑💥 **[BP COMPARISON VICTORY: ${src.card.name}]**: Pierced opposing defense! For each symbol (${symbols} total), burned ${dmg} opposing Life directly to Reserve! (${defSide === 'player' ? 'Player' : 'Opponent'} Life remaining: ${defState.life})`, 'damage');
+            if (typeof showToast === 'function') {
+              showToast(`👑 ${src.card.name}: Piercing ${dmg} Life Burn triggered!`, 'success');
+            }
+            renderDuelTable();
+            checkGameOver();
+          }
+        }
+        // 2. THE DUKE KINGTAURUS: "When only the opposing Spirit is destroyed via BP comparison, send an opposing Life to their Reserve."
+        else if (/when only the opposing spirit is destroyed (?:via|by) bp comparison.*?send (?:an|\d+) opposing life to (?:their|the) reserve/i.test(bodyLower) ||
+            /BPを比べ相手のスピリットだけを破壊したとき.*?相手のライフにあるコア1個を相手のリザーブに置く/i.test(bpBlock)) {
+          if (defState.life > 0) {
+            defState.life -= 1;
+            defState.reserve += 1;
+            AudioFX.lifeDamage();
+            addLog(`👑💥 **[BP COMPARISON VICTORY: ${src.card.name}]**: Pierced through opposing defense! Sent 1 opposing Life directly to their Reserve! (${defSide === 'player' ? 'Player' : 'Opponent'} Life remaining: ${defState.life})`, 'damage');
+            if (typeof showToast === 'function') {
+              showToast(`👑 ${src.card.name}: Life Burn triggered! Opposing Life -1`, 'error');
+            }
+            renderDuelTable();
+            checkGameOver();
+          }
+        }
+        // 3. THE EMPEROR KAISERATLAS: "When only the opposing Spirit is destroyed via BP comparison, by sending a core from your Reserve to the Void, send two opposing Lives to their Reserve."
+        else if (/when only the opposing spirit is destroyed (?:via|by) bp comparison.*?by sending a core from your reserve to the void.*?send two opposing lives to (?:their|the) reserve/i.test(bodyLower)) {
+          const attReserve = isPlayerAttacking ? DuelState.player : DuelState.opponent;
+          if (attReserve.reserve >= 1 && defState.life > 0) {
+            attReserve.reserve -= 1; // sent to void
+            const dmg = Math.min(2, defState.life);
+            defState.life -= dmg;
+            defState.reserve += dmg;
+            AudioFX.lifeDamage();
+            addLog(`👑💥 **[BP COMPARISON VICTORY: ${src.card.name}]**: Kaiseratlas channeled 1 core to the Void and shattered 2 opposing Lives to their Reserve! (${defSide === 'player' ? 'Player' : 'Opponent'} Life remaining: ${defState.life})`, 'damage');
+            renderDuelTable();
+            checkGameOver();
+          }
+        }
+        // 4. THE DARKDRAGONEMPEROR SIEGFRIED: "When only the opposing Spirit is destroyed via BP comparison, draw a card."
+        else if (/when only the opposing spirit is destroyed (?:via|by) bp comparison.*?draw a card/i.test(bodyLower)) {
+          const attDeck = isPlayerAttacking ? DuelState.player.deck : DuelState.opponent.deck;
+          const attHand = isPlayerAttacking ? DuelState.player.hand : DuelState.opponent.hand;
+          const card = attDeck.shift();
+          if (card) {
+            attHand.push(card);
+            AudioFX.playTone(440, 'sine', 0.15, 0.1);
+            addLog(`🎴 **[BP COMPARISON VICTORY: ${src.card.name}]**: Drew 1 card from deck for victory in BP comparison!`, 'step');
+            renderDuelTable();
+          }
+        }
       }
     }
   }
@@ -8297,16 +8426,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     if (!braveCard) return;
 
-    const eligibleSpirits = DuelState.player.field.filter(s => s.uid !== braveCard.uid && !s.brave);
+    const eligibleSpirits = DuelState.player.field.filter(s => isEligibleBraveHost(braveCard, s).eligible);
 
     if (eligibleSpirits.length === 0) {
       if (source === 'hand') {
         if (typeof showToast === 'function') {
-          showToast(`No allied Spirits on battlefield to Brave with! You can summon "${braveCard.name}" in Spirit Form first.`, 'warning');
+          showToast(`No eligible allied Spirits on battlefield to Brave with "${braveCard.name}"! You can summon it in Spirit Form first.`, 'warning');
         }
       } else {
         if (typeof showToast === 'function') {
-          showToast(`No other allied Spirits on battlefield to combine with "${braveCard.name}"!`, 'warning');
+          showToast(`No other eligible allied Spirits on battlefield to combine with "${braveCard.name}"!`, 'warning');
         }
       }
       return;
@@ -8350,8 +8479,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return;
     }
 
-    if (targetSpirit.brave) {
-      if (typeof showToast === 'function') showToast(`"${targetSpirit.name}" already has a Brave attached!`, 'warning');
+    const hostCheck = isEligibleBraveHost(braveCard, targetSpirit);
+    if (!hostCheck.eligible) {
+      if (typeof showToast === 'function') showToast(hostCheck.reason, 'warning');
       return;
     }
 
@@ -8524,11 +8654,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const choicesEl = document.getElementById('targetSpiritChoices');
 
     if (mode === 'brave_hand' || mode === 'brave_field') {
-      const bpBonus = parseBraveBonus(card.levels, card.effect);
+      const bpBonus = parseBraveBonus(card.levels, card.effect, card);
       if (titleEl) titleEl.textContent = `🔗 Combine Brave: ${card.name}`;
       if (descEl) descEl.innerHTML = `Select which allied Spirit or Ultimate combines with <strong>${card.name}</strong> (+${bpBonus} BP):`;
       if (choicesEl) {
-        const eligible = DuelState.player.field.filter(s => s.uid !== card.uid && !s.brave);
+        const eligible = DuelState.player.field.filter(s => isEligibleBraveHost(card, s).eligible);
         choicesEl.innerHTML = eligible.map(s => `
           <div class="target-choice-card" onclick="BattleArena.selectTargetSpirit('${s.uid}')">
             <div class="tcc-info">
@@ -12826,7 +12956,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     braveOntoSpirit,
     separateBrave,
     isBraveCard,
+    hasDoubleBrave,
     parseBraveBonus,
+    checkBraveCondition,
     isEligibleBraveHost,
     deployNexus,
     addCoreToNexus,
