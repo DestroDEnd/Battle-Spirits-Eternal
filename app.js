@@ -1232,7 +1232,122 @@ function checkCardUsageRestriction(card, side = 'player') {
   return { allowed: true };
 }
 
-async function openCardDetail(name, contextList) {
+function renderModalFieldStatus(container, unit, isPlayer) {
+  if (!container || !unit) return;
+
+  const normalCores = unit.hasSoulCore ? Math.max(0, unit.currentCores - 1) : unit.currentCores;
+  const isExhausted = !!unit.isExhausted;
+  const stateClass = isExhausted ? 'mfs-status-exhausted' : 'mfs-status-ready';
+  const stateLabel = isExhausted ? '🔄 EXHAUSTED' : '🟢 READY';
+
+  // BP calculation & buffs
+  const baseBp = unit.baseBp !== undefined ? unit.baseBp : (unit.currentBp || 0);
+  const buffTotal = (unit.turnBpBoost || 0) + (unit.temporaryBpBuff || 0) + (unit.battleBpBoost || 0);
+  const currentBp = unit.battleBp || unit.currentBp;
+
+  // Active modifiers & granted effects
+  const effectsList = [];
+  if (Array.isArray(unit.grantedKeywords)) {
+    unit.grantedKeywords.forEach(kw => {
+      const kwStr = typeof kw === 'string' ? kw : kw.name;
+      if (kwStr && !effectsList.some(e => e.keyword === kwStr)) {
+        let desc = '';
+        const low = kwStr.toLowerCase();
+        if (low.includes('clash')) desc = 'The opponent must block if possible.';
+        else if (low.includes('curse')) desc = 'When destroyed in battle, destroy the opponent\'s battling Spirit.';
+        else if (low.includes('crush')) desc = 'When attacks, discard cards from opponent\'s deck equal to this Spirit\'s level.';
+        else if (low.includes('unblockable')) desc = 'This Spirit cannot be blocked.';
+        effectsList.push({ keyword: kwStr, desc: desc || `Granted keyword [${kwStr}] active this turn.` });
+      }
+    });
+  }
+
+  if (Array.isArray(unit.grantedEffects)) {
+    unit.grantedEffects.forEach(ge => {
+      const txt = typeof ge === 'string' ? ge : (ge.text || ge.desc || '');
+      const src = (typeof ge === 'object' && ge.source) ? ` (Granted by ${ge.source})` : '';
+      const kw = (typeof ge === 'object' && ge.keyword) ? ge.keyword : '';
+      if (txt && !effectsList.some(e => e.desc === `${txt}${src}`)) {
+        effectsList.push({ keyword: kw || 'Granted Ability', desc: `${txt}${src}` });
+      }
+    });
+  }
+
+  if (buffTotal > 0 && !effectsList.some(e => e.keyword === `+${buffTotal} BP`)) {
+    effectsList.push({ keyword: `+${buffTotal} BP`, desc: `Active battle/turn BP boost (+${buffTotal} BP).` });
+  }
+
+  if (unit.hasSoulCore && !effectsList.some(e => e.keyword === 'Soul Core')) {
+    effectsList.push({ keyword: 'Soul Core', desc: 'Soul Core placed on this card (+1000 BP bonus at all levels).' });
+  }
+
+  let braveHtml = '';
+  if (unit.brave) {
+    braveHtml = `
+      <div class="mfs-brave-banner">
+        ⚔️ <strong>Braved with ${esc(unit.brave.name)}</strong> • +${unit.brave.bpBonus || 1000} BP • +${unit.brave.symbolCount || 1} Symbol
+      </div>
+    `;
+  }
+
+  let effectsHtml = '';
+  if (effectsList.length > 0) {
+    effectsHtml = `
+      <div class="mfs-effects-container">
+        <div class="mfs-effects-header">⚡ ACTIVE BUFFS & GRANTED EFFECTS (${effectsList.length})</div>
+        ${effectsList.map(eff => `
+          <div class="mfs-effect-pill">
+            <span class="mfs-effect-tag">✨ [${esc(eff.keyword)}]</span>
+            <span class="mfs-effect-desc">${esc(eff.desc)}</span>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else {
+    effectsHtml = `
+      <div class="mfs-effects-container">
+        <div class="mfs-effects-header">⚡ ACTIVE BUFFS & MODIFIERS</div>
+        <div class="mfs-no-effects">No temporary buffs or granted abilities currently active. Base card rules apply.</div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="mfs-header">
+      <div class="mfs-title">
+        <span>⚡ BATTLEFIELD STATUS</span>
+        <span style="font-size:0.65rem; color:var(--muted); font-weight:700;">(${isPlayer ? 'YOUR FIELD' : 'OPPONENT FIELD'})</span>
+      </div>
+      <div class="mfs-status-pill ${stateClass}">${stateLabel}</div>
+    </div>
+    <div class="mfs-grid">
+      <div class="mfs-stat-item">
+        <div class="mfs-stat-label">Current BP</div>
+        <div class="mfs-stat-val">
+          <span>${currentBp} BP</span>
+          ${buffTotal > 0 ? `<span style="font-size:0.7rem; color:#fbbf24;">(+${buffTotal})</span>` : ''}
+        </div>
+      </div>
+      <div class="mfs-stat-item">
+        <div class="mfs-stat-label">Level & Cores</div>
+        <div class="mfs-stat-val">
+          <span>Lv${unit.currentLevel || 1}</span>
+          <span style="font-size:0.72rem; color:#93c5fd; font-weight:600;">(${normalCores}c${unit.hasSoulCore ? ' + 🔥SC' : ''})</span>
+        </div>
+      </div>
+      <div class="mfs-stat-item">
+        <div class="mfs-stat-label">Symbols</div>
+        <div class="mfs-stat-val">
+          <span>${(unit.extraSymbols || 0) + (unit.brave ? (unit.brave.symbolCount || 1) : 1)} Symbol</span>
+        </div>
+      </div>
+    </div>
+    ${braveHtml}
+    ${effectsHtml}
+  `;
+}
+
+async function openCardDetail(name, contextList, cardUid = null) {
   const modal = document.getElementById('cardModal');
   if (!modal) return;
   modal.classList.add('open');
@@ -1250,6 +1365,55 @@ async function openCardDetail(name, contextList) {
   const duelBtn = document.getElementById('modalDuelSummonBtn');
   const deckBtn = document.getElementById('modalDeckBtn');
   const isInDuel = typeof DuelState !== 'undefined' && DuelState.inDuel;
+
+  // Look up field card instance
+  let fieldUnit = null;
+  let isPlayerField = true;
+  if (isInDuel) {
+    const pField = (DuelState.player && DuelState.player.field) || [];
+    const oppField = (DuelState.opponent && DuelState.opponent.field) || [];
+    if (cardUid) {
+      fieldUnit = pField.find(s => s.uid === cardUid);
+      if (!fieldUnit) {
+        fieldUnit = oppField.find(s => s.uid === cardUid);
+        if (fieldUnit) isPlayerField = false;
+      }
+    }
+    if (!fieldUnit) {
+      fieldUnit = pField.find(s => (s.name || '').toLowerCase() === (name || '').toLowerCase());
+      if (!fieldUnit) {
+        fieldUnit = oppField.find(s => (s.name || '').toLowerCase() === (name || '').toLowerCase());
+        if (fieldUnit) isPlayerField = false;
+      }
+    }
+  }
+
+  let fieldStatusEl = document.getElementById('modalFieldStatus');
+  if (!fieldStatusEl) {
+    const modalInfo = document.querySelector('.modal-info');
+    if (modalInfo) {
+      fieldStatusEl = document.createElement('div');
+      fieldStatusEl.id = 'modalFieldStatus';
+      fieldStatusEl.className = 'modal-field-status-box';
+      fieldStatusEl.style.display = 'none';
+      const modalBadges = document.getElementById('modalBadges');
+      if (modalBadges && modalBadges.nextSibling) {
+        modalInfo.insertBefore(fieldStatusEl, modalBadges.nextSibling);
+      } else {
+        modalInfo.appendChild(fieldStatusEl);
+      }
+    }
+  }
+
+  if (fieldStatusEl) {
+    if (fieldUnit) {
+      renderModalFieldStatus(fieldStatusEl, fieldUnit, isPlayerField);
+      fieldStatusEl.style.display = 'flex';
+    } else {
+      fieldStatusEl.style.display = 'none';
+      fieldStatusEl.innerHTML = '';
+    }
+  }
 
   if (isInDuel) {
     if (deckBtn) deckBtn.style.display = 'none';

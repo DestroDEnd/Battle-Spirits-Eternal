@@ -478,7 +478,7 @@
       }
     }
 
-    spirit.currentBp = (spirit.baseBp || 0) + (spirit.turnBpBoost || 0);
+    spirit.currentBp = (spirit.baseBp || 0) + (spirit.turnBpBoost || 0) + (spirit.temporaryBpBuff || 0);
     if (spirit.brave && spirit.brave.bpBonus) {
       spirit.currentBp += spirit.brave.bpBonus;
     }
@@ -1388,6 +1388,7 @@
 
     renderDuelTable();
   }
+  const executeUltimateTrigger = triggerUTrigger;
 const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY ARMOR', 'DAMAGE_CAP', 'GRANT_SYMBOL', 'HAND_DISCARD_DRAW', 'HAND_DISCARD']);
 
   function promptHandDiscardModal(card, side, maxDiscard, nameFilter, upTo, onConfirm) {
@@ -3783,7 +3784,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     el.innerHTML = html;
   }
 
-  function openCardDetailContext(cardName, zone = 'auto') {
+  function openCardDetailContext(cardName, zone = 'auto', cardUid = null) {
     let contextList = null;
     if (zone === 'hand') {
       contextList = (DuelState.player && DuelState.player.hand ? DuelState.player.hand : []).map(c => c.name);
@@ -3811,7 +3812,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       contextList = list;
     }
     if (typeof openCardDetail === 'function') {
-      openCardDetail(cardName, contextList);
+      openCardDetail(cardName, contextList, cardUid);
     }
   }
 
@@ -3893,12 +3894,22 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    let activeBuffsBadge = '';
+    if (hasClash(spirit)) {
+      activeBuffsBadge += `<div class="spirit-clash-badge" title="[CLASH] forces opposing ready defense to block!">⚔️ CLASH</div>`;
+    }
+    const totalBuff = (spirit.turnBpBoost || 0) + (spirit.temporaryBpBuff || 0);
+    if (totalBuff > 0) {
+      activeBuffsBadge += `<div class="spirit-bpbuff-badge" title="Active BP Boost">+${totalBuff} BP</div>`;
+    }
+
     return `
       <div class="${classes}" id="spirit_${spirit.uid}" ${dragAttrs} onclick="BattleArena.handleSpiritClick('${spirit.uid}', '${side}')">
         ${dragHandleHtml}
         ${braveFieldBadge}
+        ${activeBuffsBadge}
         ${hasSC ? `<div class="spirit-soul-core-badge" title="Soul Core is placed on this Spirit!">${getHexCoreSvg('soul', 13)} SOUL CORE</div>` : ''}
-        <button class="fsc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeSpName}', 'field')" title="Inspect Card Details">🔍</button>
+        <button class="fsc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeSpName}', 'field', '${spirit.uid}')" title="Inspect Card Details">🔍</button>
         <div class="fsc-header-row">
           <span class="fsc-level-tag">LV${spirit.currentLevel}</span>
           <span class="fsc-bp-tag">${spirit.currentBp} BP</span>
@@ -7934,6 +7945,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function hasCantBeBlocked(spirit) {
     if (!spirit) return false;
     if (spirit.cantBeBlocked) return true;
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /unblockable|cant be blocked|cannot be blocked/i.test(k))) return true;
+    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
+      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
+      return /unblockable|cant be blocked|cannot be blocked/i.test(txt);
+    })) return true;
     if (!spirit.effect) return false;
     return /this spirit can't be blocked|this spirit cannot be blocked|ブロックされない/i.test(spirit.effect);
   }
@@ -8168,7 +8184,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return card.summary || (card.effect ? card.effect.substring(0, 50) + '...' : 'Flash Timing');
   }
 
-  function isSingleTargetBpBuff(card, castMode = null) {
+  function isSingleTargetSpell(card, castMode = null) {
     if (!card) return false;
     const name = card.name || '';
     if (name.includes('Defensive Aura')) return false; // Defensive Aura affects all blocking spirits
@@ -8178,13 +8194,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const textToCheck = extractMagicTimingBlock(card.effect || '', phase, 'hand', castMode);
     const eff = (textToCheck || card.effect || '').toLowerCase();
     
-    const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(eff) || /bp\s*(?:\+|plus\s*)\d+/i.test(eff);
-    if (!hasBpBoost) return false;
+    // Exclude team-wide effects
     if (eff.includes('all your spirits') || eff.includes('all spirits') || eff.includes('all your blocking') || eff.includes('すべてのスピリット') || eff.includes('全スピリット')) {
       return false;
     }
-    return true;
+
+    const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(eff) || /bp\s*(?:\+|plus\s*)\d+/i.test(eff);
+    if (hasBpBoost) return true;
+
+    // Grants keyword / ability: e.g. "give a Spirit you control", "give 1 of your Spirits"
+    const givesAbility = /(?:give|grant)\s+(?:a|one|1 of your|an allied|your)\s+(?:spirit|ultimate)(?: you control)?/i.test(eff);
+    if (givesAbility) return true;
+
+    return false;
   }
+  const isSingleTargetBpBuff = isSingleTargetSpell;
 
   function getMagicBpBoostAmount(card) {
     if (!card || !card.effect) return 2000;
@@ -8517,8 +8541,27 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     } else {
       const bpAmount = getMagicBpBoostAmount(card);
+      const phase = (DuelState && DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+      const textToCheck = extractMagicTimingBlock(card.effect || '', phase, 'hand', castMode);
+      const eff = (textToCheck || card.effect || '').toLowerCase();
+      const givesClash = /clash|confront|激突/i.test(eff);
+      const hasBp = /(?:\+|plus\s*)\d+\s*bp/i.test(eff) || /bp\s*(?:\+|plus\s*)\d+/i.test(eff);
+
+      let targetPrompt = `Select which allied Spirit receives effects from <strong>${card.name}</strong>:`;
+      let btnLabel = `🎯 Target Spirit`;
+      if (givesClash && hasBp) {
+        targetPrompt = `Select which allied Spirit receives <strong>+${bpAmount} BP and [CLASH]</strong> this turn:`;
+        btnLabel = `🎯 Target (+${bpAmount} BP & Clash)`;
+      } else if (givesClash) {
+        targetPrompt = `Select which allied Spirit receives <strong>[CLASH]</strong> this turn (forces opponent to block if able):`;
+        btnLabel = `⚔️ Grant [CLASH]`;
+      } else if (hasBp) {
+        targetPrompt = `Select which allied Spirit receives <strong>+${bpAmount} BP</strong> this turn:`;
+        btnLabel = `🎯 Target (+${bpAmount} BP)`;
+      }
+
       if (titleEl) titleEl.textContent = `Target Spirit: ${card.name}`;
-      if (descEl) descEl.innerHTML = `Select which allied Spirit receives <strong>+${bpAmount} BP</strong> this turn:`;
+      if (descEl) descEl.innerHTML = targetPrompt;
       if (choicesEl) {
         choicesEl.innerHTML = DuelState.player.field.map(s => `
           <div class="target-choice-card" onclick="BattleArena.selectTargetSpirit('${s.uid}')">
@@ -8526,7 +8569,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               <span class="tcc-name">${s.name}</span>
               <span class="tcc-meta">Lv${s.currentLevel} • ${s.currentBp} BP • ${s.currentCores} Core${s.currentCores === 1 ? '' : 's'}${s.isExhausted ? ' (Exhausted)' : ' (Ready)'}</span>
             </div>
-            <button class="target-choice-btn">🎯 Target (+${bpAmount} BP)</button>
+            <button class="target-choice-btn">${btnLabel}</button>
           </div>
         `).join('');
       }
@@ -8537,7 +8580,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function selectTargetSpirit(spiritUid) {
     if (!pendingTargetSelection) return;
-    const { card, mode, attackerUid } = pendingTargetSelection;
+    const { card, mode, attackerUid, castMode } = pendingTargetSelection;
     closeTargetModal();
 
     if (mode === 'flash_battle') {
@@ -8547,7 +8590,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     } else if (mode === 'brave_field') {
       braveOntoSpirit(card.uid, spiritUid, 'field');
     } else {
-      castMagic(card.uid, spiritUid);
+      castMagic(card.uid, spiritUid, null, castMode);
     }
   }
 
@@ -8645,6 +8688,51 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+  function grantEffectToUnit(target, grantData, sourceName = '') {
+    if (!target) return;
+    target.grantedKeywords = target.grantedKeywords || [];
+    target.grantedEffects = target.grantedEffects || [];
+
+    if (grantData.keyword) {
+      if (!target.grantedKeywords.includes(grantData.keyword)) {
+        target.grantedKeywords.push(grantData.keyword);
+      }
+      const kwLow = grantData.keyword.toLowerCase();
+      if (kwLow.includes('clash') || kwLow.includes('confront') || kwLow.includes('激突')) {
+        target.hasClash = true;
+      }
+      if (kwLow.includes('curse') || kwLow.includes('jugeki') || kwLow.includes('呪撃')) {
+        target.hasCurse = true;
+      }
+      if (kwLow.includes('crush') || kwLow.includes('funsai') || kwLow.includes('粉砕')) {
+        target.hasCrush = true;
+      }
+    }
+
+    if (grantData.bp) {
+      target.turnBpBoost = (target.turnBpBoost || 0) + grantData.bp;
+      target.temporaryBpBuff = (target.temporaryBpBuff || 0) + grantData.bp;
+      target.currentBp = (target.currentBp || 0) + grantData.bp;
+      target.battleBp = (target.battleBp !== undefined ? target.battleBp + grantData.bp : target.currentBp);
+    }
+
+    if (grantData.cantBeBlocked) {
+      target.cantBeBlocked = true;
+    }
+
+    if (grantData.extraSymbols) {
+      target.extraSymbols = (target.extraSymbols || 0) + grantData.extraSymbols;
+    }
+
+    target.grantedEffects.push({
+      source: sourceName || 'Card Effect',
+      keyword: grantData.keyword || '',
+      bp: grantData.bp || 0,
+      text: grantData.text || '',
+      expires: grantData.expires || 'end_of_turn'
+    });
+  }
+
   function applyMagicEffect(card, side = 'player', contextAttacker = null, targetSpiritUid = null, forcedEffectType = null) {
     let effectDesc = '';
     const isPlayer = side === 'player';
@@ -8685,8 +8773,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
         if (target) {
-          target.currentBp += bpAmount;
-          target.battleBp = (target.battleBp || target.currentBp);
+          grantEffectToUnit(target, {
+            bp: bpAmount,
+            text: `+${bpAmount} BP until end of turn`,
+            expires: 'end_of_turn'
+          }, card.name);
           effectDesc = `Granted +${bpAmount} BP to "${target.name}" (now ${target.currentBp} BP)!`;
         } else {
           effectDesc = `Activated Flash timing, but no allied Spirits or Ultimates were on the field.`;
@@ -8763,19 +8854,100 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
       effectDesc = 'Refreshed an allied spirit and erected a protective shield against life damage!';
     } else {
-      // Dynamic BP Boost or general effect resolution
+      // Dynamic Ability Granting (e.g. Aggressive Rage: give a Spirit you control [Clash])
       const activeLower = activeEffectText.toLowerCase();
+      const givesClash = /give\s+(?:a|one|1 of your|an allied|your)\s+(?:spirit|ultimate)(?: you control)?(?:\s*[:：]\s*["“'‘]?)?.*?\[?(?:clash|confront|激突)\]?/i.test(activeEffectText);
+      const givesCurse = /give\s+(?:a|one|1 of your|an allied|your)\s+(?:spirit|ultimate)(?: you control)?(?:\s*[:：]\s*["“'‘]?)?.*?\[?(?:curse|jugeki|呪撃)\]?/i.test(activeEffectText);
+      const givesCrush = /give\s+(?:a|one|1 of your|an allied|your)\s+(?:spirit|ultimate)(?: you control)?(?:\s*[:：]\s*["“'‘]?)?.*?\[?(?:crush|funsai|粉砕)\]?/i.test(activeEffectText);
+      const givesUnblockable = /give\s+(?:a|one|1 of your|an allied|your)\s+(?:spirit|ultimate)(?: you control)?(?:\s*[:：]\s*["“'‘]?)?.*?(?:cannot be blocked|can't be blocked|unblockable)/i.test(activeEffectText);
+      const hasAbilityGrant = givesClash || givesCurse || givesCrush || givesUnblockable;
+
       const hasBpBoost = /(?:\+|plus\s*)\d+\s*bp/i.test(activeLower) || /bp\s*(?:\+|plus\s*)\d+/i.test(activeLower);
       const isTeamWide = eff.includes('all your spirits') || eff.includes('all spirits') || eff.includes('all your blocking') || eff.includes('すべてのスピリット') || eff.includes('全スピリット');
 
-      if (hasBpBoost) {
+      if (hasAbilityGrant) {
+        if (!myField.length) {
+          effectDesc = `Magic activated, but no allied Spirits were on the field to receive granted abilities.`;
+        } else {
+          let target = null;
+          if (targetSpiritUid) {
+            target = myField.find(s => s.uid === targetSpiritUid);
+          }
+          if (!target) {
+            if (DuelState.combatEvent) {
+              if (DuelState.combatEvent.attacker && myField.some(s => s.uid === DuelState.combatEvent.attacker.uid)) {
+                target = DuelState.combatEvent.attacker;
+              } else if (DuelState.combatEvent.blocker && myField.some(s => s.uid === DuelState.combatEvent.blocker.uid)) {
+                target = DuelState.combatEvent.blocker;
+              }
+            }
+            if (!target && contextAttacker && myField.some(s => s.uid === contextAttacker.uid)) {
+              target = contextAttacker;
+            }
+            if (!target && myField.length > 0) {
+              target = [...myField].sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0))[0];
+            }
+          }
+
+          if (target) {
+            const bpMatch = eff.match(/(?:\+|plus\s*)(\d+)\s*bp/i) || eff.match(/bp\s*(?:\+|plus\s*)(\d+)/i);
+            const bpAmount = bpMatch ? parseInt(bpMatch[1], 10) : 0;
+
+            if (givesClash) {
+              grantEffectToUnit(target, {
+                keyword: 'Clash',
+                bp: bpAmount,
+                text: '[CLASH] (WHEN ATTACKS) The opponent must block if possible.',
+                expires: 'end_of_turn'
+              }, card.name);
+              addLog(`⚔️ **[ABILITY GRANTED: ${card.name}]**: Granted **[CLASH]** to "${target.name}" until end of turn! Opponent must block this Spirit if able.`, 'magic');
+              effectDesc = `Granted [CLASH] to "${target.name}" until end of turn!`;
+            } else if (givesCurse) {
+              grantEffectToUnit(target, {
+                keyword: 'Curse',
+                bp: bpAmount,
+                text: '[CURSE] When destroyed in battle, destroy the opponent\'s battling Spirit.',
+                expires: 'end_of_turn'
+              }, card.name);
+              addLog(`💀 **[ABILITY GRANTED: ${card.name}]**: Granted **[CURSE]** to "${target.name}" until end of turn!`, 'magic');
+              effectDesc = `Granted [CURSE] to "${target.name}" until end of turn!`;
+            } else if (givesCrush) {
+              grantEffectToUnit(target, {
+                keyword: 'Crush',
+                bp: bpAmount,
+                text: '[CRUSH] Discard cards from opponent\'s deck equal to this Spirit\'s level.',
+                expires: 'end_of_turn'
+              }, card.name);
+              addLog(`💥 **[ABILITY GRANTED: ${card.name}]**: Granted **[CRUSH]** to "${target.name}" until end of turn!`, 'magic');
+              effectDesc = `Granted [CRUSH] to "${target.name}" until end of turn!`;
+            } else if (givesUnblockable) {
+              grantEffectToUnit(target, {
+                keyword: 'Unblockable',
+                cantBeBlocked: true,
+                bp: bpAmount,
+                text: 'This Spirit cannot be blocked.',
+                expires: 'end_of_turn'
+              }, card.name);
+              addLog(`⚡ **[ABILITY GRANTED: ${card.name}]**: Granted **[UNBLOCKABLE]** to "${target.name}" until end of turn!`, 'magic');
+              effectDesc = `Granted [UNBLOCKABLE] to "${target.name}" until end of turn!`;
+            }
+
+            if (bpAmount > 0) {
+              effectDesc += ` Also granted +${bpAmount} BP!`;
+            }
+          }
+        }
+      } else if (hasBpBoost) {
         const bpMatch = eff.match(/(?:\+|plus\s*)(\d+)\s*bp/i) || eff.match(/bp\s*(?:\+|plus\s*)(\d+)/i);
         const bpAmount = bpMatch ? parseInt(bpMatch[1], 10) : 2000;
 
         if (isTeamWide) {
           myField.forEach(s => {
-            s.currentBp += bpAmount;
-            s.battleBp = (s.battleBp || s.currentBp) + bpAmount;
+            grantEffectToUnit(s, {
+              bp: bpAmount,
+              text: `+${bpAmount} BP until end of turn`,
+              expires: 'end_of_turn'
+            }, card.name);
           });
           effectDesc = `Granted +${bpAmount} BP to all allied spirits!`;
         } else {
@@ -8808,12 +8980,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             }
 
             if (target) {
-              target.currentBp += bpAmount;
-              if (target.battleBp !== undefined) {
-                target.battleBp += bpAmount;
-              } else {
-                target.battleBp = target.currentBp;
-              }
+              grantEffectToUnit(target, {
+                bp: bpAmount,
+                text: `+${bpAmount} BP until end of turn`,
+                expires: 'end_of_turn'
+              }, card.name);
 
               // Handle Carry Cores extra effect if present
               if (name.includes('Carry Cores') || eff.includes('void to your reserve')) {
@@ -9193,7 +9364,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         checkHandOnUltimateSummon(card, 'player');
       }
     } else {
-      const effectDesc = applyMagicEffect(card, 'player', null, null, pendingSacrifice?.castMode || null);
+      let targetUid = null;
+      if (DuelState.player.field && DuelState.player.field.length === 1) {
+        targetUid = DuelState.player.field[0].uid;
+      }
+      const effectDesc = applyMagicEffect(card, 'player', null, targetUid, pendingSacrifice?.castMode || null);
       addLog(`🔮 **MAGIC CAST**: "${card.name}" activated using field cores! ${effectDesc}`, 'magic');
     }
 
@@ -9233,32 +9408,61 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   // ── BATTLE SPIRITS KEYWORD MECHANICS ENGINE ──
   function hasClash(spirit) {
-    if (!spirit || !spirit.effect) return false;
+    if (!spirit) return false;
+    if (spirit.hasClash) return true;
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /clash|confront|激突/i.test(k))) return true;
+    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
+      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
+      return /clash|confront|激突/i.test(txt);
+    })) return true;
+    if (!spirit.effect) return false;
     const eff = spirit.effect.toLowerCase();
     return eff.includes('clash') || eff.includes('confront') || eff.includes('true-clash') || eff.includes('supreme clash') || eff.includes('ultra clash') || eff.includes('激突') || eff.includes('真・激突');
   }
 
   function hasCurse(spirit) {
-    if (!spirit || !spirit.effect) return false;
+    if (!spirit) return false;
+    if (spirit.hasCurse) return true;
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /curse|jugeki|呪撃/i.test(k))) return true;
+    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
+      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
+      return /curse|jugeki|呪撃/i.test(txt);
+    })) return true;
+    if (!spirit.effect) return false;
     const eff = spirit.effect.toLowerCase();
     return eff.includes('curse') || eff.includes('true-curse') || eff.includes('grudging curse') || eff.includes('jugeki') || eff.includes('呪撃') || eff.includes('真・呪撃');
   }
 
   function hasCrush(spirit) {
-    if (!spirit || !spirit.effect) return false;
+    if (!spirit) return false;
+    if (spirit.hasCrush) return true;
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /crush|funsai|粉砕/i.test(k))) return true;
+    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
+      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
+      return /crush|funsai|粉砕/i.test(txt);
+    })) return true;
+    if (!spirit.effect) return false;
     const eff = spirit.effect.toLowerCase();
     return eff.includes('crush') || eff.includes('great crush') || eff.includes('wave crush') || eff.includes('xv crush') || eff.includes('funsai') || eff.includes('粉砕') || eff.includes('大粉砕');
   }
 
   function hasArmor(spirit, color) {
-    if (!spirit || !spirit.effect) return false;
-    const eff = spirit.effect.toLowerCase();
+    if (!spirit) return false;
     const col = (color || '').toLowerCase();
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && (k.toLowerCase().includes(`armor: ${col}`) || k.toLowerCase().includes('armor: all')))) return true;
+    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
+      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
+      return txt.toLowerCase().includes(`armor: ${col}`) || txt.toLowerCase().includes('armor: all');
+    })) return true;
+    if (!spirit.effect) return false;
+    const eff = spirit.effect.toLowerCase();
     return eff.includes(`armor: ${col}`) || eff.includes(`heavy armor: ${col}`) || eff.includes(`ultra armor: ${col}`) || eff.includes('armor: all') || eff.includes('a.t. field') || eff.includes('ps armor');
   }
 
   function hasHolyLife(spirit) {
-    if (!spirit || !spirit.effect) return false;
+    if (!spirit) return false;
+    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /holy life|heavenly light|聖命|極聖命/i.test(k))) return true;
+    if (!spirit.effect) return false;
     const eff = spirit.effect.toLowerCase();
     return eff.includes('holy life') || eff.includes('ultra holy life') || eff.includes('heavenly light') || eff.includes('divine holy life') || eff.includes('聖命') || eff.includes('極聖命');
   }
@@ -10416,11 +10620,25 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.activeBurstTrigger = null;
     closeBurstPromptModal();
 
-    // Reset all turn and battle BP boosts for all spirits across both fields
+    // Reset all turn and battle BP boosts & temporary granted effects for all spirits across both fields
     const allSpirits = [...(DuelState.player.field || []), ...(DuelState.opponent.field || [])];
     for (const s of allSpirits) {
       s.turnBpBoost = 0;
       s.battleBpBoost = 0;
+      s.temporaryBpBuff = 0;
+      s.grantedKeywords = (s.grantedKeywords || []).filter(k => typeof k === 'object' && k.permanent);
+      s.grantedEffects = (s.grantedEffects || []).filter(e => typeof e === 'object' && e.expires !== 'end_of_turn');
+      s.hasClash = false;
+      s.hasCurse = false;
+      s.hasCrush = false;
+      s.cantBeBlocked = false;
+      if (s.effect) {
+        const effLow = s.effect.toLowerCase();
+        if (effLow.includes('clash') || effLow.includes('激突')) s.hasClash = true;
+        if (effLow.includes('curse') || effLow.includes('呪撃')) s.hasCurse = true;
+        if (effLow.includes('crush') || effLow.includes('粉砕')) s.hasCrush = true;
+        if (effLow.includes("can't be blocked") || effLow.includes("cannot be blocked") || effLow.includes("ブロックされない")) s.cantBeBlocked = true;
+      }
       delete s.battleBp;
       recalculateSpiritBp(s);
     }
@@ -12478,6 +12696,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     inspectOpponentBurst,
     activateBurst,
     renderBurstZones,
+    grantEffectToUnit,
     hasClash,
     hasCurse,
     hasCrush,
