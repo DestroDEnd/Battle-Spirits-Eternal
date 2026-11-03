@@ -732,3 +732,98 @@ test('Phase 11 - Contract Advent onto Soul State restores card to field and Over
   BattleArena.recalculateSpiritBp(DuelState.player.field[0]);
   assert.equal(DuelState.player.field[0].currentBp, 15000, 'Base 10000 BP + 5000 OC BP = 15000 BP');
 });
+
+test('Phase 11 - The Ruler of FourDemonLords Lord-Javad prompts hand discard before drawing 2 and drains 2 cores on Evil God discard', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const lordJavad = {
+    uid: 'ult_lord_javad_01',
+    name: 'The Ruler of FourDemonLords Lord-Javad',
+    type: 'Ultimate',
+    cost: 6,
+    family: 'Hell Contract/Evil God',
+    currentLevel: 3,
+    currentCores: 1,
+    currentBp: 10000,
+    effect: '[LV3][LV4] (When Summoned/Advents)\nBy discarding a card from your Hand, draw two cards. When this effect discards any "Evil God" family card, send two cores from the opposing Field to the Reserve.'
+  };
+
+  const greyTude = {
+    uid: 'card_grey_tude_01',
+    name: 'The HellsoilCount Grey-Tude',
+    type: 'Ultimate',
+    cost: 1,
+    family: 'Evil God',
+    effect: ''
+  };
+
+  const deckCard1 = { uid: 'deck_1', name: 'Deck Card 1', type: 'Spirit', cost: 2 };
+  const deckCard2 = { uid: 'deck_2', name: 'Deck Card 2', type: 'Magic', cost: 3 };
+
+  const oppSpirit = {
+    uid: 'opp_sp_01',
+    name: 'Opposing Minion',
+    type: 'Spirit',
+    cost: 3,
+    currentCores: 2,
+    currentBp: 3000
+  };
+
+  DuelState.player.field = [lordJavad];
+  DuelState.player.hand = [greyTude];
+  DuelState.player.deck = [deckCard1, deckCard2];
+  DuelState.player.trashCards = [];
+
+  DuelState.opponent.field = [oppSpirit];
+  DuelState.opponent.reserve = 0;
+  DuelState.opponent.trashCards = [];
+
+  // Execute When Summoned effect
+  BattleArena.executeWhenSummonedEffects(lordJavad, 'player');
+
+  // Verify hand discard: Grey-Tude was discarded from Hand to Trash
+  assert.equal(DuelState.player.trashCards.some(c => c.uid === greyTude.uid), true, 'Grey-Tude is in Trash');
+  assert.equal(DuelState.player.hand.some(c => c.uid === greyTude.uid), false, 'Grey-Tude removed from Hand');
+
+  // Verify draw 2 cards: deckCard1 and deckCard2 added to hand
+  assert.equal(DuelState.player.hand.length, 2, 'Player drew 2 cards');
+  assert.equal(DuelState.player.hand[0].name, 'Deck Card 1');
+  assert.equal(DuelState.player.hand[1].name, 'Deck Card 2');
+  assert.equal(DuelState.player.deck.length, 0, 'Deck has 0 cards remaining');
+
+  // Verify Evil God synergy: Opposing spirit had 2 cores drained to Reserve and was depleted to Trash!
+  assert.equal(DuelState.opponent.reserve, 2, '2 cores sent to opponent Reserve');
+  assert.equal(DuelState.opponent.field.length, 0, 'Opposing spirit depleted from field');
+  assert.equal(DuelState.opponent.trashCards.some(c => c.uid === oppSpirit.uid), true, 'Opposing spirit sent to Trash');
+});
+
+test('Phase 11 - The Ruler of FourDemonLords Lord-Javad does not draw if hand is empty', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const lordJavad = {
+    uid: 'ult_lord_javad_02',
+    name: 'The Ruler of FourDemonLords Lord-Javad',
+    type: 'Ultimate',
+    cost: 6,
+    family: 'Hell Contract/Evil God',
+    currentLevel: 3,
+    currentCores: 1,
+    currentBp: 10000,
+    effect: '[LV3][LV4] (When Summoned/Advents)\nBy discarding a card from your Hand, draw two cards. When this effect discards any "Evil God" family card, send two cores from the opposing Field to the Reserve.'
+  };
+
+  const deckCard1 = { uid: 'deck_1', name: 'Deck Card 1', type: 'Spirit', cost: 2 };
+  const deckCard2 = { uid: 'deck_2', name: 'Deck Card 2', type: 'Magic', cost: 3 };
+
+  DuelState.player.field = [lordJavad];
+  DuelState.player.hand = []; // Empty hand!
+  DuelState.player.deck = [deckCard1, deckCard2];
+  DuelState.player.trash = [];
+
+  // Execute When Summoned effect
+  BattleArena.executeWhenSummonedEffects(lordJavad, 'player');
+
+  // Verify no draw occurs because cost condition could not be fulfilled
+  assert.equal(DuelState.player.hand.length, 0, 'Player hand remains empty');
+  assert.equal(DuelState.player.deck.length, 2, 'Deck remains untouched at 2 cards');
+});

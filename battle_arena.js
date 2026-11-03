@@ -1897,6 +1897,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return true;
     }
 
+    if (costType === 'DISCARD_HAND' || (rawCond.includes('discard') && rawCond.includes('hand'))) {
+      const handCards = (friendlyState.hand || []).filter(c => c.uid !== card.uid);
+      if (handCards.length === 0) {
+        addLog(`ℹ️ **[${card.name}]**: Cost condition ("By ${byCond.condition_raw}") could not be fulfilled — Hand is empty.`, 'step');
+        return false;
+      }
+      return true;
+    }
+
     return true;
   }
 
@@ -2120,16 +2129,48 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           if (targetSide === 'player') renderPlayerHand();
         });
       } else if (actType === 'DRAW_CARDS') {
+        const byCond = act.canva_rules && act.canva_rules.by_condition;
+        const isCostGatedDiscard = byCond && (byCond.cost_type === 'DISCARD_HAND' || /discard.*hand/i.test(byCond.condition_raw || ''));
         const count = act.count || 1;
-        for (let i = 0; i < count; i++) {
-          const drawn = friendlyState.deck.shift();
-          if (drawn) {
-            friendlyState.hand.push(drawn);
-            if (side === 'player') {
-              AudioFX.playTone(390, 'sine', 0.15, 0.08);
-              addLog(`🎴 **[${card.name}]**: Channeled ability! Drew "${drawn.name}" into your hand.`, 'magic');
-              renderPlayerHand();
-              renderDuelTable();
+        if (isCostGatedDiscard) {
+          const reqDiscard = 1;
+          promptHandDiscardModal(card, side, reqDiscard, null, true, (discardedCards) => {
+            if (!discardedCards || !discardedCards.length) {
+              addLog(`ℹ️ **[${card.name}]**: Chose not to discard from Hand; draw effect cancelled.`, 'step');
+              return;
+            }
+            for (const dc of discardedCards) {
+              const hIdx = friendlyState.hand.findIndex(h => h.uid === dc.uid);
+              if (hIdx !== -1) {
+                const removed = friendlyState.hand.splice(hIdx, 1)[0];
+                sendToTrash(removed, side, `Discarded from Hand by ${card.name}`);
+              }
+            }
+            addLog(`🗑️ **[${card.name}]**: Discarded ${discardedCards.length} card(s) from Hand to pay draw cost!`, 'step');
+            for (let i = 0; i < count; i++) {
+              const drawn = friendlyState.deck.shift();
+              if (drawn) {
+                friendlyState.hand.push(drawn);
+                if (side === 'player') {
+                  AudioFX.playTone(390, 'sine', 0.15, 0.08);
+                  addLog(`🎴 **[${card.name}]**: Drew "${drawn.name}" into your hand!`, 'magic');
+                }
+              }
+            }
+            renderPlayerHand();
+            renderDuelTable();
+          });
+        } else {
+          for (let i = 0; i < count; i++) {
+            const drawn = friendlyState.deck.shift();
+            if (drawn) {
+              friendlyState.hand.push(drawn);
+              if (side === 'player') {
+                AudioFX.playTone(390, 'sine', 0.15, 0.08);
+                addLog(`🎴 **[${card.name}]**: Channeled ability! Drew "${drawn.name}" into your hand.`, 'magic');
+                renderPlayerHand();
+                renderDuelTable();
+              }
             }
           }
         }
@@ -6717,7 +6758,116 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return false;
   }
 
+  // ── THE RULER OF FOURDEMONLORDS LORD-JAVAD (SD65-003): [LV3][LV4] (When Summoned/Advents) ──
+  // "By discarding a card from your Hand, draw two cards. When this effect discards any 'Evil God' family card, send two cores from the opposing Field to the Reserve."
+  function executeLordJavadSummonAdvent(spirit, side = 'player') {
+    if (!spirit || (spirit.currentLevel || 1) < 3) return;
+    markLegacyHandled(spirit, 'by discarding a card from your hand');
+    markLegacyHandled(spirit, 'draw two cards');
+    if (!spirit.__legacyHandled) {
+      spirit.__legacyHandled = { types: new Set(), ts: Date.now() };
+    }
+    spirit.__legacyHandled.types.add('DRAW_CARDS');
+    spirit.__legacyHandled.types.add('CORE_DRAIN');
+    spirit.__legacyHandled.types.add('HAND_DISCARD');
+    spirit.__legacyHandled.types.add('HAND_DISCARD_DRAW');
+
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    const enemySide = side === 'player' ? 'opponent' : 'player';
+    const enemyState = side === 'player' ? DuelState.opponent : DuelState.player;
+    const hand = friendlyState.hand || [];
+
+    if (!hand.length) {
+      addLog(`ℹ️ **[${spirit.name}]**: No cards in Hand to discard.`, 'info');
+      return;
+    }
+
+    promptHandDiscardModal(spirit, side, 1, null, true, (discardedCards) => {
+      if (!discardedCards || !discardedCards.length) {
+        addLog(`ℹ️ **[${spirit.name}]**: Chose not to discard from Hand; draw ability skipped.`, 'info');
+        return;
+      }
+      const discardedCard = discardedCards[0];
+      const hIdx = friendlyState.hand.findIndex(c => c.uid === discardedCard.uid);
+      if (hIdx !== -1) {
+        friendlyState.hand.splice(hIdx, 1);
+      }
+      sendToTrash(discardedCard, side, `Discarded by ${spirit.name}`);
+      addLog(`🗑️ **[${spirit.name}]**: Discarded "${discardedCard.name}" from Hand!`, 'step');
+
+      // Draw two cards
+      let drawCount = 0;
+      for (let i = 0; i < 2; i++) {
+        const drawn = friendlyState.deck.shift();
+        if (drawn) {
+          friendlyState.hand.push(drawn);
+          drawCount++;
+          if (side === 'player') {
+            AudioFX.playTone(390, 'sine', 0.15, 0.08);
+            addLog(`🎴 **[${spirit.name}]**: Drew "${drawn.name}" into your hand!`, 'magic');
+          }
+        }
+      }
+      if (side !== 'player' && drawCount > 0) {
+        addLog(`🎴 **[${spirit.name}]**: Drew ${drawCount} card(s) from deck!`, 'magic');
+      }
+
+      // Check Evil God synergy:
+      // "When this effect discards any 'Evil God' family card, send two cores from the opposing Field to the Reserve."
+      const famStr = ((discardedCard.family || '') + ' ' + (Array.isArray(discardedCard.families) ? discardedCard.families.join(' ') : '')).toLowerCase();
+      const isEvilGod = famStr.includes('evil god') || famStr.includes('邪神');
+      if (isEvilGod) {
+        addLog(`✨ **[${spirit.name}]**: Discarded "Evil God" card "${discardedCard.name}"! Sending 2 cores from opposing Field to Reserve!`, 'magic');
+        let coresNeeded = 2;
+        const oppSpirits = (enemyState.field || []).filter(s => (s.currentCores || 0) > 0);
+        oppSpirits.sort((a, b) => (a.currentCores || 0) - (b.currentCores || 0));
+        for (const sp of oppSpirits) {
+          if (coresNeeded <= 0) break;
+          const take = Math.min(coresNeeded, sp.currentCores);
+          sp.currentCores -= take;
+          enemyState.reserve = (enemyState.reserve || 0) + take;
+          coresNeeded -= take;
+          recalculateSpiritBp(sp);
+          addLog(`🔮 **[${spirit.name}]**: Sent ${take} Core from opposing "${sp.name}" to Reserve!`, 'magic');
+          if (sp.currentCores <= 0) {
+            const sIdx = enemyState.field.findIndex(s => s.uid === sp.uid);
+            if (sIdx !== -1) {
+              const depleted = enemyState.field.splice(sIdx, 1)[0];
+              handleDestroyedSpiritCores(depleted, enemySide);
+              sendToTrash(depleted, enemySide, `Depleted of cores by ${spirit.name}`);
+              AudioFX.destroy();
+              addLog(`💀 **DEPLETED**: Opposing "${depleted.name}" depleted of cores and sent to Trash!`, 'damage');
+            }
+          }
+        }
+        if (coresNeeded > 0 && enemyState.nexus && enemyState.nexus.length > 0) {
+          for (const nex of enemyState.nexus) {
+            if (coresNeeded <= 0) break;
+            if ((nex.currentCores || 0) > 0) {
+              const take = Math.min(coresNeeded, nex.currentCores);
+              nex.currentCores -= take;
+              enemyState.reserve = (enemyState.reserve || 0) + take;
+              coresNeeded -= take;
+              addLog(`🔮 **[${spirit.name}]**: Sent ${take} Core from opposing Nexus "${nex.name}" to Reserve!`, 'magic');
+            }
+          }
+        }
+      }
+
+      renderDuelTable();
+      if (side === 'player') renderPlayerHand();
+    });
+  }
+
   function executeWhenSummonedEffects(spirit, side = 'player') {
+    // The Ruler of FourDemonLords Lord-Javad (SD65-003):
+    if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
+      if ((spirit.currentLevel || 1) >= 3) {
+        executeLordJavadSummonAdvent(spirit, side);
+        return;
+      }
+    }
+
     // The Hellwind Searcher Kagerou-Seeker (BS38-CP05) / Soul Core Searcher:
     if (/Kagerou-Seeker/i.test(spirit.name || '') || /If \[Soul Core\] was used to pay the summon cost, reveal three cards from your decktop/i.test(spirit.effect || '')) {
       markLegacyHandled(spirit, 'when_summoned');
@@ -8340,6 +8490,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeWhenAdventsEffects(spirit, side = 'player') {
     if (!spirit || !spirit.effect) return;
+    // The Ruler of FourDemonLords Lord-Javad (SD65-003):
+    if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
+      if ((spirit.currentLevel || 1) >= 3) {
+        executeLordJavadSummonAdvent(spirit, side);
+        return;
+      }
+    }
     const effLower = spirit.effect.toLowerCase();
     const isPlayer = side === 'player';
     const myTrash = (isPlayer ? (DuelState.player.trashCards || DuelState.player.trash) : (DuelState.opponent.trashCards || DuelState.opponent.trash)) || [];
@@ -13376,6 +13533,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     executeMulligan: performMulligan,
     confirmOpeningHand: keepStartingHand,
     promptCumulativeCostTargetModal,
+    promptHandDiscardModal,
+    executeLordJavadSummonAdvent,
     endTurn,
     renderPlayerHand,
     loadCardEffectsDB,
