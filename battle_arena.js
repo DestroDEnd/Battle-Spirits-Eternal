@@ -672,6 +672,12 @@
         } catch (e) {}
         if (!data) {
           try {
+            const sRes = await fetch('/ai_weights.json');
+            if (sRes.ok) data = await sRes.json();
+          } catch (e) {}
+        }
+        if (!data) {
+          try {
             const res = await fetch('/api/ai-weights');
             if (res.ok) {
               const text = await res.text();
@@ -706,6 +712,12 @@
           const sRes = await fetch('./card_effects_db.json');
           if (sRes.ok) data = await sRes.json();
         } catch (e) {}
+        if (!data) {
+          try {
+            const sRes = await fetch('/card_effects_db.json');
+            if (sRes.ok) data = await sRes.json();
+          } catch (e) {}
+        }
         if (!data) {
           try {
             const res = await fetch(window.location.origin + '/api/card-effects-db');
@@ -2381,6 +2393,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           const sRes = await fetch('./standard_decks_data.json');
           if (sRes.ok) stdData = await sRes.json();
         } catch (e) {}
+        if (!stdData) {
+          try {
+            const sRes = await fetch('/standard_decks_data.json');
+            if (sRes.ok) stdData = await sRes.json();
+          } catch (e) {}
+        }
         if (!stdData) {
           try {
             const res = await fetch('/api/standard-decks');

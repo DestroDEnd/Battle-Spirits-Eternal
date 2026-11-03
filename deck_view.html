@@ -731,7 +731,7 @@
       const type = info.type || 'Spirit';
 
       return `
-        <div class="deckview-card-item" onclick="openCardInspector('${name.replace(/'/g, "\\'")}')" title="Click to inspect ${name}">
+        <div class="deckview-card-item" data-card-name="${encodeURIComponent(name)}" onclick="openCardInspector(decodeURIComponent(this.dataset.cardName))" title="Click to inspect ${name}">
           <div class="deckview-art-wrap">
             <span class="deckview-cost-badge">Cost ${cost}</span>
             <span class="deckview-count-badge">${count}x</span>
@@ -848,10 +848,12 @@
     document.getElementById('modalEffect').innerHTML = card.effect ? card.effect.replace(/\n/g, '<br>') : 'Vanilla Spirit.';
     document.getElementById('modalLevels').innerHTML = card.levels ? card.levels.replace(/\n/g, '<br>') : 'Level 1: 1 core';
     document.getElementById('modalFlavor').textContent = card.flavor || '';
+    document.getElementById('cardModal').classList.add('open');
     document.getElementById('cardModal').classList.add('active');
   }
 
   function closeModal() {
+    document.getElementById('cardModal').classList.remove('open');
     document.getElementById('cardModal').classList.remove('active');
   }
 

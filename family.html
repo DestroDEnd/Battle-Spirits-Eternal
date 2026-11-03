@@ -220,6 +220,14 @@ async function loadFamilyDirectory() {
       }
     } catch (e) {}
 
+    // 1b. Try absolute root filters_data.json if on clean subpaths
+    if (!data) {
+      try {
+        const res = await fetch('/filters_data.json');
+        if (res.ok) data = await res.json();
+      } catch (e) {}
+    }
+
     // 2. Fallback to API if running with local server
     if (!data) {
       try {

@@ -56,6 +56,17 @@ const DeckManager = {
     }
   },
 
+  getCardsCount(cards) {
+    if (!cards) return 0;
+    if (Array.isArray(cards)) {
+      return cards.reduce((a, b) => a + (typeof b === 'object' && b ? (b.count || 1) : 1), 0);
+    }
+    if (typeof cards === 'object') {
+      return Object.values(cards).reduce((a, b) => a + (typeof b === 'number' ? b : (b?.count || 1)), 0);
+    }
+    return 0;
+  },
+
   getAllData() {
     let data = null;
     try {
@@ -89,7 +100,7 @@ const DeckManager = {
         if (d.isStandard) {
           const colorKey = (d.standardKey || 'red').toLowerCase();
           const canon = this.CANONICAL_STANDARD_DECKS[colorKey];
-          const count = Object.values(d.cards || {}).reduce((a, b) => a + b, 0);
+          const count = this.getCardsCount(d?.cards);
           if (canon && count === 0) {
             d.cards = { ...canon.cards };
             d.updatedAt = Date.now();
@@ -127,7 +138,7 @@ const DeckManager = {
       legacyCards = JSON.parse(localStorage.getItem('bs_deck') || localStorage.getItem('battle_spirits_deck_v1') || '{}');
     } catch (e) {}
 
-    const legacyTotal = Object.values(legacyCards).reduce((a, b) => a + b, 0);
+    const legacyTotal = this.getCardsCount(legacyCards);
     const decks = [];
 
     // If user already had a custom deck with cards, preserve it
@@ -206,7 +217,7 @@ const DeckManager = {
     if (deck && deck.isStandard) {
       const colorKey = (deck.standardKey || 'red').toLowerCase();
       const canon = this.CANONICAL_STANDARD_DECKS[colorKey];
-      const count = Object.values(deck.cards || {}).reduce((a, b) => a + b, 0);
+      const count = this.getCardsCount(deck?.cards);
       if (canon && count === 0) {
         deck.cards = { ...canon.cards };
         deck.updatedAt = Date.now();
@@ -227,7 +238,7 @@ const DeckManager = {
   getBattleDeckId() {
     const saved = localStorage.getItem(this.BATTLE_KEY);
     const data = this.getAllData();
-    const countCards = (d) => Object.values(d?.cards || {}).reduce((a, b) => a + b, 0);
+    const countCards = (d) => this.getCardsCount(d?.cards);
 
     if (saved) {
       const d = data.decks.find(x => x.id === saved);
@@ -251,7 +262,7 @@ const DeckManager = {
     const data = this.getAllData();
     const deck = data.decks.find(d => d.id === id);
     if (!deck) return false;
-    const count = Object.values(deck.cards || {}).reduce((a, b) => a + b, 0);
+    const count = this.getCardsCount(deck?.cards);
     if (count < 40) {
       console.warn(`Cannot set deck "${deck.name}" as battle deck: only has ${count}/40 cards.`);
       return false;
@@ -341,7 +352,7 @@ const DeckManager = {
     // Check if already registered
     const existing = data.decks.find(d => d.isStandard && d.standardKey === colorKey);
     if (existing) {
-      const existingCount = Object.values(existing.cards || {}).reduce((a, b) => a + b, 0);
+      const existingCount = this.getCardsCount(existing?.cards);
       if (existingCount === 0 && canon) {
         existing.cards = { ...canon.cards };
         existing.updatedAt = Date.now();
@@ -797,7 +808,7 @@ const DeckQuickView = {
     const battleId = DeckManager.getBattleDeckId();
 
     selectEl.innerHTML = decks.map(d => {
-      const count = Object.values(d.cards || {}).reduce((a, b) => a + b, 0);
+      const count = DeckManager.getCardsCount(d?.cards);
       const isBattle = d.id === battleId;
       const isSelected = d.id === activeId;
       const battleIcon = isBattle ? '⚔️ ' : '';

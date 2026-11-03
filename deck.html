@@ -891,7 +891,7 @@ function renderVisualCardsGrid() {
           <span class="tile-qty-pill">${count}x</span>
         </div>
         <div class="tile-img-box">
-          <img class="tile-img" src="${artUrl}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" data-art="${artUrl}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith(\'http\')){this.dataset.retried=\'1\'; this.src=\'/api/proxy-image?url=\' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=FALLBACK_CARD_ART; }" />
+          <img class="tile-img" src="${artUrl}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" data-art="${artUrl}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=FALLBACK_CARD_ART; }" />
         </div>
         <div class="tile-meta-bar">
           <span class="tile-code-tag">${esc(cardNum)}</span>
