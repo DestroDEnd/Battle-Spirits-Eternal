@@ -11,7 +11,13 @@ function setupTestEnvironment() {
     getElementById: () => null,
     querySelector: () => null,
     querySelectorAll: () => [],
-    createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, innerHTML: '' }),
+    createElement: () => ({
+      style: {},
+      classList: { add() {}, remove() {} },
+      innerHTML: '',
+      querySelectorAll: () => [],
+      querySelector: () => null
+    }),
     addEventListener: () => {},
     removeEventListener: () => {},
     body: { appendChild() {} }
@@ -391,4 +397,146 @@ test('Phase 11 - Golden-Taurus-Axe braved spirit burns opposing Life on BP compa
   // Opponent Life was 5, now burns 2 Life to Reserve -> Life = 3, Reserve = 2
   assert.equal(DuelState.opponent.life, 3, 'Opponent life reduced by 2 (1 per symbol)');
   assert.equal(DuelState.opponent.reserve, 2, 'Life sent to opponent Reserve');
+});
+
+test('Phase 11 - Soul Core paid for summon cost goes to Trash and is NOT on spirit', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const kagerou = {
+    uid: 'kagerou_1',
+    name: 'The Hellwind Searcher Kagerou-Seeker',
+    type: 'Ultimate',
+    cost: 3,
+    levels: {
+      LV3: { level: 3, cost: 1, bp: 5000 },
+      LV4: { level: 4, cost: 3, bp: 7000 }
+    },
+    effect: '[Summon Condition: Your Life is at two or more]\n\n[LV3][LV4] (When Summoned)\nIf [Soul Core] was used to pay the summon cost, reveal three cards from your decktop. Among them, add an Ultimate card to the Hand. Discard any remaining cards.'
+  };
+
+  DuelState.activePlayer = 'player';
+  DuelState.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+  DuelState.phaseIndex = 4; // MAIN
+  DuelState.player.reserve = 5;
+  DuelState.player.trash = 0;
+  DuelState.player.soulCoreLocation = 'reserve';
+  DuelState.player.soulCoreSpiritUid = null;
+  DuelState.player.hand = [kagerou];
+  DuelState.player.field = [];
+  DuelState.player.life = 5; // Meets summon condition (Life >= 2)
+
+  // Summon with useSoulCore = true (Paid summon cost with Soul Core)
+  BattleArena.summonCard(kagerou.uid, 1, true);
+
+  // Field spirit must exist
+  assert.equal(DuelState.player.field.length, 1);
+  const summoned = DuelState.player.field[0];
+  assert.equal(summoned.name, 'The Hellwind Searcher Kagerou-Seeker');
+
+  // CRITICAL RULE VERIFICATION:
+  // Soul Core was used as COST PAYMENT -> it MUST be in Trash, NOT on the Spirit!
+  assert.equal(summoned.hasSoulCore, false, 'Summoned spirit must NOT have Soul Core on it when Soul Core was used to pay summon cost');
+  assert.equal(DuelState.player.soulCoreLocation, 'trash', 'Soul Core location must be in Trash');
+  assert.equal(DuelState.player.soulCoreSpiritUid, null, 'No spirit uid associated with Soul Core in Trash');
+  assert.equal(summoned.paidWithSoulCore, true, 'Card records paidWithSoulCore = true');
+  assert.equal(summoned.usedSoulCore, true, 'Card records usedSoulCore = true');
+});
+
+test('Phase 11 - Kagerou-Seeker interactive decktop reveal modal adds Ultimate and discards remainder', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const kagerou = {
+    uid: 'kagerou_scry_test',
+    name: 'The Hellwind Searcher Kagerou-Seeker',
+    type: 'Ultimate',
+    cost: 3,
+    usedSoulCore: true,
+    paidWithSoulCore: true,
+    effect: '[LV3][LV4] (When Summoned)\nIf [Soul Core] was used to pay the summon cost, reveal three cards from your decktop. Among them, add an Ultimate card to the Hand. Discard any remaining cards.'
+  };
+
+  const decktop1 = { uid: 'd1', name: 'The Four Towers of Limbo', type: 'Nexus', cost: 3 };
+  const decktop2 = { uid: 'd2', name: 'Birgoyle', type: 'Ultimate', cost: 3 };
+  const decktop3 = { uid: 'd3', name: 'The Hellwind FourDemonLord Van-Tous', type: 'Ultimate', cost: 7 };
+
+  DuelState.player.deck = [decktop1, decktop2, decktop3];
+  DuelState.player.hand = [];
+  DuelState.player.trashCards = [];
+
+  // Trigger when summoned effect
+  BattleArena.executeWhenSummonedEffects(kagerou, 'player');
+
+  // Verify modal scry picked Birgoyle (first Ultimate found by headless auto-selector)
+  assert.equal(DuelState.player.hand.length, 1, 'Exactly 1 Ultimate added to hand');
+  assert.equal(DuelState.player.hand[0].name, 'Birgoyle', 'Birgoyle added to hand');
+
+  // The remaining 2 cards (The Four Towers of Limbo and Van-Tous) must be discarded to Trash
+  assert.equal(DuelState.player.deck.length, 0, 'All 3 cards were scried from deck');
+  assert.equal(DuelState.player.trashCards.length, 2, 'Remaining 2 cards sent to Trash');
+  assert.ok(DuelState.player.trashCards.some(c => c.name === 'The Four Towers of Limbo'));
+  assert.ok(DuelState.player.trashCards.some(c => c.name === 'The Hellwind FourDemonLord Van-Tous'));
+});
+
+test('Phase 11 - Hard Once Per Turn: Same Name (The Four Towers of Limbo)', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const limboNexus1 = {
+    uid: 'nexus_limbo_1',
+    name: 'The Four Towers of Limbo',
+    type: 'Nexus',
+    cost: 3,
+    currentLevel: 1,
+    currentCores: 0
+  };
+
+  const limboNexus2 = {
+    uid: 'nexus_limbo_2',
+    name: 'The Four Towers of Limbo',
+    type: 'Nexus',
+    cost: 3,
+    currentLevel: 1,
+    currentCores: 0
+  };
+
+  const evilGodUlt1 = {
+    uid: 'ult_1',
+    name: 'Evil God Ultimate A',
+    type: 'Ultimate',
+    family: 'Evil God',
+    families: ['Evil God']
+  };
+
+  const evilGodUlt2 = {
+    uid: 'ult_2',
+    name: 'Evil God Ultimate B',
+    type: 'Ultimate',
+    family: 'Evil God',
+    families: ['Evil God']
+  };
+
+  DuelState.player.nexus = [limboNexus1, limboNexus2];
+  DuelState.player.counters = 0;
+  DuelState.player.deck = [
+    { name: 'Card 1', type: 'Spirit' },
+    { name: 'Card 2', type: 'Spirit' }
+  ];
+  DuelState.player.hand = [];
+
+  // Attack 1 with Evil God Ultimate 1
+  BattleArena.executeWhenAttacksEffects(evilGodUlt1, 'player');
+
+  // Count should be +1, and choice effect (draw card) executed once
+  assert.equal(DuelState.player.counters, 1, 'Counter increased to 1');
+  assert.equal(DuelState.player.hand.length, 1, 'Choice effect drew 1 card');
+
+  // Attack 2 with Evil God Ultimate 2 in the same turn
+  BattleArena.executeWhenAttacksEffects(evilGodUlt2, 'player');
+
+  // Counter increases again (+1 -> 2), but (Once per Turn: Same Name) PREVENTS drawing another card!
+  assert.equal(DuelState.player.counters, 2, 'Counter increased to 2 on second attack');
+  assert.equal(DuelState.player.hand.length, 1, 'Choice effect DID NOT fire a second time due to (Once per Turn: Same Name)');
+
+  // End turn resets Hard Once Per Turn
+  BattleArena.endTurn();
+  assert.equal(BattleArena.hasUsedSameNameOncePerTurn('The Four Towers of Limbo', 'AttackStepChoice'), false, 'HOPT reset on endTurn');
 });

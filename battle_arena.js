@@ -988,7 +988,22 @@
         </div>
       `;
 
-      box.querySelectorAll('.cct-item').forEach(el => {
+      const items = box.querySelectorAll('.cct-item');
+      if (!items || items.length === 0) {
+        cleanup();
+        const chosen = [];
+        let cur = 0;
+        for (const c of candidates) {
+          if (cur + c.cost <= budgetCost) {
+            chosen.push(c);
+            cur += c.cost;
+          }
+        }
+        if (typeof onConfirm === 'function') onConfirm(chosen);
+        return;
+      }
+
+      items.forEach(el => {
         el.addEventListener('click', () => {
           const uid = el.getAttribute('data-uid');
           const cand = candidates.find(c => c.item.uid === uid);
@@ -1006,16 +1021,22 @@
         });
       });
 
-      box.querySelector('.cct-skip').addEventListener('click', () => {
-        cleanup();
-        if (typeof onConfirm === 'function') onConfirm([]);
-      });
+      const skipBtn = box.querySelector('.cct-skip');
+      if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+          cleanup();
+          if (typeof onConfirm === 'function') onConfirm([]);
+        });
+      }
 
-      box.querySelector('.cct-confirm').addEventListener('click', () => {
-        cleanup();
-        const chosen = candidates.filter(c => selectedUids.has(c.item.uid));
-        if (typeof onConfirm === 'function') onConfirm(chosen);
-      });
+      const confirmBtn = box.querySelector('.cct-confirm');
+      if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+          cleanup();
+          const chosen = candidates.filter(c => selectedUids.has(c.item.uid));
+          if (typeof onConfirm === 'function') onConfirm(chosen);
+        });
+      }
     };
 
     render();
@@ -1031,6 +1052,10 @@
       return;
     }
     const box = document.createElement('div');
+    if (!box || typeof box.querySelectorAll !== 'function') {
+      if (typeof onChoice === 'function') onChoice(0);
+      return;
+    }
     box.className = 'optional-effect-popup choice-branch-modal';
     box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100005;width:min(480px,94vw);background:#0f172a;border:2px solid #a855f7;border-radius:14px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.9);color:#e2e8f0;font-size:.88rem;font-family:sans-serif;pointer-events:auto;';
 
@@ -1059,7 +1084,14 @@
         `).join('')}
       </div>
     `;
-    box.querySelectorAll('.choice-opt-btn').forEach(btn => {
+    const btns = box.querySelectorAll('.choice-opt-btn');
+    if (!btns || btns.length === 0) {
+      closeBox();
+      if (typeof onChoice === 'function') onChoice(0);
+      return;
+    }
+
+    btns.forEach(btn => {
       btn.onmouseenter = () => { btn.style.borderColor = '#c084fc'; btn.style.background = '#334155'; };
       btn.onmouseleave = () => { btn.style.borderColor = '#475569'; btn.style.background = '#1e293b'; };
       btn.onclick = () => {
@@ -1068,6 +1100,119 @@
         if (typeof onChoice === 'function') onChoice(chosenIdx);
       };
     });
+    document.body.appendChild(box);
+  }
+
+  // ── ONCE PER TURN: SAME NAME ENGINE (HARD OPT) ──
+  function hasUsedSameNameOncePerTurn(cardName, abilityKey = '') {
+    if (!DuelState.usedHardOncePerTurn) DuelState.usedHardOncePerTurn = new Set();
+    const key = `${cardName || ''}::${abilityKey || 'default'}`.toLowerCase();
+    return DuelState.usedHardOncePerTurn.has(key);
+  }
+
+  function markSameNameOncePerTurnUsed(cardName, abilityKey = '') {
+    if (!DuelState.usedHardOncePerTurn) DuelState.usedHardOncePerTurn = new Set();
+    const key = `${cardName || ''}::${abilityKey || 'default'}`.toLowerCase();
+    DuelState.usedHardOncePerTurn.add(key);
+  }
+
+  // ── INTERACTIVE SCRY / DECKTOP REVEAL MODAL ──
+  function promptScryRevealModal(options, onSelect) {
+    const {
+      sourceCard,
+      side = 'player',
+      title = 'Revealed Decktop Cards',
+      description = 'Select a card to add to your Hand. Remaining cards will be discarded.',
+      cards = [],
+      filterFn = null
+    } = options;
+
+    if (side !== 'player' || typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+      const matchIdx = filterFn ? cards.findIndex(filterFn) : 0;
+      const picked = matchIdx !== -1 ? cards[matchIdx] : null;
+      if (typeof onSelect === 'function') onSelect(picked);
+      return;
+    }
+
+    const box = document.createElement('div');
+    if (!box || typeof box.querySelectorAll !== 'function') {
+      const matchIdx = filterFn ? cards.findIndex(filterFn) : 0;
+      const picked = matchIdx !== -1 ? cards[matchIdx] : null;
+      if (typeof onSelect === 'function') onSelect(picked);
+      return;
+    }
+    box.className = 'optional-effect-popup scry-reveal-modal';
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:100005;width:min(620px,96vw);background:#0f172a;border:2px solid #38bdf8;border-radius:14px;padding:20px;box-shadow:0 25px 60px rgba(0,0,0,.95);color:#e2e8f0;font-family:sans-serif;pointer-events:auto;';
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100004;';
+    document.body.appendChild(overlay);
+
+    const closeBox = () => {
+      if (box.parentNode) box.parentNode.removeChild(box);
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    };
+
+    const hasAnyEligible = filterFn ? cards.some(filterFn) : cards.length > 0;
+
+    box.innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div style="font-size:1.1rem;font-weight:700;color:#38bdf8;display:flex;align-items:center;gap:8px;">
+          <span>🔍</span> ${title}
+        </div>
+        <div style="font-size:0.75rem;padding:3px 8px;background:#1e293b;border-radius:6px;color:#94a3b8;">${cards.length} Cards Revealed</div>
+      </div>
+      <div style="font-size:0.83rem;color:#94a3b8;margin-bottom:16px;">${description}</div>
+      <div style="display:grid;grid-template-columns:repeat(${Math.min(cards.length, 3)}, 1fr);gap:12px;margin-bottom:16px;">
+        ${cards.map((c, idx) => {
+          const eligible = filterFn ? filterFn(c) : true;
+          return `
+            <div class="scry-card-item" data-idx="${idx}" style="background:#1e293b;border:2px solid ${eligible ? '#38bdf8' : '#334155'};border-radius:10px;padding:10px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;opacity:${eligible ? '1' : '0.6'};transition:all 0.15s ease;">
+              <img src="${c.image_url || './assets/card_back.png'}" alt="${c.name}" style="width:100%;max-height:140px;object-fit:cover;border-radius:6px;margin-bottom:8px;" onerror="this.src='./assets/card_back.png';" />
+              <div style="font-size:0.8rem;font-weight:700;color:#f8fafc;margin-bottom:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${c.name}">${c.name}</div>
+              <div style="font-size:0.72rem;color:#94a3b8;margin-bottom:8px;">${c.type || 'Card'} • Cost ${c.cost || 0}</div>
+              ${eligible
+                ? `<button class="scry-pick-btn" data-idx="${idx}" style="width:100%;background:linear-gradient(135deg,#0284c7,#0369a1);border:none;border-radius:6px;padding:6px 0;color:#fff;font-weight:700;font-size:0.78rem;cursor:pointer;">✨ Add to Hand</button>`
+                : `<span style="font-size:0.7rem;color:#64748b;padding:6px 0;">Not Eligible</span>`
+              }
+            </div>
+          `;
+        }).join('')}
+      </div>
+      <div style="display:flex;justify-content:flex-end;">
+        <button class="scry-discard-all-btn" style="background:#334155;border:1px solid #475569;border-radius:6px;padding:8px 16px;color:#cbd5e1;font-size:0.8rem;font-weight:600;cursor:pointer;">
+          ${hasAnyEligible ? 'Skip & Discard All' : 'No Eligible Cards → Discard All to Trash'}
+        </button>
+      </div>
+    `;
+
+    const pickBtns = box.querySelectorAll('.scry-pick-btn');
+    if (!pickBtns || pickBtns.length === 0) {
+      closeBox();
+      const matchIdx = filterFn ? cards.findIndex(filterFn) : 0;
+      const picked = matchIdx !== -1 ? cards[matchIdx] : null;
+      if (typeof onSelect === 'function') onSelect(picked);
+      return;
+    }
+
+    pickBtns.forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const idx = parseInt(btn.getAttribute('data-idx'), 10);
+        const picked = cards[idx];
+        closeBox();
+        if (typeof onSelect === 'function') onSelect(picked);
+      };
+    });
+
+    const discardBtn = box.querySelector('.scry-discard-all-btn');
+    if (discardBtn) {
+      discardBtn.onclick = () => {
+        closeBox();
+        if (typeof onSelect === 'function') onSelect(null);
+      };
+    }
+
     document.body.appendChild(box);
   }
 
@@ -5608,6 +5753,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    // HARD ONCE PER TURN (HOPT) CHECK: (Once per Turn: Same Name) / ターンに1回：同名
+    const isHardOpt = /\(Once per Turn:\s*Same Name\)|\(Once per turn:\s*Same name\)|ターンに1回：同名/i.test(bodyText);
+    if (isHardOpt) {
+      const abilityKey = triggerName || 'ABILITY';
+      if (hasUsedSameNameOncePerTurn(card.name, abilityKey)) {
+        return;
+      }
+    }
+
     // STRICT BRAVE GATING: [When Braved], [During Brave], or 合体時 abilities are strictly inactive unless the card is Braved!
     const isBraveAbility = /\[(?:when|during)\s+braved?\]|合体時|合体中/i.test(bodyText);
     if (isBraveAbility && !card.isBraved && !card.brave) {
@@ -5638,6 +5792,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         executeAbilityActions(bodyText, card, side, triggerName, Object.assign({}, context, { __confirmed: true }));
       }, null);
       return;
+    }
+    if (isHardOpt) {
+      markSameNameOncePerTurnUsed(card.name, triggerName || 'ABILITY');
     }
     const isPlayer = side === 'player';
     const myField = isPlayer ? DuelState.player.field : DuelState.opponent.field;
@@ -6452,26 +6609,45 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenSummonedEffects(spirit, side = 'player') {
     // The Hellwind Searcher Kagerou-Seeker (BS38-CP05) / Soul Core Searcher:
     if (/Kagerou-Seeker/i.test(spirit.name || '') || /If \[Soul Core\] was used to pay the summon cost, reveal three cards from your decktop/i.test(spirit.effect || '')) {
+      markLegacyHandled(spirit, 'when_summoned');
+      markLegacyHandled(spirit, 'reveal three cards from your decktop');
+      markLegacyHandled(spirit, 'search_deck');
+
       if (spirit.usedSoulCore || spirit.paidWithSoulCore) {
         const friendlyDeck = DuelState[side].deck || [];
         const revealCount = Math.min(3, friendlyDeck.length);
         if (revealCount > 0) {
           const revealed = friendlyDeck.splice(0, revealCount);
-          addLog(`🎴 **[KAGEROU-SEEKER: When Summoned]**: Revealed ${revealCount} cards: ${revealed.map(c => `"${c.name}"`).join(', ')}!`, 'magic');
-          const ultIdx = revealed.findIndex(c => (c.type || '').includes('Ultimate'));
-          if (ultIdx !== -1) {
-            const chosenUlt = revealed.splice(ultIdx, 1)[0];
-            DuelState[side].hand.push(chosenUlt);
-            addLog(`✨ **[KAGEROU-SEEKER]**: Added Ultimate card "${chosenUlt.name}" to Hand!`, 'step');
-          } else {
-            addLog(`ℹ️ **[KAGEROU-SEEKER]**: No Ultimate cards found among revealed cards.`, 'info');
-          }
-          // Discard remaining revealed cards to Trash
-          for (const rem of revealed) {
-            sendToTrash(rem, side, 'Discarded by Kagerou-Seeker');
-          }
-          renderDuelTable();
-          if (side === 'player') renderPlayerHand();
+          addLog(`🎴 **[KAGEROU-SEEKER: When Summoned]**: Revealed ${revealCount} card(s) from decktop: ${revealed.map(c => `"${c.name}"`).join(', ')}!`, 'magic');
+
+          promptScryRevealModal({
+            sourceCard: spirit,
+            side: side,
+            title: `${spirit.name}: Revealed Cards`,
+            description: 'Select an Ultimate card to add to your Hand. Remaining cards will be discarded to the Trash:',
+            cards: revealed,
+            filterFn: (c) => (c.type || '').includes('Ultimate')
+          }, (chosenUlt) => {
+            if (chosenUlt) {
+              const uIdx = revealed.findIndex(c => c.uid === chosenUlt.uid);
+              if (uIdx !== -1) revealed.splice(uIdx, 1);
+              DuelState[side].hand.push(chosenUlt);
+              addLog(`✨ **[KAGEROU-SEEKER]**: Added Ultimate card "${chosenUlt.name}" to Hand!`, 'step');
+              if (typeof showToast === 'function' && side === 'player') {
+                showToast(`Added "${chosenUlt.name}" to Hand!`, 'success');
+              }
+            } else {
+              addLog(`ℹ️ **[KAGEROU-SEEKER]**: No Ultimate card added to Hand.`, 'info');
+            }
+            // Discard remaining revealed cards to Trash
+            for (const rem of revealed) {
+              sendToTrash(rem, side, 'Discarded by Kagerou-Seeker');
+            }
+            renderDuelTable();
+            if (side === 'player') renderPlayerHand();
+          });
+        } else {
+          addLog(`ℹ️ **[Kagerou-Seeker]**: Deck is empty; cannot reveal cards.`, 'info');
         }
       } else {
         addLog(`ℹ️ **[Kagerou-Seeker]**: Soul Core was not used for summon payment; search effect does not trigger.`, 'info');
@@ -6622,36 +6798,43 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
       friendlyState.counters = (friendlyState.counters || 0) + 1;
       addLog(`💠 **[The Four Towers of Limbo]**: Count +1 upon "${attacker.name}" attack! (Total Count: ${friendlyState.counters})`, 'step');
-      if (side === 'player') {
-        promptChoiceModal({
-          card: limbo,
-          side: 'player',
-          title: 'The Four Towers of Limbo: Choose Effect',
-          description: 'Once per turn, choose one of the following:',
-          choices: [
-            { icon: '🎴', label: 'Draw a Card', desc: 'Draw 1 card from your deck' },
-            { icon: '🔮', label: `Core Boost to "${attacker.name}"`, desc: `Put 1 core from Void onto "${attacker.name}"` }
-          ]
-        }, (choiceIdx) => {
-          if (choiceIdx === 0) {
-            const drawn = DuelState.player.deck.shift();
-            if (drawn) {
-              DuelState.player.hand.push(drawn);
-              AudioFX.magic();
-              addLog(`🎴 **[The Four Towers of Limbo]**: Drew "${drawn.name}"!`, 'magic');
-              renderPlayerHand();
+      
+      // Then, (Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate:
+      if (!hasUsedSameNameOncePerTurn('The Four Towers of Limbo', 'AttackStepChoice')) {
+        markSameNameOncePerTurnUsed('The Four Towers of Limbo', 'AttackStepChoice');
+        if (side === 'player') {
+          promptChoiceModal({
+            card: limbo,
+            side: 'player',
+            title: 'The Four Towers of Limbo: Choose Effect (Once per Turn: Same Name)',
+            description: '(Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate:',
+            choices: [
+              { icon: '🎴', label: 'Draw a Card', desc: 'Draw 1 card from your deck' },
+              { icon: '🔮', label: `Core Boost to "${attacker.name}"`, desc: `Put 1 core from Void onto "${attacker.name}"` }
+            ]
+          }, (choiceIdx) => {
+            if (choiceIdx === 0) {
+              const drawn = DuelState.player.deck.shift();
+              if (drawn) {
+                DuelState.player.hand.push(drawn);
+                AudioFX.magic();
+                addLog(`🎴 **[The Four Towers of Limbo]**: Drew "${drawn.name}"!`, 'magic');
+                renderPlayerHand();
+              }
+            } else {
+              attacker.currentCores = (attacker.currentCores || 0) + 1;
+              recalculateSpiritBp(attacker);
+              AudioFX.coreChime();
+              addLog(`🔮 **[The Four Towers of Limbo]**: Put 1 core from Void onto "${attacker.name}"!`, 'magic');
+              renderDuelTable();
             }
-          } else {
-            attacker.currentCores = (attacker.currentCores || 0) + 1;
-            recalculateSpiritBp(attacker);
-            AudioFX.coreChime();
-            addLog(`🔮 **[The Four Towers of Limbo]**: Put 1 core from Void onto "${attacker.name}"!`, 'magic');
-            renderDuelTable();
-          }
-        });
+          });
+        } else {
+          const drawn = DuelState.opponent.deck.shift();
+          if (drawn) DuelState.opponent.hand.push(drawn);
+        }
       } else {
-        const drawn = DuelState.opponent.deck.shift();
-        if (drawn) DuelState.opponent.hand.push(drawn);
+        addLog(`ℹ️ **[The Four Towers of Limbo]**: (Once per Turn: Same Name) effect was already activated this turn.`, 'info');
       }
     }
 
@@ -6993,12 +7176,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.player.hand.splice(cardIdx, 1);
     }
 
-    if (usedSoulCoreFromReserve) {
-      card.hasSoulCore = true;
-      DuelState.player.soulCoreLocation = 'field';
-      DuelState.player.soulCoreSpiritUid = card.uid;
-    }
-    const { level, bp } = calculateBpAndLevel(card.levels, coresToPlace, !!card.hasSoulCore, card.effect);
+    // When Soul Core is paid as summon cost, it resides in Trash and is NOT placed on the summoned unit.
+    card.hasSoulCore = false;
+    const { level, bp } = calculateBpAndLevel(card.levels, coresToPlace, false, card.effect);
     card.currentCores = coresToPlace;
     card.currentLevel = level;
     card.currentBp = bp;
@@ -10750,6 +10930,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.activeBurstTrigger = null;
     closeBurstPromptModal();
 
+    // Reset Hard Once Per Turn tracking and soft once per turn usage for new turn
+    DuelState.usedHardOncePerTurn = new Set();
+    const allEntities = [
+      ...(DuelState.player.field || []),
+      ...(DuelState.opponent.field || []),
+      ...(DuelState.player.nexus || []),
+      ...(DuelState.opponent.nexus || [])
+    ];
+    for (const ent of allEntities) {
+      if (ent) delete ent.__usedOncePerTurn;
+    }
+
     // Reset all turn and battle BP boosts & temporary granted effects for all spirits across both fields
     const allSpirits = [...(DuelState.player.field || []), ...(DuelState.opponent.field || [])];
     for (const s of allSpirits) {
@@ -12955,6 +13147,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     openBraveCombineModal,
     braveOntoSpirit,
     separateBrave,
+    hasUsedSameNameOncePerTurn,
+    markSameNameOncePerTurnUsed,
+    promptScryRevealModal,
     isBraveCard,
     hasDoubleBrave,
     parseBraveBonus,
