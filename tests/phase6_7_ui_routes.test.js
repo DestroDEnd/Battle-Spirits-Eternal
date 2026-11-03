@@ -118,3 +118,43 @@ test('Phase 7 - Landing Page (index.html) canonical metadata', () => {
   assert.ok(html.includes('14,607 Cards'), 'index.html must display 14,607 verified cards count');
   assert.ok(html.includes('featuredXRares'), 'index.html must display featured X-Rares showcase');
 });
+
+test('Phase 7 - Rarity filters and Contract X-Rare / NX-Rare support in browse.html', () => {
+  const browsePath = path.join(rootDir, 'browse.html');
+  const html = fs.readFileSync(browsePath, 'utf-8');
+
+  // Must have rarity pills for CXR, NX-Rare, XX-Rare, XV-Rare, and Campaign Promo
+  assert.ok(html.includes('data-val="Contract X-Rare"'), 'browse.html must have Contract X-Rare (CXR) pill');
+  assert.ok(html.includes('data-val="NX-Rare"'), 'browse.html must have NX-Rare pill');
+  assert.ok(html.includes('data-val="XX-Rare"'), 'browse.html must have XX-Rare pill');
+  assert.ok(html.includes('data-val="XV-Rare"'), 'browse.html must have XV-Rare pill');
+  assert.ok(html.includes('data-val="Campaign Promo"'), 'browse.html must have Campaign Promo (CP) pill');
+
+  // Verify WasmDB filtering supports new rarities and family normalization
+  const wasmDbPath = path.join(rootDir, 'wasm_db.js');
+  const wasmJs = fs.readFileSync(wasmDbPath, 'utf-8');
+  assert.ok(wasmJs.includes('contract x-rare') && wasmJs.includes('cxr'), 'wasm_db.js must support Contract X-Rare and CXR');
+  assert.ok(wasmJs.includes('nx-rare') && wasmJs.includes('nx'), 'wasm_db.js must support NX-Rare and NX');
+  assert.ok(wasmJs.includes('families_json LIKE ? OR family LIKE ?'), 'wasm_db.js must support multi-family matching');
+});
+
+test('Phase 7 - Collaboration and small family catalog verification in filters_data.json', () => {
+  const filtersPath = path.join(rootDir, 'filters_data.json');
+  const filtersData = JSON.parse(fs.readFileSync(filtersPath, 'utf-8'));
+
+  const collabCat = filtersData.categorized_families.find(c => c.key === 'Collaboration');
+  assert.ok(collabCat, 'filters_data.json must have Collaboration categorized family');
+
+  const smallCollabFamilies = ['Zeon', 'Marine', 'A-LAWS', 'Federation', 'Gundam Meister'];
+  for (const fam of smallCollabFamilies) {
+    const entry = collabCat.families.find(f => f.name.toLowerCase() === fam.toLowerCase());
+    assert.ok(entry, `Collaboration category must contain ${fam}`);
+    assert.ok(entry.count > 0, `${fam} must have count > 0 in filters_data.json, found ${entry.count}`);
+  }
+
+  const genCat = filtersData.categorized_families.find(c => c.key === 'General');
+  const triDisaster = genCat.families.find(f => f.name.toLowerCase().includes('tri-disaster') || f.name.toLowerCase().includes('tri\u2013disaster'));
+  assert.ok(triDisaster, 'General category must contain Tri-Disaster Beast');
+  assert.ok(triDisaster.count > 0, `Tri-Disaster Beast must have count > 0, found ${triDisaster.count}`);
+});
+

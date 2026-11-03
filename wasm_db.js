@@ -411,13 +411,31 @@
       }
 
       if (rarity && rarity !== 'all') {
-        conditions.push("LOWER(rarity) = LOWER(?)");
-        sqlParams.push(rarity);
+        const rl = rarity.toLowerCase().trim();
+        if (rl === 'contract x-rare' || rl === 'cxr' || rl === 'cx') {
+          conditions.push("(LOWER(rarity) LIKE '%contract%x%' OR LOWER(rarity) IN ('contract x-rare', 'cxr', 'cx') OR card_number LIKE '%-CX%')");
+        } else if (rl === 'nx-rare' || rl === 'nx') {
+          conditions.push("(LOWER(rarity) LIKE '%nx%' OR card_number LIKE '%-NX%')");
+        } else if (rl === 'xx-rare' || rl === 'xx' || rl === 'xx rare') {
+          conditions.push("(LOWER(rarity) LIKE '%xx%' OR card_number LIKE '%-XX%')");
+        } else if (rl === 'xv-rare' || rl === 'xv') {
+          conditions.push("(LOWER(rarity) LIKE '%xv%' OR card_number LIKE '%-XV%')");
+        } else if (rl === 'campaign promo' || rl === 'cp') {
+          conditions.push("(LOWER(rarity) LIKE '%campaign%' OR LOWER(rarity) = 'cp' OR card_number LIKE '%-CP%')");
+        } else if (rl === 'x-rare' || rl === 'x') {
+          conditions.push("(LOWER(rarity) IN ('x-rare', 'x') OR (card_number LIKE '%-X%' AND card_number NOT LIKE '%-XX%' AND card_number NOT LIKE '%-CX%' AND card_number NOT LIKE '%-NX%' AND card_number NOT LIKE '%-XV%'))");
+        } else {
+          conditions.push("LOWER(rarity) = LOWER(?)");
+          sqlParams.push(rarity.trim());
+        }
       }
 
       if (family && family !== 'all') {
-        conditions.push("families_json LIKE ?");
-        sqlParams.push(`%${family}%`);
+        const famRaw = family.trim();
+        const famDash = famRaw.replace(/[–—]/g, '-');
+        const famEn = famRaw.replace(/-/g, '–');
+        conditions.push("(families_json LIKE ? OR family LIKE ? OR families_json LIKE ? OR family LIKE ? OR families_json LIKE ? OR family LIKE ?)");
+        sqlParams.push(`%${famRaw}%`, `%${famRaw}%`, `%${famDash}%`, `%${famDash}%`, `%${famEn}%`, `%${famEn}%`);
       }
 
       if (setName && setName !== 'all') {

@@ -206,6 +206,8 @@ def save_card(card_data):
 
     card_number = card_data.get('card_number') or extract_card_number(card_data.get('image_filename'), card_data.get('name'))
 
+    fam_text = ' / '.join(families) if families else (card_data.get('family') or '')
+
     cursor.execute('''
     INSERT INTO cards (
         name, kanji, jpname, cost, color, colors_json, type, family, families_json,
@@ -244,7 +246,7 @@ def save_card(card_data):
         'color': card_data.get('color'),
         'colors_json': json.dumps(colors),
         'type': card_data.get('type'),
-        'family': card_data.get('family'),
+        'family': fam_text,
         'families_json': json.dumps(families),
         'sets_json': json.dumps(sets),
         'symbol': card_data.get('symbol'),
@@ -554,12 +556,30 @@ def search_cards_db(query='', color='', card_type='', rarity='', cost=None,
             params.append(card_type.strip())
 
     if rarity and rarity.strip() and rarity.lower() != 'all':
-        conditions.append('LOWER(rarity) = LOWER(?)')
-        params.append(rarity.strip())
+        r_clean = rarity.strip()
+        rl = r_clean.lower()
+        if rl in ('contract x-rare', 'cxr', 'cx'):
+            conditions.append("(LOWER(rarity) LIKE '%contract%x%' OR LOWER(rarity) IN ('contract x-rare', 'cxr', 'cx') OR card_number LIKE '%-CX%')")
+        elif rl in ('nx-rare', 'nx'):
+            conditions.append("(LOWER(rarity) LIKE '%nx%' OR card_number LIKE '%-NX%')")
+        elif rl in ('xx-rare', 'xx', 'xx rare'):
+            conditions.append("(LOWER(rarity) LIKE '%xx%' OR card_number LIKE '%-XX%')")
+        elif rl in ('xv-rare', 'xv'):
+            conditions.append("(LOWER(rarity) LIKE '%xv%' OR card_number LIKE '%-XV%')")
+        elif rl in ('campaign promo', 'cp'):
+            conditions.append("(LOWER(rarity) LIKE '%campaign%' OR LOWER(rarity) = 'cp' OR card_number LIKE '%-CP%')")
+        elif rl in ('x-rare', 'x'):
+            conditions.append("(LOWER(rarity) IN ('x-rare', 'x') OR (card_number LIKE '%-X%' AND card_number NOT LIKE '%-XX%' AND card_number NOT LIKE '%-CX%' AND card_number NOT LIKE '%-NX%' AND card_number NOT LIKE '%-XV%'))")
+        else:
+            conditions.append('LOWER(rarity) = LOWER(?)')
+            params.append(r_clean)
 
     if family and family.strip() and family.lower() != 'all':
-        conditions.append('families_json LIKE ?')
-        params.append(f'%{family.strip()}%')
+        fam_raw = family.strip()
+        fam_dash = fam_raw.replace('–', '-').replace('—', '-')
+        fam_en = fam_raw.replace('-', '–')
+        conditions.append('(families_json LIKE ? OR family LIKE ? OR families_json LIKE ? OR family LIKE ? OR families_json LIKE ? OR family LIKE ?)')
+        params.extend([f'%{fam_raw}%', f'%{fam_raw}%', f'%{fam_dash}%', f'%{fam_dash}%', f'%{fam_en}%', f'%{fam_en}%'])
 
     if set_name and set_name.strip() and set_name.lower() != 'all':
         conditions.append('sets_json LIKE ?')

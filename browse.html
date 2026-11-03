@@ -145,6 +145,11 @@
             <span class="filter-pill" data-val="Rare" onclick="setBrowseFilter('rarity','Rare')">Rare</span>
             <span class="filter-pill" data-val="Master Rare" onclick="setBrowseFilter('rarity','Master Rare')">Master Rare</span>
             <span class="filter-pill" data-val="X-Rare" onclick="setBrowseFilter('rarity','X-Rare')">X-Rare</span>
+            <span class="filter-pill" data-val="Contract X-Rare" onclick="setBrowseFilter('rarity','Contract X-Rare')" title="Contract X-Rare (CXR)">CXR</span>
+            <span class="filter-pill" data-val="NX-Rare" onclick="setBrowseFilter('rarity','NX-Rare')" title="NX-Rare">NX-Rare</span>
+            <span class="filter-pill" data-val="XX-Rare" onclick="setBrowseFilter('rarity','XX-Rare')" title="XX-Rare">XX-Rare</span>
+            <span class="filter-pill" data-val="XV-Rare" onclick="setBrowseFilter('rarity','XV-Rare')" title="XV-Rare">XV-Rare</span>
+            <span class="filter-pill" data-val="Campaign Promo" onclick="setBrowseFilter('rarity','Campaign Promo')" title="Campaign Promo (CP)">CP</span>
           </div>
         </div>
 
@@ -392,7 +397,16 @@ function parseUrlParams() {
   if (params.has('color')) browseState.color = params.get('color');
   if (params.has('cost')) browseState.cost = params.get('cost');
   if (params.has('type')) browseState.type = params.get('type');
-  if (params.has('rarity')) browseState.rarity = params.get('rarity');
+  if (params.has('rarity')) {
+    let r = params.get('rarity');
+    const ru = r.toUpperCase();
+    if (ru === 'CXR') r = 'Contract X-Rare';
+    else if (ru === 'NX') r = 'NX-Rare';
+    else if (ru === 'XX') r = 'XX-Rare';
+    else if (ru === 'XV') r = 'XV-Rare';
+    else if (ru === 'CP') r = 'Campaign Promo';
+    browseState.rarity = r;
+  }
   if (params.has('family')) browseState.family = params.get('family');
   if (params.has('set')) browseState.set = params.get('set');
   if (params.has('sort')) browseState.sort = params.get('sort');
@@ -415,9 +429,15 @@ function syncPillsFromState() {
     const containerId = 'browse' + key.charAt(0).toUpperCase() + key.slice(1) + 'Pills';
     const container = document.getElementById(containerId);
     if (!container) return;
-    const val = browseState[key];
+    const val = (browseState[key] || '').toLowerCase();
     container.querySelectorAll('.filter-pill').forEach(pill => {
-      pill.classList.toggle('active', pill.getAttribute('data-val') === val);
+      const pVal = (pill.getAttribute('data-val') || '').toLowerCase();
+      const isActive = (pVal === val) ||
+        (val === 'contract x-rare' && (pVal === 'cxr' || pVal === 'contract x-rare')) ||
+        (val === 'cxr' && (pVal === 'cxr' || pVal === 'contract x-rare')) ||
+        (val === 'nx-rare' && (pVal === 'nx' || pVal === 'nx-rare')) ||
+        (val === 'campaign promo' && (pVal === 'cp' || pVal === 'campaign promo'));
+      pill.classList.toggle('active', isActive);
     });
   });
   updateFamilyDropdownBtnState();

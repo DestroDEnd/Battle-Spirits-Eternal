@@ -219,14 +219,24 @@ def parse_wikitext_card(wikitext, page_title, categories, raw_images=None):
                 card_type = t
                 break
 
-    # --- Families: support multiple ---
-    raw_family = clean_wikitext(fields.get('family', ''))
+    # --- Families: support multiple (family, family2, family3, family4, etc.) ---
     families = []
-    if raw_family:
-        for f in re.split(r'[/\n,]', raw_family):
-            f = f.strip()
-            if f and len(f) < 50 and f not in families:
-                families.append(f)
+    for k, v in fields.items():
+        kl = k.lower().strip()
+        if kl.startswith('family') or kl.startswith('subfamily'):
+            raw_f = clean_wikitext(v)
+            if raw_f:
+                for f in re.split(r'[/\n,]', raw_f):
+                    f = f.strip()
+                    if f and len(f) < 50 and f not in families:
+                        families.append(f)
+
+    for cat in categories:
+        cat_clean = cat.replace('Category:', '').strip()
+        if cat_clean.endswith('(Family)'):
+            fam_name = cat_clean.replace('(Family)', '').strip()
+            if fam_name and fam_name not in families:
+                families.append(fam_name)
 
     # --- Sets: collect set1..20, subset1..20, categories, and validate via database.clean_set_name ---
     sets = []
@@ -249,6 +259,23 @@ def parse_wikitext_card(wikitext, page_title, categories, raw_images=None):
 
     # Rarity, flavor, effects, cost
     rarity = clean_wikitext(fields.get('rarity1') or fields.get('rarity') or '')
+    card_no_raw = clean_wikitext(fields.get('cardnumber') or fields.get('number') or '')
+    cat_names_lower = [c.lower() for c in categories]
+
+    # Normalize special / extended official rarities
+    if 'category:contract x-rare' in cat_names_lower or re.search(r'-CX\d+', card_no_raw, re.I):
+        rarity = 'Contract X-Rare'
+    elif 'category:nx-rare' in cat_names_lower or re.search(r'-NX\d+', card_no_raw, re.I):
+        rarity = 'NX-Rare'
+    elif 'category:xx-rare' in cat_names_lower or re.search(r'-XX\d+', card_no_raw, re.I):
+        rarity = 'XX-Rare'
+    elif 'category:xv-rare' in cat_names_lower or re.search(r'-XV\d+', card_no_raw, re.I):
+        rarity = 'XV-Rare'
+    elif 'category:10thx-rare' in cat_names_lower or re.search(r'-10thX\d+', card_no_raw, re.I):
+        rarity = '10thX-Rare'
+    elif 'category:campaign cards' in cat_names_lower or re.search(r'-CP\d+', card_no_raw, re.I):
+        if not rarity or rarity in ('Common', 'Uncommon', 'Rare'):
+            rarity = 'Campaign Promo'
     flavor = clean_wikitext(fields.get('enflavor1') or fields.get('flavor') or '')
     effect = effect_cleaner.clean_card_effect(fields.get('effect', ''))
     levels = clean_wikitext(fields.get('level', ''))
@@ -389,6 +416,12 @@ def fetch_category_cards(category_name, limit=500):
         except Exception as e:
             print(f"Category fetch error: {e}", file=sys.stderr)
             break
+
+    if not titles and not cat_title.endswith('(Family)'):
+        fallback_cat = f"{cat_title} (Family)"
+        fallback_titles = fetch_category_cards(fallback_cat, limit=limit)
+        if fallback_titles:
+            return fallback_titles
 
     return titles[:limit]
 

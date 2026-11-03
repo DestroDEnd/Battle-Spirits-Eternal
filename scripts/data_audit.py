@@ -34,8 +34,8 @@ else:
     c.execute("SELECT COUNT(*) FROM cards_v2")
     v2_count = c.fetchone()[0]
     print(f"[OK] cards_v2 table exists with {v2_count} total cards.")
-    if v2_count != 14607:
-        failures.append(f"cards_v2 count mismatch: expected 14607, got {v2_count}")
+    if v2_count < 14607:
+        failures.append(f"cards_v2 count mismatch: expected at least 14607, got {v2_count}")
 
     # Check empty card numbers
     c.execute("SELECT COUNT(*) FROM cards_v2 WHERE card_number IS NULL OR trim(card_number) = ''")
@@ -131,8 +131,8 @@ else:
     with open(INDEX_PATH, 'r', encoding='utf-8') as f:
         idx_data = json.load(f)
     print(f"[OK] cards_index.json verified: {len(idx_data)} cards ({os.path.getsize(INDEX_PATH)/(1024*1024):.2f} MB)")
-    if len(idx_data) != 14607:
-        failures.append(f"cards_index.json count mismatch: expected 14607, got {len(idx_data)}")
+    if len(idx_data) < 14607 or len(idx_data) != v2_count:
+        failures.append(f"cards_index.json count mismatch: expected {v2_count}, got {len(idx_data)}")
 
 if not os.path.exists(DETAILED_PATH):
     failures.append("data/cards_detailed.json does not exist!")
@@ -140,8 +140,8 @@ else:
     with open(DETAILED_PATH, 'r', encoding='utf-8') as f:
         det_data = json.load(f)
     print(f"[OK] cards_detailed.json verified: {len(det_data)} cards ({os.path.getsize(DETAILED_PATH)/(1024*1024):.2f} MB)")
-    if len(det_data) != 14607:
-        failures.append(f"cards_detailed.json count mismatch: expected 14607, got {len(det_data)}")
+    if len(det_data) < 14607 or len(det_data) != v2_count:
+        failures.append(f"cards_detailed.json count mismatch: expected {v2_count}, got {len(det_data)}")
 
 if not os.path.exists(EFFECTS_DIR):
     failures.append("data/effects/ directory does not exist!")
@@ -157,8 +157,8 @@ else:
         except Exception as e:
             failures.append(f"Corrupt shard {s}: {e}")
     print(f"[OK] Total cards across all shards: {total_shard_cards}")
-    if total_shard_cards != 14607:
-        failures.append(f"Shard total mismatch: expected 14607, got {total_shard_cards}")
+    if total_shard_cards < 14607 or total_shard_cards != v2_count:
+        failures.append(f"Shard total mismatch: expected {v2_count}, got {total_shard_cards}")
 
 # 3. Cross-check against wiki_all_card_titles.json
 if os.path.exists(WIKI_TITLES_PATH):

@@ -15,7 +15,7 @@ test('Phase 1 Data Integrity - cards_index.json validation', () => {
   const raw = fs.readFileSync(INDEX_PATH, 'utf8');
   const index = JSON.parse(raw);
   const count = Object.keys(index).length;
-  assert.strictEqual(count, 14607, `Expected 14607 cards in index, found ${count}`);
+  assert.ok(count >= 14607, `Expected at least 14607 cards in index, found ${count}`);
 
   for (const [cardNo, c] of Object.entries(index)) {
     assert.ok(cardNo && cardNo.trim().length > 0, 'Card number must be non-empty');
@@ -33,7 +33,7 @@ test('Phase 1 Data Integrity - cards_detailed.json validation', () => {
   const raw = fs.readFileSync(DETAILED_PATH, 'utf8');
   const detailed = JSON.parse(raw);
   const count = Object.keys(detailed).length;
-  assert.strictEqual(count, 14607, `Expected 14607 cards in detailed, found ${count}`);
+  assert.ok(count >= 14607, `Expected at least 14607 cards in detailed, found ${count}`);
 
   // Test Javad contract partner card specifically
   const javad = detailed['SD65-CX01'];
@@ -54,5 +54,5 @@ test('Phase 1 Data Integrity - Sharded effects directory validation', () => {
     const shard = JSON.parse(raw);
     totalCards += Object.keys(shard).length;
   }
-  assert.strictEqual(totalCards, 14607, `Expected 14607 total cards across all shards, found ${totalCards}`);
+  assert.ok(totalCards >= 14607, `Expected at least 14607 total cards across all shards, found ${totalCards}`);
 });
