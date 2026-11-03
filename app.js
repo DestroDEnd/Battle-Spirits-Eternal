@@ -576,21 +576,45 @@ function formatEffectKeywordsInModal(text) {
   if (!text) return '<span style="color:var(--muted);font-style:italic;">No special effects or abilities.</span>';
   let safe = esc(text);
 
-  // 1. Highlight Level tags like [LV1], [LV2][LV3]
+  // 1. Advent & Contract Advent (matching outer brackets cleanly)
+  safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
+
+  // 2. Summon Conditions & SuAdcon
+  safe = safe.replace(/\[(?:Summon Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+
+  // 3. Brave Conditions
+  safe = safe.replace(/\[(?:Brave Condition|Brave condition):[^\]]+\]|【合体条件：[^】]+】/gi, '<span class="effect-keyword-pill kw-brave-cond">$&</span>');
+
+  // 4. Over Count, Soul State, and Active States
+  safe = safe.replace(/\[During\s*OC\]|【OC中】|\[OC\s*Condition:[^\]]+\]/gi, '<span class="effect-keyword-pill kw-oc">$&</span>');
+  safe = safe.replace(/\[Soul\s*State\]|【ソウル状態】/gi, '<span class="effect-keyword-pill kw-soul-state">$&</span>');
+  safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave)\]|【(?:合体中|合体時|煌臨中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
+
+  // 5. Level tags like [LV1], [LV2][LV3]
   safe = safe.replace(/\[(LV\d+(?:[-~]LV\d+)*)\]/gi, '<span class="effect-keyword-pill kw-level">[$1]</span>');
 
-  // 2. Highlight Timing and Step triggers
-  safe = safe.replace(/\((When Attacks(?:\/[^)]+)?|When Summoned(?:\/[^)]+)?|When Advents(?:\/[^)]+)?|When Battles(?:\/[^)]+)?|When Blocks(?:\/[^)]+)?|When Manifests(?:\/[^)]+)?|When Reborn(?:\/[^)]+)?|When Destroyed(?:\/[^)]+)?|When Brave Attacks(?:\/[^)]+)?|After Your Burst Activates|After a Burst Activates|After your Burst activates|After an? opposing [^)]+|Twinkle Necromancy|Your Attack Step|Opponent's Attack Step|Opposing Attack Step|Either Attack Step|Main Step|Refresh Step|Start Step|Core Step|Draw Step|End Step)\)/gi, (match) => {
+  // 6. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field])
+  safe = safe.replace(/\[(?:Main|MAIN)\]|【メイン】/g, '<span class="effect-keyword-pill kw-main">[Main]</span>');
+  safe = safe.replace(/\[(?:Flash|FLASH)\]|【フラッシュ】/g, '<span class="effect-keyword-pill kw-flash">[Flash]</span>');
+  safe = safe.replace(/\[Grand Skill:\s*(\d+)\]|【神技：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+  safe = safe.replace(/\[Grand Field\]|【神域】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+
+  // 7. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
+  safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
+
+  // 8. Timing and Step triggers
+  safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
     return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
   });
 
-  // 3. Highlight Flash - [Advent: ...]
-  safe = safe.replace(/Flash\s*-\s*\[Advent:\s*([^\]]+)\]/gi, (match) => {
-    return `<span class="effect-keyword-pill kw-advent">${match}</span>`;
-  });
+  // 9. Soul Core
+  safe = safe.replace(/(?<!<[^>]*)(?:\[Soul Core(?::[^\]]+)?\]|【ソウルコア】)/gi, '<span class="effect-keyword-pill kw-soul-core">$&</span>');
 
-  // 4. Highlight all 102 Official Battle Spirits Wiki Keywords
-  const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Soul Core(?::[^\]]+)?|Flash|Twinkle Necromancy)\]/gi;
+  // 10. Ultimate Triggers
+  safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
+
+  // 11. Highlight all 102 Official Battle Spirits Wiki Keywords
+  const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
   safe = safe.replace(allKwPattern, (match) => {
     let cls = 'kw-generic';
@@ -1347,6 +1371,41 @@ function renderModalFieldStatus(container, unit, isPlayer) {
   `;
 }
 
+function renderManualActionsIntoModal(card, fieldUnit, isPlayerField) {
+  if (typeof DuelState === 'undefined' || !DuelState.inDuel) return;
+  if (typeof BattleArena === 'undefined' || !BattleArena.getCardManualActions) return;
+  const modalEffect = document.getElementById('modalEffect');
+  if (!modalEffect) return;
+
+  const existing = modalEffect.querySelector('.effect-action-buttons-container');
+  if (existing) existing.remove();
+
+  const manualActions = BattleArena.getCardManualActions(card, 'auto', fieldUnit, isPlayerField ? 'player' : 'opponent');
+  if (!manualActions || !manualActions.length) return;
+
+  const container = document.createElement('div');
+  container.className = 'effect-action-buttons-container';
+
+  manualActions.forEach((act) => {
+    const btn = document.createElement('button');
+    btn.className = `effect-action-btn ${act.cls || ''}`;
+    btn.textContent = act.label;
+    btn.title = act.reason || act.label;
+    if (act.disabled) {
+      btn.disabled = true;
+    } else {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        closeModal();
+        if (typeof act.action === 'function') act.action();
+      };
+    }
+    container.appendChild(btn);
+  });
+
+  modalEffect.appendChild(container);
+}
+
 async function openCardDetail(name, contextList, cardUid = null) {
   const modal = document.getElementById('cardModal');
   if (!modal) return;
@@ -1438,6 +1497,9 @@ async function openCardDetail(name, contextList, cardUid = null) {
         const isNexus = (handCard.type || '').includes('Nexus');
         const isMagic = handCard.type === 'Magic';
         const isUltimate = handCard.type === 'Ultimate' || (handCard.type || '').includes('Ultimate');
+        const ultCheck = (isUltimate && typeof BattleArena !== 'undefined' && BattleArena.validateUltimateSummonCondition)
+          ? BattleArena.validateUltimateSummonCondition(handCard, 'player')
+          : { allowed: true };
         const isSpirit = (handCard.type === 'Spirit' || (handCard.type || '').includes('Spirit')) && !isBrave && !isUltimate;
         const cost = (typeof BattleArena !== 'undefined' && BattleArena.getCardEffectiveCost) ? BattleArena.getCardEffectiveCost(handCard, 'player') : (handCard.cost || 0);
         const totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
@@ -1445,7 +1507,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
         const phase = DuelState.phases[DuelState.phaseIndex];
         const isAttackStep = phase === 'ATTACK';
         const rest = checkCardUsageRestriction(handCard, 'player');
-        const canPlay = rest.allowed && ((typeof BattleArena !== 'undefined' && BattleArena.canPlayCardInCurrentPhase)
+        const canPlay = rest.allowed && ultCheck.allowed && ((typeof BattleArena !== 'undefined' && BattleArena.canPlayCardInCurrentPhase)
           ? BattleArena.canPlayCardInCurrentPhase(handCard, 'player')
           : (isPlayerTurn && (phase === 'MAIN' || (isAttackStep && (handCard.effect || '').includes('[Flash]')))));
 
@@ -1463,6 +1525,14 @@ async function openCardDetail(name, contextList, cardUid = null) {
           duelBtn.style.opacity = '0.5';
           duelBtn.style.background = '#475569';
           duelBtn.onclick = null;
+        } else if (!ultCheck.allowed) {
+          duelBtn.textContent = `🔒 ${ultCheck.reason || 'Summon Condition Not Met'}`;
+          duelBtn.title = ultCheck.reason;
+          duelBtn.disabled = true;
+          duelBtn.style.opacity = '0.5';
+          duelBtn.style.background = '#475569';
+          duelBtn.onclick = null;
+          if (modalBraveBtn) modalBraveBtn.style.display = 'none';
         } else if (!canPlay) {
           duelBtn.textContent = isAttackStep ? '⚔️ Main Step Only (No Flash)' : `⏳ Cannot Play in ${phase} Step`;
           duelBtn.disabled = true;
@@ -1701,7 +1771,10 @@ async function openCardDetail(name, contextList, cardUid = null) {
       } else if (memCard.levels && Array.isArray(memCard.levels)) {
         document.getElementById('modalLevels').textContent = memCard.levels.map(l => `Level ${l.level}: ${l.cores} core, ${l.bp} BP`).join('\n');
       }
-      if (memCard.effect) document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(memCard.effect);
+      if (memCard.effect) {
+        document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(memCard.effect);
+        renderManualActionsIntoModal(memCard, fieldUnit, isPlayerField);
+      }
       if (memCard.flavor) {
         const fl = document.getElementById('modalFlavor');
         fl.textContent = '"' + memCard.flavor + '"';
@@ -1743,6 +1816,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
 
     document.getElementById('modalLevels').textContent = card.levels || 'No level data.';
     document.getElementById('modalEffect').innerHTML = formatEffectKeywordsInModal(card.effect || card.summary || '');
+    renderManualActionsIntoModal(card, fieldUnit, isPlayerField);
 
     if (card.flavor) {
       const fl = document.getElementById('modalFlavor');

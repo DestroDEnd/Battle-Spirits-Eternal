@@ -4726,13 +4726,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
-    // 8. Named card / Partner
+    // 8. Named card / Partner (e.g. SuAdcon or "The PartnerDemonLord Javad")
     const nameMatch = condText.match(/["'“‘]([^"'”’]+)["'”’]/);
     if (nameMatch) {
       const targetName = nameMatch[1].trim().toLowerCase();
-      const hasOnField = field.some(u => (u.name || '').toLowerCase().includes(targetName));
-      const isContractPartner = (friendlyState.contractCard && (friendlyState.contractCard.name || '').toLowerCase().includes(targetName));
-      if (!hasOnField && !isContractPartner) {
+      const hasOnField = field.some(u => {
+        if ((u.name || '').toLowerCase().includes(targetName)) return true;
+        if (u.underlyingCards && u.underlyingCards.some(pre => (pre.name || '').toLowerCase().includes(targetName))) return true;
+        return false;
+      });
+      const inSoulState = (friendlyState.soulStateCards || []).some(s => (s.name || '').toLowerCase().includes(targetName)) ||
+                          (friendlyState.contractCard && friendlyState.contractCard.inSoulState && (friendlyState.contractCard.name || '').toLowerCase().includes(targetName));
+      if (!hasOnField && !inSoulState) {
         return { allowed: false, reason: `Requires controlling "${nameMatch[1].trim()}" on field or in Soul State`, condText };
       }
       return { allowed: true, condText };
@@ -5402,21 +5407,45 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;'));
 
-    // 1. Highlight Level tags like [LV1], [LV2][LV3], LV1-LV3
+    // 1. Advent & Contract Advent (matching outer brackets cleanly)
+    safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
+
+    // 2. Summon Conditions & SuAdcon
+    safe = safe.replace(/\[(?:Summon Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+
+    // 3. Brave Conditions
+    safe = safe.replace(/\[(?:Brave Condition|Brave condition):[^\]]+\]|【合体条件：[^】]+】/gi, '<span class="effect-keyword-pill kw-brave-cond">$&</span>');
+
+    // 4. Over Count, Soul State, and Active States
+    safe = safe.replace(/\[During\s*OC\]|【OC中】|\[OC\s*Condition:[^\]]+\]/gi, '<span class="effect-keyword-pill kw-oc">$&</span>');
+    safe = safe.replace(/\[Soul\s*State\]|【ソウル状態】/gi, '<span class="effect-keyword-pill kw-soul-state">$&</span>');
+    safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave)\]|【(?:合体中|合体時|煌臨中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
+
+    // 5. Level tags like [LV1], [LV2][LV3], LV1-LV3
     safe = safe.replace(/\[(LV\d+(?:[-~]LV\d+)*)\]/gi, '<span class="effect-keyword-pill kw-level">[$1]</span>');
 
-    // 2. Highlight Timing and Step triggers like (When Attacks), (When Summoned), (When Advents), etc.
-    safe = safe.replace(/\((When Attacks(?:\/[^)]+)?|When Summoned(?:\/[^)]+)?|When Advents(?:\/[^)]+)?|When Battles(?:\/[^)]+)?|When Blocks(?:\/[^)]+)?|When Manifests(?:\/[^)]+)?|When Reborn(?:\/[^)]+)?|When Destroyed(?:\/[^)]+)?|When Brave Attacks(?:\/[^)]+)?|After Your Burst Activates|After a Burst Activates|After your Burst activates|After an? opposing [^)]+|Twinkle Necromancy|Your Attack Step|Opponent's Attack Step|Opposing Attack Step|Either Attack Step|Main Step|Refresh Step|Start Step|Core Step|Draw Step|End Step)\)/gi, (match) => {
+    // 6. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field])
+    safe = safe.replace(/\[(?:Main|MAIN)\]|【メイン】/g, '<span class="effect-keyword-pill kw-main">[Main]</span>');
+    safe = safe.replace(/\[(?:Flash|FLASH)\]|【フラッシュ】/g, '<span class="effect-keyword-pill kw-flash">[Flash]</span>');
+    safe = safe.replace(/\[Grand Skill:\s*(\d+)\]|【神技：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+    safe = safe.replace(/\[Grand Field\]|【神域】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+
+    // 7. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
+    safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
+
+    // 8. Timing & Step triggers
+    safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
       return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
     });
 
-    // 3. Highlight Flash - [Advent: ...]
-    safe = safe.replace(/Flash\s*-\s*\[Advent:\s*([^\]]+)\]/gi, (match) => {
-      return `<span class="effect-keyword-pill kw-advent">${match}</span>`;
-    });
+    // 9. Soul Core
+    safe = safe.replace(/(?<!<[^>]*)(?:\[Soul Core(?::[^\]]+)?\]|【ソウルコア】)/gi, '<span class="effect-keyword-pill kw-soul-core">$&</span>');
 
-    // 4. Highlight all 102 Official Battle Spirits Wiki Keywords + bracketed effects
-    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Soul Core(?::[^\]]+)?|Flash|Twinkle Necromancy)\]/gi;
+    // 10. Ultimate Triggers
+    safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
+
+    // 11. Highlight all 102 Official Battle Spirits Wiki Keywords + bracketed effects
+    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
     safe = safe.replace(allKwPattern, (match) => {
       let cls = 'kw-generic';
@@ -5771,6 +5800,213 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.selectedPlayerCard = null;
     renderPlayerHand();
     renderCardInspector();
+  }
+
+  // ── MANUAL ACTIVATED ABILITIES (MAIN / FLASH / GOD SKILLS ON FIELD & HAND) ──
+  function executeManualFieldAbility(cardUid, abilityType, side = 'player') {
+    const isPlayer = side === 'player';
+    const friendlyState = isPlayer ? DuelState.player : DuelState.opponent;
+    const field = friendlyState.field || [];
+    const nexuses = friendlyState.nexus || [];
+    let unit = field.find(s => s.uid === cardUid);
+    let isNexus = false;
+    if (!unit) {
+      unit = nexuses.find(n => n.uid === cardUid);
+      if (unit) isNexus = true;
+    }
+    if (!unit) {
+      if (typeof showToast === 'function' && isPlayer) showToast('Card not found on field.', 'warning');
+      return;
+    }
+
+    const phase = DuelState.phases ? DuelState.phases[DuelState.phaseIndex] : '';
+    const isOurTurn = (DuelState.activePlayer === side);
+
+    if (abilityType === 'MAIN') {
+      if (!isOurTurn || phase !== 'MAIN') {
+        if (typeof showToast === 'function' && isPlayer) showToast('Official Rule: [Main] abilities can only be activated during your Main Step!', 'warning');
+        return;
+      }
+    } else if (abilityType === 'FLASH') {
+      if (phase !== 'ATTACK' && !(isOurTurn && phase === 'MAIN')) {
+        if (typeof showToast === 'function' && isPlayer) showToast('Official Rule: [Flash] abilities can only be activated during Attack Step or Main Step!', 'warning');
+        return;
+      }
+    }
+
+    const eff = unit.effect || '';
+    const blocks = getCardAbilityBlocks(eff);
+    const targetPattern = (abilityType === 'MAIN') ? /\[(?:Main|MAIN)\]|【メイン】/i : /\[(?:Flash|FLASH)\]|【フラッシュ】/i;
+    const eligibleBlocks = blocks.filter(b => targetPattern.test(b) && !/cannot be used while on|can't be used while on|while it's on field/i.test(b));
+
+    if (!eligibleBlocks.length) {
+      if (typeof showToast === 'function' && isPlayer) showToast(`No eligible [${abilityType}] abilities found on this card.`, 'info');
+      return;
+    }
+
+    for (const b of eligibleBlocks) {
+      const lvlMatch = b.match(/(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
+      if (lvlMatch && !isEffectLevelMet(lvlMatch[1], unit.currentLevel || 1)) {
+        if (typeof showToast === 'function' && isPlayer) showToast(`Level requirement unmet (${lvlMatch[1]}). Current level is LV${unit.currentLevel || 1}.`, 'warning');
+        continue;
+      }
+
+      // Cost condition: By exhausting this Spirit/Nexus
+      if (/By exhausting this (?:Spirit|Ultimate|Nexus)/i.test(b) || /この(?:スピリット|アルティメット|ネクサス)を疲労させることで/i.test(b)) {
+        if (unit.isExhausted) {
+          if (typeof showToast === 'function' && isPlayer) showToast(`Cannot activate: "${unit.name}" is already exhausted!`, 'warning');
+          return;
+        }
+        unit.isExhausted = true;
+        addLog(`🌀 **[${unit.name}]**: Exhausted to activate [${abilityType}] ability!`, 'step');
+      }
+
+      AudioFX.magic();
+      addLog(`✨ **[MANUAL ACTIVATION: ${unit.name}]**: Activated [${abilityType}] ability!`, 'magic');
+      executeAbilityActions(b, unit, side, abilityType);
+      executeUniversalCardEffect(unit, side, abilityType);
+      if (typeof showToast === 'function' && isPlayer) showToast(`Activated [${abilityType}] ability on "${unit.name}"!`, 'success');
+      renderDuelTable();
+      if (isPlayer) renderPlayerHand();
+      return;
+    }
+  }
+
+  function getCardManualActions(card, zone = 'auto', fieldUnit = null, side = 'player') {
+    if (!card || !DuelState.inDuel) return [];
+    const actions = [];
+    const isPlayer = side === 'player';
+    if (!isPlayer) return actions;
+
+    const phase = DuelState.phases ? DuelState.phases[DuelState.phaseIndex] : '';
+    const isOurTurn = (DuelState.activePlayer === side);
+    const eff = card.effect || '';
+
+    // Case 1: Field Unit
+    const activeFieldUnit = fieldUnit || (DuelState.player.field || []).find(s => s.uid === card.uid || s.name === card.name) ||
+                            (DuelState.player.nexus || []).find(n => n.uid === card.uid || n.name === card.name);
+
+    if (activeFieldUnit) {
+      // 1. Grand Skill (Grandwalker Nexus)
+      const gs = parseGrandSkill(card);
+      if (gs) {
+        const canGs = canActivateGrandSkill(activeFieldUnit, side);
+        actions.push({
+          id: 'grand_skill',
+          label: `🌟 Activate [Grand Skill: ${gs.cost}]`,
+          cls: 'eab-grand',
+          disabled: !canGs.allowed,
+          reason: canGs.reason,
+          action: () => activateGrandSkill(activeFieldUnit.uid, side)
+        });
+      }
+
+      // 2. [Main] ability on Field Unit
+      if (/\[(?:Main|MAIN)\]|【メイン】/i.test(eff) && !/while on/i.test(eff)) {
+        const canMain = isOurTurn && phase === 'MAIN';
+        actions.push({
+          id: 'manual_main',
+          label: '📜 Activate [Main]',
+          cls: 'eab-main',
+          disabled: !canMain,
+          reason: canMain ? '' : 'Main Step Only',
+          action: () => executeManualFieldAbility(activeFieldUnit.uid, 'MAIN', side)
+        });
+      }
+
+      // 3. [Flash] ability on Field Unit
+      if (/\[(?:Flash|FLASH)\]|【フラッシュ】/i.test(eff) && !/while on/i.test(eff)) {
+        const canFlash = (phase === 'ATTACK' || (isOurTurn && phase === 'MAIN'));
+        actions.push({
+          id: 'manual_flash',
+          label: '⚡ Activate [Flash]',
+          cls: 'eab-flash',
+          disabled: !canFlash,
+          reason: canFlash ? '' : 'Attack or Main Step Only',
+          action: () => executeManualFieldAbility(activeFieldUnit.uid, 'FLASH', side)
+        });
+      }
+
+      // 4. Brave Combine / Separate on Field
+      if (activeFieldUnit.brave && isOurTurn && phase === 'MAIN') {
+        actions.push({
+          id: 'debrave',
+          label: `🔄 De-Brave (${activeFieldUnit.brave.name})`,
+          cls: 'eab-debrave',
+          disabled: false,
+          action: () => separateBrave(activeFieldUnit.uid)
+        });
+      } else if ((activeFieldUnit.type === 'Brave' || activeFieldUnit.isBraveCard) && isOurTurn && phase === 'MAIN') {
+        actions.push({
+          id: 'brave_combine',
+          label: '🔗 Combine Brave onto Spirit',
+          cls: 'eab-brave',
+          disabled: false,
+          action: () => openBraveCombineModal(activeFieldUnit.uid, 'field')
+        });
+      }
+    }
+
+    // Case 2: Card in Hand
+    const handCard = (DuelState.player.hand || []).find(c => c.uid === card.uid || c.name === card.name);
+    if (handCard) {
+      // 1. Advent / Contract Advent
+      const advReq = getCardAdventRequirement(handCard);
+      if (advReq) {
+        const canAdv = canPerformAdvent(handCard, side);
+        actions.push({
+          id: 'advent',
+          label: `🌟 Advent (${advReq.timingLabel})`,
+          cls: 'eab-advent',
+          disabled: !canAdv,
+          reason: canAdv ? '' : `Advent timing/condition unmet (${advReq.timingLabel})`,
+          action: () => openAdventPrompt(handCard.uid)
+        });
+      }
+
+      // 2. Accel
+      const accel = canCastAccel(handCard, side);
+      if (accel && accel.allowed) {
+        actions.push({
+          id: 'accel',
+          label: `⚡ Cast Accel (Cost ${accel.cost})`,
+          cls: 'eab-accel',
+          disabled: false,
+          action: () => castAccel(handCard.uid, side)
+        });
+      }
+
+      // 3. Mirage
+      const mirage = canSetMirage(handCard, side);
+      if (mirage && mirage.allowed) {
+        actions.push({
+          id: 'mirage',
+          label: `🌀 Set as Mirage (Cost ${mirage.cost})`,
+          cls: 'eab-mirage',
+          disabled: false,
+          action: () => setMirage(handCard.uid, side)
+        });
+      }
+
+      // 4. Brave in Hand
+      if (handCard.type === 'Brave' || (handCard.type || '').includes('Brave')) {
+        const effCost = getCardEffectiveCost(handCard, side);
+        const canAfford = (DuelState.player.reserve >= effCost);
+        const eligibleHosts = (DuelState.player.field || []).filter(s => !s.brave);
+        if (eligibleHosts.length > 0 && isOurTurn && phase === 'MAIN') {
+          actions.push({
+            id: 'hand_brave',
+            label: `🔗 Brave onto Spirit (Cost ${effCost})`,
+            cls: 'eab-brave',
+            disabled: !canAfford,
+            reason: canAfford ? '' : `Need ${effCost} reserve cores`,
+            action: () => openBraveCombineModal(handCard.uid, 'hand')
+          });
+        }
+      }
+    }
+
+    return actions;
   }
 
 
@@ -7602,19 +7838,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── GRAND SKILL & ON-FIELD NEXUS FLASH ENGINE ──
   function parseGrandSkill(card) {
     if (!card || !card.effect) return null;
-    const m = card.effect.match(/\[Grand Skill:\s*(\d+)\]\s*(?:\[LV\d+\]\s*)*Flash(?:\s*-\s*\(([^)]+)\))?/i);
+    const m = card.effect.match(/\[Grand Skill:\s*(\d+)\]\s*(?:\[LV\d+\]\s*)*(?:\[?(Flash|Main|Main\/Flash)\]?)?(?:\s*-\s*\(([^)]+)\))?/i);
     if (!m) return null;
     const cost = parseInt(m[1], 10);
-    const timing = m[2] ? m[2].trim().toLowerCase() : 'either';
+    const mainOrFlash = m[2] ? m[2].trim().toLowerCase() : '';
+    const timing = m[3] ? m[3].trim().toLowerCase() : '';
 
     let timingLabel = 'Flash';
     let timingType = 'either';
-    if (timing.includes('your turn') || timing.includes('your attack step')) {
+    if (mainOrFlash.includes('main') && !mainOrFlash.includes('flash')) {
+      timingLabel = 'Main';
+      timingType = 'main';
+    } else if (timing.includes('your turn') || timing.includes('your attack step')) {
       timingLabel = 'Your Turn Flash';
       timingType = 'your_turn';
     } else if (timing.includes('opposing') || timing.includes("opponent's")) {
       timingLabel = "Opponent's Turn Flash";
       timingType = 'opposing_turn';
+    } else if (mainOrFlash.includes('main') && mainOrFlash.includes('flash')) {
+      timingLabel = 'Main/Flash';
+      timingType = 'either';
     }
 
     return {
@@ -7638,6 +7881,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return { 
         allowed: false, 
         reason: `Need ${gs.cost} cores on ${nexus.name} (currently has ${currentCores})`,
+        gs
+      };
+    }
+
+    if (gs.timingType === 'main' && (!isOurTurn || phase !== 'MAIN')) {
+      return {
+        allowed: false,
+        reason: `Grand Skill timing is [Main], only activatable on your Main Step`,
         gs
       };
     }
@@ -9747,6 +9998,17 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return;
     }
 
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    if (isUltimate) {
+      const ultCheck = validateUltimateSummonCondition(card, 'player');
+      if (!ultCheck.allowed) {
+        if (typeof showToast === 'function') {
+          showToast(`Official Rule: Cannot summon Ultimate "${card.name}"! Condition not met: ${ultCheck.reason}`, 'warning');
+        }
+        return;
+      }
+    }
+
     const { reserve, fieldCores, total: totalAvailable } = getPlayerAvailableCores();
     const isUnit = card.type === 'Spirit' || card.type === 'Ultimate' || (card.type || '').includes('Spirit') || (card.type || '').includes('Ultimate') || (card.type || '').includes('Brave');
     const cost = getCardEffectiveCost(card, 'player');
@@ -9892,6 +10154,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeSacrificeSummon() {
     if (!pendingSacrifice) return;
     const { card, isSpirit, cost, totalNeeded, reserveUsed, fieldNeeded, allocations } = pendingSacrifice;
+
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    if (isUltimate) {
+      const ultCheck = validateUltimateSummonCondition(card, 'player');
+      if (!ultCheck.allowed) {
+        if (typeof showToast === 'function') {
+          showToast(`Official Rule: Cannot summon Ultimate "${card.name}"! Condition not met: ${ultCheck.reason}`, 'warning');
+        }
+        closeSacrificeModal();
+        return;
+      }
+    }
 
     const currentFieldSelected = Object.values(allocations).reduce((sum, v) => sum + v, 0);
     if (currentFieldSelected !== fieldNeeded) {
@@ -13535,6 +13809,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     promptCumulativeCostTargetModal,
     promptHandDiscardModal,
     executeLordJavadSummonAdvent,
+    executeManualFieldAbility,
+    getCardManualActions,
     endTurn,
     renderPlayerHand,
     loadCardEffectsDB,

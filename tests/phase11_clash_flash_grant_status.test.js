@@ -827,3 +827,120 @@ test('Phase 11 - The Ruler of FourDemonLords Lord-Javad does not draw if hand is
   assert.equal(DuelState.player.hand.length, 0, 'Player hand remains empty');
   assert.equal(DuelState.player.deck.length, 2, 'Deck remains untouched at 2 cards');
 });
+
+test('Phase 11 - validateUltimateSummonCondition strictly blocks Ultimate when named Partner is not on field or in Soul State', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const lordJavad = {
+    uid: 'ult_lord_javad_03',
+    name: 'The Ruler of FourDemonLords Lord-Javad',
+    type: 'Ultimate',
+    cost: 6,
+    effect: '[SuAdcon: You control one or more "The PartnerDemonLord Javad", including being in Soul State/pre-advent condition]\n[LV3][LV4] (When Summoned/Advents) Draw 2.'
+  };
+
+  // Partner is designated in deck metadata, but NOT on field and NOT in Soul State
+  DuelState.player.contractCard = { name: 'The PartnerDemonLord Javad', inSoulState: false };
+  DuelState.player.field = [];
+  DuelState.player.soulStateCards = [];
+
+  const check1 = BattleArena.validateUltimateSummonCondition(lordJavad, 'player');
+  assert.equal(check1.allowed, false, 'Lord-Javad summon blocked when Partner is not on field or Soul State');
+  assert.match(check1.reason, /Requires controlling "The PartnerDemonLord Javad"/i);
+
+  // Now place PartnerDemonLord Javad into Soul State
+  DuelState.player.soulStateCards = [{ name: 'The PartnerDemonLord Javad', isSoulState: true }];
+  const check2 = BattleArena.validateUltimateSummonCondition(lordJavad, 'player');
+  assert.equal(check2.allowed, true, 'Lord-Javad summon allowed when Partner is in Soul State');
+});
+
+test('Phase 11 - openSacrificeModal and executeSacrificeSummon strictly enforce Ultimate summon condition', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const conditionedUlt = {
+    uid: 'ult_cond_01',
+    name: 'The HellseaCount Ila-Riva',
+    type: 'Ultimate',
+    cost: 4,
+    effect: '[Summon Condition: You have 1 or more Counters]\n[LV3] Draw 1.'
+  };
+
+  const friendlySpirit = {
+    uid: 'sp_ally_01',
+    name: 'Allied Minion',
+    type: 'Spirit',
+    cost: 2,
+    currentCores: 5,
+    currentBp: 4000
+  };
+
+  DuelState.player.hand = [conditionedUlt];
+  DuelState.player.field = [friendlySpirit];
+  DuelState.player.reserve = 0;
+  DuelState.player.counters = 0; // 0 Counters! Unmet condition!
+  DuelState.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+  DuelState.phaseIndex = 4; // MAIN step
+  DuelState.activePlayer = 'player';
+
+  // Attempting to open sacrifice modal for conditioned card with 0 counters should be rejected
+  BattleArena.openSacrificeModal(conditionedUlt.uid);
+
+  // Verify that sacrifice summon did NOT place the Ultimate on field
+  assert.equal(DuelState.player.field.some(u => u.uid === conditionedUlt.uid), false, 'Conditioned Ultimate not placed on field');
+  assert.equal(DuelState.player.hand.some(c => c.uid === conditionedUlt.uid), true, 'Conditioned Ultimate remains safely in Hand');
+});
+
+test('Phase 11 - formatEffectKeywords formats Advent, Contract Advent, SuAdcon, During OC, and Soul State into emboldened keyword pills', () => {
+  const { BattleArena } = setupTestEnvironment();
+
+  const effectText = 'Flash - [Contract Advent: Hell Contract & C3 or more, (Either Attack Step)]\n[SuAdcon: You control one or more "The PartnerDemonLord Javad", including being in Soul State/pre-advent condition]\n[During OC] [LV3][LV4] (When Summoned/Advents)\n[Soul State] [Soul Core]\n(Once per Turn: Same Name) By sending [Soul Core] to Trash, refresh.';
+
+  const formatted = BattleArena.formatEffectKeywords(effectText);
+
+  assert.match(formatted, /class="effect-keyword-pill kw-advent"[^>]*>Flash - \[Contract Advent:/i, 'Contract Advent has kw-advent pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-summon-cond"[^>]*>\[SuAdcon:/i, 'SuAdcon has kw-summon-cond pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-oc"[^>]*>\[During OC\]/i, 'During OC has kw-oc pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-soul-state"[^>]*>\[Soul State\]/i, 'Soul State has kw-soul-state pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-level"[^>]*>\[LV3\]/i, 'LV3 has kw-level pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-timing"[^>]*>\(When Summoned\/Advents\)/i, 'When Summoned/Advents has kw-timing pill');
+  assert.match(formatted, /class="effect-keyword-pill kw-limit"[^>]*>\(Once per Turn: Same Name\)/i, 'Once per Turn: Same Name has kw-limit pill');
+});
+
+test('Phase 11 - getCardManualActions generates actionable buttons for manual activated abilities', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  DuelState.inDuel = true;
+  DuelState.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+  DuelState.phaseIndex = 4; // MAIN step
+  DuelState.activePlayer = 'player';
+  DuelState.player.reserve = 3;
+
+  // 1. Grandwalker Nexus on field with Grand Skill
+  const grandwalker = {
+    uid: 'gw_nexus_01',
+    name: 'The Grandwalker Apollo',
+    type: 'Grandwalker Nexus',
+    currentCores: 4,
+    cost: 2,
+    effect: '[Grand Skill: 3] [Main] Put 1 core from Void to Reserve.'
+  };
+  DuelState.player.nexus = [grandwalker];
+
+  const gwActions = BattleArena.getCardManualActions(grandwalker, 'field', grandwalker, 'player');
+  assert.equal(gwActions.some(a => a.id === 'grand_skill'), true, 'Grand Skill action button generated');
+  assert.equal(gwActions.find(a => a.id === 'grand_skill').disabled, false, 'Grand Skill is enabled (has 4 cores >= 3)');
+
+  // 2. Spirit in Hand with Advent
+  const adventCard = {
+    uid: 'adv_card_01',
+    name: 'The GreatAdvent Dragon',
+    type: 'Spirit',
+    cost: 5,
+    effect: 'Flash - [Advent: Cost 3 or more, (Either Attack Step)]'
+  };
+  DuelState.player.hand = [adventCard];
+  DuelState.player.soulCoreLocation = 'reserve';
+
+  const advActions = BattleArena.getCardManualActions(adventCard, 'hand', null, 'player');
+  assert.equal(advActions.some(a => a.id === 'advent'), true, 'Advent action button generated for hand card');
+});
