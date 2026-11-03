@@ -49,7 +49,9 @@ function setupTestEnvironment() {
       destroy: () => {},
       kill: () => {}
     },
-    showToast: () => {}
+    showToast: (msg, type) => {
+      if (typeof global.showToast === 'function') global.showToast(msg, type);
+    }
   };
 
   const fn = new Function('window', 'document', 'AudioFX', 'showToast', `
@@ -943,4 +945,163 @@ test('Phase 11 - getCardManualActions generates actionable buttons for manual ac
 
   const advActions = BattleArena.getCardManualActions(adventCard, 'hand', null, 'player');
   assert.equal(advActions.some(a => a.id === 'advent'), true, 'Advent action button generated for hand card');
+});
+
+test('Phase 11 - Universal Discard Effect & Cost Gating prompts before draw and verifies conditions', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  DuelState.inDuel = true;
+  DuelState.activePlayer = 'player';
+  DuelState.player.reserve = 3;
+
+  // Deck has cards to draw
+  DuelState.player.deck = [
+    { uid: 'deck_1', name: 'Deck Card 1' },
+    { uid: 'deck_2', name: 'Deck Card 2' }
+  ];
+
+  // Hand has 2 cards, one of which is Evil God
+  const evilGodCard = { uid: 'hand_evil_1', name: 'Evil God Minion', family: 'Evil God', type: 'Spirit' };
+  const genericCard = { uid: 'hand_gen_1', name: 'Generic Spirit', family: 'Astral Dragon', type: 'Spirit' };
+  DuelState.player.hand = [evilGodCard, genericCard];
+
+  // Opponent has spirit with cores
+  const oppSpirit = { uid: 'opp_sp_1', name: 'Opponent Guard', currentCores: 3, currentBp: 4000 };
+  DuelState.opponent.field = [oppSpirit];
+  DuelState.opponent.reserve = 0;
+
+  const lordJavad = {
+    uid: 'javad_test_1',
+    name: 'The Ruler of FourDemonLords Lord-Javad',
+    type: 'Ultimate',
+    currentLevel: 3,
+    currentCores: 1,
+    levels: { LV3: { level: 3, cost: 1, bp: 10000 }, LV4: { level: 4, cost: 3, bp: 13000 } },
+    effect: '[LV3][LV4] (When Summoned/Advents)\nBy discarding a card from your Hand, draw two cards. When this effect discards any "Evil God" family card, send two cores from the opposing Field to the Reserve.'
+  };
+
+  // 1. Gating verification: getDiscardCostInfo detects hand discard requirement
+  const discardInfo = BattleArena.getDiscardCostInfo(null, lordJavad);
+  assert.ok(discardInfo, 'Detected discard cost requirement on Lord-Javad');
+  assert.equal(discardInfo.count, 1, 'Requires 1 card discard');
+
+  // 2. Summon execution: prompts discard modal and when confirmed, discards Evil God, draws 2, and sends 2 cores to opp reserve
+  BattleArena.executeLordJavadSummonAdvent(lordJavad, 'player');
+
+  // Verify hand has drawn 2 cards and discarded evilGodCard
+  assert.equal(DuelState.player.hand.some(c => c.uid === 'hand_evil_1'), false, 'Evil God card discarded from hand');
+  assert.equal(DuelState.player.hand.some(c => c.uid === 'deck_1'), true, 'Drew Deck Card 1');
+  assert.equal(DuelState.player.hand.some(c => c.uid === 'deck_2'), true, 'Drew Deck Card 2');
+  assert.equal(DuelState.player.hand.length, 3, 'Hand size is 3 (genericCard + 2 drawn cards)');
+
+  // Verify Evil God synergy triggered: sent 2 cores from oppSpirit to Reserve
+  assert.equal(oppSpirit.currentCores, 1, 'Opponent spirit drained from 3 to 1 core');
+  assert.equal(DuelState.opponent.reserve, 2, 'Opponent reserve gained 2 cores');
+});
+
+test('Phase 11 - Rule 7.2: Uncombined Brave in Spirit condition cannot attack', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  DuelState.inDuel = true;
+  DuelState.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+  DuelState.phaseIndex = 5; // ATTACK step
+  DuelState.activePlayer = 'player';
+  DuelState.turn = 2; // Turn 2 so attack is permitted for ready spirits
+
+  const unbravedBrave = {
+    uid: 'brave_sp_1',
+    name: 'The EarthDeitySword Gaianohoko',
+    type: 'Brave',
+    isBraveCard: true,
+    isBraved: false,
+    braveHost: null,
+    isExhausted: false,
+    hasAttacked: false,
+    currentCores: 1,
+    currentBp: 3000,
+    effect: 'When your Ultimate is summoned...'
+  };
+
+  DuelState.player.field = [unbravedBrave];
+
+  // 1. canUnitAttack must evaluate to false for uncombined brave
+  assert.equal(BattleArena.canUnitAttack(unbravedBrave), false, 'canUnitAttack returns false for unbraved brave');
+
+  // 2. handleSpiritClick must not allow attack to execute
+  let toastTriggered = false;
+  global.showToast = (msg, type) => {
+    if (msg.includes('Rule 7.2') || msg.includes('cannot attack')) {
+      toastTriggered = true;
+    }
+  };
+
+  BattleArena.handleSpiritClick(unbravedBrave.uid, 'player');
+  assert.equal(unbravedBrave.isExhausted, false, 'Unbraved Brave remains ready (attack was blocked)');
+  assert.equal(toastTriggered, true, 'Toast warning displayed for Rule 7.2 violation');
+
+  // 3. Normal spirit CAN attack
+  const normalSpirit = {
+    uid: 'norm_sp_1',
+    name: 'Normal Warrior',
+    type: 'Spirit',
+    isExhausted: false,
+    hasAttacked: false,
+    currentCores: 1,
+    currentBp: 5000,
+    effect: ''
+  };
+  DuelState.player.field.push(normalSpirit);
+  assert.equal(BattleArena.canUnitAttack(normalSpirit), true, 'Normal spirit can attack');
+});
+
+test('Phase 11 - Burst Wall "When this battle ends, end the Attack Step" ends attack phase', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  DuelState.inDuel = true;
+  DuelState.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+  DuelState.phaseIndex = 5; // ATTACK step
+  DuelState.activePlayer = 'opponent';
+  DuelState.player.life = 2;
+
+  const burstWall = {
+    uid: 'burst_wall_1',
+    name: 'Burst Wall',
+    type: 'Magic',
+    cost: 4,
+    color: 'White',
+    effect: '[Burst: After your Life is reduced]\nPut a core from the Void to your Life. Then by paying the cost, activate this card\'s Flash effect.\n\n[Flash]\nWhen this battle ends, end the Attack Step.'
+  };
+
+  const oppAttacker = {
+    uid: 'opp_att_1',
+    name: 'The NetherCorpseKnight Ajaccio',
+    type: 'Spirit',
+    currentCores: 1,
+    currentBp: 6000,
+    isExhausted: false,
+    hasAttacked: false
+  };
+  const oppFollowup = {
+    uid: 'opp_att_2',
+    name: 'Opponent Second Striker',
+    type: 'Spirit',
+    currentCores: 1,
+    currentBp: 5000,
+    isExhausted: false,
+    hasAttacked: false
+  };
+
+  DuelState.opponent.field = [oppAttacker, oppFollowup];
+  DuelState.combatEvent = { attacker: oppAttacker, blocker: null };
+
+  // 1. Cast or activate Burst Wall during flash / battle
+  const effectDesc = BattleArena.applyMagicEffect(burstWall, 'player', oppAttacker, null, 'flash');
+  assert.match(effectDesc, /end the Attack Step/i, 'Magic effect confirms attack step termination');
+  assert.equal(DuelState.endAttackStepAtEndOfBattle, true, 'endAttackStepAtEndOfBattle queued for end of battle');
+
+  // 2. When this battle concludes, checkAndTriggerAttackStepEnd triggers and terminates attack phase
+  const ended = BattleArena.checkAndTriggerAttackStepEnd(0);
+  assert.equal(ended, true, 'checkAndTriggerAttackStepEnd returned true (attack step terminated)');
+  assert.equal(DuelState.attackStepEnded, true, 'attackStepEnded flag is set to true');
+  assert.equal(DuelState.activePlayer, 'player', 'Opponent turn ended and passed initiative to player');
 });

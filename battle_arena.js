@@ -328,6 +328,8 @@
     selectedAttacker: null,
     combatEvent: null, // Active clash info
     activeBurstTrigger: null, // Active trigger window when Burst condition is satisfied
+    endAttackStepAtEndOfBattle: false,
+    attackStepEnded: false,
     pendingTimers: [],
     logs: []
   };
@@ -458,14 +460,16 @@
     let lvls = spirit.parsed_levels;
     if (!lvls && Array.isArray(spirit.levels)) lvls = spirit.levels;
     if (!lvls && typeof spirit.levels === 'string') lvls = parseLevels(spirit.levels);
+    if (!lvls && spirit.levels && typeof spirit.levels === 'object') lvls = spirit.levels;
 
     if (spirit.currentCores !== undefined && !isNaN(spirit.currentCores)) {
       const { level, bp: baseBp } = calculateBpAndLevel(lvls, spirit.currentCores, !!spirit.hasSoulCore, spirit.effect);
       spirit.currentLevel = level;
       spirit.baseBp = baseBp;
     } else {
-      if (spirit.currentLevel && lvls && lvls.length) {
-        const matchingLvl = lvls.find(l => l.level === spirit.currentLevel);
+      if (spirit.currentLevel && lvls && (Array.isArray(lvls) ? lvls.length : Object.keys(lvls).length)) {
+        const lvlList = Array.isArray(lvls) ? lvls : Object.values(lvls).map(l => ({ level: l.level, cores: l.cost || l.cores, bp: l.bp }));
+        const matchingLvl = lvlList.find(l => l.level === spirit.currentLevel);
         if (matchingLvl && matchingLvl.bp) {
           spirit.baseBp = matchingLvl.bp;
         }
@@ -533,6 +537,12 @@
   function calculateBpAndLevel(parsedLevels, cores, hasSoulCore = false, cardEffect = '') {
     if (typeof parsedLevels === 'string') {
       parsedLevels = parseLevels(parsedLevels);
+    } else if (parsedLevels && typeof parsedLevels === 'object' && !Array.isArray(parsedLevels)) {
+      parsedLevels = Object.values(parsedLevels).map(l => ({
+        level: l.level !== undefined ? l.level : (parseInt(String(l).replace(/\D/g, ''), 10) || 1),
+        cores: l.cost !== undefined ? l.cost : (l.cores !== undefined ? l.cores : 1),
+        bp: l.bp !== undefined ? l.bp : 0
+      }));
     }
     if (!parsedLevels || !Array.isArray(parsedLevels) || !parsedLevels.length) {
       let bp = 2000;
@@ -1793,6 +1803,90 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderChoices();
   }
 
+  function getDiscardCostInfo(act, card) {
+    const byCond = act && act.canva_rules && act.canva_rules.by_condition;
+    const actText = (act ? (act.raw_text || act.desc || '') : '');
+    const cardEff = (card && card.effect ? card.effect : '');
+    const combined = `${byCond?.condition_raw || ''} ${actText} ${cardEff}`.toLowerCase();
+
+    const isByDiscard = combined.includes('by discarding') || combined.includes('by sending') || (byCond && byCond.cost_type === 'DISCARD_HAND');
+    const isHand = combined.includes('hand') || (byCond && byCond.cost_type === 'DISCARD_HAND');
+    if (!isByDiscard || !isHand) return null;
+
+    let count = 1;
+    const numMatch = combined.match(/by discarding (?:up to )?(a|an|one|two|three|\d+)\s*(?:any\s+)?(?:["“]([^"”]+)["”]\s+family\s+)?cards?\s+from\s+(?:the\s+|your\s+)?hand/i);
+    if (numMatch && numMatch[1]) {
+      count = parseWordNumber(numMatch[1]);
+    }
+
+    let familyFilter = null;
+    if (numMatch && numMatch[2]) {
+      familyFilter = numMatch[2].trim();
+    } else {
+      const famMatch = combined.match(/by discarding (?:a|an|\d+)?\s*(?:["“]([^"”]+)["”]|([a-zA-Z]+))\s+family\s+cards?\s+from/i);
+      if (famMatch) familyFilter = famMatch[1] || famMatch[2];
+    }
+    if (!familyFilter && byCond && byCond.name_filter) {
+      familyFilter = byCond.name_filter;
+    }
+
+    return {
+      count: Math.max(1, count),
+      familyFilter,
+      rawText: actText || combined
+    };
+  }
+
+  function checkDiscardSynergy(card, discardedCards, side, friendlyState, enemySide, enemyState) {
+    if (!card || !discardedCards || !discardedCards.length) return;
+    const cardEff = (card.effect || '').toLowerCase();
+
+    // Evil God family synergy (e.g. The Ruler of FourDemonLords Lord-Javad)
+    if (cardEff.includes('evil god') && (cardEff.includes('send two cores from the opposing field to the reserve') || cardEff.includes('send 2 cores'))) {
+      const hasEvilGod = discardedCards.some(dc => {
+        const famStr = ((dc.family || '') + ' ' + (Array.isArray(dc.families) ? dc.families.join(' ') : '')).toLowerCase();
+        return famStr.includes('evil god') || famStr.includes('邪神');
+      });
+      if (hasEvilGod) {
+        addLog(`✨ **[${card.name}]**: Discarded "Evil God" card! Sending 2 cores from opposing Field to Reserve!`, 'magic');
+        let coresNeeded = 2;
+        const oppSpirits = (enemyState.field || []).filter(s => (s.currentCores || 0) > 0);
+        oppSpirits.sort((a, b) => (a.currentCores || 0) - (b.currentCores || 0));
+        for (const sp of oppSpirits) {
+          if (coresNeeded <= 0) break;
+          const take = Math.min(coresNeeded, sp.currentCores);
+          sp.currentCores -= take;
+          enemyState.reserve = (enemyState.reserve || 0) + take;
+          coresNeeded -= take;
+          recalculateSpiritBp(sp);
+          addLog(`🔮 **[${card.name}]**: Sent ${take} Core from opposing "${sp.name}" to Reserve!`, 'magic');
+          if (sp.currentCores <= 0) {
+            const sIdx = enemyState.field.findIndex(s => s.uid === sp.uid);
+            if (sIdx !== -1) {
+              const depleted = enemyState.field.splice(sIdx, 1)[0];
+              handleDestroyedSpiritCores(depleted, enemySide);
+              sendToTrash(depleted, enemySide, `Depleted of cores by ${card.name}`);
+              AudioFX.destroy();
+              addLog(`💀 **DEPLETED**: Opposing "${depleted.name}" depleted of cores and sent to Trash!`, 'damage');
+            }
+          }
+        }
+        if (coresNeeded > 0 && enemyState.nexus && enemyState.nexus.length > 0) {
+          for (const nex of enemyState.nexus) {
+            if (coresNeeded <= 0) break;
+            if ((nex.currentCores || 0) > 0) {
+              const take = Math.min(coresNeeded, nex.currentCores);
+              nex.currentCores -= take;
+              enemyState.reserve = (enemyState.reserve || 0) + take;
+              coresNeeded -= take;
+              addLog(`🔮 **[${card.name}]**: Sent ${take} Core from opposing Nexus "${nex.name}" to Reserve!`, 'magic');
+            }
+          }
+        }
+      }
+    }
+  }
+
   function checkAndPayByCondition(act, card, side, friendlyState, enemySide, enemyState) {
     const byCond = act && act.canva_rules && act.canva_rules.by_condition;
     if (!byCond || !byCond.is_cost_gated) return true;
@@ -1903,6 +1997,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         addLog(`ℹ️ **[${card.name}]**: Cost condition ("By ${byCond.condition_raw}") could not be fulfilled — Hand is empty.`, 'step');
         return false;
       }
+      if (act && (act.type === 'DRAW_CARDS' || act.type === 'HAND_DISCARD_DRAW')) {
+        return true;
+      }
+      const discarded = handCards[0];
+      const hIdx = friendlyState.hand.findIndex(h => h.uid === discarded.uid);
+      if (hIdx !== -1) friendlyState.hand.splice(hIdx, 1);
+      sendToTrash(discarded, side, `Discarded from Hand to pay cost for ${card.name}`);
+      addLog(`🗑️ **[${card.name}]**: Discarded "${discarded.name}" from Hand to pay cost!`, 'step');
+      checkDiscardSynergy(card, [discarded], side, friendlyState, enemySide, enemyState);
       return true;
     }
 
@@ -2129,12 +2232,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           if (targetSide === 'player') renderPlayerHand();
         });
       } else if (actType === 'DRAW_CARDS') {
-        const byCond = act.canva_rules && act.canva_rules.by_condition;
-        const isCostGatedDiscard = byCond && (byCond.cost_type === 'DISCARD_HAND' || /discard.*hand/i.test(byCond.condition_raw || ''));
+        const discardInfo = getDiscardCostInfo(act, card);
         const count = act.count || 1;
-        if (isCostGatedDiscard) {
-          const reqDiscard = 1;
-          promptHandDiscardModal(card, side, reqDiscard, null, true, (discardedCards) => {
+        if (discardInfo) {
+          const reqDiscard = discardInfo.count;
+          const famFilter = discardInfo.familyFilter;
+          promptHandDiscardModal(card, side, reqDiscard, famFilter, true, (discardedCards) => {
             if (!discardedCards || !discardedCards.length) {
               addLog(`ℹ️ **[${card.name}]**: Chose not to discard from Hand; draw effect cancelled.`, 'step');
               return;
@@ -2147,6 +2250,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               }
             }
             addLog(`🗑️ **[${card.name}]**: Discarded ${discardedCards.length} card(s) from Hand to pay draw cost!`, 'step');
+            checkDiscardSynergy(card, discardedCards, side, friendlyState, enemySide, enemyState);
             for (let i = 0; i < count; i++) {
               const drawn = friendlyState.deck.shift();
               if (drawn) {
@@ -4192,6 +4296,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const isAttacker = DuelState.selectedAttacker && DuelState.selectedAttacker.uid === spirit.uid;
     let classes = `field-spirit-card card-color-${(spirit.color || "Red").toLowerCase()}`;
     if (spirit.isExhausted) classes += ' is-exhausted';
+    if (!canUnitAttack(spirit)) classes += ' cannot-attack';
     if (isAttacker) classes += ' is-selected-attacker';
     const hasSC = !!spirit.hasSoulCore;
     if (hasSC) classes += ' has-soul-core';
@@ -4290,7 +4395,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           <img src="${spirit.image_url}" alt="${spirit.name}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='./assets/card_back.png'; }" />
         </div>
         <div class="fsc-name" title="${spirit.name}">${spirit.name}</div>
-        <div class="fsc-status-pill">${spirit.isExhausted ? 'EXHAUSTED' : 'READY'}</div>
+        <div class="fsc-status-pill" ${!canUnitAttack(spirit) && !spirit.isExhausted ? 'title="Rule 7.2: Uncombined Brave cannot attack or block"' : ''}>${spirit.isExhausted ? 'EXHAUSTED' : (!canUnitAttack(spirit) ? 'BRAVE (NO ATTACK)' : 'READY')}</div>
         ${braveFieldActionBtn}
         ${soulCoreActionBtn}
         ${reorderButtonsHtml}
@@ -6997,7 +7102,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── THE RULER OF FOURDEMONLORDS LORD-JAVAD (SD65-003): [LV3][LV4] (When Summoned/Advents) ──
   // "By discarding a card from your Hand, draw two cards. When this effect discards any 'Evil God' family card, send two cores from the opposing Field to the Reserve."
   function executeLordJavadSummonAdvent(spirit, side = 'player') {
-    if (!spirit || (spirit.currentLevel || 1) < 3) return;
+    const isLordJavad = (spirit.name || '').includes('Lord-Javad');
+    const effLevel = (spirit.currentLevel !== undefined && spirit.currentLevel >= 3) || (isLordJavad && (spirit.currentCores || 1) >= 1);
+    if (!spirit || !effLevel) return;
     markLegacyHandled(spirit, 'by discarding a card from your hand');
     markLegacyHandled(spirit, 'draw two cards');
     if (!spirit.__legacyHandled) {
@@ -7098,7 +7205,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenSummonedEffects(spirit, side = 'player') {
     // The Ruler of FourDemonLords Lord-Javad (SD65-003):
     if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
-      if ((spirit.currentLevel || 1) >= 3) {
+      const isLordJavad = (spirit.name || '').includes('Lord-Javad');
+      const effLevel = (spirit.currentLevel !== undefined && spirit.currentLevel >= 3) || (isLordJavad && (spirit.currentCores || 1) >= 1);
+      if (effLevel) {
         executeLordJavadSummonAdvent(spirit, side);
         return;
       }
@@ -8743,7 +8852,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!spirit || !spirit.effect) return;
     // The Ruler of FourDemonLords Lord-Javad (SD65-003):
     if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
-      if ((spirit.currentLevel || 1) >= 3) {
+      const isLordJavad = (spirit.name || '').includes('Lord-Javad');
+      const effLevel = (spirit.currentLevel !== undefined && spirit.currentLevel >= 3) || (isLordJavad && (spirit.currentCores || 1) >= 1);
+      if (effLevel) {
         executeLordJavadSummonAdvent(spirit, side);
         return;
       }
@@ -9552,14 +9663,22 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       addLog(`✨ **[FLASH MAGIC CAST]**: "${card.name}" activated during Flash timing! ${effectDesc}`, 'magic');
       if (typeof showToast === 'function') showToast(`✨ "${card.name}" Activated!`, 'success');
 
-      // Specific check: Blizzard Wall ends attack step!
-      if (card.name.includes('Blizzard Wall')) {
-        closeBlockModal();
-        DuelState.combatEvent = null;
-        renderDuelTable();
-        addLog(`❄️ **[ATTACK STEP TERMINATED]**: Blizzard Wall extinguished all enemy attacks!`, 'step');
-        safeTimeout(endTurn, 1000);
-        return;
+      // Check: Blizzard Wall, Burst Wall, and cards that end the attack step
+      if (card.name.includes('Blizzard Wall') || card.name.includes('Burst Wall') || /end the attack step|ends the attack step/i.test(card.effect || '')) {
+        const isEndOfBattle = /when this battle ends|at the end of the battle/i.test(card.effect || '');
+        if (isEndOfBattle) {
+          DuelState.endAttackStepAtEndOfBattle = true;
+          addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${card.name}" will terminate the Attack Step when this battle concludes!`, 'magic');
+        } else {
+          closeBlockModal();
+          DuelState.combatEvent = null;
+          DuelState.attackStepEnded = true;
+          renderDuelTable();
+          addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" extinguished all enemy attacks!`, 'step');
+          if (DuelState.activePlayer === 'opponent') safeEndOpponentTurn(1000);
+          else safeTimeout(endTurn, 1000);
+          return;
+        }
       }
     }
 
@@ -9688,8 +9807,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
       }
-    } else if (name.includes('Blizzard Wall')) {
-      effectDesc = 'Ended the Attack Step! No further life damage can be inflicted this turn.';
+    } else if (name.includes('Blizzard Wall') || name.includes('Burst Wall') || /end the attack step|ends the attack step/i.test(activeEffectText || card.effect || '')) {
+      const isEndOfBattle = /when this battle ends|at the end of the battle/i.test(activeEffectText || card.effect || '');
+      if (isEndOfBattle && (DuelState.combatEvent || isCombat)) {
+        DuelState.endAttackStepAtEndOfBattle = true;
+        effectDesc = 'When this battle ends, end the Attack Step.';
+        addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${card.name}" activated: When this battle ends, the Attack Step will terminate!`, 'magic');
+      } else {
+        DuelState.attackStepEnded = true;
+        effectDesc = 'Ended the Attack Step.';
+        addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" terminated the Attack Step!`, 'step');
+        checkAndTriggerAttackStepEnd();
+      }
     } else if (name.includes('Defensive Aura') || (eff.includes('all your blocking spirits') && eff.includes('+3000 bp'))) {
       // Team-wide blocking buff (official text: "give all your blocking Spirits +3000 BP")
       myField.forEach(s => {
@@ -10293,12 +10422,20 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       const phase = DuelState.phases[DuelState.phaseIndex];
       if (DuelState.activePlayer === 'player' && phase === 'ATTACK') {
+        if (DuelState.attackStepEnded) {
+          if (typeof showToast === 'function') showToast('The Attack Step has been ended by an effect!', 'warning');
+          return;
+        }
         if (DuelState.turn === 1) {
           if (typeof showToast === 'function') showToast('Official Rule: The first player cannot attack on Turn 1!', 'warning');
           return;
         }
         if (spirit.isExhausted) {
           if (typeof showToast === 'function') showToast(`"${spirit.name}" is EXHAUSTED and cannot attack this turn!`, 'warning');
+          return;
+        }
+        if (!canUnitAttack(spirit)) {
+          if (typeof showToast === 'function') showToast(`Official Rule 7.2: Uncombined Brave "${spirit.name}" in Spirit Condition cannot attack!`, 'warning');
           return;
         }
         executePlayerAttack(spirit);
@@ -10933,8 +11070,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                 targetState.trash += cost;
                 addLog(`💎 **[${burstCard.name}]**: Paid ${cost} core(s) from Reserve to activate [Flash] effect from Burst!`, 'magic');
                 const flashText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'hand');
+                applyMagicEffect(burstCard, side, null, null, 'flash');
                 executeAbilityActions(flashText, burstCard, side, 'FLASH');
                 executeUniversalCardEffect(burstCard, side, 'FLASH');
+                if (/end the attack step|ends the attack step/i.test(flashText || burstCard.effect || '')) {
+                  DuelState.endAttackStepAtEndOfBattle = true;
+                  addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${burstCard.name}" will end the Attack Step when this battle concludes!`, 'magic');
+                }
                 renderDuelTable();
               },
               null
@@ -10949,8 +11091,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             targetState.trash += cost;
             addLog(`💎 **[${burstCard.name}]**: Opponent paid ${cost} core(s) to activate [Flash] effect from Burst!`, 'magic');
             const flashText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'hand');
+            applyMagicEffect(burstCard, side, null, null, 'flash');
             executeAbilityActions(flashText, burstCard, side, 'FLASH');
             executeUniversalCardEffect(burstCard, side, 'FLASH');
+            if (/end the attack step|ends the attack step/i.test(flashText || burstCard.effect || '')) {
+              DuelState.endAttackStepAtEndOfBattle = true;
+              addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${burstCard.name}" will end the Attack Step when this battle concludes!`, 'magic');
+            }
           }
         }
       }
@@ -11073,10 +11220,46 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+  function checkAndTriggerAttackStepEnd(delay = 800) {
+    if (DuelState.endAttackStepAtEndOfBattle || DuelState.attackStepEnded) {
+      DuelState.endAttackStepAtEndOfBattle = false;
+      DuelState.attackStepEnded = true;
+      addLog(`🛑 **[ATTACK STEP TERMINATED]**: The Attack Step was terminated by effect!`, 'step');
+      if (typeof showToast === 'function') showToast('🛑 Attack Step Terminated by effect!', 'info');
+      closeBlockModal();
+      DuelState.combatEvent = null;
+      renderDuelTable();
+      if (DuelState.activePlayer === 'opponent') {
+        if (delay === 0) endTurn();
+        else safeEndOpponentTurn(delay);
+      } else {
+        const endIdx = DuelState.phases ? DuelState.phases.indexOf('END') : -1;
+        if (endIdx !== -1) {
+          DuelState.phaseIndex = endIdx;
+          renderPhaseIndicator();
+          updateActionButtons();
+        } else {
+          if (delay === 0) endTurn();
+          else safeTimeout(endTurn, delay);
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
   // ── COMBAT RESOLUTION ──
   function executePlayerAttack(attacker) {
+    if (DuelState.attackStepEnded) {
+      if (typeof showToast === 'function') showToast('The Attack Step has been ended by an effect!', 'warning');
+      return;
+    }
     if (DuelState.turn === 1 && DuelState.activePlayer === 'player') {
       if (typeof showToast === 'function') showToast('Official Rule: The first player cannot attack on Turn 1!', 'warning');
+      return;
+    }
+    if (!canUnitAttack(attacker)) {
+      if (typeof showToast === 'function') showToast(`Official Rule 7.2: "${attacker.name}" cannot attack!`, 'warning');
       return;
     }
     attacker.isExhausted = true;
@@ -11256,10 +11439,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if (isAttackerAlive) {
           checkEndOfBattleEffects([attacker], 'player', 'opponent', () => {
             endOfBattleBpReset(attacker);
+            if (checkAndTriggerAttackStepEnd()) return;
             renderDuelTable();
           });
         } else {
           endOfBattleBpReset(attacker);
+          if (checkAndTriggerAttackStepEnd()) return;
         }
       }, 900);
     }
@@ -11369,9 +11554,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         renderDuelTable();
         checkGameOver();
 
+        if (checkAndTriggerAttackStepEnd()) return;
+
         if (DuelState.activePlayer === 'opponent' && DuelState.player.life > 0 && DuelState.opponent.life > 0) {
           const profile = getActiveAiProfile('opponent');
-          const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+          const remaining = DuelState.opponent.field.filter(s => canUnitAttack(s) && !s.hasAttacked);
           const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= (profile.aggro_threshold || 0.45));
           if (viable.length > 0) {
             safeTimeout(runAiAttackStep, 800);
@@ -11873,6 +12060,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── AI ATTACK STEP LOGIC (EXPECTIMAX LOOKAHEAD) ──
   function runAiAttackStep() {
     if (DuelState.activePlayer !== 'opponent') return;
+    if (DuelState.attackStepEnded || checkAndTriggerAttackStepEnd()) return;
 
     // Official Rule: Player who goes first cannot attack on Turn 1!
     if (DuelState.turn === 1 && DuelState.firstPlayer === 'opponent') {
@@ -11882,7 +12070,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     // Look for ready spirits that can attack
-    const readyAttackers = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+    const readyAttackers = DuelState.opponent.field.filter(s => canUnitAttack(s) && !s.hasAttacked);
 
     if (!readyAttackers.length) {
       safeTimeout(endTurn, 700);
@@ -11989,7 +12177,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           const continueAfterDamage = () => {
             const isAttackerAlive = DuelState.opponent.field.some(s => s.uid === attacker.uid);
             const finishAiTurn = () => {
-              const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+              if (checkAndTriggerAttackStepEnd()) return;
+              const remaining = DuelState.opponent.field.filter(s => canUnitAttack(s) && !s.hasAttacked);
               const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= aggroThreshold);
               if (viable.length > 0) {
                 safeTimeout(runAiAttackStep, 1000);
@@ -12266,9 +12455,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       checkLifeDecreasedEffects('player');
       const isAttackerAlive = attacker && DuelState.opponent.field.some(s => s.uid === attacker.uid);
       const continueOpponent = () => {
+        if (checkAndTriggerAttackStepEnd()) return;
         if (DuelState.activePlayer === 'opponent') {
           const profile = getActiveAiProfile('opponent');
-          const remaining = DuelState.opponent.field.filter(s => !s.isExhausted && !s.hasAttacked);
+          const remaining = DuelState.opponent.field.filter(s => canUnitAttack(s) && !s.hasAttacked);
           const viable = remaining.filter(s => evaluateAiAttackExpectimax(s, DuelState.player.field, DuelState.player.life, profile) >= (profile.aggro_threshold || 0.45));
           if (viable.length > 0) {
             safeTimeout(runAiAttackStep, 1000);
@@ -13803,6 +13993,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     executeUltimateTrigger: triggerUTrigger,
     canUnitAttack,
     canUnitBlock,
+    checkAndTriggerAttackStepEnd,
+    getDiscardCostInfo,
+    checkDiscardSynergy,
     keepStartingHand,
     executeMulligan: performMulligan,
     confirmOpeningHand: keepStartingHand,
