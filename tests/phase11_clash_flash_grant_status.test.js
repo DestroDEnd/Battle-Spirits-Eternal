@@ -540,3 +540,195 @@ test('Phase 11 - Hard Once Per Turn: Same Name (The Four Towers of Limbo)', () =
   BattleArena.endTurn();
   assert.equal(BattleArena.hasUsedSameNameOncePerTurn('The Four Towers of Limbo', 'AttackStepChoice'), false, 'HOPT reset on endTurn');
 });
+
+test('Phase 11 - Brave BP Bonus uses Braved condition BP (+5000 BP, not Spirit 3000 BP)', () => {
+  const { BattleArena } = setupTestEnvironment();
+
+  // The EarthDeitySword Gaianohoko: Spirit form has 3000 BP, Braved form has +5000 BP
+  const gaianohoko = {
+    name: 'The EarthDeitySword Gaianohoko',
+    type: 'Brave',
+    cost: 5,
+    levels: [ { level: 1, cores: 1, bp: 3000 } ],
+    raw_levels: 'Level 1: 1 core, 3000 BP\nBraved: 0 cores, +5000 BP',
+    braved_bp: 5000,
+    brave_condition: 'Cost 5 or more Ultimate',
+    effect: '[Brave Condition: Cost 5 or more Ultimate]\n\nWhen your Ultimate is summoned, you can summon this card from the Hand without paying the cost.\n\n[During Brave]\nWhile braved to an Ultimate without Cross Ultimate Trigger, this Brave\'s Cost becomes 0.\n\n[During Brave] (When Attacks/Blocks)\nThe opposing Burst can\'t activate.'
+  };
+
+  const bpBonus = BattleArena.parseBraveBonus(gaianohoko.levels, gaianohoko.effect, gaianohoko);
+  assert.equal(bpBonus, 5000, 'Gaianohoko must provide +5000 BP in Brave condition (NOT its Spirit form 3000 BP)');
+
+  // Verify host Spirit/Ultimate BP calculation with combined Brave
+  const hostUlt = {
+    uid: 'host_ult_1',
+    name: 'Ultimate-Seiryubi',
+    type: 'Ultimate',
+    cost: 8,
+    currentLevel: 3,
+    currentCores: 1,
+    baseBp: 10000,
+    currentBp: 10000,
+    levels: [{ level: 3, cores: 1, bp: 10000 }, { level: 4, cores: 3, bp: 13000 }],
+    brave: gaianohoko
+  };
+  gaianohoko.bpBonus = bpBonus;
+
+  BattleArena.recalculateSpiritBp(hostUlt);
+  assert.equal(hostUlt.currentBp, 15000, 'Host Ultimate BP must be 10000 + 5000 = 15000 BP');
+});
+
+test('Phase 11 - Brave Condition enforcement filters ineligible targets (Gaianohoko requires Cost 5+ Ultimate)', () => {
+  const { BattleArena } = setupTestEnvironment();
+
+  const gaianohoko = {
+    name: 'The EarthDeitySword Gaianohoko',
+    type: 'Brave',
+    cost: 5,
+    brave_condition: 'Cost 5 or more Ultimate',
+    effect: '[Brave Condition: Cost 5 or more Ultimate]\n\n[During Brave] ...'
+  };
+
+  const kagerouSeeker = {
+    uid: 'ks_1',
+    name: 'The Hellwind Searcher Kagerou-Seeker',
+    type: 'Ultimate',
+    cost: 3
+  };
+
+  const javad = {
+    uid: 'javad_1',
+    name: 'The PartnerDemonLord Javad',
+    type: 'Contract Ultimate',
+    cost: 3
+  };
+
+  const bladeDragon = {
+    uid: 'bd_1',
+    name: 'Blade Dragon',
+    type: 'Spirit',
+    cost: 5
+  };
+
+  const seiryubi = {
+    uid: 'seiryubi_1',
+    name: 'Ultimate-Seiryubi',
+    type: 'Ultimate',
+    cost: 8
+  };
+
+  // 1. Kagerou-Seeker is Cost 3 Ultimate -> Ineligible (Cost < 5)
+  const check1 = BattleArena.checkBraveCondition(gaianohoko, kagerouSeeker);
+  assert.equal(check1.eligible, false, 'Cost 3 Ultimate must be rejected');
+  assert.ok(check1.reason.includes('Cost 5+'));
+
+  // 2. Javad is Cost 3 Contract Ultimate -> Ineligible (Cost < 5)
+  const check2 = BattleArena.checkBraveCondition(gaianohoko, javad);
+  assert.equal(check2.eligible, false, 'Cost 3 Contract Ultimate must be rejected');
+
+  // 3. Blade Dragon is Cost 5 Spirit -> Ineligible (Not an Ultimate)
+  const check3 = BattleArena.checkBraveCondition(gaianohoko, bladeDragon);
+  assert.equal(check3.eligible, false, 'Spirit must be rejected when condition requires Ultimate');
+
+  // 4. Seiryubi is Cost 8 Ultimate -> Eligible!
+  const check4 = BattleArena.checkBraveCondition(gaianohoko, seiryubi);
+  assert.equal(check4.eligible, true, 'Cost 8 Ultimate satisfies Cost 5+ Ultimate requirement');
+});
+
+test('Phase 11 - Contract Partner transitions to Soul State upon leaving field & returns cores to reserve', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const contractPartner = {
+    uid: 'c_javad',
+    name: 'The PartnerDemonLord Javad',
+    type: 'Contract Ultimate',
+    isContractPartner: true,
+    currentCores: 2,
+    hasSoulCore: true,
+    currentBp: 5000
+  };
+
+  DuelState.player.contractCard = contractPartner;
+  DuelState.player.field = [contractPartner];
+  DuelState.player.reserve = 2;
+  DuelState.player.soulCoreLocation = 'field';
+  DuelState.player.soulCoreSpiritUid = contractPartner.uid;
+
+  // Partner destroyed by opponent effect
+  BattleArena.sendToTrash(contractPartner, 'player', 'Destroyed by opposing magic');
+
+  // 1. Partner enters Soul State instead of Trash
+  assert.equal(contractPartner.isSoulState, true, 'Partner marked in Soul State');
+  assert.equal(DuelState.player.soulStateCards.length, 1, 'Partner added to soulStateCards');
+  assert.equal(DuelState.player.field.length, 0, 'Partner removed from active field');
+  assert.equal((DuelState.player.trashCards || []).length, 0, 'Partner NOT in trash');
+
+  // 2. Cores returned to Reserve (1 normal core + Soul Core to reserve)
+  assert.equal(DuelState.player.reserve, 3, 'Normal core returned to Reserve (2 + 1 = 3)');
+  assert.equal(DuelState.player.soulCoreLocation, 'reserve', 'Soul Core returned to Reserve');
+  assert.equal(contractPartner.currentCores, 0, 'Cores on Soul State card reset to 0');
+
+  // 3. Card in Soul State cannot attack or block
+  assert.equal(BattleArena.canUnitAttack(contractPartner), false, 'Unit in Soul State cannot attack');
+  assert.equal(BattleArena.canUnitBlock(contractPartner), false, 'Unit in Soul State cannot block');
+});
+
+test('Phase 11 - Contract Advent onto Soul State restores card to field and Over Count (OC) scales BP', () => {
+  const { BattleArena, DuelState } = setupTestEnvironment();
+
+  const partnerInSoulState = {
+    uid: 'c_partner_soul',
+    name: 'The PartnerDemonLord Javad',
+    type: 'Contract Ultimate',
+    family: 'Evil God',
+    isContractPartner: true,
+    isSoulState: true,
+    currentCores: 0,
+    cost: 3,
+    effect: '[Soul State] (Your Attack Step) Count +1.'
+  };
+
+  DuelState.player.contractCard = partnerInSoulState;
+  DuelState.player.soulStateCards = [partnerInSoulState];
+  DuelState.player.field = [];
+  DuelState.player.reserve = 3;
+  DuelState.player.count = 2;
+  DuelState.player.soulCoreLocation = 'reserve';
+
+  const contractAdventCard = {
+    uid: 'c_advent_card',
+    name: 'Demon Lord Advent Form',
+    type: 'Ultimate',
+    cost: 6,
+    family: 'Evil God',
+    levels: [{ level: 3, cores: 1, bp: 10000 }, { level: 4, cores: 3, bp: 14000 }],
+    effect: 'Flash - [Contract Advent: "Evil God" & C1 or more, (Your Attack Step)]\n[During OC] [OC Condition: C2 or more] BP+5000\n[During OC] (When Attacks) Destroy 1 opposing Spirit.'
+  };
+
+  DuelState.player.hand = [contractAdventCard];
+
+  // 1. Requirement parsing: recognizes Contract Advent, C1 or more count, and targets in Soul State
+  const req = BattleArena.getCardAdventRequirement(contractAdventCard);
+  assert.equal(req.isContractAdvent, true, 'Identified as Contract Advent');
+  assert.equal(req.minCount, 1, 'Requires C1 or more');
+
+  // 2. Targets: Soul State Partner satisfies "Evil God" and C1+ requirement!
+  const eligible = BattleArena.getEligibleAdventTargets(req, DuelState.player.field, 'player');
+  assert.equal(eligible.length, 1, 'Partner in Soul State is an eligible target');
+  assert.equal(eligible[0].uid, partnerInSoulState.uid);
+
+  // 3. Execute Contract Advent onto Soul State target
+  BattleArena.executeAdvent(contractAdventCard, partnerInSoulState, 'player');
+
+  // Target leaves Soul State, enters active field with 1 core allocated from Reserve
+  assert.equal(partnerInSoulState.isSoulState, false, 'Target leaves Soul State');
+  assert.equal(DuelState.player.soulStateCards.length, 0, 'soulStateCards empty');
+  assert.equal(DuelState.player.field.length, 1, 'Placed on active field');
+  assert.equal(DuelState.player.field[0].currentCores, 1, 'Allocated 1 core');
+  assert.equal(DuelState.player.reserve, 1, 'Reserve decreased by 2 cores (1 Soul Core to Trash, 1 core to Advent spirit: 3 -> 1)');
+  assert.equal(DuelState.player.soulCoreLocation, 'trash', 'Soul Core spent for Advent sent to Trash');
+
+  // 4. Over Count BP+ bonus: Count is 2, satisfying C2 or more (+5000 BP)
+  BattleArena.recalculateSpiritBp(DuelState.player.field[0]);
+  assert.equal(DuelState.player.field[0].currentBp, 15000, 'Base 10000 BP + 5000 OC BP = 15000 BP');
+});

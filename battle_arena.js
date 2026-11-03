@@ -479,8 +479,15 @@
     }
 
     spirit.currentBp = (spirit.baseBp || 0) + (spirit.turnBpBoost || 0) + (spirit.temporaryBpBuff || 0);
-    if (spirit.brave && spirit.brave.bpBonus) {
-      spirit.currentBp += spirit.brave.bpBonus;
+    if (spirit.brave) {
+      const bBonus = spirit.brave.bpBonus || parseBraveBonus(spirit.brave.raw_levels || spirit.brave.levels, spirit.brave.effect, spirit.brave);
+      spirit.currentBp += bBonus;
+    }
+    const side = (DuelState && DuelState.player && DuelState.player.field && DuelState.player.field.some(s => s.uid === spirit.uid)) ? 'player' : 'opponent';
+    const curCount = (DuelState && DuelState[side] && DuelState[side].count) || 0;
+    const ocBp = getOverCountBpBonus(spirit, curCount);
+    if (ocBp > 0) {
+      spirit.currentBp += ocBp;
     }
     if (spirit.battleBpBoost) {
       spirit.battleBp = spirit.currentBp + spirit.battleBpBoost;
@@ -488,6 +495,20 @@
       delete spirit.battleBp;
     }
     return spirit.currentBp;
+  }
+
+  function getOverCountBpBonus(spirit, currentCount) {
+    if (!spirit || !spirit.effect || currentCount <= 0) return 0;
+    const mCond = spirit.effect.match(/(?:OC\s*Condition|OC\s*条件|\[During\s*OC\])[^:\n]*?C(\d+)\s*or\s*more[^\n]*?(?:BP\s*\+?|\+\s*)(\d{3,5})/i) ||
+                  spirit.effect.match(/\[OC(?:\s*Condition)?:\s*C(\d+)[^\]]*?\][^\n]*?(?:BP\s*\+?|\+\s*)(\d{3,5})/i);
+    if (mCond) {
+      const reqCount = parseInt(mCond[1], 10);
+      const bpBonus = parseInt(mCond[2], 10);
+      if (currentCount >= reqCount) {
+        return bpBonus;
+      }
+    }
+    return 0;
   }
 
   function getWhenBlocksBpBoost(spirit) {
@@ -554,37 +575,41 @@
   }
 
   function parseBraveBonus(levelsInput, effectStr, card = null) {
-    // 1. Direct levels object check: { LV1: { bp: 5000 } }
-    if (levelsInput && typeof levelsInput === 'object') {
-      if (Array.isArray(levelsInput) && levelsInput.length > 0 && levelsInput[0].bp) {
-        return levelsInput[0].bp;
-      }
-      if (levelsInput.LV1 && levelsInput.LV1.bp) {
-        return levelsInput.LV1.bp;
-      }
-      for (const k of Object.keys(levelsInput)) {
-        if (levelsInput[k] && levelsInput[k].bp) {
-          return levelsInput[k].bp;
-        }
-      }
+    // 0. Explicit braved_bp or bpBonus on card
+    if (card) {
+      if (typeof card.braved_bp === 'number' && card.braved_bp >= 0) return card.braved_bp;
+      if (typeof card.bpBonus === 'number' && card.bpBonus >= 0) return card.bpBonus;
     }
 
-    // 2. String levels check: "Braved: 0 cores, +5000 BP" or "合体+5000BP" or "LV1: 1 core, 5000 BP"
-    if (levelsInput && typeof levelsInput === 'string') {
-      const mBrave = levelsInput.match(/(?:Brave|Braved|合体)\s*:\s*(?:\d+\s*cores?,\s*)?\+?(\d+)\s*BP/i) ||
-                     levelsInput.match(/合体\s*\+?(\d+)\s*BP/i);
+    // 1. Check raw_levels or string representation for explicit Braved BP: "Braved: 0 cores, +5000 BP" or "合体+5000BP"
+    const strCandidate = (card && card.raw_levels) || 
+                         (typeof levelsInput === 'string' ? levelsInput : '') ||
+                         (card && typeof card.levels === 'string' ? card.levels : '');
+    if (strCandidate) {
+      const mBrave = strCandidate.match(/(?:Brave|Braved|合体)[^:\d]*[:\s]+(?:(?:\d+)\s*cores?,\s*)?\+?(\d+)\s*BP/i) ||
+                     strCandidate.match(/合体\s*\+?(\d+)\s*BP/i) ||
+                     strCandidate.match(/(?:Brave|Braved|合体)[^:\n]*?\+(\d+)\s*BP/i);
       if (mBrave) return parseInt(mBrave[1], 10);
-
-      const mLvl1 = levelsInput.match(/(?:LV1|Level\s*1)\s*:\s*\d+\s*cores?,\s*(\d+)\s*BP/i);
-      if (mLvl1) return parseInt(mLvl1[1], 10);
+      const mPlus = strCandidate.match(/\+(\d+)\s*BP/i);
+      if (mPlus) return parseInt(mPlus[1], 10);
     }
 
-    // 3. Fallback to effect string, CAREFULLY ignoring "BP or less" / "BP以下" / "BP or more" / "BP以上"
-    if (effectStr && typeof effectStr === 'string') {
-      const sanitized = effectStr.replace(/\d{3,6}\s*BP\s*(?:or\s*(?:less|more)|以下|以上)/gi, '');
+    // 2. Fallback to effect string: [During Brave] gives +5000 BP or +5000 BP (ignoring "BP or less" / "BP or more")
+    const effStr = effectStr || (card && card.effect) || '';
+    if (effStr && typeof effStr === 'string') {
+      const sanitized = effStr.replace(/\d{3,6}\s*BP\s*(?:or\s*(?:less|more)|以下|以上)/gi, '');
       const mEff = sanitized.match(/(?:\[(?:During\s+Brave|When\s+Braved|During\s+Spirit\s+Brave)\][^\n]*?)?(?:gives?|gains?|\+)\s*(\d{3,5})\s*BP/i) ||
+                   sanitized.match(/【合体中】[^\n]*?\+(\d{3,5})\s*BP/i) ||
                    sanitized.match(/\+(\d{3,5})\s*BP/i);
       if (mEff) return parseInt(mEff[1], 10);
+    }
+
+    // 3. Object representation: { Braved: { bp: 5000 } } or { brave: { bp: 5000 } }
+    if (levelsInput && typeof levelsInput === 'object') {
+      if (levelsInput.Braved && levelsInput.Braved.bp) return levelsInput.Braved.bp;
+      if (levelsInput.braved && levelsInput.braved.bp) return levelsInput.braved.bp;
+      if (levelsInput.Brave && levelsInput.Brave.bp) return levelsInput.Brave.bp;
+      if (levelsInput.brave && levelsInput.brave.bp) return levelsInput.brave.bp;
     }
 
     // 4. Card object BP fallback
@@ -597,11 +622,30 @@
 
   function checkBraveCondition(braveCard, hostCard) {
     if (!braveCard || !hostCard) return { eligible: false, reason: 'Invalid cards' };
-    const text = (braveCard.effect || '') + ' ' + (braveCard.flavor || '');
-    const m = text.match(/\[Brave Condition:\s*([^\]]+)\]|【合体条件：([^】]+)】/i);
-    if (!m) return { eligible: true };
-    const condStr = (m[1] || m[2]).trim();
+    const condStr = ((braveCard.brave_condition || braveCard.braveCondition || '').trim()) ||
+                    (() => {
+                      const text = (braveCard.effect || '') + ' ' + (braveCard.flavor || '');
+                      const m = text.match(/\[Brave Condition:\s*([^\]]+)\]|【合体条件：([^】]+)】/i);
+                      return m ? (m[1] || m[2]).trim() : '';
+                    })();
+    if (!condStr) return { eligible: true };
 
+    // 1. Ultimate vs Spirit check
+    const specifiesUltimate = /(?:^|[^a-z])ultimate(?:[^a-z]|$)|アルティメット/i.test(condStr);
+    const specifiesSpirit = /(?:^|[^a-z])spirit(?:[^a-z]|$)|スピリット/i.test(condStr);
+    const hostIsUltimate = hostCard.type === 'Ultimate' || (hostCard.type || '').includes('Ultimate');
+
+    if (specifiesUltimate && !specifiesSpirit) {
+      if (!hostIsUltimate) {
+        return { eligible: false, reason: `Requires Ultimate host (Target is a ${hostCard.type || 'Spirit'})` };
+      }
+    } else if (specifiesSpirit && !specifiesUltimate) {
+      if (hostIsUltimate) {
+        return { eligible: false, reason: `Requires Spirit host (Target is an Ultimate)` };
+      }
+    }
+
+    // 2. Cost requirement
     const costMatch = condStr.match(/Cost\s*(\d+)\s*or\s*more|コスト(\d+)以上/i);
     if (costMatch) {
       const minCost = parseInt(costMatch[1] || costMatch[2], 10);
@@ -610,13 +654,34 @@
         return { eligible: false, reason: `Requires host Cost ${minCost}+ (Target has Cost ${hostCost})` };
       }
     }
+    const costLessMatch = condStr.match(/Cost\s*(\d+)\s*or\s*less|コスト(\d+)以下/i);
+    if (costLessMatch) {
+      const maxCost = parseInt(costLessMatch[1] || costLessMatch[2], 10);
+      const hostCost = hostCard.cost || 0;
+      if (hostCost > maxCost) {
+        return { eligible: false, reason: `Requires host Cost ${maxCost} or less (Target has Cost ${hostCost})` };
+      }
+    }
 
-    const famMatch = condStr.match(/"([^"]+)"\s*(?:family)?/i);
-    if (famMatch) {
-      const reqFam = famMatch[1].toLowerCase();
+    // 3. Family requirement (e.g. "Evil God", "Kamen", "Divine Spirit", etc.)
+    const famMatches = [...condStr.matchAll(/"([^"]+)"|([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/g)]
+      .map(m => (m[1] || m[2]).trim())
+      .filter(w => !['Cost', 'Ultimate', 'Spirit', 'Brave', 'Nexus', 'Magic', 'Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue', 'or', 'more', 'less', 'and'].includes(w));
+    if (famMatches.length > 0) {
       const hostFamilies = (hostCard.families || [hostCard.family || '']).map(f => (f || '').toLowerCase());
-      if (!hostFamilies.some(f => f.includes(reqFam))) {
-        return { eligible: false, reason: `Requires "${famMatch[1]}" family` };
+      const hasMatchingFam = famMatches.some(reqFam => hostFamilies.some(hf => hf.includes(reqFam.toLowerCase())));
+      if (!hasMatchingFam && (/family/i.test(condStr) || /"/.test(condStr))) {
+        return { eligible: false, reason: `Requires family condition: ${condStr}` };
+      }
+    }
+
+    // 4. Color requirement
+    const colorCondMatch = condStr.match(/(?:^|\s)(Red|Purple|Green|White|Yellow|Blue)(?:\s+Spirit|\s+Ultimate|\s+host|\s+only)?/i);
+    if (colorCondMatch && !/colorless/i.test(condStr)) {
+      const reqCol = colorCondMatch[1].toLowerCase();
+      const hostColors = (hostCard.colors || [hostCard.color || '']).map(c => (c || '').toLowerCase());
+      if (!hostColors.includes(reqCol)) {
+        return { eligible: false, reason: `Requires ${colorCondMatch[1]} host` };
       }
     }
 
@@ -3403,6 +3468,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const prepareDeck = (cardsList) => {
       return cardsList.map(c => {
         const pLevels = c.parsed_levels || parseLevels(c.levels);
+        const isBrave = c.type === 'Brave' || (c.type || '').includes('Brave');
+        const braveBp = isBrave ? parseBraveBonus(c.raw_levels || c.levels, c.effect, c) : null;
         return {
           uid: 'c_' + (uidCounter++),
           name: c.name,
@@ -3416,7 +3483,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           card_number: c.card_number || '',
           image_url: c.image_url || './assets/card_back.png',
           levels: pLevels,
-          raw_levels: c.levels || '',
+          raw_levels: c.raw_levels || c.levels || '',
+          braved_bp: c.braved_bp !== undefined ? c.braved_bp : braveBp,
+          bpBonus: braveBp,
+          brave_condition: c.brave_condition || '',
           effect: c.effect || '',
           summary: c.summary || '',
           currentCores: 0,
@@ -3773,23 +3843,27 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       `).join('');
     }
 
-    // Render Opponent Field Spirits
+    // Render Opponent Field Spirits & Soul State
     const oFieldEl = document.getElementById('opponentField');
     if (oFieldEl) {
-      if (!DuelState.opponent.field.length) {
+      const oSoulHtml = (DuelState.opponent.soulStateCards || []).map(c => renderSoulStateCard(c, 'opponent')).join('');
+      const oFieldHtml = DuelState.opponent.field.map(s => renderFieldSpirit(s, 'opponent')).join('');
+      if (!DuelState.opponent.field.length && !(DuelState.opponent.soulStateCards || []).length) {
         oFieldEl.innerHTML = `<div class="field-empty-prompt">No Spirits on Opponent's Field</div>`;
       } else {
-        oFieldEl.innerHTML = DuelState.opponent.field.map(s => renderFieldSpirit(s, 'opponent')).join('');
+        oFieldEl.innerHTML = oSoulHtml + oFieldHtml;
       }
     }
 
-    // Render Player Field Spirits
+    // Render Player Field Spirits & Soul State
     const pFieldEl = document.getElementById('playerField');
     if (pFieldEl) {
-      if (!DuelState.player.field.length) {
+      const pSoulHtml = (DuelState.player.soulStateCards || []).map(c => renderSoulStateCard(c, 'player')).join('');
+      const pFieldHtml = DuelState.player.field.map(s => renderFieldSpirit(s, 'player')).join('');
+      if (!DuelState.player.field.length && !(DuelState.player.soulStateCards || []).length) {
         pFieldEl.innerHTML = `<div class="field-empty-prompt">Your Battle Line is empty. Summon a Spirit from your hand below!</div>`;
       } else {
-        pFieldEl.innerHTML = DuelState.player.field.map(s => renderFieldSpirit(s, 'player')).join('');
+        pFieldEl.innerHTML = pSoulHtml + pFieldHtml;
       }
     }
 
@@ -4050,6 +4124,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (typeof openCardDetail === 'function') {
       openCardDetail(cardName, contextList, cardUid);
     }
+  }
+
+  function renderSoulStateCard(card, side) {
+    const isPlayer = side === 'player';
+    const safeName = (card.name || '').replace(/'/g, "\\'");
+    const imgUrl = (typeof window !== 'undefined' && window.cleanCardImageUrl) ? window.cleanCardImageUrl(card.image_url) : (card.image_url || './assets/card_back.png');
+    return `
+      <div class="field-spirit-card soul-state-card card-color-${(card.color || 'Purple').toLowerCase()}" onclick="BattleArena.openCardDetailContext('${safeName}', '${isPlayer ? 'field' : 'opp-field'}', '${card.uid}')" title="✨ [Soul State]: ${card.name} (Contract Card in Soul State. Cannot attack, block, or hold cores. Can be Contract Advented onto.)" style="border:2px dashed #a855f7; box-shadow:0 0 16px rgba(168,85,247,0.35); filter:drop-shadow(0 0 8px rgba(168,85,247,0.4)); opacity:0.92; cursor:pointer;">
+        <div class="fsc-header" style="background:linear-gradient(135deg, #7e22ce, #9333ea);">
+          <span class="fsc-level-tag" style="background:#581c87; color:#f3e8ff; font-size:0.65rem; font-weight:900;">✨ SOUL STATE</span>
+          <span class="fsc-bp-tag" style="font-size:0.65rem; color:#d8b4fe;">CONTRACT</span>
+        </div>
+        <div class="fsc-art-container" style="position:relative;">
+          <img src="${imgUrl}" class="fsc-art" alt="${card.name}" onerror="this.src='./assets/card_back.png';" />
+          <div style="position:absolute; bottom:3px; left:4px; right:4px; background:rgba(0,0,0,0.8); color:#e9d5ff; font-size:0.62rem; text-align:center; padding:2px; border-radius:3px; font-weight:700;">🔮 IN SOUL STATE</div>
+        </div>
+        <div class="fsc-name-bar">${card.name}</div>
+        <div class="fsc-cores-display readonly" style="font-size:0.68rem; color:#c084fc; text-align:center; padding:0.25rem;">(No Cores Allowed)</div>
+      </div>
+    `;
   }
 
   function renderFieldSpirit(spirit, side) {
@@ -5745,10 +5839,27 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const bodyLower = bodyText.toLowerCase();
 
     // STRICT LEVEL CHECK: If ability block explicitly requires a level higher than current, DO NOT execute!
+    // Exception 1: Soul State abilities execute regardless of Level if card is in Soul State!
+    // Exception 2: Contract Pre-Advent abilities execute regardless of Level on the Advent host!
+    const isSoulStateAbility = /\[Soul State\]|【魂状態】/i.test(bodyText);
+    const isContractPreAdvent = context.isContractPreAdvent || /\[Contract Pre-Advent\]|【契約煌臨元】/i.test(bodyText);
+    const bypassLevelCheck = (card.isSoulState && isSoulStateAbility) || isContractPreAdvent;
+
     const lvlMatch = bodyText.match(/(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
-    if (lvlMatch && lvlMatch[1]) {
+    if (!bypassLevelCheck && lvlMatch && lvlMatch[1]) {
       const curLvl = card.currentLevel || 1;
       if (!isEffectLevelMet(lvlMatch[1], curLvl)) {
+        return;
+      }
+    }
+
+    // OVER COUNT (OC) CHECK: [During OC], 【OC中】, or OC condition: C<n> or more
+    const ocMatch = bodyText.match(/(?:\[During\s*OC\]|【OC中】|OC\s*Condition|OC\s*条件)[^:\n]*?C(\d+)\s*or\s*more/i) ||
+                    bodyText.match(/\[OC(?:\s*Condition)?:\s*C(\d+)[^\]]*?\]/i);
+    if (ocMatch) {
+      const reqCount = parseInt(ocMatch[1], 10);
+      const currentCount = (DuelState && DuelState[side] && DuelState[side].count) || 0;
+      if (currentCount < reqCount) {
         return;
       }
     }
@@ -7043,7 +7154,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   // ── BRAVE RULES (Rule 7.2): Uncombined Braves in Spirit Form cannot Attack or Block ──
   function canUnitAttack(unit) {
-    if (!unit || unit.isExhausted) return false;
+    if (!unit || unit.isExhausted || unit.isSoulState) return false;
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
       const eff = (unit.effect || '').toLowerCase();
@@ -7055,7 +7166,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function canUnitBlock(unit) {
-    if (!unit || unit.isExhausted) return false;
+    if (!unit || unit.isExhausted || unit.isSoulState) return false;
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
       const eff = (unit.effect || '').toLowerCase();
@@ -7635,12 +7746,32 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (!target.soulStateCards) target.soulStateCards = [];
       card.isSoulState = true;
       if (target.contractCard) target.contractCard.inSoulState = true;
+      recycleSpiritCoresToReserve(card, side);
+      card.currentCores = 0;
+      card.currentBp = 0;
+      target.field = target.field.filter(s => s.uid !== card.uid);
       if (!target.soulStateCards.some(c => c.uid === card.uid)) {
         target.soulStateCards.push(card);
       }
-      addLog(`✨ **[SOUL STATE TRANSITION]**: Contract Partner "${card.name}" placed in Soul State instead of Trash!`, 'system');
+      addLog(`✨ **[SOUL STATE TRANSITION]**: Contract Partner "${card.name}" placed in Soul State instead of Trash! Cores returned to Reserve.`, 'system');
       renderDuelTable();
       return;
+    }
+
+    // Check if an Advent Spirit with an underlying Contract Partner leaves the field
+    if (card.isAdvent && card.underlyingCards && card.underlyingCards.length > 0) {
+      const contractPreAdvent = card.underlyingCards.find(u => isContractPartnerCard(u) || (target.contractCard && target.contractCard.name === u.name));
+      if (contractPreAdvent) {
+        if (!target.soulStateCards) target.soulStateCards = [];
+        contractPreAdvent.isSoulState = true;
+        if (target.contractCard) target.contractCard.inSoulState = true;
+        contractPreAdvent.currentCores = 0;
+        contractPreAdvent.currentBp = 0;
+        if (!target.soulStateCards.some(c => c.name === contractPreAdvent.name)) {
+          target.soulStateCards.push(contractPreAdvent);
+        }
+        addLog(`✨ **[SOUL STATE TRANSITION]**: Underlying Contract Partner "${contractPreAdvent.name}" returned to Soul State!`, 'system');
+      }
     }
 
     if (!target.trashCards) target.trashCards = [];
@@ -7759,11 +7890,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   
-  // ── ADVENT (煌臨 / TWINKLE) MECHANICS ENGINE ──
+  // ── ADVENT (煌臨 / TWINKLE) & CONTRACT ADVENT (契約煌臨) MECHANICS ENGINE ──
   function getCardAdventRequirement(card) {
     if (!card || !card.effect) return null;
-    const m = card.effect.match(/\[Advent:\s*([^\]]+)\]|【煌臨：([^】]+)】/i);
+    const m = card.effect.match(/\[(?:Contract\s+)?Advent:\s*([^\]]+)\]|【(?:契約)?煌臨：([^】]+)】/i);
     if (!m) return null;
+    const isContractAdvent = /contract\s+advent|契約煌臨/i.test(m[0]);
     const rawCond = (m[1] || m[2]).trim();
 
     // Parse timing in parentheses following [Advent: ...]
@@ -7771,10 +7903,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let timing = 'either_attack_step';
     let timingLabel = 'Either Attack Step';
     
-    const timeMatch = card.effect.match(/(?:\[Advent:[^\]]+\]|【煌臨:[^】]+】)\s*(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)/i);
+    const timeMatch = card.effect.match(/(?:\[(?:Contract\s+)?Advent:[^\]]+\]|【(?:契約)?煌臨:[^】]+】)\s*(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)/i);
     let rawTime = timeMatch ? (timeMatch[1] || timeMatch[2] || timeMatch[3] || '').trim().toLowerCase() : '';
     if (!rawTime) {
-      const beforeMatch = card.effect.match(/(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)\s*(?:\[Advent:|【煌臨:)/i);
+      const beforeMatch = card.effect.match(/(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)\s*(?:\[(?:Contract\s+)?Advent:|【(?:契約)?煌臨:)/i);
       if (beforeMatch) {
         rawTime = (beforeMatch[1] || beforeMatch[2] || beforeMatch[3] || '').trim().toLowerCase();
       }
@@ -7804,23 +7936,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const parts = rawCond.split(/[,&]|\band\b/i).map(s => s.trim()).filter(Boolean);
     const parsed = {
       raw: m[0],
+      isContractAdvent,
       condText: rawCond,
       timing,
       timingLabel,
       minCost: null,
       maxCost: null,
+      minCount: null,
       colors: [],
       families: []
     };
 
     const validColors = ['red', 'purple', 'green', 'white', 'yellow', 'blue'];
     for (const p of parts) {
-      const moreM = p.match(/cost\s*(\d+)\s*or\s*more/i);
-      const lessM = p.match(/cost\s*(\d+)\s*or\s*less/i);
+      const moreM = p.match(/cost\s*(\d+)\s*or\s*more|コスト(\d+)以上/i);
+      const lessM = p.match(/cost\s*(\d+)\s*or\s*less|コスト(\d+)以下/i);
+      const countM = p.match(/C(\d+)\s*or\s*more|count\s*(\d+)\s*or\s*more|カウント(\d+)以上/i);
       if (moreM) {
-        parsed.minCost = parseInt(moreM[1], 10);
+        parsed.minCost = parseInt(moreM[1] || moreM[2], 10);
       } else if (lessM) {
-        parsed.maxCost = parseInt(lessM[1], 10);
+        parsed.maxCost = parseInt(lessM[1] || lessM[2], 10);
+      } else if (countM) {
+        parsed.minCount = parseInt(countM[1] || countM[2] || countM[3], 10);
       } else if (validColors.includes(p.toLowerCase())) {
         parsed.colors.push(p.toLowerCase());
       } else {
@@ -7830,9 +7967,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return parsed;
   }
 
-  function getEligibleAdventTargets(adventReq, fieldSpirits) {
-    if (!adventReq || !fieldSpirits || !fieldSpirits.length) return [];
-    return fieldSpirits.filter(s => {
+  function getEligibleAdventTargets(adventReq, fieldSpirits, side = 'player') {
+    if (!adventReq) return [];
+    const st = DuelState[side];
+    if (adventReq.minCount !== null && (st.count || 0) < adventReq.minCount) {
+      return [];
+    }
+
+    let candidates = [...(fieldSpirits || [])];
+    if (adventReq.isContractAdvent && st && st.soulStateCards && st.soulStateCards.length > 0) {
+      candidates = candidates.concat(st.soulStateCards);
+    }
+
+    return candidates.filter(s => {
       // Cost check
       if (adventReq.minCost !== null && (s.cost || 0) < adventReq.minCost) return false;
       if (adventReq.maxCost !== null && (s.cost || 0) > adventReq.maxCost) return false;
@@ -7911,7 +8058,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (typeof showToast === 'function') showToast('Official Rule: [Advent] requires your [Soul Core], but it is currently in Trash!', 'warning');
       return;
     }
-    const eligible = getEligibleAdventTargets(req, DuelState.player.field);
+    const eligible = getEligibleAdventTargets(req, DuelState.player.field, 'player');
     if (!eligible.length) {
       if (typeof showToast === 'function') showToast(`No eligible field Spirit satisfies [Advent: ${req.condText}]!`, 'warning');
       return;
@@ -7996,6 +8143,24 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     st.soulCoreLocation = 'trash';
     st.trashCores = (st.trashCores || 0) + 1;
+
+    // If targetSpirit was in Soul State, bring it onto the active battlefield!
+    if (targetSpirit.isSoulState) {
+      targetSpirit.isSoulState = false;
+      if (st.contractCard && (st.contractCard.uid === targetSpirit.uid || st.contractCard.name === targetSpirit.name)) {
+        st.contractCard.inSoulState = false;
+      }
+      st.soulStateCards = (st.soulStateCards || []).filter(c => c.uid !== targetSpirit.uid);
+      if (!st.field.some(s => s.uid === targetSpirit.uid)) {
+        st.field.push(targetSpirit);
+      }
+      if (st.reserve >= 1) {
+        st.reserve -= 1;
+        targetSpirit.currentCores = 1;
+      } else {
+        targetSpirit.currentCores = 1;
+      }
+    }
 
     // 3. Stack adventCard onto targetSpirit (preserve underlying card history & cores)
     const prevName = targetSpirit.name;
@@ -8577,7 +8742,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const parsed = parseLevels(card.levels);
     card.lv1Bp = parsed[0]?.bp || 1000;
     card.currentBp = card.lv1Bp;
-    card.bpBonus = parseBraveBonus(card.levels, card.effect);
+    card.bpBonus = parseBraveBonus(card.raw_levels || card.levels, card.effect, card);
     card.isExhausted = false;
     card.hasAttacked = false;
     card.isBraveCard = true;
@@ -8665,7 +8830,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return;
     }
 
-    const bpBonus = parseBraveBonus(braveCard.levels, braveCard.effect);
+    const bpBonus = parseBraveBonus(braveCard.raw_levels || braveCard.levels, braveCard.effect, braveCard);
     braveCard.bpBonus = bpBonus;
 
     if (source === 'hand') {
@@ -8834,7 +8999,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const choicesEl = document.getElementById('targetSpiritChoices');
 
     if (mode === 'brave_hand' || mode === 'brave_field') {
-      const bpBonus = parseBraveBonus(card.levels, card.effect, card);
+      const bpBonus = parseBraveBonus(card.raw_levels || card.levels, card.effect, card);
+      card.bpBonus = bpBonus;
       if (titleEl) titleEl.textContent = `🔗 Combine Brave: ${card.name}`;
       if (descEl) descEl.innerHTML = `Select which allied Spirit or Ultimate combines with <strong>${card.name}</strong> (+${bpBonus} BP):`;
       if (choicesEl) {
@@ -9540,6 +9706,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const { fieldNeeded, allocations } = pendingSacrifice;
     const spirit = DuelState.player.field.find(s => s.uid === spiritUid);
     if (!spirit) return;
+    if (spirit.isSoulState) {
+      if (typeof showToast === 'function') showToast("Official Rule: Cores cannot be placed onto cards in Soul State!", 'warning');
+      return;
+    }
 
     const currentVal = allocations[spiritUid] || 0;
     const currentTotal = Object.values(allocations).reduce((sum, v) => sum + v, 0);
@@ -12171,6 +12341,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const spirit = DuelState.player.field.find(s => s.uid === spiritUid);
     if (!spirit) return;
+    if (spirit.isSoulState) {
+      if (typeof showToast === 'function') showToast("Official Rule: Cores cannot be placed onto cards in Soul State!", 'warning');
+      return;
+    }
 
     // If Soul Core was on another spirit, detach it
     if (DuelState.player.soulCoreLocation === 'field' && DuelState.player.soulCoreSpiritUid) {
@@ -12273,6 +12447,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const spirit = DuelState.player.field.find(s => s.uid === spiritUid);
     if (!spirit) return;
+    if (spirit.isSoulState) {
+      if (typeof showToast === 'function') showToast("Official Rule: Cores cannot be placed onto cards in Soul State!", 'warning');
+      return;
+    }
 
     DuelState.player.reserve -= 1;
     spirit.currentCores += 1;
@@ -12309,6 +12487,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const spirit = DuelState.player.field.find(s => s.uid === spiritUid);
     if (!spirit) return;
+    if (spirit.isSoulState) {
+      if (typeof showToast === 'function') showToast("Official Rule: Cores cannot be placed onto cards in Soul State!", 'warning');
+      return;
+    }
 
     const normalCores = spirit.hasSoulCore ? Math.max(0, spirit.currentCores - 1) : spirit.currentCores;
     if (normalCores <= 0) {
@@ -13154,6 +13336,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     hasDoubleBrave,
     parseBraveBonus,
     checkBraveCondition,
+    getOverCountBpBonus,
+    renderSoulStateCard,
     isEligibleBraveHost,
     deployNexus,
     addCoreToNexus,

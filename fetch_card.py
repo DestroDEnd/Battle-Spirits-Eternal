@@ -253,6 +253,9 @@ def parse_wikitext_card(wikitext, page_title, categories, raw_images=None):
     effect = effect_cleaner.clean_card_effect(fields.get('effect', ''))
     levels = clean_wikitext(fields.get('level', ''))
     cost = fields.get('cost', '').strip()
+    brave_condition = clean_wikitext(fields.get('bravecondition') or fields.get('jpbravecondition') or '')
+    if brave_condition and 'brave condition' not in effect.lower() and '合体条件' not in effect:
+        effect = f"[Brave Condition: {brave_condition}]\n\n{effect}".strip()
 
     primary_color = colors[0] if colors else 'Yellow'
     primary_family = families[0] if families else ''
@@ -269,6 +272,7 @@ def parse_wikitext_card(wikitext, page_title, categories, raw_images=None):
         'families': families,
         'sets': sets,
         'levels': levels,
+        'brave_condition': brave_condition,
         'effect': effect,
         'rarity': rarity,
         'flavor': flavor,
