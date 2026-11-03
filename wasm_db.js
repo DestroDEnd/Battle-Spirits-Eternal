@@ -15,7 +15,7 @@
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
   const STORE_NAME = 'db_binary';
-  const DB_KEY = 'battle_spirits.db_v2';
+  const DB_KEY = 'battle_spirits.db_v3';
 
   function getBaseDir() {
     if (typeof window === 'undefined' || !window.location) return './';
@@ -83,11 +83,12 @@
         locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
       });
 
-      // Proactively purge old v1 cache if present
+      // Proactively purge old v1 and v2 cache if present
       try {
         const idb = await openIndexedDB();
         const tx = idb.transaction(STORE_NAME, 'readwrite');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v1');
+        tx.objectStore(STORE_NAME).delete('battle_spirits.db_v2');
       } catch (e) {}
 
       let dbBuffer = await getCachedDbBuffer();

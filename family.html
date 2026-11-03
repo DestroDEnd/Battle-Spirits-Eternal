@@ -212,9 +212,10 @@ let allCategorizedFamilies = [];
 async function loadFamilyDirectory() {
   try {
     let data = null;
+    const cb = '?v=' + Date.now();
     // 1. Try static filters_data.json first (100% reliable on GitHub Pages)
     try {
-      const res = await fetch('./filters_data.json');
+      const res = await fetch('./filters_data.json' + cb);
       if (res.ok) {
         data = await res.json();
       }
@@ -223,7 +224,7 @@ async function loadFamilyDirectory() {
     // 1b. Try absolute root filters_data.json if on clean subpaths
     if (!data) {
       try {
-        const res = await fetch('/filters_data.json');
+        const res = await fetch('/filters_data.json' + cb);
         if (res.ok) data = await res.json();
       } catch (e) {}
     }
@@ -231,7 +232,7 @@ async function loadFamilyDirectory() {
     // 2. Fallback to API if running with local server
     if (!data) {
       try {
-        const res = await fetch('/api/filters');
+        const res = await fetch('/api/filters' + cb);
         if (res.ok) {
           const text = await res.text();
           if (text.trim().startsWith('{')) {

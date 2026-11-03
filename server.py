@@ -117,6 +117,9 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(status)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        self.send_header('Pragma', 'no-cache')
+        self.send_header('Expires', '0')
         self.end_headers()
         try:
             payload = json.dumps(data, ensure_ascii=False).encode('utf-8')
@@ -471,10 +474,8 @@ class BattleSpiritsAPIHandler(http.server.SimpleHTTPRequestHandler):
 
         # 7. GET /api/filters — return distinct values for filter dropdowns
         if path == '/api/filters':
-            global _FILTERS_CACHE
-            if _FILTERS_CACHE is None:
-                _FILTERS_CACHE = database.get_distinct_values()
-            self.send_json(_FILTERS_CACHE)
+            _filters = database.get_distinct_values()
+            self.send_json(_filters)
             return
 
         # 8. GET /api/stats
