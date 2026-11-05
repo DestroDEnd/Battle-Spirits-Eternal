@@ -362,4 +362,9 @@ test('5. Verify battle_arena.js implementation enforces all 4 rules', () => {
   assert.ok(arenaSrc.includes('// BRAM-ZAHFAG / MASS SPIRIT DESTRUCTION:'), 'Must implement Bram-Zahfag mass destruction');
   assert.ok(arenaSrc.includes('// BRAM-ZAHFAG SUMMON LOCK:'), 'Must implement Bram-Zahfag summon lock');
   assert.ok(arenaSrc.includes('DuelState.opponentCantSummonSpiritsUntilNextStart'), 'Must track opponentCantSummonSpiritsUntilNextStart');
+
+  // 7. Turn 1 First Player Core Step and Attack Step skipping (Rule 1.1)
+  assert.ok(arenaSrc.includes('DuelState.turn === 1 && DuelState.firstPlayer === \'player\''), 'Must detect Turn 1 First Player for Player');
+  assert.ok(arenaSrc.includes('DuelState.phaseIndex = 2; // skip CORE, advance directly to DRAW'), 'Must advance directly to DRAW step on Turn 1');
+  assert.ok(arenaSrc.includes('isFirstPlayerTurn1 && (p === \'CORE\' || p === \'ATTACK\')'), 'Step navigator must flag Core and Attack steps as skipped on Turn 1');
 });
