@@ -1,79 +1,521 @@
 {
- "BATTLE-SPIRITS-A8498": {
-  "name": "The ArmoredBushin Girafa-Rando",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 11000
-   }
+  "BATTLE-SPIRITS-A8498": {
+    "name": "The ArmoredBushin Girafa-Rando",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "[LV1][LV2] Purple/White/Blue (Opposing Turn)\nWhen the opponent uses a Purple/White/Blue Magic effect, by exhausting this Spirit, negate that effect.\n\n[LV1][LV2] (Opposing Attack Step)\nThis Spirit can block opposing Spirits while exhausted.\n\n[LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and exhaust an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A8498",
+      "name": "The ArmoredBushin Girafa-Rando",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A8498#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent uses a Purple/White/Blue Magic effect, by exhausting this Spirit, negate that effect."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent uses a Purple/White/Blue Magic effect, by exhausting this Spirit, negate that effect.",
+              "cleanText": "When the opponent uses a Purple/White/Blue Magic effect, by exhausting this Spirit, negate that effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A8498#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block opposing Spirits while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block opposing Spirits while exhausted.",
+              "cleanText": "This Spirit can block opposing Spirits while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "CAN_BLOCK_WHILE_EXHAUSTED",
+                "target": "SELF"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A8498#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and exhaust an opposing Spirit.",
+              "cleanText": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] Purple/White/Blue (Opposing Turn)\nWhen the opponent uses a Purple/White/Blue Magic effect, by exhausting this Spirit, negate that effect.\n\n[LV1][LV2] (Opposing Attack Step)\nThis Spirit can block opposing Spirits while exhausted.\n\n[LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed by comparing BP, refresh this Spirit and exhaust an opposing Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A9393": {
-  "name": "The DinoDeity Gundinos",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A9393": {
+    "name": "The DinoDeity Gundinos",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Assault: 2] (When Attacks)\nThis Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV1][LV2][LV3] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit. When this effect destroys any opposing Spirit, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9393",
+      "name": "The DinoDeity Gundinos",
+      "keywords": [
+        {
+          "name": "Assault",
+          "parameter": "2",
+          "wave": 1,
+          "hook": "assault",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9393#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Assault: 2",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.",
+              "cleanText": "This Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9393#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit. When this effect destroys any opposing Spirit, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "When this effect destroys any opposing Spirit, draw a card.",
+              "cleanText": "When this effect destroys any opposing Spirit, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Assault: 2] (When Attacks)\nThis Spirit can, up to twice per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV1][LV2][LV3] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit. When this effect destroys any opposing Spirit, draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A10742": {
-  "name": "The HellWheel Buer",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   }
+  "BATTLE-SPIRITS-A10742": {
+    "name": "The HellWheel Buer",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\n[When Braved] (When Brave Attacks)\nDraw a card, and send a core from any opposing Cost 4 or less Spirit to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10742",
+      "name": "The HellWheel Buer",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A10742#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A10742#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card, and send a core from any opposing Cost 4 or less Spirit to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "send a core from any opposing Cost 4 or less Spirit to their Reserve.",
+              "cleanText": "send a core from any opposing Cost 4 or less Spirit to their Reserve",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more]\n\n[When Braved] (When Brave Attacks)\nDraw a card, and send a core from any opposing Cost 4 or less Spirit to their Reserve.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A13620": {
-  "name": "The WingBeast Griffi-Oar",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 10000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nReturn every Yellow Magic card from your Trash to the Hand.\n\n[LV2][LV3] (When Attacks)\nYou can use your Magic cards without paying the cost during the Flash Timing.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A13620": {
+    "name": "The WingBeast Griffi-Oar",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nReturn every Yellow Magic card from your Trash to the Hand.\n\n[LV2][LV3] (When Attacks)\nYou can use your Magic cards without paying the cost during the Flash Timing.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A13620",
+      "name": "The WingBeast Griffi-Oar",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A13620#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return every Yellow Magic card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return every Yellow Magic card from your Trash to the Hand.",
+              "cleanText": "Return every Yellow Magic card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A13620#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can use your Magic cards without paying the cost during the Flash Timing."
+          },
+          "clauses": [
+            {
+              "rawText": "You can use your Magic cards without paying the cost during the Flash Timing.",
+              "cleanText": "You can use your Magic cards without paying the cost during the Flash Timing",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CAST_MAGIC_FREE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

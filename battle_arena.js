@@ -638,12 +638,18 @@
                       const m = text.match(/\[Brave Condition:\s*([^\]]+)\]|【合体条件：([^】]+)】/i);
                       return m ? (m[1] || m[2]).trim() : '';
                     })();
-    if (!condStr) return { eligible: true };
+    const hostIsUltimate = hostCard.type === 'Ultimate' || (hostCard.type || '').includes('Ultimate');
+
+    if (!condStr) {
+      if (hostIsUltimate) {
+        return { eligible: false, reason: 'Standard Braves cannot combine with Ultimates (requires an Ultimate Brave)' };
+      }
+      return { eligible: true };
+    }
 
     // 1. Ultimate vs Spirit check
     const specifiesUltimate = /(?:^|[^a-z])ultimate(?:[^a-z]|$)|アルティメット/i.test(condStr);
     const specifiesSpirit = /(?:^|[^a-z])spirit(?:[^a-z]|$)|スピリット/i.test(condStr);
-    const hostIsUltimate = hostCard.type === 'Ultimate' || (hostCard.type || '').includes('Ultimate');
 
     if (specifiesUltimate && !specifiesSpirit) {
       if (!hostIsUltimate) {
@@ -653,6 +659,8 @@
       if (hostIsUltimate) {
         return { eligible: false, reason: `Requires Spirit host (Target is an Ultimate)` };
       }
+    } else if (!specifiesUltimate && hostIsUltimate) {
+      return { eligible: false, reason: `Standard Braves cannot combine with Ultimates (Brave Condition: "${condStr}")` };
     }
 
     // 2. Cost requirement
@@ -1300,19 +1308,29 @@
     );
     if (gaiaIdx === -1) return;
     const gaiaCard = friendlyState.hand[gaiaIdx];
+    const canBraveDirectly = isEligibleBraveHost(gaiaCard, summonedUltimate).eligible;
     if (side === 'player') {
+      const choices = [
+        { id: 'spirit', icon: '⚔️', label: 'Summon as Spirit (0 Cost)', desc: 'Summon to field in Spirit form for 0 cost (places 1 core to sustain)' }
+      ];
+      if (canBraveDirectly) {
+        choices.push({ id: 'brave', icon: '🔗', label: `Brave onto "${summonedUltimate.name}"`, desc: 'Directly combine onto the summoned Ultimate for 0 cost' });
+      }
+      choices.push({ id: 'skip', icon: '⏭️', label: 'Do not summon (Skip)', desc: 'Keep Gaianohoko in hand' });
+
+      const subNote = canBraveDirectly ? '' : ` Note: "${summonedUltimate.name}" has Cost ${summonedUltimate.cost || 0}; Gaianohoko requires Cost 5+ Ultimate to combine directly.`;
+
       promptChoiceModal({
         card: gaiaCard,
         side: 'player',
         title: 'The EarthDeitySword Gaianohoko: Free Summon',
-        description: `Your Ultimate "${summonedUltimate.name}" was summoned! Summon "${gaiaCard.name}" from Hand without paying the cost?`,
-        choices: [
-          { icon: '⚔️', label: 'Summon as Spirit (0 Cost)', desc: 'Summon to field for 0 cost (places 1 core to sustain)' },
-          { icon: '🔗', label: `Brave onto "${summonedUltimate.name}"`, desc: 'Directly combine onto the summoned Ultimate for 0 cost' },
-          { icon: '⏭️', label: 'Do not summon (Skip)', desc: 'Keep Gaianohoko in hand' }
-        ]
+        description: `Your Ultimate "${summonedUltimate.name}" was summoned! Summon "${gaiaCard.name}" from Hand without paying the cost?${subNote}`,
+        choices: choices
       }, (choiceIdx) => {
-        if (choiceIdx === 0) {
+        const chosen = choices[choiceIdx];
+        if (!chosen || chosen.id === 'skip') return;
+
+        if (chosen.id === 'spirit') {
           friendlyState.hand.splice(gaiaIdx, 1);
           const coresToPlace = (friendlyState.reserve > 0) ? 1 : 0;
           if (coresToPlace > 0) friendlyState.reserve -= 1;
@@ -1320,15 +1338,18 @@
           gaiaCard.currentLevel = 1;
           gaiaCard.currentBp = 3000;
           gaiaCard.isExhausted = false;
+          gaiaCard.isBraveCard = true;
           friendlyState.field.push(gaiaCard);
           AudioFX.slash();
-          addLog(`⚔️ **[GAIANOHOKO FREE SUMMON]**: "${gaiaCard.name}" summoned to field for free!`, 'magic');
+          addLog(`⚔️ **[GAIANOHOKO FREE SUMMON]**: "${gaiaCard.name}" summoned to field in Spirit form for free!`, 'magic');
           renderDuelTable();
           renderPlayerHand();
-        } else if (choiceIdx === 1) {
+        } else if (chosen.id === 'brave') {
           friendlyState.hand.splice(gaiaIdx, 1);
           summonedUltimate.brave = gaiaCard;
           summonedUltimate.isBraved = true;
+          gaiaCard.isBraved = true;
+          gaiaCard.hostSpiritUid = summonedUltimate.uid;
           summonedUltimate.currentBp = (summonedUltimate.currentBp || 0) + 5000;
           AudioFX.magic();
           addLog(`🔗 **[GAIANOHOKO BRAVED]**: Combined onto "${summonedUltimate.name}" (+5000 BP, burst protection active)!`, 'magic');
@@ -1337,13 +1358,28 @@
         }
       });
     } else {
-      // Opponent AI braves onto Ultimate
-      friendlyState.hand.splice(gaiaIdx, 1);
-      summonedUltimate.brave = gaiaCard;
-      summonedUltimate.isBraved = true;
-      summonedUltimate.currentBp = (summonedUltimate.currentBp || 0) + 5000;
-      addLog(`🔗 **[OPPONENT GAIANOHOKO]**: Combined onto "${summonedUltimate.name}"!`, 'magic');
-      renderDuelTable();
+      if (canBraveDirectly) {
+        friendlyState.hand.splice(gaiaIdx, 1);
+        summonedUltimate.brave = gaiaCard;
+        summonedUltimate.isBraved = true;
+        gaiaCard.isBraved = true;
+        gaiaCard.hostSpiritUid = summonedUltimate.uid;
+        summonedUltimate.currentBp = (summonedUltimate.currentBp || 0) + 5000;
+        addLog(`🔗 **[OPPONENT GAIANOHOKO]**: Combined onto "${summonedUltimate.name}"!`, 'magic');
+        renderDuelTable();
+      } else {
+        friendlyState.hand.splice(gaiaIdx, 1);
+        const coresToPlace = (friendlyState.reserve > 0) ? 1 : 0;
+        if (coresToPlace > 0) friendlyState.reserve -= 1;
+        gaiaCard.currentCores = coresToPlace;
+        gaiaCard.currentLevel = 1;
+        gaiaCard.currentBp = 3000;
+        gaiaCard.isExhausted = false;
+        gaiaCard.isBraveCard = true;
+        friendlyState.field.push(gaiaCard);
+        addLog(`⚔️ **[OPPONENT GAIANOHOKO]**: Summoned to field in Spirit form!`, 'magic');
+        renderDuelTable();
+      }
     }
   }
 
@@ -1390,7 +1426,8 @@
       card,
       side = 'player',
       targetSide = 'opponent',
-      targetKind = 'spirit', // 'spirit' | 'nexus'
+      targetKind = 'spirit', // 'spirit' | 'nexus' | 'ultimate'
+      customPool = null,
       title = 'Select Target',
       description = '',
       minCount = 1,
@@ -1400,7 +1437,15 @@
     } = options;
 
     const targetPlayerState = targetSide === 'player' ? DuelState.player : DuelState.opponent;
-    let pool = targetKind === 'nexus' ? (targetPlayerState.nexus || []) : (targetPlayerState.field || []);
+    let pool = customPool ? [...customPool] : (targetKind === 'nexus' ? (targetPlayerState.nexus || []) : (targetPlayerState.field || []));
+
+    if (!customPool) {
+      if (targetKind === 'spirit') {
+        pool = pool.filter(s => s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit')));
+      } else if (targetKind === 'ultimate') {
+        pool = pool.filter(s => s.type === 'Ultimate' || (s.type || '').includes('Ultimate'));
+      }
+    }
 
     if (typeof filter === 'function') {
       pool = pool.filter(filter);
@@ -2753,11 +2798,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             if (side === 'player') renderPlayerHand();
           }
         }
-        // 4. Exhaust enemy spirits
-        else if (descText.includes('exhaust') && (descText.includes('opposing') || descText.includes('enemy'))) {
+        // 4. Exhaust enemy spirits (Strict check: must be an exhaust action, NEVER a destruction effect!)
+        else if (!/destroy/i.test(descText) && /\bexhaust\s+(a|an|one|two|three|\d+|all)?\s*(?:opposing|enemy)?\s*spirits?/i.test(descText)) {
           const exMatch = descText.match(/exhaust\s+(a|an|one|two|three|\d+)?\s*(?:opposing|enemy)?\s*(?:exhausted|ready)?\s*spirits?/i);
           const exCount = exMatch && exMatch[1] ? parseWordNumber(exMatch[1], 1) : 1;
-          const readies = (enemyState.field || []).filter(s => !s.isExhausted);
+          const readies = (enemyState.field || []).filter(s => !s.isExhausted && (s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit'))));
           if (readies.length > 0) {
             promptUniversalTargetModal({
               card,
@@ -3466,7 +3511,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const hasPartnerName = name.includes('partner') || kanji.includes('相棒') || kanji.includes('契約者');
     const hasContractRarity = rarity.includes('contract') || rarity === 'cx';
     const hasContractNumber = /-(?:cx|cp)\d+/i.test(num);
+    const family = (c.family || (Array.isArray(c.families) ? c.families.join(' ') : '') || '').toLowerCase();
+    const isFlagNexus = (type === 'contract nexus' || (type.includes('nexus') && (family.includes('flag') || family.includes('旗'))));
 
+    if (isFlagNexus) return true;
     if (hasPartnerName && (isContractType || hasContractRarity || hasContractNumber)) return true;
     if (hasContractRarity && isContractType) return true;
     if (hasContractNumber && isContractType) return true;
@@ -3639,8 +3687,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           currentBp: pLevels[0]?.bp || 2000,
           isExhausted: false,
           hasAttacked: false,
-          isContractPartner: isContractPartnerCard(c),
-          is_contract_partner: isContractPartnerCard(c)
+          isContractPartner: false,
+          is_contract_partner: false
         };
       });
     };
@@ -3663,6 +3711,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let shuffledP = [];
     if (pContractIdx !== -1) {
       pPartnerCard = pPreparedCards.splice(pContractIdx, 1)[0];
+      pPartnerCard.isContractPartner = true;
+      pPartnerCard.is_contract_partner = true;
       shuffledP = shuffle(pPreparedCards);
       pHand = [pPartnerCard, ...shuffledP.splice(0, 3)];
       addLog(`🃏 **CONTRACT PARTNER**: Guaranteed "${pPartnerCard.name}" as your Contract Partner in your starting hand!`, 'system');
@@ -3677,6 +3727,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let shuffledO = [];
     if (oContractIdx !== -1) {
       oPartnerCard = oPreparedCards.splice(oContractIdx, 1)[0];
+      oPartnerCard.isContractPartner = true;
+      oPartnerCard.is_contract_partner = true;
       shuffledO = shuffle(oPreparedCards);
       oHand = [oPartnerCard, ...shuffledO.splice(0, 3)];
       addLog(`🃏 **CONTRACT PARTNER**: Opponent revealed "${oPartnerCard.name}" as their Contract Partner!`, 'system');
@@ -3694,6 +3746,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     DuelState.selectedPlayerCard = null;
     DuelState.selectedAttacker = null;
     DuelState.activeBurstTrigger = null;
+    DuelState.burstLockThisTurn = null;
+    DuelState.combatAttacker = null;
     closeBurstPromptModal();
     DuelState.logs = [];
 
@@ -3988,27 +4042,51 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       `).join('');
     }
 
-    // Render Opponent Field Spirits & Soul State
+    // Render Opponent Field Spirits (Clean battle line)
     const oFieldEl = document.getElementById('opponentField');
     if (oFieldEl) {
-      const oSoulHtml = (DuelState.opponent.soulStateCards || []).map(c => renderSoulStateCard(c, 'opponent')).join('');
       const oFieldHtml = DuelState.opponent.field.map(s => renderFieldSpirit(s, 'opponent')).join('');
-      if (!DuelState.opponent.field.length && !(DuelState.opponent.soulStateCards || []).length) {
+      if (!DuelState.opponent.field.length) {
         oFieldEl.innerHTML = `<div class="field-empty-prompt">No Spirits on Opponent's Field</div>`;
       } else {
-        oFieldEl.innerHTML = oSoulHtml + oFieldHtml;
+        oFieldEl.innerHTML = oFieldHtml;
       }
     }
 
-    // Render Player Field Spirits & Soul State
+    // Render Opponent Soul State Zone (Hub next to Nexus Field)
+    const oSoulZone = document.getElementById('opponentSoulStateZone');
+    const oSoulContent = document.getElementById('opponentSoulStateContent');
+    if (oSoulZone && oSoulContent) {
+      const oSoulCards = DuelState.opponent.soulStateCards || [];
+      if (oSoulCards.length > 0) {
+        oSoulZone.style.display = 'flex';
+        oSoulContent.innerHTML = oSoulCards.map(c => renderSoulStateCard(c, 'opponent')).join('');
+      } else {
+        oSoulZone.style.display = 'none';
+      }
+    }
+
+    // Render Player Field Spirits (Clean battle line)
     const pFieldEl = document.getElementById('playerField');
     if (pFieldEl) {
-      const pSoulHtml = (DuelState.player.soulStateCards || []).map(c => renderSoulStateCard(c, 'player')).join('');
       const pFieldHtml = DuelState.player.field.map(s => renderFieldSpirit(s, 'player')).join('');
-      if (!DuelState.player.field.length && !(DuelState.player.soulStateCards || []).length) {
+      if (!DuelState.player.field.length) {
         pFieldEl.innerHTML = `<div class="field-empty-prompt">Your Battle Line is empty. Summon a Spirit from your hand below!</div>`;
       } else {
-        pFieldEl.innerHTML = pSoulHtml + pFieldHtml;
+        pFieldEl.innerHTML = pFieldHtml;
+      }
+    }
+
+    // Render Player Soul State Zone (Hub next to Nexus Field)
+    const pSoulZone = document.getElementById('playerSoulStateZone');
+    const pSoulContent = document.getElementById('playerSoulStateContent');
+    if (pSoulZone && pSoulContent) {
+      const pSoulCards = DuelState.player.soulStateCards || [];
+      if (pSoulCards.length > 0) {
+        pSoulZone.style.display = 'flex';
+        pSoulContent.innerHTML = pSoulCards.map(c => renderSoulStateCard(c, 'player')).join('');
+      } else {
+        pSoulZone.style.display = 'none';
       }
     }
 
@@ -4276,17 +4354,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const safeName = (card.name || '').replace(/'/g, "\\'");
     const imgUrl = (typeof window !== 'undefined' && window.cleanCardImageUrl) ? window.cleanCardImageUrl(card.image_url) : (card.image_url || './assets/card_back.png');
     return `
-      <div class="field-spirit-card soul-state-card card-color-${(card.color || 'Purple').toLowerCase()}" onclick="BattleArena.openCardDetailContext('${safeName}', '${isPlayer ? 'field' : 'opp-field'}', '${card.uid}')" title="✨ [Soul State]: ${card.name} (Contract Card in Soul State. Cannot attack, block, or hold cores. Can be Contract Advented onto.)" style="border:2px dashed #a855f7; box-shadow:0 0 16px rgba(168,85,247,0.35); filter:drop-shadow(0 0 8px rgba(168,85,247,0.4)); opacity:0.92; cursor:pointer;">
-        <div class="fsc-header" style="background:linear-gradient(135deg, #7e22ce, #9333ea);">
-          <span class="fsc-level-tag" style="background:#581c87; color:#f3e8ff; font-size:0.65rem; font-weight:900;">✨ SOUL STATE</span>
-          <span class="fsc-bp-tag" style="font-size:0.65rem; color:#d8b4fe;">CONTRACT</span>
+      <div class="bssz-mini-card" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeName}', '${isPlayer ? 'field' : 'opp-field'}', '${card.uid}')" title="✨ [Soul State]: ${card.name} (Contract Partner in Soul State. Click to view details / Contract Advent)">
+        <img src="${imgUrl}" class="bssz-card-thumb" alt="${card.name}" onerror="this.src='./assets/card_back.png';" />
+        <div class="bssz-card-info">
+          <div class="bssz-card-name" title="${card.name}">${card.name}</div>
+          <div class="bssz-card-status"><span>🔮</span> In Soul State</div>
+          <button class="bssz-inspect-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeName}', '${isPlayer ? 'field' : 'opp-field'}', '${card.uid}')">🔍 View Details</button>
         </div>
-        <div class="fsc-art-container" style="position:relative;">
-          <img src="${imgUrl}" class="fsc-art" alt="${card.name}" onerror="this.src='./assets/card_back.png';" />
-          <div style="position:absolute; bottom:3px; left:4px; right:4px; background:rgba(0,0,0,0.8); color:#e9d5ff; font-size:0.62rem; text-align:center; padding:2px; border-radius:3px; font-weight:700;">🔮 IN SOUL STATE</div>
-        </div>
-        <div class="fsc-name-bar">${card.name}</div>
-        <div class="fsc-cores-display readonly" style="font-size:0.68rem; color:#c084fc; text-align:center; padding:0.25rem;">(No Cores Allowed)</div>
       </div>
     `;
   }
@@ -4366,7 +4440,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     } else if (spirit.type === 'Brave' || spirit.isBraveCard) {
       braveFieldBadge = `<div class="spirit-brave-mode-badge" title="Brave in Spirit Form">⚔️ BRAVE (Spirit)</div>`;
       if (isPlayer && isMainStep) {
-        braveFieldActionBtn = `<button class="fsc-brave-btn brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${spirit.uid}', 'field')" title="Combine with another Spirit">🔗 Brave</button>`;
+        braveFieldActionBtn = `<button class="fsc-brave-btn brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${spirit.uid}', 'field')" title="Combine with eligible Spirit or Ultimate">🔗 Brave</button>`;
       }
     }
 
@@ -4913,6 +4987,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     // Place newly designated partner at hand[0]
+    allCards.forEach(c => {
+      c.isContractPartner = false;
+      c.is_contract_partner = false;
+    });
+    chosen.isContractPartner = true;
+    chosen.is_contract_partner = true;
     DuelState.player.hand.unshift(chosen);
     DuelState.player.contractCard = chosen;
     addLog(`🃏 **CONTRACT PARTNER**: Selected "${chosen.name}" as your designated Contract Partner!`, 'system');
@@ -4967,6 +5047,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const isSelected = DuelState.selectedPlayerCard && DuelState.selectedPlayerCard.uid === card.uid;
       const isBrave = card.type === 'Brave' || (card.type || '').includes('Brave');
       const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    if (!isUltimate && DuelState.playerCantSummonSpiritsUntilNextStart && (card.type === 'Spirit' || (card.type || '').includes('Spirit'))) {
+      if (typeof showToast === 'function') showToast("Cannot summon Spirit cards! Blocked until opponent's next Start Step.", 'warning');
+      addLog("🚫 Cannot summon Spirit cards! Opponent's summon lock effect is active until next Start Step.", 'warning');
+      return;
+    }
       const isSpirit = (card.type === 'Spirit' || (card.type || '').includes('Spirit')) && !isBrave && !isUltimate;
       const isMagic = card.type === 'Magic';
       const isNexus = (card.type || '').includes('Nexus');
@@ -5020,7 +5105,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (isUltimate && !meetsCondition) {
         actionBtnHtml = `<button class="btn-quick-disabled" disabled title="Summon Condition: ${ultCheck.reason}">🔒 ${ultCheck.reason || 'Summon Condition Not Met'}</button>`;
       } else if (canPlayStep && isBrave && isMainStep) {
-        const eligibleHosts = DuelState.player.field.filter(s => !s.brave);
+        const eligibleHosts = DuelState.player.field.filter(s => isEligibleBraveHost(card, s).eligible);
         let braveBtns = '';
         if (canAffordDirect) {
           braveBtns += `<button class="btn-quick-summon" onclick="event.stopPropagation(); BattleArena.summonBraveAsSpirit('${card.uid}')" title="Summon as Spirit (Cost ${cost} + 1 Core)">⚔️ Spirit (${cost})</button>`;
@@ -5028,7 +5113,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           braveBtns += `<button class="btn-quick-sacrifice" onclick="event.stopPropagation(); BattleArena.openSacrificeModal('${card.uid}')">⚡ Sac (${cost})</button>`;
         }
         if (eligibleHosts.length > 0 && reserve >= cost) {
-          braveBtns += `<button class="btn-quick-brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${card.uid}', 'hand')" title="Combine with field Spirit (Cost ${cost})">🔗 Brave (${cost})</button>`;
+          braveBtns += `<button class="btn-quick-brave" onclick="event.stopPropagation(); BattleArena.openBraveCombineModal('${card.uid}', 'hand')" title="Combine with field Spirit/Ultimate (Cost ${cost})">🔗 Brave (${cost})</button>`;
         }
         actionBtnHtml = `<div class="brave-actions-duo">${braveBtns}</div>`;
       } else if (canPlayStep && (isSpirit || isUltimate)) {
@@ -5093,7 +5178,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         <div class="${cls}" onclick="BattleArena.selectHandCard('${card.uid}')">
           <button class="hc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeCardName}', 'hand')" title="View Full Card Details">🔍</button>
           ${costBadgeHtml}
-          ${(card.isContractPartner || (DuelState.player && DuelState.player.contractCard && DuelState.player.contractCard.uid === card.uid)) ? `<div class="hc-partner-badge" title="Designated Contract Partner" style="position:absolute;top:6px;left:6px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:0.6rem;font-weight:900;padding:2px 6px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,0.6);z-index:3;letter-spacing:0.5px;">🌟 PARTNER</div>` : ''}
+          ${(DuelState.player && DuelState.player.contractCard && DuelState.player.contractCard.uid === card.uid) ? `<div class="hc-partner-badge" title="Designated Contract Partner" style="position:absolute;top:6px;left:6px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:0.6rem;font-weight:900;padding:2px 6px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,0.6);z-index:3;letter-spacing:0.5px;">🌟 PARTNER</div>` : ''}
           <div class="hc-img-wrap">
             <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
@@ -5550,7 +5635,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
     // 11. Highlight all 102 Official Battle Spirits Wiki Keywords + bracketed effects
-    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flag Contract Advent|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
     safe = safe.replace(allKwPattern, (match) => {
       let cls = 'kw-generic';
@@ -5717,7 +5802,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           bBtns += `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${totalNeeded} Cores</button>`;
         }
         if (eligibleHosts.length > 0 && reserve >= cost) {
-          bBtns += `<button class="btn-inspector-action btn-inspect-brave" onclick="BattleArena.openBraveCombineModal('${card.uid}', 'hand')">🔗 Brave onto Spirit (Cost ${cost})</button>`;
+          bBtns += `<button class="btn-inspector-action btn-inspect-brave" onclick="BattleArena.openBraveCombineModal('${card.uid}', 'hand')">🔗 Brave onto Unit (Cost ${cost})</button>`;
         }
         actionBtnHtml = bBtns;
       } else if (canPlayStep && isInspectUnit) {
@@ -5977,6 +6062,43 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+  function executeOnStageAction(spiritUid) {
+    const unitIdx = (DuelState.player.field || []).findIndex(s => s.uid === spiritUid);
+    if (unitIdx === -1) return;
+    const unit = DuelState.player.field[unitIdx];
+
+    const stageStylesInHand = (DuelState.player.hand || []).filter(c => (c.family || '').includes('Stage Style') || (c.name || '').includes(unit.name));
+    if (!stageStylesInHand.length) {
+      if (typeof showToast === 'function') showToast('No eligible Stage Style card in hand!', 'warning');
+      return;
+    }
+
+    const stageStyleCard = stageStylesInHand[0];
+    DuelState.player.deck.push(unit);
+    const handIdx = DuelState.player.hand.findIndex(c => c.uid === stageStyleCard.uid);
+    if (handIdx !== -1) DuelState.player.hand.splice(handIdx, 1);
+
+    const { level, bp } = calculateBpAndLevel(stageStyleCard.levels, unit.currentCores, !!unit.hasSoulCore, stageStyleCard.effect);
+    const newUnit = {
+      ...stageStyleCard,
+      uid: stageStyleCard.uid || `spirit_${Date.now()}`,
+      currentCores: unit.currentCores,
+      hasSoulCore: unit.hasSoulCore,
+      currentLevel: level,
+      currentBp: bp,
+      isExhausted: false,
+      hasAttacked: false
+    };
+
+    DuelState.player.field[unitIdx] = newUnit;
+
+    AudioFX.summon();
+    addLog(`🎤 **[On Stage]**: Returned **${unit.name}** to deckbottom and summoned **${newUnit.name}** in Refreshed state!`, 'step');
+    if (typeof showToast === 'function') showToast(`🎤 [On Stage] Summoned ${newUnit.name}!`, 'success');
+    renderDuelTable();
+    renderPlayerHand();
+  }
+
   function getCardManualActions(card, zone = 'auto', fieldUnit = null, side = 'player') {
     if (!card || !DuelState.inDuel) return [];
     const actions = [];
@@ -6050,6 +6172,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           action: () => openBraveCombineModal(activeFieldUnit.uid, 'field')
         });
       }
+
+      // 5. [On Stage] Diva Mechanic
+      if (/\[(?:On Stage|ON STAGE)\]/i.test(eff) && isOurTurn && phase === 'ATTACK') {
+        const stageStylesInHand = (DuelState.player.hand || []).filter(c => (c.family || '').includes('Stage Style') || (c.name || '').includes(activeFieldUnit.name));
+        actions.push({
+          id: 'on_stage',
+          label: '🎤 [On Stage]',
+          cls: 'eab-diva',
+          disabled: stageStylesInHand.length === 0,
+          reason: stageStylesInHand.length === 0 ? 'No Stage Style in hand' : '',
+          action: () => executeOnStageAction(activeFieldUnit.uid)
+        });
+      }
     }
 
     // Case 2: Card in Hand
@@ -6097,7 +6232,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (handCard.type === 'Brave' || (handCard.type || '').includes('Brave')) {
         const effCost = getCardEffectiveCost(handCard, side);
         const canAfford = (DuelState.player.reserve >= effCost);
-        const eligibleHosts = (DuelState.player.field || []).filter(s => !s.brave);
+        const eligibleHosts = (DuelState.player.field || []).filter(s => isEligibleBraveHost(handCard, s).eligible);
         if (eligibleHosts.length > 0 && isOurTurn && phase === 'MAIN') {
           actions.push({
             id: 'hand_brave',
@@ -6321,22 +6456,188 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
-    // 3. DESTROY EXHAUSTED OPPOSING SPIRIT
-    if (/destroy\s+(?:an?|one|all|\d+)?\s*(?:opposing\s+)?exhausted\s+(?:spirit|ultimate)/i.test(bodyLower)) {
-      const exhausted = enemyField.filter(s => s.isExhausted);
-      if (exhausted.length > 0) {
-        exhausted.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
-        const target = exhausted[0];
-        const tIdx = enemyField.findIndex(s => s.uid === target.uid);
-        if (tIdx !== -1) {
-          const dest = enemyField.splice(tIdx, 1)[0];
-          enemyReserve.reserve += dest.currentCores;
-          handleDestroyedSpiritCores(dest, enemySide);
-          sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
-          AudioFX.slash();
-          addLog(`💀 **[EXHAUSTED DESTRUCTION: ${card.name}]**: Destroyed opposing exhausted "${dest.name}" (${dest.currentBp} BP)! Cores returned to reserve.`, 'kill');
-          if (typeof showToast === 'function') showToast(`Destroyed exhausted "${dest.name}"!`, 'success');
+    // VAN-TOUS / HAND TO DECKTOP CORE GAIN & BURST LOCK:
+    // "By returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects."
+    if (/return(?:ing)?\s+a\s+card\s+from\s+your\s+hand\s+to\s+the\s+decktop/i.test(bodyLower) && /opponent\s+can't\s+activate\s+burst\s+effects/i.test(bodyLower)) {
+      if (myHand && myHand.length > 0) {
+        if (isPlayer && typeof promptUniversalTargetModal === 'function') {
+          promptUniversalTargetModal({
+            card,
+            side: 'player',
+            targetSide: 'player',
+            targetKind: 'spirit',
+            customPool: myHand,
+            title: `${card.name}: (When Attacks) Effect`,
+            description: 'Select a card from your Hand to return to the decktop (gains 2 cores from Void to an Ultimate & locks opposing Bursts this turn):',
+            minCount: 1,
+            maxCount: 1,
+            allowSkip: true
+          }, (selectedCards) => {
+            if (!selectedCards || !selectedCards.length) return;
+            const returned = selectedCards[0];
+            const hIdx = myHand.findIndex(c => c.uid === returned.uid);
+            if (hIdx !== -1) {
+              myHand.splice(hIdx, 1);
+              myDeck.unshift(returned);
+              AudioFX.magic();
+              addLog(`🎴 **[${card.name}]**: Returned "${returned.name}" from Hand to the top of the deck!`, 'magic');
+
+              const ultTarget = (card.type === 'Ultimate' || (card.type || '').includes('Ultimate')) ? card : myField.find(s => s.type === 'Ultimate' || (s.type || '').includes('Ultimate'));
+              if (ultTarget) {
+                ultTarget.currentCores = (ultTarget.currentCores || 0) + 2;
+                recalculateSpiritBp(ultTarget);
+                AudioFX.coreChime();
+                addLog(`🔮 **[${card.name}]**: Placed 2 cores from Void onto "${ultTarget.name}"!`, 'magic');
+              }
+              DuelState.burstLockThisTurn = enemySide;
+              addLog(`🔒 **[${card.name}]**: Opponent cannot activate Burst effects during this turn!`, 'magic');
+              if (typeof showToast === 'function') showToast('🔒 Opponent Burst effects locked for this turn!', 'success');
+              renderDuelTable();
+              renderPlayerHand();
+            }
+          });
+        } else {
+          const returned = myHand.shift();
+          myDeck.unshift(returned);
+          const ultTarget = (card.type === 'Ultimate' || (card.type || '').includes('Ultimate')) ? card : myField.find(s => s.type === 'Ultimate' || (s.type || '').includes('Ultimate'));
+          if (ultTarget) {
+            ultTarget.currentCores = (ultTarget.currentCores || 0) + 2;
+            recalculateSpiritBp(ultTarget);
+          }
+          DuelState.burstLockThisTurn = enemySide;
+          addLog(`🔒 **[${card.name}]**: Returned "${returned.name}" to decktop, placed 2 cores from Void onto "${ultTarget ? ultTarget.name : card.name}", and locked opposing Bursts for this turn!`, 'magic');
         }
+      }
+    }
+
+    // BRAM-ZAHFAG / MASS SPIRIT DESTRUCTION: "Destroy every opposing Spirit" / "Destroy all opposing Spirits"
+    if (/destroy\s+(?:every|all)\s+opposing\s+spirits?/i.test(bodyLower)) {
+      const eligibleSpirits = enemyField.filter(s => s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit')));
+      if (eligibleSpirits.length > 0) {
+        const destroyedNames = [];
+        for (const s of [...eligibleSpirits]) {
+          const idx = enemyField.findIndex(sp => sp.uid === s.uid);
+          if (idx !== -1) {
+            const dest = enemyField.splice(idx, 1)[0];
+            enemyReserve.reserve = (enemyReserve.reserve || 0) + (dest.currentCores || 0);
+            handleDestroyedSpiritCores(dest, enemySide);
+            sendToTrash(dest, enemySide, `Destroyed by ${card.name} (Mass Destruction)`);
+            destroyedNames.push(`"${dest.name}"`);
+          }
+        }
+        AudioFX.destroy();
+        addLog(`💀 **[MASS DESTRUCTION: ${card.name}]**: Destroyed all opposing Spirit(s): ${destroyedNames.join(', ')}! Cores returned to opponent reserve.`, 'kill');
+        if (typeof showToast === 'function') showToast(`Destroyed all opposing Spirits: ${destroyedNames.length} spirit(s)!`, 'success');
+        renderDuelTable();
+      } else {
+        addLog(`ℹ️ **[${card.name}]**: Opponent controls no Spirits to destroy.`, 'info');
+      }
+    }
+
+    // BRAM-ZAHFAG SUMMON LOCK:
+    // "by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards"
+    if (/by\s+sending\s+(?:one|\d+)\s+of\s+your\s+lives?\s+to\s+the\s+void.*?until\s+your\s+next\s+start\s+step.*?opponent\s+can't\s+summon\s+spirit\s+cards/i.test(bodyLower)) {
+      DuelState.usedOncePerGame = DuelState.usedOncePerGame || new Set();
+      const gameKey = card.name + '_SummonLock';
+      if (!DuelState.usedOncePerGame.has(gameKey)) {
+        const friendlyLife = isPlayer ? DuelState.player.life : DuelState.opponent.life;
+        if (friendlyLife > 1) {
+          if (isPlayer && typeof askOptionalEffect === 'function' && typeof document !== 'undefined' && document.body) {
+            askOptionalEffect(
+              card,
+              '(Once per Game) Send 1 of your Lives to the Void so the opponent cannot summon Spirit cards until your next Start Step?',
+              () => {
+                DuelState.usedOncePerGame.add(gameKey);
+                DuelState.player.life -= 1;
+                DuelState.opponentCantSummonSpiritsUntilNextStart = true;
+                DuelState.summonLockPlacedBy = 'player';
+                AudioFX.lifeDamage();
+                addLog(`🔥 **[${card.name}]**: (Once per Game) Sent 1 Life to the Void! Opponent cannot summon Spirit cards until your next Start Step!`, 'magic');
+                if (typeof showToast === 'function') showToast('🔥 Opponent cannot summon Spirit cards until your next Start Step!', 'success');
+                renderDuelTable();
+              },
+              null
+            );
+          } else {
+            DuelState.usedOncePerGame.add(gameKey);
+            if (isPlayer) {
+              DuelState.player.life -= 1;
+              DuelState.opponentCantSummonSpiritsUntilNextStart = true;
+              DuelState.summonLockPlacedBy = 'player';
+            } else {
+              DuelState.opponent.life -= 1;
+              DuelState.playerCantSummonSpiritsUntilNextStart = true;
+              DuelState.summonLockPlacedBy = 'opponent';
+            }
+            AudioFX.lifeDamage();
+            addLog(`🔥 **[${card.name}]**: (Once per Game) Sent 1 Life to the Void! Summon lock active until next Start Step!`, 'magic');
+            renderDuelTable();
+          }
+        }
+      }
+    }
+
+    // 3. DESTROY EXHAUSTED OPPOSING SPIRIT OR ULTIMATE (Enhanced with Cost constraint: e.g. Curse of Hades: "Destroy an opposing exhausted Cost 5 or less Spirit")
+    if (/destroy\s+(?:an?|one|all|\d+)?\s*(?:opposing\s+)?exhausted\s+(?:(?:cost\s*(\d+)\s*or\s*(less|more)\s+)?(?:spirits?|ultimates?)|(?:spirits?|ultimates?))/i.test(bodyLower)) {
+      const match = bodyLower.match(/destroy\s+(?:an?|one|all|\d+)?\s*(?:opposing\s+)?exhausted\s+(?:cost\s*(\d+)\s*or\s*(less|more)\s+)?(spirits?|ultimates?)/i);
+      const targetCost = match && match[1] ? parseInt(match[1], 10) : null;
+      const isLess = match && match[2] ? match[2].toLowerCase() === 'less' : true;
+      const targetKind = (match && match[3] && match[3].toLowerCase().startsWith('ultimate')) ? 'ultimate' : 'spirit';
+
+      let exhausted = enemyField.filter(s => s.isExhausted);
+      if (targetKind === 'spirit') {
+        exhausted = exhausted.filter(s => s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit')));
+      } else if (targetKind === 'ultimate') {
+        exhausted = exhausted.filter(s => s.type === 'Ultimate' || (s.type || '').includes('Ultimate'));
+      }
+      if (targetCost !== null) {
+        exhausted = exhausted.filter(s => isLess ? (s.cost || 0) <= targetCost : (s.cost || 0) >= targetCost);
+      }
+
+      if (exhausted.length > 0) {
+        if (isPlayer && typeof promptUniversalTargetModal === 'function') {
+          promptUniversalTargetModal({
+            card,
+            side: 'player',
+            targetSide: enemySide,
+            targetKind,
+            customPool: exhausted,
+            title: `${card.name}: Destroy Exhausted ${targetKind === 'ultimate' ? 'Ultimate' : 'Spirit'}`,
+            description: `Select an opposing exhausted ${targetCost !== null ? `Cost ${targetCost} or ${isLess ? 'less' : 'more'} ` : ''}${targetKind === 'ultimate' ? 'Ultimate' : 'Spirit'} to destroy:`,
+            minCount: 1,
+            maxCount: 1,
+            allowSkip: false
+          }, (selectedTargets) => {
+            if (!selectedTargets || !selectedTargets.length) return;
+            const dest = selectedTargets[0];
+            const tIdx = enemyField.findIndex(s => s.uid === dest.uid);
+            if (tIdx !== -1) {
+              enemyField.splice(tIdx, 1);
+              enemyReserve.reserve += (dest.currentCores || 0);
+              handleDestroyedSpiritCores(dest, enemySide);
+              sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
+              AudioFX.slash();
+              addLog(`💀 **[EXHAUSTED DESTRUCTION: ${card.name}]**: Destroyed opposing exhausted "${dest.name}" (${dest.currentBp} BP)! Cores returned to reserve.`, 'kill');
+              if (typeof showToast === 'function') showToast(`Destroyed exhausted "${dest.name}"!`, 'success');
+              renderDuelTable();
+            }
+          });
+        } else {
+          exhausted.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+          const dest = exhausted[0];
+          const tIdx = enemyField.findIndex(s => s.uid === dest.uid);
+          if (tIdx !== -1) {
+            enemyField.splice(tIdx, 1);
+            enemyReserve.reserve += (dest.currentCores || 0);
+            handleDestroyedSpiritCores(dest, enemySide);
+            sendToTrash(dest, enemySide, `Destroyed by ${card.name} (${triggerName})`);
+            AudioFX.slash();
+            addLog(`💀 **[EXHAUSTED DESTRUCTION: ${card.name}]**: Destroyed opposing exhausted "${dest.name}" (${dest.currentBp} BP)! Cores returned to reserve.`, 'kill');
+            renderDuelTable();
+          }
+        }
+      } else {
+        addLog(`ℹ️ **[${card.name}]**: No eligible opposing exhausted ${targetCost !== null ? `Cost ${targetCost} or ${isLess ? 'less' : 'more'} ` : ''}${targetKind === 'ultimate' ? 'Ultimate' : 'Spirit'} found on battlefield to destroy.`, 'info');
       }
     }
     // 4A2. CUMULATIVE COST DESTRUCTION (e.g. The SacredEmperor Siegfrieden XV, BS66-XV02)
@@ -7648,8 +7949,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
 
   // ── BRAVE RULES (Rule 7.2): Uncombined Braves in Spirit Form cannot Attack or Block ──
+  // ── KEYWORD RULES: Pursuit (attack while exhausted), Soar (block while exhausted), Clock Up ──
   function canUnitAttack(unit) {
-    if (!unit || unit.isExhausted || unit.isSoulState) return false;
+    if (!unit || unit.isSoulState) return false;
+    if (unit.isExhausted) {
+      const hasPursuit = (unit.effect || '').toLowerCase().includes('pursuit');
+      if (!hasPursuit || unit.isHeavyExhausted) return false;
+    }
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
       const eff = (unit.effect || '').toLowerCase();
@@ -7661,7 +7967,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function canUnitBlock(unit) {
-    if (!unit || unit.isExhausted || unit.isSoulState) return false;
+    if (!unit || unit.isSoulState) return false;
+    const currentAttacker = DuelState.combatAttacker;
+    const attackerHasSoar = currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('soar');
+    if (unit.isExhausted && !attackerHasSoar) {
+      const eff = (unit.effect || '').toLowerCase();
+      if (!eff.includes('can block while exhausted')) return false;
+    }
+    if (currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('clock up')) {
+      if (!(unit.effect || '').toLowerCase().includes('clock up')) return false;
+    }
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
       const eff = (unit.effect || '').toLowerCase();
@@ -8405,7 +8720,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!card || !card.effect) return null;
     const m = card.effect.match(/\[(?:Contract\s+)?Advent:\s*([^\]]+)\]|【(?:契約)?煌臨：([^】]+)】/i);
     if (!m) return null;
-    const isContractAdvent = /contract\s+advent|契約煌臨/i.test(m[0]);
+    const isContractAdvent = /(?:flag\s+)?contract\s+advent|(?:旗)?契約煌臨/i.test(m[0]);
+    const isFlagContractAdvent = /flag\s+contract\s+advent|旗契約煌臨/i.test(m[0]);
     const rawCond = (m[1] || m[2]).trim();
 
     // Parse timing in parentheses following [Advent: ...]
@@ -8447,6 +8763,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const parsed = {
       raw: m[0],
       isContractAdvent,
+      isFlagContractAdvent,
       condText: rawCond,
       timing,
       timingLabel,
@@ -8487,6 +8804,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let candidates = [...(fieldSpirits || [])];
     if (adventReq.isContractAdvent && st && st.soulStateCards && st.soulStateCards.length > 0) {
       candidates = candidates.concat(st.soulStateCards);
+    }
+    // Eternal 17.0: Flag Contract Advent can advent onto Spirits AND Nexuses (including in Soul State)
+    if (adventReq.isFlagContractAdvent && st && st.nexus && st.nexus.length > 0) {
+      candidates = candidates.concat(st.nexus);
     }
 
     return candidates.filter(s => {
@@ -9290,23 +9611,41 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     if (!braveCard) return;
 
-    const eligibleSpirits = DuelState.player.field.filter(s => isEligibleBraveHost(braveCard, s).eligible);
+    const condStr = ((braveCard.brave_condition || braveCard.braveCondition || '').trim()) ||
+                    (() => {
+                      const text = (braveCard.effect || '') + ' ' + (braveCard.flavor || '');
+                      const m = text.match(/\[Brave Condition:\s*([^\]]+)\]|【合体条件：([^】]+)】/i);
+                      return m ? (m[1] || m[2]).trim() : '';
+                    })();
 
-    if (eligibleSpirits.length === 0) {
-      if (source === 'hand') {
-        if (typeof showToast === 'function') {
-          showToast(`No eligible allied Spirits on battlefield to Brave with "${braveCard.name}"! You can summon it in Spirit Form first.`, 'warning');
-        }
+    const otherUnits = DuelState.player.field.filter(s => s.uid !== braveCard.uid);
+    const eligibleUnits = otherUnits.filter(s => isEligibleBraveHost(braveCard, s).eligible);
+
+    if (eligibleUnits.length === 0) {
+      if (otherUnits.length === 0) {
+        const msg = (source === 'hand')
+          ? `No allied Spirits or Ultimates on battlefield to combine with "${braveCard.name}"! You can summon it in Spirit Form first.`
+          : `No other allied Spirits or Ultimates on the battlefield to combine with "${braveCard.name}"!`;
+        if (typeof showToast === 'function') showToast(msg, 'warning');
       } else {
+        // Collect specific diagnostic reasons for each unit on the battlefield
+        const reasons = otherUnits.map(u => {
+          const check = isEligibleBraveHost(braveCard, u);
+          return `"${u.name}" (${u.type || 'Spirit'}, Cost ${u.cost || 0}): ${check.reason || 'Brave condition not met'}`;
+        }).join('; ');
+
+        const condInfo = condStr ? ` [Brave Condition: ${condStr}]` : '';
+        const msg = `Cannot combine "${braveCard.name}"${condInfo} — ${reasons}`;
         if (typeof showToast === 'function') {
-          showToast(`No other eligible allied Spirits on battlefield to combine with "${braveCard.name}"!`, 'warning');
+          showToast(msg, 'warning', 7000);
         }
+        addLog(`⚠️ **[BRAVE INELIGIBLE]**: ${msg}`, 'warning');
       }
       return;
     }
 
-    if (eligibleSpirits.length === 1) {
-      braveOntoSpirit(braveUid, eligibleSpirits[0].uid, source);
+    if (eligibleUnits.length === 1) {
+      braveOntoSpirit(braveUid, eligibleUnits[0].uid, source);
       return;
     }
 
@@ -11155,6 +11494,23 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
     if (!burstCard) return false;
 
+    // Rule Protection: Check if Burst activation is locked for this turn (e.g. Van-Tous effect)
+    if (DuelState.burstLockThisTurn === side) {
+      addLog(`🔒 Burst activation prevented! ${isPlayer ? 'Player' : 'Opponent'} cannot activate Burst effects during this turn.`, 'info');
+      return false;
+    }
+
+    // Rule Protection: Attacker Brave / Effect Continuous Burst Lock (e.g. Gaianohoko During Brave)
+    const attacker = eventContext.attacker || DuelState.combatAttacker;
+    if (attacker) {
+      const braveEff = (attacker.brave && attacker.brave.effect ? attacker.brave.effect : '').toLowerCase();
+      if (braveEff.includes("burst can't activate") || braveEff.includes("burst cannot activate") || braveEff.includes("バースト効果を発揮できない") ||
+          braveEff.includes("opposing burst can't activate")) {
+        addLog(`🔒 Burst activation prevented! Opposing Burst cannot activate against "${attacker.name}"!`, 'info');
+        return false;
+      }
+    }
+
     const cond = parseBurstCondition(burstCard.effect);
 
     // Strict validation: eventType must match the card's specific condition
@@ -11264,6 +11620,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     attacker.isExhausted = true;
     attacker.hasAttacked = true;
+    DuelState.combatAttacker = attacker;
     checkGrandFieldOnOpponentExhaust('opponent');
 
     // Reset battle BP boost before attack resolution
@@ -11432,7 +11789,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
         if (DuelState.opponent.life > 0) {
           checkLifeDecreasedEffects('opponent');
-          checkBurstTrigger('opponent', 'AFTER_LIFE_DECREASED');
+          checkBurstTrigger('opponent', 'AFTER_LIFE_DECREASED', { attacker });
         }
 
         const isAttackerAlive = DuelState.player.field.some(s => s.uid === attacker.uid);
@@ -11596,6 +11953,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       AudioFX.playTone(330, 'triangle', 0.15, 0.08);
       DuelState.player.hasMulliganed = true;
       DuelState.player.hasConfirmedHand = true;
+      if (DuelState.summonLockPlacedBy === 'player') {
+        DuelState.opponentCantSummonSpiritsUntilNextStart = false;
+        DuelState.summonLockPlacedBy = null;
+        addLog('🔓 Opponent is now permitted to summon Spirit cards again.', 'info');
+      }
       addLog(`▶️ **START STEP**: Turn ${DuelState.turn} commenced! Next: Claim your Core from the Void.`, 'step');
       DuelState.phaseIndex = 1; // to CORE
       renderDuelTable();
@@ -11787,6 +12149,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     if (currentPhase === 'START') {
       AudioFX.playTone(280, 'sine', 0.15, 0.08);
+      if (DuelState.summonLockPlacedBy === 'opponent') {
+        DuelState.playerCantSummonSpiritsUntilNextStart = false;
+        DuelState.summonLockPlacedBy = null;
+        addLog('🔓 Player is now permitted to summon Spirit cards again.', 'info');
+      }
       addLog(`▶️ **START STEP**: Opponent begins Turn ${DuelState.turn}.`, 'step');
       DuelState.phaseIndex = 1; // to CORE
       renderDuelTable();
@@ -11960,6 +12327,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           const ultCheck = validateUltimateSummonCondition(c, 'opponent');
           if (!ultCheck.allowed) return false;
         } else if (c.type !== 'Spirit' && !(c.type || '').includes('Spirit')) {
+          return false;
+        } else if (DuelState.opponentCantSummonSpiritsUntilNextStart) {
           return false;
         }
         const effCost = getCardEffectiveCost(c, 'opponent');
@@ -12198,7 +12567,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             }
           };
 
-          const burstTriggered = checkBurstTrigger('player', 'AFTER_LIFE_DECREASED', {}, continueAfterDamage);
+          const burstTriggered = checkBurstTrigger('player', 'AFTER_LIFE_DECREASED', { attacker }, continueAfterDamage);
           if (!burstTriggered) {
             continueAfterDamage();
           }
@@ -13819,6 +14188,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     setBurst,
     inspectBurst,
     inspectOpponentBurst,
+    inspectSoulStateCard: (side = 'player') => {
+      const cards = (side === 'player' ? DuelState.player.soulStateCards : DuelState.opponent.soulStateCards) || [];
+      if (cards.length > 0) {
+        const c = cards[0];
+        openCardDetailContext(c.name, side === 'player' ? 'field' : 'opp-field', c.uid);
+      }
+    },
     activateBurst,
     renderBurstZones,
     grantEffectToUnit,

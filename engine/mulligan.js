@@ -14,15 +14,26 @@ export async function setupOpeningHands(game) {
     const p = state.players[side];
 
     // 1. Contract Partner Guarantee (Rule 3.5 & R39)
-    const partnerIndex = p.deck.findIndex(c => c.isContractPartner);
-    if (partnerIndex !== -1) {
-      const partnerCard = p.deck.splice(partnerIndex, 1)[0];
-      p.hand.push(partnerCard);
+    if (!p.hand.some(c => c.isContractPartner)) {
+      const partnerIndex = p.deck.findIndex(c => c.isContractPartner);
+      if (partnerIndex !== -1) {
+        const partnerCard = p.deck.splice(partnerIndex, 1)[0];
+        p.hand.push(partnerCard);
+      }
     }
 
-    // 2. Fill remaining opening hand up to 4 cards
+    // 2. Fill or adjust remaining opening hand to exact initialHandSize
     while (p.hand.length < ETERNAL_RULES.setup.initialHandSize && p.deck.length > 0) {
       p.hand.push(p.deck.shift());
+    }
+    while (p.hand.length > ETERNAL_RULES.setup.initialHandSize) {
+      const excess = p.hand.find(c => !c.isContractPartner);
+      if (excess) {
+        p.hand = p.hand.filter(c => c.id !== excess.id);
+        p.deck.unshift(excess);
+      } else {
+        break;
+      }
     }
 
     // 3. Prompt for Mulligan (Rule 3.5 & R41)

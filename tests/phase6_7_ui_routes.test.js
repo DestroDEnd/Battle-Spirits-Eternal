@@ -99,11 +99,18 @@ test('Phase 7 - Floating Deck Drawer in browse.html', () => {
   assert.ok(html.includes('scope'), 'browse.html must have scope filter pills');
 });
 
-test('Phase 7 - Captcha verification in login.html and register.html', () => {
+test('Phase 7 - Captcha verification & Forgot Password recovery in login.html and register.html', () => {
   const loginPath = path.join(rootDir, 'login.html');
   const loginHtml = fs.readFileSync(loginPath, 'utf-8');
   assert.ok(loginHtml.includes('captchaSvgContainer'), 'login.html must include captcha container');
   assert.ok(loginHtml.includes('verifyCaptchaLocal'), 'login.html must verify captcha on submit');
+  assert.ok(loginHtml.includes('openForgotPasswordModal'), 'login.html must include Forgot Password trigger');
+  assert.ok(loginHtml.includes('forgotPasswordModal'), 'login.html must include password reset modal');
+  assert.ok(loginHtml.includes('handleForgotPasswordSubmit'), 'login.html must handle password reset submission');
+
+  const firebaseServicePath = path.join(rootDir, 'firebase_service.js');
+  const firebaseJs = fs.readFileSync(firebaseServicePath, 'utf-8');
+  assert.ok(firebaseJs.includes('sendPasswordReset'), 'firebase_service.js must export sendPasswordReset');
 
   const regPath = path.join(rootDir, 'register.html');
   const regHtml = fs.readFileSync(regPath, 'utf-8');

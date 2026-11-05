@@ -414,6 +414,84 @@
     return cred;
   }
 
+  function maskEmail(email) {
+    if (!email || !email.includes('@')) return email || '';
+    const parts = email.split('@');
+    const name = parts[0];
+    const domain = parts[1];
+    if (name.length <= 2) {
+      return `${name[0]}***@${domain}`;
+    }
+    return `${name[0]}***${name[name.length - 1]}@${domain}`;
+  }
+
+  async function sendPasswordReset(identifier) {
+    if (!auth) throw new Error('Firebase Auth not available');
+    const clean = String(identifier || '').trim();
+    if (!clean) throw new Error('Please enter your Duelist Username or Email address.');
+
+    let targetEmail = null;
+
+    if (clean.includes('@')) {
+      targetEmail = clean;
+    } else {
+      const lower = clean.toLowerCase();
+      const noSpaceLower = lower.replace(/\s+/g, '');
+
+      if (db) {
+        try {
+          // 1. Check usernames collection
+          let doc = await db.collection('usernames').doc(lower).get();
+          if (!doc.exists && noSpaceLower !== lower) {
+            doc = await db.collection('usernames').doc(noSpaceLower).get();
+          }
+          if (doc.exists && doc.data() && doc.data().email) {
+            targetEmail = doc.data().email;
+          }
+
+          // 2. Check users collection
+          if (!targetEmail) {
+            let snap = await db.collection('users').where('username_lower', '==', lower).limit(1).get();
+            if (snap.empty && noSpaceLower !== lower) {
+              snap = await db.collection('users').where('username_lower', '==', noSpaceLower).limit(1).get();
+            }
+            if (!snap.empty && snap.docs[0].data() && snap.docs[0].data().email) {
+              targetEmail = snap.docs[0].data().email;
+            }
+          }
+        } catch (e) {
+          console.warn('[Firebase] Username lookup in Firestore warning:', e);
+        }
+      }
+
+      // 3. Fallback for known demo / default domains
+      if (!targetEmail) {
+        if (noSpaceLower === 'destrodend') {
+          targetEmail = 'destrodend@gmail.com';
+        } else {
+          targetEmail = `${noSpaceLower}@bsp-eternal.com`;
+        }
+      }
+    }
+
+    try {
+      await auth.sendPasswordResetEmail(targetEmail);
+      return {
+        success: true,
+        email: maskEmail(targetEmail),
+        fullEmail: targetEmail
+      };
+    } catch (err) {
+      if (err.code === 'auth/user-not-found') {
+        throw new Error(`No registered Duelist account found for "${clean}". Please verify your spelling or create an account.`);
+      }
+      if (err.code === 'auth/invalid-email') {
+        throw new Error('Please enter a valid email address or registered Duelist username.');
+      }
+      throw err;
+    }
+  }
+
   async function signOut() {
     currentUser = null;
     currentDuelistId = null;
@@ -449,6 +527,8 @@
     loginWithGoogle: signInWithGoogle,
     register: signUpWithUsernameOrEmail,
     checkUsername: checkUsernameAvailable,
+    sendPasswordReset: sendPasswordReset,
+    maskEmail: maskEmail,
     guestLogin: signInAnonymously,
     logout: signOut,
     getDatabase: () => rtdb,

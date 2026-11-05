@@ -1,249 +1,1619 @@
 {
- "SD20-001": {
-  "name": "Missile Mobile",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "SD20-001": {
+    "name": "Missile Mobile",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "",
+    "is_vanilla": true,
+    "compiledIr": {
+      "cardNumber": "SD20-001",
+      "name": "Missile Mobile",
+      "isFullySupported": true,
+      "isVanilla": true,
+      "compiledClausesCount": 0,
+      "unsupportedClausesCount": 0,
+      "abilities": [],
+      "keywords": []
+    }
   },
-  "effect": "",
-  "is_vanilla": true
- },
- "SD20-004": {
-  "name": "Shield Mobile",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
+  "SD20-004": {
+    "name": "Shield Mobile",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (Opposing Attack Step)\nThis Spirit can block while exhausted.\n\n[LV2][LV3] [Heavy Armor: Red]\nThis Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-004",
+      "name": "Shield Mobile",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 90
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block while exhausted.",
+              "cleanText": "This Spirit can block while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUSTED_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Red",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (Opposing Attack Step)\nThis Spirit can block while exhausted.\n\n[LV2][LV3] [Heavy Armor: Red]\nThis Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "SD20-005": {
-  "name": "Trooper Mobile",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "SD20-005": {
+    "name": "Trooper Mobile",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Heavy Armor: Red]\nThis Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\n\n[LV2][LV3] (When Blocks)\nPut a core from the Void to any of your White Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-005",
+      "name": "Trooper Mobile",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Red",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your White Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your White Spirits.",
+              "cleanText": "Put a core from the Void to any of your White Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Heavy Armor: Red]\nThis Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\n\n[LV2][LV3] (When Blocks)\nPut a core from the Void to any of your White Spirits.",
-  "is_vanilla": false
- },
- "SD20-009": {
-  "name": "Ultimate-Asc",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 13000
-   }
+  "SD20-009": {
+    "name": "Ultimate-Asc",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 13000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-009",
+      "name": "Ultimate-Asc",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 59
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-009#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more White Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more White Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.",
+              "cleanText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]",
-  "is_vanilla": false
- },
- "SD20-X01": {
-  "name": "Ultimate-Odin",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 15000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 20000
-   }
+  "SD20-X01": {
+    "name": "Ultimate-Odin",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 15000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 20000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more White Spirits]\n\n[LV3][LV4][LV5] (When Summoned)\nReturn an opposing Spirit to the Hand.\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]\n\n[LV4][LV5] (Your End Step)\nThis Ultimate refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-X01",
+      "name": "Ultimate-Odin",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 131
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-X01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more White Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more White Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the Hand.",
+              "cleanText": "Return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.",
+              "cleanText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-X01#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Ultimate refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "This Ultimate refreshes.",
+              "cleanText": "This Ultimate refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more White Spirits]\n\n[LV3][LV4][LV5] (When Summoned)\nReturn an opposing Spirit to the Hand.\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]\n\n[LV4][LV5] (Your End Step)\nThis Ultimate refreshes.",
-  "is_vanilla": false
- },
- "SD20-010": {
-  "name": "Ultimate-Surtr",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 11000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 14000
-   }
+  "SD20-010": {
+    "name": "Ultimate-Surtr",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 11000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 14000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]\n\n[LV4] (Your End Step)\nThis Ultimate refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-010",
+      "name": "Ultimate-Surtr",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 59
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-010#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more White Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more White Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.",
+              "cleanText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-010#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Ultimate refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "This Ultimate refreshes.",
+              "cleanText": "This Ultimate refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]\n\n[LV4] (Your End Step)\nThis Ultimate refreshes.",
-  "is_vanilla": false
- },
- "SD20-008": {
-  "name": "UltimateCannon-Bell",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 8000
-   }
+  "SD20-008": {
+    "name": "UltimateCannon-Bell",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 8000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV4] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-008",
+      "name": "UltimateCannon-Bell",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV4",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 59
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-008#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more White Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more White Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.",
+              "cleanText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more White Spirits]\n\n[Ultimate Trigger: [LV4] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits.\n[utb]",
-  "is_vanilla": false
- },
- "SD20-006": {
-  "name": "Wing Soldier",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD20-006": {
+    "name": "Wing Soldier",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing 5000 BP or less Spirit to the Hand. Also, if your Life is at three or less, return an opposing 5000 BP or less Spirit to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-006",
+      "name": "Wing Soldier",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing 5000 BP or less Spirit to the Hand. Also, if your Life is at three or less, return an opposing 5000 BP or less Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing 5000 BP or less Spirit to the Hand.",
+              "cleanText": "Return an opposing 5000 BP or less Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "if your Life is at three or less, return an opposing 5000 BP or less Spirit to the Hand.",
+              "cleanText": "return an opposing 5000 BP or less Spirit to the Hand",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if your Life is at three or less",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing 5000 BP or less Spirit to the Hand. Also, if your Life is at three or less, return an opposing 5000 BP or less Spirit to the Hand.",
-  "is_vanilla": false
- },
- "SD20-007": {
-  "name": "White Jet Dragoon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD20-007": {
+    "name": "White Jet Dragoon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2]\nWhen you Life is at three or less, this Spirit gains +4000 BP.\n\n[LV2] (When Attacks)\nDiscard an opposing Burst.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-007",
+      "name": "White Jet Dragoon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you Life is at three or less, this Spirit gains +4000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "When you Life is at three or less, this Spirit gains +4000 BP.",
+              "cleanText": "When you Life is at three or less, this Spirit gains +4000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 4000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Discard an opposing Burst."
+          },
+          "clauses": [
+            {
+              "rawText": "Discard an opposing Burst.",
+              "cleanText": "Discard an opposing Burst",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_BURST",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nWhen you Life is at three or less, this Spirit gains +4000 BP.\n\n[LV2] (When Attacks)\nDiscard an opposing Burst.",
-  "is_vanilla": false
- },
- "SD20-016": {
-  "name": "Blitz Order",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nReturn an opposing Spirit to the Hand. Then, refresh one of your Spirits.",
-  "is_vanilla": false
- },
- "SD20-014": {
-  "name": "Burst Shield",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Life is reduced]\nPut a core from the Void to any of your White Spirits. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDuring this turn, your Life can't be reduced by the attacks of Cost 4 or more Spirits.",
-  "is_vanilla": false
- },
- "SD20-003": {
-  "name": "Defenzard",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "SD20-016": {
+    "name": "Blitz Order",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nReturn an opposing Spirit to the Hand. Then, refresh one of your Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-016",
+      "name": "Blitz Order",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-016#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the Hand. Then, refresh one of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the Hand.",
+              "cleanText": "Return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            },
+            {
+              "rawText": "refresh one of your Spirits.",
+              "cleanText": "refresh one of your Spirits",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Blocks)\nThis Spirit gains +3000 BP. Also, if your Life is at three or less, this Spirit gains +3000 BP.",
-  "is_vanilla": false
- },
- "SD20-015": {
-  "name": "Last Rebellion",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nReturn every opposing Cost 3 or less Spirit to the Hand. Or, return an opposing non-braved Spirit to the Hand.",
-  "is_vanilla": false
- },
- "SD20-012": {
-  "name": "The Falling World",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen your Spirits/Ultimates are destroyed by the opponent, return an opposing Nexus to the Hand.\n\n[LV2] (Opposing Attack Step)\nWhen your Spirits/Ultimates are destroyed by the opponent, return an opposing Spirit to the Hand.",
-  "is_vanilla": false
- },
- "SD20-011": {
-  "name": "The Rowgard Northern Instructions Bureau",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nAll your White Spirits/Ultimates gain +2000 BP.\n\n[LV2] (Opposing Attack Step)\nWhile your Life is at three or less, your Life can only be reduced by opposing Ultimate effects by one per turn.",
-  "is_vanilla": false
- },
- "SD20-013": {
-  "name": "Ultimate Power",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, give a Spirit/Ultimate +3000 BP.",
-  "is_vanilla": false
- }
+  "SD20-014": {
+    "name": "Burst Shield",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Life is reduced]\nPut a core from the Void to any of your White Spirits. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDuring this turn, your Life can't be reduced by the attacks of Cost 4 or more Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-014",
+      "name": "Burst Shield",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD20-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your White Spirits. Then, by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your White Spirits.",
+              "cleanText": "Put a core from the Void to any of your White Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "by paying the cost, activate this card's Flash effect.",
+              "cleanText": "by paying the cost, activate this card's Flash effect",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, your Life can't be reduced by the attacks of Cost 4 or more Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, your Life can't be reduced by the attacks of Cost 4 or more Spirits.",
+              "cleanText": "your Life can't be reduced by the attacks of Cost 4 or more Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD20-003": {
+    "name": "Defenzard",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Blocks)\nThis Spirit gains +3000 BP. Also, if your Life is at three or less, this Spirit gains +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-003",
+      "name": "Defenzard",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +3000 BP. Also, if your Life is at three or less, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +3000 BP.",
+              "cleanText": "This Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            },
+            {
+              "rawText": "if your Life is at three or less, this Spirit gains +3000 BP.",
+              "cleanText": "this Spirit gains +3000 BP",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if your Life is at three or less",
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD20-015": {
+    "name": "Last Rebellion",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nReturn every opposing Cost 3 or less Spirit to the Hand. Or, return an opposing non-braved Spirit to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-015",
+      "name": "Last Rebellion",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return every opposing Cost 3 or less Spirit to the Hand. Or, return an opposing non-braved Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return every opposing Cost 3 or less Spirit to the Hand.",
+              "cleanText": "Return every opposing Cost 3 or less Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "all": true,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "maxCost": 3,
+                  "maxBp": null
+                }
+              }
+            },
+            {
+              "rawText": "return an opposing non-braved Spirit to the Hand.",
+              "cleanText": "return an opposing non-braved Spirit to the Hand",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD20-012": {
+    "name": "The Falling World",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen your Spirits/Ultimates are destroyed by the opponent, return an opposing Nexus to the Hand.\n\n[LV2] (Opposing Attack Step)\nWhen your Spirits/Ultimates are destroyed by the opponent, return an opposing Spirit to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-012",
+      "name": "The Falling World",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Nexus to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Nexus to the Hand.",
+              "cleanText": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Nexus to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Spirit to the Hand.",
+              "cleanText": "When your Spirits/Ultimates are destroyed by the opponent, return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD20-011": {
+    "name": "The Rowgard Northern Instructions Bureau",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nAll your White Spirits/Ultimates gain +2000 BP.\n\n[LV2] (Opposing Attack Step)\nWhile your Life is at three or less, your Life can only be reduced by opposing Ultimate effects by one per turn.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-011",
+      "name": "The Rowgard Northern Instructions Bureau",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your White Spirits/Ultimates gain +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your White Spirits/Ultimates gain +2000 BP.",
+              "cleanText": "All your White Spirits/Ultimates gain +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD20-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your Life is at three or less, your Life can only be reduced by opposing Ultimate effects by one per turn."
+          },
+          "clauses": [
+            {
+              "rawText": "While your Life is at three or less, your Life can only be reduced by opposing Ultimate effects by one per turn.",
+              "cleanText": "your Life can only be reduced by opposing Ultimate effects by one per turn",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your Life is at three or less",
+              "duration": null,
+              "op": {
+                "op": "DAMAGE_CAP"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD20-013": {
+    "name": "Ultimate Power",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, give a Spirit/Ultimate +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD20-013",
+      "name": "Ultimate Power",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD20-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit/Ultimate +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit/Ultimate +3000 BP.",
+              "cleanText": "give a Spirit/Ultimate +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

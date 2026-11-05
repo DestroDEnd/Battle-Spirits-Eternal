@@ -1,84 +1,527 @@
 {
- "P22-14": {
-  "name": "Victory Bladra",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   }
+  "P22-14": {
+    "name": "Victory Bladra",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      }
+    },
+    "effect": "Flash - [Contract Advent: Blade Contract, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nReturn two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.\n\n[During OC] [LV1][LV2] (When Attacks)\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P22-14",
+      "name": "Victory Bladra",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "Blade Contract, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P22-14#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: Blade Contract, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P22-14#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.",
+              "cleanText": "Return two Cost 3 or less Red-only Spirit cards from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P22-14#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: Blade Contract, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nReturn two Cost 3 or less Red-only Spirit cards from your Trash to the Hand.\n\n[During OC] [LV1][LV2] (When Attacks)\nDraw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6519": {
-  "name": "Mimizukku",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A6519": {
+    "name": "Mimizukku",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV2][LV3] (When Destroyed)\nRefresh a \"Winged Beast\" family Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6519",
+      "name": "Mimizukku",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6519#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Refresh a \"Winged Beast\" family Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh a \"Winged Beast\" family Spirit you control.",
+              "cleanText": "Refresh a \"Winged Beast\" family Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2][LV3] (When Destroyed)\nRefresh a \"Winged Beast\" family Spirit you control.",
-  "is_vanilla": false
- },
- "P22-03": {
-  "name": "Mugendra-Trinity",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 8000
-   }
+  "P22-03": {
+    "name": "Mugendra-Trinity",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 8000
+      }
+    },
+    "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[LV1][LV2][LV3] (Your Main Step)\nOnce per turn, your counter can +1. When you've done so, during this turn, an \"Incarnate\" family Spirit you control is treated as being one LV higher.\n\n[LV2][LV3] (When Attacks)\nYour counter +1, and you draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P22-03",
+      "name": "Mugendra-Trinity",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P22-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.",
+              "cleanText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P22-03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "your counter can +1. When you've done so, during this turn, an \"Incarnate\" family Spirit you control is treated as being one LV higher."
+          },
+          "clauses": [
+            {
+              "rawText": "your counter can +1.",
+              "cleanText": "your counter can +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COUNT_OPERATION"
+              }
+            },
+            {
+              "rawText": "during this turn, an \"Incarnate\" family Spirit you control is treated as being one LV higher.",
+              "cleanText": "an \"Incarnate\" family Spirit you control is treated as being one LV higher",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P22-03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1, and you draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1, and you draw a card.",
+              "cleanText": "Your counter +1, and you draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[LV1][LV2][LV3] (Your Main Step)\nOnce per turn, your counter can +1. When you've done so, during this turn, an \"Incarnate\" family Spirit you control is treated as being one LV higher.\n\n[LV2][LV3] (When Attacks)\nYour counter +1, and you draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A11472": {
-  "name": "The MoonlightMusha Heike-Boruta",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   }
-  },
-  "effect": "[LV1][LV2]\nThe cores on your \"Moonlight\"-named Spirits can't be removed by opposing Spirit/Brave/Magic effects.\n\n[When Braved] [LV2]\nWhen cores are removed from your Spirits due to opposing Spirit/Brave/Magic effects, for each core removed, send a core from any opposing Spirits to the Void.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A11472": {
+    "name": "The MoonlightMusha Heike-Boruta",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2]\nThe cores on your \"Moonlight\"-named Spirits can't be removed by opposing Spirit/Brave/Magic effects.\n\n[When Braved] [LV2]\nWhen cores are removed from your Spirits due to opposing Spirit/Brave/Magic effects, for each core removed, send a core from any opposing Spirits to the Void.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A11472",
+      "name": "The MoonlightMusha Heike-Boruta",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A11472#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The cores on your \"Moonlight\"-named Spirits can't be removed by opposing Spirit/Brave/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "The cores on your \"Moonlight\"-named Spirits can't be removed by opposing Spirit/Brave/Magic effects.",
+              "cleanText": "The cores on your \"Moonlight\"-named Spirits can't be removed by opposing Spirit/Brave/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11472#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When cores are removed from your Spirits due to opposing Spirit/Brave/Magic effects, for each core removed, send a core from any opposing Spirits to the Void."
+          },
+          "clauses": [
+            {
+              "rawText": "When cores are removed from your Spirits due to opposing Spirit/Brave/Magic effects, for each core removed, send a core from any opposing Spirits to the Void.",
+              "cleanText": "When cores are removed from your Spirits due to opposing Spirit/Brave/Magic effects, for each core removed, send a core from any opposing Spirits to the Void",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

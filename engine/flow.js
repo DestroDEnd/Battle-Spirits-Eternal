@@ -6,7 +6,7 @@
  */
 
 import { ETERNAL_RULES } from './rules/eternal.js';
-import { moveCard, moveCore } from './zones.js';
+import { moveCard, moveCore, flushStandbyStacks } from './zones.js';
 import { checkStateBasedActions } from './sba.js';
 
 export class FlowController {
@@ -57,6 +57,9 @@ export class FlowController {
 
     // Execute automatic step actions
     await this.executeStepActions(nextStep);
+
+    // Flush any pending standby stacks from previous step resolutions
+    await flushStandbyStacks(this.state, this.events);
 
     // Run State-Based Actions
     await checkStateBasedActions(this.state, this.events);

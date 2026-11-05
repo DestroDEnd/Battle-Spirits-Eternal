@@ -1,66 +1,447 @@
 {
- "BSC15-006": {
-  "name": "Heavy-Tankmobile T-35",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "BSC15-006": {
+    "name": "Heavy-Tankmobile T-35",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[Burst: After your Spirit is Destroyed by the Opponent]\nSummon this Spirit card.\n\n[LV2] (Opposing Attack Step)\nThis Spirit can block while exhausted. When you control any Ultimate, also, this Spirit gains +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC15-006",
+      "name": "Heavy-Tankmobile T-35",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit is Destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC15-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this Spirit card.",
+              "cleanText": "Summon this Spirit card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC15-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block while exhausted. When you control any Ultimate, also, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block while exhausted.",
+              "cleanText": "This Spirit can block while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUSTED_BLOCK"
+              }
+            },
+            {
+              "rawText": "When you control any Ultimate, also, this Spirit gains +3000 BP.",
+              "cleanText": "When you control any Ultimate, also, this Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Spirit is Destroyed by the Opponent]\nSummon this Spirit card.\n\n[LV2] (Opposing Attack Step)\nThis Spirit can block while exhausted. When you control any Ultimate, also, this Spirit gains +3000 BP.",
-  "is_vanilla": false
- },
- "BSC15-011": {
-  "name": "Frigate-Golem",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 11000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 15000
-   }
+  "BSC15-011": {
+    "name": "Frigate-Golem",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 11000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 15000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nIf you control any Blue Ultimates, summon this Spirit card.\n\n[LV1][LV2][LV3] (When Summoned)\nTreat the Braves on all opposing Brave Spirits as Cost 0, and destroy an opposing Cost 8 or less Spirit.\n\n[LV2][LV3] (Opposing Turn)\nAll your \"Artificial Soldier\" family Spirits/Ultimates get +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC15-011",
+      "name": "Frigate-Golem",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC15-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any Blue Ultimates, summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any Blue Ultimates, summon this Spirit card.",
+              "cleanText": "summon this Spirit card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any Blue Ultimates",
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC15-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Treat the Braves on all opposing Brave Spirits as Cost 0, and destroy an opposing Cost 8 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Treat the Braves on all opposing Brave Spirits as Cost 0",
+              "cleanText": "Treat the Braves on all opposing Brave Spirits as Cost 0",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "destroy an opposing Cost 8 or less Spirit.",
+              "cleanText": "destroy an opposing Cost 8 or less Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 8
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC15-011#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Artificial Soldier\" family Spirits/Ultimates get +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Artificial Soldier\" family Spirits/Ultimates get +2000 BP.",
+              "cleanText": "All your \"Artificial Soldier\" family Spirits/Ultimates get +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nIf you control any Blue Ultimates, summon this Spirit card.\n\n[LV1][LV2][LV3] (When Summoned)\nTreat the Braves on all opposing Brave Spirits as Cost 0, and destroy an opposing Cost 8 or less Spirit.\n\n[LV2][LV3] (Opposing Turn)\nAll your \"Artificial Soldier\" family Spirits/Ultimates get +2000 BP.",
-  "is_vanilla": false
- },
- "BSC15-003": {
-  "name": "Satoridemon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 9000
-   }
-  },
-  "effect": "After your Burst activates, return this Spirit card from your Trash to the Hand.\n\n[Burst: After your Life is reduced]\nSend cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card.",
-  "is_vanilla": false
- }
+  "BSC15-003": {
+    "name": "Satoridemon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 9000
+      }
+    },
+    "effect": "After your Burst activates, return this Spirit card from your Trash to the Hand.\n\n[Burst: After your Life is reduced]\nSend cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC15-003",
+      "name": "Satoridemon",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 82
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC15-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "After your Burst activates, return this Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "After your Burst activates, return this Spirit card from your Trash to the Hand.",
+              "cleanText": "After your Burst activates, return this Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC15-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them. After this effect resolves, if you control any Ultimate, summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them.",
+              "cleanText": "Send cores from every opposing Spirit to the Reserve until only one core remains on each of them",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "if you control any Ultimate, summon this Spirit card.",
+              "cleanText": "summon this Spirit card",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any Ultimate",
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

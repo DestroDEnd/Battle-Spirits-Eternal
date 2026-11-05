@@ -1,215 +1,1596 @@
 {
- "SD40-X03": {
-  "name": "The 33rdGenerationWindDemonHead Yatagarai",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   }
+  "SD40-X03": {
+    "name": "The 33rdGenerationWindDemonHead Yatagarai",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "When this card is revealed from the deck, you can add it to the Hand.\n\nFlash - [Accel: Cost 6 ([Green Core][Green Core][Green Core][Red Core])]\nExhaust three opposing Spirits/Ultimates, and for each target exhausted, refresh a Spirit you control. After this effect resolves, put this card onto the Removed Zone.\n\n[LV1][LV2] (When Summoned)\nPut two cores from the Void to any of your Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-X03",
+      "name": "The 33rdGenerationWindDemonHead Yatagarai",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 6 ([Green Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 79
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-X03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed from the deck, you can add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed from the deck, you can add it to the Hand.",
+              "cleanText": "When this card is revealed from the deck, you can add it to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-X03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Red Core",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust three opposing Spirits/Ultimates, and for each target exhausted, refresh a Spirit you control. After this effect resolves, put this card onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust three opposing Spirits/Ultimates, and for each target exhausted, refresh a Spirit you control.",
+              "cleanText": "Exhaust three opposing Spirits/Ultimates, and for each target exhausted, refresh a Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 3,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "put this card onto the Removed Zone.",
+              "cleanText": "put this card onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-X03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put two cores from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Put two cores from the Void to any of your Spirits.",
+              "cleanText": "Put two cores from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this card is revealed from the deck, you can add it to the Hand.\n\nFlash - [Accel: Cost 6 ([Green Core][Green Core][Green Core][Red Core])]\nExhaust three opposing Spirits/Ultimates, and for each target exhausted, refresh a Spirit you control. After this effect resolves, put this card onto the Removed Zone.\n\n[LV1][LV2] (When Summoned)\nPut two cores from the Void to any of your Spirits.",
-  "is_vanilla": false
- },
- "SD40-X02": {
-  "name": "The 44thGenerationStrangeFangShinobiHead Shishinobi",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 13000
-   }
+  "SD40-X02": {
+    "name": "The 44thGenerationStrangeFangShinobiHead Shishinobi",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 13000
+      }
+    },
+    "effect": "[Burst: s] (After your Life is reduced)\nDestroy four opposing 12000 BP or less Spirits. Effects of the Spirits destroyed by this effect can't activate. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks/Blocks)\nOnce per turn, you can reveal two cards from your decktop. From among them, summon any number of \"Ninja Gale\" family Spirit cards/Brave cards without paying the cost. Add any remaining cards to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-X02",
+      "name": "The 44thGenerationStrangeFangShinobiHead Shishinobi",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "s",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy four opposing 12000 BP or less Spirits. Effects of the Spirits destroyed by this effect can't activate. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy four opposing 12000 BP or less Spirits.",
+              "cleanText": "Destroy four opposing 12000 BP or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Effects of the Spirits destroyed by this effect can't activate.",
+              "cleanText": "Effects of the Spirits destroyed by this effect can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NEGATE_EFFECT"
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "you can reveal two cards from your decktop. From among them, summon any number of \"Ninja Gale\" family Spirit cards/Brave cards without paying the cost. Add any remaining cards to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "you can reveal two cards from your decktop.",
+              "cleanText": "you can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "From among them, summon any number of \"Ninja Gale\" family Spirit cards/Brave cards without paying the cost.",
+              "cleanText": "From among them, summon any number of \"Ninja Gale\" family Spirit cards/Brave cards without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Add any remaining cards to the Hand.",
+              "cleanText": "Add any remaining cards to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: s] (After your Life is reduced)\nDestroy four opposing 12000 BP or less Spirits. Effects of the Spirits destroyed by this effect can't activate. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks/Blocks)\nOnce per turn, you can reveal two cards from your decktop. From among them, summon any number of \"Ninja Gale\" family Spirit cards/Brave cards without paying the cost. Add any remaining cards to the Hand.",
-  "is_vanilla": false
- },
- "SD40-004": {
-  "name": "The ArmoredMothShinobi Barakiri",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   }
+  "SD40-004": {
+    "name": "The ArmoredMothShinobi Barakiri",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "When this card is revealed from the deck, you can add it to the Hand.\n\nFlash - (Either Attack Step)\nThis card can be summoned from your Removed Zone by paying the cost and putting cores onto it using cores from your Reserve.\n\nFlash - [Accel: Cost 4 ([Green Core][Green Core])]\nReturn an opposing exhausted Spirit to the Hand. After this effect resolves, put this card face-up onto the Removed Zone.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-004",
+      "name": "The ArmoredMothShinobi Barakiri",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 4 ([Green Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 234
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed from the deck, you can add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed from the deck, you can add it to the Hand.",
+              "cleanText": "When this card is revealed from the deck, you can add it to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "This card can be summoned from your Removed Zone by paying the cost and putting cores onto it using cores from your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "This card can be summoned from your Removed Zone by paying the cost and putting cores onto it using cores from your Reserve.",
+              "cleanText": "This card can be summoned from your Removed Zone by paying the cost and putting cores onto it using cores from your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Green Core",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return an opposing exhausted Spirit to the Hand. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing exhausted Spirit to the Hand.",
+              "cleanText": "Return an opposing exhausted Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this card is revealed from the deck, you can add it to the Hand.\n\nFlash - (Either Attack Step)\nThis card can be summoned from your Removed Zone by paying the cost and putting cores onto it using cores from your Reserve.\n\nFlash - [Accel: Cost 4 ([Green Core][Green Core])]\nReturn an opposing exhausted Spirit to the Hand. After this effect resolves, put this card face-up onto the Removed Zone.",
-  "is_vanilla": false
- },
- "SD40-003": {
-  "name": "The FlameSannin Izayoi of the GreatShuriken",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD40-003": {
+    "name": "The FlameSannin Izayoi of the GreatShuriken",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "Flash- [Accel: Cost 4 ([Red Core][Red Core])]\nDestroy an opposing Spirit/Ultimate with two symbols or more. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned/Destroyed)\nYou can summon a \"Ninja Gale\" family Spirit card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-003",
+      "name": "The FlameSannin Izayoi of the GreatShuriken",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 4 ([Red Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 7
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Red Core",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Spirit/Ultimate with two symbols or more. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Spirit/Ultimate with two symbols or more.",
+              "cleanText": "Destroy an opposing Spirit/Ultimate with two symbols or more",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED_OR_DESTROYED",
+            "timingLabel": "When Summoned/Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon a \"Ninja Gale\" family Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon a \"Ninja Gale\" family Spirit card from your Hand, without paying the cost.",
+              "cleanText": "You can summon a \"Ninja Gale\" family Spirit card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash- [Accel: Cost 4 ([Red Core][Red Core])]\nDestroy an opposing Spirit/Ultimate with two symbols or more. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned/Destroyed)\nYou can summon a \"Ninja Gale\" family Spirit card from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "SD40-002": {
-  "name": "The FlameSannin Kayaku of the Explosion",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD40-002": {
+    "name": "The FlameSannin Kayaku of the Explosion",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nIgnoring the \"BP +\" of Braves, by destroying an opposing 5000 BP or less Spirit, draw a card.\n\n[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Green.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-002",
+      "name": "The FlameSannin Kayaku of the Explosion",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD40-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Ignoring the \"BP +\" of Braves, by destroying an opposing 5000 BP or less Spirit, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Ignoring the \"BP +\" of Braves, by destroying an opposing 5000 BP or less Spirit, draw a card.",
+              "cleanText": "Ignoring the \"BP +\" of Braves, by destroying an opposing 5000 BP or less Spirit, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Green."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Green.",
+              "cleanText": "This Spirit's color and symbol are also treated as Green",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Green"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nIgnoring the \"BP +\" of Braves, by destroying an opposing 5000 BP or less Spirit, draw a card.\n\n[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Green.",
-  "is_vanilla": false
- },
- "SD40-001": {
-  "name": "The FlameSannin Saizo of the WickedHeart",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "SD40-001": {
+    "name": "The FlameSannin Saizo of the WickedHeart",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Green.\n\n[LV1][LV2][LV3]\nWhen any player would summon \"God-King\"/\"Ten Crown\"/\"Imagine\" family Spirit cards/Brave cards, unless the player sends a core from their Life to the Void for each card to be summoned, they can't be summoned. Bursts can't activate via this effect.\n\n[LV2][LV3]\nThis Spirit is unaffected by opposing effects, but it can't attack/block, and loses its symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-001",
+      "name": "The FlameSannin Saizo of the WickedHeart",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD40-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Green."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Green.",
+              "cleanText": "This Spirit's color and symbol are also treated as Green",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Green"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When any player would summon \"God-King\"/\"Ten Crown\"/\"Imagine\" family Spirit cards/Brave cards, unless the player sends a core from their Life to the Void for each card to be summoned, they can't be summoned. Bursts can't activate via this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "When any player would summon \"God-King\"/\"Ten Crown\"/\"Imagine\" family Spirit cards/Brave cards, unless the player sends a core from their Life to the Void for each card to be summoned, they can't be summoned.",
+              "cleanText": "When any player would summon \"God-King\"/\"Ten Crown\"/\"Imagine\" family Spirit cards/Brave cards, unless the player sends a core from their Life to the Void for each card to be summoned, they can't be summoned",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Bursts can't activate via this effect.",
+              "cleanText": "Bursts can't activate via this effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing effects, but it can't attack/block, and loses its symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing effects, but it can't attack/block, and loses its symbol.",
+              "cleanText": "This Spirit is unaffected by opposing effects, but it can't attack/block, and loses its symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Green.\n\n[LV1][LV2][LV3]\nWhen any player would summon \"God-King\"/\"Ten Crown\"/\"Imagine\" family Spirit cards/Brave cards, unless the player sends a core from their Life to the Void for each card to be summoned, they can't be summoned. Bursts can't activate via this effect.\n\n[LV2][LV3]\nThis Spirit is unaffected by opposing effects, but it can't attack/block, and loses its symbol.",
-  "is_vanilla": false
- },
- "SD40-X01": {
-  "name": "The NinjaHead Souldragon-Hokage",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 14000
-   }
+  "SD40-X01": {
+    "name": "The NinjaHead Souldragon-Hokage",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 14000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Infinite Flame] (When Attacks)\nYou can target and attack an opposing Spirit. When that battling Spirit is depleted/destroyed, for every Symbol on this Spirit, send a core from the opposing Life to their Reserve, and refresh this Spirit.\n\n[LV2][LV3] (When Attacks)\nDraw a card, and the opponent can't activate their Bursts.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-X01",
+      "name": "The NinjaHead Souldragon-Hokage",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD40-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Infinite Flame",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can target and attack an opposing Spirit. When that battling Spirit is depleted/destroyed, for every Symbol on this Spirit, send a core from the opposing Life to their Reserve, and refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can target and attack an opposing Spirit.",
+              "cleanText": "You can target and attack an opposing Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_ATTACK",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "When that battling Spirit is depleted/destroyed, for every Symbol on this Spirit, send a core from the opposing Life to their Reserve",
+              "cleanText": "When that battling Spirit is depleted/destroyed, for every Symbol on this Spirit, send a core from the opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card, and the opponent can't activate their Bursts."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card, and the opponent can't activate their Bursts.",
+              "cleanText": "Draw a card, and the opponent can't activate their Bursts",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Infinite Flame] (When Attacks)\nYou can target and attack an opposing Spirit. When that battling Spirit is depleted/destroyed, for every Symbol on this Spirit, send a core from the opposing Life to their Reserve, and refresh this Spirit.\n\n[LV2][LV3] (When Attacks)\nDraw a card, and the opponent can't activate their Bursts.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A12310": {
-  "name": "The Shinobigatana Reverse Summer-Sun",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A12310": {
+    "name": "The Shinobigatana Reverse Summer-Sun",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\nMain - [Accel: Cost 3 ([Red Core][Green Core])]\nReveal two cards from your decktop. Add a \"Ninja Gale\" family Spirit card/Brave card among them to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1] (When Summoned)\nDestroy an opposing Spirit with [Ultra Armor]. Or, destroy an opposing Nexus.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A12310",
+      "name": "The Shinobigatana Reverse Summer-Sun",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Accel",
+          "parameter": "Cost 3 ([Red Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 42
+        },
+        {
+          "name": "Ultra Armor",
+          "parameter": null,
+          "wave": 1,
+          "hook": "ultra_armor",
+          "bracketed": true,
+          "index": 349
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A12310#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12310#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Green Core",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Reveal two cards from your decktop. Add a \"Ninja Gale\" family Spirit card/Brave card among them to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "Reveal two cards from your decktop.",
+              "cleanText": "Reveal two cards from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "Add a \"Ninja Gale\" family Spirit card/Brave card among them to the Hand.",
+              "cleanText": "Add a \"Ninja Gale\" family Spirit card/Brave card among them to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12310#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Spirit with [Ultra Armor]. Or, destroy an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Spirit with [Ultra Armor].",
+              "cleanText": "Destroy an opposing Spirit with [Ultra Armor]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "destroy an opposing Nexus.",
+              "cleanText": "destroy an opposing Nexus",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more]\n\nMain - [Accel: Cost 3 ([Red Core][Green Core])]\nReveal two cards from your decktop. Add a \"Ninja Gale\" family Spirit card/Brave card among them to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1] (When Summoned)\nDestroy an opposing Spirit with [Ultra Armor]. Or, destroy an opposing Nexus.",
-  "is_vanilla": false
- },
- "SD40-007": {
-  "name": "The StrangeFangShinobi Tachikage",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   }
+  "SD40-007": {
+    "name": "The StrangeFangShinobi Tachikage",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits.\n\n[LV1][LV2]\nThis Spirit's color and symbols are also treated as Red.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-007",
+      "name": "The StrangeFangShinobi Tachikage",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD40-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your Spirits.",
+              "cleanText": "Put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbols are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbols are also treated as Red.",
+              "cleanText": "This Spirit's color and symbols are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits.\n\n[LV1][LV2]\nThis Spirit's color and symbols are also treated as Red.",
-  "is_vanilla": false
- },
- "SD40-006": {
-  "name": "The WindDemon Ikaruga",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD40-006": {
+    "name": "The WindDemon Ikaruga",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "Flash - [High Speed]\nThis Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.\n\n[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits. Also, if this Spirit was summoned via an effect, refresh a \"Ninja Gale\" family Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-006",
+      "name": "The WindDemon Ikaruga",
+      "keywords": [
+        {
+          "name": "High Speed",
+          "parameter": null,
+          "wave": 2,
+          "hook": "high_speed",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "High Speed",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.",
+              "cleanText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_RESERVE_ONLY"
+              }
+            },
+            {
+              "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+              "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_RESERVE_ONLY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD40-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your Spirits. Also, if this Spirit was summoned via an effect, refresh a \"Ninja Gale\" family Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your Spirits.",
+              "cleanText": "Put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "if this Spirit was summoned via an effect, refresh a \"Ninja Gale\" family Spirit you control.",
+              "cleanText": "refresh a \"Ninja Gale\" family Spirit you control",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if this Spirit was summoned via an effect",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [High Speed]\nThis Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve.\n\n[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits. Also, if this Spirit was summoned via an effect, refresh a \"Ninja Gale\" family Spirit you control.",
-  "is_vanilla": false
- },
- "SD40-005": {
-  "name": "The WindDemon Kakitsuburi",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
-  },
-  "effect": "[LV1][LV2] (Your Attack Step)\nWhen your Spirit with [Accel] effects, or your \"Ninja Gale\" family Spirit with [Soul Core] on it attacks, return an opposing exhausted Spirit/Ultimate to the Hand.",
-  "is_vanilla": false
- }
+  "SD40-005": {
+    "name": "The WindDemon Kakitsuburi",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (Your Attack Step)\nWhen your Spirit with [Accel] effects, or your \"Ninja Gale\" family Spirit with [Soul Core] on it attacks, return an opposing exhausted Spirit/Ultimate to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD40-005",
+      "name": "The WindDemon Kakitsuburi",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": null,
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 52
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD40-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit with [Accel] effects, or your \"Ninja Gale\" family Spirit with [Soul Core] on it attacks, return an opposing exhausted Spirit/Ultimate to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit with [Accel] effects, or your \"Ninja Gale\" family Spirit with [Soul Core] on it attacks, return an opposing exhausted Spirit/Ultimate to the Hand.",
+              "cleanText": "When your Spirit with [Accel] effects, or your \"Ninja Gale\" family Spirit with [Soul Core] on it attacks, return an opposing exhausted Spirit/Ultimate to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

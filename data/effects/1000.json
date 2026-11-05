@@ -1,48 +1,276 @@
 {
- "CP14-X01R": {
-  "name": "The ImmortalDragon Eternal-Dragonis",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 9000
-   }
+  "CP14-X01R": {
+    "name": "The ImmortalDragon Eternal-Dragonis",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 9000
+      }
+    },
+    "effect": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.\n\n[LV3] (When Attacks)\nWhile you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "CP14-X01R",
+      "name": "The ImmortalDragon Eternal-Dragonis",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "CP14-X01R#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.",
+              "cleanText": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CP14-X01R#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "While you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
+              "cleanText": "this Spirit gains an extra Red symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While you or the opponent controls any Ultimate",
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this Spirit card is sent to the Trash via opposing Ultimate Trigger/\"Deck Discarding effect\", you can summon it without paying the cost.\n\n[LV3] (When Attacks)\nWhile you or the opponent controls any Ultimate, this Spirit gains an extra Red symbol.",
-  "is_vanilla": false
- },
- "CP14-X14R": {
-  "name": "The ShiningSwordDragonEmperor Shining-Ryuuman",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 14000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 18000
-   }
-  },
-  "effect": "[Summon Condition: You control one or more Cost 3 or higher Spirit]\n\n[Ultimate Unsheathe: [LV3][LV4][LV5] (When Summoned)]\nYou can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7. When a Brave is summoned via this effect, draw a card.\n\n[When Braved] [LV4][LV5] (When Brave Attacks)\nDuring this turn, all your Brave Ultimates gain +3000 BP.",
-  "is_vanilla": false
- }
+  "CP14-X14R": {
+    "name": "The ShiningSwordDragonEmperor Shining-Ryuuman",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 14000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 18000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Cost 3 or higher Spirit]\n\n[Ultimate Unsheathe: [LV3][LV4][LV5] (When Summoned)]\nYou can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7. When a Brave is summoned via this effect, draw a card.\n\n[When Braved] [LV4][LV5] (When Brave Attacks)\nDuring this turn, all your Brave Ultimates gain +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "CP14-X14R",
+      "name": "The ShiningSwordDragonEmperor Shining-Ryuuman",
+      "keywords": [
+        {
+          "name": "Ultimate Unsheathe",
+          "parameter": "[LV3",
+          "wave": 4,
+          "hook": "unsheathe",
+          "bracketed": true,
+          "index": 69
+        }
+      ],
+      "abilities": [
+        {
+          "id": "CP14-X14R#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Cost 3 or higher Spirit"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Cost 3 or higher Spirit]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "CP14-X14R#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Unsheathe: [LV3",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7. When a Brave is summoned via this effect, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7.",
+              "cleanText": "You can summon any number of \"Exalted Sword\" family Brave cards from your Hand, up to a total cost of 7",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "When a Brave is summoned via this effect, draw a card.",
+              "cleanText": "When a Brave is summoned via this effect, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CP14-X14R#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, all your Brave Ultimates gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, all your Brave Ultimates gain +3000 BP.",
+              "cleanText": "all your Brave Ultimates gain +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

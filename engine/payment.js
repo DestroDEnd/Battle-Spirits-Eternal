@@ -16,6 +16,21 @@ export function calculateEffectiveCost(state, card, playerSide = 'player') {
   const reduction = card.reduction || {};
   const fieldSymbols = computeFieldSymbols(state, playerSide);
 
+  // If card is an Ultimate, add Spirit Soul symbols from friendly field
+  if (card.type === 'Ultimate' && state.players && state.players[playerSide]) {
+    const p = state.players[playerSide];
+    for (const stack of p.field || []) {
+      const effectText = stack.top?.effect || '';
+      const matches = effectText.matchAll(/\[Spirit Soul(?:::|:)?\s*([^\]]*)\]/gi);
+      for (const m of matches) {
+        const col = (m[1] || stack.top?.color || 'Red').trim();
+        if (fieldSymbols[col] !== undefined) {
+          fieldSymbols[col]++;
+        }
+      }
+    }
+  }
+
   let totalReduction = 0;
 
   for (const [col, maxRed] of Object.entries(reduction)) {

@@ -1,280 +1,3000 @@
 {
- "PB41-009": {
-  "name": "New Generation Ultraman Arc",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "PB41-009": {
+    "name": "New Generation Ultraman Arc",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "This card/Spirit's symbol/reduction symbols are also treated as White.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\n(Once per Turn: Same Name) You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards.\n\n[LV2][LV3] (Your Attack Step)\n(Can't Stack) When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-009",
+      "name": "New Generation Ultraman Arc",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB41-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit's symbol/reduction symbols are also treated as White."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit's symbol/reduction symbols are also treated as White.",
+              "cleanText": "This card/Spirit's symbol/reduction symbols are also treated as White",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal two cards from your decktop.",
+              "cleanText": "You can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand.",
+              "cleanText": "Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-009#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
+              "cleanText": "When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit's symbol/reduction symbols are also treated as White.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\n(Once per Turn: Same Name) You can reveal two cards from your decktop. Among them, add an \"Ultraman\"/\"Earth Garon\"/\"YouPi\" to the Hand. Discard any remaining cards.\n\n[LV2][LV3] (Your Attack Step)\n(Can't Stack) When your \"Ultraman\" attacks, by sending one core, besides [Soul Core], from your Trash to that target, during this battle, that target gains +5000 BP.",
-  "is_vanilla": false
- },
- "PB41-X01": {
-  "name": "Special Aircraft No. 1 Sevenger ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 8000
-   }
+  "PB41-X01": {
+    "name": "Special Aircraft No. 1 Sevenger ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can reveal three cards from your decktop. Among them, besides any \"Sevenger\", add White \"Zett\"/ \"Zero\"/ \"Geed\"/ \"Special Aircraft\"/ \"STORAGE\"/ \"Zestium\", one of each, to the Hand. Discard any remaining cards. You can return to the deckbottom an opposing Spirit with a cost equal or inferior to that of one of the cards added to the Hand via this effect.\n\n[LV2][LV3] (Start of Your Attack Step)\nIf you control any White \"Zett\", you can return this Spirit to the Hand. When you do, during this turn, one of your originally Cost 6 or more Spirits gains +5000 BP, and an extra White symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-X01",
+      "name": "Special Aircraft No. 1 Sevenger ［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB41-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, besides any \"Sevenger\", add White \"Zett\"/ \"Zero\"/ \"Geed\"/ \"Special Aircraft\"/ \"STORAGE\"/ \"Zestium\", one of each, to the Hand. Discard any remaining cards. You can return to the deckbottom an opposing Spirit with a cost equal or inferior to that of one of the cards added to the Hand via this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, besides any \"Sevenger\", add White \"Zett\"/ \"Zero\"/ \"Geed\"/ \"Special Aircraft\"/ \"STORAGE\"/ \"Zestium\", one of each, to the Hand.",
+              "cleanText": "Among them, besides any \"Sevenger\", add White \"Zett\"/ \"Zero\"/ \"Geed\"/ \"Special Aircraft\"/ \"STORAGE\"/ \"Zestium\", one of each, to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            },
+            {
+              "rawText": "You can return to the deckbottom an opposing Spirit with a cost equal or inferior to that of one of the cards added to the Hand via this effect.",
+              "cleanText": "You can return to the deckbottom an opposing Spirit with a cost equal or inferior to that of one of the cards added to the Hand via this effect",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any White \"Zett\", you can return this Spirit to the Hand. When you do, during this turn, one of your originally Cost 6 or more Spirits gains +5000 BP, and an extra White symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any White \"Zett\", you can return this Spirit to the Hand.",
+              "cleanText": "you can return this Spirit to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If you control any White \"Zett\"",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "When you do, during this turn, one of your originally Cost 6 or more Spirits gains +5000 BP, and an extra White symbol.",
+              "cleanText": "When you do, during this turn, one of your originally Cost 6 or more Spirits gains +5000 BP, and an extra White symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\n(Once per Turn: Same Name) You can reveal three cards from your decktop. Among them, besides any \"Sevenger\", add White \"Zett\"/ \"Zero\"/ \"Geed\"/ \"Special Aircraft\"/ \"STORAGE\"/ \"Zestium\", one of each, to the Hand. Discard any remaining cards. You can return to the deckbottom an opposing Spirit with a cost equal or inferior to that of one of the cards added to the Hand via this effect.\n\n[LV2][LV3] (Start of Your Attack Step)\nIf you control any White \"Zett\", you can return this Spirit to the Hand. When you do, during this turn, one of your originally Cost 6 or more Spirits gains +5000 BP, and an extra White symbol.",
-  "is_vanilla": false
- },
- "PB41-001": {
-  "name": "Special Aircraft No. 2 Windom ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "PB41-001": {
+    "name": "Special Aircraft No. 2 Windom ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[Mirage: Cost 2 ([White Core]]\n[During Set] (Your Main Step)\nYou can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.\n\n[LV1][LV2] (When Summoned)\nYour counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-001",
+      "name": "Special Aircraft No. 2 Windom ［2］",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 2 ([White Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([White Core]"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.",
+              "cleanText": "You can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "if you have four counters or more, you can put a core from the Void to your Trash.",
+              "cleanText": "you can put a core from the Void to your Trash",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you have four counters or more",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Mirage: Cost 2 ([White Core]]\n[During Set] (Your Main Step)\nYou can summon one of your White \"Zett\" Contract Cards from Soul State/pre-advent condition by paying one cost.\n\n[LV1][LV2] (When Summoned)\nYour counter +1. Then, if you have four counters or more, you can put a core from the Void to your Trash.",
-  "is_vanilla": false
- },
- "PB41-004": {
-  "name": "Special Aircraft No. 3 King Joe STORAGE Custom ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "PB41-004": {
+    "name": "Special Aircraft No. 3 King Joe STORAGE Custom ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "[Burst: After an opposing Spirit's (When Summoned/Advents) effect resolves]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nIgnoring the cost of Braves, you can return an opposing Cost 4 or less Spirit/Nexus to the deckbottom. For every two counters you have, increase the cost limit of this \"Deck Returning Effect\" by +1.\n\n[LV2][LV3] [Heavy Armor: Green/Blue]\nThis Spirit is unaffected by opposing Green/Blue Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-004",
+      "name": "Special Aircraft No. 3 King Joe STORAGE Custom ［2］",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit's (When Summoned/Advents) effect resolves",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Green/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 362
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this card without paying the cost.",
+              "cleanText": "Summon this card without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Ignoring the cost of Braves, you can return an opposing Cost 4 or less Spirit/Nexus to the deckbottom. For every two counters you have, increase the cost limit of this \"Deck Returning Effect\" by +1."
+          },
+          "clauses": [
+            {
+              "rawText": "Ignoring the cost of Braves, you can return an opposing Cost 4 or less Spirit/Nexus to the deckbottom.",
+              "cleanText": "Ignoring the cost of Braves, you can return an opposing Cost 4 or less Spirit/Nexus to the deckbottom",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "For every two counters you have, increase the cost limit of this \"Deck Returning Effect\" by +1.",
+              "cleanText": "For every two counters you have, increase the cost limit of this \"Deck Returning Effect\" by +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Green/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Green/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Green/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Green/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After an opposing Spirit's (When Summoned/Advents) effect resolves]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nIgnoring the cost of Braves, you can return an opposing Cost 4 or less Spirit/Nexus to the deckbottom. For every two counters you have, increase the cost limit of this \"Deck Returning Effect\" by +1.\n\n[LV2][LV3] [Heavy Armor: Green/Blue]\nThis Spirit is unaffected by opposing Green/Blue Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "PB41-006": {
-  "name": "Special Aircraft No. 4 Ultroid Zero (PB41-006)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 15000
-   }
+  "PB41-006": {
+    "name": "Special Aircraft No. 4 Ultroid Zero (PB41-006)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 15000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nFor every two counters you have, send a core from an opposing Spirit to the Reserve. When this effect depletes, draw a card. If you have six counters or more, this \"Core Removal Effect\" can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].\n\n[LV2][LV3] (When Attacks)\nReturn an opposing Spirit/Nexus to the deckbottom. If you have six counters or more, and including being in Soul State/pre-advent condition, if you control any White \"Zett\", instead of returning it to the deckbottom, banish it. Also, once per turn, you can draw two cards.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-006",
+      "name": "Special Aircraft No. 4 Ultroid Zero (PB41-006)",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": null,
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 243
+        },
+        {
+          "name": "Ultra Heavy Armor",
+          "parameter": null,
+          "wave": 1,
+          "hook": "ultra_heavy_armor",
+          "bracketed": true,
+          "index": 257
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For every two counters you have, send a core from an opposing Spirit to the Reserve. When this effect depletes, draw a card. If you have six counters or more, this \"Core Removal Effect\" can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]."
+          },
+          "clauses": [
+            {
+              "rawText": "For every two counters you have, send a core from an opposing Spirit to the Reserve.",
+              "cleanText": "For every two counters you have, send a core from an opposing Spirit to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "When this effect depletes, draw a card.",
+              "cleanText": "When this effect depletes, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "If you have six counters or more, this \"Core Removal Effect\" can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].",
+              "cleanText": "this \"Core Removal Effect\" can only be prevented by [Heavy Armor]/[Ultra Heavy Armor]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you have six counters or more",
+              "duration": null,
+              "op": {
+                "op": "PIERCING_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit/Nexus to the deckbottom. If you have six counters or more, and including being in Soul State/pre-advent condition, if you control any White \"Zett\", instead of returning it to the deckbottom, banish it. Also, once per turn, you can draw two cards."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit/Nexus to the deckbottom.",
+              "cleanText": "Return an opposing Spirit/Nexus to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "If you have six counters or more, and including being in Soul State/pre-advent condition, if you control any White \"Zett\", instead of returning it to the deckbottom, banish it.",
+              "cleanText": "and including being in Soul State/pre-advent condition, if you control any White \"Zett\", instead of returning it to the deckbottom, banish it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you have six counters or more",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "once per turn, you can draw two cards.",
+              "cleanText": "once per turn, you can draw two cards",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nFor every two counters you have, send a core from an opposing Spirit to the Reserve. When this effect depletes, draw a card. If you have six counters or more, this \"Core Removal Effect\" can only be prevented by [Heavy Armor]/[Ultra Heavy Armor].\n\n[LV2][LV3] (When Attacks)\nReturn an opposing Spirit/Nexus to the deckbottom. If you have six counters or more, and including being in Soul State/pre-advent condition, if you control any White \"Zett\", instead of returning it to the deckbottom, banish it. Also, once per turn, you can draw two cards.",
-  "is_vanilla": false
- },
- "PB41-010": {
-  "name": "The DarkGreatEmperor Kaiser-Darkness",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 13000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 18000
-   }
+  "PB41-010": {
+    "name": "The DarkGreatEmperor Kaiser-Darkness",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 13000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 18000
+      }
+    },
+    "effect": "This card/Spirit is also treated as being exactly-named \"Belial\".\n\nFlash -\nBy banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nFor each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-010",
+      "name": "The DarkGreatEmperor Kaiser-Darkness",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB41-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit is also treated as being exactly-named \"Belial\"."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit is also treated as being exactly-named \"Belial\".",
+              "cleanText": "This card/Spirit is also treated as being exactly-named \"Belial\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family",
+              "cleanText": "By banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "summon this card from the Hand/Trash without paying the cost.",
+              "cleanText": "summon this card from the Hand/Trash without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            },
+            {
+              "rawText": "if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.",
+              "cleanText": "you can send the [Soul Core] from your Trash to this Spirit",
+              "link": "byDoing",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if it's the opposing Turn",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-010#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve.",
+              "cleanText": "For each LV this Spirit has, you can send two cores from the opposing Field to the Reserve",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "you can destroy an opposing Nexus.",
+              "cleanText": "you can destroy an opposing Nexus",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit is also treated as being exactly-named \"Belial\".\n\nFlash -\nBy banishing four \"Belial\" in your Trash that are either Cost 7 or more or have the \"Grandwalker\" family, summon this card from the Hand/Trash without paying the cost. When you've done so, if it's the opposing Turn, you can send the [Soul Core] from your Trash to this Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nFor each LV this Spirit has, you can send two cores from the opposing Field to the Reserve. Then, you can destroy an opposing Nexus.",
-  "is_vanilla": false
- },
- "PB41-011": {
-  "name": "The EvilAlien Zarab Seijin［First Generation Ultra Kaiju］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "PB41-011": {
+    "name": "The EvilAlien Zarab Seijin［First Generation Ultra Kaiju］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "This card/Spirit is also treated as being exactly-named \"Ultraman\".\n\n[LV1][LV2][LV3] (When Summoned)\nBanish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.\n\n[LV2][LV3]\nWhen cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-011",
+      "name": "The EvilAlien Zarab Seijin［First Generation Ultra Kaiju］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB41-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit is also treated as being exactly-named \"Ultraman\"."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+              "cleanText": "This card/Spirit is also treated as being exactly-named \"Ultraman\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Banish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Banish two cards from the opposing Trash.",
+              "cleanText": "Banish two cards from the opposing Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BANISH_TRASH"
+              }
+            },
+            {
+              "rawText": "if you control any other \"First Generation Ultra Kaiju\" Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.",
+              "cleanText": "by sending one core, besides [Soul Core], from your Trash to the Void, draw a card",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any other \"First Generation Ultra Kaiju\" Spirit/Nexus",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-011#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
+              "cleanText": "When cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": true,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit is also treated as being exactly-named \"Ultraman\".\n\n[LV1][LV2][LV3] (When Summoned)\nBanish two cards from the opposing Trash. Then, if you control any other “First Generation Ultra Kaiju” Spirit/Nexus, by sending one core, besides [Soul Core], from your Trash to the Void, draw a card.\n\n[LV2][LV3]\nWhen cores in your Trash are sent to the Void, you can heavy exhaust an opposing Spirit.",
-  "is_vanilla": false
- },
- "PB41-X03": {
-  "name": "The VeteranWarrior Ultraman Zero",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)]\n◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.\n\n[Grand Field] [LV2] (Opposing Attack Step)\nAll your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
-  "is_vanilla": false
- },
- "PB41-002": {
-  "name": "Ultraman Zett Alpha Edge ［5］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "PB41-X03": {
+    "name": "The VeteranWarrior Ultraman Zero",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)]\n◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.\n\n[Grand Field] [LV2] (Opposing Attack Step)\nAll your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-X03",
+      "name": "The VeteranWarrior Ultraman Zero",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "4",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 364
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 648
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-X03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (White & \"Ultraman\"/\"Special Aircraft\") (\"Beliarok\" & Brave)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit/Brave, you can +1 core to this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, +1 core to this Nexus.",
+              "cleanText": "For each target card among them, +1 core to this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE_ADD",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X03#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 4"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White “Ultraman”/\"Special Aircraft\" Spirit/Ultimate you control. Or, during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White \"Ultraman\"/\"Special Aircraft\" Spirit/Ultimate you control.",
+              "cleanText": "(Once per turn, send four cores from this Nexus to the Void) Refresh a White \"Ultraman\"/\"Special Aircraft\" Spirit/Ultimate you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "during this battle, one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked.",
+              "cleanText": "one of your White \"Ultraman\"/\"Special Aircraft\" can't be blocked",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X03#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted.",
+              "cleanText": "All your White \"Zett\"/\"Special Aircraft\" Spirits can block while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUSTED_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Ultraman Zett\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\n(Once per Turn: Same Name) Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards.\n\n[During OC] [LV1][LV2]\nEither set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
-  "is_vanilla": false
- },
- "PB41-003": {
-  "name": "Ultraman Zett Beta Smash ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   }
+  "PB41-002": {
+    "name": "Ultraman Zett Alpha Edge ［5］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Ultraman Zett\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\n(Once per Turn: Same Name) Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards.\n\n[During OC] [LV1][LV2]\nEither set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-002",
+      "name": "Ultraman Zett Alpha Edge ［5］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Ultraman Zett\", (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Ultraman Zett\", (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. After this effect resolves, you can reveal three cards from your decktop. Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "you can reveal three cards from your decktop.",
+              "cleanText": "you can reveal three cards from your decktop",
+              "link": "afterResolves",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand.",
+              "cleanText": "Among them, add a White \"Ultraman\"/\"Special Aircraft\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect.",
+              "cleanText": "Either set, or add to the Hand a \"STORAGE\"/\"Zestium\" revealed from the deck by this Spirit's effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.\n\n[During OC] [LV1][LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
-  "is_vanilla": false
- },
- "PB41-X02": {
-  "name": "Ultraman Zett Deathcium Rise Claw",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   }
+  "PB41-003": {
+    "name": "Ultraman Zett Beta Smash ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYour counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.\n\n[During OC] [LV1][LV2] (When Attacks)\nWhen only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-003",
+      "name": "Ultraman Zett Beta Smash ［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Ultraman Zett\" & C2 or more, (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Ultraman Zett\" & C2 or more, (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. Then, once per turn, you can put a core from the Void to any of your Spirits. When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "once per turn, you can put a core from the Void to any of your Spirits.",
+              "cleanText": "once per turn, you can put a core from the Void to any of your Spirits",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP.",
+              "cleanText": "When core is put onto this Spirit via this effect, during this battle, this Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve.",
+              "cleanText": "When only the opposing Spirit is destroyed via BP comparison, you can send an opposing Life to the Reserve",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2] (When Attacks)\nReturn any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.\n\n[During OC] [LV1][LV2] Flash - (Your Attack Step)\nOnce per turn, this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
-  "is_vanilla": false
- },
- "PB41-007": {
-  "name": "Ultraman Zett Delta Rise Claw ［4］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   }
+  "PB41-X02": {
+    "name": "Ultraman Zett Deathcium Rise Claw",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[During Advent] [LV1][LV2] (When Attacks)\nReturn any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.\n\n[During OC] [LV1][LV2] Flash - (Your Attack Step)\nOnce per turn, this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-X02",
+      "name": "Ultraman Zett Deathcium Rise Claw",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Ultraman Zett\" & C7 or more, (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Ultraman Zett\" & C7 or more, (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Advent"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand.",
+              "cleanText": "Return any number of opposing Spirits up to a total of Cost 15 to the deckbottom, and for every 5 costs of the targets returned, discard a random card from the opposing Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "this Spirit can refresh. When you've done so, you can send a core, besides [Soul Core], from the opposing Trash to the Void."
+          },
+          "clauses": [
+            {
+              "rawText": "this Spirit can refresh.",
+              "cleanText": "this Spirit can refresh",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            },
+            {
+              "rawText": "you can send a core, besides [Soul Core], from the opposing Trash to the Void.",
+              "cleanText": "you can send a core, besides [Soul Core], from the opposing Trash to the Void",
+              "link": "byDoing",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nReturn an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nThis Spirit's effect is treated as colorless.",
-  "is_vanilla": false
- },
- "PB41-005": {
-  "name": "Ultraman Zett Gamma Future ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   }
+  "PB41-007": {
+    "name": "Ultraman Zett Delta Rise Claw ［4］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nReturn an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it.\n\n[During OC] [LV1][LV2] (Either Attack Step)\nThis Spirit's effect is treated as colorless.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-007",
+      "name": "Ultraman Zett Delta Rise Claw ［4］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Ultraman Zett\" & C5 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Ultraman Zett\" & C5 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Brave to the deckbottom. After this effect resolves, you can destroy an opposing Spirit/Ultimate with four cores or less on it."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Brave to the deckbottom.",
+              "cleanText": "Return an opposing Brave to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "you can destroy an opposing Spirit/Ultimate with four cores or less on it.",
+              "cleanText": "you can destroy an opposing Spirit/Ultimate with four cores or less on it",
+              "link": "afterResolves",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-007#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's effect is treated as colorless."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's effect is treated as colorless.",
+              "cleanText": "This Spirit's effect is treated as colorless",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n(Once per Turn: Same Name) If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents)\nYou can return an opposing Spirit to the deckbottom.\n\n[During OC] [LV1][LV2]\nWhen your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
-  "is_vanilla": false
- },
- "PB41-008": {
-  "name": "Zestium Death Burst",
-  "type": "Magic",
-  "levels": {},
-  "effect": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.\n\n[Burst: After your Life is reduced]\nReturn two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nReturn an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
-  "is_vanilla": false
- },
- "PB41-CX01": {
-  "name": "Ultra's Bond, Ultraman Zett",
-  "type": "Contract Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "PB41-005": {
+    "name": "Ultraman Zett Gamma Future ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n(Once per Turn: Same Name) If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents)\nYou can return an opposing Spirit to the deckbottom.\n\n[During OC] [LV1][LV2]\nWhen your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-005",
+      "name": "Ultraman Zett Gamma Future ［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Ultraman Zett\"& C3 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 240
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Ultraman Zett\"& C3 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "If you have four counters or more, you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash.",
+              "cleanText": "you can [Contract Advent] this card from the Hand, treating your [Soul Core] as being sent to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If you have four counters or more",
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-005#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return an opposing Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return an opposing Spirit to the deckbottom.",
+              "cleanText": "You can return an opposing Spirit to the deckbottom",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-005#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void.",
+              "cleanText": "When your \"Special Aircraft\" is summoned, send up to four cores from an opposing Grandwalker Nexus to the Void",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State] [Contract Pre-Advent]/[Spirit] [LV1][LV2] Flash - (Either Attack Step)\nOnce per turn, you can pay one cost to summon from your Hand a \"Special Aircraft\" with a cost equal or inferior to your number of counters.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counter +2. Then, return an opposing Burst to the deckbottom. When this effect couldn't return, you can put a core from the Void to any of your Spirits.",
-  "is_vanilla": false
- }
+  "PB41-008": {
+    "name": "Zestium Death Burst",
+    "type": "Magic",
+    "levels": {},
+    "effect": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.\n\n[Burst: After your Life is reduced]\nReturn two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nReturn an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-008",
+      "name": "Zestium Death Burst",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 95
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card.",
+              "cleanText": "When your Cost 5 or more \"Ultraman Zett\" attacks, you can immediately activate this set card",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand.",
+              "cleanText": "Return two differently-named \"Special Aircraft\" from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "by paying the cost, activate this card's Flash effect.",
+              "cleanText": "by paying the cost, activate this card's Flash effect",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-008#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit/Ultimate to the deckbottom. Or, including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit/Ultimate to the deckbottom.",
+              "cleanText": "Return an opposing Spirit/Ultimate to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve.",
+              "cleanText": "including being in in Soul State/pre-advent condition, if you control any White \"Zett\" Contract Spirit, send three cores from an opposing Spirit/Ultimate to the Reserve",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 3,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "PB41-CX01": {
+    "name": "Ultra's Bond, Ultraman Zett",
+    "type": "Contract Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State] [Contract Pre-Advent]/[Spirit] [LV1][LV2] Flash - (Either Attack Step)\nOnce per turn, you can pay one cost to summon from your Hand a \"Special Aircraft\" with a cost equal or inferior to your number of counters.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counter +2. Then, return an opposing Burst to the deckbottom. When this effect couldn't return, you can put a core from the Void to any of your Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB41-CX01",
+      "name": "Ultra's Bond, Ultraman Zett",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 42
+        },
+        {
+          "name": "Soul State",
+          "parameter": null,
+          "wave": 2,
+          "hook": "soul_state",
+          "bracketed": true,
+          "index": 159
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 172
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 384
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB41-CX01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
+          },
+          "clauses": [
+            {
+              "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+              "cleanText": "you can [Contract Advent] onto it",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "While this card is in Soul State",
+              "duration": null,
+              "op": {
+                "op": "CONTRACT_ADVENT_RULE"
+              }
+            },
+            {
+              "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+              "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": "ANY",
+                "source": "FIELD_RESERVE",
+                "destination": "ADVENT_CARD"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-CX01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "you can pay one cost to summon from your Hand a \"Special Aircraft\" with a cost equal or inferior to your number of counters."
+          },
+          "clauses": [
+            {
+              "rawText": "you can pay one cost to summon from your Hand a \"Special Aircraft\" with a cost equal or inferior to your number of counters.",
+              "cleanText": "you can pay one cost to summon from your Hand a \"Special Aircraft\" with a cost equal or inferior to your number of counters",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB41-CX01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +2. Then, return an opposing Burst to the deckbottom. When this effect couldn't return, you can put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +2.",
+              "cleanText": "Your counter +2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "return an opposing Burst to the deckbottom.",
+              "cleanText": "return an opposing Burst to the deckbottom",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "When this effect couldn't return, you can put a core from the Void to any of your Spirits.",
+              "cleanText": "When this effect couldn't return, you can put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

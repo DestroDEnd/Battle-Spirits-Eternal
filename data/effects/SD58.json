@@ -1,328 +1,3017 @@
 {
- "BATTLE-SPIRITS-A6302": {
-  "name": "Let's Begin! School Band (Vo/Gt/Key/Ba/Dr)",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Either Main Step)\nEvery Cost 3 or less Nexus can't activate its effects and has zero symbols.\n\n[LV2] (Your Attack Step)\nWhen your Spirit with [Resonance]/[Resonance Blast] attacks, you can reveal a card from your decktop. Return that card to the decktop or deckbottom.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A7129": {
-  "name": "Pick Shoot (Gt)",
-  "type": "Magic",
-  "levels": {},
-  "effect": "(Once per Turn: Same Name) When your \"Diva\" family Spirit has left the Field due to the opponent, you can use this card from the Hand, without paying the cost.\n\n[Type: Song]\n\n[Flash]\nDuring this turn, give an opposing Spirit/Ultimate -10000 BP, and destroy it if reaches 0 BP. Then, you can put this card onto your Field.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A7925": {
-  "name": "Spiral Stick (Dr)",
-  "type": "Magic",
-  "levels": {},
-  "effect": "This card has \"Diva\" family.\n\nWhen this card is revealed by your [Resonance]/[Resonance Blast] effect, you can add it to the Hand.\n\n[Type: Song]\n\n[Flash]\nReturn two opposing Spirits to the Hand. Then, you can put this card onto your Field.",
-  "is_vanilla": false
- },
- "SD58-X02": {
-  "name": "［School Band］Diana Fleur (Key)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 10000
-   }
+  "BATTLE-SPIRITS-A6302": {
+    "name": "Let's Begin! School Band (Vo/Gt/Key/Ba/Dr)",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Either Main Step)\nEvery Cost 3 or less Nexus can't activate its effects and has zero symbols.\n\n[LV2] (Your Attack Step)\nWhen your Spirit with [Resonance]/[Resonance Blast] attacks, you can reveal a card from your decktop. Return that card to the decktop or deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6302",
+      "name": "Let's Begin! School Band (Vo/Gt/Key/Ba/Dr)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6302#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Either Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Every Cost 3 or less Nexus can't activate its effects and has zero symbols."
+          },
+          "clauses": [
+            {
+              "rawText": "Every Cost 3 or less Nexus can't activate its effects and has zero symbols.",
+              "cleanText": "Every Cost 3 or less Nexus can't activate its effects and has zero symbols",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6302#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit with [Resonance]/[Resonance Blast] attacks, you can reveal a card from your decktop. Return that card to the decktop or deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit with [Resonance]/[Resonance Blast] attacks, you can reveal a card from your decktop.",
+              "cleanText": "When your Spirit with [Resonance]/[Resonance Blast] attacks, you can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "Return that card to the decktop or deckbottom.",
+              "cleanText": "Return that card to the decktop or deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Twilight Gothic Shiny Hearts]\n\n[Burst: After an opposing Spirit/Ultimate attacks]\nSummon this card without paying the cost. Then, put two cores from the Void to any “School Style” family Spirits you control.\n\n[LV2][LV3]\nGive every \"Vo/\"Fleur\" Spirit you control: \"This Spirit is unaffected by opposing Spirit/Nexus effects.\"",
-  "is_vanilla": false
- },
- "SD58-004": {
-  "name": "［School Band］Fongneena (Dr)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A7129": {
+    "name": "Pick Shoot (Gt)",
+    "type": "Magic",
+    "levels": {},
+    "effect": "(Once per Turn: Same Name) When your \"Diva\" family Spirit has left the Field due to the opponent, you can use this card from the Hand, without paying the cost.\n\n[Type: Song]\n\n[Flash]\nDuring this turn, give an opposing Spirit/Ultimate -10000 BP, and destroy it if reaches 0 BP. Then, you can put this card onto your Field.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A7129",
+      "name": "Pick Shoot (Gt)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A7129#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Diva\" family Spirit has left the Field due to the opponent, you can use this card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Diva\" family Spirit has left the Field due to the opponent, you can use this card from the Hand, without paying the cost.",
+              "cleanText": "When your \"Diva\" family Spirit has left the Field due to the opponent, you can use this card from the Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7129#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Song",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7129#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit/Ultimate -10000 BP, and destroy it if reaches 0 BP. Then, you can put this card onto your Field."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit/Ultimate -10000 BP",
+              "cleanText": "give an opposing Spirit/Ultimate -10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000
+              }
+            },
+            {
+              "rawText": "destroy it if reaches 0 BP.",
+              "cleanText": "destroy it if reaches 0 BP",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "you can put this card onto your Field.",
+              "cleanText": "you can put this card onto your Field",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: Absolutes]\n\n[LV1][LV2] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a “Vo”/“Gt”/“Key”/“Ba”-named card, or a “Producer”-named card to the Hand. Return any remaining cards to either the decktop or deckbottom only.\n\n[LV2] (Your Main Step)\nThis Spirit gains an extra Yellow symbol.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15188": {
-  "name": "［School Band］Griffiar d'Arc (Key)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A7925": {
+    "name": "Spiral Stick (Dr)",
+    "type": "Magic",
+    "levels": {},
+    "effect": "This card has \"Diva\" family.\n\nWhen this card is revealed by your [Resonance]/[Resonance Blast] effect, you can add it to the Hand.\n\n[Type: Song]\n\n[Flash]\nReturn two opposing Spirits to the Hand. Then, you can put this card onto your Field.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A7925",
+      "name": "Spiral Stick (Dr)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A7925#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card has \"Diva\" family."
+          },
+          "clauses": [
+            {
+              "rawText": "This card has \"Diva\" family.",
+              "cleanText": "This card has \"Diva\" family",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7925#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed by your [Resonance]/[Resonance Blast] effect, you can add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed by your [Resonance]/[Resonance Blast] effect, you can add it to the Hand.",
+              "cleanText": "When this card is revealed by your [Resonance]/[Resonance Blast] effect, you can add it to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7925#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Song",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7925#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return two opposing Spirits to the Hand. Then, you can put this card onto your Field."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two opposing Spirits to the Hand.",
+              "cleanText": "Return two opposing Spirits to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "you can put this card onto your Field.",
+              "cleanText": "you can put this card onto your Field",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Shiny Hearts Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned)\nFor each \"School Band\"-named Spirit you control, send a core from a single opposing Spirit to the Reserve (Max. 3).\n\n[LV2][LV3]\nGive all your \"Gt\"/\"Key\"/\"Dr\"-named Spirits the following effect: \"(When Attacks) Draw a card.\" This effect doesn't stack.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15190": {
-  "name": "［School Band］Jakomina Kit (Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   }
+  "SD58-X02": {
+    "name": "［School Band］Diana Fleur (Key)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "[teams: Twilight Gothic Shiny Hearts]\n\n[Burst: After an opposing Spirit/Ultimate attacks]\nSummon this card without paying the cost. Then, put two cores from the Void to any “School Style” family Spirits you control.\n\n[LV2][LV3]\nGive every \"Vo/\"Fleur\" Spirit you control: \"This Spirit is unaffected by opposing Spirit/Nexus effects.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-X02",
+      "name": "［School Band］Diana Fleur (Key)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Twilight Gothic Shiny Hearts",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit/Ultimate attacks",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 39
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_ATTACK",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this card without paying the cost. Then, put two cores from the Void to any “School Style” family Spirits you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this card without paying the cost.",
+              "cleanText": "Summon this card without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            },
+            {
+              "rawText": "put two cores from the Void to any \"School Style\" family Spirits you control.",
+              "cleanText": "put two cores from the Void to any \"School Style\" family Spirits you control",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give every \"Vo/\"Fleur\" Spirit you control: \"This Spirit is unaffected by opposing Spirit/Nexus effects.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give every \"Vo/\"Fleur\" Spirit you control: \"This Spirit is unaffected by opposing Spirit/Nexus effects.\"",
+              "cleanText": "Give every \"Vo/\"Fleur\" Spirit you control: \"This Spirit is unaffected by opposing Spirit/Nexus effects.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Absolutes Sacred Swords]\n\n[LV1][LV2] (When Summoned)\nReturn an opposing Cost 4 or less Spirit to the decktop.\n\n[LV1][LV2] [Resn: Gt/Key/Ba] (When Attacks)\nYou can reveal a card from the decktop. If that card is \"Gt\"/\"Key\"/\"Ba\"-named, you can summon/deploy it without paying the cost. Remaining card is discarded.",
-  "is_vanilla": false
- },
- "SD58-003": {
-  "name": "［School Band］Jeanne Doraniece (Dr)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD58-004": {
+    "name": "［School Band］Fongneena (Dr)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "[team: Absolutes]\n\n[LV1][LV2] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a “Vo”/“Gt”/“Key”/“Ba”-named card, or a “Producer”-named card to the Hand. Return any remaining cards to either the decktop or deckbottom only.\n\n[LV2] (Your Main Step)\nThis Spirit gains an extra Yellow symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-004",
+      "name": "［School Band］Fongneena (Dr)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Absolutes",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add a “Vo”/“Gt”/“Key”/“Ba”-named card, or a “Producer”-named card to the Hand. Return any remaining cards to either the decktop or deckbottom only."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Producer\"-named card to the Hand.",
+              "cleanText": "Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Producer\"-named card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to either the decktop or deckbottom only.",
+              "cleanText": "Return any remaining cards to either the decktop or deckbottom only",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains an extra Yellow symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains an extra Yellow symbol.",
+              "cleanText": "This Spirit gains an extra Yellow symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Twilight Gothic Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Rei-Ohba\" to the Hand. Return any remaining cards to either the decktop or deckbottom only.\n\n[LV3]\nAdd an exactly-named \"Producer Alex\" revealed from the deck by this Spirit's effect to the Hand.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15192": {
-  "name": "［School Band］Saclaire Metum (Vo/Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
+  "BATTLE-SPIRITS-A15188": {
+    "name": "［School Band］Griffiar d'Arc (Key)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 7000
+      }
+    },
+    "effect": "[teams: Shiny Hearts Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned)\nFor each \"School Band\"-named Spirit you control, send a core from a single opposing Spirit to the Reserve (Max. 3).\n\n[LV2][LV3]\nGive all your \"Gt\"/\"Key\"/\"Dr\"-named Spirits the following effect: \"(When Attacks) Draw a card.\" This effect doesn't stack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15188",
+      "name": "［School Band］Griffiar d'Arc (Key)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Shiny Hearts Sacred Swords",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15188#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15188#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each \"School Band\"-named Spirit you control, send a core from a single opposing Spirit to the Reserve ."
+          },
+          "clauses": [
+            {
+              "rawText": "For each \"School Band\"-named Spirit you control, send a core from a single opposing Spirit to the Reserve .",
+              "cleanText": "For each \"School Band\"-named Spirit you control, send a core from a single opposing Spirit to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15188#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your \"Gt\"/\"Key\"/\"Dr\"-named Spirits the following effect: \"(When Attacks) Draw a card.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your \"Gt\"/\"Key\"/\"Dr\"-named Spirits the following effect: \"(When Attacks) Draw a card.\"",
+              "cleanText": "Give all your \"Gt\"/\"Key\"/\"Dr\"-named Spirits the following effect: \"(When Attacks) Draw a card.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: \"Band\"/\"Saclair\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[teams: Grand Siesta Absolutes]\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDuring this turn, give an opposing Spirit -10000 BP, and destroy it when its BP reaches 0.\n\n[LV2][LV3] (When Attacks/Blocks)\nDuring this turn, give an opposing Spirit -5000 BP, and destroy it when its BP reaches 0.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15193": {
-  "name": "［School Band］Loria Sheeps",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A15190": {
+    "name": "［School Band］Jakomina Kit (Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      }
+    },
+    "effect": "[teams: Absolutes Sacred Swords]\n\n[LV1][LV2] (When Summoned)\nReturn an opposing Cost 4 or less Spirit to the decktop.\n\n[LV1][LV2] [Resn: Gt/Key/Ba] (When Attacks)\nYou can reveal a card from the decktop. If that card is \"Gt\"/\"Key\"/\"Ba\"-named, you can summon/deploy it without paying the cost. Remaining card is discarded.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15190",
+      "name": "［School Band］Jakomina Kit (Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Absolutes Sacred Swords",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15190#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15190#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Cost 4 or less Spirit to the decktop."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Cost 4 or less Spirit to the decktop.",
+              "cleanText": "Return an opposing Cost 4 or less Spirit to the decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15190#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Gt/Key/Ba",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from the decktop. If that card is \"Gt\"/\"Key\"/\"Ba\"-named, you can summon/deploy it without paying the cost. Remaining card is discarded."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from the decktop.",
+              "cleanText": "You can reveal a card from the decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_CARDS"
+              }
+            },
+            {
+              "rawText": "If that card is \"Gt\"/\"Key\"/\"Ba\"-named, you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is \"Gt\"/\"Key\"/\"Ba\"-named",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Remaining card is discarded.",
+              "cleanText": "Remaining card is discarded",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_CARDS"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Pretty Animals Shiny Hearts]\n\nWhen this card is revealed from the deck by your \"School Band\"-named Spirit effect, you can summon it in exhausted state, without paying the cost. This effect doesn't stack.\n\n[LV2]\nWhen this Spirit and \"Dr\"-named Spirits you control would leave the Field by opposing effects, they can remain on the Field, exhausted.",
-  "is_vanilla": false
- },
- "SD58-012": {
-  "name": "［School Band］Momo Gyuumonje (Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 13000
-   }
+  "SD58-003": {
+    "name": "［School Band］Jeanne Doraniece (Dr)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[teams: Twilight Gothic Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Rei-Ohba\" to the Hand. Return any remaining cards to either the decktop or deckbottom only.\n\n[LV3]\nAdd an exactly-named \"Producer Alex\" revealed from the deck by this Spirit's effect to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-003",
+      "name": "［School Band］Jeanne Doraniece (Dr)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Twilight Gothic Sacred Swords",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Rei-Ohba\" to the Hand. Return any remaining cards to either the decktop or deckbottom only."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Rei-Ohba\" to the Hand.",
+              "cleanText": "Among them, add a \"Vo\"/\"Gt\"/\"Key\"/\"Ba\"-named card, or a \"Rei-Ohba\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to either the decktop or deckbottom only.",
+              "cleanText": "Return any remaining cards to either the decktop or deckbottom only",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Add an exactly-named \"Producer Alex\" revealed from the deck by this Spirit's effect to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Add an exactly-named \"Producer Alex\" revealed from the deck by this Spirit's effect to the Hand.",
+              "cleanText": "Add an exactly-named \"Producer Alex\" revealed from the deck by this Spirit's effect to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: Absolutes]\n\n[Burst: After an opposing Spirit/Brave's (When Summoned) effect resolves]\nReturn two opposing Spirits/Nexuses to the deckbottom. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] [Resn: Key/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that's \"Key\"/\"Ba\"/\"Dr\", you can summon/deploy it without paying the cost. Discard any remaining card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15196": {
-  "name": "［School Band］Speania Squall (Vo/Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   }
+  "BATTLE-SPIRITS-A15192": {
+    "name": "［School Band］Saclaire Metum (Vo/Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "Flash - [Advent: \"Band\"/\"Saclair\"] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[teams: Grand Siesta Absolutes]\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDuring this turn, give an opposing Spirit -10000 BP, and destroy it when its BP reaches 0.\n\n[LV2][LV3] (When Attacks/Blocks)\nDuring this turn, give an opposing Spirit -5000 BP, and destroy it when its BP reaches 0.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15192",
+      "name": "［School Band］Saclaire Metum (Vo/Gt)",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "\"Band\"/\"Saclair\"",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Team",
+          "parameter": "Grand Siesta Absolutes",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 152
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15192#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: \"Band\"/\"Saclair\"",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Spirit.",
+              "cleanText": "stack this from your Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15192#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15192#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit -10000 BP, and destroy it when its BP reaches 0."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit -10000 BP",
+              "cleanText": "give an opposing Spirit -10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "destroy it when its BP reaches 0.",
+              "cleanText": "destroy it when its BP reaches 0",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15192#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit -5000 BP, and destroy it when its BP reaches 0."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit -5000 BP",
+              "cleanText": "give an opposing Spirit -5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 5000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "destroy it when its BP reaches 0.",
+              "cleanText": "destroy it when its BP reaches 0",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: CoZ12]\n\n[LV1][LV2] [Resn: Vo/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Vo\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.\n\n[LV2] (When Attacks)\nReturn an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom. Then, if you control any \"Ba\"-named Spirit, once per turn, refresh this Spirit.",
-  "is_vanilla": false
- },
- "SD58-006": {
-  "name": "［School Band］Nei-Lanetail (Ba)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A15193": {
+    "name": "［School Band］Loria Sheeps",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      }
+    },
+    "effect": "[teams: Pretty Animals Shiny Hearts]\n\nWhen this card is revealed from the deck by your \"School Band\"-named Spirit effect, you can summon it in exhausted state, without paying the cost. This effect doesn't stack.\n\n[LV2]\nWhen this Spirit and \"Dr\"-named Spirits you control would leave the Field by opposing effects, they can remain on the Field, exhausted.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15193",
+      "name": "［School Band］Loria Sheeps",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Pretty Animals Shiny Hearts",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15193#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15193#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed from the deck by your \"School Band\"-named Spirit effect, you can summon it in exhausted state, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed from the deck by your \"School Band\"-named Spirit effect, you can summon it in exhausted state, without paying the cost.",
+              "cleanText": "When this card is revealed from the deck by your \"School Band\"-named Spirit effect, you can summon it in exhausted state, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15193#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit and \"Dr\"-named Spirits you control would leave the Field by opposing effects, they can remain on the Field, exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit and \"Dr\"-named Spirits you control would leave the Field by opposing effects, they can remain on the Field, exhausted.",
+              "cleanText": "When this Spirit and \"Dr\"-named Spirits you control would leave the Field by opposing effects, they can remain on the Field, exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Twilight Gothic Sacred Swords]\n\n[LV1][LV2] (When Summoned)\nReturn either a \"School Band\"-named card, or a [Song] Magic card from your Trash to the Hand.\n\n[LV2] [Resn: Gt/Key] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Gt\"/\"Key\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
-  "is_vanilla": false
- },
- "SD58-X03": {
-  "name": "［School Band］Noa Fleur (Vo/Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 11000
-   }
+  "SD58-012": {
+    "name": "［School Band］Momo Gyuumonje (Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 13000
+      }
+    },
+    "effect": "[team: Absolutes]\n\n[Burst: After an opposing Spirit/Brave's (When Summoned) effect resolves]\nReturn two opposing Spirits/Nexuses to the deckbottom. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] [Resn: Key/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that's \"Key\"/\"Ba\"/\"Dr\", you can summon/deploy it without paying the cost. Discard any remaining card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-012",
+      "name": "［School Band］Momo Gyuumonje (Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Absolutes",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit/Brave's (When Summoned) effect resolves",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 19
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return two opposing Spirits/Nexuses to the deckbottom. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two opposing Spirits/Nexuses to the deckbottom.",
+              "cleanText": "Return two opposing Spirits/Nexuses to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-012#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Key/Ba/Dr",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that's \"Key\"/\"Ba\"/\"Dr\", you can summon/deploy it without paying the cost. Discard any remaining card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that's \"Key\"/\"Ba\"/\"Dr\", you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that's \"Key\"/\"Ba\"/\"Dr\"",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining card.",
+              "cleanText": "Discard any remaining card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: Shiny Hearts]\n\n[LV1][LV2][LV3] (Your Attack Step)\nWhen your “Fleur”-named Spirit attacks, during that battle, that Spirit gains an extra Yellow symbol, and the opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (When Attacks)\nOnce per turn, refresh this Spirit. Also, when blocked, for each symbol on this Spirit, send an opposing Life to the Reserve.",
-  "is_vanilla": false
- },
- "SD58-002": {
-  "name": "［School Band］Rabbey Darling (Ba)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A15196": {
+    "name": "［School Band］Speania Squall (Vo/Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      }
+    },
+    "effect": "[team: CoZ12]\n\n[LV1][LV2] [Resn: Vo/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Vo\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.\n\n[LV2] (When Attacks)\nReturn an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom. Then, if you control any \"Ba\"-named Spirit, once per turn, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15196",
+      "name": "［School Band］Speania Squall (Vo/Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "CoZ12",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15196#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15196#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Vo/Ba/Dr",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that card is \"Vo\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that card is \"Vo\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is \"Vo\"/\"Ba\"/\"Dr\"-named",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining card.",
+              "cleanText": "Discard any remaining card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15196#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom. Then, if you control any \"Ba\"-named Spirit, once per turn, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom.",
+              "cleanText": "Return an opposing Spirit with a cost equal or inferior to this Spirit's to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "if you control any \"Ba\"-named Spirit, once per turn, refresh this Spirit.",
+              "cleanText": "once per turn, refresh this Spirit",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any \"Ba\"-named Spirit",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: Shiny Hearts]\n\n[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit. Also, when summoned via [Resonance]/[Resonance Blast], put a core from the Void to any \"School Band\"-named Spirit you control.\n\n[LV2] [Resn: Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
-  "is_vanilla": false
- },
- "SD58-X01": {
-  "name": "［School Band］Rei-Ohba (Vo/Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 10000
-   }
+  "SD58-006": {
+    "name": "［School Band］Nei-Lanetail (Ba)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[teams: Twilight Gothic Sacred Swords]\n\n[LV1][LV2] (When Summoned)\nReturn either a \"School Band\"-named card, or a [Song] Magic card from your Trash to the Hand.\n\n[LV2] [Resn: Gt/Key] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Gt\"/\"Key\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-006",
+      "name": "［School Band］Nei-Lanetail (Ba)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Twilight Gothic Sacred Swords",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return either a \"School Band\"-named card, or a [Song] Magic card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return either a \"School Band\"-named card, or a [Song] Magic card from your Trash to the Hand.",
+              "cleanText": "Return either a \"School Band\"-named card, or a [Song] Magic card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-006#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Gt/Key",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that card is \"Gt\"/\"Key\"-named, you can summon/deploy it without paying the cost. Discard any remaining card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that card is \"Gt\"/\"Key\"-named, you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is \"Gt\"/\"Key\"-named",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining card.",
+              "cleanText": "Discard any remaining card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Shiny Hearts Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can summon/deploy a “Key”/“Ba”/“Dr”-named card from your Hand, without paying the cost. When you've done so, draw a card from the deckbottom.\n\n[LV2][LV3] (When Attacks)\nFor each “School Band”/“Rei-Ohba”-named Spirit you control, return an opposing Spirit/Ultimate to the deckbottom.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15207": {
-  "name": "［School Band］Rias Urovorun (Ba)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   }
+  "SD58-X03": {
+    "name": "［School Band］Noa Fleur (Vo/Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 11000
+      }
+    },
+    "effect": "[team: Shiny Hearts]\n\n[LV1][LV2][LV3] (Your Attack Step)\nWhen your “Fleur”-named Spirit attacks, during that battle, that Spirit gains an extra Yellow symbol, and the opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (When Attacks)\nOnce per turn, refresh this Spirit. Also, when blocked, for each symbol on this Spirit, send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-X03",
+      "name": "［School Band］Noa Fleur (Vo/Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Shiny Hearts",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-X03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your “Fleur”-named Spirit attacks, during that battle, that Spirit gains an extra Yellow symbol, and the opponent can't end the Attack Step via effects."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Fleur\"-named Spirit attacks, during that battle, that Spirit gains an extra Yellow symbol, and the opponent can't end the Attack Step via effects.",
+              "cleanText": "When your \"Fleur\"-named Spirit attacks, during that battle, that Spirit gains an extra Yellow symbol, and the opponent can't end the Attack Step via effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "refresh this Spirit. Also, when blocked, for each symbol on this Spirit, send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            },
+            {
+              "rawText": "when blocked, for each symbol on this Spirit, send an opposing Life to the Reserve.",
+              "cleanText": "when blocked, for each symbol on this Spirit, send an opposing Life to the Reserve",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Pretty Animals Twilight Gothic]\n\n[LV1][LV2] (When Summoned)\nDraw a card. If you control any \"Riolu Tida\", draw three cards instead.\n\n[LV2] [Resn: Gt/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Gt\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A15209": {
-  "name": "［School Band］Riolu Tida (Vo/Gt)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 10000
-   }
+  "SD58-002": {
+    "name": "［School Band］Rabbey Darling (Ba)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "[team: Shiny Hearts]\n\n[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit. Also, when summoned via [Resonance]/[Resonance Blast], put a core from the Void to any \"School Band\"-named Spirit you control.\n\n[LV2] [Resn: Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-002",
+      "name": "［School Band］Rabbey Darling (Ba)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Shiny Hearts",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to this Spirit. Also, when summoned via [Resonance]/[Resonance Blast], put a core from the Void to any \"School Band\"-named Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to this Spirit.",
+              "cleanText": "Put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "when summoned via [Resonance]/[Resonance Blast], put a core from the Void to any \"School Band\"-named Spirit you control.",
+              "cleanText": "when summoned via [Resonance]/[Resonance Blast], put a core from the Void to any \"School Band\"-named Spirit you control",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Ba/Dr",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that card is \"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that card is \"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is \"Ba\"/\"Dr\"-named",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining card.",
+              "cleanText": "Discard any remaining card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Pretty Animals Shiny Hearts]\n\n[LV1][LV2][LV3] [Resn Blast: Key/Ba/Dr] (When Attacks)\nYou can reveal two cards from your decktop. Among them, you can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card, without paying the cost. Discard any remaining cards.\n\n[LV2][LV3] (When Attacks)\nWhen this Spirit's [Resonance Blast] reveals a \"Rias Urovorun\" or a Cost 6 or more \"Diva\" family card, immediately send an opposing Life to the Reserve.",
-  "is_vanilla": false
- }
+  "SD58-X01": {
+    "name": "［School Band］Rei-Ohba (Vo/Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "[teams: Shiny Hearts Sacred Swords]\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can summon/deploy a “Key”/“Ba”/“Dr”-named card from your Hand, without paying the cost. When you've done so, draw a card from the deckbottom.\n\n[LV2][LV3] (When Attacks)\nFor each “School Band”/“Rei-Ohba”-named Spirit you control, return an opposing Spirit/Ultimate to the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD58-X01",
+      "name": "［School Band］Rei-Ohba (Vo/Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Shiny Hearts Sacred Swords",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD58-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon/deploy a “Key”/“Ba”/“Dr”-named card from your Hand, without paying the cost. When you've done so, draw a card from the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card from your Hand, without paying the cost.",
+              "cleanText": "You can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "draw a card from the deckbottom.",
+              "cleanText": "draw a card from the deckbottom",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD58-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each “School Band”/“Rei-Ohba”-named Spirit you control, return an opposing Spirit/Ultimate to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "For each \"School Band\"/\"Rei-Ohba\"-named Spirit you control, return an opposing Spirit/Ultimate to the deckbottom.",
+              "cleanText": "For each \"School Band\"/\"Rei-Ohba\"-named Spirit you control, return an opposing Spirit/Ultimate to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A15207": {
+    "name": "［School Band］Rias Urovorun (Ba)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      }
+    },
+    "effect": "[teams: Pretty Animals Twilight Gothic]\n\n[LV1][LV2] (When Summoned)\nDraw a card. If you control any \"Riolu Tida\", draw three cards instead.\n\n[LV2] [Resn: Gt/Ba/Dr] (When Attacks)\nYou can reveal a card from your decktop. If that card is \"Gt\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15207",
+      "name": "［School Band］Rias Urovorun (Ba)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Pretty Animals Twilight Gothic",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15207#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15207#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card. If you control any \"Riolu Tida\", draw three cards instead."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "If you control any \"Riolu Tida\", draw three cards instead.",
+              "cleanText": "draw three cards instead",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any \"Riolu Tida\"",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 3,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15207#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn: Gt/Ba/Dr",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that card is \"Gt\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost. Discard any remaining card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that card is \"Gt\"/\"Ba\"/\"Dr\"-named, you can summon/deploy it without paying the cost.",
+              "cleanText": "you can summon/deploy it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is \"Gt\"/\"Ba\"/\"Dr\"-named",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining card.",
+              "cleanText": "Discard any remaining card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A15209": {
+    "name": "［School Band］Riolu Tida (Vo/Gt)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "[teams: Pretty Animals Shiny Hearts]\n\n[LV1][LV2][LV3] [Resn Blast: Key/Ba/Dr] (When Attacks)\nYou can reveal two cards from your decktop. Among them, you can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card, without paying the cost. Discard any remaining cards.\n\n[LV2][LV3] (When Attacks)\nWhen this Spirit's [Resonance Blast] reveals a \"Rias Urovorun\" or a Cost 6 or more \"Diva\" family card, immediately send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A15209",
+      "name": "［School Band］Riolu Tida (Vo/Gt)",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Pretty Animals Shiny Hearts",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A15209#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15209#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Resn Blast: Key/Ba/Dr",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal two cards from your decktop. Among them, you can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card, without paying the cost. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal two cards from your decktop.",
+              "cleanText": "You can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "Among them, you can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card, without paying the cost.",
+              "cleanText": "Among them, you can summon/deploy a \"Key\"/\"Ba\"/\"Dr\"-named card, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A15209#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit's [Resonance Blast] reveals a \"Rias Urovorun\" or a Cost 6 or more \"Diva\" family card, immediately send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit's [Resonance Blast] reveals a \"Rias Urovorun\" or a Cost 6 or more \"Diva\" family card, immediately send an opposing Life to the Reserve.",
+              "cleanText": "When this Spirit's [Resonance Blast] reveals a \"Rias Urovorun\" or a Cost 6 or more \"Diva\" family card, immediately send an opposing Life to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

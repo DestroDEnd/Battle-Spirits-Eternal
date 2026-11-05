@@ -1,211 +1,1488 @@
 {
- "SD23-015": {
-  "name": "Angel Strike",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, give an opposing Spirit/Ultimate -5000 BP. Destroy the Spirit/Ultimate that has its BP brought to 0 by this effect.",
-  "is_vanilla": false
- },
- "SD23-014": {
-  "name": "Burst Snap",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Life is reduced]\nDuring this turn, your Life can't be reduced by attacks from opposing Cost 0/1/3/5/7/9/11 Spirits. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nTarget an opposing Spirit. During this turn, that Spirit can't attack/block, loses all its effects, and can't gain new ones. That Spirit is treated as a Spirit with no printed effects.",
-  "is_vanilla": false
- },
- "SD23-016": {
-  "name": "Reversal Force",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nRefresh all exhausted Spirits, and exhaust all refreshed Spirits. This effect can't be used during (Your Turn).",
-  "is_vanilla": false
- },
- "SD23-013": {
-  "name": "Symphonic Burst",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Spirit is destroyed by the Opponent]\nReturn a Cost 5 or less Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nWhen this battle ends, if your Life is at two or less, end the Attack Step.",
-  "is_vanilla": false
- },
- "SD23-004": {
-  "name": "The Angelia Aester",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "SD23-015": {
+    "name": "Angel Strike",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, give an opposing Spirit/Ultimate -5000 BP. Destroy the Spirit/Ultimate that has its BP brought to 0 by this effect.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-015",
+      "name": "Angel Strike",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit/Ultimate -5000 BP. Destroy the Spirit/Ultimate that has its BP brought to 0 by this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit/Ultimate -5000 BP.",
+              "cleanText": "give an opposing Spirit/Ultimate -5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 5000
+              }
+            },
+            {
+              "rawText": "Destroy the Spirit/Ultimate that has its BP brought to 0 by this effect.",
+              "cleanText": "Destroy the Spirit/Ultimate that has its BP brought to 0 by this effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nDuring this turn, give an opposing Spirit -3000 BP.",
-  "is_vanilla": false
- },
- "SD23-005": {
-  "name": "The Angelia Gourette",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD23-014": {
+    "name": "Burst Snap",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Life is reduced]\nDuring this turn, your Life can't be reduced by attacks from opposing Cost 0/1/3/5/7/9/11 Spirits. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nTarget an opposing Spirit. During this turn, that Spirit can't attack/block, loses all its effects, and can't gain new ones. That Spirit is treated as a Spirit with no printed effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-014",
+      "name": "Burst Snap",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, your Life can't be reduced by attacks from opposing Cost 0/1/3/5/7/9/11 Spirits. Then, by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, your Life can't be reduced by attacks from opposing Cost 0/1/3/5/7/9/11 Spirits.",
+              "cleanText": "your Life can't be reduced by attacks from opposing Cost 0/1/3/5/7/9/11 Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "by paying the cost, activate this card's Flash effect.",
+              "cleanText": "by paying the cost, activate this card's Flash effect",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. During this turn, that Spirit can't attack/block, loses all its effects, and can't gain new ones. That Spirit is treated as a Spirit with no printed effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "During this turn, that Spirit can't attack/block, loses all its effects, and can't gain new ones.",
+              "cleanText": "that Spirit can't attack/block, loses all its effects, and can't gain new ones",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            },
+            {
+              "rawText": "That Spirit is treated as a Spirit with no printed effects.",
+              "cleanText": "That Spirit is treated as a Spirit with no printed effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0, destroy that Spirit.",
-  "is_vanilla": false
- },
- "SD23-003": {
-  "name": "The Angelia Hiver",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "SD23-016": {
+    "name": "Reversal Force",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nRefresh all exhausted Spirits, and exhaust all refreshed Spirits. This effect can't be used during (Your Turn).",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-016",
+      "name": "Reversal Force",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-016#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Refresh all exhausted Spirits, and exhaust all refreshed Spirits. This effect can't be used during (Your Turn)."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh all exhausted Spirits",
+              "cleanText": "Refresh all exhausted Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "exhaust all refreshed Spirits.",
+              "cleanText": "exhaust all refreshed Spirits",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "This effect can't be used during (Your Turn).",
+              "cleanText": "This effect can't be used during (Your Turn)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0 for the first time that turn, draw a card.",
-  "is_vanilla": false
- },
- "SD23-007": {
-  "name": "The Angelia Lyell",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 9000
-   }
+  "SD23-013": {
+    "name": "Symphonic Burst",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Spirit is destroyed by the Opponent]\nReturn a Cost 5 or less Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect.\n\n[Flash]\nWhen this battle ends, if your Life is at two or less, end the Attack Step.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-013",
+      "name": "Symphonic Burst",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit is destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return a Cost 5 or less Spirit card that was destroyed when this Burst activates from your Trash to the Hand. Then, by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Return a Cost 5 or less Spirit card that was destroyed when this Burst activates from your Trash to the Hand.",
+              "cleanText": "Return a Cost 5 or less Spirit card that was destroyed when this Burst activates from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "by paying the cost, activate this card's Flash effect.",
+              "cleanText": "by paying the cost, activate this card's Flash effect",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "When this battle ends, if your Life is at two or less, end the Attack Step."
+          },
+          "clauses": [
+            {
+              "rawText": "When this battle ends, if your Life is at two or less, end the Attack Step.",
+              "cleanText": "When this battle ends, if your Life is at two or less, end the Attack Step",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -5000 BP.\n\n[LV2][LV3] (Either Attack Step)\nWhen a battle resolves, if the opposing battling Spirit is 3000 BP or less, destroy that Spirit.",
-  "is_vanilla": false
- },
- "SD23-010": {
-  "name": "Ultimate-Exsia",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 11000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 16000
-   }
+  "SD23-004": {
+    "name": "The Angelia Aester",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nDuring this turn, give an opposing Spirit -3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-004",
+      "name": "The Angelia Aester",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit -3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+              "cleanText": "give an opposing Spirit -3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 3000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If that opposing Spirit is brought to 0 BP, destroy that Spirit.\n[utb]\n\n[LV5] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to your Hand.",
-  "is_vanilla": false
- },
- "SD23-008": {
-  "name": "Ultimate-Kleio",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 7000
-   }
+  "SD23-005": {
+    "name": "The Angelia Gourette",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0, destroy that Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-005",
+      "name": "The Angelia Gourette",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0, destroy that Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "During this battle, give an opposing Spirit -3000 BP.",
+              "cleanText": "give an opposing Spirit -3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 3000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            },
+            {
+              "rawText": "If that opposing Spirit's BP is brought to 0, destroy that Spirit.",
+              "cleanText": "destroy that Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If that opposing Spirit's BP is brought to 0",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -5000 BP. When this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.\n[utb]",
-  "is_vanilla": false
- },
- "SD23-X01": {
-  "name": "Ultimate-Valiero",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 14000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 3,
-    "bp": 17000
-   }
+  "SD23-003": {
+    "name": "The Angelia Hiver",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0 for the first time that turn, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-003",
+      "name": "The Angelia Hiver",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this battle, give an opposing Spirit -3000 BP. If that opposing Spirit's BP is brought to 0 for the first time that turn, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "During this battle, give an opposing Spirit -3000 BP.",
+              "cleanText": "give an opposing Spirit -3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 3000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            },
+            {
+              "rawText": "If that opposing Spirit's BP is brought to 0 for the first time that turn, draw a card.",
+              "cleanText": "draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If that opposing Spirit's BP is brought to 0 for the first time that turn",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits/Ultimates with LV inferior to this Ultimate's. [Critical Hit] If the hit card is a Magic card, also, return every Magic card of one single color from your Trash to the Hand.\n[utb]\n\n[LV4][LV5] (When Battles)\nDuring this turn, give an opposing Spirit/Ultimate -3000 BP.",
-  "is_vanilla": false
- },
- "SD23-009": {
-  "name": "Ultimate-Virchu",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 11000
-   }
+  "SD23-007": {
+    "name": "The Angelia Lyell",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDuring this battle, give an opposing Spirit -5000 BP.\n\n[LV2][LV3] (Either Attack Step)\nWhen a battle resolves, if the opposing battling Spirit is 3000 BP or less, destroy that Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-007",
+      "name": "The Angelia Lyell",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this battle, give an opposing Spirit -5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this battle, give an opposing Spirit -5000 BP.",
+              "cleanText": "give an opposing Spirit -5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 5000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When a battle resolves, if the opposing battling Spirit is 3000 BP or less, destroy that Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When a battle resolves, if the opposing battling Spirit is 3000 BP or less, destroy that Spirit.",
+              "cleanText": "When a battle resolves, if the opposing battling Spirit is 3000 BP or less, destroy that Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control onr or more Yellow Spirits]\n\n[LV3][LV4] (When Battles)\nThe cost of all Magic cards in your Hand gets -1.\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.\n[utb]",
-  "is_vanilla": false
- },
- "SD23-012": {
-  "name": "Yellow Alert",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, give an opposing Spirit -2000 BP. If this Magic card was used on the Opposing Turn, also, refresh a Yellow Spirit you control.",
-  "is_vanilla": false
- }
+  "SD23-010": {
+    "name": "Ultimate-Exsia",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 11000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 16000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If that opposing Spirit is brought to 0 BP, destroy that Spirit.\n[utb]\n\n[LV5] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to your Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-010",
+      "name": "Ultimate-Exsia",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 60
+        },
+        {
+          "name": "Brilliance",
+          "parameter": null,
+          "wave": 3,
+          "hook": "brilliance",
+          "bracketed": true,
+          "index": 272
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-010#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Yellow Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Yellow Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If that opposing Spirit is brought to 0 BP, destroy that Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP.",
+              "cleanText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            },
+            {
+              "rawText": "If that opposing Spirit is brought to 0 BP, destroy that Spirit.",
+              "cleanText": "destroy that Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If that opposing Spirit is brought to 0 BP",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-010#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brilliance",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of battle, return all Magic cards you used during this battle to your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of battle, return all Magic cards you used during this battle to your Hand.",
+              "cleanText": "At the end of battle, return all Magic cards you used during this battle to your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "SALVAGE",
+                "cardType": "Magic",
+                "filter": {
+                  "usedThisBattle": true
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD23-008": {
+    "name": "Ultimate-Kleio",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 7000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -5000 BP. When this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-008",
+      "name": "Ultimate-Kleio",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 60
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-008#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Yellow Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Yellow Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -5000 BP. When this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -5000 BP.",
+              "cleanText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 5000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            },
+            {
+              "rawText": "When this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.",
+              "cleanText": "When this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD23-X01": {
+    "name": "Ultimate-Valiero",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 14000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 3,
+        "bp": 17000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Yellow Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits/Ultimates with LV inferior to this Ultimate's. [Critical Hit] If the hit card is a Magic card, also, return every Magic card of one single color from your Trash to the Hand.\n[utb]\n\n[LV4][LV5] (When Battles)\nDuring this turn, give an opposing Spirit/Ultimate -3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-X01",
+      "name": "Ultimate-Valiero",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 60
+        },
+        {
+          "name": "Critical Hit",
+          "parameter": null,
+          "wave": 3,
+          "hook": "critical_hit",
+          "bracketed": true,
+          "index": 237
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-X01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Yellow Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Yellow Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits/Ultimates with LV inferior to this Ultimate's. [Critical Hit] If the hit card is a Magic card, also, return every Magic card of one single color from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits/Ultimates with LV inferior to this Ultimate's.",
+              "cleanText": "When Ultimate Trigger hits, this Ultimate can't be blocked by opposing Spirits/Ultimates with LV inferior to this Ultimate's",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            },
+            {
+              "rawText": "[Critical Hit] If the hit card is a Magic card, also, return every Magic card of one single color from your Trash to the Hand.",
+              "cleanText": "[Critical Hit] If the hit card is a Magic card, also, return every Magic card of one single color from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit/Ultimate -3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit/Ultimate -3000 BP.",
+              "cleanText": "give an opposing Spirit/Ultimate -3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 3000
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD23-009": {
+    "name": "Ultimate-Virchu",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 11000
+      }
+    },
+    "effect": "[Summon Condition: You control onr or more Yellow Spirits]\n\n[LV3][LV4] (When Battles)\nThe cost of all Magic cards in your Hand gets -1.\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-009",
+      "name": "Ultimate-Virchu",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 137
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD23-009#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control onr or more Yellow Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control onr or more Yellow Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The cost of all Magic cards in your Hand gets -1."
+          },
+          "clauses": [
+            {
+              "rawText": "The cost of all Magic cards in your Hand gets -1.",
+              "cleanText": "The cost of all Magic cards in your Hand gets -1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD23-009#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP. If this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP.",
+              "cleanText": "When Ultimate Trigger hits, during this battle, give an opposing Spirit -10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            },
+            {
+              "rawText": "If this Ultimate is blocked by opposing Spirits, send a core from the opposing Life to their Reserve.",
+              "cleanText": "send a core from the opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If this Ultimate is blocked by opposing Spirits",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD23-012": {
+    "name": "Yellow Alert",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, give an opposing Spirit -2000 BP. If this Magic card was used on the Opposing Turn, also, refresh a Yellow Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD23-012",
+      "name": "Yellow Alert",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD23-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit -2000 BP. If this Magic card was used on the Opposing Turn, also, refresh a Yellow Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit -2000 BP.",
+              "cleanText": "give an opposing Spirit -2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 2000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "If this Magic card was used on the Opposing Turn, also, refresh a Yellow Spirit you control.",
+              "cleanText": "also, refresh a Yellow Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If this Magic card was used on the Opposing Turn",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "color": "Yellow"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

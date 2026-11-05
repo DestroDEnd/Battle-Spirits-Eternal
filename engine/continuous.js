@@ -8,6 +8,10 @@
 
 export function computeLevel(stack) {
   if (!stack || !stack.top) return 1;
+  // Eternal 17.0: If stack is in depletion standby, resolve using pre-depletion level
+  if (stack.standby && stack.standby.type === 'depletion' && stack.standby.previousLevel) {
+    return stack.standby.previousLevel;
+  }
   const totalCores = (stack.cores.normal || 0) + (stack.cores.soul ? 1 : 0);
   const levels = stack.top.levels || { 1: { cost: 1, bp: 1000 } };
 
@@ -23,6 +27,7 @@ export function computeLevel(stack) {
     }
   }
 
+  stack.lastActiveLevel = currentLevel;
   return currentLevel;
 }
 
@@ -122,15 +127,18 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
     }
   }
 
-  // Check card text keywords (Armor, Heavy Armor, Ultra Armor)
-  const effectText = stack.top.effect || '';
+  // Check card text keywords (Armor, Heavy Armor, Ultra Armor, Silver Wheel, Barrage)
+  const effectText = stack.top?.effect || '';
   for (const c of sourceColors) {
     const low = c.toLowerCase();
     if (
       effectText.toLowerCase().includes(`heavy armor: ${low}`) ||
       effectText.toLowerCase().includes(`ultra armor: ${low}`) ||
       effectText.toLowerCase().includes(`armor: ${low}`) ||
-      effectText.toLowerCase().includes('armor: all')
+      effectText.toLowerCase().includes(`silver wheel: ${low}`) ||
+      effectText.toLowerCase().includes(`barrage: ${low}`) ||
+      effectText.toLowerCase().includes('armor: all') ||
+      effectText.toLowerCase().includes('ultra armor: all')
     ) {
       return true;
     }
@@ -141,7 +149,17 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
 
 export function canAttack(state, stack) {
   if (!stack) return false;
-  if (stack.state !== 'REFRESHED') return false;
+
+  // Normal rule: must be REFRESHED to attack.
+  // Pursuit: an EXHAUSTED spirit with Pursuit can attack (by heavy exhausting).
+  // A HEAVY_EXHAUSTED spirit cannot attack.
+  if (stack.state !== 'REFRESHED') {
+    const hasPursuit = (stack.top?.effect && stack.top.effect.toLowerCase().includes('pursuit')) ||
+      (stack.top?.compiledIr?.keywords?.some(k => k.name.toLowerCase() === 'pursuit'));
+    if (!hasPursuit || stack.state === 'HEAVY_EXHAUSTED') {
+      return false;
+    }
+  }
 
   for (const mod of state.modifiers || []) {
     if (mod.type === 'CANNOT_ATTACK' && isModifierApplicable(mod, stack)) {
@@ -155,9 +173,21 @@ export function canAttack(state, stack) {
 export function canBlock(state, stack) {
   if (!stack) return false;
 
-  // Spirits can only block while Refreshed unless granted EXHAUSTED_BLOCK
-  const canBlockExhausted = (state.modifiers || []).some(m => m.type === 'EXHAUSTED_BLOCK' && isModifierApplicable(m, stack)) ||
-    (stack.top.effect && stack.top.effect.toLowerCase().includes('can block while exhausted'));
+  // Combat restriction: only blockable by specific keyword (e.g. Clock Up)
+  if (state.combat && state.combat.onlyBlockableByKeyword) {
+    const reqKeyword = state.combat.onlyBlockableByKeyword.toLowerCase();
+    const hasKeyword = (stack.top?.effect && stack.top.effect.toLowerCase().includes(reqKeyword)) ||
+      (stack.top?.compiledIr?.keywords?.some(k => k.name.toLowerCase() === reqKeyword));
+    if (!hasKeyword) {
+      return false;
+    }
+  }
+
+  // Spirits can only block while Refreshed unless granted EXHAUSTED_BLOCK, or Soar is active on attacker
+  const soarActive = Boolean(state.combat && state.combat.soarActive);
+  const canBlockExhausted = soarActive ||
+    (state.modifiers || []).some(m => m.type === 'EXHAUSTED_BLOCK' && isModifierApplicable(m, stack)) ||
+    (stack.top?.effect && stack.top.effect.toLowerCase().includes('can block while exhausted'));
 
   if (stack.state !== 'REFRESHED' && !canBlockExhausted) {
     return false;

@@ -1,146 +1,1201 @@
 {
- "P21-18": {
-  "name": "The SnakeMasterDeity Asklepiooze X",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 13000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 16000
-   }
+  "P21-18": {
+    "name": "The SnakeMasterDeity Asklepiooze X",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 13000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 16000
+      }
+    },
+    "effect": "While you have a Mirage set, this set card is unaffected by opposing effects.\n\n[Burst: After your Spirit is Destroyed by the Opponent]\nSend three cores from an opposing Spirit/Ultimate to the Trash, and when depletes, draw three cards. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3]\nWhen your \"Galaxian\" family Spirits are destroyed by comparing BP, they can remain on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-18",
+      "name": "The SnakeMasterDeity Asklepiooze X",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit is Destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 79
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P21-18#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While you have a Mirage set, this set card is unaffected by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While you have a Mirage set, this set card is unaffected by opposing effects.",
+              "cleanText": "this set card is unaffected by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While you have a Mirage set",
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-18#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send three cores from an opposing Spirit/Ultimate to the Trash, and when depletes, draw three cards. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Send three cores from an opposing Spirit/Ultimate to the Trash, and when depletes, draw three cards.",
+              "cleanText": "Send three cores from an opposing Spirit/Ultimate to the Trash, and when depletes, draw three cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 3,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-18#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Galaxian\" family Spirits are destroyed by comparing BP, they can remain on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Galaxian\" family Spirits are destroyed by comparing BP, they can remain on the Field, refreshed.",
+              "cleanText": "When your \"Galaxian\" family Spirits are destroyed by comparing BP, they can remain on the Field, refreshed",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While you have a Mirage set, this set card is unaffected by opposing effects.\n\n[Burst: After your Spirit is Destroyed by the Opponent]\nSend three cores from an opposing Spirit/Ultimate to the Trash, and when depletes, draw three cards. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3]\nWhen your \"Galaxian\" family Spirits are destroyed by comparing BP, they can remain on the Field, refreshed.",
-  "is_vanilla": false
- },
- "P21-14": {
-  "name": "Battle Spirits Mirage (Card)",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Mirage: Cost 4 ([White Core][White Core])]\n[During Set] (Your Attack Step)\nWhile your one-symbol “Proximate”/“Astroblazer” family Spirit is attacking as the first attack of the turn, that Spirit can't be blocked.\n\n[Flash]\nReturn an opposing Spirit to the Hand.",
-  "is_vanilla": false
- },
- "P21-12": {
-  "name": "Kamen Rider 50th Anniversary",
-  "type": "Magic",
-  "levels": {},
-  "effect": "When using this card, the symbols of every \"50th\"-named Spirit you control are also treated as Red.\n\n[Mirage: Cost 2]\n[During Set] (Your Attack Step)\nFor each Spirit you control, your attacking “50th”-named Spirit gains +3000 BP, and while it has 30000 BP or more, it gains an extra Red symbol.\n\n[Flash]\nDestroy 50 opposing 7000 BP or less Spirits.",
-  "is_vanilla": false
- },
- "P21-13": {
-  "name": "Synchroid Bronto",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   }
+  "P21-14": {
+    "name": "Battle Spirits Mirage (Card)",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Mirage: Cost 4 ([White Core][White Core])]\n[During Set] (Your Attack Step)\nWhile your one-symbol “Proximate”/“Astroblazer” family Spirit is attacking as the first attack of the turn, that Spirit can't be blocked.\n\n[Flash]\nReturn an opposing Spirit to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-14",
+      "name": "Battle Spirits Mirage (Card)",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 4 ([White Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P21-14#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([White Core][White Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "P21-14#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your one-symbol “Proximate”/“Astroblazer” family Spirit is attacking as the first attack of the turn, that Spirit can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "While your one-symbol \"Proximate\"/\"Astroblazer\" family Spirit is attacking as the first attack of the turn, that Spirit can't be blocked.",
+              "cleanText": "that Spirit can't be blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your one-symbol \"Proximate\"/\"Astroblazer\" family Spirit is attacking as the first attack of the turn",
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-14#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the Hand.",
+              "cleanText": "Return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Mirage: Cost 4 ([White Core][White Core])]\n[During Set] (Your Attack Step)\nWhen your \"Proximate\"/“Astroblazer” & “Machine Beast” family Spirit would leave the Field due to opposing effects, if you have fewer cards in Hand than the opponent, you can draw until you have the same number of cards in the opposing Hand.\n\n[LV2] (Either Main Step)\nWhen this Spirit would leave the Field due to opposing effects, it can remain on the Field, in the same condition.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A10625": {
-  "name": "The HeadlessKnight Durahan",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "P21-12": {
+    "name": "Kamen Rider 50th Anniversary",
+    "type": "Magic",
+    "levels": {},
+    "effect": "When using this card, the symbols of every \"50th\"-named Spirit you control are also treated as Red.\n\n[Mirage: Cost 2]\n[During Set] (Your Attack Step)\nFor each Spirit you control, your attacking “50th”-named Spirit gains +3000 BP, and while it has 30000 BP or more, it gains an extra Red symbol.\n\n[Flash]\nDestroy 50 opposing 7000 BP or less Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-12",
+      "name": "Kamen Rider 50th Anniversary",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 2",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 101
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P21-12#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When using this card, the symbols of every \"50th\"-named Spirit you control are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "When using this card, the symbols of every \"50th\"-named Spirit you control are also treated as Red.",
+              "cleanText": "When using this card, the symbols of every \"50th\"-named Spirit you control are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-12#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost 2"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "P21-12#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Spirit you control, your attacking “50th”-named Spirit gains +3000 BP, and while it has 30000 BP or more, it gains an extra Red symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Spirit you control, your attacking \"50th\"-named Spirit gains +3000 BP, and while it has 30000 BP or more, it gains an extra Red symbol.",
+              "cleanText": "For each Spirit you control, your attacking \"50th\"-named Spirit gains +3000 BP, and while it has 30000 BP or more, it gains an extra Red symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-12#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy 50 opposing 7000 BP or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy 50 opposing 7000 BP or less Spirits.",
+              "cleanText": "Destroy 50 opposing 7000 BP or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 50,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 7000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "",
-  "is_vanilla": true
- },
- "P21-15": {
-  "name": "The SunStarDragon Heliopause-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "P21-13": {
+    "name": "Synchroid Bronto",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      }
+    },
+    "effect": "[Mirage: Cost 4 ([White Core][White Core])]\n[During Set] (Your Attack Step)\nWhen your \"Proximate\"/“Astroblazer” & “Machine Beast” family Spirit would leave the Field due to opposing effects, if you have fewer cards in Hand than the opponent, you can draw until you have the same number of cards in the opposing Hand.\n\n[LV2] (Either Main Step)\nWhen this Spirit would leave the Field due to opposing effects, it can remain on the Field, in the same condition.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-13",
+      "name": "Synchroid Bronto",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 4 ([White Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P21-13#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([White Core][White Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "P21-13#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Proximate\"/“Astroblazer” & “Machine Beast” family Spirit would leave the Field due to opposing effects, if you have fewer cards in Hand than the opponent, you can draw until you have the same number of cards in the opposing Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Proximate\"/\"Astroblazer\" & \"Machine Beast\" family Spirit would leave the Field due to opposing effects, if you have fewer cards in Hand than the opponent, you can draw until you have the same number of cards in the opposing Hand.",
+              "cleanText": "When your \"Proximate\"/\"Astroblazer\" & \"Machine Beast\" family Spirit would leave the Field due to opposing effects, if you have fewer cards in Hand than the opponent, you can draw until you have the same number of cards in the opposing Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-13#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Either Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit would leave the Field due to opposing effects, it can remain on the Field, in the same condition."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit would leave the Field due to opposing effects, it can remain on the Field, in the same condition.",
+              "cleanText": "When this Spirit would leave the Field due to opposing effects, it can remain on the Field, in the same condition",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REMAIN_ON_FIELD"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Mirage: Cost 5 ([Red Core][Red Core][Green Core][Green Core])]\n[During Set] (Your Attack Step)\nWhen your Spirit is blocked, destroy an opposing 10000 BP or less Spirit/Ultimate, and the effects of the destroyed Spirit/Ultimate can't activate.\n\n[LV1][LV2][LV3] [Ultra Clash] (When Attacks)\nOpposing Spirits/Ultimates must block if possible. This effect can't be prevented by opposing effects.",
-  "is_vanilla": false
- },
- "P21-16": {
-  "name": "What Are You, Fool?",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDestroy an opposing Nexus, and when destroys, draw a card. When a Rebirth Nexus is destroyed, this effect draws +1 card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A14501": {
-  "name": "Xain-Traill",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A10625": {
+    "name": "The HeadlessKnight Durahan",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "",
+    "is_vanilla": true,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10625",
+      "name": "The HeadlessKnight Durahan",
+      "isFullySupported": true,
+      "isVanilla": true,
+      "compiledClausesCount": 0,
+      "unsupportedClausesCount": 0,
+      "abilities": [],
+      "keywords": []
+    }
   },
-  "effect": "[LV1][LV2] Red/Blue (Opposing Turn)\nWhen the opponent uses a Red/Blue Magic effect, by exhausting this Spirit, negate that effect.\n\n[LV1][LV2] (Opposing Main Step)\nWhen the opposing Hand increases, for each card added, the opponent discards a card from their Hand.",
-  "is_vanilla": false
- },
- "P21-20": {
-  "name": "Zodiac Draco",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "P21-15": {
+    "name": "The SunStarDragon Heliopause-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[Mirage: Cost 5 ([Red Core][Red Core][Green Core][Green Core])]\n[During Set] (Your Attack Step)\nWhen your Spirit is blocked, destroy an opposing 10000 BP or less Spirit/Ultimate, and the effects of the destroyed Spirit/Ultimate can't activate.\n\n[LV1][LV2][LV3] [Ultra Clash] (When Attacks)\nOpposing Spirits/Ultimates must block if possible. This effect can't be prevented by opposing effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-15",
+      "name": "The SunStarDragon Heliopause-Dragon",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 5 ([Red Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Ultra Clash",
+          "parameter": null,
+          "wave": 1,
+          "hook": "clash",
+          "bracketed": true,
+          "index": 261
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P21-15#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([Red Core][Red Core][Green Core][Green Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "P21-15#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit is blocked, destroy an opposing 10000 BP or less Spirit/Ultimate, and the effects of the destroyed Spirit/Ultimate can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit is blocked, destroy an opposing 10000 BP or less Spirit/Ultimate, and the effects of the destroyed Spirit/Ultimate can't activate.",
+              "cleanText": "When your Spirit is blocked, destroy an opposing 10000 BP or less Spirit/Ultimate, and the effects of the destroyed Spirit/Ultimate can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-15#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultra Clash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Opposing Spirits/Ultimates must block if possible. This effect can't be prevented by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Opposing Spirits/Ultimates must block if possible.",
+              "cleanText": "Opposing Spirits/Ultimates must block if possible",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "FORCE_BLOCK",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "This effect can't be prevented by opposing effects.",
+              "cleanText": "This effect can't be prevented by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNPREVENTABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card's reduction symbol is also treated as Purple/Green/White/Yellow/Blue.\n\n[LV1][LV2] [Astmu: 1] (When Summoned)\nYou can put a card from your decktop to the Removed Zone. You can add a \"Proximate\"/\"Astroblazer\" & “Galaxian” family card being put to the Removed Zone by this effect to your Hand. When you've done so, return an opposing 7000 BP or less Spirit to the deckbottom.\n\n[LV2] (When Attacks)\nDraw a card.",
-  "is_vanilla": false
- }
+  "P21-16": {
+    "name": "What Are You, Fool?",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDestroy an opposing Nexus, and when destroys, draw a card. When a Rebirth Nexus is destroyed, this effect draws +1 card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-16",
+      "name": "What Are You, Fool?",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P21-16#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Nexus, and when destroys, draw a card. When a Rebirth Nexus is destroyed, this effect draws +1 card."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Nexus, and when destroys, draw a card.",
+              "cleanText": "Destroy an opposing Nexus, and when destroys, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "When a Rebirth Nexus is destroyed, this effect draws +1 card.",
+              "cleanText": "When a Rebirth Nexus is destroyed, this effect draws +1 card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MODIFY_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A14501": {
+    "name": "Xain-Traill",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] Red/Blue (Opposing Turn)\nWhen the opponent uses a Red/Blue Magic effect, by exhausting this Spirit, negate that effect.\n\n[LV1][LV2] (Opposing Main Step)\nWhen the opposing Hand increases, for each card added, the opponent discards a card from their Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A14501",
+      "name": "Xain-Traill",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A14501#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent uses a Red/Blue Magic effect, by exhausting this Spirit, negate that effect."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent uses a Red/Blue Magic effect, by exhausting this Spirit, negate that effect.",
+              "cleanText": "When the opponent uses a Red/Blue Magic effect, by exhausting this Spirit, negate that effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14501#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Opposing Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opposing Hand increases, for each card added, the opponent discards a card from their Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opposing Hand increases, for each card added, the opponent discards a card from their Hand.",
+              "cleanText": "When the opposing Hand increases, for each card added, the opponent discards a card from their Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "chooser": "opp",
+                "target": {
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "P21-20": {
+    "name": "Zodiac Draco",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "This card's reduction symbol is also treated as Purple/Green/White/Yellow/Blue.\n\n[LV1][LV2] [Astmu: 1] (When Summoned)\nYou can put a card from your decktop to the Removed Zone. You can add a \"Proximate\"/\"Astroblazer\" & “Galaxian” family card being put to the Removed Zone by this effect to your Hand. When you've done so, return an opposing 7000 BP or less Spirit to the deckbottom.\n\n[LV2] (When Attacks)\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P21-20",
+      "name": "Zodiac Draco",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P21-20#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card's reduction symbol is also treated as Purple/Green/White/Yellow/Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This card's reduction symbol is also treated as Purple/Green/White/Yellow/Blue.",
+              "cleanText": "This card's reduction symbol is also treated as Purple/Green/White/Yellow/Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-20#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Astmu: 1",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can put a card from your decktop to the Removed Zone. You can add a \"Proximate\"/\"Astroblazer\" & “Galaxian” family card being put to the Removed Zone by this effect to your Hand. When you've done so, return an opposing 7000 BP or less Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can put a card from your decktop to the Removed Zone.",
+              "cleanText": "You can put a card from your decktop to the Removed Zone",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_ZONE"
+              }
+            },
+            {
+              "rawText": "You can add a \"Proximate\"/\"Astroblazer\" & \"Galaxian\" family card being put to the Removed Zone by this effect to your Hand.",
+              "cleanText": "You can add a \"Proximate\"/\"Astroblazer\" & \"Galaxian\" family card being put to the Removed Zone by this effect to your Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "return an opposing 7000 BP or less Spirit to the deckbottom.",
+              "cleanText": "return an opposing 7000 BP or less Spirit to the deckbottom",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P21-20#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

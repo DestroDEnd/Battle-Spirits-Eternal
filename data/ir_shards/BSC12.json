@@ -1,0 +1,601 @@
+{
+  "EX13-04": {
+    "cardNumber": "EX13-04",
+    "name": "The SatelliteRobo Telescord",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "EX13-04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For both players, Spirits with two or more symbols can only attack once per turn."
+        },
+        "clauses": [
+          {
+            "rawText": "For both players, Spirits with two or more symbols can only attack once per turn.",
+            "cleanText": "For both players, Spirits with two or more symbols can only attack once per turn",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Spirits with one symbol gain +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Spirits with one symbol gain +2000 BP.",
+            "cleanText": "All your Spirits with one symbol gain +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-03": {
+    "cardNumber": "EX13-03",
+    "name": "Compass-Mingo",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "EX13-03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit is blocked, the opponent exhausts a Spirit they control."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit is blocked, the opponent exhausts a Spirit they control.",
+            "cleanText": "When this Spirit is blocked, the opponent exhausts a Spirit they control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "count": 1,
+              "chooser": "opp",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve.",
+            "cleanText": "When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-05": {
+    "cardNumber": "EX13-05",
+    "name": "The Angelia Coma",
+    "keywords": [
+      {
+        "name": "Holy Life",
+        "parameter": null,
+        "wave": 1,
+        "hook": "holy_life",
+        "bracketed": true,
+        "index": 115
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EX13-05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target an opposing Spirit. During this battle, that Spirit can't block."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an opposing Spirit.",
+            "cleanText": "Target an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "During this battle, that Spirit can't block.",
+            "cleanText": "that Spirit can't block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Holy Life",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life.",
+            "cleanText": "When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-01": {
+    "cardNumber": "EX13-01",
+    "name": "The CrossStarDragon Southern-Cross-Dragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "EX13-01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP.",
+            "cleanText": "All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 4000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 4000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 4000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-02": {
+    "cardNumber": "EX13-02",
+    "name": "The EvilArtifactMaster Caelum",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "EX13-02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains."
+        },
+        "clauses": [
+          {
+            "rawText": "Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains.",
+            "cleanText": "Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit with two or less cores on it."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit with two or less cores on it.",
+            "cleanText": "Destroy an opposing Spirit with two or less cores on it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-06": {
+    "cardNumber": "EX13-06",
+    "name": "The GiantCentaurus Troydes",
+    "keywords": [
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 16
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EX13-06#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Crush",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard a number of cards from the opposing decktop equal to this Spirit's level."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard a number of cards from the opposing decktop equal to this Spirit's level.",
+            "cleanText": "Discard a number of cards from the opposing decktop equal to this Spirit's level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-06#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each level this Spirit has, destroy an opposing Cost 3 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each level this Spirit has, destroy an opposing Cost 3 or less Spirit.",
+            "cleanText": "For each level this Spirit has, destroy an opposing Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "BATTLE-SPIRITS-A13190": {
+    "cardNumber": "BATTLE-SPIRITS-A13190",
+    "name": "The TrueTwelveGodKing Exe-Gale-Ceed",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 21
+      },
+      {
+        "name": "Seal",
+        "parameter": "During Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 117
+      },
+      {
+        "name": "Seal",
+        "parameter": "During Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 363
+      },
+      {
+        "name": "True-Soar",
+        "parameter": null,
+        "wave": 4,
+        "hook": "soar",
+        "bracketed": true,
+        "index": 399
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A13190#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send [Soul Core](Soul Core) from this Spirit to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send [Soul Core] from this Spirit to your Life.",
+            "cleanText": "You can send [Soul Core] from this Spirit to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A13190#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: During Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "True-Drive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit/Ultimate. When you've done so, at the end of a blocked battle, for each symbol on this Spirit, send an opposing Life to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit/Ultimate.",
+            "cleanText": "You can target and attack an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "at the end of a blocked battle, for each symbol on this Spirit, send an opposing Life to the Trash.",
+            "cleanText": "at the end of a blocked battle, for each symbol on this Spirit, send an opposing Life to the Trash",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A13190#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: During Seal"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "True-Soar",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of battle, by paying one cost, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of battle, by paying one cost, this Spirit refreshes.",
+            "cleanText": "At the end of battle, by paying one cost, this Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ17-01": {
+    "cardNumber": "SJ17-01",
+    "name": "The TwinkleBeastKing Blazoma",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Ten Crown & Cost 4 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ17-01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Ten Crown & Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your Hand onto your target Spirit.",
+            "cleanText": "stack this from your Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SJ17-01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate.",
+            "cleanText": "Destroy an opposing 10000 BP or less Spirit and an opposing 10000 BP or less Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 10000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SJ17-01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By discarding a pre-Advent card beneath this Spirit, summon a \"God-King\" family Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "By discarding a pre-Advent card beneath this Spirit",
+            "cleanText": "By discarding a pre-Advent card beneath this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_PRE_ADVENT",
+              "count": 1,
+              "target": "SELF_STACK"
+            }
+          },
+          {
+            "rawText": "summon a \"God-King\" family Spirit card from your Hand, without paying the cost.",
+            "cleanText": "summon a \"God-King\" family Spirit card from your Hand, without paying the cost",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ14-01": {
+    "cardNumber": "SJ14-01",
+    "name": "The UltimateStrongest Dragon",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 57
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ14-01#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Red Spirits"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Red Spirits]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SJ14-01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, the opponent must block if possible. However, opposing Ultimates don't have to block. If it's blocked by an opposing Spirit, send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, the opponent must block if possible.",
+            "cleanText": "When Ultimate Trigger hits, the opponent must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "opposing Ultimates don't have to block.",
+            "cleanText": "opposing Ultimates don't have to block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "If it's blocked by an opposing Spirit, send an opposing Life to the Reserve.",
+            "cleanText": "send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If it's blocked by an opposing Spirit",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,140 +1,1214 @@
 {
- "BS40-CP07": {
-  "name": "The DefenseEmperor Gunned Bison",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BS40-CP07": {
+    "name": "The DefenseEmperor Gunned Bison",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP07",
+      "name": "The DefenseEmperor Gunned Bison",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP07#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP07#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP07#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- },
- "BS40-CP05": {
-  "name": "The GreatSageSnake Agastia",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BS40-CP05": {
+    "name": "The GreatSageSnake Agastia",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP05",
+      "name": "The GreatSageSnake Agastia",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Draw a card, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- },
- "BS40-CP08": {
-  "name": "The MagicianAngelia Molchel",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BS40-CP08": {
+    "name": "The MagicianAngelia Molchel",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP08",
+      "name": "The MagicianAngelia Molchel",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP08#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP08#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Draw a card, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP08#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- },
- "BS40-CP09": {
-  "name": "The TuskFightingKing Boaradalus",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BS40-CP09": {
+    "name": "The TuskFightingKing Boaradalus",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP09",
+      "name": "The TuskFightingKing Boaradalus",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP09#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP09#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP09#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- },
- "BS40-CP06": {
-  "name": "The TwinBladeEmperor Jackbit",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BS40-CP06": {
+    "name": "The TwinBladeEmperor Jackbit",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP06",
+      "name": "The TwinBladeEmperor Jackbit",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Put a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP06#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nPut a core from the Void to your Reserve, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- },
- "BS40-CP04": {
-  "name": "The TwinkleDragonEmperor Execeedragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
-  },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
-  "is_vanilla": false
- }
+  "BS40-CP04": {
+    "name": "The TwinkleDragonEmperor Execeedragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDraw a card, and during this turn, this Spirit gains +10000 BP.\n\n[LV2][LV3] (When Destroyed)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BS40-CP04",
+      "name": "The TwinkleDragonEmperor Execeedragon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BS40-CP04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this card from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this card from the Hand onto your target Spirit.",
+              "cleanText": "stack this card from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card, and during this turn, this Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card, and during this turn, this Spirit gains +10000 BP.",
+              "cleanText": "Draw a card, and during this turn, this Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BS40-CP04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit remains on the Field, refreshed."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit remains on the Field, refreshed.",
+              "cleanText": "this Spirit remains on the Field, refreshed",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,0 +1,1183 @@
+{
+  "BATTLE-SPIRITS-A27": {
+    "cardNumber": "BATTLE-SPIRITS-A27",
+    "name": "Birgoyle",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A27#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at two or more"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at two or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A27#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 5000 BP or less Spirit. Or, put a core from the Void to this Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "put a core from the Void to this Ultimate.",
+            "cleanText": "put a core from the Void to this Ultimate",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A2931": {
+    "cardNumber": "BATTLE-SPIRITS-A2931",
+    "name": "Beetlegon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A2931#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at two or more"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at two or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2931#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you are summoning an Ultimate card, this Ultimate can be treated as a Spirit to fulfill the summon condition."
+        },
+        "clauses": [
+          {
+            "rawText": "When you are summoning an Ultimate card, this Ultimate can be treated as a Spirit to fulfill the summon condition.",
+            "cleanText": "When you are summoning an Ultimate card, this Ultimate can be treated as a Spirit to fulfill the summon condition",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2931#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Ultimate gains an extra Red symbol and an extra Green symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "This Ultimate gains an extra Red symbol and an extra Green symbol.",
+            "cleanText": "This Ultimate gains an extra Red symbol and an extra Green symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A4233": {
+    "cardNumber": "BATTLE-SPIRITS-A4233",
+    "name": "Evil Draw",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A4233#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards. Also, if [Soul Core] was used to pay the cost, destroy an opposing 4000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "if [Soul Core] was used to pay the cost, destroy an opposing 4000 BP or less Spirit.",
+            "cleanText": "destroy an opposing 4000 BP or less Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if [Soul Core] was used to pay the cost",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A4233#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit/Ultimate +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit/Ultimate +2000 BP.",
+            "cleanText": "give a Spirit/Ultimate +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9226": {
+    "cardNumber": "BATTLE-SPIRITS-A9226",
+    "name": "The DarkKnight Dusk Dragon",
+    "keywords": [
+      {
+        "name": "Soul Drive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "soul_drive",
+        "bracketed": true,
+        "index": 176
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9226#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at three or less"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at three or less]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9226#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit/Ultimate.",
+            "cleanText": "You can target and attack an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9226#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Soul Drive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you banish the [Soul Core](Soul Core) on this Ultimate from the game, refresh all your Ultimates."
+        },
+        "clauses": [
+          {
+            "rawText": "If you banish the [Soul Core] on this Ultimate from the game, refresh all your Ultimates.",
+            "cleanText": "refresh all your Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you banish the [Soul Core] on this Ultimate from the game",
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9226#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your Red/Green Ultimate is attacking, the opponent can't activate their Burst."
+        },
+        "clauses": [
+          {
+            "rawText": "While your Red/Green Ultimate is attacking, the opponent can't activate their Burst.",
+            "cleanText": "the opponent can't activate their Burst",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your Red/Green Ultimate is attacking",
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9517": {
+    "cardNumber": "BATTLE-SPIRITS-A9517",
+    "name": "The DragonEvilEmperor Evilfried",
+    "keywords": [
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV3",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 80
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9517#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: You control one or more Cost 1 or higher Spirits/Ultimates]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9517#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate.",
+            "cleanText": "When Ultimate Trigger hits, send all cores from your Trash to this Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9517#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's",
+            "cleanText": "By destroying an opposing Spirit with a BP equal or inferior to this Ultimate's",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9681": {
+    "cardNumber": "BATTLE-SPIRITS-A9681",
+    "name": "The EvilPriest Crickets",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9681#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at two or more"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at two or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9681#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9681#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Your Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The (When Summoned) effects of Red/Green Spirits you control become (When Attacks) effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The (When Summoned) effects of Red/Green Spirits you control become (When Attacks) effects.",
+            "cleanText": "The (When Summoned) effects of Red/Green Spirits you control become (When Attacks) effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COPY_ABILITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9685": {
+    "cardNumber": "BATTLE-SPIRITS-A9685",
+    "name": "The Evil God Territory",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9685#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus' color and symbol are also treated as Green."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus' color and symbol are also treated as Green.",
+            "cleanText": "This Nexus' color and symbol are also treated as Green",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Green"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9685#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning an Ultimate card, by exhausting this Nexus, ignore its summon condition."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning an Ultimate card, by exhausting this Nexus, ignore its summon condition.",
+            "cleanText": "When you're summoning an Ultimate card, by exhausting this Nexus, ignore its summon condition",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BRAM-ZAND": {
+    "cardNumber": "BRAM-ZAND",
+    "name": "The Hellflame FourDemonLord Bram-Zand",
+    "keywords": [
+      {
+        "name": "Soul Drive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "soul_drive",
+        "bracketed": true,
+        "index": 82
+      },
+      {
+        "name": "Soul Drive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "soul_drive",
+        "bracketed": true,
+        "index": 335
+      },
+      {
+        "name": "Soul Drive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "soul_drive",
+        "bracketed": true,
+        "index": 371
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BRAM-ZAND#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at three or less"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at three or less]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BRAM-ZAND#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3,
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Soul Drive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you banish the [Soul Core](Soul Core) on this Ultimate from the game, destroy every opposing Spirit. Until the next (Your Start Step), the opponent can't summon Spirit cards."
+        },
+        "clauses": [
+          {
+            "rawText": "If you banish the [Soul Core] on this Ultimate from the game, destroy every opposing Spirit.",
+            "cleanText": "destroy every opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you banish the [Soul Core] on this Ultimate from the game",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "Until the next (Your Start Step), the opponent can't summon Spirit cards.",
+            "cleanText": "Until the next (Your Start Step), the opponent can't summon Spirit cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BRAM-ZAND#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After the effect of this Ultimate's [Soul Drive] resolves, activate the [Soul Drive] of one of your Ultimates. This effect can only be used once per game."
+        },
+        "clauses": [
+          {
+            "rawText": "After the effect of this Ultimate's [Soul Drive] resolves, activate the [Soul Drive] of one of your Ultimates.",
+            "cleanText": "After the effect of this Ultimate's [Soul Drive] resolves, activate the [Soul Drive] of one of your Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_SOUL_DRIVE"
+            }
+          },
+          {
+            "rawText": "This effect can only be used once per game.",
+            "cleanText": "This effect can only be used once per game",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PLAY_CONDITION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12408": {
+    "cardNumber": "BATTLE-SPIRITS-A12408",
+    "name": "The ShelledEarl Metallifer",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 49
+      },
+      {
+        "name": "Ultimate Trigger",
+        "parameter": "[LV4",
+        "wave": 3,
+        "hook": "ultimate_trigger",
+        "bracketed": true,
+        "index": 256
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12408#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Summon Condition: Your Life is at two or more"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Summon Condition: Your Life is at two or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12408#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_TRIGGER_CONDITION",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits up to a total of 20000 BP. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits up to a total of 20000 BP.",
+            "cleanText": "Destroy any number of opposing Spirits up to a total of 20000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "mode": "TOTAL_BP_LTE",
+              "maxTotalBp": 20000,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12408#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            4,
+            5
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Trigger",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When Ultimate Trigger hits, target two opposing Spirits/Ultimates. Exhaust those Spirits/Ultimates, and they can't refresh in the next opposing Refresh Step."
+        },
+        "clauses": [
+          {
+            "rawText": "When Ultimate Trigger hits, target two opposing Spirits/Ultimates.",
+            "cleanText": "When Ultimate Trigger hits, target two opposing Spirits/Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_SELECT"
+            }
+          },
+          {
+            "rawText": "Exhaust those Spirits/Ultimates, and they can't refresh in the next opposing Refresh Step.",
+            "cleanText": "Exhaust those Spirits/Ultimates, and they can't refresh in the next opposing Refresh Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

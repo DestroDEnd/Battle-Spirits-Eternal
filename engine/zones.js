@@ -6,6 +6,158 @@
  */
 
 import { ETERNAL_RULES } from './rules/eternal.js';
+import { computeLevel } from './continuous.js';
+
+export async function stageStackStandby(state, stack, standbyType, options = {}, events = null) {
+  if (!stack || !stack.top) return false;
+
+  const currentLevel = computeLevel(stack);
+  const by = options.by || 'self';
+  const cause = options.cause || standbyType;
+
+  stack.standby = {
+    type: standbyType, // 'destruction' | 'depletion' | 'bounce' | 'banish' | 'removed'
+    previousLevel: options.previousLevel || currentLevel,
+    by,
+    cause,
+    sourceCard: options.sourceCard || null,
+    destZone: options.destZone || (standbyType === 'bounce' ? 'hand' : standbyType === 'banish' ? 'removed' : 'grave'),
+    destSide: options.destSide || stack.owner
+  };
+
+  if (events) {
+    await events.emit({
+      type: 'STACK_ENTERED_STANDBY',
+      stack,
+      card: stack.top,
+      standby: stack.standby
+    });
+  }
+
+  return true;
+}
+
+export async function commitStackExit(state, stack, toZone = null, options = {}, events = null) {
+  if (!stack || !stack.top) return false;
+
+  const side = stack.owner;
+  const p = state.players[side];
+  const standby = stack.standby || {};
+  const by = options.by || standby.by || 'self';
+  const cause = options.cause || standby.cause || 'rule';
+  const targetZone = toZone || standby.destZone || 'grave';
+  const targetSide = options.toSide || standby.destSide || side;
+  const targetPlayer = state.players[targetSide];
+
+  // Contract Card Soul State Check (Eternal Format rule):
+  // When leaving the field due to opponent, and NOT depleted by self:
+  const isContract = Boolean(stack.top.isContractPartner || stack.top.type === 'Contract Nexus');
+  const oppSide = side === 'player' ? 'opponent' : 'player';
+  const opponentRemoved = by === oppSide || by === 'opponent';
+  const isDepletionBySelf = standby.type === 'depletion' && (by === side || by === 'self');
+
+  if (isContract && opponentRemoved && !isDepletionBySelf && !options.forceGrave) {
+    // Normal cores return to reserve; 1 Soul Core stays on the card in Soul State
+    const hasSoul = stack.cores.soul > 0;
+    p.reserve.normal += stack.cores.normal;
+    stack.cores.normal = 0;
+
+    if (!hasSoul && p.reserve.soul > 0) {
+      p.reserve.soul -= 1;
+      stack.cores.soul = 1;
+    }
+
+    stack.isSoulState = true;
+    stack.standby = null;
+    stack.state = 'EXHAUSTED';
+
+    if (events) {
+      await events.emit({
+        type: 'CONTRACT_ENTERED_SOUL_STATE',
+        card: stack.top,
+        player: side,
+        cause,
+        by
+      });
+    }
+    return true;
+  }
+
+  // Physical exit from field:
+  // 1. Cores return to reserve
+  p.reserve.normal += stack.cores.normal;
+  p.reserve.soul += stack.cores.soul;
+  stack.cores = { normal: 0, soul: 0 };
+
+  // 2. Under cards and braves go to grave
+  for (const underCard of stack.under || []) {
+    p.grave.push(underCard);
+  }
+  for (const braveCard of stack.braves || []) {
+    p.grave.push(braveCard);
+  }
+
+  // 3. Remove stack from field
+  p.field = p.field.filter(st => st.id !== stack.id);
+
+  // 4. Place top card into target zone
+  const topCard = stack.top;
+  topCard.currentOwner = targetSide;
+
+  if (targetZone === 'grave') {
+    targetPlayer.grave.push(topCard);
+  } else if (targetZone === 'hand') {
+    targetPlayer.hand.push(topCard);
+  } else if (targetZone === 'removed') {
+    targetPlayer.removed.push(topCard);
+  } else if (targetZone === 'deck_top') {
+    targetPlayer.deck.unshift(topCard);
+  } else if (targetZone === 'deck' || targetZone === 'deck_bottom') {
+    targetPlayer.deck.push(topCard);
+  }
+
+  // 5. Emit movement and destruction events
+  if (events) {
+    await events.emit({
+      type: 'CARD_MOVED',
+      card: topCard,
+      fromZone: 'field',
+      fromSide: side,
+      toZone: targetZone,
+      toSide: targetSide,
+      cause,
+      by,
+      sourceCard: options.sourceCard || standby.sourceCard || null
+    });
+
+    if (targetZone === 'grave' && (cause === 'destroy' || cause === 'battle' || standby.type === 'destruction')) {
+      await events.emit({
+        type: 'DESTROYED',
+        card: topCard,
+        fromZone: 'field',
+        fromSide: side,
+        cause,
+        by,
+        sourceCard: options.sourceCard || standby.sourceCard || null
+      });
+    }
+  }
+
+  return true;
+}
+
+export async function flushStandbyStacks(state, events = null) {
+  let flushedCount = 0;
+  for (const side of ['player', 'opponent']) {
+    const p = state.players[side];
+    const stacksWithStandby = (p.field || []).filter(st => st.standby !== null && st.standby !== undefined);
+    for (const stack of stacksWithStandby) {
+      await commitStackExit(state, stack, null, {}, events);
+      flushedCount++;
+    }
+  }
+  return flushedCount;
+}
 
 export async function moveCard(state, card, toZone, toSide = null, options = {}, events = null) {
   if (!card) return false;
@@ -179,6 +331,7 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
   } else if (fromZone === 'field') {
     const stack = fromPlayer.field.find(st => st.id === from.stackId);
     if (!stack) return false;
+    stack.lastActiveLevel = computeLevel(stack);
     if (isSoul) {
       if (stack.cores.soul < 1) return false;
       stack.cores.soul -= 1;

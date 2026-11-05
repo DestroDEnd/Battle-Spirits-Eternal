@@ -1,186 +1,1705 @@
 {
- "SD11-007": {
-  "name": "Bear Polar",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD11-007": {
+    "name": "Bear Polar",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nThe opponent must attack at least once if possible.\n\n[LV2] (When Blocks)\nThis Spirit gets +3000 BP.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-007",
+      "name": "Bear Polar",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 134
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The opponent must attack at least once if possible."
+          },
+          "clauses": [
+            {
+              "rawText": "The opponent must attack at least once if possible.",
+              "cleanText": "The opponent must attack at least once if possible",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "FORCE_ATTACK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gets +3000 BP.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gets +3000 BP.",
+              "cleanText": "This Spirit gets +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Exhaust an opposing Spirit.",
+              "cleanText": "Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nThe opponent must attack at least once if possible.\n\n[LV2] (When Blocks)\nThis Spirit gets +3000 BP.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
-  "is_vanilla": false
- },
- "SD11-016": {
-  "name": "Burst Break",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nReturn any number of opposing Spirits up to a total of 5000 BP to the Hand. Or, discard an opposing Burst. This effect can't be used during Main Step.",
-  "is_vanilla": false
- },
- "SD11-005": {
-  "name": "Dark-Gadphant",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "SD11-016": {
+    "name": "Burst Break",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nReturn any number of opposing Spirits up to a total of 5000 BP to the Hand. Or, discard an opposing Burst. This effect can't be used during Main Step.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-016",
+      "name": "Burst Break",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD11-016#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return any number of opposing Spirits up to a total of 5000 BP to the Hand. Or, discard an opposing Burst. This effect can't be used during Main Step."
+          },
+          "clauses": [
+            {
+              "rawText": "Return any number of opposing Spirits up to a total of 5000 BP to the Hand.",
+              "cleanText": "Return any number of opposing Spirits up to a total of 5000 BP to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "discard an opposing Burst.",
+              "cleanText": "discard an opposing Burst",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_BURST",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "This effect can't be used during Main Step.",
+              "cleanText": "This effect can't be used during Main Step",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing 2000 BP or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to this Spirit.\n\n[LV2] [Heavy Armor: Red/Blue]\nThis Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "SD11-010": {
-  "name": "Dark-Uranus",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 9000
-   }
+  "SD11-005": {
+    "name": "Dark-Gadphant",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing 2000 BP or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to this Spirit.\n\n[LV2] [Heavy Armor: Red/Blue]\nThis Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-005",
+      "name": "Dark-Gadphant",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 82
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 227
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing 2000 BP or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing 2000 BP or less Spirit to the Hand.",
+              "cleanText": "Return an opposing 2000 BP or less Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Put a core from the Void to this Spirit.",
+              "cleanText": "Put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Red/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2][LV3]\nThis Spirit is also treated as a Green Spirit.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nBy exhausting an opposing 7000 BP or more Spirit, refresh this Spirit.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to any of your Spirits.",
-  "is_vanilla": false
- },
- "SD11-015": {
-  "name": "Dream Horizon",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nReturn an opposing Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Refresh a White Spirit you control.",
-  "is_vanilla": false
- },
- "SD11-011": {
-  "name": "Jet-Gannet",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "SD11-010": {
+    "name": "Dark-Uranus",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV2][LV3]\nThis Spirit is also treated as a Green Spirit.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nBy exhausting an opposing 7000 BP or more Spirit, refresh this Spirit.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to any of your Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-010",
+      "name": "Dark-Uranus",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 176
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is also treated as a Green Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is also treated as a Green Spirit.",
+              "cleanText": "This Spirit is also treated as a Green Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COLOR",
+                "color": "Green"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting an opposing 7000 BP or more Spirit, refresh this Spirit.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting an opposing 7000 BP or more Spirit",
+              "cleanText": "By exhausting an opposing 7000 BP or more Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Put a core from the Void to any of your Spirits.",
+              "cleanText": "Put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more]\n\n[LV1] (When Summoned)\nReturn an opposing Nexus to the Hand.\n\n[When Braved] (Opposing Attack Step)\nWhen an opposing 4000 BP or more Spirit attacks, refresh this Spirit.",
-  "is_vanilla": false
- },
- "SD11-X01": {
-  "name": "The DarkEmperor Ninetail-Dark",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   }
+  "SD11-015": {
+    "name": "Dream Horizon",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nReturn an opposing Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Refresh a White Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-015",
+      "name": "Dream Horizon",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 47
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Refresh a White Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the Hand.",
+              "cleanText": "Return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Refresh a White Spirit you control.",
+              "cleanText": "Refresh a White Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "color": "White"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen only the opposing Spirit is destroyed by comparing BP, refresh this Spirit, and during this turn, this Spirit gains +3000 BP.\n\n[LV3] (When Battles)\nReturn an opposing Cost 6 or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
-  "is_vanilla": false
- },
- "SD11-009": {
-  "name": "The HuntingMachineBeast Silver-Jackal",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 10000
-   }
+  "SD11-011": {
+    "name": "Jet-Gannet",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\n[LV1] (When Summoned)\nReturn an opposing Nexus to the Hand.\n\n[When Braved] (Opposing Attack Step)\nWhen an opposing 4000 BP or more Spirit attacks, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-011",
+      "name": "Jet-Gannet",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-011#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Nexus to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Nexus to the Hand.",
+              "cleanText": "Return an opposing Nexus to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-011#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When an opposing 4000 BP or more Spirit attacks, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When an opposing 4000 BP or more Spirit attacks, refresh this Spirit.",
+              "cleanText": "When an opposing 4000 BP or more Spirit attacks, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to their Reserve.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent can't activate their Burst.",
-  "is_vanilla": false
- },
- "SD11-013": {
-  "name": "The Lost Crystal",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (When Destroyed)\nYou can summon a White Spirit card from your Hand, without paying the cost.\n\n[LV2]\nGive all your \"Machine Beast\" family Spirits: \"[Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\"",
-  "is_vanilla": false
- },
- "SD11-X02": {
-  "name": "The MidnightSunTreasuredSword Midnight-Sun",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
+  "SD11-X01": {
+    "name": "The DarkEmperor Ninetail-Dark",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen only the opposing Spirit is destroyed by comparing BP, refresh this Spirit, and during this turn, this Spirit gains +3000 BP.\n\n[LV3] (When Battles)\nReturn an opposing Cost 6 or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-X01",
+      "name": "The DarkEmperor Ninetail-Dark",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 237
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit, and during this turn, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit, and during this turn, this Spirit gains +3000 BP.",
+              "cleanText": "When only the opposing Spirit is destroyed by comparing BP, refresh this Spirit, and during this turn, this Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Cost 6 or less Spirit to the Hand.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Cost 6 or less Spirit to the Hand.",
+              "cleanText": "Return an opposing Cost 6 or less Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Exhaust an opposing Spirit.",
+              "cleanText": "Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] [Heavy Armor: Green/White/Yellow/Blue]\nThis Spirit is unaffected by opposing Green/White/Yellow/Blue Spirit/Brave/Nexus/Magic effects.\n\n[When Braved]\nThis Spirit's [Rush] effects activate, ignoring the conditions.",
-  "is_vanilla": false
- },
- "SD11-012": {
-  "name": "The Underground Lake of the Ice Sword",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nAll your \"Machine Beast\" family Spirits gain +2000 BP.\n\n[LV2] (Opposing Attack Step)\nWhen your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit.",
-  "is_vanilla": false
- },
- "SD11-014": {
-  "name": "Wind Wall",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nWhen this battle ends, end the Attack Step.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
-  "is_vanilla": false
- },
- "SD11-008": {
-  "name": "Wise-Monkey",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   }
+  "SD11-009": {
+    "name": "The HuntingMachineBeast Silver-Jackal",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to their Reserve.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent can't activate their Burst.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-009",
+      "name": "The HuntingMachineBeast Silver-Jackal",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 143
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to their Reserve.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: The opponent can't activate their Burst."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to their Reserve.",
+              "cleanText": "When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "The opponent can't activate their Burst.",
+              "cleanText": "The opponent can't activate their Burst",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (Your Attack Step)\nThe (When Blocks) effects of all your \"Machine Beast\" family Spirits actviate at (When Attacks).",
-  "is_vanilla": false
- }
+  "SD11-013": {
+    "name": "The Lost Crystal",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (When Destroyed)\nYou can summon a White Spirit card from your Hand, without paying the cost.\n\n[LV2]\nGive all your \"Machine Beast\" family Spirits: \"[Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-013",
+      "name": "The Lost Crystal",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 158
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon a White Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon a White Spirit card from your Hand, without paying the cost.",
+              "cleanText": "You can summon a White Spirit card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "from": "hand",
+                "color": "White"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your \"Machine Beast\" family Spirits: \"[Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your \"Machine Beast\" family Spirits: \"[Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\"",
+              "cleanText": "Give all your \"Machine Beast\" family Spirits: \"[Heavy Armor: Red] This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD11-X02": {
+    "name": "The MidnightSunTreasuredSword Midnight-Sun",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] [Heavy Armor: Green/White/Yellow/Blue]\nThis Spirit is unaffected by opposing Green/White/Yellow/Blue Spirit/Brave/Nexus/Magic effects.\n\n[When Braved]\nThis Spirit's [Rush] effects activate, ignoring the conditions.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-X02",
+      "name": "The MidnightSunTreasuredSword Midnight-Sun",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Green/White/Yellow/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 49
+        },
+        {
+          "name": "Rush",
+          "parameter": null,
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 213
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-X02#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Green/White/Yellow/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Green/White/Yellow/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Green/White/Yellow/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Green/White/Yellow/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's [Rush] effects activate, ignoring the conditions."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's [Rush] effects activate, ignoring the conditions.",
+              "cleanText": "This Spirit's [Rush] effects activate, ignoring the conditions",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD11-012": {
+    "name": "The Underground Lake of the Ice Sword",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nAll your \"Machine Beast\" family Spirits gain +2000 BP.\n\n[LV2] (Opposing Attack Step)\nWhen your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-012",
+      "name": "The Underground Lake of the Ice Sword",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD11-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Machine Beast\" family Spirits gain +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Machine Beast\" family Spirits gain +2000 BP.",
+              "cleanText": "All your \"Machine Beast\" family Spirits gain +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "targetGroup": "ALL_FRIENDLY",
+                "family": "Machine Beast",
+                "target": "all_friendly",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD11-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit.",
+              "cleanText": "When your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD11-014": {
+    "name": "Wind Wall",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nWhen this battle ends, end the Attack Step.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-014",
+      "name": "Wind Wall",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Green",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 52
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD11-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "When this battle ends, end the Attack Step.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: Exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When this battle ends, end the Attack Step.",
+              "cleanText": "When this battle ends, end the Attack Step",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            },
+            {
+              "rawText": "[Rush: Green]",
+              "cleanText": "[Rush: Green]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Green symbol, the following effect activates next)",
+              "cleanText": "(While you have a Green symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Green"
+                }
+              }
+            },
+            {
+              "rawText": "Exhaust an opposing Spirit.",
+              "cleanText": "Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD11-008": {
+    "name": "Wise-Monkey",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2] (Your Attack Step)\nThe (When Blocks) effects of all your \"Machine Beast\" family Spirits actviate at (When Attacks).",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD11-008",
+      "name": "Wise-Monkey",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD11-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The (When Blocks) effects of all your \"Machine Beast\" family Spirits actviate at (When Attacks)."
+          },
+          "clauses": [
+            {
+              "rawText": "The (When Blocks) effects of all your \"Machine Beast\" family Spirits actviate at (When Attacks).",
+              "cleanText": "The (When Blocks) effects of all your \"Machine Beast\" family Spirits actviate at (When Attacks)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

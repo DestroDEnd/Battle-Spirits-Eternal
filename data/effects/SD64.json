@@ -1,81 +1,896 @@
 {
- "SD64-X01": {
-  "name": "Mugendragon-the-First-Star",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 15000
-   }
+  "SD64-X01": {
+    "name": "Mugendragon-the-First-Star",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 15000
+      }
+    },
+    "effect": "Flash - [Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nUnless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.\n\n[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD64-X01",
+      "name": "Mugendragon-the-First-Star",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "Flame Contract/Incarnate & C6 or more, (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Accel",
+          "parameter": null,
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 287
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD64-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel].",
+              "cleanText": "Unless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.",
+              "cleanText": "this effect sends +1 core to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If there is any \"Mugen\" among this Spirit's pre-advents",
+              "duration": null,
+              "op": {
+                "op": "MODIFY_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC & During Advent"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
+              "cleanText": "When your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: Flame Contract/Incarnate & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Attacks)\nUnless the opponent sends a core from their Life to the Trash, they can't use Magic cards/[Accel]. If there is any \"Mugen\" among this Spirit's pre-advents, this effect sends +1 core to the Trash.\n\n[During OC & During Advent] [LV1][LV2] (Your Attack Step)\nWhen your \"Incarnate\" family Spirit makes the first attack of the turn, during this turn, that Spirit can gain two extra Red symbols.",
-  "is_vanilla": false
- },
- "SD64-002": {
-  "name": "Ryuuman-Medieval",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 12000
-   }
+  "SD64-002": {
+    "name": "Ryuuman-Medieval",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 12000
+      }
+    },
+    "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[LV1][LV2] (When Summoned)\nYou can summon up to three \"Incarnate\" family Spirit cards/Ultimate cards from your Hand, paying one cost each. For each \"Mugen\"/\"Choco\"/\"Ian\" summoned by this effect, draw a card.\n\n[LV2] (When Attacks)\nDestroy an opposing 12000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD64-002",
+      "name": "Ryuuman-Medieval",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD64-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.",
+              "cleanText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon up to three \"Incarnate\" family Spirit cards/Ultimate cards from your Hand, paying one cost each. For each \"Mugen\"/\"Choco\"/\"Ian\" summoned by this effect, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon up to three \"Incarnate\" family Spirit cards/Ultimate cards from your Hand, paying one cost each.",
+              "cleanText": "You can summon up to three \"Incarnate\" family Spirit cards/Ultimate cards from your Hand, paying one cost each",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "For each \"Mugen\"/\"Choco\"/\"Ian\" summoned by this effect, draw a card.",
+              "cleanText": "For each \"Mugen\"/\"Choco\"/\"Ian\" summoned by this effect, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": "DISCARDED_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 12000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 12000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 12000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[LV1][LV2] (When Summoned)\nYou can summon up to three \"Incarnate\" family Spirit cards/Ultimate cards from your Hand, paying one cost each. For each \"Mugen\"/\"Choco\"/\"Ian\" summoned by this effect, draw a card.\n\n[LV2] (When Attacks)\nDestroy an opposing 12000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SD64-001": {
-  "name": "Ryuuman-Polaris",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 11000
-   }
+  "SD64-001": {
+    "name": "Ryuuman-Polaris",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 11000
+      }
+    },
+    "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[Burst: After an opposing Spirit's (When Summoned/Reborn) effect resolves]\nDraw two cards. After this effect resolves, summon this card without paying the cost.\n\n[LV1][LV2] (When Summoned)\nYou can destroy an opposing 12000 BP or less Spirit. Then, if you control any Contract Spirit, including being in Soul State/pre-advent condition, you can destroy an opposing one-symbol Spirit/Nexus. The effects of the Spirits/Nexuses destroyed by these effects can't activate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD64-001",
+      "name": "Ryuuman-Polaris",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit's (When Summoned/Reborn) effect resolves",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 83
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD64-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.",
+              "cleanText": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing 12000 BP or less Spirit. Then, if you control any Contract Spirit, including being in Soul State/pre-advent condition, you can destroy an opposing one-symbol Spirit/Nexus. The effects of the Spirits/Nexuses destroyed by these effects can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing 12000 BP or less Spirit.",
+              "cleanText": "You can destroy an opposing 12000 BP or less Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "if you control any Contract Spirit, including being in Soul State/pre-advent condition, you can destroy an opposing one-symbol Spirit/Nexus.",
+              "cleanText": "including being in Soul State/pre-advent condition, you can destroy an opposing one-symbol Spirit/Nexus",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you control any Contract Spirit",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "symbolCount": 1
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "The effects of the Spirits/Nexuses destroyed by these effects can't activate.",
+              "cleanText": "The effects of the Spirits/Nexuses destroyed by these effects can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NEGATE_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit's symbols and reduction symbols are also treated as Yellow/Blue.\n\n[Burst: After an opposing Spirit's (When Summoned/Reborn) effect resolves]\nDraw two cards. After this effect resolves, summon this card without paying the cost.\n\n[LV1][LV2] (When Summoned)\nYou can destroy an opposing 12000 BP or less Spirit. Then, if you control any Contract Spirit, including being in Soul State/pre-advent condition, you can destroy an opposing one-symbol Spirit/Nexus. The effects of the Spirits/Nexuses destroyed by these effects can't activate.",
-  "is_vanilla": false
- },
- "SD64-003": {
-  "name": "Trinity Star",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nImmediately end the battle. Then, destroy an opposing 7000 BP or less Spirit. Also, if you control any \"Incarnate\" family Spirit, during this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack. After this effect resolves, banish this card.",
-  "is_vanilla": false
- },
- "SD64-CX01": {
-  "name": "Mugen (Card)",
-  "type": "Contract Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD64-003": {
+    "name": "Trinity Star",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nImmediately end the battle. Then, destroy an opposing 7000 BP or less Spirit. Also, if you control any \"Incarnate\" family Spirit, during this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack. After this effect resolves, banish this card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD64-003",
+      "name": "Trinity Star",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD64-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Immediately end the battle. Then, destroy an opposing 7000 BP or less Spirit. Also, if you control any \"Incarnate\" family Spirit, during this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack. After this effect resolves, banish this card."
+          },
+          "clauses": [
+            {
+              "rawText": "Immediately end the battle.",
+              "cleanText": "Immediately end the battle",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "END_BATTLE"
+              }
+            },
+            {
+              "rawText": "destroy an opposing 7000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 7000 BP or less Spirit",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 7000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "if you control any \"Incarnate\" family Spirit, during this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack.",
+              "cleanText": "during this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any \"Incarnate\" family Spirit",
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "banish this card.",
+              "cleanText": "banish this card",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BANISH"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State][Contract Pre-Advent]/[Spirit] [LV1][LV2]\n(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can send the [Soul Core] from the Trash to any of your Spirits/Ultimates.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counters +2. Then, destroy an opposing 5000 BP or less Spirit/Ultimate, and the effects of the destroyed target can't activate.",
-  "is_vanilla": false
- }
+  "SD64-CX01": {
+    "name": "Mugen (Card)",
+    "type": "Contract Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State][Contract Pre-Advent]/[Spirit] [LV1][LV2]\n(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can send the [Soul Core] from the Trash to any of your Spirits/Ultimates.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Attacks)\nYour counters +2. Then, destroy an opposing 5000 BP or less Spirit/Ultimate, and the effects of the destroyed target can't activate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD64-CX01",
+      "name": "Mugen (Card)",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 42
+        },
+        {
+          "name": "Soul State",
+          "parameter": null,
+          "wave": 2,
+          "hook": "soul_state",
+          "bracketed": true,
+          "index": 159
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 171
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 384
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD64-CX01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
+          },
+          "clauses": [
+            {
+              "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+              "cleanText": "you can [Contract Advent] onto it",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "While this card is in Soul State",
+              "duration": null,
+              "op": {
+                "op": "CONTRACT_ADVENT_RULE"
+              }
+            },
+            {
+              "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+              "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": "ANY",
+                "source": "FIELD_RESERVE",
+                "destination": "ADVENT_CARD"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-CX01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your counter increases via your \"Incarnate\" family effects, you can send the [Soul Core] from the Trash to any of your Spirits/Ultimates."
+          },
+          "clauses": [
+            {
+              "rawText": "When your counter increases via your \"Incarnate\" family effects, you can send the [Soul Core] from the Trash to any of your Spirits/Ultimates.",
+              "cleanText": "When your counter increases via your \"Incarnate\" family effects, you can send the [Soul Core] from the Trash to any of your Spirits/Ultimates",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD64-CX01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counters +2. Then, destroy an opposing 5000 BP or less Spirit/Ultimate, and the effects of the destroyed target can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counters +2.",
+              "cleanText": "Your counters +2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "destroy an opposing 5000 BP or less Spirit/Ultimate, and the effects of the destroyed target can't activate.",
+              "cleanText": "destroy an opposing 5000 BP or less Spirit/Ultimate, and the effects of the destroyed target can't activate",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

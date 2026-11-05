@@ -1,27 +1,306 @@
 {
- "P19-22": {
-  "name": "Finishing Dance",
-  "type": "Magic",
-  "levels": {},
-  "effect": "(Once per Turn: Same Name) When this card is revealed from the deck by your \"Diva\" family Spirit effect, you can add it to the Hand.\n\n[Type: Song]\n\n[Flash]\nImmediately end the battle. Then, by sending two cores from any of your \"Producer\" Grandwalker Nexuses to the Void, during this turn, an opposing Spirit can't attack.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5952": {
-  "name": "Kamen Rider Zero-One Flying Falcon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 6000
-   }
+  "P19-22": {
+    "name": "Finishing Dance",
+    "type": "Magic",
+    "levels": {},
+    "effect": "(Once per Turn: Same Name) When this card is revealed from the deck by your \"Diva\" family Spirit effect, you can add it to the Hand.\n\n[Type: Song]\n\n[Flash]\nImmediately end the battle. Then, by sending two cores from any of your \"Producer\" Grandwalker Nexuses to the Void, during this turn, an opposing Spirit can't attack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P19-22",
+      "name": "Finishing Dance",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P19-22#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed from the deck by your \"Diva\" family Spirit effect, you can add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed from the deck by your \"Diva\" family Spirit effect, you can add it to the Hand.",
+              "cleanText": "When this card is revealed from the deck by your \"Diva\" family Spirit effect, you can add it to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P19-22#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Song",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "P19-22#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Immediately end the battle. Then, by sending two cores from any of your \"Producer\" Grandwalker Nexuses to the Void, during this turn, an opposing Spirit can't attack."
+          },
+          "clauses": [
+            {
+              "rawText": "Immediately end the battle.",
+              "cleanText": "Immediately end the battle",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "END_BATTLE"
+              }
+            },
+            {
+              "rawText": "by sending two cores from any of your \"Producer\" Grandwalker Nexuses to the Void, during this turn, an opposing Spirit can't attack.",
+              "cleanText": "by sending two cores from any of your \"Producer\" Grandwalker Nexuses to the Void, during this turn, an opposing Spirit can't attack",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.\n\n[LV1][LV2] (When Summoned)\nPut one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.\n\n[LV2] (When Attacks)\nBy paying three cost, refresh this Spirit.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A5952": {
+    "name": "Kamen Rider Zero-One Flying Falcon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.\n\n[LV1][LV2] (When Summoned)\nPut one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.\n\n[LV2] (When Attacks)\nBy paying three cost, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5952",
+      "name": "Kamen Rider Zero-One Flying Falcon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5952#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue.",
+              "cleanText": "This symbol and reduction symbols of this card/Spirit are also treated as Red/Purple/White/Yellow/Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5952#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put one core from the Void to your Trash. Also, put one core from the Void to a \"Kamen\" family Spirit you control, other than this one."
+          },
+          "clauses": [
+            {
+              "rawText": "Put one core from the Void to your Trash.",
+              "cleanText": "Put one core from the Void to your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "put one core from the Void to a \"Kamen\" family Spirit you control, other than this one.",
+              "cleanText": "put one core from the Void to a \"Kamen\" family Spirit you control, other than this one",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5952#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By paying three cost, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By paying three cost",
+              "cleanText": "By paying three cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

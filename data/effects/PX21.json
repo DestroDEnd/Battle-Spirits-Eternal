@@ -1,23 +1,925 @@
 {
- "PX21-04": {
-  "name": "Lime (Card)",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge] (Purple & Proximate/Astroblazer & Cost 3 or more)\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus.\n\n[LV1][LV2] (When Deployed)\nYou can return a Purple/White \"Proximate\"/\"Astroblazer\" family Spirit card from the Trash to your Hand. Also, if you have a Mirage set, you can put two cores from the Void to this Nexus.\n\n[Grand Skill: 3] [LV2] (Your Main Step)\n(Send three cores from this Nexus to the Void) Look at the content of an opposing Burst.",
-  "is_vanilla": false
- },
- "PX21-03": {
-  "name": "The Blue Bearer of Core Light Varte Parx",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Blue & Proximate/Astroblazer & Cost 3 or more, Red & Dragon & Cost 3 or more)]\n◆When you summon/advent a target Spirit, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Grand Field] [LV1][LV2] (Your Attack Step)\n(Can't Stack) When your Red/Blue \"Primal\"/\"Proximate\"/\"Astroblazer\" family Spirit reduces the opposing Life, you can discard a card from the opposing decktop for each two original costs that Spirit has.\n\n∞ [LV2] Flash - (Your Attack Step)\n(Send all cores from this Nexus to the Void) Activate a (When Reborn) effect of any Spirit you control.",
-  "is_vanilla": false
- },
- "PX21-05": {
-  "name": "The White Bearer of Core Light Gallet Revolt",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Purple/White & Proximate/Astroblazer & Cost 3 or more, \"Bladra\")]\n◆When you summon/advent a target Spirit, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[LV1][LV2]\nThis Nexus's symbol is also treated as Purple.\n\n[LV1][LV2] (When Deployed)\n+1 core to this Nexus, and put one core from the Void each to two White Spirits you control.\n\n[Grand Skill: 7] [LV2] Flash - (Your Attack Step)\n(Once per turn, send 7 cores from this Nexus to the Void) During this turn, every \"Evil Shadow\"/\"Armed Machine\" family Spirit you control gains an extra White symbol.",
-  "is_vanilla": false
- }
+  "PX21-04": {
+    "name": "Lime (Card)",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge] (Purple & Proximate/Astroblazer & Cost 3 or more)\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus.\n\n[LV1][LV2] (When Deployed)\nYou can return a Purple/White \"Proximate\"/\"Astroblazer\" family Spirit card from the Trash to your Hand. Also, if you have a Mirage set, you can put two cores from the Void to this Nexus.\n\n[Grand Skill: 3] [LV2] (Your Main Step)\n(Send three cores from this Nexus to the Void) Look at the content of an opposing Burst.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PX21-04",
+      "name": "Lime (Card)",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": null,
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "3",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 890
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PX21-04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(Purple & Proximate/Astroblazer & Cost 3 or more)"
+          },
+          "clauses": [
+            {
+              "rawText": "(Purple & Proximate/Astroblazer & Cost 3 or more)",
+              "cleanText": "(Purple & Proximate/Astroblazer & Cost 3 or more)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-04#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, place one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, place one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-04#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return a Purple/White \"Proximate\"/\"Astroblazer\" family Spirit card from the Trash to your Hand. Also, if you have a Mirage set, you can put two cores from the Void to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return a Purple/White \"Proximate\"/\"Astroblazer\" family Spirit card from the Trash to your Hand.",
+              "cleanText": "You can return a Purple/White \"Proximate\"/\"Astroblazer\" family Spirit card from the Trash to your Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "if you have a Mirage set, you can put two cores from the Void to this Nexus.",
+              "cleanText": "you can put two cores from the Void to this Nexus",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you have a Mirage set",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-04#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 3"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(Send three cores from this Nexus to the Void) Look at the content of an opposing Burst."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send three cores from this Nexus to the Void) Look at the content of an opposing Burst.",
+              "cleanText": "(Send three cores from this Nexus to the Void) Look at the content of an opposing Burst",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 9,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "PX21-03": {
+    "name": "The Blue Bearer of Core Light Varte Parx",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Blue & Proximate/Astroblazer & Cost 3 or more, Red & Dragon & Cost 3 or more)]\n◆When you summon/advent a target Spirit, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[Grand Field] [LV1][LV2] (Your Attack Step)\n(Can't Stack) When your Red/Blue \"Primal\"/\"Proximate\"/\"Astroblazer\" family Spirit reduces the opposing Life, you can discard a card from the opposing decktop for each two original costs that Spirit has.\n\n∞ [LV2] Flash - (Your Attack Step)\n(Send all cores from this Nexus to the Void) Activate a (When Reborn) effect of any Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PX21-03",
+      "name": "The Blue Bearer of Core Light Varte Parx",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Red/Blue & Proximate/Astroblazer & Cost 3 or more, Red & Dragon & Cost 3 or more)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 665
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PX21-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Red/Blue & Proximate/Astroblazer & Cost 3 or more, Red & Dragon & Cost 3 or more)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can +1 core to this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-03#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE_TRIGGER",
+                "millCount": 3
+              }
+            },
+            {
+              "rawText": "For each target card among them, +1 core to this Nexus.",
+              "cleanText": "For each target card among them, +1 core to this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE_ADD",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-03#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Red/Blue \"Primal\"/\"Proximate\"/\"Astroblazer\" family Spirit reduces the opposing Life, you can discard a card from the opposing decktop for each two original costs that Spirit has."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Red/Blue \"Primal\"/\"Proximate\"/\"Astroblazer\" family Spirit reduces the opposing Life, you can discard a card from the opposing decktop for each two original costs that Spirit has.",
+              "cleanText": "When your Red/Blue \"Primal\"/\"Proximate\"/\"Astroblazer\" family Spirit reduces the opposing Life, you can discard a card from the opposing decktop for each two original costs that Spirit has",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-03#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send all cores from this Nexus to the Void) Activate a (When Reborn) effect of any Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send all cores from this Nexus to the Void) Activate a (When Reborn) effect of any Spirit you control.",
+              "cleanText": "(Send all cores from this Nexus to the Void) Activate a (When Reborn) effect of any Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "PX21-05": {
+    "name": "The White Bearer of Core Light Gallet Revolt",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Purple/White & Proximate/Astroblazer & Cost 3 or more, \"Bladra\")]\n◆When you summon/advent a target Spirit, you can +1 core to this Nexus.\n◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus.\n\n[LV1][LV2]\nThis Nexus's symbol is also treated as Purple.\n\n[LV1][LV2] (When Deployed)\n+1 core to this Nexus, and put one core from the Void each to two White Spirits you control.\n\n[Grand Skill: 7] [LV2] Flash - (Your Attack Step)\n(Once per turn, send 7 cores from this Nexus to the Void) During this turn, every \"Evil Shadow\"/\"Armed Machine\" family Spirit you control gains an extra White symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PX21-05",
+      "name": "The White Bearer of Core Light Gallet Revolt",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Purple/White & Proximate/Astroblazer & Cost 3 or more, \"Bladra\")",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "7",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 828
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PX21-05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Purple/White & Proximate/Astroblazer & Cost 3 or more, \"Bladra\")",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can +1 core to this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE_TRIGGER",
+                "millCount": 3
+              }
+            },
+            {
+              "rawText": "For each target card among them, +1 core to this Nexus.",
+              "cleanText": "For each target card among them, +1 core to this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CORE_CHARGE_ADD",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus's symbol is also treated as Purple."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus's symbol is also treated as Purple.",
+              "cleanText": "This Nexus's symbol is also treated as Purple",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "+1 core to this Nexus, and put one core from the Void each to two White Spirits you control."
+          },
+          "clauses": [
+            {
+              "rawText": "+1 core to this Nexus",
+              "cleanText": "+1 core to this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            },
+            {
+              "rawText": "put one core from the Void each to two White Spirits you control.",
+              "cleanText": "put one core from the Void each to two White Spirits you control",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX21-05#a6",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 7"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send 7 cores from this Nexus to the Void) During this turn, every \"Evil Shadow\"/\"Armed Machine\" family Spirit you control gains an extra White symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send 7 cores from this Nexus to the Void) During this turn, every \"Evil Shadow\"/\"Armed Machine\" family Spirit you control gains an extra White symbol.",
+              "cleanText": "(Once per turn, send 7 cores from this Nexus to the Void) During this turn, every \"Evil Shadow\"/\"Armed Machine\" family Spirit you control gains an extra White symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 9,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

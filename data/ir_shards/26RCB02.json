@@ -1,1 +1,101 @@
-{"26RCB02-X10":{"cardNumber":"26RCB02-X10","name":"［Star Festival Coord］Hoshimiya Ichigo (26RCB02-X10)","keywords":[],"abilities":[{"id":"26RCB02-X10#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Start of Your Attack StepCan't Stack\nTarget your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each. During this turn, give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\""},"clauses":[{"rawText":"Start of Your Attack StepCan't Stack","cleanText":"Start of Your Attack StepCan't Stack","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Start of Your Attack StepCan't Stack"}},{"rawText":"Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each.","cleanText":"Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each"}},{"rawText":"During this turn, give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\"","cleanText":"During this turn, give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"REFRESH","target":"self"}}],"unsupported":["Start of Your Attack StepCan't Stack","Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each."]},{"id":"26RCB02-X10#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"True ReleaseDuring Attack Once Per Turn\nWhen this Spirit reduces the opposing Life, refresh this Spirit."},"clauses":[{"rawText":"True ReleaseDuring Attack Once Per Turn","cleanText":"True ReleaseDuring Attack Once Per Turn","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"True ReleaseDuring Attack Once Per Turn"}},{"rawText":"When this Spirit reduces the opposing Life, refresh this Spirit.","cleanText":"When this Spirit reduces the opposing Life, refresh this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":["True ReleaseDuring Attack Once Per Turn"]}],"compiledClausesCount":2,"unsupportedClausesCount":3,"isFullySupported":false}}
+{
+  "26RCB02-X10": {
+    "cardNumber": "26RCB02-X10",
+    "name": "［Star Festival Coord］Hoshimiya Ichigo (26RCB02-X10)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "26RCB02-X10#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_OF_ATTACK_STEP",
+          "timingLabel": "Start of Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each. During this turn, give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each.",
+            "cleanText": "Target your \"Hoshimiya Ichigo\" and \"Kiriya Aoi\" and \"Shibuki Ran\", one of each",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_CARD"
+            }
+          },
+          {
+            "rawText": "During this turn, give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\"",
+            "cleanText": "give them: \"During Attack Once Per Turn When opposing 6000 BP or less Spirits are destroyed, refresh this Spirit.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "26RCB02-X10#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "True Release"
+          ],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "During Attack",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit reduces the opposing Life, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit reduces the opposing Life, refresh this Spirit.",
+            "cleanText": "When this Spirit reduces the opposing Life, refresh this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

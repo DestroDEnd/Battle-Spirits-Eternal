@@ -1,0 +1,1968 @@
+{
+  "BATTLE-SPIRITS-A3968": {
+    "cardNumber": "BATTLE-SPIRITS-A3968",
+    "name": "Emerald Barrier",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "White",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 38
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A3968#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Exhaust two opposing Spirits.\n[Rush: White]\n(While you have a White symbol, the following effect activates next)\n[White Core]: During this turn, your Life can't be reduced by the attacks of opposing Cost 4 or more Spirits/Ultimates."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust two opposing Spirits.",
+            "cleanText": "Exhaust two opposing Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: White]",
+            "cleanText": "[Rush: White]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "White"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a White symbol, the following effect activates next)",
+            "cleanText": "(While you have a White symbol, the following effect activates next)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "White"
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, your Life can't be reduced by the attacks of opposing Cost 4 or more Spirits/Ultimates.",
+            "cleanText": "your Life can't be reduced by the attacks of opposing Cost 4 or more Spirits/Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A4255": {
+    "cardNumber": "BATTLE-SPIRITS-A4255",
+    "name": "Flying Squirrel",
+    "keywords": [
+      {
+        "name": "High Speed",
+        "parameter": null,
+        "wave": 2,
+        "hook": "high_speed",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A4255#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "High Speed",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.",
+            "cleanText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          },
+          {
+            "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+            "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A4255#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, this Spirit gains +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, this Spirit gains +3000 BP.",
+            "cleanText": "this Spirit gains +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A5275": {
+    "cardNumber": "BATTLE-SPIRITS-A5275",
+    "name": "Jumping Bind",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A5275#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve. Then, by paying the cost, activate this card's Flash effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve.",
+            "cleanText": "Put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "by paying the cost, activate this card's Flash effect.",
+            "cleanText": "by paying the cost, activate this card's Flash effect",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_FLASH"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A5275#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit. Or, exhaust three opposing Cost 3 or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "exhaust three opposing Cost 3 or less Spirits.",
+            "cleanText": "exhaust three opposing Cost 3 or less Spirits",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A6606": {
+    "cardNumber": "BATTLE-SPIRITS-A6606",
+    "name": "Mistral Finish",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A6606#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Reveal three cards from your decktop. Among them, summon any number of Green Brave cards and Green \"God-King\"/\"Ten Crown\" family Spirit cards, without paying the cost. Return the remaining or unsummoned cards to the decktop in any order. Then, by paying the cost, activate this card's Flash effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal three cards from your decktop.",
+            "cleanText": "Reveal three cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, summon any number of Green Brave cards and Green \"God-King\"/\"Ten Crown\" family Spirit cards, without paying the cost.",
+            "cleanText": "Among them, summon any number of Green Brave cards and Green \"God-King\"/\"Ten Crown\" family Spirit cards, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "Return the remaining or unsummoned cards to the decktop in any order.",
+            "cleanText": "Return the remaining or unsummoned cards to the decktop in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "by paying the cost, activate this card's Flash effect.",
+            "cleanText": "by paying the cost, activate this card's Flash effect",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_FLASH"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A6606#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Return an opposing exhausted Spirit/Ultimate to the Hand. When you've done so, refresh one of your Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing exhausted Spirit/Ultimate to the Hand.",
+            "cleanText": "Return an opposing exhausted Spirit/Ultimate to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "refresh one of your Spirits.",
+            "cleanText": "refresh one of your Spirits",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A6823": {
+    "cardNumber": "BATTLE-SPIRITS-A6823",
+    "name": "Netherdwarf",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A6823#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as White."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as White.",
+            "cleanText": "This Spirit's color and symbol are also treated as White",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "White"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A6823#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed by the Opponent",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending a core from your Reserve to your Trash, this Spirit returns to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from your Reserve to your Trash",
+            "cleanText": "By sending a core from your Reserve to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "this Spirit returns to the Hand.",
+            "cleanText": "this Spirit returns to the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A6902": {
+    "cardNumber": "BATTLE-SPIRITS-A6902",
+    "name": "No. 46 Deer Child Island",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A6902#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Either Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When any player would summon a Cost 5 or less Spirit card without \"Imp\"/\"Winged Beast\" family, it is summoned in exhausted state."
+        },
+        "clauses": [
+          {
+            "rawText": "When any player would summon a Cost 5 or less Spirit card without \"Imp\"/\"Winged Beast\" family, it is summoned in exhausted state.",
+            "cleanText": "When any player would summon a Cost 5 or less Spirit card without \"Imp\"/\"Winged Beast\" family, it is summoned in exhausted state",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A6902#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "CORE_STEP",
+          "timingLabel": "Your Core Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By not putting a core from the Void to your Reserve, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "By not putting a core from the Void to your Reserve",
+            "cleanText": "By not putting a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A7352": {
+    "cardNumber": "BATTLE-SPIRITS-A7352",
+    "name": "Rabbat",
+    "keywords": [
+      {
+        "name": "High Speed",
+        "parameter": null,
+        "wave": 2,
+        "hook": "high_speed",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A7352#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "High Speed",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.",
+            "cleanText": "This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          },
+          {
+            "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+            "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A7352#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core](Soul Core) from this Spirit to the Trash, this Spirit returns to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] from this Spirit to the Trash",
+            "cleanText": "By sending [Soul Core] from this Spirit to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "this Spirit returns to the Hand.",
+            "cleanText": "this Spirit returns to the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "USAGI-DG": {
+    "cardNumber": "USAGI-DG",
+    "name": "Rabbit Demon-God",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "[Right",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "USAGI-DG#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: [Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 4 or more<br>[Left] Cost 4 or more]"
+        },
+        "rawText": "[Brave Condition: [Right] Cost 4 or more<br>[Left] Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "USAGI-DG#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block.",
+            "cleanText": "This Brave doesn't exhaust, and while in Spirit condition, can't attack or block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "CANNOT_ATTACK_OR_BLOCK"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "USAGI-DG#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Braved on the Right",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't activate their Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't activate their Bursts.",
+            "cleanText": "The opponent can't activate their Bursts",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "USAGI-DG#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "When Braved on the Left",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning an opposing exhausted Spirit to the deckbottom, once per turn, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning an opposing exhausted Spirit to the deckbottom",
+            "cleanText": "By returning an opposing exhausted Spirit to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "once per turn, refresh this Spirit.",
+            "cleanText": "once per turn, refresh this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A8687": {
+    "cardNumber": "BATTLE-SPIRITS-A8687",
+    "name": "The BeastStriker Oo-Gangar",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A8687#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While [Soul Core](Soul Core) is on this Spirit, all your \"Imp\"/\"Winged Beast\" family Spirits gain +4000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While [Soul Core] is on this Spirit, all your \"Imp\"/\"Winged Beast\" family Spirits gain +4000 BP.",
+            "cleanText": "all your \"Imp\"/\"Winged Beast\" family Spirits gain +4000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While [Soul Core] is on this Spirit",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 4000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8687#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During Seal"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Imp\"/\"Winged Beast\" family Spirits gain +8000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Imp\"/\"Winged Beast\" family Spirits gain +8000 BP.",
+            "cleanText": "All your \"Imp\"/\"Winged Beast\" family Spirits gain +8000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 8000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10050": {
+    "cardNumber": "BATTLE-SPIRITS-A10050",
+    "name": "The Fourth's HoppingBeast Rocket-Rex",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10050#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent exhausts two of their Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent exhausts two of their Spirits.",
+            "cleanText": "The opponent exhausts two of their Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10050#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When it's the first attack of your turn, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "When it's the first attack of your turn, this Spirit refreshes.",
+            "cleanText": "When it's the first attack of your turn, this Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "THEYRE-JUST": {
+    "cardNumber": "THEYRE-JUST",
+    "name": "The GreatHoppingBeast Flemishbase",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "THEYRE-JUST#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this Spirit card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this Spirit card without paying the cost.",
+            "cleanText": "Summon this Spirit card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "THEYRE-JUST#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return three opposing exhausted Spirits to the deckbottom, in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "Return three opposing exhausted Spirits to the deckbottom, in any order.",
+            "cleanText": "Return three opposing exhausted Spirits to the deckbottom, in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "THEYRE-JUST#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the attack of your \"Imp\"/\"Winged Beast\" family Spirit reduces the opposing Life, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When the attack of your \"Imp\"/\"Winged Beast\" family Spirit reduces the opposing Life, send an opposing Life to their Reserve.",
+            "cleanText": "When the attack of your \"Imp\"/\"Winged Beast\" family Spirit reduces the opposing Life, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A11787": {
+    "cardNumber": "BATTLE-SPIRITS-A11787",
+    "name": "The RabbitTwelveGodKing Mistral-Bit",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "High Speed Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Seal",
+        "parameter": "During Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 278
+      },
+      {
+        "name": "Leap",
+        "parameter": null,
+        "wave": 4,
+        "hook": "leap",
+        "bracketed": true,
+        "index": 309
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A11787#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Seal: High Speed Seal",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "This card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve. When you've done so, you can send the [Soul Core] from any of your Spirits to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "This card in Hand can be summoned by paying the cost with cores in the Reserve.",
+            "cleanText": "This card in Hand can be summoned by paying the cost with cores in the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          },
+          {
+            "rawText": "In this case, cores to be put on this Spirit must also be from the Reserve.",
+            "cleanText": "In this case, cores to be put on this Spirit must also be from the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_RESERVE_ONLY"
+            }
+          },
+          {
+            "rawText": "you can send the [Soul Core] from any of your Spirits to your Life.",
+            "cleanText": "you can send the [Soul Core] from any of your Spirits to your Life",
+            "link": "byDoing",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A11787#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: During Seal"
+          ],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Leap",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning an opposing exhausted Spirit to the Hand, send an opposing Life to their Reserve, and put a core from the Void each to every \"God-King\"/\"Ten Crown\" family Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning an opposing exhausted Spirit to the Hand",
+            "cleanText": "By returning an opposing exhausted Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "send an opposing Life to their Reserve",
+            "cleanText": "send an opposing Life to their Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          },
+          {
+            "rawText": "put a core from the Void each to every \"God-King\"/\"Ten Crown\" family Spirit you control.",
+            "cleanText": "put a core from the Void each to every \"God-King\"/\"Ten Crown\" family Spirit you control",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12157": {
+    "cardNumber": "BATTLE-SPIRITS-A12157",
+    "name": "The Second's HoppingBeast Droplop",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12157#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve.",
+            "cleanText": "Put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12157#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed by the Opponent",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending a core from your Reserve to your Trash, this Spirit returns to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from your Reserve to your Trash",
+            "cleanText": "By sending a core from your Reserve to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "this Spirit returns to the Hand.",
+            "cleanText": "this Spirit returns to the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12404": {
+    "cardNumber": "BATTLE-SPIRITS-A12404",
+    "name": "The Sixth's HoppingBeastEmperor Lio-Bit",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12404#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Imp\"/\"Winged Beast\" family Spirit attacks, the opponent can't block unless they block with two Spirits or two Ultimates. When that Spirit is blocked, choose one of them to battle against."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Imp\"/\"Winged Beast\" family Spirit attacks, the opponent can't block unless they block with two Spirits or two Ultimates.",
+            "cleanText": "When your \"Imp\"/\"Winged Beast\" family Spirit attacks, the opponent can't block unless they block with two Spirits or two Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          },
+          {
+            "rawText": "When that Spirit is blocked, choose one of them to battle against.",
+            "cleanText": "When that Spirit is blocked, choose one of them to battle against",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHOOSE_BLOCKER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12404#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By paying one cost, return one of your \"Imp\"/\"Winged Beast\" family Spirits to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By paying one cost",
+            "cleanText": "By paying one cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "return one of your \"Imp\"/\"Winged Beast\" family Spirits to the Hand.",
+            "cleanText": "return one of your \"Imp\"/\"Winged Beast\" family Spirits to the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12995": {
+    "cardNumber": "BATTLE-SPIRITS-A12995",
+    "name": "The Tenth's SpearBeast Yariarashi",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12995#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as White."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as White.",
+            "cleanText": "This Spirit's color and symbol are also treated as White",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "White"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12995#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "END_OF_TURN",
+          "timingLabel": "Your End Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit refreshes.",
+            "cleanText": "This Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12995#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed by the Opponent",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing exhausted Spirit to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing exhausted Spirit to the deckbottom.",
+            "cleanText": "Return an opposing exhausted Spirit to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A14366": {
+    "cardNumber": "BATTLE-SPIRITS-A14366",
+    "name": "Wild Ride",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A14366#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand.",
+            "cleanText": "During (Your End Step), return a [Wild Ride] from your Trash to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A14366#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\""
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+            "cleanText": "give one of your Spirits +3000 BP, and the effect:\"(When Attacks/Blocks) When only the opposing Spirit is destroyed by BP comparison, this Spirit refreshes.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

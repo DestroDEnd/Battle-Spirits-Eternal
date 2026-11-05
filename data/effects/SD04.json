@@ -1,48 +1,258 @@
 {
- "BATTLE-SPIRITS-A9297": {
-  "name": "The Deity Sieg-Catastrophedragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 10,
-    "bp": 20000
-   }
+  "BATTLE-SPIRITS-A9297": {
+    "name": "The Deity Sieg-Catastrophedragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 10,
+        "bp": 20000
+      }
+    },
+    "effect": "[LV3] (When Destroyed)\nPut a core from the Void to your life.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9297",
+      "name": "The Deity Sieg-Catastrophedragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9297#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to your life."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to your life.",
+              "cleanText": "Put a core from the Void to your life",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RECOVER_LIFE",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV3] (When Destroyed)\nPut a core from the Void to your life.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A13313": {
-  "name": "The UltimateDragonRider Sieg-Crimson",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
-  },
-  "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from a Cost 3 or more Spirit you control to the Trash.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy every 3000 BP or less Spirit. For each Spirit destroyed by this effect, put a core from the Void to this Spirit.\n\n[LV3] (When Attacks)\nThis Spirit gains +5000 BP.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A13313": {
+    "name": "The UltimateDragonRider Sieg-Crimson",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from a Cost 3 or more Spirit you control to the Trash.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy every 3000 BP or less Spirit. For each Spirit destroyed by this effect, put a core from the Void to this Spirit.\n\n[LV3] (When Attacks)\nThis Spirit gains +5000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A13313",
+      "name": "The UltimateDragonRider Sieg-Crimson",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": "Cost 3 or more → Trash",
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A13313#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Tribute: Cost 3 or more → Trash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "After paying for the summoning cost, you must send all cores from a Cost 3 or more Spirit you control to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "After paying for the summoning cost, you must send all cores from a Cost 3 or more Spirit you control to the Trash.",
+              "cleanText": "After paying for the summoning cost, you must send all cores from a Cost 3 or more Spirit you control to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ACTION",
+                "keyword": "Tribute"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A13313#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every 3000 BP or less Spirit. For each Spirit destroyed by this effect, put a core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every 3000 BP or less Spirit.",
+              "cleanText": "Destroy every 3000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "all": true,
+                "target": {
+                  "side": "either",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "maxBp": 3000
+                }
+              }
+            },
+            {
+              "rawText": "For each Spirit destroyed by this effect, put a core from the Void to this Spirit.",
+              "cleanText": "For each Spirit destroyed by this effect, put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A13313#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +5000 BP.",
+              "cleanText": "This Spirit gains +5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

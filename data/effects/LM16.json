@@ -1,108 +1,1033 @@
 {
- "LM16-01": {
-  "name": "The FiftyFirstBeast Revol-Koleon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
+  "LM16-01": {
+    "name": "The FiftyFirstBeast Revol-Koleon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "Main- [Accel: Cost 4 ([Red Core][Red Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-01",
+      "name": "The FiftyFirstBeast Revol-Koleon",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 4 ([Red Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 6
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM16-01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Red Core",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand.",
+              "cleanText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Discard any reemaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+              "cleanText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Main- [Accel: Cost 4 ([Red Core][Red Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "LM16-04": {
-  "name": "Battle Spirits Burning Soul (Card)",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Your Attack Step)\nWhen your Spirit with Soul Core on it attacks, destroy an opposing 5000 BP or less Spirit/Ultimate.\n\n[LV2] (Your Attack Step)\nAll your Spirits with Soul Core on it gain an extra Red Symbol.",
-  "is_vanilla": false
- },
- "LM16-05": {
-  "name": "Battle Spirits Double Drive (Card)",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen your \"God-King\"/\"Ten Crown\" family Spirit is summoned, draw a card. This effect can only be used once per turn.\n\n[During Seal] [LV2] (Opposing Attack Step)\nWhen your Life is reduced, for each reduced Life, put a core from the Void to any of your Spirits.",
-  "is_vanilla": false
- },
- "LM16-09": {
-  "name": "Fire & Wind",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDestroy an opposing 5000 BP or less Spirit/Ultimate. Or, exhaust an opposing Spirit/Ultimate.",
-  "is_vanilla": false
- },
- "LM16-06": {
-  "name": "It's New Year's! Battle Spirits",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nGive all your Brave Spirits: \"Purple/Blue This Spirit is unaffected by opposing Purple/Blue Spirit/Ultimate/Nexus/Magic effects.\"\n\n[LV2] (Your End Step)\nRefresh a Brave Spirit you control.",
-  "is_vanilla": false
- },
- "LM16-07": {
-  "name": "Mogami Family's Day Off",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (When Deployed)\nIf your Life is at five or less, put a core from the Void each to your Reserve and the opposing Reserve.\n\n[LV2]\nGive all your Spirits +2000 BP.",
-  "is_vanilla": false
- },
- "LM16-08": {
-  "name": "Professor Battleskii's BS Course!",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (When Deployed)\nDuring this turn, treat a Spirit you control as being on its highest LV.\n\n[LV2]\nWhen your Spirit is destroyed by opposing effects, put a core from the Void to your Reserve.",
-  "is_vanilla": false
- },
- "LM16-03": {
-  "name": "The FiftyEighthBird Gale-ChickenKnight",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "LM16-04": {
+    "name": "Battle Spirits Burning Soul (Card)",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Your Attack Step)\nWhen your Spirit with Soul Core on it attacks, destroy an opposing 5000 BP or less Spirit/Ultimate.\n\n[LV2] (Your Attack Step)\nAll your Spirits with Soul Core on it gain an extra Red Symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-04",
+      "name": "Battle Spirits Burning Soul (Card)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit with Soul Core on it attacks, destroy an opposing 5000 BP or less Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit with Soul Core on it attacks, destroy an opposing 5000 BP or less Spirit/Ultimate.",
+              "cleanText": "When your Spirit with Soul Core on it attacks, destroy an opposing 5000 BP or less Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your Spirits with Soul Core on it gain an extra Red Symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "All your Spirits with Soul Core on it gain an extra Red Symbol.",
+              "cleanText": "All your Spirits with Soul Core on it gain an extra Red Symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Main- [Accel: Cost 4 ([Green Core][Green Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "LM16-02": {
-  "name": "The TwentyNinthDragon Ourovodra",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 8000
-   }
+  "LM16-05": {
+    "name": "Battle Spirits Double Drive (Card)",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen your \"God-King\"/\"Ten Crown\" family Spirit is summoned, draw a card. This effect can only be used once per turn.\n\n[During Seal] [LV2] (Opposing Attack Step)\nWhen your Life is reduced, for each reduced Life, put a core from the Void to any of your Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-05",
+      "name": "Battle Spirits Double Drive (Card)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, draw a card.",
+              "cleanText": "When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Seal"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is reduced, for each reduced Life, put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is reduced, for each reduced Life, put a core from the Void to any of your Spirits.",
+              "cleanText": "When your Life is reduced, for each reduced Life, put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Main- [Accel: Cost 4 ([Purple Core][Purple Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
-  "is_vanilla": false
- }
+  "LM16-09": {
+    "name": "Fire & Wind",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDestroy an opposing 5000 BP or less Spirit/Ultimate. Or, exhaust an opposing Spirit/Ultimate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-09",
+      "name": "Fire & Wind",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-09#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit/Ultimate. Or, exhaust an opposing Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit/Ultimate.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Spirit/Ultimate.",
+              "cleanText": "exhaust an opposing Spirit/Ultimate",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "LM16-06": {
+    "name": "It's New Year's! Battle Spirits",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nGive all your Brave Spirits: \"Purple/Blue This Spirit is unaffected by opposing Purple/Blue Spirit/Ultimate/Nexus/Magic effects.\"\n\n[LV2] (Your End Step)\nRefresh a Brave Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-06",
+      "name": "It's New Year's! Battle Spirits",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your Brave Spirits: \"Purple/Blue This Spirit is unaffected by opposing Purple/Blue Spirit/Ultimate/Nexus/Magic effects.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your Brave Spirits: \"Purple/Blue This Spirit is unaffected by opposing Purple/Blue Spirit/Ultimate/Nexus/Magic effects.\"",
+              "cleanText": "Give all your Brave Spirits: \"Purple/Blue This Spirit is unaffected by opposing Purple/Blue Spirit/Ultimate/Nexus/Magic effects.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Refresh a Brave Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh a Brave Spirit you control.",
+              "cleanText": "Refresh a Brave Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "LM16-07": {
+    "name": "Mogami Family's Day Off",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (When Deployed)\nIf your Life is at five or less, put a core from the Void each to your Reserve and the opposing Reserve.\n\n[LV2]\nGive all your Spirits +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-07",
+      "name": "Mogami Family's Day Off",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-07#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If your Life is at five or less, put a core from the Void each to your Reserve and the opposing Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "If your Life is at five or less, put a core from the Void each to your Reserve and the opposing Reserve.",
+              "cleanText": "put a core from the Void each to your Reserve and the opposing Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If your Life is at five or less",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-07#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your Spirits +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your Spirits +2000 BP.",
+              "cleanText": "Give all your Spirits +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "targetGroup": "ALL_FRIENDLY",
+                "family": null,
+                "target": "all_friendly",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "LM16-08": {
+    "name": "Professor Battleskii's BS Course!",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (When Deployed)\nDuring this turn, treat a Spirit you control as being on its highest LV.\n\n[LV2]\nWhen your Spirit is destroyed by opposing effects, put a core from the Void to your Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-08",
+      "name": "Professor Battleskii's BS Course!",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "LM16-08#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, treat a Spirit you control as being on its highest LV."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, treat a Spirit you control as being on its highest LV.",
+              "cleanText": "treat a Spirit you control as being on its highest LV",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-08#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit is destroyed by opposing effects, put a core from the Void to your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit is destroyed by opposing effects, put a core from the Void to your Reserve.",
+              "cleanText": "When your Spirit is destroyed by opposing effects, put a core from the Void to your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "LM16-03": {
+    "name": "The FiftyEighthBird Gale-ChickenKnight",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "Main- [Accel: Cost 4 ([Green Core][Green Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-03",
+      "name": "The FiftyEighthBird Gale-ChickenKnight",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 4 ([Green Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 6
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM16-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Green Core",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand.",
+              "cleanText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Discard any reemaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+              "cleanText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "LM16-02": {
+    "name": "The TwentyNinthDragon Ourovodra",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 8000
+      }
+    },
+    "effect": "Main- [Accel: Cost 4 ([Purple Core][Purple Core])]\nYou can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen summoned from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM16-02",
+      "name": "The TwentyNinthDragon Ourovodra",
+      "keywords": [
+        {
+          "name": "Accel",
+          "parameter": "Cost 4 ([Purple Core",
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 6
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM16-02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Purple Core",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any remaining cards. After this effect resolves, put this card face-up onto the Removed Zone."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand.",
+              "cleanText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            },
+            {
+              "rawText": "put this card face-up onto the Removed Zone.",
+              "cleanText": "put this card face-up onto the Removed Zone",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "OPEN_ZONE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM16-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
+              "cleanText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

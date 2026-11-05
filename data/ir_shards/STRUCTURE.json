@@ -1,0 +1,117 @@
+{
+  "SD06-013": {
+    "cardNumber": "SD06-013",
+    "name": "Burst Draw",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Brave's (When Summoned) effect resolves",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD06-013#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw two cards. Then by paying the cost, activate this card's Main effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "Then by paying the cost, activate this card's Main effect.",
+            "cleanText": "Then by paying the cost, activate this card's Main effect",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_CARD_EFFECT",
+              "timing": "MAIN",
+              "payCost": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD06-013#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

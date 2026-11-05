@@ -1,0 +1,515 @@
+{
+  "P17-11": {
+    "cardNumber": "P17-11",
+    "name": "The BraveShineBeast SuffolkSheep",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P17-11#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Nexus to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Nexus to the Hand.",
+            "cleanText": "Return an opposing Nexus to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-11#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be returned to the Hand/Deck by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be returned to the Hand/Deck by opposing effects.",
+            "cleanText": "This Spirit can't be returned to the Hand/Deck by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CANNOT_BE_BOUNCED",
+              "target": "SELF"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-11#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The number of cores on this Spirit can't be brought to two or less by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The number of cores on this Spirit can't be brought to two or less by opposing effects.",
+            "cleanText": "The number of cores on this Spirit can't be brought to two or less by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P17-22": {
+    "cardNumber": "P17-22",
+    "name": "The BraveShineDiva Lemuriel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P17-22#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be returned to the Hand/Deck by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be returned to the Hand/Deck by opposing effects.",
+            "cleanText": "This Spirit can't be returned to the Hand/Deck by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CANNOT_BE_BOUNCED",
+              "target": "SELF"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-22#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Diva\"/\"Divine Spirit\" family Spirit is destroyed, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Diva\"/\"Divine Spirit\" family Spirit is destroyed, draw a card.",
+            "cleanText": "When your \"Diva\"/\"Divine Spirit\" family Spirit is destroyed, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-22#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The number of cores on this Spirit can't be brought to two or less due to opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects.",
+            "cleanText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P17-10": {
+    "cardNumber": "P17-10",
+    "name": "The BraveShineDragon Polacanthus",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P17-10#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be returned to your Hand/Deck due to opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be returned to your Hand/Deck due to opposing effects.",
+            "cleanText": "This Spirit can't be returned to your Hand/Deck due to opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-10#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-10#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The number of cores on this Spirit can't be brought to two or less due to opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects.",
+            "cleanText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P17-23": {
+    "cardNumber": "P17-23",
+    "name": "The BraveShinePirate Granza",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P17-23#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be returned to the Hand/Deck due to opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be returned to the Hand/Deck due to opposing effects.",
+            "cleanText": "This Spirit can't be returned to the Hand/Deck due to opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CANNOT_BE_BOUNCED",
+              "target": "SELF"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-23#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The number of cores on this Spirit can't be brought to two or less due to opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects.",
+            "cleanText": "The number of cores on this Spirit can't be brought to two or less due to opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P17-23#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Ignoring the Cost of Braves, destroy an opposing Cost 4/5 Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Ignoring the Cost of Braves, destroy an opposing Cost 4/5 Spirit.",
+            "cleanText": "Ignoring the Cost of Braves, destroy an opposing Cost 4/5 Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

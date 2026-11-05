@@ -63,11 +63,28 @@ export class AsyncResolver {
         }
       }
 
-      // Handle "byDoing" / "ifYouDo": Prerequisite check
-      if (clause.link === 'byDoing' || clause.link === 'ifYouDo') {
+      // Handle "byDoing" / "ifYouDo" / "whenYouveDoneSo": Prerequisite check
+      if (clause.link === 'byDoing' || clause.link === 'ifYouDo' || clause.link === 'whenYouveDoneSo') {
         if (!previousResult || !previousResult.success) {
           // Prerequisite failed, cannot execute derived effect
           continue;
+        }
+
+        // Rule Manual 17.0: If previous action depleted or leveled down the activating card below required level,
+        // derived follow-up clauses ("when you've done so", "by doing", etc.) fail to resolve.
+        if (context.sourceCard) {
+          const p = state.players[context.controller || 'player'];
+          const sourceStack = p && p.field && p.field.find(st => st.top.id === context.sourceCard.id);
+          if (sourceStack) {
+            const totalCores = (sourceStack.cores.normal || 0) + (sourceStack.cores.soul ? 1 : 0);
+            const reqLevel = (ability.header && ability.header.level) || 1;
+            const levels = sourceStack.top.levels || {};
+            const minReqCores = (levels[reqLevel] && levels[reqLevel].cost) || 1;
+            if (totalCores < minReqCores) {
+              previousResult = { success: false, depleted: true };
+              continue;
+            }
+          }
         }
       }
 

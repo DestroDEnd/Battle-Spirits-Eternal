@@ -1,0 +1,1290 @@
+{
+  "LM19-U07": {
+    "cardNumber": "LM19-U07",
+    "name": "Here He Comes! Our Ultraman!",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(\"Ultraman\" & Cost 3 or more)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 326
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 594
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM19-U07#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (\"Ultraman\" & Cost 3 or more)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U07#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, you can +1 core to this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U07#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you don't control a Gandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you don't control a Gandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you don't control a Gandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U07#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Ultraman\" Spirits would leave the Field due to opposing effects, you can put a core from this Nexus to each of those Spirits. Spirits which had cores put on them by this effect remain on the Field in the same state."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Ultraman\" Spirits would leave the Field due to opposing effects, you can put a core from this Nexus to each of those Spirits.",
+            "cleanText": "when your \"Ultraman\" Spirits would leave the Field due to opposing effects, you can put a core from this Nexus to each of those Spirits",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMAIN_ON_FIELD"
+            }
+          },
+          {
+            "rawText": "Spirits which had cores put on them by this effect remain on the Field in the same state.",
+            "cleanText": "Spirits which had cores put on them by this effect remain on the Field in the same state",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REMAIN_ON_FIELD"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U07#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Every \"Ultraman\" Spirit you control gains +5000 BP, and is treated as being on its highest level."
+        },
+        "clauses": [
+          {
+            "rawText": "Every \"Ultraman\" Spirit you control gains +5000 BP, and is treated as being on its highest level.",
+            "cleanText": "Every \"Ultraman\" Spirit you control gains +5000 BP, and is treated as being on its highest level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U08": {
+    "cardNumber": "LM19-U08",
+    "name": "Spacium Ray",
+    "keywords": [
+      {
+        "name": "Heavy Armor",
+        "parameter": null,
+        "wave": 1,
+        "hook": "heavy_armor",
+        "bracketed": true,
+        "index": 488
+      },
+      {
+        "name": "Ultra Armor",
+        "parameter": null,
+        "wave": 1,
+        "hook": "ultra_armor",
+        "bracketed": true,
+        "index": 502
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM19-U08#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by the effect of your \"Ultraman\" Spirit/Spirit card, or sent to the Trash by your exactly-named \"Here He Comes! Our Ultraman!\", you can add it to the Hand. When you've done so, +1 core to any of your exactly-named \"Here He Comes! Our Ultraman!\"."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by the effect of your \"Ultraman\" Spirit/Spirit card, or sent to the Trash by your exactly-named \"Here He Comes! Our Ultraman!\", you can add it to the Hand.",
+            "cleanText": "When this card is revealed from the deck by the effect of your \"Ultraman\" Spirit/Spirit card, or sent to the Trash by your exactly-named \"Here He Comes! Our Ultraman!\", you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "+1 core to any of your exactly-named \"Here He Comes! Our Ultraman!\".",
+            "cleanText": "+1 core to any of your exactly-named \"Here He Comes! Our Ultraman!\"",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_ACTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U08#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 5 or less Spirit. Or, if you control any \"Ultraman\" Spirit/Grandwalker Nexus, destroy an opposing Cost 8 or less Spirit/Ultimate. This effect can only be prevented by [Heavy Armor]/[Ultra Armor]."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 5 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 5 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          },
+          {
+            "rawText": "if you control any \"Ultraman\" Spirit/Grandwalker Nexus, destroy an opposing Cost 8 or less Spirit/Ultimate.",
+            "cleanText": "destroy an opposing Cost 8 or less Spirit/Ultimate",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you control any \"Ultraman\" Spirit/Grandwalker Nexus",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 8
+                }
+              }
+            }
+          },
+          {
+            "rawText": "This effect can only be prevented by [Heavy Armor]/[Ultra Armor].",
+            "cleanText": "This effect can only be prevented by [Heavy Armor]/[Ultra Armor]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U06": {
+    "cardNumber": "LM19-U06",
+    "name": "Taiga's Father Ultraman Tarou",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": "Cost 4 ([Blue Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 6
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM19-U06#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Blue Core",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Reveal four cards from your decktop. Among them, deploy a Cost 4 or less Blue Nexus card without paying the cost, and add an \"Ultraman\" Spirit card to the Hand. Return the remaining cards to the deckbottom. After this effect resolves, put this card face-up onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal four cards from your decktop.",
+            "cleanText": "Reveal four cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Among them, deploy a Cost 4 or less Blue Nexus card without paying the cost",
+            "cleanText": "Among them, deploy a Cost 4 or less Blue Nexus card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          },
+          {
+            "rawText": "add an \"Ultraman\" Spirit card to the Hand.",
+            "cleanText": "add an \"Ultraman\" Spirit card to the Hand",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return the remaining cards to the deckbottom.",
+            "cleanText": "Return the remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "put this card face-up onto the Removed Zone.",
+            "cleanText": "put this card face-up onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U06#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 9 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 9 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 9 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 9
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U02": {
+    "cardNumber": "LM19-U02",
+    "name": "Ultraman Fuma",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM19-U02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to either your Blue Nexus, or to another \"Ultraman\" Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to either your Blue Nexus, or to another \"Ultraman\" Spirit you control.",
+            "cleanText": "Put a core from the Void to either your Blue Nexus, or to another \"Ultraman\" Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw two cards, then discard a card from your Hand. When this effect discards any \"Ultraman\", destroy an opposing Cost 5 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards, then discard a card from your Hand.",
+            "cleanText": "Draw two cards, then discard a card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 5 or less Spirit.",
+            "cleanText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 5 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U04": {
+    "cardNumber": "LM19-U04",
+    "name": "Ultraman Ruebe",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Blue & Cost 4 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 243
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM19-U04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Blue & Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your Hand onto your target Spirit.",
+            "cleanText": "stack this from your Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every opposing Cost 5 or less Spirit. When [advents] on an \"Ultraman\" Spirit, instead, destroy every opposing Cost 7 or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every opposing Cost 5 or less Spirit.",
+            "cleanText": "Destroy every opposing Cost 5 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When [advents] on an \"Ultraman\" Spirit, instead, destroy every opposing Cost 7 or less Spirit/Ultimate.",
+            "cleanText": "When [advents] on an \"Ultraman\" Spirit, instead, destroy every opposing Cost 7 or less Spirit/Ultimate",
+            "link": "instead",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U04#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "you can refresh a Spirit you control. When you've done so, during this turn, the opponent can't end the Attack Step via effects."
+        },
+        "clauses": [
+          {
+            "rawText": "you can refresh a Spirit you control.",
+            "cleanText": "you can refresh a Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "during this turn, the opponent can't end the Attack Step via effects.",
+            "cleanText": "the opponent can't end the Attack Step via effects",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U01": {
+    "cardNumber": "LM19-U01",
+    "name": "Ultraman Taiga",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM19-U01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Among them, add an exactly-named \"Here He Comes! Our Ultraman!\", and a Cost 4 or more \"Ultraman\" Spirit card to the Hand. Return any remaining cards to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Among them, add an exactly-named \"Here He Comes! Our Ultraman!\", and a Cost 4 or more \"Ultraman\" Spirit card to the Hand.",
+            "cleanText": "Among them, add an exactly-named \"Here He Comes! Our Ultraman!\", and a Cost 4 or more \"Ultraman\" Spirit card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom.",
+            "cleanText": "Return any remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning this Spirit to the Hand, summon an \"Ultraman Titus\"/\"Ultraman Fuuma\" Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning this Spirit to the Hand",
+            "cleanText": "By returning this Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon an \"Ultraman Titus\"/\"Ultraman Fuuma\" Spirit card from your Hand, without paying the cost.",
+            "cleanText": "summon an \"Ultraman Titus\"/\"Ultraman Fuuma\" Spirit card from your Hand, without paying the cost",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U03": {
+    "cardNumber": "LM19-U03",
+    "name": "Ultraman Titas",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM19-U03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, this Spirit is treated as being on its highest level."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, this Spirit is treated as being on its highest level.",
+            "cleanText": "this Spirit is treated as being on its highest level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this battle, this Spirit gains an extra Blue symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "During this battle, this Spirit gains an extra Blue symbol.",
+            "cleanText": "this Spirit gains an extra Blue symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit with the highest cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit with the highest cost.",
+            "cleanText": "Destroy an opposing Spirit with the highest cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM19-U05": {
+    "cardNumber": "LM19-U05",
+    "name": "Ultraman Orb Dark Noir Black Schwarz",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After the opposing Hand increases via an opposing effect",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM19-U05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_TRIGGER_CONDITION",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send three cores from an opposing Spirit/Ultimate to the Reserve, and summon this card without paying the cost. Then, if your Life is three or less, send five cores from any opposing Grandwalker Nexus(es) to the Void and, if it's the opponent's Main Step, end this turn."
+        },
+        "clauses": [
+          {
+            "rawText": "Send three cores from an opposing Spirit/Ultimate to the Reserve",
+            "cleanText": "Send three cores from an opposing Spirit/Ultimate to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 3,
+              "from": {
+                "zone": "field",
+                "side": "opp",
+                "types": [
+                  "Spirit",
+                  "Ultimate"
+                ]
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          },
+          {
+            "rawText": "if your Life is three or less, send five cores from any opposing Grandwalker Nexus(es) to the Void and, if it's the opponent's Main Step, end this turn.",
+            "cleanText": "send five cores from any opposing Grandwalker Nexus(es) to the Void and, if it's the opponent's Main Step, end this turn",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if your Life is three or less",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM19-U05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit with three or less cores on it. The cores on a Spirit destroyed by this effect are sent to the Trash, not the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit with three or less cores on it.",
+            "cleanText": "Destroy an opposing Spirit with three or less cores on it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "The cores on a Spirit destroyed by this effect are sent to the Trash, not the Reserve.",
+            "cleanText": "The cores on a Spirit destroyed by this effect are sent to the Trash, not the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MODIFY_DESTINATION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,20 +1,123 @@
 {
- "BATTLE-SPIRITS-A10287": {
-  "name": "The GiantPrince Alexander IV",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 8000
-   }
-  },
-  "effect": "[LV1][LV2] [Assault: 1] (When Attacks)\nThis Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV2] (When Attacks)\nDestroy an opposing Cost 3 or less Spirit.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A10287": {
+    "name": "The GiantPrince Alexander IV",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2] [Assault: 1] (When Attacks)\nThis Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV2] (When Attacks)\nDestroy an opposing Cost 3 or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10287",
+      "name": "The GiantPrince Alexander IV",
+      "keywords": [
+        {
+          "name": "Assault",
+          "parameter": "1",
+          "wave": 1,
+          "hook": "assault",
+          "bracketed": true,
+          "index": 11
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A10287#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Assault: 1",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses.",
+              "cleanText": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A10287#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Cost 3 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Cost 3 or less Spirit.",
+              "cleanText": "Destroy an opposing Cost 3 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 3
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

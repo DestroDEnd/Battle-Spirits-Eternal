@@ -1,80 +1,1077 @@
 {
- "LM19-02": {
-  "name": "The MakaiScythe Beelzebeat Scythe",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "LM19-02": {
+    "name": "The MakaiScythe Beelzebeat Scythe",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more<br>Purple & Grandwalker Nexuss]\n\n[During Spirit Brave] (When Attacks)\nOnce per turn, you can summon a Cost 4 or less \"Worldswalker\"/\"Celeste\" family Spirit card from your Trash, without paying the cost.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, exhaust an opposing Grandwalker Nexus. When you've done so, all opposing exhausted Grandwalker Nexuses can't refresh until the next turn's Main Step, nor can they activate [Core Charge]/[Grand Skill].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-02",
+      "name": "The MakaiScythe Beelzebeat Scythe",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more<br>Purple & Grandwalker Nexuss",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 258
+        },
+        {
+          "name": "Core Charge",
+          "parameter": null,
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 487
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 501
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-02#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more<br>Purple & Grandwalker Nexuss",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more<br>Purple & Grandwalker Nexuss]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "you can summon a Cost 4 or less \"Worldswalker\"/\"Celeste\" family Spirit card from your Trash, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "you can summon a Cost 4 or less \"Worldswalker\"/\"Celeste\" family Spirit card from your Trash, without paying the cost.",
+              "cleanText": "you can summon a Cost 4 or less \"Worldswalker\"/\"Celeste\" family Spirit card from your Trash, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting this Nexus, exhaust an opposing Grandwalker Nexus. When you've done so, all opposing exhausted Grandwalker Nexuses can't refresh until the next turn's Main Step, nor can they activate [Core Charge]/[Grand Skill]."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting this Nexus",
+              "cleanText": "By exhausting this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Grandwalker Nexus.",
+              "cleanText": "exhaust an opposing Grandwalker Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "all opposing exhausted Grandwalker Nexuses can't refresh until the next turn's Main Step, nor can they activate [Core Charge]/[Grand Skill].",
+              "cleanText": "all opposing exhausted Grandwalker Nexuses can't refresh until the next turn's Main Step, nor can they activate [Core Charge]/[Grand Skill]",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more<br>Purple & Grandwalker Nexuss]\n\n[During Spirit Brave] (When Attacks)\nOnce per turn, you can summon a Cost 4 or less \"Worldswalker\"/\"Celeste\" family Spirit card from your Trash, without paying the cost.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, exhaust an opposing Grandwalker Nexus. When you've done so, all opposing exhausted Grandwalker Nexuses can't refresh until the next turn's Main Step, nor can they activate [Core Charge]/[Grand Skill].",
-  "is_vanilla": false
- },
- "LM19-05": {
-  "name": "The AngelicHolySpear Isfielance",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "LM19-05": {
+    "name": "The AngelicHolySpear Isfielance",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more\nYellow & Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nDuring the Flash Timing, you can use one Magic card from your Hand without paying the cost. After its effect resolves, you can activate the same effect once and only once more.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, during this turn, while your Cost 6 or more \"Divine Spirit\" family Spirit is attacking, the opponent can't use cards from the Hand other than Yellow Magic cards.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-05",
+      "name": "The AngelicHolySpear Isfielance",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more\nYellow & Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 298
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-05#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more\nYellow & Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more\nYellow & Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During the Flash Timing, you can use one Magic card from your Hand without paying the cost. After its effect resolves, you can activate the same effect once and only once more."
+          },
+          "clauses": [
+            {
+              "rawText": "During the Flash Timing, you can use one Magic card from your Hand without paying the cost.",
+              "cleanText": "During the Flash Timing, you can use one Magic card from your Hand without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CAST_MAGIC_FREE"
+              }
+            },
+            {
+              "rawText": "After its effect resolves, you can activate the same effect once and only once more.",
+              "cleanText": "After its effect resolves, you can activate the same effect once and only once more",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COPY_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting this Nexus, during this turn, while your Cost 6 or more \"Divine Spirit\" family Spirit is attacking, the opponent can't use cards from the Hand other than Yellow Magic cards."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting this Nexus",
+              "cleanText": "By exhausting this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "during this turn, while your Cost 6 or more \"Divine Spirit\" family Spirit is attacking, the opponent can't use cards from the Hand other than Yellow Magic cards.",
+              "cleanText": "the opponent can't use cards from the Hand other than Yellow Magic cards",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "while your Cost 6 or more \"Divine Spirit\" family Spirit is attacking",
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "MAGIC_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more\nYellow & Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nDuring the Flash Timing, you can use one Magic card from your Hand without paying the cost. After its effect resolves, you can activate the same effect once and only once more.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, during this turn, while your Cost 6 or more \"Divine Spirit\" family Spirit is attacking, the opponent can't use cards from the Hand other than Yellow Magic cards.",
-  "is_vanilla": false
- },
- "LM19-03": {
-  "name": "The BladeKingBeastClaws Byak-Gaclaw",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   }
+  "LM19-03": {
+    "name": "The BladeKingBeastClaws Byak-Gaclaw",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more\nGreen & Grandwalker Nexuss]\n\n[During Spirit Brave] (When Attacks)\nExhaust two opposing Spirits/Ultimates. When this Spirit's attack reduces the opposing Life, return two opposing exhausted Spirits/Ultimates to the Hand.\n\n[During Nexus Brave] [Grand Field] Flash - (Either Attack Step)\nBy exhausting an opposing Grandwalker Nexus, put a core from the Void to this Green-only Nexus.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-03",
+      "name": "The BladeKingBeastClaws Byak-Gaclaw",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more\nGreen & Grandwalker Nexuss",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 275
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-03#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more\nGreen & Grandwalker Nexuss",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more\nGreen & Grandwalker Nexuss]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Exhaust two opposing Spirits/Ultimates. When this Spirit's attack reduces the opposing Life, return two opposing exhausted Spirits/Ultimates to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust two opposing Spirits/Ultimates.",
+              "cleanText": "Exhaust two opposing Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "When this Spirit's attack reduces the opposing Life, return two opposing exhausted Spirits/Ultimates to the Hand.",
+              "cleanText": "When this Spirit's attack reduces the opposing Life, return two opposing exhausted Spirits/Ultimates to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By exhausting an opposing Grandwalker Nexus, put a core from the Void to this Green-only Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting an opposing Grandwalker Nexus",
+              "cleanText": "By exhausting an opposing Grandwalker Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "put a core from the Void to this Green-only Nexus.",
+              "cleanText": "put a core from the Void to this Green-only Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more\nGreen & Grandwalker Nexuss]\n\n[During Spirit Brave] (When Attacks)\nExhaust two opposing Spirits/Ultimates. When this Spirit's attack reduces the opposing Life, return two opposing exhausted Spirits/Ultimates to the Hand.\n\n[During Nexus Brave] [Grand Field] Flash - (Either Attack Step)\nBy exhausting an opposing Grandwalker Nexus, put a core from the Void to this Green-only Nexus.",
-  "is_vanilla": false
- },
- "LM19-06": {
-  "name": "The EmperorGrandSpear Alexander Spear",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   }
+  "LM19-06": {
+    "name": "The EmperorGrandSpear Alexander Spear",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more\nBlue & Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nIf this Spirit has two Blue symbols or more, once per turn, by exhausting one of your Grandwalker Nexuses, refresh this Spirit.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, exhaust an opposing Grandwalker Nexus. During this turn, the opposing Grandwalker Nexus exhausted by this effect can't activate its [Grand Field].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-06",
+      "name": "The EmperorGrandSpear Alexander Spear",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more\nBlue & Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 247
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 436
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-06#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more\nBlue & Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more\nBlue & Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If this Spirit has two Blue symbols or more, once per turn, by exhausting one of your Grandwalker Nexuses, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "If this Spirit has two Blue symbols or more, once per turn, by exhausting one of your Grandwalker Nexuses, refresh this Spirit.",
+              "cleanText": "once per turn, by exhausting one of your Grandwalker Nexuses, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If this Spirit has two Blue symbols or more",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-06#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting this Nexus, exhaust an opposing Grandwalker Nexus. During this turn, the opposing Grandwalker Nexus exhausted by this effect can't activate its [Grand Field]."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting this Nexus",
+              "cleanText": "By exhausting this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Grandwalker Nexus.",
+              "cleanText": "exhaust an opposing Grandwalker Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "During this turn, the opposing Grandwalker Nexus exhausted by this effect can't activate its [Grand Field].",
+              "cleanText": "the opposing Grandwalker Nexus exhausted by this effect can't activate its [Grand Field]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more\nBlue & Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nIf this Spirit has two Blue symbols or more, once per turn, by exhausting one of your Grandwalker Nexuses, refresh this Spirit.\n\n[During Nexus Brave] [Grand Field] (Your Main Step)\nBy exhausting this Nexus, exhaust an opposing Grandwalker Nexus. During this turn, the opposing Grandwalker Nexus exhausted by this effect can't activate its [Grand Field].",
-  "is_vanilla": false
- },
- "LM19-01": {
-  "name": "The SuperstarDragonBlade Siegwurm Sword",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
+  "LM19-01": {
+    "name": "The SuperstarDragonBlade Siegwurm Sword",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more<br>Red & Grandwalker Nexus]\n\n[During Spirit Brave] [Twinkle Clash] (When Attacks)\nOpposing Spirits/Ultimates must block if possible. When blocked, you can [Advent] a card from your Hand onto this Spirit, without sending [Soul Core] to the Trash.\n\n[During Nexus Brave] [Grand Field] Flash - (Your Attack Step)\nYou can exhaust this Nexus. When you've done so, send the [Soul Core] from your Trash to any of your \"Superstar\" family Spirit and, during this turn, all your Spirits with [Soul Core] on it gain +5000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-01",
+      "name": "The SuperstarDragonBlade Siegwurm Sword",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more<br>Red & Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 188
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 301
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more<br>Red & Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more<br>Red & Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Twinkle Clash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Opposing Spirits/Ultimates must block if possible. When blocked, you can [Advent] a card from your Hand onto this Spirit, without sending [Soul Core] to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "Opposing Spirits/Ultimates must block if possible.",
+              "cleanText": "Opposing Spirits/Ultimates must block if possible",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "FORCE_BLOCK",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "When blocked, you can [Advent] a card from your Hand onto this Spirit, without sending [Soul Core] to the Trash.",
+              "cleanText": "When blocked, you can [Advent] a card from your Hand onto this Spirit, without sending [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can exhaust this Nexus. When you've done so, send the [Soul Core] from your Trash to any of your \"Superstar\" family Spirit and, during this turn, all your Spirits with [Soul Core] on it gain +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "You can exhaust this Nexus.",
+              "cleanText": "You can exhaust this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "send the [Soul Core] from your Trash to any of your \"Superstar\" family Spirit and, during this turn, all your Spirits with [Soul Core] on it gain +5000 BP.",
+              "cleanText": "send the [Soul Core] from your Trash to any of your \"Superstar\" family Spirit and, during this turn, all your Spirits with [Soul Core] on it gain +5000 BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more<br>Red & Grandwalker Nexus]\n\n[During Spirit Brave] [Twinkle Clash] (When Attacks)\nOpposing Spirits/Ultimates must block if possible. When blocked, you can [Advent] a card from your Hand onto this Spirit, without sending [Soul Core] to the Trash.\n\n[During Nexus Brave] [Grand Field] Flash - (Your Attack Step)\nYou can exhaust this Nexus. When you've done so, send the [Soul Core] from your Trash to any of your \"Superstar\" family Spirit and, during this turn, all your Spirits with [Soul Core] on it gain +5000 BP.",
-  "is_vanilla": false
- },
- "LM19-04": {
-  "name": "The WingDeityGun Grand Woden Blaster",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
-  },
-  "effect": "[Brave Condition: Cost 4 or more<br>White & Grandwalker Nexuss]\n\n[During Spirit Brave] (Either Attack Step)\nBesides this Spirit, when your White-only \"Worldswalker\"/\"Celeste\" family Spirit is exhausted, this Spirit can refresh.\n\n[During Nexus Brave] [Grand Field] [GI Wall: Red/Purple/Green/White/Yellow/Blue] (Opposing Turn)\nWhen the opponent uses a Red/Purple/Green/White/Yellow/Blue Magic card, before its effect activates, by exhausting this Nexus, immediately negate that effect.",
-  "is_vanilla": false
- }
+  "LM19-04": {
+    "name": "The WingDeityGun Grand Woden Blaster",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more<br>White & Grandwalker Nexuss]\n\n[During Spirit Brave] (Either Attack Step)\nBesides this Spirit, when your White-only \"Worldswalker\"/\"Celeste\" family Spirit is exhausted, this Spirit can refresh.\n\n[During Nexus Brave] [Grand Field] [GI Wall: Red/Purple/Green/White/Yellow/Blue] (Opposing Turn)\nWhen the opponent uses a Red/Purple/Green/White/Yellow/Blue Magic card, before its effect activates, by exhausting this Nexus, immediately negate that effect.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "LM19-04",
+      "name": "The WingDeityGun Grand Woden Blaster",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more<br>White & Grandwalker Nexuss",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 250
+        }
+      ],
+      "abilities": [
+        {
+          "id": "LM19-04#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more<br>White & Grandwalker Nexuss",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more<br>White & Grandwalker Nexuss]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Besides this Spirit, when your White-only \"Worldswalker\"/\"Celeste\" family Spirit is exhausted, this Spirit can refresh."
+          },
+          "clauses": [
+            {
+              "rawText": "Besides this Spirit, when your White-only \"Worldswalker\"/\"Celeste\" family Spirit is exhausted, this Spirit can refresh.",
+              "cleanText": "Besides this Spirit, when your White-only \"Worldswalker\"/\"Celeste\" family Spirit is exhausted, this Spirit can refresh",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "LM19-04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "GI Wall: Red/Purple/Green/White/Yellow/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent uses a Red/Purple/Green/White/Yellow/Blue Magic card, before its effect activates, by exhausting this Nexus, immediately negate that effect."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent uses a Red/Purple/Green/White/Yellow/Blue Magic card, before its effect activates, by exhausting this Nexus, immediately negate that effect.",
+              "cleanText": "When the opponent uses a Red/Purple/Green/White/Yellow/Blue Magic card, before its effect activates, by exhausting this Nexus, immediately negate that effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

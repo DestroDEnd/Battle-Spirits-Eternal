@@ -1,177 +1,1430 @@
 {
- "SD25-002": {
-  "name": "Ascella-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD25-002": {
+    "name": "Ascella-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as White.\n\n[LV1][LV2][LV3] (Opposing Attack Step)\nAll your \"Astral Dragon\" family Spirits can block while exhausted.\n\n[LV2][LV3]\nThis Spirit can't be destroyed by opposing effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-002",
+      "name": "Ascella-Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD25-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as White."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as White.",
+              "cleanText": "This Spirit's color and symbol are also treated as White",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "White"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Astral Dragon\" family Spirits can block while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Astral Dragon\" family Spirits can block while exhausted.",
+              "cleanText": "All your \"Astral Dragon\" family Spirits can block while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUSTED_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can't be destroyed by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can't be destroyed by opposing effects.",
+              "cleanText": "This Spirit can't be destroyed by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "INDESTRUCTIBLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as White.\n\n[LV1][LV2][LV3] (Opposing Attack Step)\nAll your \"Astral Dragon\" family Spirits can block while exhausted.\n\n[LV2][LV3]\nThis Spirit can't be destroyed by opposing effects.",
-  "is_vanilla": false
- },
- "SD25-007": {
-  "name": "Energy Burst",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Life is reduced]\nDestroy any number of opposing Spirits up to a total of 7000 BP. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDuring this turn, give a Spirit/Ultimate +3000 BP. Or, destroy a Brave on an opposing Brave Spirit.",
-  "is_vanilla": false
- },
- "SD25-006": {
-  "name": "Flame Blast",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Spirit is destroyed by the Opponent]\nDraw two cards. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDestroy an opposing 4000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6551": {
-  "name": "Meteodrian",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "SD25-007": {
+    "name": "Energy Burst",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Life is reduced]\nDestroy any number of opposing Spirits up to a total of 7000 BP. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDuring this turn, give a Spirit/Ultimate +3000 BP. Or, destroy a Brave on an opposing Brave Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-007",
+      "name": "Energy Burst",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD25-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy any number of opposing Spirits up to a total of 7000 BP. Then by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy any number of opposing Spirits up to a total of 7000 BP.",
+              "cleanText": "Destroy any number of opposing Spirits up to a total of 7000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "mode": "TOTAL_BP_LTE",
+                "maxTotalBp": 7000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Then by paying the cost, activate this card's Flash effect.",
+              "cleanText": "Then by paying the cost, activate this card's Flash effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit/Ultimate +3000 BP. Or, destroy a Brave on an opposing Brave Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit/Ultimate +3000 BP.",
+              "cleanText": "give a Spirit/Ultimate +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "destroy a Brave on an opposing Brave Spirit.",
+              "cleanText": "destroy a Brave on an opposing Brave Spirit",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Brave"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This Spirit card's reduction symbols are also treated as Red/Purple/Green/White/Yellow.\n\n[LV1][LV2][LV3]\nThis Spirit's symbol is also treated as Red/Purple/Green/White/Yellow.\n\n[LV1][LV2][LV3] [SSoul: ∞]\nWhen you are summoning an Ultimate card, this Spirit gains two symbols of the same color as the Ultimate card to be summoned.\n\n[LV2][LV3] (When Battles)\nDraw a card from your deck, and destroy an opposing 3000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SD25-001": {
-  "name": "Rukbart-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "SD25-006": {
+    "name": "Flame Blast",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Spirit is destroyed by the Opponent]\nDraw two cards. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDestroy an opposing 4000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-006",
+      "name": "Flame Blast",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit is destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD25-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards. Then by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "Then by paying the cost, activate this card's Flash effect.",
+              "cleanText": "Then by paying the cost, activate this card's Flash effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 4000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 4000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 4000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 4000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [SSoul: Red]\nWhen you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\n\n[LV2][LV3] (Your Attack Step)\nAll your Spirits gain +1000 BP.",
-  "is_vanilla": false
- },
- "SD25-X01": {
-  "name": "The MilkDipper Blazing-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 13000
-   }
+  "BATTLE-SPIRITS-A6551": {
+    "name": "Meteodrian",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "This Spirit card's reduction symbols are also treated as Red/Purple/Green/White/Yellow.\n\n[LV1][LV2][LV3]\nThis Spirit's symbol is also treated as Red/Purple/Green/White/Yellow.\n\n[LV1][LV2][LV3] [SSoul: ∞]\nWhen you are summoning an Ultimate card, this Spirit gains two symbols of the same color as the Ultimate card to be summoned.\n\n[LV2][LV3] (When Battles)\nDraw a card from your deck, and destroy an opposing 3000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6551",
+      "name": "Meteodrian",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6551#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit card's reduction symbols are also treated as Red/Purple/Green/White/Yellow."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit card's reduction symbols are also treated as Red/Purple/Green/White/Yellow.",
+              "cleanText": "This Spirit card's reduction symbols are also treated as Red/Purple/Green/White/Yellow",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6551#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's symbol is also treated as Red/Purple/Green/White/Yellow."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's symbol is also treated as Red/Purple/Green/White/Yellow.",
+              "cleanText": "This Spirit's symbol is also treated as Red/Purple/Green/White/Yellow",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6551#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "SSoul:",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you are summoning an Ultimate card, this Spirit gains two symbols of the same color as the Ultimate card to be summoned."
+          },
+          "clauses": [
+            {
+              "rawText": "When you are summoning an Ultimate card, this Spirit gains two symbols of the same color as the Ultimate card to be summoned.",
+              "cleanText": "When you are summoning an Ultimate card, this Spirit gains two symbols of the same color as the Ultimate card to be summoned",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6551#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card from your deck, and destroy an opposing 3000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card from your deck",
+              "cleanText": "Draw a card from your deck",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "destroy an opposing 3000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 3000 BP or less Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 3000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nIf your life is three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card.\n\n[LV2][LV3] (When Battles)\nDraw a card.\n\n[LV3] (Your Attack Step)\nWhen your \"Astral Dragon\" family Spirit attacks, refresh this Spirit.",
-  "is_vanilla": false
- },
- "SD25-003": {
-  "name": "The StarBowDragon Kaus-Wyvern",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD25-001": {
+    "name": "Rukbart-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [SSoul: Red]\nWhen you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\n\n[LV2][LV3] (Your Attack Step)\nAll your Spirits gain +1000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-001",
+      "name": "Rukbart-Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD25-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "SSoul: Red",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol)."
+          },
+          "clauses": [
+            {
+              "rawText": "When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).",
+              "cleanText": "When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your Spirits gain +1000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your Spirits gain +1000 BP.",
+              "cleanText": "All your Spirits gain +1000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "targetGroup": "ALL_FRIENDLY",
+                "family": null,
+                "target": "all_friendly",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 3000 BP or less Spirit.\n\n[LV2][LV3] (When Attacks)\nIf you control any Ultimate, destroy an opposing 5000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "ULTIMATE-SAGITTO": {
-  "name": "Ultimate-Sagitto-Apollodragon",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 12000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 20000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 23000
-   }
+  "SD25-X01": {
+    "name": "The MilkDipper Blazing-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 13000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nIf your life is three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card.\n\n[LV2][LV3] (When Battles)\nDraw a card.\n\n[LV3] (Your Attack Step)\nWhen your \"Astral Dragon\" family Spirit attacks, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-X01",
+      "name": "The MilkDipper Blazing-Dragon",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD25-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If your life is three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "If your life is three or less, destroy an opposing 10000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 10000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If your life is three or less",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "summon this Spirit card.",
+              "cleanText": "summon this Spirit card",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Astral Dragon\" family Spirit attacks, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Astral Dragon\" family Spirit attacks, refresh this Spirit.",
+              "cleanText": "When your \"Astral Dragon\" family Spirit attacks, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Ultimate Trigger hit, destroy an opposing 15000 BP or less Spirit. [Double Hit] If it hits twice, also, this Ultimate gains an extra Ultimate symbol.\n[wutb]\n\n[LV4][LV5] (When Attacks)\nTarget an opposing Spirit. You can attack that Spirit. When the Ultimate Trigger hits, and the targeted Spirit is destroyed, send an opposing Life to the Reserve.",
-  "is_vanilla": false
- },
- "SD25-005": {
-  "name": "Ultimate-Shurikeraptor",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 15000
-   }
+  "SD25-003": {
+    "name": "The StarBowDragon Kaus-Wyvern",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 3000 BP or less Spirit.\n\n[LV2][LV3] (When Attacks)\nIf you control any Ultimate, destroy an opposing 5000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-003",
+      "name": "The StarBowDragon Kaus-Wyvern",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD25-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 3000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 3000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 3000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 3000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any Ultimate, destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any Ultimate, destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any Ultimate",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[LV3][LV4][LV5] (When Summoned)\nDestroy a Brave on an opposing Brave Spirit.\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, the opponent must block with their Spirits/Ultimates if possible. When blocked by an opposing Spirit, send an opposing Life to their Reserve.\n[utb]",
-  "is_vanilla": false
- }
+  "ULTIMATE-SAGITTO": {
+    "name": "Ultimate-Sagitto-Apollodragon",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 12000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 20000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 23000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Ultimate Trigger hit, destroy an opposing 15000 BP or less Spirit. [Double Hit] If it hits twice, also, this Ultimate gains an extra Ultimate symbol.\n[wutb]\n\n[LV4][LV5] (When Attacks)\nTarget an opposing Spirit. You can attack that Spirit. When the Ultimate Trigger hits, and the targeted Spirit is destroyed, send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "ULTIMATE-SAGITTO",
+      "name": "Ultimate-Sagitto-Apollodragon",
+      "keywords": [
+        {
+          "name": "Double Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 57
+        },
+        {
+          "name": "Double Hit",
+          "parameter": null,
+          "wave": 3,
+          "hook": "double_hit",
+          "bracketed": true,
+          "index": 191
+        }
+      ],
+      "abilities": [
+        {
+          "id": "ULTIMATE-SAGITTO#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Red Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Red Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "ULTIMATE-SAGITTO#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Double Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Ultimate Trigger hit, destroy an opposing 15000 BP or less Spirit. [Double Hit] If it hits twice, also, this Ultimate gains an extra Ultimate symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Ultimate Trigger hit, destroy an opposing 15000 BP or less Spirit.",
+              "cleanText": "For each Ultimate Trigger hit, destroy an opposing 15000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 15000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "[Double Hit] If it hits twice, also, this Ultimate gains an extra Ultimate symbol.",
+              "cleanText": "[Double Hit] If it hits twice, also, this Ultimate gains an extra Ultimate symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "ULTIMATE-SAGITTO#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. You can attack that Spirit. When the Ultimate Trigger hits, and the targeted Spirit is destroyed, send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "You can attack that Spirit.",
+              "cleanText": "You can attack that Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CAN_ATTACK"
+              }
+            },
+            {
+              "rawText": "When the Ultimate Trigger hits, and the targeted Spirit is destroyed, send an opposing Life to the Reserve.",
+              "cleanText": "When the Ultimate Trigger hits, and the targeted Spirit is destroyed, send an opposing Life to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD25-005": {
+    "name": "Ultimate-Shurikeraptor",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 15000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[LV3][LV4][LV5] (When Summoned)\nDestroy a Brave on an opposing Brave Spirit.\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, the opponent must block with their Spirits/Ultimates if possible. When blocked by an opposing Spirit, send an opposing Life to their Reserve.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD25-005",
+      "name": "Ultimate-Shurikeraptor",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 135
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD25-005#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Red Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Red Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy a Brave on an opposing Brave Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy a Brave on an opposing Brave Spirit.",
+              "cleanText": "Destroy a Brave on an opposing Brave Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Brave"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD25-005#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, the opponent must block with their Spirits/Ultimates if possible. When blocked by an opposing Spirit, send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, the opponent must block with their Spirits/Ultimates if possible.",
+              "cleanText": "When Ultimate Trigger hits, the opponent must block with their Spirits/Ultimates if possible",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            },
+            {
+              "rawText": "When blocked by an opposing Spirit, send an opposing Life to their Reserve.",
+              "cleanText": "When blocked by an opposing Spirit, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

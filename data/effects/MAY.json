@@ -1,25 +1,127 @@
 {
- "P15-02": {
-  "name": "The WaterBrawler Douji",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard a number of cards from the opposing decktop equal to this Spirit's Lv.\n\n[LV1][LV2][LV3]\nWhile [Soul Core] (Soul Core) is on this Spirit, all your \"Fighting Spirit\" family Spirits gain +3000 BP.",
-  "is_vanilla": false
- }
+  "P15-02": {
+    "name": "The WaterBrawler Douji",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard a number of cards from the opposing decktop equal to this Spirit's Lv.\n\n[LV1][LV2][LV3]\nWhile [Soul Core] (Soul Core) is on this Spirit, all your \"Fighting Spirit\" family Spirits gain +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P15-02",
+      "name": "The WaterBrawler Douji",
+      "keywords": [
+        {
+          "name": "Crush",
+          "parameter": null,
+          "wave": 1,
+          "hook": "crush",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P15-02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Crush",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Discard a number of cards from the opposing decktop equal to this Spirit's Lv."
+          },
+          "clauses": [
+            {
+              "rawText": "Discard a number of cards from the opposing decktop equal to this Spirit's Lv.",
+              "cleanText": "Discard a number of cards from the opposing decktop equal to this Spirit's Lv",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": "LEVEL",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P15-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While [Soul Core] (Soul Core) is on this Spirit, all your \"Fighting Spirit\" family Spirits gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "While [Soul Core] (Soul Core) is on this Spirit, all your \"Fighting Spirit\" family Spirits gain +3000 BP.",
+              "cleanText": "all your \"Fighting Spirit\" family Spirits gain +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While [Soul Core] (Soul Core) is on this Spirit",
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "targetGroup": "ALL_FRIENDLY",
+                "family": "Fighting Spirit",
+                "target": "all_friendly",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,1 +1,541 @@
-{"PC01-X01":{"cardNumber":"PC01-X01","name":"Drian-the-Shooting-Star","keywords":[{"name":"Contract Advent","parameter":"Azure Contract/Incarnate & C5 or more, (Your Turn)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Azure Contract/Incarnate & C5 or more, (Your Turn)","wave":2,"hook":"contract","bracketed":true},{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"PC01-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Azure Contract/Incarnate & C5 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nWhen your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\"."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}},{"rawText":"When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\".","cleanText":"When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\"","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\""}}],"unsupported":["When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\"."]},{"id":"PC01-X01#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opponent can't end Turn/Attack Step via effects."},"clauses":[{"rawText":"The opponent can't end Turn/Attack Step via effects.","cleanText":"The opponent can't end Turn/Attack Step via effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"The opponent can't end Turn/Attack Step via effects"}}],"unsupported":["The opponent can't end Turn/Attack Step via effects."]},{"id":"PC01-X01#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During OC"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 10 or less Spirit/Ultimate. Then, by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control."},"clauses":[{"rawText":"Destroy an opposing Cost 10 or less Spirit/Ultimate.","cleanText":"Destroy an opposing Cost 10 or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":10}}}},{"rawText":"by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control.","cleanText":"by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control"}}],"unsupported":["by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control."]}],"compiledClausesCount":3,"unsupportedClausesCount":3,"isFullySupported":false},"PC01-001":{"cardNumber":"PC01-001","name":"The Ruins of the Hill Where Shooting Stars Fall","keywords":[{"name":"Accel","parameter":null,"wave":2,"hook":"accel","bracketed":true}],"abilities":[{"id":"PC01-001#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opponent can't use Magic cards which don't have the same colors as the symbols on their Field. Also, while you have five or more counters, the opponent can't use [Accel] which don't have the same colors as the symbols on their Field."},"clauses":[{"rawText":"The opponent can't use Magic cards which don't have the same colors as the symbols on their Field.","cleanText":"The opponent can't use Magic cards which don't have the same colors as the symbols on their Field","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"The opponent can't use Magic cards which don't have the same colors as the symbols on their Field"}},{"rawText":"while you have five or more counters, the opponent can't use [Accel] which don't have the same colors as the symbols on their Field.","cleanText":"the opponent can't use [Accel] which don't have the same colors as the symbols on their Field","link":"also","isOptional":false,"isCost":false,"condition":"while you have five or more counters","duration":null,"op":{"op":"UNSUPPORTED","rawText":"the opponent can't use [Accel] which don't have the same colors as the symbols on their Field"}}],"unsupported":["The opponent can't use Magic cards which don't have the same colors as the symbols on their Field.","while you have five or more counters, the opponent can't use [Accel] which don't have the same colors as the symbols on their Field."]},{"id":"PC01-001#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"START_OF_ATTACK_STEP","timingLabel":"Start of Your Attack Step","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit."},"clauses":[{"rawText":"You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit.","cleanText":"You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit"}}],"unsupported":["You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit."]}],"compiledClausesCount":0,"unsupportedClausesCount":3,"isFullySupported":false},"PC01-CX01":{"cardNumber":"PC01-CX01","name":"Ian (Card)","keywords":[{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true},{"name":"Soul State","parameter":null,"wave":2,"hook":"soul_state","bracketed":true},{"name":"Contract Pre-Advent","parameter":null,"wave":2,"hook":"contract_pre_advent","bracketed":true}],"abilities":[{"id":"PC01-CX01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."},"clauses":[{"rawText":"While this card is in Soul State, you can [Contract Advent] onto it.","cleanText":"you can [Contract Advent] onto it","link":null,"isOptional":true,"isCost":false,"condition":"While this card is in Soul State","duration":null,"op":{"op":"UNSUPPORTED","rawText":"you can [Contract Advent] onto it"}},{"rawText":"When you do, you can put any number of cores from your Field/Reserve to the advent card.","cleanText":"When you do, you can put any number of cores from your Field/Reserve to the advent card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":"ANY","source":"FIELD_RESERVE","destination":"ADVENT_CARD"}}],"unsupported":["While this card is in Soul State, you can [Contract Advent] onto it."]},{"id":"PC01-CX01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Soul State","Contract Pre-Advent"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"[LV1][LV2]\n(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits."},"clauses":[{"rawText":"[LV1][LV2]","cleanText":"[LV1][LV2]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"[LV1][LV2]"}},{"rawText":"(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits.","cleanText":"(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits"}}],"unsupported":["[LV1][LV2]","(Once per turn: Same Name) When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits."]},{"id":"PC01-CX01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Contract Pre-Advent"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"[LV1][LV2] (When Attacks)\nYour counters +2. Then, ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate."},"clauses":[{"rawText":"[LV1][LV2] (When Attacks)","cleanText":"[LV1][LV2] (When Attacks)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"[LV1][LV2] (When Attacks)"}},{"rawText":"Your counters +2.","cleanText":"Your counters +2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":2}},{"rawText":"ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.","cleanText":"ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":4}}}}],"unsupported":["[LV1][LV2] (When Attacks)"]}],"compiledClausesCount":3,"unsupportedClausesCount":4,"isFullySupported":false}}
+{
+  "PC01-X01": {
+    "cardNumber": "PC01-X01",
+    "name": "Drian-the-Shooting-Star",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Azure Contract/Incarnate & C5 or more, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 241
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PC01-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Azure Contract/Incarnate & C5 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\"."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\".",
+            "cleanText": "When your Attack Step/Turn would end due to opposing effects, you can [Contract Advent] this card from the Hand onto \"Ian\"",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_RULE_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Your Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't end Turn/Attack Step via effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't end Turn/Attack Step via effects.",
+            "cleanText": "The opponent can't end Turn/Attack Step via effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPPONENT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-X01#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During OC"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 10 or less Spirit/Ultimate. Then, by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 10 or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing Cost 10 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 10
+                }
+              }
+            }
+          },
+          {
+            "rawText": "by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control.",
+            "cleanText": "by exhausting a Nexus you control, refresh up to two \"Incarnate\" family Spirits/Ultimates you control",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PC01-001": {
+    "cardNumber": "PC01-001",
+    "name": "The Ruins of the Hill Where Shooting Stars Fall",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 177
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PC01-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't use Magic cards which don't have the same colors as the symbols on their Field. Also, while you have five or more counters, the opponent can't use [Accel] which don't have the same colors as the symbols on their Field."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't use Magic cards which don't have the same colors as the symbols on their Field.",
+            "cleanText": "The opponent can't use Magic cards which don't have the same colors as the symbols on their Field",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "PREVENT_MAGIC",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "while you have five or more counters, the opponent can't use [Accel] which don't have the same colors as the symbols on their Field.",
+            "cleanText": "the opponent can't use [Accel] which don't have the same colors as the symbols on their Field",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "while you have five or more counters",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_OF_ATTACK_STEP",
+          "timingLabel": "Start of Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit.",
+            "cleanText": "You can pay one cost to summon an \"Incarnate\" family pre-advent card under your Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PC01-CX01": {
+    "cardNumber": "PC01-CX01",
+    "name": "Ian (Card)",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 42
+      },
+      {
+        "name": "Soul State",
+        "parameter": null,
+        "wave": 2,
+        "hook": "soul_state",
+        "bracketed": true,
+        "index": 159
+      },
+      {
+        "name": "Contract Pre-Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_pre_advent",
+        "bracketed": true,
+        "index": 171
+      },
+      {
+        "name": "Contract Pre-Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_pre_advent",
+        "bracketed": true,
+        "index": 382
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PC01-CX01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+            "cleanText": "you can [Contract Advent] onto it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "While this card is in Soul State",
+            "duration": null,
+            "op": {
+              "op": "CONTRACT_ADVENT_RULE"
+            }
+          },
+          {
+            "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+            "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": "ANY",
+              "source": "FIELD_RESERVE",
+              "destination": "ADVENT_CARD"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-CX01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Soul State",
+            "Contract Pre-Advent"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits.",
+            "cleanText": "When your counter increases via your \"Incarnate\" family effects, you can put a core from the Void to any of your \"Incarnate\" family Spirits",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC01-CX01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Contract Pre-Advent"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counters +2. Then, ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counters +2.",
+            "cleanText": "Your counters +2",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.",
+            "cleanText": "ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -14,11 +14,20 @@ export function resetInstanceIdCounter() {
 
 export function createCardInstance(cardData, owner = 'player') {
   const id = `inst_${nextInstanceId++}`;
+  const family = cardData.family || (Array.isArray(cardData.families) ? cardData.families.join(' ') : '');
+  const type = cardData.type || 'Spirit';
+  const isContractPartner = Boolean(
+    cardData.is_contract_partner ||
+    cardData.isContractPartner ||
+    type === 'Contract Nexus' ||
+    (type.includes('Contract') && family.toLowerCase().includes('flag'))
+  );
   return {
     id,
     cardNumber: cardData.card_number || cardData.cardNumber || cardData.id || 'UNKNOWN',
     name: cardData.name || 'Unknown',
-    type: cardData.type || 'Spirit',
+    type,
+    family,
     cost: typeof cardData.cost === 'number' ? cardData.cost : parseInt(cardData.cost || '0', 10),
     colors: cardData.colors || [cardData.color || 'Red'],
     symbols: cardData.symbols || [cardData.color || 'Red'],
@@ -29,7 +38,7 @@ export function createCardInstance(cardData, owner = 'player') {
     owner,
     currentOwner: owner,
     isVanilla: Boolean(cardData.is_vanilla),
-    isContractPartner: Boolean(cardData.is_contract_partner)
+    isContractPartner
   };
 }
 
@@ -45,7 +54,9 @@ export function createFieldStack(topCard, initialCores = { normal: 1, soul: 0 },
       soul: initialCores.soul ? 1 : 0
     },
     state: 'REFRESHED', // REFRESHED | EXHAUSTED | HEAVY_EXHAUSTED
-    owner: topCard.owner
+    owner: topCard.owner,
+    standby: null, // null or { type, previousLevel, by, cause, sourceCard }
+    isSoulState: false
   };
 }
 

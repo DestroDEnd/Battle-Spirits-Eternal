@@ -1,219 +1,2054 @@
 {
- "SD65-006": {
-  "name": "The Four Towers of Limbo",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Your Attack Step)\nWhen your \"Evil God\" family Ultimate attacks, your counter +1. Then, (Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate.\n\n[LV2] (Either Attack Step)\n(Can't Stack) When your Life is reduced, you can summon an Ultimate card from your Hand with a cost equal or inferior to your number of counters, without paying the cost.",
-  "is_vanilla": false
- },
- "SD65-001": {
-  "name": "The HellflameCount Zan-Zival",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 12000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 16000
-   }
+  "SD65-006": {
+    "name": "The Four Towers of Limbo",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Your Attack Step)\nWhen your \"Evil God\" family Ultimate attacks, your counter +1. Then, (Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate.\n\n[LV2] (Either Attack Step)\n(Can't Stack) When your Life is reduced, you can summon an Ultimate card from your Hand with a cost equal or inferior to your number of counters, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-006",
+      "name": "The Four Towers of Limbo",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD65-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Evil God\" family Ultimate attacks, your counter +1. Then, (Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Evil God\" family Ultimate attacks, your counter +1.",
+              "cleanText": "When your \"Evil God\" family Ultimate attacks, your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "either draw a card, or put a core from the Void to that Ultimate.",
+              "cleanText": "either draw a card, or put a core from the Void to that Ultimate",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is reduced, you can summon an Ultimate card from your Hand with a cost equal or inferior to your number of counters, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is reduced, you can summon an Ultimate card from your Hand with a cost equal or inferior to your number of counters, without paying the cost.",
+              "cleanText": "When your Life is reduced, you can summon an Ultimate card from your Hand with a cost equal or inferior to your number of counters, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You have one or more counters]\n\n[LV3][LV4][LV5] (When Summoned)\nYou can destroy an opposing 15000 BP or less Spirit, or an opposing Nexus.\n\n[LV4][LV5] (Start of Your Attack Step)\nSend up to five cores from your Trash to your “Evil God”/\"Next Generation\" family Ultimates/Nexuses. Then, you can send two cores from your other \"Evil God\" family Ultimates/Nexuses to the Trash. When you've done so, destroy an opposing originally Cost 3 or less Grandwalker Nexus.",
-  "is_vanilla": false
- },
- "SD65-X01": {
-  "name": "The Hellflame FourDemonLord Bram-Zahfag",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 14000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 21000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 28000
-   }
+  "SD65-001": {
+    "name": "The HellflameCount Zan-Zival",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 12000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 16000
+      }
+    },
+    "effect": "[Summon Condition: You have one or more counters]\n\n[LV3][LV4][LV5] (When Summoned)\nYou can destroy an opposing 15000 BP or less Spirit, or an opposing Nexus.\n\n[LV4][LV5] (Start of Your Attack Step)\nSend up to five cores from your Trash to your “Evil God”/\"Next Generation\" family Ultimates/Nexuses. Then, you can send two cores from your other \"Evil God\" family Ultimates/Nexuses to the Trash. When you've done so, destroy an opposing originally Cost 3 or less Grandwalker Nexus.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-001",
+      "name": "The HellflameCount Zan-Zival",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD65-001#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You have one or more counters"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You have one or more counters]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing 15000 BP or less Spirit, or an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing 15000 BP or less Spirit, or an opposing Nexus.",
+              "cleanText": "You can destroy an opposing 15000 BP or less Spirit, or an opposing Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 15000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send up to five cores from your Trash to your “Evil God”/\"Next Generation\" family Ultimates/Nexuses. Then, you can send two cores from your other \"Evil God\" family Ultimates/Nexuses to the Trash. When you've done so, destroy an opposing originally Cost 3 or less Grandwalker Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "Send up to five cores from your Trash to your \"Evil God\"/\"Next Generation\" family Ultimates/Nexuses.",
+              "cleanText": "Send up to five cores from your Trash to your \"Evil God\"/\"Next Generation\" family Ultimates/Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "you can send two cores from your other \"Evil God\" family Ultimates/Nexuses to the Trash.",
+              "cleanText": "you can send two cores from your other \"Evil God\" family Ultimates/Nexuses to the Trash",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "destroy an opposing originally Cost 3 or less Grandwalker Nexus.",
+              "cleanText": "destroy an opposing originally Cost 3 or less Grandwalker Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n[LV3][LV4][LV5] (When Summoned)\nDestroy every opposing Spirit. Then, (Once per Game: Same Name) by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards. This \"can't summon\" effect can't be prevented by opposing effects.\n\n[LV4][LV5] (Your Attack Step)\nWhile your “Evil God” family Ultimate is attacking, the opponent can't end the Attack Step via effects.",
-  "is_vanilla": false
- },
- "SD65-005": {
-  "name": "The HellseaCount Ila-Riva",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 10000
-   }
+  "SD65-X01": {
+    "name": "The Hellflame FourDemonLord Bram-Zahfag",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 14000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 21000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 28000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n[LV3][LV4][LV5] (When Summoned)\nDestroy every opposing Spirit. Then, (Once per Game: Same Name) by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards. This \"can't summon\" effect can't be prevented by opposing effects.\n\n[LV4][LV5] (Your Attack Step)\nWhile your “Evil God” family Ultimate is attacking, the opponent can't end the Attack Step via effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-X01",
+      "name": "The Hellflame FourDemonLord Bram-Zahfag",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD65-X01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every opposing Spirit. Then, (Once per Game: Same Name) by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards. This \"can't summon\" effect can't be prevented by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every opposing Spirit.",
+              "cleanText": "Destroy every opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards.",
+              "cleanText": "by sending one of your Lives to the Void, until your next Start Step, the opponent can't summon Spirit cards",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "This \"can't summon\" effect can't be prevented by opposing effects.",
+              "cleanText": "This \"can't summon\" effect can't be prevented by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your “Evil God” family Ultimate is attacking, the opponent can't end the Attack Step via effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While your \"Evil God\" family Ultimate is attacking, the opponent can't end the Attack Step via effects.",
+              "cleanText": "the opponent can't end the Attack Step via effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your \"Evil God\" family Ultimate is attacking",
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You have one counter or more]\n\n[Burst: After an opposing Spirit/Ultimate's (When Summoned) effect resolves]\nDraw two cards, then discard a card from your Hand. Then, if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand, and discard a Magic card among them. After this effect resolves, summon this card without paying the cost. Then, by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand.",
-  "is_vanilla": false
- },
- "SD65-004": {
-  "name": "The HellwindCount Nouvelle-Vague",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 15000
-   }
+  "SD65-005": {
+    "name": "The HellseaCount Ila-Riva",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "[Summon Condition: You have one counter or more]\n\n[Burst: After an opposing Spirit/Ultimate's (When Summoned) effect resolves]\nDraw two cards, then discard a card from your Hand. Then, if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand, and discard a Magic card among them. After this effect resolves, summon this card without paying the cost. Then, by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-005",
+      "name": "The HellseaCount Ila-Riva",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit/Ultimate's (When Summoned) effect resolves",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 50
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-005#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You have one counter or more"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You have one counter or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards, then discard a card from your Hand. Then, if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand, and discard a Magic card among them. After this effect resolves, summon this card without paying the cost. Then, by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards, then discard a card from your Hand.",
+              "cleanText": "Draw two cards, then discard a card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "if this Burst was activated via your \"Evil God\" family effect, look at the entire opposing Hand",
+              "cleanText": "look at the entire opposing Hand",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if this Burst was activated via your \"Evil God\" family effect",
+              "duration": null,
+              "op": {
+                "op": "LOOK_HAND",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "discard a Magic card among them.",
+              "cleanText": "discard a Magic card among them",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "cardType": "Magic"
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            },
+            {
+              "rawText": "by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand.",
+              "cleanText": "by sending a core from your Field/Reserve to the Trash, set a Burst card from your Hand",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field/reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You have one or more counters]\n\nFlash - (Either Attack Step)\n(Once per Turn: Same Name) Including being in Soul State/pre-advent condition, if you control any “The PartnerDemonLord Javad”, by sending two cores from your Reserve to the Trash, summon this card from the Hand, without paying the cost.\n\n[LV3][LV4][LV5] (When Summoned/Attacks)\nPut a core from the Void to this Ultimate, and exhaust an opposing Spirit. Then, if you have six counters or more, you can return an opposing exhausted Spirit to the deckbottom.",
-  "is_vanilla": false
- },
- "SD65-X04": {
-  "name": "The Hellsea FourDemonLord Ill-Dezal",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 12000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 20000
-   }
+  "SD65-004": {
+    "name": "The HellwindCount Nouvelle-Vague",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 15000
+      }
+    },
+    "effect": "[Summon Condition: You have one or more counters]\n\nFlash - (Either Attack Step)\n(Once per Turn: Same Name) Including being in Soul State/pre-advent condition, if you control any “The PartnerDemonLord Javad”, by sending two cores from your Reserve to the Trash, summon this card from the Hand, without paying the cost.\n\n[LV3][LV4][LV5] (When Summoned/Attacks)\nPut a core from the Void to this Ultimate, and exhaust an opposing Spirit. Then, if you have six counters or more, you can return an opposing exhausted Spirit to the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-004",
+      "name": "The HellwindCount Nouvelle-Vague",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD65-004#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You have one or more counters"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You have one or more counters]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Including being in Soul State/pre-advent condition, if you control any “The PartnerDemonLord Javad”, by sending two cores from your Reserve to the Trash, summon this card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerDemonLord Javad\", by sending two cores from your Reserve to the Trash, summon this card from the Hand, without paying the cost.",
+              "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"The PartnerDemonLord Javad\", by sending two cores from your Reserve to the Trash, summon this card from the Hand, without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to this Ultimate, and exhaust an opposing Spirit. Then, if you have six counters or more, you can return an opposing exhausted Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to this Ultimate",
+              "cleanText": "Put a core from the Void to this Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Spirit.",
+              "cleanText": "exhaust an opposing Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "if you have six counters or more, you can return an opposing exhausted Spirit to the deckbottom.",
+              "cleanText": "you can return an opposing exhausted Spirit to the deckbottom",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you have six counters or more",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\nThis set card can't be discarded by the opponent.\n\n[Burst: After the opposing Hand increases via an opposing effect]\nDestroy an opposing Spirit with the highest cost. Then, destroy two opposing Spirits with a cost equal or inferior to the number of your counters. After this effect resolves, summon this card without paying the cost.\n\n[LV4][LV5] Flash - (Your Attack Step)\nWhile your \"DemonLord\" is attacking, by sending a core from that Ultimate to the Trash, immediately activate one of your Bursts.",
-  "is_vanilla": false
- },
- "SD65-X03": {
-  "name": "The Hellwind FourDemonLord Van-Tous",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 13000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 20000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 7,
-    "bp": 30000
-   }
+  "SD65-X04": {
+    "name": "The Hellsea FourDemonLord Ill-Dezal",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 12000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 20000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\nThis set card can't be discarded by the opponent.\n\n[Burst: After the opposing Hand increases via an opposing effect]\nDestroy an opposing Spirit with the highest cost. Then, destroy two opposing Spirits with a cost equal or inferior to the number of your counters. After this effect resolves, summon this card without paying the cost.\n\n[LV4][LV5] Flash - (Your Attack Step)\nWhile your \"DemonLord\" is attacking, by sending a core from that Ultimate to the Trash, immediately activate one of your Bursts.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-X04",
+      "name": "The Hellsea FourDemonLord Ill-Dezal",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After the opposing Hand increases via an opposing effect",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 177
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-X04#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This set card can't be discarded by the opponent."
+          },
+          "clauses": [
+            {
+              "rawText": "This set card can't be discarded by the opponent.",
+              "cleanText": "This set card can't be discarded by the opponent",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_TRIGGER_CONDITION",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Spirit with the highest cost. Then, destroy two opposing Spirits with a cost equal or inferior to the number of your counters. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Spirit with the highest cost.",
+              "cleanText": "Destroy an opposing Spirit with the highest cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "destroy two opposing Spirits with a cost equal or inferior to the number of your counters.",
+              "cleanText": "destroy two opposing Spirits with a cost equal or inferior to the number of your counters",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X04#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "While your \"DemonLord\" is attacking, by sending a core from that Ultimate to the Trash, immediately activate one of your Bursts."
+          },
+          "clauses": [
+            {
+              "rawText": "While your \"DemonLord\" is attacking, by sending a core from that Ultimate to the Trash, immediately activate one of your Bursts.",
+              "cleanText": "by sending a core from that Ultimate to the Trash, immediately activate one of your Bursts",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your \"DemonLord\" is attacking",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n[LV3][LV4][LV5] (When Attacks)\nBy returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects.\n\n[LV4][LV5] (When Attacks)\n(Once per Turn: Same Name) Besides [Soul Core], by sending a core from your Trash to the Void, reveal a number of cards from your decktop up to the number of counters you have. Among them, you can summon up to three “DemonLord” without paying the cost, or [Contract Advent] them. Banish any remaining cards.",
-  "is_vanilla": false
- },
- "SD65-002": {
-  "name": "The HellsoilCount Grey-Tude",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 6000
-   }
+  "SD65-X03": {
+    "name": "The Hellwind FourDemonLord Van-Tous",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 13000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 20000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 7,
+        "bp": 30000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n[LV3][LV4][LV5] (When Attacks)\nBy returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects.\n\n[LV4][LV5] (When Attacks)\n(Once per Turn: Same Name) Besides [Soul Core], by sending a core from your Trash to the Void, reveal a number of cards from your decktop up to the number of counters you have. Among them, you can summon up to three “DemonLord” without paying the cost, or [Contract Advent] them. Banish any remaining cards.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-X03",
+      "name": "The Hellwind FourDemonLord Van-Tous",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 610
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-X03#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning a card from your Hand to the decktop",
+              "cleanText": "By returning a card from your Hand to the decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects.",
+              "cleanText": "put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Besides [Soul Core], by sending a core from your Trash to the Void, reveal a number of cards from your decktop up to the number of counters you have. Among them, you can summon up to three “DemonLord” without paying the cost, or [Contract Advent] them. Banish any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "Besides [Soul Core], by sending a core from your Trash to the Void, reveal a number of cards from your decktop up to the number of counters you have.",
+              "cleanText": "Besides [Soul Core], by sending a core from your Trash to the Void, reveal a number of cards from your decktop up to the number of counters you have",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": true
+              }
+            },
+            {
+              "rawText": "Among them, you can summon up to three \"DemonLord\" without paying the cost, or [Contract Advent] them.",
+              "cleanText": "Among them, you can summon up to three \"DemonLord\" without paying the cost, or [Contract Advent] them",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Banish any remaining cards.",
+              "cleanText": "Banish any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BANISH"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You have one or more counters]\n\n[Mirage: Cost 2 ([Core])]\n[During Set] Flash - (Your Turn)\nBy discarding this Mirage, your counter +1. When you do, send a core from any opposing Spirit to the Reserve.\n\n[LV3][LV4] (When Summoned)\nYour counter +1, and draw a card.",
-  "is_vanilla": false
- },
- "SD65-X02": {
-  "name": "The Hellsoil FourDemonLord Magnazappah",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 14000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 6,
-    "bp": 25000
-   }
+  "SD65-002": {
+    "name": "The HellsoilCount Grey-Tude",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 6000
+      }
+    },
+    "effect": "[Summon Condition: You have one or more counters]\n\n[Mirage: Cost 2 ([Core])]\n[During Set] Flash - (Your Turn)\nBy discarding this Mirage, your counter +1. When you do, send a core from any opposing Spirit to the Reserve.\n\n[LV3][LV4] (When Summoned)\nYour counter +1, and draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-002",
+      "name": "The HellsoilCount Grey-Tude",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 2 ([Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 51
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-002#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You have one or more counters"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You have one or more counters]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By discarding this Mirage, your counter +1. When you do, send a core from any opposing Spirit to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding this Mirage",
+              "cleanText": "By discarding this Mirage",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_MIRAGE_COST"
+              }
+            },
+            {
+              "rawText": "your counter +1.",
+              "cleanText": "your counter +1",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "When you do, send a core from any opposing Spirit to the Reserve.",
+              "cleanText": "When you do, send a core from any opposing Spirit to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-002#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1, and draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n(Once per Turn: Same Name) When your \"Evil God\" family Ultimates would leave the Field due to the opponent, you can summon this card from the Hand, without paying the cost.\n\n[Count Ultimate Trigger: [LV3][LV4][LV5] (When Summoned/Attacks)]\nWhen Count Ultimate Trigger hits, once per turn, send two cores from the opposing Field to the Trash.\n[cutb]",
-  "is_vanilla": false
- },
- "SD65-003": {
-  "name": "The Ruler of FourDemonLords Lord-Javad",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 13000
-   }
+  "SD65-X02": {
+    "name": "The Hellsoil FourDemonLord Magnazappah",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 14000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 6,
+        "bp": 25000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]\n\n(Once per Turn: Same Name) When your \"Evil God\" family Ultimates would leave the Field due to the opponent, you can summon this card from the Hand, without paying the cost.\n\n[Count Ultimate Trigger: [LV3][LV4][LV5] (When Summoned/Attacks)]\nWhen Count Ultimate Trigger hits, once per turn, send two cores from the opposing Field to the Trash.\n[cutb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-X02",
+      "name": "The Hellsoil FourDemonLord Magnazappah",
+      "keywords": [
+        {
+          "name": "Count Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "count_ultimate_trigger",
+          "bracketed": true,
+          "index": 300
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-X02#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more \"The PartnerDemonLord Javad\", including being in Soul State/pre-advent condition]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Evil God\" family Ultimates would leave the Field due to the opponent, you can summon this card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Evil God\" family Ultimates would leave the Field due to the opponent, you can summon this card from the Hand, without paying the cost.",
+              "cleanText": "When your \"Evil God\" family Ultimates would leave the Field due to the opponent, you can summon this card from the Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Count Ultimate Trigger: [LV3][LV4][LV5] (When Summoned/Attacks)"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Count Ultimate Trigger hits, once per turn, send two cores from the opposing Field to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When Count Ultimate Trigger hits, once per turn, send two cores from the opposing Field to the Trash.",
+              "cleanText": "When Count Ultimate Trigger hits, once per turn, send two cores from the opposing Field to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: Hell Contract & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Ultimate.\n\n[SuAdcon: You control one or more “The PartnerDemonLord Javad”, including being in Soul State/pre-advent condition]\n\n[LV3][LV4] (When Summoned/Advents)\nBy discarding a card from your Hand, draw two cards. When this effect discards any \"Evil God\" family card, send two cores from the opposing Field to the Reserve.\n\n[During OC] [LV3][LV4] (When Attacks)\nOnce per turn, at the end of battle, by sending the [Soul Core] from your Trash to this Ultimate, this Ultimate refreshes.",
-  "is_vanilla": false
- },
- "SD65-CX01": {
-  "name": "The PartnerDemonLord Javad",
-  "type": "Contract Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 8000
-   }
+  "SD65-003": {
+    "name": "The Ruler of FourDemonLords Lord-Javad",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 13000
+      }
+    },
+    "effect": "Flash - [Contract Advent: Hell Contract & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Ultimate.\n\n[SuAdcon: You control one or more “The PartnerDemonLord Javad”, including being in Soul State/pre-advent condition]\n\n[LV3][LV4] (When Summoned/Advents)\nBy discarding a card from your Hand, draw two cards. When this effect discards any \"Evil God\" family card, send two cores from the opposing Field to the Reserve.\n\n[During OC] [LV3][LV4] (When Attacks)\nOnce per turn, at the end of battle, by sending the [Soul Core] from your Trash to this Ultimate, this Ultimate refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-003",
+      "name": "The Ruler of FourDemonLords Lord-Javad",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "Hell Contract & C3 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: Hell Contract & C3 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Ultimate.",
+              "cleanText": "stack this from the Hand onto your target Ultimate",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-003#a1",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "SuAdcon: You control one or more “The PartnerDemonLord Javad”, including being in Soul State/pre-advent condition",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[SuAdcon: You control one or more “The PartnerDemonLord Javad”, including being in Soul State/pre-advent condition]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding a card from your Hand, draw two cards. When this effect discards any \"Evil God\" family card, send two cores from the opposing Field to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding a card from your Hand",
+              "cleanText": "By discarding a card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "draw two cards.",
+              "cleanText": "draw two cards",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "When this effect discards any \"Evil God\" family card, send two cores from the opposing Field to the Reserve.",
+              "cleanText": "When this effect discards any \"Evil God\" family card, send two cores from the opposing Field to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-003#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "at the end of battle, by sending the [Soul Core] from your Trash to this Ultimate, this Ultimate refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "at the end of battle, by sending the [Soul Core] from your Trash to this Ultimate, this Ultimate refreshes.",
+              "cleanText": "at the end of battle, by sending the [Soul Core] from your Trash to this Ultimate, this Ultimate refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: Your Life is at two or more]\n\n[Soul State][Contract Pre-Advent]/[Ultimate] [LV3][LV4]\n(Can't Stack) When your cores or the opposing cores are sent to the Void/Trash from the Life/Field/Reserve/Trash by your \"Evil God\" family effects, your counters +2. Also, if that's a \"DemonLord\" effect, you can draw a card.\n\n[Contract Pre-Advent]/[Ultimate] [LV3][LV4] Flash - (Either Attack Step)\nOnce per turn, you can send a core from your Field/Reserve to the Trash. When you've done so, send two cores from an opposing Spirit/Ultimate to the Reserve.",
-  "is_vanilla": false
- }
+  "SD65-CX01": {
+    "name": "The PartnerDemonLord Javad",
+    "type": "Contract Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "[Summon Condition: Your Life is at two or more]\n\n[Soul State][Contract Pre-Advent]/[Ultimate] [LV3][LV4]\n(Can't Stack) When your cores or the opposing cores are sent to the Void/Trash from the Life/Field/Reserve/Trash by your \"Evil God\" family effects, your counters +2. Also, if that's a \"DemonLord\" effect, you can draw a card.\n\n[Contract Pre-Advent]/[Ultimate] [LV3][LV4] Flash - (Either Attack Step)\nOnce per turn, you can send a core from your Field/Reserve to the Trash. When you've done so, send two cores from an opposing Spirit/Ultimate to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD65-CX01",
+      "name": "The PartnerDemonLord Javad",
+      "keywords": [
+        {
+          "name": "Soul State",
+          "parameter": null,
+          "wave": 2,
+          "hook": "soul_state",
+          "bracketed": true,
+          "index": 49
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 61
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 331
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD65-CX01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: Your Life is at two or more"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: Your Life is at two or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-CX01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your cores or the opposing cores are sent to the Void/Trash from the Life/Field/Reserve/Trash by your \"Evil God\" family effects, your counters +2. Also, if that's a \"DemonLord\" effect, you can draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your cores or the opposing cores are sent to the Void/Trash from the Life/Field/Reserve/Trash by your \"Evil God\" family effects, your counters +2.",
+              "cleanText": "When your cores or the opposing cores are sent to the Void/Trash from the Life/Field/Reserve/Trash by your \"Evil God\" family effects, your counters +2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "if that's a \"DemonLord\" effect, you can draw a card.",
+              "cleanText": "you can draw a card",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if that's a \"DemonLord\" effect",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD65-CX01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "you can send a core from your Field/Reserve to the Trash. When you've done so, send two cores from an opposing Spirit/Ultimate to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "you can send a core from your Field/Reserve to the Trash.",
+              "cleanText": "you can send a core from your Field/Reserve to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field/reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "send two cores from an opposing Spirit/Ultimate to the Reserve.",
+              "cleanText": "send two cores from an opposing Spirit/Ultimate to the Reserve",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

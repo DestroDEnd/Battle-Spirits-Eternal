@@ -1,0 +1,1510 @@
+{
+  "BATTLE-SPIRITS-A2546": {
+    "cardNumber": "BATTLE-SPIRITS-A2546",
+    "name": "The Hero Hinobori Hajime",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Supreme Hero/Great General & Cost 3 or more) (Burst effect-holder & Magic)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "4",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 776
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 1085
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A2546#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Supreme Hero/Great General & Cost 3 or more) (Burst effect-holder & Magic)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you Summon/Advent a target Spirit or use a target Magic, you can put one core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you Summon/Advent a target Spirit or use a target Magic, you can put one core from the Void onto this Nexus.",
+            "cleanText": "When you Summon/Advent a target Spirit or use a target Magic, you can put one core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The Nexus's symbol is also treated as White."
+        },
+        "clauses": [
+          {
+            "rawText": "The Nexus's symbol is also treated as White.",
+            "cleanText": "The Nexus's symbol is also treated as White",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send four cores from this Nexus to the Void) Immediately activate one of your \"Supreme Hero\"/\"Great General\" family Bursts, and until after the Burst activates, the effects of every opposing Cost 5 or less Spirit/Nexus can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send four cores from this Nexus to the Void) Immediately activate one of your \"Supreme Hero\"/\"Great General\" family Bursts, and until after the Burst activates, the effects of every opposing Cost 5 or less Spirit/Nexus can't activate.",
+            "cleanText": "(Once per turn, send four cores from this Nexus to the Void) Immediately activate one of your \"Supreme Hero\"/\"Great General\" family Bursts, and until after the Burst activates, the effects of every opposing Cost 5 or less Spirit/Nexus can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A2546#a6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "After Your Burst Activates",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can set a card with Burst effect from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can set a card with Burst effect from your Hand.",
+            "cleanText": "You can set a card with Burst effect from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A4832": {
+    "cardNumber": "BATTLE-SPIRITS-A4832",
+    "name": "Hanasaka Dragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A4832#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have a set Burst, this card in Hand is treated as Cost 4."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have a set Burst, this card in Hand is treated as Cost 4.",
+            "cleanText": "this card in Hand is treated as Cost 4",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have a set Burst",
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A4832#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return a \"Hajime\"-named card, or a Red/White \"Supreme Hero\"/\"Great General\" family card, except \"Hanasaka Dragon\", from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return a \"Hajime\"-named card, or a Red/White \"Supreme Hero\"/\"Great General\" family card, except \"Hanasaka Dragon\", from your Trash to the Hand.",
+            "cleanText": "Return a \"Hajime\"-named card, or a Red/White \"Supreme Hero\"/\"Great General\" family card, except \"Hanasaka Dragon\", from your Trash to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A4832#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal a card from your decktop. If it's a \"Supreme Hero\" family card with Burst effect, you can activate it, ignoring the Burst condition. Add any remaining card to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal a card from your decktop.",
+            "cleanText": "You can reveal a card from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "If it's a \"Supreme Hero\" family card with Burst effect, you can activate it, ignoring the Burst condition.",
+            "cleanText": "you can activate it, ignoring the Burst condition",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If it's a \"Supreme Hero\" family card with Burst effect",
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "Add any remaining card to the Hand.",
+            "cleanText": "Add any remaining card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND",
+              "count": "REMAINING"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A8953": {
+    "cardNumber": "BATTLE-SPIRITS-A8953",
+    "name": "The BuraiMan Oni-Dragon",
+    "keywords": [
+      {
+        "name": "Rebirth",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rebirth",
+        "bracketed": true,
+        "index": 169
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A8953#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Nexus. If you have any set Burst, the effects of the Nexus destroyed by this effect can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Nexus.",
+            "cleanText": "Destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "If you have any set Burst, the effects of the Nexus destroyed by this effect can't activate.",
+            "cleanText": "the effects of the Nexus destroyed by this effect can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have any set Burst",
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8953#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Rebirth3",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Red/White Cost 5 or more Spirit attacks, or after your Burst activates, this Spirit can be flipped."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Red/White Cost 5 or more Spirit attacks, or after your Burst activates, this Spirit can be flipped.",
+            "cleanText": "When your Red/White Cost 5 or more Spirit attacks, or after your Burst activates, this Spirit can be flipped",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8953#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 5000 BP or less Spirit, and draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 5000 BP or less Spirit",
+            "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9550": {
+    "cardNumber": "BATTLE-SPIRITS-A9550",
+    "name": "The Dragon Palace",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9550#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[+1]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9550#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your Hand is unaffected by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "Your Hand is unaffected by opposing effects.",
+            "cleanText": "Your Hand is unaffected by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9550#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "After Your Burst Activates",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve/Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve/Spirit.",
+            "cleanText": "Put a core from the Void to your Reserve/Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A9775": {
+    "cardNumber": "BATTLE-SPIRITS-A9775",
+    "name": "The ExplosionHero Lord-Dragon-Bazzel X",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9775#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[+1]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9775#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_REBORN",
+          "timingLabel": "When Reborn/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can immediately activate one of your Bursts. The Burst effects of a Red/White \"Supreme Hero\" family card activated by this effect can't be prevented by opposing effects. After that Burst activates, you can set a card with Burst effect from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can immediately activate one of your Bursts.",
+            "cleanText": "You can immediately activate one of your Bursts",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "The Burst effects of a Red/White \"Supreme Hero\" family card activated by this effect can't be prevented by opposing effects.",
+            "cleanText": "The Burst effects of a Red/White \"Supreme Hero\" family card activated by this effect can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "UNPREVENTABLE"
+            }
+          },
+          {
+            "rawText": "After that Burst activates, you can set a card with Burst effect from your Hand.",
+            "cleanText": "After that Burst activates, you can set a card with Burst effect from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9775#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "After Your Burst Activates",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If it's your Attack Step, you can refresh this Spirit. When you've done so, send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "If it's your Attack Step, you can refresh this Spirit.",
+            "cleanText": "you can refresh this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If it's your Attack Step",
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          },
+          {
+            "rawText": "send an opposing Life to the Reserve.",
+            "cleanText": "send an opposing Life to the Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10328": {
+    "cardNumber": "BATTLE-SPIRITS-A10328",
+    "name": "The GlacialHero Lord-Dragon-Glazar X",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10328#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Spirit and an opposing Ultimate to the deckbottom. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Spirit and an opposing Ultimate to the deckbottom.",
+            "cleanText": "Return an opposing Spirit and an opposing Ultimate to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10328#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Ultimate Heavy Armor:",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing effects with the same color(s) as the symbols on the opposing Field."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing effects with the same color(s) as the symbols on the opposing Field.",
+            "cleanText": "This Spirit is unaffected by opposing effects with the same color(s) as the symbols on the opposing Field",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10328#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Spirit to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Spirit to the deckbottom.",
+            "cleanText": "Return an opposing Spirit to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "DECK"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10798": {
+    "cardNumber": "BATTLE-SPIRITS-A10798",
+    "name": "The HeroDragon Lord-Dragon X",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Rebirth",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rebirth",
+        "bracketed": true,
+        "index": 177
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10798#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 12000 BP or less Spirit/Ultimate. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 12000 BP or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing 12000 BP or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 12000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10798#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Rebirth5",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit attacks, if you have a set Burst, you can flip this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit attacks, if you have a set Burst, you can flip this Spirit.",
+            "cleanText": "When this Spirit attacks, if you have a set Burst, you can flip this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10798#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can set down a card with Burst effect from your Hand. When you've done so, draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can set down a card with Burst effect from your Hand.",
+            "cleanText": "You can set down a card with Burst effect from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "draw two cards.",
+            "cleanText": "draw two cards",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12163": {
+    "cardNumber": "BATTLE-SPIRITS-A12163",
+    "name": "The SeaDragon Cima-Creek II",
+    "keywords": [
+      {
+        "name": "Rebirth",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rebirth",
+        "bracketed": true,
+        "index": 145
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12163#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void each to two \"Supreme Hero\"/\"Great General\" family Spirits you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void each to two \"Supreme Hero\"/\"Great General\" family Spirits you control.",
+            "cleanText": "Put a core from the Void each to two \"Supreme Hero\"/\"Great General\" family Spirits you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12163#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Rebirth3",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit would leave the Field due to the opponent, it can be flipped."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit would leave the Field due to the opponent, it can be flipped.",
+            "cleanText": "When this Spirit would leave the Field due to the opponent, it can be flipped",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REBIRTH_FLIP"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12163#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your Hand is unaffected by opposing effects, and your Life can only be reduced by up to one per opposing Spirit per turn."
+        },
+        "clauses": [
+          {
+            "rawText": "Your Hand is unaffected by opposing effects, and your Life can only be reduced by up to one per opposing Spirit per turn.",
+            "cleanText": "Your Hand is unaffected by opposing effects, and your Life can only be reduced by up to one per opposing Spirit per turn",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12870": {
+    "cardNumber": "BATTLE-SPIRITS-A12870",
+    "name": "The SuperHero Lord-Dragon-Saviour X",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 347
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12870#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this card without paying the cost. Then, by returning a Cost 9 or less \"Lord-Dragon\"-named card from your Trash to the deckbottom, put cores from the Void to your Life until it's five."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this card without paying the cost.",
+            "cleanText": "Summon this card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          },
+          {
+            "rawText": "by returning a Cost 9 or less \"Lord-Dragon\"-named card from your Trash to the deckbottom, put cores from the Void to your Life until it's five.",
+            "cleanText": "by returning a Cost 9 or less \"Lord-Dragon\"-named card from your Trash to the deckbottom, put cores from the Void to your Life until it's five",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12870#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your \"Supreme Hero\" family Spirit is attacking, the opponent can't use Magic card/[Accel] unless they send a core from their Life to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "While your \"Supreme Hero\" family Spirit is attacking, the opponent can't use Magic card/[Accel] unless they send a core from their Life to the Trash.",
+            "cleanText": "the opponent can't use Magic card/[Accel] unless they send a core from their Life to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your \"Supreme Hero\" family Spirit is attacking",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

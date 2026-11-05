@@ -1,25 +1,118 @@
 {
- "P14-24": {
-  "name": "The FallenKnight Harut",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
-  },
-  "effect": "[LV1][LV2][LV3]\nAll other \"Evil Shadow\" family Spirits you control gain +2000 BP.\n\n[LV2][LV3] (When Attacks)\nReturn a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
-  "is_vanilla": false
- }
+  "P14-24": {
+    "name": "The FallenKnight Harut",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nAll other \"Evil Shadow\" family Spirits you control gain +2000 BP.\n\n[LV2][LV3] (When Attacks)\nReturn a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-24",
+      "name": "The FallenKnight Harut",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P14-24#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP.",
+              "cleanText": "All other \"Evil Shadow\" family Spirits you control gain +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-24#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand.",
+              "cleanText": "Return a \"FallenKnight\"-named Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

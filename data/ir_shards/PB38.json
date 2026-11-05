@@ -1,0 +1,426 @@
+{
+  "PB16-D02": {
+    "cardNumber": "PB16-D02",
+    "name": "［Christmas Party］Fongneena",
+    "keywords": [
+      {
+        "name": "Team",
+        "parameter": "Absolutes",
+        "wave": 5,
+        "hook": "team",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB16-D02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB16-D02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust two opposing Spirits. Also, when summoned via your effect, put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust two opposing Spirits.",
+            "cleanText": "Exhaust two opposing Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "when summoned via your effect, put two cores from the Void to this Spirit.",
+            "cleanText": "when summoned via your effect, put two cores from the Void to this Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB15-D05": {
+    "cardNumber": "PB15-D05",
+    "name": "［Halloween Zombie］Fongneena",
+    "keywords": [
+      {
+        "name": "Team",
+        "parameter": "Absolutes",
+        "wave": 5,
+        "hook": "team",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Mirage",
+        "parameter": "Cost 3 ([Yellow Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 19
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB15-D05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB15-D05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Yellow Core][Yellow Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB15-D05#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Fongneena\" would leave the Field due to opposing effects, by sending a core, besides the [Soul Core], from your Trash to the Void, one of them remains on the Field in the same state."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Fongneena\" would leave the Field due to opposing effects, by sending a core, besides the [Soul Core], from your Trash to the Void, one of them remains on the Field in the same state.",
+            "cleanText": "when your \"Fongneena\" would leave the Field due to opposing effects, by sending a core, besides the [Soul Core], from your Trash to the Void, one of them remains on the Field in the same state",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RESURRECT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB15-D05#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to any \"Fongneena\" you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to any \"Fongneena\" you control.",
+            "cleanText": "Put a core from the Void to any \"Fongneena\" you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB18-X03": {
+    "cardNumber": "PB18-X03",
+    "name": "［School Festival Princess］Fongneena",
+    "keywords": [
+      {
+        "name": "Team",
+        "parameter": "Absolutes",
+        "wave": 5,
+        "hook": "team",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB18-X03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-X03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Among them, addd every \"Fongneena\" to the Hand. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, addd every \"Fongneena\" to the Hand.",
+            "cleanText": "Among them, addd every \"Fongneena\" to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-X03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by sending a core from this Spirit to the Trash, refresh a \"Fongneena\" you control."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from this Spirit to the Trash",
+            "cleanText": "By sending a core from this Spirit to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "refresh a \"Fongneena\" you control.",
+            "cleanText": "refresh a \"Fongneena\" you control",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,20 +1,113 @@
 {
- "P15-20": {
-  "name": "The Catalyst Mejishi",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
-  },
-  "effect": "[LV1][LV2]\nGive all your \"Ninja Gale\" family Spirits: \"[Catl: Green] (When Attacks) By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Green Soul Bursts\".\n\n[LV2] (When Attacks)\nYou can send [Soul Core](Soul Core) from your Reserve to any of your Spirit.",
-  "is_vanilla": false
- }
+  "P15-20": {
+    "name": "The Catalyst Mejishi",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2]\nGive all your \"Ninja Gale\" family Spirits: \"[Catl: Green] (When Attacks) By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Green Soul Bursts\".\n\n[LV2] (When Attacks)\nYou can send [Soul Core](Soul Core) from your Reserve to any of your Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P15-20",
+      "name": "The Catalyst Mejishi",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P15-20#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your \"Ninja Gale\" family Spirits: \" (When Attacks) By sending [Soul Core](Soul Core) from this Spirit to your Trash, immediately activate one of your Green Soul Bursts\"."
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your \"Ninja Gale\" family Spirits: \" (When Attacks) By sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Green Soul Bursts\".",
+              "cleanText": "Give all your \"Ninja Gale\" family Spirits: \" (When Attacks) By sending [Soul Core] from this Spirit to your Trash, immediately activate one of your Green Soul Bursts\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P15-20#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can send [Soul Core](Soul Core) from your Reserve to any of your Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can send [Soul Core] from your Reserve to any of your Spirit.",
+              "cleanText": "You can send [Soul Core] from your Reserve to any of your Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_SOUL_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

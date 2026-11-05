@@ -1,0 +1,106 @@
+{
+  "BATTLE-SPIRITS-A7668": {
+    "cardNumber": "BATTLE-SPIRITS-A7668",
+    "name": "Seize Glory (PB14)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A7668#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card has the \"Primal\" family, and its reduction symbols are also treated as Red/Purple/Green/White/Blue."
+        },
+        "clauses": [
+          {
+            "rawText": "This card has the \"Primal\" family, and its reduction symbols are also treated as Red/Purple/Green/White/Blue.",
+            "cleanText": "This card has the \"Primal\" family, and its reduction symbols are also treated as Red/Purple/Green/White/Blue",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A7668#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit/Ultimate -7000 BP, and destroy it if it reaches 0 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit/Ultimate -7000 BP",
+            "cleanText": "give an opposing Spirit/Ultimate -7000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 7000
+            }
+          },
+          {
+            "rawText": "destroy it if it reaches 0 BP.",
+            "cleanText": "destroy it if it reaches 0 BP",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

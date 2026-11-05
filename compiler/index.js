@@ -45,10 +45,10 @@ export function compileCard(card) {
     const abilityId = `${cardNumber}#a${idx}`;
 
     // If block is solely a summon condition or reminder text without actions
-    if (/^\[Summon Condition:/i.test(blockText) || /^\[SuAdcon:/i.test(blockText)) {
+    if (/^\[(?:Summon|Brave)\s+Condition:/i.test(blockText) || /^\[SuAdcon:/i.test(blockText) || /^\[\+\d+\]\s*$/i.test(blockText.trim())) {
       abilities.push({
         id: abilityId,
-        type: 'SUMMON_CONDITION',
+        type: 'CONDITION',
         header,
         rawText: blockText,
         clauses: [],
@@ -108,10 +108,11 @@ export function compileCard(card) {
 
 function splitAbilityBlocks(effectText) {
   // Normalize line breaks
-  const normalized = effectText.replace(/\r\n/g, '\n').trim();
+  let normalized = effectText.replace(/\r\n/g, '\n').trim();
+  normalized = normalized.replace(/\{LV(\d+)\]/gi, '[LV$1]');
 
-  // Split by double newlines OR single newlines preceding ability headers
-  const headerSplitRegex = /\n+(?=\[(?:LV\d+|During|When|Flash|Main|Burst|Contract|Soul State|Grand|Summon Condition|SuAdcon)|Flash\s*[-–]|Main\s*[-–]|Legacy\b|◆)/gi;
+  // Split by double newlines OR single newlines preceding ability headers / parenthesized timing tags
+  const headerSplitRegex = /\n{2,}|\n+(?=\d+\s+\[LV\d+\]|Striker\s+Pack\b|Silhouette\s+System\b|\[(?:LV\d+|During|When|Flash|Main|Burst|Contract|Soul State|Grand|Summon Condition|SuAdcon|Rebirth|Mirage|Supremacy|Show Up|Assemble)|\((?:When|During|Your|Opposing|Opponent's|Either|Flash|Main|Start|Core|Draw|Refresh|Attack|End|Permanent)\)|Flash\s*[-–]|Main\s*[-–]|Legacy\b|◆)/gi;
   const paragraphs = normalized.split(headerSplitRegex).map(p => p.trim()).filter(Boolean);
 
   const blocks = [];

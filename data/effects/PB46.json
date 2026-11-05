@@ -1,188 +1,2181 @@
 {
- "PB46-006": {
-  "name": "Den-O Belt",
-  "type": "Magic",
-  "levels": {},
-  "effect": "When this card is revealed from the deck by your \"Den-O\"/ \"DenLiner\"/ \"Taros\" effect, you can add it to the Hand.\n\n[Mirage: Cost 2 ([White Core])]\n[During Set] Flash - (Either Attack Step)\n(Once per Turn: Same Name) You can put one of your \"Taros\" Braves onto the Removed Zone. After this effect resolves, you can [Contract Advent] a \"Den-O\" from your Hand, treating [Soul Core] as being sent to the Trash.\n\n[Main]\n(Once per Turn: Same Name) Deploy a \"Den-O\"/\"DenLiner\" from your Trash. Then, if you don't have a Mirage set, you can set this card.",
-  "is_vanilla": false
- },
- "PB46-008": {
-  "name": "Kamen Rider Ark One［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 13000
-   }
+  "PB46-006": {
+    "name": "Den-O Belt",
+    "type": "Magic",
+    "levels": {},
+    "effect": "When this card is revealed from the deck by your \"Den-O\"/ \"DenLiner\"/ \"Taros\" effect, you can add it to the Hand.\n\n[Mirage: Cost 2 ([White Core])]\n[During Set] Flash - (Either Attack Step)\n(Once per Turn: Same Name) You can put one of your \"Taros\" Braves onto the Removed Zone. After this effect resolves, you can [Contract Advent] a \"Den-O\" from your Hand, treating [Soul Core] as being sent to the Trash.\n\n[Main]\n(Once per Turn: Same Name) Deploy a \"Den-O\"/\"DenLiner\" from your Trash. Then, if you don't have a Mirage set, you can set this card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-006",
+      "name": "Den-O Belt",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 2 ([White Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 115
+        },
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 314
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is revealed from the deck by your \"Den-O\"/ \"DenLiner\"/ \"Taros\" effect, you can add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is revealed from the deck by your \"Den-O\"/ \"DenLiner\"/ \"Taros\" effect, you can add it to the Hand.",
+              "cleanText": "When this card is revealed from the deck by your \"Den-O\"/ \"DenLiner\"/ \"Taros\" effect, you can add it to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([White Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-006#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can put one of your \"Taros\" Braves onto the Removed Zone. After this effect resolves, you can [Contract Advent] a \"Den-O\" from your Hand, treating [Soul Core] as being sent to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "You can put one of your \"Taros\" Braves onto the Removed Zone.",
+              "cleanText": "You can put one of your \"Taros\" Braves onto the Removed Zone",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DECK_OR_HAND_ACTION"
+              }
+            },
+            {
+              "rawText": "you can [Contract Advent] a \"Den-O\" from your Hand, treating [Soul Core] as being sent to the Trash.",
+              "cleanText": "you can [Contract Advent] a \"Den-O\" from your Hand, treating [Soul Core] as being sent to the Trash",
+              "link": "afterResolves",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-006#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN_SAME_NAME",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Deploy a \"Den-O\"/\"DenLiner\" from your Trash. Then, if you don't have a Mirage set, you can set this card."
+          },
+          "clauses": [
+            {
+              "rawText": "Deploy a \"Den-O\"/\"DenLiner\" from your Trash.",
+              "cleanText": "Deploy a \"Den-O\"/\"DenLiner\" from your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "if you don't have a Mirage set, you can set this card.",
+              "cleanText": "you can set this card",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you don't have a Mirage set",
+              "duration": null,
+              "op": {
+                "op": "SET_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Zero-One\" & C6 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nThis card/Spirit is also treated as \"Zero-One\".\n\nWhen your Green Spirits/ \"Izu\" Grandwalker Nexuses are depleted/destroyed by the opponent and sent to the Trash, you can [Contract Advent] this card from the Hand, treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents/Attacks)\nOnce per turn, you can reveal two cards from your decktop. For each Spirit card among them, send a core from any opposing Spirits to the Reserve. Add the revealed cards to the Hand.",
-  "is_vanilla": false
- },
- "PB46-002": {
-  "name": "Kamen Rider Den-O Ax Form ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   }
+  "PB46-008": {
+    "name": "Kamen Rider Ark One［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 13000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Zero-One\" & C6 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nThis card/Spirit is also treated as \"Zero-One\".\n\nWhen your Green Spirits/ \"Izu\" Grandwalker Nexuses are depleted/destroyed by the opponent and sent to the Trash, you can [Contract Advent] this card from the Hand, treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2] (When Advents/Attacks)\nOnce per turn, you can reveal two cards from your decktop. For each Spirit card among them, send a core from any opposing Spirits to the Reserve. Add the revealed cards to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-008",
+      "name": "Kamen Rider Ark One［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Zero-One\" & C6 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 336
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Zero-One\" & C6 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit is also treated as \"Zero-One\"."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit is also treated as \"Zero-One\".",
+              "cleanText": "This card/Spirit is also treated as \"Zero-One\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-008#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Green Spirits/ \"Izu\" Grandwalker Nexuses are depleted/destroyed by the opponent and sent to the Trash, you can [Contract Advent] this card from the Hand, treating [Soul Core] as being sent to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Green Spirits/ \"Izu\" Grandwalker Nexuses are depleted/destroyed by the opponent and sent to the Trash, you can [Contract Advent] this card from the Hand, treating [Soul Core] as being sent to the Trash.",
+              "cleanText": "When your Green Spirits/ \"Izu\" Grandwalker Nexuses are depleted/destroyed by the opponent and sent to the Trash, you can [Contract Advent] this card from the Hand, treating [Soul Core] as being sent to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-008#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "you can reveal two cards from your decktop. For each Spirit card among them, send a core from any opposing Spirits to the Reserve. Add the revealed cards to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "you can reveal two cards from your decktop.",
+              "cleanText": "you can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "For each Spirit card among them, send a core from any opposing Spirits to the Reserve.",
+              "cleanText": "For each Spirit card among them, send a core from any opposing Spirits to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Add the revealed cards to the Hand.",
+              "cleanText": "Add the revealed cards to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, return an opposing Spirit/Ultimate to the deckbottom.\n\n[During OC] [LV1][LV2]\nAll your \"Den-O\", and all your \"Taros\" Braves can't be destroyed by opposing effects.",
-  "is_vanilla": false
- },
- "PB46-X01": {
-  "name": "Kamen Rider Den-O Climax Form ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 13000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 16000
-   }
+  "PB46-002": {
+    "name": "Kamen Rider Den-O Ax Form ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, return an opposing Spirit/Ultimate to the deckbottom.\n\n[During OC] [LV1][LV2]\nAll your \"Den-O\", and all your \"Taros\" Braves can't be destroyed by opposing effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-002",
+      "name": "Kamen Rider Den-O Ax Form ［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. Then, return an opposing Spirit/Ultimate to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "return an opposing Spirit/Ultimate to the deckbottom.",
+              "cleanText": "return an opposing Spirit/Ultimate to the deckbottom",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Den-O\", and all your \"Taros\" Braves can't be destroyed by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Den-O\", and all your \"Taros\" Braves can't be destroyed by opposing effects.",
+              "cleanText": "All your \"Den-O\", and all your \"Taros\" Braves can't be destroyed by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While you have ten counters or more, for each \"Taros\" in your Removed Zone, this card in Hand/Removed Zone gets -1 cost.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can summon up to two \"Taros\" from your Hand/Removed Zone, without paying the cost.\n\n[LV1][LV2][LV3]\nThis Spirit can brave with up to four White Braves, and while braved to four Braves, this Spirit is unaffected by opposing effects.\n\n[During Brave] [LV2][LV3] (When Attacks)\nFor each Brave this Spirit has, return an opposing Spirit/Ultimate/Nexus to the deckbottom.",
-  "is_vanilla": false
- },
- "PB46-003": {
-  "name": "Kamen Rider Den-O Gun Form ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   }
+  "PB46-X01": {
+    "name": "Kamen Rider Den-O Climax Form ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 13000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 16000
+      }
+    },
+    "effect": "While you have ten counters or more, for each \"Taros\" in your Removed Zone, this card in Hand/Removed Zone gets -1 cost.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can summon up to two \"Taros\" from your Hand/Removed Zone, without paying the cost.\n\n[LV1][LV2][LV3]\nThis Spirit can brave with up to four White Braves, and while braved to four Braves, this Spirit is unaffected by opposing effects.\n\n[During Brave] [LV2][LV3] (When Attacks)\nFor each Brave this Spirit has, return an opposing Spirit/Ultimate/Nexus to the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-X01",
+      "name": "Kamen Rider Den-O Climax Form ［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB46-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While you have ten counters or more, for each \"Taros\" in your Removed Zone, this card in Hand/Removed Zone gets -1 cost."
+          },
+          "clauses": [
+            {
+              "rawText": "While you have ten counters or more, for each \"Taros\" in your Removed Zone, this card in Hand/Removed Zone gets -1 cost.",
+              "cleanText": "for each \"Taros\" in your Removed Zone, this card in Hand/Removed Zone gets -1 cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While you have ten counters or more",
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon up to two \"Taros\" from your Hand/Removed Zone, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon up to two \"Taros\" from your Hand/Removed Zone, without paying the cost.",
+              "cleanText": "You can summon up to two \"Taros\" from your Hand/Removed Zone, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can brave with up to four White Braves, and while braved to four Braves, this Spirit is unaffected by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can brave with up to four White Braves, and while braved to four Braves, this Spirit is unaffected by opposing effects.",
+              "cleanText": "This Spirit can brave with up to four White Braves, and while braved to four Braves, this Spirit is unaffected by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-X01#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Brave this Spirit has, return an opposing Spirit/Ultimate/Nexus to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Brave this Spirit has, return an opposing Spirit/Ultimate/Nexus to the deckbottom.",
+              "cleanText": "For each Brave this Spirit has, return an opposing Spirit/Ultimate/Nexus to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, you can return an opposing Burst to the deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks/Blocks)\nOnce per turn, at the end of battle, this Spirit can refresh.",
-  "is_vanilla": false
- },
- "PB46-X02": {
-  "name": "Kamen Rider Den-O Liner Form ［3］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 12000
-   }
+  "PB46-003": {
+    "name": "Kamen Rider Den-O Gun Form ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1. Then, you can return an opposing Burst to the deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks/Blocks)\nOnce per turn, at the end of battle, this Spirit can refresh.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-003",
+      "name": "Kamen Rider Den-O Gun Form ［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Kamen Rider Den-O\" & C2 or more, (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. Then, you can return an opposing Burst to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "you can return an opposing Burst to the deckbottom.",
+              "cleanText": "you can return an opposing Burst to the deckbottom",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "at the end of battle, this Spirit can refresh."
+          },
+          "clauses": [
+            {
+              "rawText": "at the end of battle, this Spirit can refresh.",
+              "cleanText": "at the end of battle, this Spirit can refresh",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYou can put a \"Den-O\"/\"Taros\" from your Hand/Trash onto the Removed Zone. When you've done so, you can return an opposing Spirit to the deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks)\nBy returning a \"Taros\" from your Removed Zone to the deckbottom, activate one of the [During Brave] (When Attacks) effects written on that card as this Spirit's effect, ignoring [During Brave]. After that effect resolves, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "PB46-004": {
-  "name": "Kamen Rider Den-O Rod Form ［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
+  "PB46-X02": {
+    "name": "Kamen Rider Den-O Liner Form ［3］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C6 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents/Attacks)\nYou can put a \"Den-O\"/\"Taros\" from your Hand/Trash onto the Removed Zone. When you've done so, you can return an opposing Spirit to the deckbottom.\n\n[During OC] [LV1][LV2] (When Attacks)\nBy returning a \"Taros\" from your Removed Zone to the deckbottom, activate one of the [During Brave] (When Attacks) effects written on that card as this Spirit's effect, ignoring [During Brave]. After that effect resolves, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-X02",
+      "name": "Kamen Rider Den-O Liner Form ［3］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Kamen Rider Den-O\" & C6 or more, (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Kamen Rider Den-O\" & C6 or more, (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can put a \"Den-O\"/\"Taros\" from your Hand/Trash onto the Removed Zone. When you've done so, you can return an opposing Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can put a \"Den-O\"/\"Taros\" from your Hand/Trash onto the Removed Zone.",
+              "cleanText": "You can put a \"Den-O\"/\"Taros\" from your Hand/Trash onto the Removed Zone",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DECK_OR_HAND_ACTION"
+              }
+            },
+            {
+              "rawText": "you can return an opposing Spirit to the deckbottom.",
+              "cleanText": "you can return an opposing Spirit to the deckbottom",
+              "link": "byDoing",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning a \"Taros\" from your Removed Zone to the deckbottom, activate one of the [During Brave] (When Attacks) effects written on that card as this Spirit's effect, ignoring [During Brave]. After that effect resolves, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning a \"Taros\" from your Removed Zone to the deckbottom",
+              "cleanText": "By returning a \"Taros\" from your Removed Zone to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "activate one of the [During Brave] (When Attacks) effects written on that card as this Spirit's effect, ignoring [During Brave].",
+              "cleanText": "activate one of the [During Brave] (When Attacks) effects written on that card as this Spirit's effect, ignoring [During Brave]",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYou can reveal three cards from your decktop. Among them, put every \"Taros\" to the Removed Zone. Discard any remaining cards.\n\n[During OC] [LV1][LV2]\nYou can add a \"DenLiner\" revealed from deck by this Spirit's effect to the Hand.",
-  "is_vanilla": false
- },
- "PB46-001": {
-  "name": "Kamen Rider Den-O Sword Form ［4］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "PB46-004": {
+    "name": "Kamen Rider Den-O Rod Form ［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\" & C1 or more, (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYou can reveal three cards from your decktop. Among them, put every \"Taros\" to the Removed Zone. Discard any remaining cards.\n\n[During OC] [LV1][LV2]\nYou can add a \"DenLiner\" revealed from deck by this Spirit's effect to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-004",
+      "name": "Kamen Rider Den-O Rod Form ［2］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Kamen Rider Den-O\" & C1 or more, (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Kamen Rider Den-O\" & C1 or more, (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, put every \"Taros\" to the Removed Zone. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, put every \"Taros\" to the Removed Zone.",
+              "cleanText": "Among them, put every \"Taros\" to the Removed Zone",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REMOVED_ZONE_ACTION"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can add a \"DenLiner\" revealed from deck by this Spirit's effect to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "You can add a \"DenLiner\" revealed from deck by this Spirit's effect to the Hand.",
+              "cleanText": "You can add a \"DenLiner\" revealed from deck by this Spirit's effect to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1, and put a core from the Void to any of your Spirits.\n\n[During OC] [LV1][LV2] (When Attacks)\nReturn an opposing Spirit to the deckbottom.",
-  "is_vanilla": false
- },
- "PB46-007": {
-  "name": "Kamen Rider Kuuga Ultimate Form (Dark Eyes Ver.)",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 12000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 15000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 18000
-   }
+  "PB46-001": {
+    "name": "Kamen Rider Den-O Sword Form ［4］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "Flash - [Contract Advent: \"Kamen Rider Den-O\", (Your Turn)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nYour counter +1, and put a core from the Void to any of your Spirits.\n\n[During OC] [LV1][LV2] (When Attacks)\nReturn an opposing Spirit to the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-001",
+      "name": "Kamen Rider Den-O Sword Form ［4］",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": "\"Kamen Rider Den-O\", (Your Turn)",
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Contract Advent: \"Kamen Rider Den-O\", (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1, and put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "put a core from the Void to any of your Spirits.",
+              "cleanText": "put a core from the Void to any of your Spirits",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During OC"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the deckbottom.",
+              "cleanText": "Return an opposing Spirit to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - (Either Attack Step)\nIf you have three counters or more, by discarding this card from your Hand, discard up to three cards from your decktop. When this \"Deck-Discarding effect\" discards any \"Kuuga\", summon this card by paying one cost. When you've done so, you can summon/deploy a \"Kuuga\" from your Hand.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can destroy an opposing Spirit/Nexus with two symbols or less, and when destroys, (Once per Turn: Same Name) besides the [Soul Core], you can send up to three cores from your Trash to any \"Kamen\" family Spirits.",
-  "is_vanilla": false
- },
- "PB46-005": {
-  "name": "The Time Train, DenLiner",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Turn)\n(Can't Stack) When the opposing Hand increases via an opposing effect, you can reveal a card from your decktop. If that's \"Den-O\", you can add it to the Hand; If that's \"Taros\", you can put it onto the Removed Zone. Discard any remaining cards.\n\n[LV2] Flash - (Either Attack Step)\nOnce per turn, you can summon a \"Taros\" Brave card from your Removed Zone by paying one cost.",
-  "is_vanilla": false
- },
- "PB46-CX01": {
-  "name": "Here I Am! Kamen Rider Den-O",
-  "type": "Contract Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "PB46-007": {
+    "name": "Kamen Rider Kuuga Ultimate Form (Dark Eyes Ver.)",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 12000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 15000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 18000
+      }
+    },
+    "effect": "Flash - (Either Attack Step)\nIf you have three counters or more, by discarding this card from your Hand, discard up to three cards from your decktop. When this \"Deck-Discarding effect\" discards any \"Kuuga\", summon this card by paying one cost. When you've done so, you can summon/deploy a \"Kuuga\" from your Hand.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can destroy an opposing Spirit/Nexus with two symbols or less, and when destroys, (Once per Turn: Same Name) besides the [Soul Core], you can send up to three cores from your Trash to any \"Kamen\" family Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-007",
+      "name": "Kamen Rider Kuuga Ultimate Form (Dark Eyes Ver.)",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB46-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "If you have three counters or more, by discarding this card from your Hand, discard up to three cards from your decktop. When this \"Deck-Discarding effect\" discards any \"Kuuga\", summon this card by paying one cost. When you've done so, you can summon/deploy a \"Kuuga\" from your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "If you have three counters or more, by discarding this card from your Hand, discard up to three cards from your decktop.",
+              "cleanText": "by discarding this card from your Hand, discard up to three cards from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you have three counters or more",
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "When this \"Deck-Discarding effect\" discards any \"Kuuga\", summon this card by paying one cost.",
+              "cleanText": "When this \"Deck-Discarding effect\" discards any \"Kuuga\", summon this card by paying one cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            },
+            {
+              "rawText": "you can summon/deploy a \"Kuuga\" from your Hand.",
+              "cleanText": "you can summon/deploy a \"Kuuga\" from your Hand",
+              "link": "byDoing",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing Spirit/Nexus with two symbols or less, and when destroys, (Once per Turn: Same Name) besides the [Soul Core], you can send up to three cores from your Trash to any \"Kamen\" family Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing Spirit/Nexus with two symbols or less, and when destroys, besides the [Soul Core], you can send up to three cores from your Trash to any \"Kamen\" family Spirits.",
+              "cleanText": "You can destroy an opposing Spirit/Nexus with two symbols or less, and when destroys, besides the [Soul Core], you can send up to three cores from your Trash to any \"Kamen\" family Spirits",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State] [Contract Pre-Advent]/[Spirit] [LV1][LV2] (Start of Your Attack Step)\n(Can't Stack) You can return a \"Den-O\" with [Contract Advent] from your Trash to the Hand.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Summoned/Attacks)\nYour counter +1. Then, you can reveal two cards from your decktop. Among them, put a \"Taros\" to your Removed Zone. Discard any remaining cards.",
-  "is_vanilla": false
- }
+  "PB46-005": {
+    "name": "The Time Train, DenLiner",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Turn)\n(Can't Stack) When the opposing Hand increases via an opposing effect, you can reveal a card from your decktop. If that's \"Den-O\", you can add it to the Hand; If that's \"Taros\", you can put it onto the Removed Zone. Discard any remaining cards.\n\n[LV2] Flash - (Either Attack Step)\nOnce per turn, you can summon a \"Taros\" Brave card from your Removed Zone by paying one cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-005",
+      "name": "The Time Train, DenLiner",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB46-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opposing Hand increases via an opposing effect, you can reveal a card from your decktop. If that's \"Den-O\", you can add it to the Hand; If that's \"Taros\", you can put it onto the Removed Zone. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opposing Hand increases via an opposing effect, you can reveal a card from your decktop.",
+              "cleanText": "When the opposing Hand increases via an opposing effect, you can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that's \"Den-O\", you can add it to the Hand; If that's \"Taros\", you can put it onto the Removed Zone.",
+              "cleanText": "you can add it to the Hand; If that's \"Taros\", you can put it onto the Removed Zone",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that's \"Den-O\"",
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "you can summon a \"Taros\" Brave card from your Removed Zone by paying one cost."
+          },
+          "clauses": [
+            {
+              "rawText": "you can summon a \"Taros\" Brave card from your Removed Zone by paying one cost.",
+              "cleanText": "you can summon a \"Taros\" Brave card from your Removed Zone by paying one cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "PB46-CX01": {
+    "name": "Here I Am! Kamen Rider Den-O",
+    "type": "Contract Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card.\n\n[Soul State] [Contract Pre-Advent]/[Spirit] [LV1][LV2] (Start of Your Attack Step)\n(Can't Stack) You can return a \"Den-O\" with [Contract Advent] from your Trash to the Hand.\n\n[Contract Pre-Advent]/[Spirit] [LV1][LV2] (When Summoned/Attacks)\nYour counter +1. Then, you can reveal two cards from your decktop. Among them, put a \"Taros\" to your Removed Zone. Discard any remaining cards.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB46-CX01",
+      "name": "Here I Am! Kamen Rider Den-O",
+      "keywords": [
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 42
+        },
+        {
+          "name": "Soul State",
+          "parameter": null,
+          "wave": 2,
+          "hook": "soul_state",
+          "bracketed": true,
+          "index": 159
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 172
+        },
+        {
+          "name": "Contract Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_advent",
+          "bracketed": true,
+          "index": 286
+        },
+        {
+          "name": "Contract Pre-Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "contract_pre_advent",
+          "bracketed": true,
+          "index": 334
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB46-CX01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
+          },
+          "clauses": [
+            {
+              "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+              "cleanText": "you can [Contract Advent] onto it",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "While this card is in Soul State",
+              "duration": null,
+              "op": {
+                "op": "CONTRACT_ADVENT_RULE"
+              }
+            },
+            {
+              "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+              "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": "ANY",
+                "source": "FIELD_RESERVE",
+                "destination": "ADVENT_CARD"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-CX01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Soul State",
+              "Contract Pre-Advent"
+            ],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return a \"Den-O\" with [Contract Advent] from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return a \"Den-O\" with [Contract Advent] from your Trash to the Hand.",
+              "cleanText": "You can return a \"Den-O\" with [Contract Advent] from your Trash to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB46-CX01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Contract Pre-Advent"
+            ],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your counter +1. Then, you can reveal two cards from your decktop. Among them, put a \"Taros\" to your Removed Zone. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "Your counter +1.",
+              "cleanText": "Your counter +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COUNTER",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "you can reveal two cards from your decktop.",
+              "cleanText": "you can reveal two cards from your decktop",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "Among them, put a \"Taros\" to your Removed Zone.",
+              "cleanText": "Among them, put a \"Taros\" to your Removed Zone",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REMOVED_ZONE_ACTION"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,15 +1,169 @@
 {
- "BATTLE-SPIRITS-A11722": {
-  "name": "The PhoenixDragon Phoenix-Sword",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
-  },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[LV1] (When Summoned)\nDestroy every 4000 BP or less Spirit. Or, destroy all Nexuses.\n\n[When Braved] (When Brave Attacks)\nYou can target and attack an opposing Spirit.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A11722": {
+    "name": "The PhoenixDragon Phoenix-Sword",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[LV1] (When Summoned)\nDestroy every 4000 BP or less Spirit. Or, destroy all Nexuses.\n\n[When Braved] (When Brave Attacks)\nYou can target and attack an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A11722",
+      "name": "The PhoenixDragon Phoenix-Sword",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A11722#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11722#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every 4000 BP or less Spirit. Or, destroy all Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every 4000 BP or less Spirit.",
+              "cleanText": "Destroy every 4000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "all": true,
+                "target": {
+                  "side": "either",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "maxBp": 4000
+                }
+              }
+            },
+            {
+              "rawText": "destroy all Nexuses.",
+              "cleanText": "destroy all Nexuses",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": "ALL",
+                "target": {
+                  "side": "either",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11722#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can target and attack an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can target and attack an opposing Spirit.",
+              "cleanText": "You can target and attack an opposing Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_ATTACK",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

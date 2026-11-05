@@ -1,43 +1,192 @@
 {
- "P14-34": {
-  "name": "The Beastman Lagos",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "P14-34": {
+    "name": "The Beastman Lagos",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2]\nWhen your \"Beastman\"-named Spirits are destroyed by the opponent, they can remain on the Field, exhausted.\n\n[LV2] (Your Attack Step)\nEach \"Ultimate Dragon\" family Spirit you control gains +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-34",
+      "name": "The Beastman Lagos",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P14-34#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Beastman\"-named Spirits are destroyed by the opponent, they can remain on the Field, exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Beastman\"-named Spirits are destroyed by the opponent, they can remain on the Field, exhausted.",
+              "cleanText": "When your \"Beastman\"-named Spirits are destroyed by the opponent, they can remain on the Field, exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-34#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Each \"Ultimate Dragon\" family Spirit you control gains +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Each \"Ultimate Dragon\" family Spirit you control gains +2000 BP.",
+              "cleanText": "Each \"Ultimate Dragon\" family Spirit you control gains +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nWhen your \"Beastman\"-named Spirits are destroyed by the opponent, they can remain on the Field, exhausted.\n\n[LV2] (Your Attack Step)\nEach \"Ultimate Dragon\" family Spirit you control gains +2000 BP.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A13209": {
-  "name": "The TridentalSpear Hugo",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 7000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard cards from the opposing decktop equal to this Spirit's LV.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A13209": {
+    "name": "The TridentalSpear Hugo",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard cards from the opposing decktop equal to this Spirit's LV.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A13209",
+      "name": "The TridentalSpear Hugo",
+      "keywords": [
+        {
+          "name": "Crush",
+          "parameter": null,
+          "wave": 1,
+          "hook": "crush",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A13209#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Crush",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Discard cards from the opposing decktop equal to this Spirit's LV."
+          },
+          "clauses": [
+            {
+              "rawText": "Discard cards from the opposing decktop equal to this Spirit's LV.",
+              "cleanText": "Discard cards from the opposing decktop equal to this Spirit's LV",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": "LEVEL",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

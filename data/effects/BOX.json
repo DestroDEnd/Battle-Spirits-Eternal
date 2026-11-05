@@ -1,9 +1,135 @@
 {
- "26RBS02-CP01": {
-  "name": "Gate Open, Release",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nReveal four cards from your decktop. Among them, add up to two Spirit cards with Legacy to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP.",
-  "is_vanilla": false
- }
+  "26RBS02-CP01": {
+    "name": "Gate Open, Release",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nReveal four cards from your decktop. Among them, add up to two Spirit cards with Legacy to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RBS02-CP01",
+      "name": "Gate Open, Release",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RBS02-CP01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Reveal four cards from your decktop. Among them, add up to two Spirit cards with Legacy to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "Reveal four cards from your decktop.",
+              "cleanText": "Reveal four cards from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, add up to two Spirit cards with Legacy to the Hand.",
+              "cleanText": "Among them, add up to two Spirit cards with Legacy to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RBS02-CP01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target one of your Spirits. During this turn, give it +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your Spirits.",
+              "cleanText": "Target one of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "During this turn, give it +2000 BP.",
+              "cleanText": "give it +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,20 +1,131 @@
 {
- "P15-16": {
-  "name": "The PantherBladeOgre Gakuu",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   }
-  },
-  "effect": "[LV1][LV2] (When Attacks)\nBy discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit.\n\n[LV2] (When Destroyed by the Opponent)\nReturn a Purple Spirit card/Ultimate card from your Trash to the Hand.",
-  "is_vanilla": false
- }
+  "P15-16": {
+    "name": "The PantherBladeOgre Gakuu",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nBy discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit.\n\n[LV2] (When Destroyed by the Opponent)\nReturn a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P15-16",
+      "name": "The PantherBladeOgre Gakuu",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P15-16#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By discarding a Purple Spirit card/Ultimate card from your Hand, destroy an opposing exhausted Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding a Purple Spirit card/Ultimate card from your Hand",
+              "cleanText": "By discarding a Purple Spirit card/Ultimate card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "destroy an opposing exhausted Spirit.",
+              "cleanText": "destroy an opposing exhausted Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "state": "EXHAUSTED"
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P15-16#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed by the Opponent",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand.",
+              "cleanText": "Return a Purple Spirit card/Ultimate card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

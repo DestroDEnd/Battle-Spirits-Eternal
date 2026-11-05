@@ -1,153 +1,767 @@
 {
- "KF-01": {
-  "name": "Colonel-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 9000
-   }
+  "KF-01": {
+    "name": "Colonel-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nThis Spirit gains +3000 BP.\n\n[LV2][LV3] [Clash] (When Attacks)\nThe opponent must block if possible.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-01",
+      "name": "Colonel-Dragon",
+      "keywords": [
+        {
+          "name": "Clash",
+          "parameter": null,
+          "wave": 1,
+          "hook": "clash",
+          "bracketed": true,
+          "index": 71
+        }
+      ],
+      "abilities": [
+        {
+          "id": "KF-01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +3000 BP.",
+              "cleanText": "This Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "KF-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Clash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The opponent must block if possible."
+          },
+          "clauses": [
+            {
+              "rawText": "The opponent must block if possible.",
+              "cleanText": "The opponent must block if possible",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "FORCE_BLOCK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nThis Spirit gains +3000 BP.\n\n[LV2][LV3] [Clash] (When Attacks)\nThe opponent must block if possible.",
-  "is_vanilla": false
- },
- "KF-04": {
-  "name": "ChickenFilletSandKnight",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 4000
-   }
+  "KF-04": {
+    "name": "ChickenFilletSandKnight",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nSend a core from any opposing Spirits to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-04",
+      "name": "ChickenFilletSandKnight",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "KF-04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core from any opposing Spirits to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core from any opposing Spirits to their Reserve.",
+              "cleanText": "Send a core from any opposing Spirits to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nSend a core from any opposing Spirits to their Reserve.",
-  "is_vanilla": false
- },
- "KF-11": {
-  "name": "Crispy-Cobra",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "KF-11": {
+    "name": "Crispy-Cobra",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-11",
+      "name": "Crispy-Cobra",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "KF-11#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nDraw a card.",
-  "is_vanilla": false
- },
- "KF-03": {
-  "name": "Colonel-Golem",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 8000
-   }
+  "KF-03": {
+    "name": "Colonel-Golem",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV2] (When Attacks)\nDestroy an opposing Cost 4 or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-03",
+      "name": "Colonel-Golem",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "KF-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Cost 4 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Cost 4 or less Spirit.",
+              "cleanText": "Destroy an opposing Cost 4 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 4
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2] (When Attacks)\nDestroy an opposing Cost 4 or less Spirit.",
-  "is_vanilla": false
- },
- "KF-13": {
-  "name": "The ChickenHero Sieg-Kenta-Fried",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 6,
-    "bp": 13000
-   }
+  "KF-13": {
+    "name": "The ChickenHero Sieg-Kenta-Fried",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 6,
+        "bp": 13000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nIf your Life is at three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card.\n\n[LV2][LV3][LV4] (When Attacks)\nIf you control any \"Colonel\"-named Spirit, destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-13",
+      "name": "The ChickenHero Sieg-Kenta-Fried",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "KF-13#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If your Life is at three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "If your Life is at three or less, destroy an opposing 10000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 10000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If your Life is at three or less",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "summon this Spirit card.",
+              "cleanText": "summon this Spirit card",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "KF-13#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any \"Colonel\"-named Spirit, destroy an opposing Spirit with a BP equal or inferior to this Spirit's."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any \"Colonel\"-named Spirit, destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+              "cleanText": "destroy an opposing Spirit with a BP equal or inferior to this Spirit's",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any \"Colonel\"-named Spirit",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nIf your Life is at three or less, destroy an opposing 10000 BP or less Spirit. After this effect resolves, summon this Spirit card.\n\n[LV2][LV3][LV4] (When Attacks)\nIf you control any \"Colonel\"-named Spirit, destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
-  "is_vanilla": false
- },
- "KF-14": {
-  "name": "The FryingHero Kenta-Dragon-Bazzel",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 10000
-   }
+  "KF-14": {
+    "name": "The FryingHero Kenta-Dragon-Bazzel",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 10000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nSummon this Spirit card.\n\n[LV2][LV3] (When Attacks)\nIf you control any \"Colonel\"-named Spirit, this Spirit gains +5000 BP.\n\n[LV3] (After your Burst activates)\nRefresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-14",
+      "name": "The FryingHero Kenta-Dragon-Bazzel",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "KF-14#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this Spirit card."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this Spirit card.",
+              "cleanText": "Summon this Spirit card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "KF-14#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any \"Colonel\"-named Spirit, this Spirit gains +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any \"Colonel\"-named Spirit, this Spirit gains +5000 BP.",
+              "cleanText": "this Spirit gains +5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any \"Colonel\"-named Spirit",
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "KF-14#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "After your Burst activates",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh this Spirit.",
+              "cleanText": "Refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nSummon this Spirit card.\n\n[LV2][LV3] (When Attacks)\nIf you control any \"Colonel\"-named Spirit, this Spirit gains +5000 BP.\n\n[LV3] (After your Burst activates)\nRefresh this Spirit.",
-  "is_vanilla": false
- },
- "KF-15": {
-  "name": "The ParttimePrincess Kentuckyster",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
-  },
-  "effect": "[LV1][LV2] (When Summoned)\nReturn a \"Colonel\"-named Spirit card from your Trash to the Hand.\n\n[LV2] (When Attacks)\nThis Spirit can't be blocked by opposing LV1 Spirits.",
-  "is_vanilla": false
- }
+  "KF-15": {
+    "name": "The ParttimePrincess Kentuckyster",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nReturn a \"Colonel\"-named Spirit card from your Trash to the Hand.\n\n[LV2] (When Attacks)\nThis Spirit can't be blocked by opposing LV1 Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "KF-15",
+      "name": "The ParttimePrincess Kentuckyster",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "KF-15#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand.",
+              "cleanText": "Return a \"Colonel\"-named Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "KF-15#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can't be blocked by opposing LV1 Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can't be blocked by opposing LV1 Spirits.",
+              "cleanText": "This Spirit can't be blocked by opposing LV1 Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "self",
+                "blockedByLevel": 1
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

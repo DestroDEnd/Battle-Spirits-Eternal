@@ -1,25 +1,183 @@
 {
- "P19-05": {
-  "name": "The PyroxeneDragonballUser Batrei",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 5000
-   }
-  },
-  "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Red/Yellow.\n\n[LV2][LV3] (When Attacks)\nThis Spirit's color and symbol are treated as colorless. Also, you can target and attack an opposing Spirit/Ultimate with three cores or less on it. When you've done so, this Spirit gains +5000 BP.\n\n[LV3] (When Attacks)\nDraw a card from the deckbottom.",
-  "is_vanilla": false
- }
+  "P19-05": {
+    "name": "The PyroxeneDragonballUser Batrei",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Red/Yellow.\n\n[LV2][LV3] (When Attacks)\nThis Spirit's color and symbol are treated as colorless. Also, you can target and attack an opposing Spirit/Ultimate with three cores or less on it. When you've done so, this Spirit gains +5000 BP.\n\n[LV3] (When Attacks)\nDraw a card from the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P19-05",
+      "name": "The PyroxeneDragonballUser Batrei",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P19-05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Red/Yellow."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Red/Yellow.",
+              "cleanText": "This Spirit's color and symbol are also treated as Red/Yellow",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Red/Yellow"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P19-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are treated as colorless. Also, you can target and attack an opposing Spirit/Ultimate with three cores or less on it. When you've done so, this Spirit gains +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are treated as colorless.",
+              "cleanText": "This Spirit's color and symbol are treated as colorless",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            },
+            {
+              "rawText": "you can target and attack an opposing Spirit/Ultimate with three cores or less on it.",
+              "cleanText": "you can target and attack an opposing Spirit/Ultimate with three cores or less on it",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_ATTACK",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "this Spirit gains +5000 BP.",
+              "cleanText": "this Spirit gains +5000 BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P19-05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card from the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card from the deckbottom.",
+              "cleanText": "Draw a card from the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

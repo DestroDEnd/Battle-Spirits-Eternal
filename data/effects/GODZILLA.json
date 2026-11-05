@@ -1,25 +1,76 @@
 {
- "BATTLE-SPIRITS-A4296": {
-  "name": "GODZILLA Godzilla",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 15000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 20000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nThis Spirit gains +10000 BP.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A4296": {
+    "name": "GODZILLA Godzilla",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 15000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 20000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nThis Spirit gains +10000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4296",
+      "name": "GODZILLA Godzilla",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4296#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +10000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +10000 BP.",
+              "cleanText": "This Spirit gains +10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

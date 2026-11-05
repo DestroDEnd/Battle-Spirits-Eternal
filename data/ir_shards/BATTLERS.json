@@ -1,0 +1,114 @@
+{
+  "26RBS01-120": {
+    "cardNumber": "26RBS01-120",
+    "name": "Punish Gate",
+    "keywords": [
+      {
+        "name": "Soul Magic",
+        "parameter": "w",
+        "wave": 6,
+        "hook": "soul_magic",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "26RBS01-120#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Soul Magic: w",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "26RBS01-120#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Target an opposing 7000 BP or less Spirit. Return it to the Hand. If your Life was reduced this turn, return it to the deckbottom instead."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an opposing 7000 BP or less Spirit.",
+            "cleanText": "Target an opposing 7000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_CARD"
+            }
+          },
+          {
+            "rawText": "Return it to the Hand.",
+            "cleanText": "Return it to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "target": "PREVIOUS_TARGET",
+              "destination": "HAND"
+            }
+          },
+          {
+            "rawText": "If your Life was reduced this turn, return it to the deckbottom instead.",
+            "cleanText": "return it to the deckbottom instead",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If your Life was reduced this turn",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

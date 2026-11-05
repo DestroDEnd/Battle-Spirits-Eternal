@@ -5,6 +5,8 @@
  * Manages keyword definitions and connects keyword lifecycle hooks to the EventBus.
  */
 
+import { extractKeywords } from '../../compiler/keyword_compiler.js';
+
 export class KeywordRegistry {
   constructor() {
     this.keywords = new Map();
@@ -144,6 +146,59 @@ export class KeywordRegistry {
         }
       }
     });
+
+    // 5. Battle end hook: Soar, Rumble, etc.
+    events.on('BATTLE_END', async (event) => {
+      const combat = state.combat;
+      if (!combat) return;
+
+      const attackerStack = combat.attacker || (combat.attackerStackId && 
+        [...(state.players.player.field || []), ...(state.players.opponent.field || [])].find(st => st.id === combat.attackerStackId));
+      const blockerCard = combat.blockerCard || (combat.blocker && combat.blocker.top);
+
+      if (attackerStack && attackerStack.top) {
+        const cardKeywords = this.extractCardKeywords(attackerStack.top);
+        for (const kwItem of cardKeywords) {
+          const handler = this.get(kwItem.name);
+          if (handler && handler.hooks && handler.hooks.onBattleEnd) {
+            await handler.hooks.onBattleEnd({
+              game,
+              state,
+              attackerStack,
+              blockerCard,
+              keyword: kwItem,
+              event,
+              resolver
+            });
+          }
+        }
+      }
+    });
+
+    // 6. Magic used hook: Ice Wall
+    events.on('MAGIC_USED', async (event) => {
+      if (!event || !event.player) return;
+      const opposingSide = event.player === 'player' ? 'opponent' : 'player';
+      const opposingStacks = state.players[opposingSide]?.field || [];
+
+      for (const st of opposingStacks) {
+        if (!st.top) continue;
+        const cardKeywords = this.extractCardKeywords(st.top);
+        for (const kwItem of cardKeywords) {
+          const handler = this.get(kwItem.name);
+          if (handler && handler.hooks && handler.hooks.onMagicUsed) {
+            await handler.hooks.onMagicUsed({
+              game,
+              state,
+              stack: st,
+              event,
+              keyword: kwItem,
+              resolver
+            });
+          }
+        }
+      }
+    });
   }
 
   extractCardKeywords(card) {
@@ -151,15 +206,12 @@ export class KeywordRegistry {
     if (card.compiledIr && card.compiledIr.keywords) {
       return card.compiledIr.keywords;
     }
-    // Fallback: extract from text directly if compiledIr not attached
     const text = card.effect || '';
-    const keywords = [];
-    const known = ['Clash', 'Curse', 'Crush', 'Holy Life', 'Assault', 'Windstorm', 'Awaken', 'Heavy Armor', 'Armor', 'Accel', 'Mirage', 'Change', 'High Speed', 'Rebirth', 'Ultimate Trigger', 'A.T. Field'];
-    for (const k of known) {
-      if (text.toLowerCase().includes(k.toLowerCase())) {
-        keywords.push({ name: k });
-      }
+    if (!text) return [];
+    try {
+      return extractKeywords(text);
+    } catch {
+      return [];
     }
-    return keywords;
   }
 }

@@ -1,25 +1,205 @@
 {
- "P20-03": {
-  "name": "Perfect Strike Gundam",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nReturn an opposing Nexus to the deckbottom.\n\n[LV1][LV2][LV3] (When Attacks)\nReturn two opposing 10000 BP or less Spirits to the Hand.\n\n[LV2][LV3] Cost 4 or less\nThis Spirit is unaffected by opposing Cost 4 or less effects.\n\n[LV3] (When Attacks)\nThis Spirit can't be blocked.",
-  "is_vanilla": false
- }
+  "P20-03": {
+    "name": "Perfect Strike Gundam",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nReturn an opposing Nexus to the deckbottom.\n\n[LV1][LV2][LV3] (When Attacks)\nReturn two opposing 10000 BP or less Spirits to the Hand.\n\n[LV2][LV3] Cost 4 or less\nThis Spirit is unaffected by opposing Cost 4 or less effects.\n\n[LV3] (When Attacks)\nThis Spirit can't be blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P20-03",
+      "name": "Perfect Strike Gundam",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P20-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Nexus to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Nexus to the deckbottom.",
+              "cleanText": "Return an opposing Nexus to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P20-03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return two opposing 10000 BP or less Spirits to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two opposing 10000 BP or less Spirits to the Hand.",
+              "cleanText": "Return two opposing 10000 BP or less Spirits to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P20-03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Cost 4 or less\nThis Spirit is unaffected by opposing Cost 4 or less effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Cost 4 or less",
+              "cleanText": "Cost 4 or less",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "This Spirit is unaffected by opposing Cost 4 or less effects.",
+              "cleanText": "This Spirit is unaffected by opposing Cost 4 or less effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P20-03#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can't be blocked.",
+              "cleanText": "This Spirit can't be blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

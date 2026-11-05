@@ -1,0 +1,192 @@
+{
+  "BATTLE-SPIRITS-A3622": {
+    "cardNumber": "BATTLE-SPIRITS-A3622",
+    "name": "Daioh-Hydra",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A3622#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each \"Fusion Beast\"/\"Ocean Emperor\" family Spirit you control, destroy an opposing Cost 3 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each \"Fusion Beast\"/\"Ocean Emperor\" family Spirit you control, destroy an opposing Cost 3 or less Spirit.",
+            "cleanText": "For each \"Fusion Beast\"/\"Ocean Emperor\" family Spirit you control, destroy an opposing Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3622#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have a Burst set, treat the \"BP+ when braved\" of all opposing Brave Spirits as 0."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have a Burst set, treat the \"BP+ when braved\" of all opposing Brave Spirits as 0.",
+            "cleanText": "treat the \"BP+ when braved\" of all opposing Brave Spirits as 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have a Burst set",
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P15-05": {
+    "cardNumber": "P15-05",
+    "name": "The CleverMachineBeast Kuropard",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P15-05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While [Soul Core](Soul Core) is on this Spirit, all \"Machine Beast\" family Spirits you control gain +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While [Soul Core] is on this Spirit, all \"Machine Beast\" family Spirits you control gain +3000 BP.",
+            "cleanText": "all \"Machine Beast\" family Spirits you control gain +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While [Soul Core] is on this Spirit",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P15-05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by your \"Machine Beast\" family Spirits via BP comparison, send an opposing Life to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by your \"Machine Beast\" family Spirits via BP comparison, send an opposing Life to their Reserve.",
+            "cleanText": "When only the opposing Spirit is destroyed by your \"Machine Beast\" family Spirits via BP comparison, send an opposing Life to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

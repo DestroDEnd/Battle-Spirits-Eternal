@@ -1,50 +1,515 @@
 {
- "PB15-02": {
-  "name": "Good-Looking Twins Castor&Pollux",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 10000
-   }
+  "PB15-02": {
+    "name": "Good-Looking Twins Castor&Pollux",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nBy sending the [Soul Core] (Soul Core) from this Spirit to your Trash, put two cores from the Void to this Spirit. Or, draw two cards.\n\n[LV2] (When Attacks)\nExhaust an opposing Spirit.\n\n[LV2] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB15-02",
+      "name": "Good-Looking Twins Castor&Pollux",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB15-02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By sending the [Soul Core] (Soul Core) from this Spirit to your Trash, put two cores from the Void to this Spirit. Or, draw two cards."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending the [Soul Core] (Soul Core) from this Spirit to your Trash",
+              "cleanText": "By sending the [Soul Core] (Soul Core) from this Spirit to your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_SOUL_CORE"
+              }
+            },
+            {
+              "rawText": "put two cores from the Void to this Spirit.",
+              "cleanText": "put two cores from the Void to this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "draw two cards.",
+              "cleanText": "draw two cards",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB15-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Exhaust an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust an opposing Spirit.",
+              "cleanText": "Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB15-02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nBy sending the [Soul Core] (Soul Core) from this Spirit to your Trash, put two cores from the Void to this Spirit. Or, draw two cards.\n\n[LV2] (When Attacks)\nExhaust an opposing Spirit.\n\n[LV2] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "PB15-01": {
-  "name": "The AntKing Ant-Res",
-  "type": "Spirit",
-  "levels": {},
-  "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit. Also, if [Soul Core] was used to pay the cost, also, put three cores from the Void to this Spirit.\n\n[LV2] (When Attacks)\nYou can send the [Soul Core] from your Reserve to your Trash. When you've done so, exhaust an opposing Spirit. Then, refresh this Spirit.",
-  "is_vanilla": false
- },
- "PX14-032": {
-  "name": "The FlowerMoonEmperor Ultimate-Wisteria",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 11000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 16000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 6,
-    "bp": 22000
-   }
+  "PB15-01": {
+    "name": "The AntKing Ant-Res",
+    "type": "Spirit",
+    "levels": {},
+    "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit. Also, if [Soul Core] was used to pay the cost, also, put three cores from the Void to this Spirit.\n\n[LV2] (When Attacks)\nYou can send the [Soul Core] from your Reserve to your Trash. When you've done so, exhaust an opposing Spirit. Then, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB15-01",
+      "name": "The AntKing Ant-Res",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PB15-01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to this Spirit. Also, if [Soul Core] was used to pay the cost, also, put three cores from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to this Spirit.",
+              "cleanText": "Put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "if [Soul Core] was used to pay the cost, also, put three cores from the Void to this Spirit.",
+              "cleanText": "also, put three cores from the Void to this Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if [Soul Core] was used to pay the cost",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 3,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB15-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can send the [Soul Core] from your Reserve to your Trash. When you've done so, exhaust an opposing Spirit. Then, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can send the [Soul Core] from your Reserve to your Trash.",
+              "cleanText": "You can send the [Soul Core] from your Reserve to your Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_SOUL_CORE"
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Spirit.",
+              "cleanText": "exhaust an opposing Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Cost 3 or higher Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this turn, all opposing Spirit's level cost gets +2. [Critical Hit] If the hit card is a Spirit card, also, during this turn, all opposing Nexus' level cost gets +1.\n[utb]\n\n[LV5]\nThis Ultimate can't be destroyed.",
-  "is_vanilla": false
- }
+  "PX14-032": {
+    "name": "The FlowerMoonEmperor Ultimate-Wisteria",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 11000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 16000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 6,
+        "bp": 22000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Cost 3 or higher Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, during this turn, all opposing Spirit's level cost gets +2. [Critical Hit] If the hit card is a Spirit card, also, during this turn, all opposing Nexus' level cost gets +1.\n[utb]\n\n[LV5]\nThis Ultimate can't be destroyed.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PX14-032",
+      "name": "The FlowerMoonEmperor Ultimate-Wisteria",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 70
+        },
+        {
+          "name": "Critical Hit",
+          "parameter": null,
+          "wave": 3,
+          "hook": "critical_hit",
+          "bracketed": true,
+          "index": 209
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PX14-032#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Cost 3 or higher Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Cost 3 or higher Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PX14-032#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, during this turn, all opposing Spirit's level cost gets +2. [Critical Hit] If the hit card is a Spirit card, also, during this turn, all opposing Nexus' level cost gets +1."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, during this turn, all opposing Spirit's level cost gets +2.",
+              "cleanText": "When Ultimate Trigger hits, during this turn, all opposing Spirit's level cost gets +2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "[Critical Hit] If the hit card is a Spirit card, also, during this turn, all opposing Nexus' level cost gets +1.",
+              "cleanText": "[Critical Hit] If the hit card is a Spirit card, also, during this turn, all opposing Nexus' level cost gets +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PX14-032#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Ultimate can't be destroyed."
+          },
+          "clauses": [
+            {
+              "rawText": "This Ultimate can't be destroyed.",
+              "cleanText": "This Ultimate can't be destroyed",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "INDESTRUCTIBLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

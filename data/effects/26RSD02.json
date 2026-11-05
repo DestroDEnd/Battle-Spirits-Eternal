@@ -1,197 +1,1404 @@
 {
- "26RSD02-005": {
-  "name": "Boogilugar",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
+  "26RSD02-005": {
+    "name": "Boogilugar",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "",
+    "is_vanilla": true,
+    "compiledIr": {
+      "cardNumber": "26RSD02-005",
+      "name": "Boogilugar",
+      "isFullySupported": true,
+      "isVanilla": true,
+      "compiledClausesCount": 0,
+      "unsupportedClausesCount": 0,
+      "abilities": [],
+      "keywords": []
+    }
   },
-  "effect": "",
-  "is_vanilla": true
- },
- "26RSD02-012": {
-  "name": "Blood Sip",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nTarget an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent choses which cores to send)",
-  "is_vanilla": false
- },
- "26RSD02-011": {
-  "name": "Dark Hang",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nTarget one of your \"Bloodrouse\" family Spirits. Destroy it. If you've done so, put a core from the Void to your Reserve.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP.",
-  "is_vanilla": false
- },
- "26RSD02-X02": {
-  "name": "Emperor Perigorouge",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   }
+  "26RSD02-012": {
+    "name": "Blood Sip",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nTarget an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent choses which cores to send)",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-012",
+      "name": "Blood Sip",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent choses which cores to send)"
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send cores from it to the Reserve until one core remains.",
+              "cleanText": "Send cores from it to the Reserve until one core remains",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Legacy\n[LV1-2]When Summoned\nTarget an opposing Spirit. Send a total of two cores from it to the Reserve. If you control any exhausted \"Bloodrouse\" family Spirit, target up to two Spirits instead. (The opponent chooses which cores to send.)\n\n[LV2]True ReleaseDuring Attacks\nIf any opposing Spirit is depleted by your effects this turn, this Spirit can't be blocked by opposing Cost 4 or less Spirits.",
-  "is_vanilla": false
- },
- "26RSD02-002": {
-  "name": "Firalba",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "26RSD02-011": {
+    "name": "Dark Hang",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nTarget one of your \"Bloodrouse\" family Spirits. Destroy it. If you've done so, put a core from the Void to your Reserve.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-011",
+      "name": "Dark Hang",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Target one of your \"Bloodrouse\" family Spirits. Destroy it. If you've done so, put a core from the Void to your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your \"Bloodrouse\" family Spirits.",
+              "cleanText": "Target one of your \"Bloodrouse\" family Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            },
+            {
+              "rawText": "If you've done so, put a core from the Void to your Reserve.",
+              "cleanText": "put a core from the Void to your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you've done so",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target one of your Spirits. During this turn, give it +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your Spirits.",
+              "cleanText": "Target one of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "During this turn, give it +2000 BP.",
+              "cleanText": "give it +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Destroyed\nDraw a card.",
-  "is_vanilla": false
- },
- "26RSD02-004": {
-  "name": "Garsis",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "26RSD02-X02": {
+    "name": "Emperor Perigorouge",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      }
+    },
+    "effect": "Legacy\n[LV1-2]When Summoned\nTarget an opposing Spirit. Send a total of two cores from it to the Reserve. If you control any exhausted \"Bloodrouse\" family Spirit, target up to two Spirits instead. (The opponent chooses which cores to send.)\n\n[LV2]True ReleaseDuring Attacks\nIf any opposing Spirit is depleted by your effects this turn, this Spirit can't be blocked by opposing Cost 4 or less Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-X02",
+      "name": "Emperor Perigorouge",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send a total of two cores from it to the Reserve. If you control any exhausted \"Bloodrouse\" family Spirit, target up to two Spirits instead. (The opponent chooses which cores to send.)"
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a total of two cores from it to the Reserve.",
+              "cleanText": "Send a total of two cores from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "If you control any exhausted \"Bloodrouse\" family Spirit, target up to two Spirits instead.",
+              "cleanText": "target up to two Spirits instead",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any exhausted \"Bloodrouse\" family Spirit",
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "During Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If any opposing Spirit is depleted by your effects this turn, this Spirit can't be blocked by opposing Cost 4 or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "If any opposing Spirit is depleted by your effects this turn, this Spirit can't be blocked by opposing Cost 4 or less Spirits.",
+              "cleanText": "this Spirit can't be blocked by opposing Cost 4 or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If any opposing Spirit is depleted by your effects this turn",
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]True ReleaseWhen Attacks\nTarget an opposing Cost 4 or less Spirit. Send a core, besides [Soul Core] from it to the Reserve.",
-  "is_vanilla": false
- },
- "26RSD02-007": {
-  "name": "Lady Lamica",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "26RSD02-002": {
+    "name": "Firalba",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1-2]When Destroyed\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-002",
+      "name": "Firalba",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Summoned\nIf you control any exhausted \"Bloodrouse\" family Spirit, target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.\n\n[LV2] True ReleaseDuring Attack\nThis Spirit gains +2000 BP.",
-  "is_vanilla": false
- },
- "26RSD02-003": {
-  "name": "Medici-Cattery",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "26RSD02-004": {
+    "name": "Garsis",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV2]True ReleaseWhen Attacks\nTarget an opposing Cost 4 or less Spirit. Send a core, besides [Soul Core] from it to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-004",
+      "name": "Garsis",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Cost 4 or less Spirit. Send a core, besides [Soul Core] from it to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Cost 4 or less Spirit.",
+              "cleanText": "Target an opposing Cost 4 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core] from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core] from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]True ReleaseDuring Attack\nThis Spirit gains +3000 BP.",
-  "is_vanilla": false
- },
- "26RSD02-008": {
-  "name": "Ogrul",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
+  "26RSD02-007": {
+    "name": "Lady Lamica",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1-2]When Summoned\nIf you control any exhausted \"Bloodrouse\" family Spirit, target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.\n\n[LV2] True ReleaseDuring Attack\nThis Spirit gains +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-007",
+      "name": "Lady Lamica",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any exhausted \"Bloodrouse\" family Spirit, target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any exhausted \"Bloodrouse\" family Spirit, target an opposing Spirit.",
+              "cleanText": "target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any exhausted \"Bloodrouse\" family Spirit",
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core], from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core], from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "During Attack",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +2000 BP.",
+              "cleanText": "This Spirit gains +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]When Attacks\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.",
-  "is_vanilla": false
- },
- "26RSD02-013": {
-  "name": "Rainy Poison",
-  "type": "Magic",
-  "levels": {},
-  "effect": "Legacy\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP. Then, if your Life was reduced this turn, during this turn, your Life can't be reduced by the attacks of opposing Spirits with one core on them.",
-  "is_vanilla": false
- },
- "26RSD02-006": {
-  "name": "Ram Toker",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "26RSD02-003": {
+    "name": "Medici-Cattery",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV2]True ReleaseDuring Attack\nThis Spirit gains +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-003",
+      "name": "Medici-Cattery",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "During Attack",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +3000 BP.",
+              "cleanText": "This Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Summoned\nDraw a card.",
-  "is_vanilla": false
- },
- "26RSD02-001": {
-  "name": "Sclouse",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   }
+  "26RSD02-008": {
+    "name": "Ogrul",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV2]When Attacks\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-008",
+      "name": "Ogrul",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core], from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core], from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]When Destroyed\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.",
-  "is_vanilla": false
- },
- "26RSD02-X01": {
-  "name": "The HeadNurse Nephila",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   }
+  "26RSD02-013": {
+    "name": "Rainy Poison",
+    "type": "Magic",
+    "levels": {},
+    "effect": "Legacy\n[Flash]\nTarget one of your Spirits. During this turn, give it +2000 BP. Then, if your Life was reduced this turn, during this turn, your Life can't be reduced by the attacks of opposing Spirits with one core on them.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-013",
+      "name": "Rainy Poison",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target one of your Spirits. During this turn, give it +2000 BP. Then, if your Life was reduced this turn, during this turn, your Life can't be reduced by the attacks of opposing Spirits with one core on them."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your Spirits.",
+              "cleanText": "Target one of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "During this turn, give it +2000 BP.",
+              "cleanText": "give it +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "if your Life was reduced this turn, during this turn, your Life can't be reduced by the attacks of opposing Spirits with one core on them.",
+              "cleanText": "during this turn, your Life can't be reduced by the attacks of opposing Spirits with one core on them",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if your Life was reduced this turn",
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Legacy\n[LV1-2]When Summoned\nTarget an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)\n\n[LV2]When Attacks\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve. If it depletes, draw a card.",
-  "is_vanilla": false
- },
- "26RSD02-010": {
-  "name": "The Violet Witherlands",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1-2] When Deployed\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.\n\n[LV2] [Invoke: Main]\nDestroy this Nexus ▶ Target an opposing Cost 3 or less Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)",
-  "is_vanilla": false
- },
- "26RSD02-009": {
-  "name": "Utmost Depth: The Bloodrouse Mountain Range",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1-2] Your Attack Step [Invoke: Flash]\nExhaust this Nexus ▶ Target one of your attacking \"Bloodrouse\" family Spirits. During this battle, it gains +2000 BP.\n\n[LV2] True ReleaseYour Main Step\nWhen you're summoning any \"Bloodrouse\" family Spirit card, if any opposing Spirit is depleted this turn, this Nexus gains an extra Purple symbol.",
-  "is_vanilla": false
- }
+  "26RSD02-006": {
+    "name": "Ram Toker",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1-2]When Summoned\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-006",
+      "name": "Ram Toker",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD02-001": {
+    "name": "Sclouse",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      }
+    },
+    "effect": "[LV2]When Destroyed\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-001",
+      "name": "Sclouse",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core], from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core], from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD02-X01": {
+    "name": "The HeadNurse Nephila",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      }
+    },
+    "effect": "Legacy\n[LV1-2]When Summoned\nTarget an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)\n\n[LV2]When Attacks\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve. If it depletes, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-X01",
+      "name": "The HeadNurse Nephila",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)"
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send cores from it to the Reserve until one core remains.",
+              "cleanText": "Send cores from it to the Reserve until one core remains",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve. If it depletes, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core], from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core], from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            },
+            {
+              "rawText": "If it depletes, draw a card.",
+              "cleanText": "draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If it depletes",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD02-010": {
+    "name": "The Violet Witherlands",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1-2] When Deployed\nTarget an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve.\n\n[LV2] [Invoke: Main]\nDestroy this Nexus ▶ Target an opposing Cost 3 or less Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-010",
+      "name": "The Violet Witherlands",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Send a core, besides [Soul Core], from it to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Send a core, besides [Soul Core], from it to the Reserve.",
+              "cleanText": "Send a core, besides [Soul Core], from it to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Destroy this Nexus ▶ Target an opposing Cost 3 or less Spirit. Send cores from it to the Reserve until one core remains. (The opponent chooses which cores to send.)"
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy this Nexus ▶ Target an opposing Cost 3 or less Spirit.",
+              "cleanText": "Destroy this Nexus ▶ Target an opposing Cost 3 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Send cores from it to the Reserve until one core remains.",
+              "cleanText": "Send cores from it to the Reserve until one core remains",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD02-009": {
+    "name": "Utmost Depth: The Bloodrouse Mountain Range",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1-2] Your Attack Step [Invoke: Flash]\nExhaust this Nexus ▶ Target one of your attacking \"Bloodrouse\" family Spirits. During this battle, it gains +2000 BP.\n\n[LV2] True ReleaseYour Main Step\nWhen you're summoning any \"Bloodrouse\" family Spirit card, if any opposing Spirit is depleted this turn, this Nexus gains an extra Purple symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD02-009",
+      "name": "Utmost Depth: The Bloodrouse Mountain Range",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD02-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust this Nexus ▶ Target one of your attacking \"Bloodrouse\" family Spirits. During this battle, it gains +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust this Nexus ▶ Target one of your attacking \"Bloodrouse\" family Spirits.",
+              "cleanText": "Exhaust this Nexus ▶ Target one of your attacking \"Bloodrouse\" family Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "During this battle, it gains +2000 BP.",
+              "cleanText": "it gains +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD02-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you're summoning any \"Bloodrouse\" family Spirit card, if any opposing Spirit is depleted this turn, this Nexus gains an extra Purple symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "When you're summoning any \"Bloodrouse\" family Spirit card, if any opposing Spirit is depleted this turn, this Nexus gains an extra Purple symbol.",
+              "cleanText": "When you're summoning any \"Bloodrouse\" family Spirit card, if any opposing Spirit is depleted this turn, this Nexus gains an extra Purple symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

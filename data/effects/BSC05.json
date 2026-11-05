@@ -1,274 +1,2064 @@
 {
- "BSC05-009": {
-  "name": "The ArtifactDragon Swordrander",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 8000
-   }
+  "BSC05-009": {
+    "name": "The ArtifactDragon Swordrander",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (Opposing Attack Step)\nThis Spirit can block all opposing non-braved Spirits while exhausted.\n\n[LV3] (When Battles)\nWhen only the opposing Spirit is destroyed via BP comparison, return any number of opposing Spirits up to a total of Cost 4 to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-009",
+      "name": "The ArtifactDragon Swordrander",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block all opposing non-braved Spirits while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block all opposing non-braved Spirits while exhausted.",
+              "cleanText": "This Spirit can block all opposing non-braved Spirits while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "CAN_BLOCK_WHILE_EXHAUSTED",
+                "target": "SELF"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, return any number of opposing Spirits up to a total of Cost 4 to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed via BP comparison, return any number of opposing Spirits up to a total of Cost 4 to the Hand.",
+              "cleanText": "When only the opposing Spirit is destroyed via BP comparison, return any number of opposing Spirits up to a total of Cost 4 to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (Opposing Attack Step)\nThis Spirit can block all opposing non-braved Spirits while exhausted.\n\n[LV3] (When Battles)\nWhen only the opposing Spirit is destroyed via BP comparison, return any number of opposing Spirits up to a total of Cost 4 to the Hand.",
-  "is_vanilla": false
- },
- "BSC05-027": {
-  "name": "Elec Trick",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nBy destroying one of your battling Spirits, send a core from that Spirit to your Life.",
-  "is_vanilla": false
- },
- "BSC05-023": {
-  "name": "Grass Trap",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nTarget an opposing Spirit. Exhaust that Spirit, and during this turn, that Spirit can't refresh.",
-  "is_vanilla": false
- },
- "BSC05-022": {
-  "name": "Greedy Cores",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nSend two cores from any opposing non-braved Spirits to their Reserve.",
-  "is_vanilla": false
- },
- "BSC05-021": {
-  "name": "Grim Reaper",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nDestroy an exhausted Spirit with only one core on it.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
-  "is_vanilla": false
- },
- "BSC05-005": {
-  "name": "Hinawazaru",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "BSC05-027": {
+    "name": "Elec Trick",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nBy destroying one of your battling Spirits, send a core from that Spirit to your Life.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-027",
+      "name": "Elec Trick",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-027#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By destroying one of your battling Spirits, send a core from that Spirit to your Life."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying one of your battling Spirits",
+              "cleanText": "By destroying one of your battling Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "send a core from that Spirit to your Life.",
+              "cleanText": "send a core from that Spirit to your Life",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits.\n\n[LV2] (When Battles)\nWhen only the opposing Spirit is destroyed via BP comparison, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "BSC05-007": {
-  "name": "Igua-Buggy",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   }
+  "BSC05-023": {
+    "name": "Grass Trap",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nTarget an opposing Spirit. Exhaust that Spirit, and during this turn, that Spirit can't refresh.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-023",
+      "name": "Grass Trap",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-023#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. Exhaust that Spirit, and during this turn, that Spirit can't refresh."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Exhaust that Spirit, and during this turn, that Spirit can't refresh.",
+              "cleanText": "Exhaust that Spirit, and during this turn, that Spirit can't refresh",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
-  "is_vanilla": false
- },
- "BSC05-025": {
-  "name": "Magic Boost",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nRefresh one of your Brave Spirits, and during this turn, give that Spirit +2000 BP.",
-  "is_vanilla": false
- },
- "BSC05-026": {
-  "name": "Mirage Coat",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, all your Spirit-condition Braves can't be blocked.",
-  "is_vanilla": false
- },
- "BSC05-024": {
-  "name": "Rapid Wind",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nTarget a family. Refresh two of your Spirits with the targeted family.",
-  "is_vanilla": false
- },
- "BSC05-001": {
-  "name": "Soulhorse",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   }
+  "BSC05-022": {
+    "name": "Greedy Cores",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nSend two cores from any opposing non-braved Spirits to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-022",
+      "name": "Greedy Cores",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-022#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Send two cores from any opposing non-braved Spirits to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send two cores from any opposing non-braved Spirits to their Reserve.",
+              "cleanText": "Send two cores from any opposing non-braved Spirits to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
-  "is_vanilla": false
- },
- "BSC05-015": {
-  "name": "The BeastArmor Megabison",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BSC05-021": {
+    "name": "Grim Reaper",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nDestroy an exhausted Spirit with only one core on it.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-021",
+      "name": "Grim Reaper",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-021#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Destroy an exhausted Spirit with only one core on it."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an exhausted Spirit with only one core on it.",
+              "cleanText": "Destroy an exhausted Spirit with only one core on it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "state": "exhausted"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-021#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit +2000 BP.",
+              "cleanText": "give a Spirit +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[During Brave] [Armor: Red/Green/White]\nThis Spirit is unaffected by opposing Red/Green/White Spirit/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "BSC05-013": {
-  "name": "The BlackWingDragon Burn-Crow",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   }
+  "BSC05-005": {
+    "name": "Hinawazaru",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to any of your Spirits.\n\n[LV2] (When Battles)\nWhen only the opposing Spirit is destroyed via BP comparison, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-005",
+      "name": "Hinawazaru",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your Spirits.",
+              "cleanText": "Put a core from the Void to any of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed via BP comparison, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed via BP comparison, this Spirit refreshes.",
+              "cleanText": "When only the opposing Spirit is destroyed via BP comparison, this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Battles)\nWhen this Spirit is destroyed by opposing Spirit via BP comparison, send an opposing Life to their Reserve. Then, the Brave of this Brave Spirit remains on the Field, and only the Spirit returns to the Hand.",
-  "is_vanilla": false
- },
- "BSC05-014": {
-  "name": "The BladeWolf Beo-Wulf",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BSC05-007": {
+    "name": "Igua-Buggy",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-007",
+      "name": "Igua-Buggy",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Red.",
+              "cleanText": "This Spirit's color and symbol are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Red"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Attacks)\nWhen only the opposing Spirit is destroyed by comparing BP, send two opposing Lives to their Reserve.",
-  "is_vanilla": false
- },
- "BSC05-006": {
-  "name": "The BushinBeast Tigerd-Shingen",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
+  "BSC05-025": {
+    "name": "Magic Boost",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nRefresh one of your Brave Spirits, and during this turn, give that Spirit +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-025",
+      "name": "Magic Boost",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-025#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Refresh one of your Brave Spirits, and during this turn, give that Spirit +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh one of your Brave Spirits, and during this turn, give that Spirit +2000 BP.",
+              "cleanText": "Refresh one of your Brave Spirits, and during this turn, give that Spirit +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nNeither player can remove cores from the battling Spirits.\n\n[LV2] (When Attacks)\nWhen the opposing Life is reduced, besides [The BushinBeast Tigerd-Shingen], refresh a Spirit you control.",
-  "is_vanilla": false
- },
- "BSC05-020": {
-  "name": "The Crown of the Starlit Sky",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen your Life is reduced, you can reveal a card from your decktop. If it is a Cost 2 or less Spirit card, you can summon it without paying the cost. Add any remaining card to the Hand.\n\n[LV2] (Opposing Turn)\nDestroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects.",
-  "is_vanilla": false
- },
- "BSC05-004": {
-  "name": "The ForestBird Sekkohkiji",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   }
+  "BSC05-026": {
+    "name": "Mirage Coat",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, all your Spirit-condition Braves can't be blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-026",
+      "name": "Mirage Coat",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-026#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, all your Spirit-condition Braves can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, all your Spirit-condition Braves can't be blocked.",
+              "cleanText": "all your Spirit-condition Braves can't be blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
-  "is_vanilla": false
- },
- "BSC05-016": {
-  "name": "The HeavenHornBeast Bicorn",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BSC05-024": {
+    "name": "Rapid Wind",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nTarget a family. Refresh two of your Spirits with the targeted family.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-024",
+      "name": "Rapid Wind",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-024#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target a family. Refresh two of your Spirits with the targeted family."
+          },
+          "clauses": [
+            {
+              "rawText": "Target a family.",
+              "cleanText": "Target a family",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_FAMILY"
+              }
+            },
+            {
+              "rawText": "Refresh two of your Spirits with the targeted family.",
+              "cleanText": "Refresh two of your Spirits with the targeted family",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 2,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Brave Attacks)\nWhen this battle resolves, if the opposing blocking Spirit is 6000 BP or less, by not comparing BP, treat this Spirit as not being blocked.",
-  "is_vanilla": false
- },
- "BSC05-018": {
-  "name": "The Immovable Headquarters",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Your Main Step)\nWhen your Spirit-condition Brave is summoned, put a core from the Void to your Reserve.\n\n[LV2] (Your End Step)\nRefresh all your Brave Spirits.",
-  "is_vanilla": false
- },
- "BSC05-019": {
-  "name": "The Impregnable Fortress",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Turn)\nYour Life can only be reduced by up to one per opposing Spirit per turn.\n\n[LV2]\nGive all your Spirit-condition Braves the effect: \"[Armor: Red/Blue] This Spirit is unaffected by opposing Red/Blue Spirit/Nexus/Magic effects.\"",
-  "is_vanilla": false
- },
- "BSC05-002": {
-  "name": "The Magician Dragonaga",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 6000
-   }
+  "BSC05-001": {
+    "name": "Soulhorse",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      }
+    },
+    "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-001",
+      "name": "Soulhorse",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Red.",
+              "cleanText": "This Spirit's color and symbol are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Red"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw a card.\n\n[LV3] (When Attacks)\nSend a core from any opposing Spirit to their Reserve.",
-  "is_vanilla": false
- },
- "BSC05-017": {
-  "name": "The Old Devil's Castle",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen the opponent uses a Spirit/Magic effect that targets your Spirits, you can choose one of your Spirits affected by that effect, and change the target of that effect to that Spirit only.\n\n[LV2] (Either Attack Step)\nWhen your Brave Spirit becomes exhausted, draw a card.",
-  "is_vanilla": false
- },
- "BSC05-028": {
-  "name": "Thunder Branch",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, treat the LV1/LV2/LV3 BP of every opposing non-braved or non-[Tribute] Spirit as 2000 BP. This effect can't be used during Main Step.",
-  "is_vanilla": false
- }
+  "BSC05-015": {
+    "name": "The BeastArmor Megabison",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[During Brave] [Armor: Red/Green/White]\nThis Spirit is unaffected by opposing Red/Green/White Spirit/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-015",
+      "name": "The BeastArmor Megabison",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Armor",
+          "parameter": "Red/Green/White",
+          "wave": 1,
+          "hook": "armor",
+          "bracketed": true,
+          "index": 50
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-015#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-015#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Armor: Red/Green/White",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red/Green/White Spirit/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red/Green/White Spirit/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red/Green/White Spirit/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-013": {
+    "name": "The BlackWingDragon Burn-Crow",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Battles)\nWhen this Spirit is destroyed by opposing Spirit via BP comparison, send an opposing Life to their Reserve. Then, the Brave of this Brave Spirit remains on the Field, and only the Spirit returns to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-013",
+      "name": "The BlackWingDragon Burn-Crow",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-013#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit is destroyed by opposing Spirit via BP comparison, send an opposing Life to their Reserve. Then, the Brave of this Brave Spirit remains on the Field, and only the Spirit returns to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit is destroyed by opposing Spirit via BP comparison, send an opposing Life to their Reserve.",
+              "cleanText": "When this Spirit is destroyed by opposing Spirit via BP comparison, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            },
+            {
+              "rawText": "the Brave of this Brave Spirit remains on the Field, and only the Spirit returns to the Hand.",
+              "cleanText": "the Brave of this Brave Spirit remains on the Field, and only the Spirit returns to the Hand",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-014": {
+    "name": "The BladeWolf Beo-Wulf",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Attacks)\nWhen only the opposing Spirit is destroyed by comparing BP, send two opposing Lives to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-014",
+      "name": "The BladeWolf Beo-Wulf",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-014#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, send two opposing Lives to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When only the opposing Spirit is destroyed by comparing BP, send two opposing Lives to their Reserve.",
+              "cleanText": "When only the opposing Spirit is destroyed by comparing BP, send two opposing Lives to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-006": {
+    "name": "The BushinBeast Tigerd-Shingen",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nNeither player can remove cores from the battling Spirits.\n\n[LV2] (When Attacks)\nWhen the opposing Life is reduced, besides [The BushinBeast Tigerd-Shingen], refresh a Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-006",
+      "name": "The BushinBeast Tigerd-Shingen",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Neither player can remove cores from the battling Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Neither player can remove cores from the battling Spirits.",
+              "cleanText": "Neither player can remove cores from the battling Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opposing Life is reduced, besides [The BushinBeast Tigerd-Shingen], refresh a Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opposing Life is reduced, besides [The BushinBeast Tigerd-Shingen], refresh a Spirit you control.",
+              "cleanText": "When the opposing Life is reduced, besides [The BushinBeast Tigerd-Shingen], refresh a Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-020": {
+    "name": "The Crown of the Starlit Sky",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen your Life is reduced, you can reveal a card from your decktop. If it is a Cost 2 or less Spirit card, you can summon it without paying the cost. Add any remaining card to the Hand.\n\n[LV2] (Opposing Turn)\nDestroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-020",
+      "name": "The Crown of the Starlit Sky",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-020#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is reduced, you can reveal a card from your decktop. If it is a Cost 2 or less Spirit card, you can summon it without paying the cost. Add any remaining card to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is reduced, you can reveal a card from your decktop.",
+              "cleanText": "When your Life is reduced, you can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If it is a Cost 2 or less Spirit card, you can summon it without paying the cost.",
+              "cleanText": "you can summon it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If it is a Cost 2 or less Spirit card",
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Add any remaining card to the Hand.",
+              "cleanText": "Add any remaining card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND",
+                "count": "REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-020#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects.",
+              "cleanText": "Destroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-004": {
+    "name": "The ForestBird Sekkohkiji",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      }
+    },
+    "effect": "[LV1][LV2]\nThis Spirit's color and symbol are also treated as Red.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-004",
+      "name": "The ForestBird Sekkohkiji",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Red.",
+              "cleanText": "This Spirit's color and symbol are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Red"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-016": {
+    "name": "The HeavenHornBeast Bicorn",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more]\n\n[When Braved] (When Brave Attacks)\nWhen this battle resolves, if the opposing blocking Spirit is 6000 BP or less, by not comparing BP, treat this Spirit as not being blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-016",
+      "name": "The HeavenHornBeast Bicorn",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-016#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-016#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this battle resolves, if the opposing blocking Spirit is 6000 BP or less, by not comparing BP, treat this Spirit as not being blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "When this battle resolves, if the opposing blocking Spirit is 6000 BP or less, by not comparing BP, treat this Spirit as not being blocked.",
+              "cleanText": "When this battle resolves, if the opposing blocking Spirit is 6000 BP or less, by not comparing BP, treat this Spirit as not being blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-018": {
+    "name": "The Immovable Headquarters",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Your Main Step)\nWhen your Spirit-condition Brave is summoned, put a core from the Void to your Reserve.\n\n[LV2] (Your End Step)\nRefresh all your Brave Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-018",
+      "name": "The Immovable Headquarters",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-018#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit-condition Brave is summoned, put a core from the Void to your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit-condition Brave is summoned, put a core from the Void to your Reserve.",
+              "cleanText": "When your Spirit-condition Brave is summoned, put a core from the Void to your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-018#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Refresh all your Brave Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh all your Brave Spirits.",
+              "cleanText": "Refresh all your Brave Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-019": {
+    "name": "The Impregnable Fortress",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Turn)\nYour Life can only be reduced by up to one per opposing Spirit per turn.\n\n[LV2]\nGive all your Spirit-condition Braves the effect: \"[Armor: Red/Blue] This Spirit is unaffected by opposing Red/Blue Spirit/Nexus/Magic effects.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-019",
+      "name": "The Impregnable Fortress",
+      "keywords": [
+        {
+          "name": "Armor",
+          "parameter": "Red/Blue",
+          "wave": 1,
+          "hook": "armor",
+          "bracketed": true,
+          "index": 158
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-019#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Opposing Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your Life can only be reduced by up to one per opposing Spirit per turn."
+          },
+          "clauses": [
+            {
+              "rawText": "Your Life can only be reduced by up to one per opposing Spirit per turn.",
+              "cleanText": "Your Life can only be reduced by up to one per opposing Spirit per turn",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DAMAGE_CAP"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-019#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give all your Spirit-condition Braves the effect: \"[Armor: Red/Blue] This Spirit is unaffected by opposing Red/Blue Spirit/Nexus/Magic effects.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give all your Spirit-condition Braves the effect: \"[Armor: Red/Blue] This Spirit is unaffected by opposing Red/Blue Spirit/Nexus/Magic effects.\"",
+              "cleanText": "Give all your Spirit-condition Braves the effect: \"[Armor: Red/Blue] This Spirit is unaffected by opposing Red/Blue Spirit/Nexus/Magic effects.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-002": {
+    "name": "The Magician Dragonaga",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw a card.\n\n[LV3] (When Attacks)\nSend a core from any opposing Spirit to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-002",
+      "name": "The Magician Dragonaga",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core from any opposing Spirit to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core from any opposing Spirit to their Reserve.",
+              "cleanText": "Send a core from any opposing Spirit to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-017": {
+    "name": "The Old Devil's Castle",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen the opponent uses a Spirit/Magic effect that targets your Spirits, you can choose one of your Spirits affected by that effect, and change the target of that effect to that Spirit only.\n\n[LV2] (Either Attack Step)\nWhen your Brave Spirit becomes exhausted, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-017",
+      "name": "The Old Devil's Castle",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BSC05-017#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent uses a Spirit/Magic effect that targets your Spirits, you can choose one of your Spirits affected by that effect, and change the target of that effect to that Spirit only."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent uses a Spirit/Magic effect that targets your Spirits, you can choose one of your Spirits affected by that effect, and change the target of that effect to that Spirit only.",
+              "cleanText": "When the opponent uses a Spirit/Magic effect that targets your Spirits, you can choose one of your Spirits affected by that effect, and change the target of that effect to that Spirit only",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REDIRECT_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC05-017#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Brave Spirit becomes exhausted, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Brave Spirit becomes exhausted, draw a card.",
+              "cleanText": "When your Brave Spirit becomes exhausted, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BSC05-028": {
+    "name": "Thunder Branch",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, treat the LV1/LV2/LV3 BP of every opposing non-braved or non-[Tribute] Spirit as 2000 BP. This effect can't be used during Main Step.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC05-028",
+      "name": "Thunder Branch",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 87
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC05-028#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, treat the LV1/LV2/LV3 BP of every opposing non-braved or non-[Tribute] Spirit as 2000 BP. This effect can't be used during Main Step."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, treat the LV1/LV2/LV3 BP of every opposing non-braved or non-[Tribute] Spirit as 2000 BP.",
+              "cleanText": "treat the LV1/LV2/LV3 BP of every opposing non-braved or non-[Tribute] Spirit as 2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "This effect can't be used during Main Step.",
+              "cleanText": "This effect can't be used during Main Step",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

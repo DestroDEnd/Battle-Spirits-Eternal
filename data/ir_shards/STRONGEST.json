@@ -1,0 +1,586 @@
+{
+  "SJ13-18": {
+    "cardNumber": "SJ13-18",
+    "name": "Chubu-Castle",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ13-18#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Neither player's deck can be discarded from."
+        },
+        "clauses": [
+          {
+            "rawText": "Neither player's deck can be discarded from.",
+            "cleanText": "Neither player's deck can be discarded from",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-13": {
+    "cardNumber": "SJ13-13",
+    "name": "Concerd-Cannon",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-10": {
+    "cardNumber": "SJ13-10",
+    "name": "Eighty-Eighter",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-20": {
+    "cardNumber": "SJ13-20",
+    "name": "Formosa 101",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ13-20#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent uses a Cost 3 Magic card, after its effect resolves, return an opposing Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent uses a Cost 3 Magic card, after its effect resolves, return an opposing Spirit to the Hand.",
+            "cleanText": "When the opponent uses a Cost 3 Magic card, after its effect resolves, return an opposing Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-16": {
+    "cardNumber": "SJ13-16",
+    "name": "God-Kenshing",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ13-16#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is also treated as a Yellow Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is also treated as a Yellow Spirit.",
+            "cleanText": "This Spirit is also treated as a Yellow Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COLOR",
+              "color": "Yellow"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-21": {
+    "cardNumber": "SJ13-21",
+    "name": "Majestic-Kowloon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ13-21#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, refresh a Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by comparing BP, refresh a Spirit you control.",
+            "cleanText": "When only the opposing Spirit is destroyed by comparing BP, refresh a Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-15": {
+    "cardNumber": "SJ13-15",
+    "name": "Masamu-Neos",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-12": {
+    "cardNumber": "SJ13-12",
+    "name": "Red-Itsukushima",
+    "keywords": [
+      {
+        "name": "Heavy Armor",
+        "parameter": "Red",
+        "wave": 1,
+        "hook": "heavy_armor",
+        "bracketed": true,
+        "index": 6
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ13-12#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Heavy Armor: Red",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects.",
+            "cleanText": "This Spirit is unaffected by opposing Red Spirit/Brave/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-17": {
+    "cardNumber": "SJ13-17",
+    "name": "Sky-Site",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ13-17#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Spirit to the Hand.",
+            "cleanText": "Return an opposing Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-14": {
+    "cardNumber": "SJ13-14",
+    "name": "Sunlight-Shisa",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-22": {
+    "cardNumber": "SJ13-22",
+    "name": "The WhiteMachineEmperor Ganret-Age",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 16
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ13-22#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of bodies to be refreshed by your “Spirit-refreshing effects” by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of bodies to be refreshed by your \"Spirit-refreshing effects\" by +1.",
+            "cleanText": "Increase the number of bodies to be refreshed by your \"Spirit-refreshing effects\" by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SJ13-22#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirit is destroyed by comparing BP, refresh a Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirit is destroyed by comparing BP, refresh a Spirit you control.",
+            "cleanText": "When your Spirit is destroyed by comparing BP, refresh a Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SJ13-11": {
+    "cardNumber": "SJ13-11",
+    "name": "Thunder-Zaifu",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-19": {
+    "cardNumber": "SJ13-19",
+    "name": "Tsuuten-Tiger",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SJ13-23": {
+    "cardNumber": "SJ13-23",
+    "name": "The LionSoulBlade Leon-Excalibur",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SJ13-23#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SJ13-23#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Cost 4 or less Spirit to the Hand. When this effect returns any Cost 4 Spirit to the Hand, put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Cost 4 or less Spirit to the Hand.",
+            "cleanText": "Return an opposing Cost 4 or less Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "When this effect returns any Cost 4 Spirit to the Hand, put a core from the Void to your Reserve.",
+            "cleanText": "When this effect returns any Cost 4 Spirit to the Hand, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

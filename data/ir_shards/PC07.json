@@ -1,1 +1,257 @@
-{"PC07-002":{"cardNumber":"PC07-002","name":"The Bond with Buddy","keywords":[],"abilities":[{"id":"PC07-002#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4."},"clauses":[{"rawText":"Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4.","cleanText":"Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"PC07-002#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack. Also, if you control any Ultimate, and your Life is at five or less, put a core from the Void to your Life. Then, banish this card."},"clauses":[{"rawText":"During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack.","cleanText":"During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"UNSUPPORTED","rawText":"During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack"}},{"rawText":"if you control any Ultimate, and your Life is at five or less, put a core from the Void to your Life.","cleanText":"and your Life is at five or less, put a core from the Void to your Life","link":"also","isOptional":false,"isCost":false,"condition":"if you control any Ultimate","duration":null,"op":{"op":"RECOVER_LIFE","count":1}},{"rawText":"banish this card.","cleanText":"banish this card","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"banish this card"}}],"unsupported":["During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack.","banish this card."]}],"compiledClausesCount":2,"unsupportedClausesCount":2,"isFullySupported":false},"PC07-001":{"cardNumber":"PC07-001","name":"The Infinite Power","keywords":[],"abilities":[{"id":"PC07-001#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2. Then, you can reveal three cards from your decktop. Add an Ultimate card among them to the Hand. Return any remaining cards to the deckbottom. If you have four counters or more, you can add +1 card to Hand via this effect."},"clauses":[{"rawText":"Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2.","cleanText":"Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":2}},{"rawText":"you can reveal three cards from your decktop.","cleanText":"you can reveal three cards from your decktop","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Add an Ultimate card among them to the Hand.","cleanText":"Add an Ultimate card among them to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Add an Ultimate card among them to the Hand"}},{"rawText":"Return any remaining cards to the deckbottom.","cleanText":"Return any remaining cards to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}},{"rawText":"If you have four counters or more, you can add +1 card to Hand via this effect.","cleanText":"you can add +1 card to Hand via this effect","link":null,"isOptional":true,"isCost":false,"condition":"If you have four counters or more","duration":null,"op":{"op":"UNSUPPORTED","rawText":"you can add +1 card to Hand via this effect"}}],"unsupported":["Add an Ultimate card among them to the Hand.","If you have four counters or more, you can add +1 card to Hand via this effect."]},{"id":"PC07-001#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate."},"clauses":[{"rawText":"When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate.","cleanText":"When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":15000}}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":2,"isFullySupported":false}}
+{
+  "PC07-002": {
+    "cardNumber": "PC07-002",
+    "name": "The Bond with Buddy",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PC07-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4."
+        },
+        "clauses": [
+          {
+            "rawText": "Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4.",
+            "cleanText": "Including being in Soul State/pre-advent condition, while you control any \"Mugen\", this card in Hand is unaffected by opposing effects, and if it's the opposing Attack Step, it becomes Cost 4",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC07-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack. Also, if you control any Ultimate, and your Life is at five or less, put a core from the Void to your Life. Then, banish this card."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, every opposing Cost 4 or more Spirit/Ultimate can't attack.",
+            "cleanText": "every opposing Cost 4 or more Spirit/Ultimate can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "if you control any Ultimate, and your Life is at five or less, put a core from the Void to your Life.",
+            "cleanText": "and your Life is at five or less, put a core from the Void to your Life",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you control any Ultimate",
+            "duration": null,
+            "op": {
+              "op": "RECOVER_LIFE",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "banish this card.",
+            "cleanText": "banish this card",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BANISH"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PC07-001": {
+    "cardNumber": "PC07-001",
+    "name": "The Infinite Power",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PC07-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2. Then, you can reveal three cards from your decktop. Add an Ultimate card among them to the Hand. Return any remaining cards to the deckbottom. If you have four counters or more, you can add +1 card to Hand via this effect."
+        },
+        "clauses": [
+          {
+            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2.",
+            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"Mugen\", your counters +2",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "you can reveal three cards from your decktop.",
+            "cleanText": "you can reveal three cards from your decktop",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Add an Ultimate card among them to the Hand.",
+            "cleanText": "Add an Ultimate card among them to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom.",
+            "cleanText": "Return any remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          },
+          {
+            "rawText": "If you have four counters or more, you can add +1 card to Hand via this effect.",
+            "cleanText": "you can add +1 card to Hand via this effect",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If you have four counters or more",
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PC07-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate.",
+            "cleanText": "When your Cost 6 or more Ultimate attacks, you can destroy an opposing 15000 BP or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 15000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

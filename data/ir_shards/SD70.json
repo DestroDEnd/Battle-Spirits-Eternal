@@ -1,1 +1,2092 @@
-{"SD70-012":{"cardNumber":"SD70-012","name":"Agi","keywords":[],"abilities":[{"id":"SD70-012#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While your \"Persona\" family Spirit is attacking, this card in Hand becomes Cost 0."},"clauses":[{"rawText":"While your \"Persona\" family Spirit is attacking, this card in Hand becomes Cost 0.","cleanText":"this card in Hand becomes Cost 0","link":null,"isOptional":false,"isCost":false,"condition":"While your \"Persona\" family Spirit is attacking","duration":null,"op":{"op":"UNSUPPORTED","rawText":"this card in Hand becomes Cost 0"}}],"unsupported":["While your \"Persona\" family Spirit is attacking, this card in Hand becomes Cost 0."]},{"id":"SD70-012#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate. Or, if you have five counters or more, destroy an opposing Spirit/Ultimate with the lowest cost."},"clauses":[{"rawText":"Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.","cleanText":"Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":4}}}},{"rawText":"if you have five counters or more, destroy an opposing Spirit/Ultimate with the lowest cost.","cleanText":"destroy an opposing Spirit/Ultimate with the lowest cost","link":"or","isOptional":false,"isCost":false,"condition":"if you have five counters or more","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":1,"isFullySupported":false},"SD70-008":{"cardNumber":"SD70-008","name":"Hermes","keywords":[{"name":"Contract Advent","parameter":"Blue & Magician Arcana, (Your Turn)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Magician Arcana, (Your Turn)","wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-008#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Magician Arcana, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-008#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"your counter +1. Then, destroy an opposing Nexus."},"clauses":[{"rawText":"your counter +1.","cleanText":"your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"destroy an opposing Nexus.","cleanText":"destroy an opposing Nexus","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]},{"id":"SD70-008#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate."},"clauses":[{"rawText":"Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate.","cleanText":"Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":5}}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SD70-004":{"cardNumber":"SD70-004","name":"Io","keywords":[{"name":"Contract Advent","parameter":"Blue & Lovers Arcana, (Either Attack Step)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Lovers Arcana, (Either Attack Step)","wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-004#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Lovers Arcana, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-004#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit/Ultimate. Then, put a core from the Void to any of your Spirits."},"clauses":[{"rawText":"Exhaust an opposing Spirit/Ultimate.","cleanText":"Exhaust an opposing Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"put a core from the Void to any of your Spirits.","cleanText":"put a core from the Void to any of your Spirits","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"put a core from the Void to any of your Spirits"}}],"unsupported":["put a core from the Void to any of your Spirits."]},{"id":"SD70-004#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BLOCKS","timingLabel":"When Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit/Ultimate. Then, refresh a Spirit you control."},"clauses":[{"rawText":"Exhaust an opposing Spirit/Ultimate.","cleanText":"Exhaust an opposing Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"refresh a Spirit you control.","cleanText":"refresh a Spirit you control","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":1,"isFullySupported":false},"SD70-005":{"cardNumber":"SD70-005","name":"Isis","keywords":[{"name":"Contract Advent","parameter":"Blue & Lovers Arcana & C2 or more, (Either Attack Step)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Lovers Arcana & C2 or more, (Either Attack Step)","wave":2,"hook":"contract","bracketed":true},{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-005#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Lovers Arcana & C2 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-005#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Refresh two other Spirits you control. Also, if this Spirit [Contract Advents], you can immediately end the battle."},"clauses":[{"rawText":"Refresh two other Spirits you control.","cleanText":"Refresh two other Spirits you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Refresh two other Spirits you control"}},{"rawText":"if this Spirit [Contract Advents], you can immediately end the battle.","cleanText":"you can immediately end the battle","link":"also","isOptional":true,"isCost":false,"condition":"if this Spirit [Contract Advents]","duration":null,"op":{"op":"END_BATTLE"}}],"unsupported":["Refresh two other Spirits you control."]},{"id":"SD70-005#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Heavy exhaust an opposing Spirit/Ultimate. Then, put a core from the Void to any Spirit you control."},"clauses":[{"rawText":"Heavy exhaust an opposing Spirit/Ultimate.","cleanText":"Heavy exhaust an opposing Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":true,"count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"put a core from the Void to any Spirit you control.","cleanText":"put a core from the Void to any Spirit you control","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"put a core from the Void to any Spirit you control"}}],"unsupported":["put a core from the Void to any Spirit you control."]}],"compiledClausesCount":4,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-001":{"cardNumber":"SD70-001","name":"Orpheus","keywords":[{"name":"Contract Advent","parameter":"Blue & Wild, (Your Turn)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Wild, (Your Turn)","wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-001#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Wild, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-001#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD70-001#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your counter +1. Then, ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate."},"clauses":[{"rawText":"Your counter +1.","cleanText":"Your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.","cleanText":"ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":4}}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SD70-009":{"cardNumber":"SD70-009","name":"Trismegistus","keywords":[{"name":"Contract Advent","parameter":"Blue & Magician Arcana & C4 or more, (Your Turn)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Magician Arcana & C4 or more, (Your Turn)","wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-009#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Magician Arcana & C4 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-009#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Advents","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 9 or less Spirit/Ultimate."},"clauses":[{"rawText":"Destroy an opposing Cost 9 or less Spirit/Ultimate.","cleanText":"Destroy an opposing Cost 9 or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":9}}}}],"unsupported":[]},{"id":"SD70-009#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains +10000 BP. Also, while you have five counters or more, this Spirit gains an extra Red symbol."},"clauses":[{"rawText":"This Spirit gains +10000 BP.","cleanText":"This Spirit gains +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":"target","duration":"THIS_TURN"}},{"rawText":"while you have five counters or more, this Spirit gains an extra Red symbol.","cleanText":"this Spirit gains an extra Red symbol","link":"also","isOptional":false,"isCost":false,"condition":"while you have five counters or more","duration":null,"op":{"op":"UNSUPPORTED","rawText":"this Spirit gains an extra Red symbol"}}],"unsupported":["while you have five counters or more, this Spirit gains an extra Red symbol."]}],"compiledClausesCount":4,"unsupportedClausesCount":1,"isFullySupported":false},"SD70-X01":{"cardNumber":"SD70-X01","name":"［Death］ Thanatos","keywords":[{"name":"Contract Advent","parameter":"Blue & Wild & C5 or more, (Your Turn)","wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":"Blue & Wild & C5 or more, (Your Turn)","wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Contract Advent: Blue & Wild & C5 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"SD70-X01#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["During Advent"],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them. Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless."},"clauses":[{"rawText":"You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them.","cleanText":"You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them"}},{"rawText":"Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless.","cleanText":"Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless"}}],"unsupported":["You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them.","Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless."]},{"id":"SD70-X01#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["During Advent"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve."},"clauses":[{"rawText":"Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve.","cleanText":"Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-006":{"cardNumber":"SD70-006","name":"［Gekkoukan High School Uniform］ Iori Junpei","keywords":[],"abilities":[{"id":"SD70-006#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP."},"clauses":[{"rawText":"All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP.","cleanText":"All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP"}}],"unsupported":["All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP."]},{"id":"SD70-006#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Persona\" family Spirits are treated as being one LV higher."},"clauses":[{"rawText":"All your \"Persona\" family Spirits are treated as being one LV higher.","cleanText":"All your \"Persona\" family Spirits are treated as being one LV higher","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"All your \"Persona\" family Spirits are treated as being one LV higher"}}],"unsupported":["All your \"Persona\" family Spirits are treated as being one LV higher."]}],"compiledClausesCount":0,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-002":{"cardNumber":"SD70-002","name":"［Gekkoukan High School Uniform］ Takeba Yukari","keywords":[],"abilities":[{"id":"SD70-002#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's.","cleanText":"Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":["Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's."]}],"compiledClausesCount":2,"unsupportedClausesCount":1,"isFullySupported":false},"SD70-010":{"cardNumber":"SD70-010","name":"［Gekkoukan High School Uniform］ Yamagishi Fuuka","keywords":[],"abilities":[{"id":"SD70-010#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Main Step","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve."},"clauses":[{"rawText":"When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve.","cleanText":"When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]},{"id":"SD70-010#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"S.E.E.S.\" family Spirit attacks, your counter +1."},"clauses":[{"rawText":"When your \"S.E.E.S.\" family Spirit attacks, your counter +1.","cleanText":"When your \"S.E.E.S.\" family Spirit attacks, your counter +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD70-007":{"cardNumber":"SD70-007","name":"［S.E.E.S. Official Battle Uniform］ Iori Junpei","keywords":[{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-007#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand."},"clauses":[{"rawText":"You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand.","cleanText":"You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand"}}],"unsupported":["You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand."]},{"id":"SD70-007#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Your Turn","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."},"clauses":[{"rawText":"When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash.","cleanText":"When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash"}}],"unsupported":["When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."]}],"compiledClausesCount":0,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-003":{"cardNumber":"SD70-003","name":"［S.E.E.S. Official Battle Uniform］ Takeba Yukari","keywords":[{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true}],"abilities":[{"id":"SD70-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand. Discard any remaining cards. Then, including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand.","cleanText":"Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1.","cleanText":"including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}}],"unsupported":["Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand."]},{"id":"SD70-003#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Either Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."},"clauses":[{"rawText":"When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash.","cleanText":"When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash"}}],"unsupported":["When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."]}],"compiledClausesCount":3,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-011":{"cardNumber":"SD70-011","name":"［S.E.E.S. Official Battle Uniform］ Yamagishi Fuuka","keywords":[{"name":"Mirage","parameter":"Cost 2 ([Blue Core","wave":2,"hook":"mirage","bracketed":true}],"abilities":[{"id":"SD70-011#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mirage: Cost 2 ([Blue Core","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"SD70-011#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"STEP_RESTRICTED","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's."},"clauses":[{"rawText":"All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's.","cleanText":"All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's"}}],"unsupported":["All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's."]},{"id":"SD70-011#a2","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"Either Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted."},"clauses":[{"rawText":"when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted.","cleanText":"when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted"}}],"unsupported":["when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted."]}],"compiledClausesCount":0,"unsupportedClausesCount":2,"isFullySupported":false},"SD70-CX01":{"cardNumber":"SD70-CX01","name":"［S.E.E.S. Official Battle Uniform］ Protagonist","keywords":[{"name":"Contract Advent","parameter":null,"wave":1,"hook":"contract_advent","bracketed":true},{"name":"Contract","parameter":null,"wave":2,"hook":"contract","bracketed":true},{"name":"Soul State","parameter":null,"wave":2,"hook":"soul_state","bracketed":true},{"name":"Contract Pre-Advent","parameter":null,"wave":2,"hook":"contract_pre_advent","bracketed":true}],"abilities":[{"id":"SD70-CX01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."},"clauses":[{"rawText":"While this card is in Soul State, you can [Contract Advent] onto it.","cleanText":"you can [Contract Advent] onto it","link":null,"isOptional":true,"isCost":false,"condition":"While this card is in Soul State","duration":null,"op":{"op":"UNSUPPORTED","rawText":"you can [Contract Advent] onto it"}},{"rawText":"When you do, you can put any number of cores from your Field/Reserve to the advent card.","cleanText":"When you do, you can put any number of cores from your Field/Reserve to the advent card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":"ANY","source":"FIELD_RESERVE","destination":"ADVENT_CARD"}}],"unsupported":["While this card is in Soul State, you can [Contract Advent] onto it."]},{"id":"SD70-CX01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Soul State","Contract Pre-Advent"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"[LV1][LV2] (Your Turn)\n(Once per Turn: Same Name) When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2, and draw two cards, then discard two cards from your Hand."},"clauses":[{"rawText":"[LV1][LV2] (Your Turn)","cleanText":"[LV1][LV2] (Your Turn)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"[LV1][LV2] (Your Turn)"}},{"rawText":"(Once per Turn: Same Name) When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2","cleanText":"(Once per Turn: Same Name) When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":2}},{"rawText":"draw two cards, then discard two cards from your Hand.","cleanText":"draw two cards, then discard two cards from your Hand","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":["[LV1][LV2] (Your Turn)"]},{"id":"SD70-CX01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Contract Pre-Advent"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"[LV1][LV2] (When Attacks)\nOnce per turn, when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit."},"clauses":[{"rawText":"[LV1][LV2] (When Attacks)","cleanText":"[LV1][LV2] (When Attacks)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"UNSUPPORTED","rawText":"[LV1][LV2] (When Attacks)"}},{"rawText":"Once per turn, when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit.","cleanText":"Once per turn, when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":["[LV1][LV2] (When Attacks)"]}],"compiledClausesCount":4,"unsupportedClausesCount":3,"isFullySupported":false}}
+{
+  "SD70-012": {
+    "cardNumber": "SD70-012",
+    "name": "Agi",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD70-012#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your \"Persona\" family Spirit is attacking, this card in Hand becomes Cost 0."
+        },
+        "clauses": [
+          {
+            "rawText": "While your \"Persona\" family Spirit is attacking, this card in Hand becomes Cost 0.",
+            "cleanText": "this card in Hand becomes Cost 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your \"Persona\" family Spirit is attacking",
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-012#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate. Or, if you have five counters or more, destroy an opposing Spirit/Ultimate with the lowest cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.",
+            "cleanText": "Ignoring the Cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          },
+          {
+            "rawText": "if you have five counters or more, destroy an opposing Spirit/Ultimate with the lowest cost.",
+            "cleanText": "destroy an opposing Spirit/Ultimate with the lowest cost",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you have five counters or more",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-008": {
+    "cardNumber": "SD70-008",
+    "name": "Hermes",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Magician Arcana, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Magician Arcana, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "your counter +1. Then, destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "your counter +1.",
+            "cleanText": "your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "destroy an opposing Nexus.",
+            "cleanText": "destroy an opposing Nexus",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-008#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate.",
+            "cleanText": "Discard a card from the opposing decktop, and for each symbol on the discarded cards combined, destroy an opposing Cost 5 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-004": {
+    "cardNumber": "SD70-004",
+    "name": "Io",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Lovers Arcana, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Lovers Arcana, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-004#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit/Ultimate. Then, put a core from the Void to any of your Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit/Ultimate.",
+            "cleanText": "Exhaust an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "put a core from the Void to any of your Spirits.",
+            "cleanText": "put a core from the Void to any of your Spirits",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-004#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit/Ultimate. Then, refresh a Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit/Ultimate.",
+            "cleanText": "Exhaust an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "refresh a Spirit you control.",
+            "cleanText": "refresh a Spirit you control",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-005": {
+    "cardNumber": "SD70-005",
+    "name": "Isis",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Lovers Arcana & C2 or more, (Either Attack Step)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 271
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Lovers Arcana & C2 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Refresh two other Spirits you control. Also, if this Spirit [Contract Advents], you can immediately end the battle."
+        },
+        "clauses": [
+          {
+            "rawText": "Refresh two other Spirits you control.",
+            "cleanText": "Refresh two other Spirits you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "if this Spirit [Contract Advents], you can immediately end the battle.",
+            "cleanText": "you can immediately end the battle",
+            "link": "also",
+            "isOptional": true,
+            "isCost": false,
+            "condition": "if this Spirit [Contract Advents]",
+            "duration": null,
+            "op": {
+              "op": "END_BATTLE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-005#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Heavy exhaust an opposing Spirit/Ultimate. Then, put a core from the Void to any Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Heavy exhaust an opposing Spirit/Ultimate.",
+            "cleanText": "Heavy exhaust an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": true,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "put a core from the Void to any Spirit you control.",
+            "cleanText": "put a core from the Void to any Spirit you control",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-001": {
+    "cardNumber": "SD70-001",
+    "name": "Orpheus",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Wild, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Wild, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-001#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your counter +1. Then, ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Your counter +1.",
+            "cleanText": "Your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate.",
+            "cleanText": "ignoring the cost of Braves, destroy an opposing Cost 4 or less Spirit/Ultimate",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-009": {
+    "cardNumber": "SD70-009",
+    "name": "Trismegistus",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Magician Arcana & C4 or more, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-009#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Magician Arcana & C4 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-009#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Advents",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 9 or less Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 9 or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing Cost 9 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 9
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-009#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +10000 BP. Also, while you have five counters or more, this Spirit gains an extra Red symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +10000 BP.",
+            "cleanText": "This Spirit gains +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          },
+          {
+            "rawText": "while you have five counters or more, this Spirit gains an extra Red symbol.",
+            "cleanText": "this Spirit gains an extra Red symbol",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "while you have five counters or more",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-X01": {
+    "cardNumber": "SD70-X01",
+    "name": "［Death］ Thanatos",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": "Blue & Wild & C5 or more, (Your Turn)",
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Contract Advent: Blue & Wild & C5 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During Advent"
+          ],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them. Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them.",
+            "cleanText": "You can send core from every opposing Spirit/Ultimate to the Reserve until one core remains on each of them",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless.",
+            "cleanText": "Including being in Soul State/pre-advent condition, if you control any \"Protagonist\", this effect is treated as colorless",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "During Advent"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve.",
+            "cleanText": "Destroy an opposing Spirit/Ultimate with one core or less on it, and when destroys, send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-006": {
+    "cardNumber": "SD70-006",
+    "name": "［Gekkoukan High School Uniform］ Iori Junpei",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD70-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP.",
+            "cleanText": "All your \"S.E.E.S.\"/\"Persona\" family Spirits gain +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Persona\" family Spirits are treated as being one LV higher."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Persona\" family Spirits are treated as being one LV higher.",
+            "cleanText": "All your \"Persona\" family Spirits are treated as being one LV higher",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-002": {
+    "cardNumber": "SD70-002",
+    "name": "［Gekkoukan High School Uniform］ Takeba Yukari",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD70-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's.",
+            "cleanText": "Among them, add to the Hand a \"S.E.E.S.\"/\"Persona\" family card with a card name different to this Spirit's",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-010": {
+    "cardNumber": "SD70-010",
+    "name": "［Gekkoukan High School Uniform］ Yamagishi Fuuka",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD70-010#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve.",
+            "cleanText": "When your other \"Gekkoukan High School Uniform\" is summoned/deployed, you can put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-010#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"S.E.E.S.\" family Spirit attacks, your counter +1."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"S.E.E.S.\" family Spirit attacks, your counter +1.",
+            "cleanText": "When your \"S.E.E.S.\" family Spirit attacks, your counter +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-007": {
+    "cardNumber": "SD70-007",
+    "name": "［S.E.E.S. Official Battle Uniform］ Iori Junpei",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 189
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 257
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand.",
+            "cleanText": "You can return a Cost 4 or more \"Magician Arcana\" family card from your Trash to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Your Turn",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash.",
+            "cleanText": "When you would [Contract Advent] \"Hermes\"/\"Trismegistus\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-003": {
+    "cardNumber": "SD70-003",
+    "name": "［S.E.E.S. Official Battle Uniform］ Takeba Yukari",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 371
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 427
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand. Discard any remaining cards. Then, including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand.",
+            "cleanText": "Among them, add a \"Persona\" family \"Io\"/\"Isis\" to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1.",
+            "cleanText": "including being in Soul State/pre-advent condition, if you control any \"S.E.E.S.\" family Contract Spirit, your counter +1",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-003#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash.",
+            "cleanText": "When you would [Contract Advent] \"Io\"/\"Isis\" onto this Spirit, you can [Contract Advent] it, treating [Soul Core] as being sent to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-011": {
+    "cardNumber": "SD70-011",
+    "name": "［S.E.E.S. Official Battle Uniform］ Yamagishi Fuuka",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 2 ([Blue Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-011#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Blue Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-011#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's."
+        },
+        "clauses": [
+          {
+            "rawText": "All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's.",
+            "cleanText": "All your attacking \"S.E.E.S.\"/\"Persona\" family Spirits can't be blocked by opposing Spirits/Ultimates with a cost different to that target's",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-011#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted.",
+            "cleanText": "when your \"S.E.E.S.\" family Spirits would leave the Field due to opposing effects, they can remain on the Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD70-CX01": {
+    "cardNumber": "SD70-CX01",
+    "name": "［S.E.E.S. Official Battle Uniform］ Protagonist",
+    "keywords": [
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 42
+      },
+      {
+        "name": "Soul State",
+        "parameter": null,
+        "wave": 2,
+        "hook": "soul_state",
+        "bracketed": true,
+        "index": 159
+      },
+      {
+        "name": "Contract Pre-Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_pre_advent",
+        "bracketed": true,
+        "index": 171
+      },
+      {
+        "name": "Contract Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_advent",
+        "bracketed": true,
+        "index": 322
+      },
+      {
+        "name": "Contract Pre-Advent",
+        "parameter": null,
+        "wave": 2,
+        "hook": "contract_pre_advent",
+        "bracketed": true,
+        "index": 449
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD70-CX01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in Soul State, you can [Contract Advent] onto it. When you do, you can put any number of cores from your Field/Reserve to the advent card."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in Soul State, you can [Contract Advent] onto it.",
+            "cleanText": "you can [Contract Advent] onto it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "While this card is in Soul State",
+            "duration": null,
+            "op": {
+              "op": "CONTRACT_ADVENT_RULE"
+            }
+          },
+          {
+            "rawText": "When you do, you can put any number of cores from your Field/Reserve to the advent card.",
+            "cleanText": "When you do, you can put any number of cores from your Field/Reserve to the advent card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": "ANY",
+              "source": "FIELD_RESERVE",
+              "destination": "ADVENT_CARD"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-CX01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Soul State",
+            "Contract Pre-Advent"
+          ],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Your Turn",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2, and draw two cards, then discard two cards from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2",
+            "cleanText": "When your other \"S.E.E.S.\"/\"Persona\" family card is summoned/deployed/[Contract Advents], or when this Spirit attacks, your counters +2",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "draw two cards, then discard two cards from your Hand.",
+            "cleanText": "draw two cards, then discard two cards from your Hand",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD70-CX01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Contract Pre-Advent"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit.",
+            "cleanText": "when opposing Spirits/Ultimates would leave the Field, you can refresh this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

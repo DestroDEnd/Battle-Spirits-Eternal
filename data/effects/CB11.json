@@ -1,478 +1,4838 @@
 {
- "BATTLE-SPIRITS-A2690": {
-  "name": "Agumon -Bond of Courage-",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 15000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 20000
-   }
+  "BATTLE-SPIRITS-A2690": {
+    "name": "Agumon -Bond of Courage-",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 15000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 20000
+      }
+    },
+    "effect": "Flash - [Advent: Red/Purple & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\nWhen your Life is at three or less, you can [Advent] this card from the Hand onto your \"Agumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2][LV3] (When Advents/Attacks)\nYou can destroy an opposing 15000 BP or less Spirit/Ultimate. If you control any exactly-named \"Yagami Taichi\", this effect can only be prevented by [Heavy Armor]/[Ultra Armor].\n\n[LV2][LV3] (When Attacks)\nWhen any opposing Spirit/Ultimate is depleted/destroyed, send an opposing Life to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A2690",
+      "name": "Agumon -Bond of Courage-",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Red/Purple & Cost 6 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 207
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": null,
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 538
+        },
+        {
+          "name": "Ultra Armor",
+          "parameter": null,
+          "wave": 1,
+          "hook": "ultra_armor",
+          "bracketed": true,
+          "index": 552
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A2690#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Red/Purple & Cost 6 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Spirit.",
+              "cleanText": "stack this from your Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A2690#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Agumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Agumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.",
+              "cleanText": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Agumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A2690#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing 15000 BP or less Spirit/Ultimate. If you control any exactly-named \"Yagami Taichi\", this effect can only be prevented by [Heavy Armor]/[Ultra Armor]."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing 15000 BP or less Spirit/Ultimate.",
+              "cleanText": "You can destroy an opposing 15000 BP or less Spirit/Ultimate",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 15000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "If you control any exactly-named \"Yagami Taichi\", this effect can only be prevented by [Heavy Armor]/[Ultra Armor].",
+              "cleanText": "this effect can only be prevented by [Heavy Armor]/[Ultra Armor]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any exactly-named \"Yagami Taichi\"",
+              "duration": null,
+              "op": {
+                "op": "RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A2690#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When any opposing Spirit/Ultimate is depleted/destroyed, send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When any opposing Spirit/Ultimate is depleted/destroyed, send an opposing Life to their Reserve.",
+              "cleanText": "When any opposing Spirit/Ultimate is depleted/destroyed, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Red/Purple & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\nWhen your Life is at three or less, you can [Advent] this card from the Hand onto your \"Agumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2][LV3] (When Advents/Attacks)\nYou can destroy an opposing 15000 BP or less Spirit/Ultimate. If you control any exactly-named \"Yagami Taichi\", this effect can only be prevented by [Heavy Armor]/[Ultra Armor].\n\n[LV2][LV3] (When Attacks)\nWhen any opposing Spirit/Ultimate is depleted/destroyed, send an opposing Life to their Reserve.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A3024": {
-  "name": "Birdramon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   }
+  "BATTLE-SPIRITS-A3024": {
+    "name": "Birdramon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] [Warp Digivolve: Red] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red \"Ultimate\" family Spirit card from your Hand, without paying the cost.\n\n[LV2]\nGive an exactly-named \"Garudamon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) This Spirit can't be destroyed by the opponent.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A3024",
+      "name": "Birdramon［2］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 243
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A3024#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red \"Ultimate\" family Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red \"Ultimate\" family Spirit card from your Hand, without paying the cost.",
+              "cleanText": "summon a Red \"Ultimate\" family Spirit card from your Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A3024#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give an exactly-named \"Garudamon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) This Spirit can't be destroyed by the opponent.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give an exactly-named \"Garudamon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) This Spirit can't be destroyed by the opponent.\"",
+              "cleanText": "Give an exactly-named \"Garudamon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) This Spirit can't be destroyed by the opponent.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "INDESTRUCTIBLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Warp Digivolve: Red] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red \"Ultimate\" family Spirit card from your Hand, without paying the cost.\n\n[LV2]\nGive an exactly-named \"Garudamon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) This Spirit can't be destroyed by the opponent.\"",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A3625": {
-  "name": "Daisuke's Veemon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A3625": {
+    "name": "Daisuke's Veemon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Motomiya Daisuke\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Armor\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Green/Blue] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A3625",
+      "name": "Daisuke's Veemon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A3625#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal four cards from your decktop. Among them, add an exactly-named \"Motomiya Daisuke\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Armor\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal four cards from your decktop.",
+              "cleanText": "You can reveal four cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, add an exactly-named \"Motomiya Daisuke\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Armor\"/\"Partner\" family card to the Hand.",
+              "cleanText": "Among them, add an exactly-named \"Motomiya Daisuke\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Armor\"/\"Partner\" family card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A3625#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Green/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Motomiya Daisuke\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Armor\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Green/Blue] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A3722": {
-  "name": "Diaboromon Strikes Back",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 8,
-    "bp": 10000
-   }
+  "BATTLE-SPIRITS-A3722": {
+    "name": "Diaboromon Strikes Back",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 8,
+        "bp": 10000
+      }
+    },
+    "effect": "This card/Spirit is also treated as being exactly-named \"Diaboromon\".\n\n[LV1][LV2][LV3] (When Summoned)\nYou can reveal eight cards from your decktop. Among them, discard or add to the Hand any amount of exactly-named \"Kuramon\"/ \"Armageddemon\"/ \"Diaboromon\". Banish any remaining cards. This effect can only be used once per game.\n\n[LV2][LV3]\nEvery exactly-named \"Kuramon\"/ \"Armageddemon\"/\"Diaboromon\" Spirit you control is treated as being on its highest level.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A3722",
+      "name": "Diaboromon Strikes Back",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A3722#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card/Spirit is also treated as being exactly-named \"Diaboromon\"."
+          },
+          "clauses": [
+            {
+              "rawText": "This card/Spirit is also treated as being exactly-named \"Diaboromon\".",
+              "cleanText": "This card/Spirit is also treated as being exactly-named \"Diaboromon\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A3722#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal eight cards from your decktop. Among them, discard or add to the Hand any amount of exactly-named \"Kuramon\"/ \"Armageddemon\"/ \"Diaboromon\". Banish any remaining cards. This effect can only be used once per game."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal eight cards from your decktop.",
+              "cleanText": "You can reveal eight cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DECK_OR_HAND_ACTION"
+              }
+            },
+            {
+              "rawText": "Among them, discard or add to the Hand any amount of exactly-named \"Kuramon\"/ \"Armageddemon\"/ \"Diaboromon\".",
+              "cleanText": "Among them, discard or add to the Hand any amount of exactly-named \"Kuramon\"/ \"Armageddemon\"/ \"Diaboromon\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Banish any remaining cards.",
+              "cleanText": "Banish any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BANISH"
+              }
+            },
+            {
+              "rawText": "This effect can only be used once per game.",
+              "cleanText": "This effect can only be used once per game",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "PLAY_CONDITION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A3722#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Every exactly-named \"Kuramon\"/ \"Armageddemon\"/\"Diaboromon\" Spirit you control is treated as being on its highest level."
+          },
+          "clauses": [
+            {
+              "rawText": "Every exactly-named \"Kuramon\"/ \"Armageddemon\"/\"Diaboromon\" Spirit you control is treated as being on its highest level.",
+              "cleanText": "Every exactly-named \"Kuramon\"/ \"Armageddemon\"/\"Diaboromon\" Spirit you control is treated as being on its highest level",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "This card/Spirit is also treated as being exactly-named \"Diaboromon\".\n\n[LV1][LV2][LV3] (When Summoned)\nYou can reveal eight cards from your decktop. Among them, discard or add to the Hand any amount of exactly-named \"Kuramon\"/ \"Armageddemon\"/ \"Diaboromon\". Banish any remaining cards. This effect can only be used once per game.\n\n[LV2][LV3]\nEvery exactly-named \"Kuramon\"/ \"Armageddemon\"/\"Diaboromon\" Spirit you control is treated as being on its highest level.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A4236": {
-  "name": "Flamedramon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 5,
-    "bp": 11000
-   }
+  "BATTLE-SPIRITS-A4236": {
+    "name": "Flamedramon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 5,
+        "bp": 11000
+      }
+    },
+    "effect": "Flash - [Armor Digivolve: Rookie]\nBy returning a \"Rookie\" family Spirit you control to the Hand, pay one cost to summon this card from the Hand.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nDestroy any number of opposing Spirits up to a total of 10000 BP. Or, destroy an opposing Nexus.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Mega\"/\"Armor\" family Spirit attacks, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4236",
+      "name": "Flamedramon［2］",
+      "keywords": [
+        {
+          "name": "Armor",
+          "parameter": "Rookie",
+          "wave": 1,
+          "hook": "armor",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4236#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Armor Digivolve: Rookie",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By returning a \"Rookie\" family Spirit you control to the Hand, pay one cost to summon this card from the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning a \"Rookie\" family Spirit you control to the Hand",
+              "cleanText": "By returning a \"Rookie\" family Spirit you control to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "pay one cost to summon this card from the Hand.",
+              "cleanText": "pay one cost to summon this card from the Hand",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4236#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy any number of opposing Spirits up to a total of 10000 BP. Or, destroy an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy any number of opposing Spirits up to a total of 10000 BP.",
+              "cleanText": "Destroy any number of opposing Spirits up to a total of 10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "mode": "TOTAL_BP_LTE",
+                "maxTotalBp": 10000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "destroy an opposing Nexus.",
+              "cleanText": "destroy an opposing Nexus",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4236#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Mega\"/\"Armor\" family Spirit attacks, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Mega\"/\"Armor\" family Spirit attacks, draw a card.",
+              "cleanText": "When your \"Mega\"/\"Armor\" family Spirit attacks, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Armor Digivolve: Rookie]\nBy returning a \"Rookie\" family Spirit you control to the Hand, pay one cost to summon this card from the Hand.\n\n[LV1][LV2][LV3] (When Summoned/Attacks)\nDestroy any number of opposing Spirits up to a total of 10000 BP. Or, destroy an opposing Nexus.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Mega\"/\"Armor\" family Spirit attacks, draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A4307": {
-  "name": "Gabumon -Bond of Friendship-",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 15000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 20000
-   }
+  "BATTLE-SPIRITS-A4307": {
+    "name": "Gabumon -Bond of Friendship-",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 15000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 20000
+      }
+    },
+    "effect": "Flash - [Advent: Red/Purple & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\nWhen your Life is at three or less, you can [Advent] this card from the Hand onto your \"Gabumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2][LV3] (When Advents)\nSend up to three cores from the opposing Field to their Trash. Then, if you control any exactly-named \"Ishida Yamato\", once per turn, besides [Soul Core], send two cores from the opposing Trash to the Void.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding a card from your Hand, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4307",
+      "name": "Gabumon -Bond of Friendship-",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Red/Purple & Cost 6 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 207
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4307#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Red/Purple & Cost 6 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Spirit.",
+              "cleanText": "stack this from your Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4307#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Gabumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Gabumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.",
+              "cleanText": "When your Life is at three or less, you can [Advent] this card from the Hand onto your \"Gabumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4307#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send up to three cores from the opposing Field to their Trash. Then, if you control any exactly-named \"Ishida Yamato\", once per turn, besides [Soul Core], send two cores from the opposing Trash to the Void."
+          },
+          "clauses": [
+            {
+              "rawText": "Send up to three cores from the opposing Field to their Trash.",
+              "cleanText": "Send up to three cores from the opposing Field to their Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "if you control any exactly-named \"Ishida Yamato\", once per turn, besides [Soul Core], send two cores from the opposing Trash to the Void.",
+              "cleanText": "once per turn, besides [Soul Core], send two cores from the opposing Trash to the Void",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any exactly-named \"Ishida Yamato\"",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4307#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By discarding a card from your Hand, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding a card from your Hand",
+              "cleanText": "By discarding a card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Red/Purple & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\nWhen your Life is at three or less, you can [Advent] this card from the Hand onto your \"Gabumon\"-named Spirit, ignoring the condition and treating [Soul Core] as being sent to the Trash.\n\n[LV1][LV2][LV3] (When Advents)\nSend up to three cores from the opposing Field to their Trash. Then, if you control any exactly-named \"Ishida Yamato\", once per turn, besides [Soul Core], send two cores from the opposing Trash to the Void.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding a card from your Hand, refresh this Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A4388": {
-  "name": "Garurumon［3］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "BATTLE-SPIRITS-A4388": {
+    "name": "Garurumon［3］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen summoning any exactly-named \"WereGarurumon\" via this Spirit's [Super Digivolution], treat this Spirit's color as colorless and send three cores from any opposing Spirits to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4388",
+      "name": "Garurumon［3］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 276
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4388#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4388#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning any exactly-named \"WereGarurumon\" via this Spirit's [Super Digivolution], treat this Spirit's color as colorless and send three cores from any opposing Spirits to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning any exactly-named \"WereGarurumon\" via this Spirit's [Super Digivolution], treat this Spirit's color as colorless and send three cores from any opposing Spirits to their Reserve.",
+              "cleanText": "When summoning any exactly-named \"WereGarurumon\" via this Spirit's [Super Digivolution], treat this Spirit's color as colorless and send three cores from any opposing Spirits to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen summoning any exactly-named \"WereGarurumon\" via this Spirit's [Super Digivolution], treat this Spirit's color as colorless and send three cores from any opposing Spirits to their Reserve.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A4696": {
-  "name": "Greymon［3］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 8000
-   }
+  "BATTLE-SPIRITS-A4696": {
+    "name": "Greymon［3］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2][LV3] (Your Attack Step)\nWhen summoning any exactly-named \"MetalGreymon\" via this Spirit's [Super Digivolution], return up to three Red/Purple \"Rookie\"/\"Mega\" family cards from your Trash to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4696",
+      "name": "Greymon［3］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 285
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4696#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4696#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning any exactly-named \"MetalGreymon\" via this Spirit's [Super Digivolution], return up to three Red/Purple \"Rookie\"/\"Mega\" family cards from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning any exactly-named \"MetalGreymon\" via this Spirit's [Super Digivolution], return up to three Red/Purple \"Rookie\"/\"Mega\" family cards from your Trash to the Hand.",
+              "cleanText": "When summoning any exactly-named \"MetalGreymon\" via this Spirit's [Super Digivolution], return up to three Red/Purple \"Rookie\"/\"Mega\" family cards from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2][LV3] (Your Attack Step)\nWhen summoning any exactly-named \"MetalGreymon\" via this Spirit's [Super Digivolution], return up to three Red/Purple \"Rookie\"/\"Mega\" family cards from your Trash to the Hand.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A4984": {
-  "name": "Ichijouji Ken",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Blue.\n\n[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Send four cores from this Nexus to the Void) By exhausting an opposing Spirit, put a core from the Void to any Spirit you control/your Reserve.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhile your Green \"Ultimate\"/\"Mega\" family Spirits are attacking, the opponent can't activate Burst effects.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5080": {
-  "name": "Ikkakumon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A4984": {
+    "name": "Ichijouji Ken",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Blue.\n\n[Grand Skill: 4] [LV1][LV2] Flash - (Either Attack Step)\n(Send four cores from this Nexus to the Void) By exhausting an opposing Spirit, put a core from the Void to any Spirit you control/your Reserve.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhile your Green \"Ultimate\"/\"Mega\" family Spirits are attacking, the opponent can't activate Burst effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A4984",
+      "name": "Ichijouji Ken",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Green/Blue & Rookie/Champion/Ultimate/Mega)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "4",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 724
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 927
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A4984#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus' symbol is also treated as Blue."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus' symbol is also treated as Blue.",
+              "cleanText": "This Nexus' symbol is also treated as Blue",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 4"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send four cores from this Nexus to the Void) By exhausting an opposing Spirit, put a core from the Void to any Spirit you control/your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send four cores from this Nexus to the Void) By exhausting an opposing Spirit, put a core from the Void to any Spirit you control/your Reserve.",
+              "cleanText": "(Send four cores from this Nexus to the Void) By exhausting an opposing Spirit, put a core from the Void to any Spirit you control/your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A4984#a6",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your Green \"Ultimate\"/\"Mega\" family Spirits are attacking, the opponent can't activate Burst effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While your Green \"Ultimate\"/\"Mega\" family Spirits are attacking, the opponent can't activate Burst effects.",
+              "cleanText": "the opponent can't activate Burst effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your Green \"Ultimate\"/\"Mega\" family Spirits are attacking",
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 8,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Warp Digivolve: Blue] (When Attacks)\nBy returning this Spirit to the Hand, summon a Blue \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen this Spirit's [Super Digivolution] would summon any exactly-named \"Zudomon\", during this turn, all your Blue \"Ultimate\"/\"Mega\" family Spirits are treated as being on their highest levels.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5118": {
-  "name": "Imperialdramon Dragon Mode［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A5080": {
+    "name": "Ikkakumon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2] [Warp Digivolve: Blue] (When Attacks)\nBy returning this Spirit to the Hand, summon a Blue \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen this Spirit's [Super Digivolution] would summon any exactly-named \"Zudomon\", during this turn, all your Blue \"Ultimate\"/\"Mega\" family Spirits are treated as being on their highest levels.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5080",
+      "name": "Ikkakumon［2］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 216
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5080#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Blue \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Blue \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Blue \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5080#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Zudomon\", during this turn, all your Blue \"Ultimate\"/\"Mega\" family Spirits are treated as being on their highest levels."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Zudomon\", during this turn, all your Blue \"Ultimate\"/\"Mega\" family Spirits are treated as being on their highest levels.",
+              "cleanText": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Zudomon\", during this turn, all your Blue \"Ultimate\"/\"Mega\" family Spirits are treated as being on their highest levels",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After an opposing Spirit/Ultimate Attacks]\nSummon this card without paying the cost. Then, heavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2] (When Attacks/Blocks)\nYou can reveal a card from your decktop. If that card is a Green/Blue \"Rookie\"/ \"Champion\"/ \"Ultimate\"/ \"Partner\" family card, you can pay one cost to summon/deploy it. Add any remaining card to the Hand.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5119": {
-  "name": "Imperialdramon Fighter Mode［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 11000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 13000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 16000
-   }
+  "BATTLE-SPIRITS-A5118": {
+    "name": "Imperialdramon Dragon Mode［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "effect": "[Burst: After an opposing Spirit/Ultimate Attacks]\nSummon this card without paying the cost. Then, heavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2] (When Attacks/Blocks)\nYou can reveal a card from your decktop. If that card is a Green/Blue \"Rookie\"/ \"Champion\"/ \"Ultimate\"/ \"Partner\" family card, you can pay one cost to summon/deploy it. Add any remaining card to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5118",
+      "name": "Imperialdramon Dragon Mode［2］",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After an opposing Spirit/Ultimate Attacks",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5118#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_OPPONENT_ATTACK",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this card without paying the cost. Then, heavy exhaust an opposing Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this card without paying the cost.",
+              "cleanText": "Summon this card without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            },
+            {
+              "rawText": "heavy exhaust an opposing Spirit/Ultimate.",
+              "cleanText": "heavy exhaust an opposing Spirit/Ultimate",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": true,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5118#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal a card from your decktop. If that card is a Green/Blue \"Rookie\"/ \"Champion\"/ \"Ultimate\"/ \"Partner\" family card, you can pay one cost to summon/deploy it. Add any remaining card to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal a card from your decktop.",
+              "cleanText": "You can reveal a card from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "If that card is a Green/Blue \"Rookie\"/ \"Champion\"/ \"Ultimate\"/ \"Partner\" family card, you can pay one cost to summon/deploy it.",
+              "cleanText": "you can pay one cost to summon/deploy it",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card is a Green/Blue \"Rookie\"/ \"Champion\"/ \"Ultimate\"/ \"Partner\" family card",
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Add any remaining card to the Hand.",
+              "cleanText": "Add any remaining card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND",
+                "count": "REMAINING"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Change: Cost 6 ([Blue Core][Blue Core][Green Core][Green Core])]\nExhaust two opposing Spirits/Ultimates. Then, return an opposing exhausted Spirit/Ultimate to the deckbottom. After this effect resolves, either discard this card or replace one of your Green/Blue \"Ultimate\"/\"Mega\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle.\n\n[LV2][LV3] (When Attacks)\nIf you control both exactly-named \"Motomiya Daisuke\" and \"Ichijouji Ken\", this Spirit gains an extra Green symbol and an extra Blue symbol.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5172": {
-  "name": "Ishida Yamato",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Red.\n\n[Grand Skill: 3] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send three cores from this Nexus to the Void) Destroy an opposing Spirit with three or less cores on it.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen your Red/Purple \"Mega\" family Spirit refreshes, you can send an opposing Life to their Reserve. This effect doesn't stack.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A5249": {
-  "name": "Kabuterimon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 8000
-   }
+  "BATTLE-SPIRITS-A5119": {
+    "name": "Imperialdramon Fighter Mode［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 11000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 13000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 16000
+      }
+    },
+    "effect": "Flash - [Change: Cost 6 ([Blue Core][Blue Core][Green Core][Green Core])]\nExhaust two opposing Spirits/Ultimates. Then, return an opposing exhausted Spirit/Ultimate to the deckbottom. After this effect resolves, either discard this card or replace one of your Green/Blue \"Ultimate\"/\"Mega\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle.\n\n[LV2][LV3] (When Attacks)\nIf you control both exactly-named \"Motomiya Daisuke\" and \"Ichijouji Ken\", this Spirit gains an extra Green symbol and an extra Blue symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5119",
+      "name": "Imperialdramon Fighter Mode［2］",
+      "keywords": [
+        {
+          "name": "Change",
+          "parameter": "Cost 6 ([Blue Core",
+          "wave": 2,
+          "hook": "change",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5119#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Change: Cost ([Blue Core][Blue Core][Green Core][Green Core])"
+            ],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust two opposing Spirits/Ultimates. Then, return an opposing exhausted Spirit/Ultimate to the deckbottom. After this effect resolves, either discard this card or replace one of your Green/Blue \"Ultimate\"/\"Mega\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust two opposing Spirits/Ultimates.",
+              "cleanText": "Exhaust two opposing Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "return an opposing exhausted Spirit/Ultimate to the deckbottom.",
+              "cleanText": "return an opposing exhausted Spirit/Ultimate to the deckbottom",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "either discard this card or replace one of your Green/Blue \"Ultimate\"/\"Mega\" family Spirits with this card in refreshed condition.",
+              "cleanText": "either discard this card or replace one of your Green/Blue \"Ultimate\"/\"Mega\" family Spirits with this card in refreshed condition",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "If the Spirit is currently battling, continue the battle.",
+              "cleanText": "continue the battle",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If the Spirit is currently battling",
+              "duration": null,
+              "op": {
+                "op": "CONTINUE_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5119#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control both exactly-named \"Motomiya Daisuke\" and \"Ichijouji Ken\", this Spirit gains an extra Green symbol and an extra Blue symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control both exactly-named \"Motomiya Daisuke\" and \"Ichijouji Ken\", this Spirit gains an extra Green symbol and an extra Blue symbol.",
+              "cleanText": "this Spirit gains an extra Green symbol and an extra Blue symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control both exactly-named \"Motomiya Daisuke\" and \"Ichijouji Ken\"",
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Warp Digivolve: Green] (When Attacks)\nBy returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2]\nGive an exactly-named \"MegaKabuterimon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) When the opponent would use a Flash effect, unless they exhaust a Spirit they control, they can't use it.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6021": {
-  "name": "Kimeramon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A5172": {
+    "name": "Ishida Yamato",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Red.\n\n[Grand Skill: 3] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send three cores from this Nexus to the Void) Destroy an opposing Spirit with three or less cores on it.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen your Red/Purple \"Mega\" family Spirit refreshes, you can send an opposing Life to their Reserve. This effect doesn't stack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5172",
+      "name": "Ishida Yamato",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Red/Purple & Rookie/Champion/Ultimate/Mega)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "3",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 723
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 902
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5172#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus' symbol is also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus' symbol is also treated as Red.",
+              "cleanText": "This Nexus' symbol is also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 3"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) Destroy an opposing Spirit with three or less cores on it."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send three cores from this Nexus to the Void) Destroy an opposing Spirit with three or less cores on it.",
+              "cleanText": "(Once per turn, send three cores from this Nexus to the Void) Destroy an opposing Spirit with three or less cores on it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5172#a6",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Red/Purple \"Mega\" family Spirit refreshes, you can send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Red/Purple \"Mega\" family Spirit refreshes, you can send an opposing Life to their Reserve.",
+              "cleanText": "When your Red/Purple \"Mega\" family Spirit refreshes, you can send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 8,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While there is any \"Rookie\"/\"Champion\" family card in your Trash, this set card is unaffected by opposing effects.\n\n[Burst: After the opposing Hand increases via an opposing effect]\nDestroy two opposing Nexuses, and put a core from the Void to your Reserve. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit with a BP equal or inferior to this Spirit's. Then, draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6029": {
-  "name": "Ken's Wormmon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
+  "BATTLE-SPIRITS-A5249": {
+    "name": "Kabuterimon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2] [Warp Digivolve: Green] (When Attacks)\nBy returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2]\nGive an exactly-named \"MegaKabuterimon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) When the opponent would use a Flash effect, unless they exhaust a Spirit they control, they can't use it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A5249",
+      "name": "Kabuterimon［2］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 252
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A5249#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Green",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A5249#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give an exactly-named \"MegaKabuterimon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) When the opponent would use a Flash effect, unless they exhaust a Spirit they control, they can't use it."
+          },
+          "clauses": [
+            {
+              "rawText": "Give an exactly-named \"MegaKabuterimon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) When the opponent would use a Flash effect, unless they exhaust a Spirit they control, they can't use it.",
+              "cleanText": "Give an exactly-named \"MegaKabuterimon\" to be summoned by this Spirit's [Super Digivolution], during this turn, the effect: \"(Your Attack Step) When the opponent would use a Flash effect, unless they exhaust a Spirit they control, they can't use it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Ichijouji Ken\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Green/Blue] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6495": {
-  "name": "MetalGreymon［3］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
+  "BATTLE-SPIRITS-A6021": {
+    "name": "Kimeramon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 12000
+      }
+    },
+    "effect": "While there is any \"Rookie\"/\"Champion\" family card in your Trash, this set card is unaffected by opposing effects.\n\n[Burst: After the opposing Hand increases via an opposing effect]\nDestroy two opposing Nexuses, and put a core from the Void to your Reserve. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit with a BP equal or inferior to this Spirit's. Then, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6021",
+      "name": "Kimeramon",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After the opposing Hand increases via an opposing effect",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 116
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6021#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While there is any \"Rookie\"/\"Champion\" family card in your Trash, this set card is unaffected by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While there is any \"Rookie\"/\"Champion\" family card in your Trash, this set card is unaffected by opposing effects.",
+              "cleanText": "this set card is unaffected by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While there is any \"Rookie\"/\"Champion\" family card in your Trash",
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6021#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_TRIGGER_CONDITION",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy two opposing Nexuses, and put a core from the Void to your Reserve. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy two opposing Nexuses",
+              "cleanText": "Destroy two opposing Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "put a core from the Void to your Reserve.",
+              "cleanText": "put a core from the Void to your Reserve",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6021#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing Spirit with a BP equal or inferior to this Spirit's. Then, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing Spirit with a BP equal or inferior to this Spirit's.",
+              "cleanText": "You can destroy an opposing Spirit with a BP equal or inferior to this Spirit's",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nYou can destroy an opposing 10000 BP or less Spirit and an opposing Nexus.\n\n[LV2][LV3] (Your Turn)\nYour refreshed \"Terra Dragon\" family Spirits are unaffected by opposing Spirit/Nexus effects.\n\n[LV3] (When Attacks)\nOnce per turn, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6514": {
-  "name": "Meicrackmon Vicious Mode",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 9000
-   }
+  "BATTLE-SPIRITS-A6029": {
+    "name": "Ken's Wormmon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Ichijouji Ken\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Green/Blue] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6029",
+      "name": "Ken's Wormmon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6029#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal four cards from your decktop. Among them, add an exactly-named \"Ichijouji Ken\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal four cards from your decktop.",
+              "cleanText": "You can reveal four cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, add an exactly-named \"Ichijouji Ken\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand.",
+              "cleanText": "Among them, add an exactly-named \"Ichijouji Ken\", and a Green/Blue \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6029#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Green/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Green/Blue \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDraw a card.\n\n[LV2][LV3] (When Attacks)\nSend a core each from every opposing Grandwalker Nexus to the Void. When this effect sends at least one core, once per turn, discard a random card from the opposing Hand.\n\n[LV3] (When Attacks)\nBy paying three costs, refresh this Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6648": {
-  "name": "Motomiya Daisuke",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega, Armor)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Green.\n\n[Grand Skill: 3] [LV1][LV2] Flash - (Your Attack Step)\n(Send three cores from this Nexus to the Void) During this battle, a Blue \"Ultimate\"/\"Mega\" family Spirit you control can't be blocked by opposing Spirits with printed effects.\n\n[Grand Field] [LV2] (Your Turn)\nYour Blue \"Ultimate\"/\"Mega\" family Spirits are unaffected by opposing Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A7570": {
-  "name": "Salamon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A6495": {
+    "name": "MetalGreymon［3］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nYou can destroy an opposing 10000 BP or less Spirit and an opposing Nexus.\n\n[LV2][LV3] (Your Turn)\nYour refreshed \"Terra Dragon\" family Spirits are unaffected by opposing Spirit/Nexus effects.\n\n[LV3] (When Attacks)\nOnce per turn, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6495",
+      "name": "MetalGreymon［3］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6495#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing 10000 BP or less Spirit and an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing 10000 BP or less Spirit and an opposing Nexus.",
+              "cleanText": "You can destroy an opposing 10000 BP or less Spirit and an opposing Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6495#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your refreshed \"Terra Dragon\" family Spirits are unaffected by opposing Spirit/Nexus effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Your refreshed \"Terra Dragon\" family Spirits are unaffected by opposing Spirit/Nexus effects.",
+              "cleanText": "Your refreshed \"Terra Dragon\" family Spirits are unaffected by opposing Spirit/Nexus effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6495#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a Yellow \"Champion\"/\"Ultimate\"/\"Mega\" family Spirit card to the Hand. Discard any remaining cards.\n\n[LV2][LV3] [Digivolve: Yellow] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Yellow \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "CB11-001": {
-  "name": "Taichi's Agumon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A6514": {
+    "name": "Meicrackmon Vicious Mode",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDraw a card.\n\n[LV2][LV3] (When Attacks)\nSend a core each from every opposing Grandwalker Nexus to the Void. When this effect sends at least one core, once per turn, discard a random card from the opposing Hand.\n\n[LV3] (When Attacks)\nBy paying three costs, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6514",
+      "name": "Meicrackmon Vicious Mode",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6514#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6514#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core each from every opposing Grandwalker Nexus to the Void. When this effect sends at least one core, once per turn, discard a random card from the opposing Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core each from every opposing Grandwalker Nexus to the Void.",
+              "cleanText": "Send a core each from every opposing Grandwalker Nexus to the Void",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "When this effect sends at least one core, once per turn, discard a random card from the opposing Hand.",
+              "cleanText": "When this effect sends at least one core, once per turn, discard a random card from the opposing Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6514#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By paying three costs, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By paying three costs",
+              "cleanText": "By paying three costs",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Yagami Taichi\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A13822": {
-  "name": "Togemon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A6648": {
+    "name": "Motomiya Daisuke",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega, Armor)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Green.\n\n[Grand Skill: 3] [LV1][LV2] Flash - (Your Attack Step)\n(Send three cores from this Nexus to the Void) During this battle, a Blue \"Ultimate\"/\"Mega\" family Spirit you control can't be blocked by opposing Spirits with printed effects.\n\n[Grand Field] [LV2] (Your Turn)\nYour Blue \"Ultimate\"/\"Mega\" family Spirits are unaffected by opposing Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6648",
+      "name": "Motomiya Daisuke",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Green/Blue & Rookie/Champion/Ultimate/Mega, Armor)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "3",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 732
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 965
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6648#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Green/Blue & Rookie/Champion/Ultimate/Mega, Armor)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus' symbol is also treated as Green."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus' symbol is also treated as Green.",
+              "cleanText": "This Nexus' symbol is also treated as Green",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 3"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send three cores from this Nexus to the Void) During this battle, a Blue \"Ultimate\"/\"Mega\" family Spirit you control can't be blocked by opposing Spirits with printed effects."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send three cores from this Nexus to the Void) During this battle, a Blue \"Ultimate\"/\"Mega\" family Spirit you control can't be blocked by opposing Spirits with printed effects.",
+              "cleanText": "(Send three cores from this Nexus to the Void) During this battle, a Blue \"Ultimate\"/\"Mega\" family Spirit you control can't be blocked by opposing Spirits with printed effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6648#a6",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your Blue \"Ultimate\"/\"Mega\" family Spirits are unaffected by opposing Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Your Blue \"Ultimate\"/\"Mega\" family Spirits are unaffected by opposing Nexus/Magic effects.",
+              "cleanText": "Your Blue \"Ultimate\"/\"Mega\" family Spirits are unaffected by opposing Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 8,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Warp Digivolve: Green] (When Attacks)\nBy returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen this Spirit's [Super Digivolution] would summon any exactly-named \"Lillymon\", during this turn, opposing exhausted Spirits can't activate their effects.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A14381": {
-  "name": "WereGarurumon［3］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A7570": {
+    "name": "Salamon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a Yellow \"Champion\"/\"Ultimate\"/\"Mega\" family Spirit card to the Hand. Discard any remaining cards.\n\n[LV2][LV3] [Digivolve: Yellow] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Yellow \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A7570",
+      "name": "Salamon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A7570#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add a Yellow \"Champion\"/\"Ultimate\"/\"Mega\" family Spirit card to the Hand. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a Yellow \"Champion\"/\"Ultimate\"/\"Mega\" family Spirit card to the Hand.",
+              "cleanText": "Among them, add a Yellow \"Champion\"/\"Ultimate\"/\"Mega\" family Spirit card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A7570#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Yellow",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Yellow \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Yellow \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Yellow \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards. Then, for each two cards in your Hand, send a core from any opposing Spirits to their Reserve.\n\n[LV2][LV3] (When Attacks)\nBy returning a \"Gabumon\"/\"Garurumon\"-named card from your Trash to the Hand, refresh this Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A14441": {
-  "name": "Yamato's Gabumon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
+  "CB11-001": {
+    "name": "Taichi's Agumon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Yagami Taichi\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "CB11-001",
+      "name": "Taichi's Agumon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "CB11-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal four cards from your decktop. Among them, add an exactly-named \"Yagami Taichi\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal four cards from your decktop.",
+              "cleanText": "You can reveal four cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, add an exactly-named \"Yagami Taichi\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand.",
+              "cleanText": "Among them, add an exactly-named \"Yagami Taichi\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CB11-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Ishida Yamato\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A14515": {
-  "name": "Yagami Taichi",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Purple.\n\n[Grand Skill: 3] [LV1][LV2] (Your Main Step)\n(Once per turn, send three cores from this Nexus to the Void) Draw a card. Also, during this turn, increase the limit of your \"BP Destruction effects\" by +5000.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen any opposing Spirit is depleted/destroyed, you can refresh a Red/Purple \"Mega\" family Spirit you control.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A13822": {
+    "name": "Togemon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2] [Warp Digivolve: Green] (When Attacks)\nBy returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV2] (Your Attack Step)\nWhen this Spirit's [Super Digivolution] would summon any exactly-named \"Lillymon\", during this turn, opposing exhausted Spirits can't activate their effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A13822",
+      "name": "Togemon［2］",
+      "keywords": [
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 218
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A13822#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Green",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Green \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A13822#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Lillymon\", during this turn, opposing exhausted Spirits can't activate their effects."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Lillymon\", during this turn, opposing exhausted Spirits can't activate their effects.",
+              "cleanText": "When this Spirit's [Super Digivolution] would summon any exactly-named \"Lillymon\", during this turn, opposing exhausted Spirits can't activate their effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A14381": {
+    "name": "WereGarurumon［3］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards. Then, for each two cards in your Hand, send a core from any opposing Spirits to their Reserve.\n\n[LV2][LV3] (When Attacks)\nBy returning a \"Gabumon\"/\"Garurumon\"-named card from your Trash to the Hand, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A14381",
+      "name": "WereGarurumon［3］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A14381#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards. Then, for each two cards in your Hand, send a core from any opposing Spirits to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "for each two cards in your Hand, send a core from any opposing Spirits to their Reserve.",
+              "cleanText": "for each two cards in your Hand, send a core from any opposing Spirits to their Reserve",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14381#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning a \"Gabumon\"/\"Garurumon\"-named card from your Trash to the Hand, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning a \"Gabumon\"/\"Garurumon\"-named card from your Trash to the Hand",
+              "cleanText": "By returning a \"Gabumon\"/\"Garurumon\"-named card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A14441": {
+    "name": "Yamato's Gabumon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal four cards from your decktop. Among them, add an exactly-named \"Ishida Yamato\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A14441",
+      "name": "Yamato's Gabumon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A14441#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal four cards from your decktop. Among them, add an exactly-named \"Ishida Yamato\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal four cards from your decktop.",
+              "cleanText": "You can reveal four cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, add an exactly-named \"Ishida Yamato\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand.",
+              "cleanText": "Among them, add an exactly-named \"Ishida Yamato\", and a Red/Purple \"Champion\"/\"Ultimate\"/\"Mega\"/\"Partner\" family card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14441#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "BATTLE-SPIRITS-A14515": {
+    "name": "Yagami Taichi",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)]\n◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[LV1][LV2]\nThis Nexus' symbol is also treated as Purple.\n\n[Grand Skill: 3] [LV1][LV2] (Your Main Step)\n(Once per turn, send three cores from this Nexus to the Void) Draw a card. Also, during this turn, increase the limit of your \"BP Destruction effects\" by +5000.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen any opposing Spirit is depleted/destroyed, you can refresh a Red/Purple \"Mega\" family Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A14515",
+      "name": "Yagami Taichi",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Red/Purple & Rookie/Champion/Ultimate/Mega)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "3",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 726
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 933
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A14515#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Red/Purple & Rookie/Champion/Ultimate/Mega)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you don't control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus' symbol is also treated as Purple."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus' symbol is also treated as Purple.",
+              "cleanText": "This Nexus' symbol is also treated as Purple",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 3"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) Draw a card. Also, during this turn, increase the limit of your \"BP Destruction effects\" by +5000."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send three cores from this Nexus to the Void) Draw a card.",
+              "cleanText": "(Once per turn, send three cores from this Nexus to the Void) Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "during this turn, increase the limit of your \"BP Destruction effects\" by +5000.",
+              "cleanText": "increase the limit of your \"BP Destruction effects\" by +5000",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14515#a6",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When any opposing Spirit is depleted/destroyed, you can refresh a Red/Purple \"Mega\" family Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "When any opposing Spirit is depleted/destroyed, you can refresh a Red/Purple \"Mega\" family Spirit you control.",
+              "cleanText": "When any opposing Spirit is depleted/destroyed, you can refresh a Red/Purple \"Mega\" family Spirit you control",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 9,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

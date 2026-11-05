@@ -1,0 +1,346 @@
+{
+  "P15-19": {
+    "cardNumber": "P15-19",
+    "name": "Spirit Santa",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P15-19#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash, each player reveals a card from their decktop. If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost. If not summoning, or if it's another card, return it to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash",
+            "cleanText": "By sending [Soul Core] (Soul Core) on this Spirit to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "each player reveals a card from their decktop.",
+            "cleanText": "each player reveals a card from their decktop",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "If that card is a Spirit card, the opponent, and then you, can summon it without paying the cost.",
+            "cleanText": "the opponent, and then you, can summon it without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If that card is a Spirit card",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "If not summoning, or if it's another card, return it to the deckbottom.",
+            "cleanText": "or if it's another card, return it to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If not summoning",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P14-41": {
+    "cardNumber": "P14-41",
+    "name": "The AstralKingBlade Alphecca",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 3 or more Spirit/Ultimate",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P14-41#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 3 or more Spirit/Ultimate",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 3 or more Spirit/Ultimate]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "P14-41#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy a Brave on an opposing Brave Spirit. If your Life is at three or less, instead, destroy a Brave on an opposing Brave Spirit/Brave Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy a Brave on an opposing Brave Spirit.",
+            "cleanText": "Destroy a Brave on an opposing Brave Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Brave"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "If your Life is at three or less, instead, destroy a Brave on an opposing Brave Spirit/Brave Ultimate.",
+            "cleanText": "destroy a Brave on an opposing Brave Spirit/Brave Ultimate",
+            "link": "instead",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If your Life is at three or less",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Brave"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P14-41#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(When this Spirit/Ultimate Brave Attacks)\nFor each of your Brave Spirits/Brave Ultimates, this Spirit/Ultimate gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "(When this Spirit/Ultimate Brave Attacks)",
+            "cleanText": "(When this Spirit/Ultimate Brave Attacks)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "For each of your Brave Spirits/Brave Ultimates, this Spirit/Ultimate gains +2000 BP.",
+            "cleanText": "For each of your Brave Spirits/Brave Ultimates, this Spirit/Ultimate gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P15-17": {
+    "cardNumber": "P15-17",
+    "name": "The Minis' Great Athletics Meeting",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P15-17#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can put any number of [The Minis' Great Athletics Meeting] in your deck."
+        },
+        "clauses": [
+          {
+            "rawText": "You can put any number of [The Minis' Great Athletics Meeting] in your deck.",
+            "cleanText": "You can put any number of [The Minis' Great Athletics Meeting] in your deck",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_BUILDING_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P15-17#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each [The Minis' Great Athletics Meeting] you control, all your Spirits gain +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "For each [The Minis' Great Athletics Meeting] you control, all your Spirits gain +1000 BP.",
+            "cleanText": "For each [The Minis' Great Athletics Meeting] you control, all your Spirits gain +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "targetGroup": "ALL_FRIENDLY",
+              "family": null,
+              "target": "all_friendly",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

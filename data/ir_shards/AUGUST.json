@@ -1,0 +1,187 @@
+{
+  "PX25-03": {
+    "cardNumber": "PX25-03",
+    "name": "The FugurumaDeityPrincess Kuroe",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PX25-03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand.",
+            "cleanText": "This card is also treated as a Magic card, and is unaffected by opposing effects in Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PX25-03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(You can't use this effect while it's on the Field)\nDuring this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero. If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects. After this effect resolves, you can summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "(You can't use this effect while it's on the Field)",
+            "cleanText": "(You can't use this effect while it's on the Field)",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PLAY_CONDITION"
+            }
+          },
+          {
+            "rawText": "During this turn, the symbol of an opposing Spirit/Ultimate is fixed as zero.",
+            "cleanText": "the symbol of an opposing Spirit/Ultimate is fixed as zero",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          },
+          {
+            "rawText": "If you control any Rebirth Spirit/Rebirth Nexus, this effect can't be prevented by opposing effects.",
+            "cleanText": "this effect can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any Rebirth Spirit/Rebirth Nexus",
+            "duration": null,
+            "op": {
+              "op": "UNPREVENTABLE"
+            }
+          },
+          {
+            "rawText": "you can summon this card without paying the cost.",
+            "cleanText": "you can summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PX25-03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "destroy an opposing Nexus, and draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "destroy an opposing Nexus",
+            "cleanText": "destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "draw a card from the deckbottom.",
+            "cleanText": "draw a card from the deckbottom",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

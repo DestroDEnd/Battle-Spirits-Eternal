@@ -1,0 +1,161 @@
+{
+  "26RCB01-001": {
+    "cardNumber": "26RCB01-001",
+    "name": "Kamen Rider Gaim Orange Arms (26RCB01-001)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "26RCB01-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Reveal three cards from your decktop. Among them, add a \"GAIM\" family Spirit card with a name different to this Spirit's to the Hand. Return any remaining cards to the deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal three cards from your decktop.",
+            "cleanText": "Reveal three cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add a \"GAIM\" family Spirit card with a name different to this Spirit's to the Hand.",
+            "cleanText": "Among them, add a \"GAIM\" family Spirit card with a name different to this Spirit's to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom in any order.",
+            "cleanText": "Return any remaining cards to the deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A13471": {
+    "cardNumber": "BATTLE-SPIRITS-A13471",
+    "name": "The Wanderer Lolo",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A13471#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card can't be summoned without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "This card can't be summoned without paying the cost.",
+            "cleanText": "This card can't be summoned without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A13471#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't attack or brave, and is unaffected by any effects except its own."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't attack or brave, and is unaffected by any effects except its own.",
+            "cleanText": "This Spirit can't attack or brave, and is unaffected by any effects except its own",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "target": "self",
+              "restriction": "CANNOT_ATTACK"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -1,61 +1,603 @@
 {
- "P17-12": {
-  "name": "Ophanimon Falldown Mode",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 12000
-   }
+  "P17-12": {
+    "name": "Ophanimon Falldown Mode",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Purple/Yellow & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nBy returning a pre-advent card beneath this Spirit without [Advent] to the Hand, draw two cards.\n\n[LV2][LV3] (When Attack)\nBy destroying an opposing exhausted spirit, put a core from the Void to your Life.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P17-12",
+      "name": "Ophanimon Falldown Mode",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Purple/Yellow & Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 255
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P17-12#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Purple/Yellow & Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P17-12#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning a pre-advent card beneath this Spirit without [Advent] to the Hand, draw two cards."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning a pre-advent card beneath this Spirit without [Advent] to the Hand",
+              "cleanText": "By returning a pre-advent card beneath this Spirit without [Advent] to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "draw two cards.",
+              "cleanText": "draw two cards",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P17-12#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "When Attack",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By destroying an opposing exhausted spirit, put a core from the Void to your Life."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying an opposing exhausted spirit",
+              "cleanText": "By destroying an opposing exhausted spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "put a core from the Void to your Life.",
+              "cleanText": "put a core from the Void to your Life",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RECOVER_LIFE",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Purple/Yellow & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nBy returning a pre-advent card beneath this Spirit without [Advent] to the Hand, draw two cards.\n\n[LV2][LV3] (When Attack)\nBy destroying an opposing exhausted spirit, put a core from the Void to your Life.",
-  "is_vanilla": false
- },
- "CB03-P17": {
-  "name": "Raguelmon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 7,
-    "bp": 13000
-   }
+  "CB03-P17": {
+    "name": "Raguelmon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 7,
+        "bp": 13000
+      }
+    },
+    "effect": "Flash - [Advent: [[Ultimate (Family)] (Ultimate]], (Either Attack Step))\nBy sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDestroy every opposing Nexus. For each Nexus destroyed by this effect, put a core from the Void to this Spirit.\n\n[LV2][LV3] (When Attacks)\nOnce per turn, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "CB03-P17",
+      "name": "Raguelmon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "[[Ultimate (Family)",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "CB03-P17#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "During Ultimate, (Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: [[Ultimate (Family)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Spirit.",
+              "cleanText": "stack this from your Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CB03-P17#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every opposing Nexus. For each Nexus destroyed by this effect, put a core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every opposing Nexus.",
+              "cleanText": "Destroy every opposing Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "For each Nexus destroyed by this effect, put a core from the Void to this Spirit.",
+              "cleanText": "For each Nexus destroyed by this effect, put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CB03-P17#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: [[Ultimate (Family)] (Ultimate]], (Either Attack Step))\nBy sending your [Soul Core](Soul Core) to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Summoned/Advents)\nDestroy every opposing Nexus. For each Nexus destroyed by this effect, put a core from the Void to this Spirit.\n\n[LV2][LV3] (When Attacks)\nOnce per turn, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "CB03-CP01": {
-  "name": "Zubamon",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
-  },
-  "effect": "[Brave Condition: Cost 4 or more]\n\n[LV1] [Digivolve: All] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a \"Champion\" family Spirit card from your Hand, without paying the cost.\n\n[When Braved]\nWhen the braved Spirit activates [Super Digivolution], this Brave enters refreshed condition, and can brave to the summoned Spirit.",
-  "is_vanilla": false
- }
+  "CB03-CP01": {
+    "name": "Zubamon",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\n[LV1] [Digivolve: All] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a \"Champion\" family Spirit card from your Hand, without paying the cost.\n\n[When Braved]\nWhen the braved Spirit activates [Super Digivolution], this Brave enters refreshed condition, and can brave to the summoned Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "CB03-CP01",
+      "name": "Zubamon",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Super Digivolution",
+          "parameter": null,
+          "wave": 5,
+          "hook": "digivolution",
+          "bracketed": true,
+          "index": 252
+        }
+      ],
+      "abilities": [
+        {
+          "id": "CB03-CP01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "CB03-CP01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: All",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a \"Champion\" family Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a \"Champion\" family Spirit card from your Hand, without paying the cost.",
+              "cleanText": "summon a \"Champion\" family Spirit card from your Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "CB03-CP01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the braved Spirit activates [Super Digivolution], this Brave enters refreshed condition, and can brave to the summoned Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When the braved Spirit activates [Super Digivolution], this Brave enters refreshed condition, and can brave to the summoned Spirit.",
+              "cleanText": "When the braved Spirit activates [Super Digivolution], this Brave enters refreshed condition, and can brave to the summoned Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

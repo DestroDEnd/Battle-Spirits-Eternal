@@ -1,0 +1,189 @@
+{
+  "P22-10-A15176": {
+    "cardNumber": "P22-10-A15176",
+    "name": "［Rei-san, Here~］Jeanne Doraniece",
+    "keywords": [
+      {
+        "name": "Team",
+        "parameter": "Twilight Gothic",
+        "wave": 5,
+        "hook": "team",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Show Up",
+        "parameter": null,
+        "wave": 5,
+        "hook": "show_up",
+        "bracketed": true,
+        "index": 144
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P22-10-A15176#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "P22-10-A15176#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card is also treated as \"Rei-Ohba\"."
+        },
+        "clauses": [
+          {
+            "rawText": "This card is also treated as \"Rei-Ohba\".",
+            "cleanText": "This card is also treated as \"Rei-Ohba\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P22-10-A15176#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card from the deckbottom.",
+            "cleanText": "Draw a card from the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P22-10-A15176#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Stage Style & \"Rei-Ohba\""
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Show Up",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By not attacking with this Spirit and returning it to the Hand, summon a target card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "By not attacking with this Spirit and returning it to the Hand",
+            "cleanText": "By not attacking with this Spirit and returning it to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon a target card from your Hand, without paying the cost.",
+            "cleanText": "summon a target card from your Hand, without paying the cost",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

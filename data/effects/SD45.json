@@ -1,373 +1,3396 @@
 {
- "SD45-CP05": {
-  "name": "Magnadramon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 13000
-   }
+  "SD45-CP05": {
+    "name": "Magnadramon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 13000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, the symbols of all opposing Spirits become zero.\n\n[LV2][LV3] Flash - (When Attacks/Blocks)\nBy sending one of your Lives to your Trash, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP05",
+      "name": "Magnadramon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, the symbols of all opposing Spirits become zero."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "during this turn, the symbols of all opposing Spirits become zero.",
+              "cleanText": "the symbols of all opposing Spirits become zero",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending one of your Lives to your Trash, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending one of your Lives to your Trash",
+              "cleanText": "By sending one of your Lives to your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MODIFY_LIFE"
+              }
+            },
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, the symbols of all opposing Spirits become zero.\n\n[LV2][LV3] Flash - (When Attacks/Blocks)\nBy sending one of your Lives to your Trash, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "SD45-001": {
-  "name": "Agumon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 8000
-   }
+  "SD45-001": {
+    "name": "Agumon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] Flash - (When Attacks)\nIf your Life is at three or less, by returning this Spirit to the Hand, summon a \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-001",
+      "name": "Agumon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "If your Life is at three or less, by returning this Spirit to the Hand, summon a \"WarGreymon\"-named Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "If your Life is at three or less, by returning this Spirit to the Hand, summon a \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.",
+              "cleanText": "by returning this Spirit to the Hand, summon a \"WarGreymon\"-named Spirit card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If your Life is at three or less",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] Flash - (When Attacks)\nIf your Life is at three or less, by returning this Spirit to the Hand, summon a \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.\n\n[LV2][LV3] [Digivolve: Red/Purple] (Start of Your Attack Step)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Champion\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "SD45-013": {
-  "name": "Evolution Draw",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nDraw two cards. Also, if you control any \"Mega\" family Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate.\n\n[Flash]\nDuring this turn, give a Spirit +3000 BP.",
-  "is_vanilla": false
- },
- "SD45-014": {
-  "name": "Evolution Shoot",
-  "type": "Magic",
-  "levels": {},
-  "effect": "When your \"Mega\" family Spirit is summoned/[advented], return this card from the Trash to the Hand. This effect can only be used once per turn.\n\n[Flash]\nSend two cores from an opposing Spirit/Ultimate to their Reserve.",
-  "is_vanilla": false
- },
- "SD45-008": {
-  "name": "Garurumon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   }
+  "SD45-013": {
+    "name": "Evolution Draw",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nDraw two cards. Also, if you control any \"Mega\" family Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate.\n\n[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-013",
+      "name": "Evolution Draw",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Draw two cards. Also, if you control any \"Mega\" family Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "if you control any \"Mega\" family Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate.",
+              "cleanText": "destroy an opposing 10000 BP or less Spirit/Ultimate",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any \"Mega\" family Spirit",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit +3000 BP.",
+              "cleanText": "give a Spirit +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nSend a core from any opposing Spirits to their Reserve. When any Spirit is depleted by this effect, return a Spirit card from your Trash to the Hand.\n\n[LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "SD45-002": {
-  "name": "Greymon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD45-014": {
+    "name": "Evolution Shoot",
+    "type": "Magic",
+    "levels": {},
+    "effect": "When your \"Mega\" family Spirit is summoned/[advented], return this card from the Trash to the Hand. This effect can only be used once per turn.\n\n[Flash]\nSend two cores from an opposing Spirit/Ultimate to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-014",
+      "name": "Evolution Shoot",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 43
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Mega\" family Spirit is summoned/[advented], return this card from the Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Mega\" family Spirit is summoned/[advented], return this card from the Trash to the Hand.",
+              "cleanText": "When your \"Mega\" family Spirit is summoned/[advented], return this card from the Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Send two cores from an opposing Spirit/Ultimate to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send two cores from an opposing Spirit/Ultimate to their Reserve.",
+              "cleanText": "Send two cores from an opposing Spirit/Ultimate to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nBy destroying an opposing Nexus, draw a card.\n\n[LV1][LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "SD45-CP02": {
-  "name": "HerculesKabuterimon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 12000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 18000
-   }
+  "SD45-008": {
+    "name": "Garurumon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nSend a core from any opposing Spirits to their Reserve. When any Spirit is depleted by this effect, return a Spirit card from your Trash to the Hand.\n\n[LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-008",
+      "name": "Garurumon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core from any opposing Spirits to their Reserve. When any Spirit is depleted by this effect, return a Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core from any opposing Spirits to their Reserve.",
+              "cleanText": "Send a core from any opposing Spirits to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "When any Spirit is depleted by this effect, return a Spirit card from your Trash to the Hand.",
+              "cleanText": "When any Spirit is depleted by this effect, return a Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SALVAGE",
+                "cardType": "Spirit",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, put three core from the Void to this Spirit.\n\n[LV1][LV2] Flash - (When Attacks)\nSend three cores from this Spirit to your Trash. When you've done so, exhaust an opposing Spirit, and refresh this Spirit.",
-  "is_vanilla": false
- },
- "SD45-004": {
-  "name": "Leomon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 9000
-   }
+  "SD45-002": {
+    "name": "Greymon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nBy destroying an opposing Nexus, draw a card.\n\n[LV1][LV2] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-002",
+      "name": "Greymon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By destroying an opposing Nexus, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying an opposing Nexus",
+              "cleanText": "By destroying an opposing Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nDestroy an opposing 8000 BP or less Spirit. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV3] (When Destroyed by the Opponent)\nDestroy an opposing 10000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SD45-010": {
-  "name": "MetalGarurumon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 12000
-   }
+  "SD45-CP02": {
+    "name": "HerculesKabuterimon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 12000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 18000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, put three core from the Void to this Spirit.\n\n[LV1][LV2] Flash - (When Attacks)\nSend three cores from this Spirit to your Trash. When you've done so, exhaust an opposing Spirit, and refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP02",
+      "name": "HerculesKabuterimon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, put three core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "put three core from the Void to this Spirit.",
+              "cleanText": "put three core from the Void to this Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 3,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Send three cores from this Spirit to your Trash. When you've done so, exhaust an opposing Spirit, and refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Send three cores from this Spirit to your Trash.",
+              "cleanText": "Send three cores from this Spirit to your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "exhaust an opposing Spirit",
+              "cleanText": "exhaust an opposing Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "refresh this Spirit.",
+              "cleanText": "refresh this Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned/Attacks)\nSend two cores from any opposing Spirits to their Reserve.\n\n[LV2][LV3]\nWhen your Spirit effects deplete any opposing Spirits, draw a card.",
-  "is_vanilla": false
- },
- "SD45-003": {
-  "name": "MetalGreymon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 10000
-   }
+  "SD45-004": {
+    "name": "Leomon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 9000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nDestroy an opposing 8000 BP or less Spirit. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] [Warp Digivolve: Red/Purple] (When Attacks)\nBy returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.\n\n[LV3] (When Destroyed by the Opponent)\nDestroy an opposing 10000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-004",
+      "name": "Leomon［2］",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 8000 BP or less Spirit. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 8000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 8000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 8000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Warp Digivolve: Red/Purple",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost.",
+              "cleanText": "summon a Red/Purple \"Ultimate\" family Spirit card from the Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed by the Opponent",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 10000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 10000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 10000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy two opposing 6000 BP or less Spirits.\n\n[LV2][LV3] Flash - (When Attacks)\nBy returning this Spirit to the Hand, summon up to one \"WarGreymon\"-named Spirit card and one Cost 7 \"MetalGarurumon\"-named Spirit card from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A6988": {
-  "name": "Omnimon Merciful Mode",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 13000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 16000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 7,
-    "bp": 26000
-   }
+  "SD45-010": {
+    "name": "MetalGarurumon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned/Attacks)\nSend two cores from any opposing Spirits to their Reserve.\n\n[LV2][LV3]\nWhen your Spirit effects deplete any opposing Spirits, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-010",
+      "name": "MetalGarurumon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send two cores from any opposing Spirits to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send two cores from any opposing Spirits to their Reserve.",
+              "cleanText": "Send two cores from any opposing Spirits to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit effects deplete any opposing Spirits, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit effects deplete any opposing Spirits, draw a card.",
+              "cleanText": "When your Spirit effects deplete any opposing Spirits, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 7 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDestroy any number of opposing Spirits/Ultimates up to a total of 15000 BP. Also, you can add as many \"Mega\" family Spirit cards as you want from your Hand/Trash as pre-Advent cards to under this Spirit.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "SD45-006": {
-  "name": "Omnimon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 15000
-   }
+  "SD45-003": {
+    "name": "MetalGreymon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy two opposing 6000 BP or less Spirits.\n\n[LV2][LV3] Flash - (When Attacks)\nBy returning this Spirit to the Hand, summon up to one \"WarGreymon\"-named Spirit card and one Cost 7 \"MetalGarurumon\"-named Spirit card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-003",
+      "name": "MetalGreymon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy two opposing 6000 BP or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy two opposing 6000 BP or less Spirits.",
+              "cleanText": "Destroy two opposing 6000 BP or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 6000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon up to one \"WarGreymon\"-named Spirit card and one Cost 7 \"MetalGarurumon\"-named Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon up to one \"WarGreymon\"-named Spirit card and one Cost 7 \"MetalGarurumon\"-named Spirit card from your Hand, without paying the cost.",
+              "cleanText": "summon up to one \"WarGreymon\"-named Spirit card and one Cost 7 \"MetalGarurumon\"-named Spirit card from your Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Mega] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can send the [Soul Core] from your Trash to this Spirit. When you've done so, return a Spirit card from your Trash to the Hand.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-Advent cards, destroy an opposing 12000 BP or less Spirit/Ultimate.",
-  "is_vanilla": false
- },
- "SD45-CP01": {
-  "name": "Phoenixmon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A6988": {
+    "name": "Omnimon Merciful Mode",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 13000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 16000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 7,
+        "bp": 26000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 7 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nDestroy any number of opposing Spirits/Ultimates up to a total of 15000 BP. Also, you can add as many \"Mega\" family Spirit cards as you want from your Hand/Trash as pre-Advent cards to under this Spirit.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-Advent cards, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A6988",
+      "name": "Omnimon Merciful Mode",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 7 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A6988#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 7 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6988#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy any number of opposing Spirits/Ultimates up to a total of 15000 BP. Also, you can add as many \"Mega\" family Spirit cards as you want from your Hand/Trash as pre-Advent cards to under this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy any number of opposing Spirits/Ultimates up to a total of 15000 BP.",
+              "cleanText": "Destroy any number of opposing Spirits/Ultimates up to a total of 15000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "mode": "TOTAL_BP_LTE",
+                "maxTotalBp": 15000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit",
+                    "Ultimate"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "you can add as many \"Mega\" family Spirit cards as you want from your Hand/Trash as pre-Advent cards to under this Spirit.",
+              "cleanText": "you can add as many \"Mega\" family Spirit cards as you want from your Hand/Trash as pre-Advent cards to under this Spirit",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A6988#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nYou can also stack this card from the Trash via [Advent].\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Red \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, destroy an opposing 10000 BP or more Spirit. Effects of the Spirit destroyed by this effect can't activate.\n\n[LV2] (When Attacks)\nDestroy an opposing 10000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SD45-CP03": {
-  "name": "Rosemon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 9000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 15000
-   }
+  "SD45-006": {
+    "name": "Omnimon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 15000
+      }
+    },
+    "effect": "Flash - [Advent: Mega] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can send the [Soul Core] from your Trash to this Spirit. When you've done so, return a Spirit card from your Trash to the Hand.\n\n[LV2][LV3] Flash - (When Attacks)\nBy discarding one of this Spirit's pre-Advent cards, destroy an opposing 12000 BP or less Spirit/Ultimate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-006",
+      "name": "Omnimon［2］",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Mega",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Mega",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can send the [Soul Core] from your Trash to this Spirit. When you've done so, return a Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "You can send the [Soul Core] from your Trash to this Spirit.",
+              "cleanText": "You can send the [Soul Core] from your Trash to this Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "trash",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "return a Spirit card from your Trash to the Hand.",
+              "cleanText": "return a Spirit card from your Trash to the Hand",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SALVAGE",
+                "cardType": "Spirit",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-006#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By discarding one of this Spirit's pre-Advent cards, destroy an opposing 12000 BP or less Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding one of this Spirit's pre-Advent cards",
+              "cleanText": "By discarding one of this Spirit's pre-Advent cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "destroy an opposing 12000 BP or less Spirit/Ultimate.",
+              "cleanText": "destroy an opposing 12000 BP or less Spirit/Ultimate",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, return two opposing exhausted Spirits to the decktop in any order.\n\n[LV2][LV3] (When Attacks)\nThe opposing Burst can't activate.",
-  "is_vanilla": false
- },
- "SD45-CP04": {
-  "name": "Seraphimon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 14000
-   }
+  "SD45-CP01": {
+    "name": "Phoenixmon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\nYou can also stack this card from the Trash via [Advent].\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Red \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, destroy an opposing 10000 BP or more Spirit. Effects of the Spirit destroyed by this effect can't activate.\n\n[LV2] (When Attacks)\nDestroy an opposing 10000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP01",
+      "name": "Phoenixmon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 197
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can also stack this card from the Trash via [Advent]."
+          },
+          "clauses": [
+            {
+              "rawText": "You can also stack this card from the Trash via [Advent].",
+              "cleanText": "You can also stack this card from the Trash via [Advent]",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Red \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, destroy an opposing 10000 BP or more Spirit. Effects of the Spirit destroyed by this effect can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Red \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Red \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "destroy an opposing 10000 BP or more Spirit.",
+              "cleanText": "destroy an opposing 10000 BP or more Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Effects of the Spirit destroyed by this effect can't activate.",
+              "cleanText": "Effects of the Spirit destroyed by this effect can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NEGATE_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP01#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 10000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 10000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 10000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, every opposing Spirit gets -10000 BP. Destroy every Spirit whose BP is brought to 0 by this effect.\n\n[LV2][LV3] (When Attacks)\nThis Spirit can't be blocked by opposing 10000 BP or less Spirits/Ultimates.",
-  "is_vanilla": false
- },
- "SD45-011": {
-  "name": "The Crest of Courage",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nWhen your Life is reduced by the opponent, destroy an opposing 5000 BP or less Spirit.\n\n[LV2] (Your Draw Step)\nIncrease the amount of cards you draw by +1. After you draw, discard a card from your Hand. If you control any \"Greymon\"-named Spirit, this effect discards -1 card from your Hand. These effects don't stack.",
-  "is_vanilla": false
- },
- "SD45-012": {
-  "name": "The Crest of Friendship",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Your Attack Step)\nAll your \"Rookie\"/\"Champion\"/\"Ultimate\" family Spirits gain +3000 BP.\n\n[LV2]\nWhen your \"Ultimate\"/\"Mega\" family Spirits are destroyed, by discarding a card from your Hand, one of the destroyed Spirits remains on the Field, exhausted.",
-  "is_vanilla": false
- },
- "SD45-CP06": {
-  "name": "Vikemon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 15000
-   }
+  "SD45-CP03": {
+    "name": "Rosemon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 9000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 15000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, return two opposing exhausted Spirits to the decktop in any order.\n\n[LV2][LV3] (When Attacks)\nThe opposing Burst can't activate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP03",
+      "name": "Rosemon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, return two opposing exhausted Spirits to the decktop in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Green \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "return two opposing exhausted Spirits to the decktop in any order.",
+              "cleanText": "return two opposing exhausted Spirits to the decktop in any order",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The opposing Burst can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "The opposing Burst can't activate.",
+              "cleanText": "The opposing Burst can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BURST_LOCK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Blue \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, discard five cards from the opposing decktop. When any Magic card is discarded by this effect, this Spirit refreshes.\n\n[LV2] (When Attacks)\nAt the end of the battle, discard seven cards from the opposing decktop.",
-  "is_vanilla": false
- },
- "SD45-005": {
-  "name": "WarGreymon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 12000
-   }
+  "SD45-CP04": {
+    "name": "Seraphimon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 14000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2][LV3] (When Advents)\nYou can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, every opposing Spirit gets -10000 BP. Destroy every Spirit whose BP is brought to 0 by this effect.\n\n[LV2][LV3] (When Attacks)\nThis Spirit can't be blocked by opposing 10000 BP or less Spirits/Ultimates.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP04",
+      "name": "Seraphimon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, during this turn, every opposing Spirit gets -10000 BP. Destroy every Spirit whose BP is brought to 0 by this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Yellow \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "during this turn, every opposing Spirit gets -10000 BP.",
+              "cleanText": "every opposing Spirit gets -10000 BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "Destroy every Spirit whose BP is brought to 0 by this effect.",
+              "cleanText": "Destroy every Spirit whose BP is brought to 0 by this effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can't be blocked by opposing 10000 BP or less Spirits/Ultimates."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can't be blocked by opposing 10000 BP or less Spirits/Ultimates.",
+              "cleanText": "This Spirit can't be blocked by opposing 10000 BP or less Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can destroy an opposing 8000 BP or less Spirit. When this effect destroys any Spirit, refresh this Spirit.\n\n[LV2][LV3] (Your Attack Step)\nYour Spirits can't be returned to the Hand/Deck by opposing effects.",
-  "is_vanilla": false
- },
- "SD45-009": {
-  "name": "WereGarurumon［2］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "SD45-011": {
+    "name": "The Crest of Courage",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nWhen your Life is reduced by the opponent, destroy an opposing 5000 BP or less Spirit.\n\n[LV2] (Your Draw Step)\nIncrease the amount of cards you draw by +1. After you draw, discard a card from your Hand. If you control any \"Greymon\"-named Spirit, this effect discards -1 card from your Hand. These effects don't stack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-011",
+      "name": "The Crest of Courage",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is reduced by the opponent, destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is reduced by the opponent, destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "When your Life is reduced by the opponent, destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "DRAW_STEP",
+            "timingLabel": "Your Draw Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Increase the amount of cards you draw by +1. After you draw, discard a card from your Hand. If you control any \"Greymon\"-named Spirit, this effect discards -1 card from your Hand. These effects don't stack."
+          },
+          "clauses": [
+            {
+              "rawText": "Increase the amount of cards you draw by +1.",
+              "cleanText": "Increase the amount of cards you draw by +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "After you draw, discard a card from your Hand.",
+              "cleanText": "After you draw, discard a card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "If you control any \"Greymon\"-named Spirit, this effect discards -1 card from your Hand.",
+              "cleanText": "this effect discards -1 card from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any \"Greymon\"-named Spirit",
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "These effects don't stack.",
+              "cleanText": "These effects don't stack",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NON_STACKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw a card.\n\n[LV2][LV3] Flash - (When Attacks)\nBy returning this Spirit to the Hand, summon up to one \"MetalGarurumon\"-named Spirit card and one Cost 7 \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.",
-  "is_vanilla": false
- }
+  "SD45-012": {
+    "name": "The Crest of Friendship",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Your Attack Step)\nAll your \"Rookie\"/\"Champion\"/\"Ultimate\" family Spirits gain +3000 BP.\n\n[LV2]\nWhen your \"Ultimate\"/\"Mega\" family Spirits are destroyed, by discarding a card from your Hand, one of the destroyed Spirits remains on the Field, exhausted.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-012",
+      "name": "The Crest of Friendship",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Rookie\"/\"Champion\"/\"Ultimate\" family Spirits gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Rookie\"/\"Champion\"/\"Ultimate\" family Spirits gain +3000 BP.",
+              "cleanText": "All your \"Rookie\"/\"Champion\"/\"Ultimate\" family Spirits gain +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Ultimate\"/\"Mega\" family Spirits are destroyed, by discarding a card from your Hand, one of the destroyed Spirits remains on the Field, exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Ultimate\"/\"Mega\" family Spirits are destroyed, by discarding a card from your Hand, one of the destroyed Spirits remains on the Field, exhausted.",
+              "cleanText": "When your \"Ultimate\"/\"Mega\" family Spirits are destroyed, by discarding a card from your Hand, one of the destroyed Spirits remains on the Field, exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD45-CP06": {
+    "name": "Vikemon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 15000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nYou can return one of this Spirit's Blue \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, discard five cards from the opposing decktop. When any Magic card is discarded by this effect, this Spirit refreshes.\n\n[LV2] (When Attacks)\nAt the end of the battle, discard seven cards from the opposing decktop.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-CP06",
+      "name": "Vikemon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD45-CP06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can return one of this Spirit's Blue \"Ultimate\" family pre-Advent cards to the Hand. When you've done so, discard five cards from the opposing decktop. When any Magic card is discarded by this effect, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return one of this Spirit's Blue \"Ultimate\" family pre-Advent cards to the Hand.",
+              "cleanText": "You can return one of this Spirit's Blue \"Ultimate\" family pre-Advent cards to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "discard five cards from the opposing decktop.",
+              "cleanText": "discard five cards from the opposing decktop",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "When any Magic card is discarded by this effect, this Spirit refreshes.",
+              "cleanText": "When any Magic card is discarded by this effect, this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-CP06#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of the battle, discard seven cards from the opposing decktop."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of the battle, discard seven cards from the opposing decktop.",
+              "cleanText": "At the end of the battle, discard seven cards from the opposing decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD45-005": {
+    "name": "WarGreymon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned/Attacks)\nYou can destroy an opposing 8000 BP or less Spirit. When this effect destroys any Spirit, refresh this Spirit.\n\n[LV2][LV3] (Your Attack Step)\nYour Spirits can't be returned to the Hand/Deck by opposing effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-005",
+      "name": "WarGreymon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing 8000 BP or less Spirit. When this effect destroys any Spirit, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing 8000 BP or less Spirit.",
+              "cleanText": "You can destroy an opposing 8000 BP or less Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 8000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "When this effect destroys any Spirit, refresh this Spirit.",
+              "cleanText": "When this effect destroys any Spirit, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your Spirits can't be returned to the Hand/Deck by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Your Spirits can't be returned to the Hand/Deck by opposing effects.",
+              "cleanText": "Your Spirits can't be returned to the Hand/Deck by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD45-009": {
+    "name": "WereGarurumon［2］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw a card.\n\n[LV2][LV3] Flash - (When Attacks)\nBy returning this Spirit to the Hand, summon up to one \"MetalGarurumon\"-named Spirit card and one Cost 7 \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD45-009",
+      "name": "WereGarurumon［2］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD45-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD45-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By returning this Spirit to the Hand, summon up to one \"MetalGarurumon\"-named Spirit card and one Cost 7 \"WarGreymon\"-named Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning this Spirit to the Hand",
+              "cleanText": "By returning this Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "summon up to one \"MetalGarurumon\"-named Spirit card and one Cost 7 \"WarGreymon\"-named Spirit card from your Hand, without paying the cost.",
+              "cleanText": "summon up to one \"MetalGarurumon\"-named Spirit card and one Cost 7 \"WarGreymon\"-named Spirit card from your Hand, without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

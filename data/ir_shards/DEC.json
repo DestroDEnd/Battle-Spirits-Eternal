@@ -1,0 +1,181 @@
+{
+  "PX25-05": {
+    "cardNumber": "PX25-05",
+    "name": "The Investigator Lolo",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 86
+      },
+      {
+        "name": "Accel",
+        "parameter": "Cost 3 ([Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 328
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PX25-05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand.",
+            "cleanText": "When this card is revealed from the deck by your effect, or sent to the Trash by your [Core Charge], you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PX25-05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols."
+        },
+        "clauses": [
+          {
+            "rawText": "While this card is in the Removed Zone, when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols.",
+            "cleanText": "when you're summoning/deploying any Ultimate card, or \"Devotee\"/\"Grandwalker\" family Nexus card, fulfill one of its reduction symbols",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While this card is in the Removed Zone",
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PX25-05#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Reveal three cards from your decktop. Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand. Discard any remaining cards. After this effect resolves, put this card onto the Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal three cards from your decktop.",
+            "cleanText": "Reveal three cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand.",
+            "cleanText": "Among them, add a \"Devotee\"/ \"Concluser\"/ \"Ultimate Queen\" family Ultimate card, and a Contract Grandwalker Nexus card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "put this card onto the Removed Zone.",
+            "cleanText": "put this card onto the Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "OPEN_ZONE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

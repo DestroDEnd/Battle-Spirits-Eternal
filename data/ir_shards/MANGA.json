@@ -1,0 +1,65 @@
+{
+  "SJ16-06": {
+    "cardNumber": "SJ16-06",
+    "name": "The Kappa Kawatarou",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SJ16-06#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control. When you've done so, refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it."
+        },
+        "clauses": [
+          {
+            "rawText": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control.",
+            "cleanText": "you can send the [Soul Core] (Soul Core) from a Spirit you control to another Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_SOUL_CORE"
+            }
+          },
+          {
+            "rawText": "refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it.",
+            "cleanText": "refresh the Spirit you control with [Soul Core] (Soul Core) being sent to it",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

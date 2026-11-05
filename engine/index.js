@@ -46,13 +46,17 @@ export function createGame(options = {}) {
   const resolver = new AsyncResolver(resolverDelegate);
   const keywords = options.keywordRegistry || createDefaultKeywordRegistry();
 
-  // Initial draw: 4 cards each
-  for (let i = 0; i < ETERNAL_RULES.setup.initialHandSize; i++) {
-    if (state.players.player.deck.length > 0) {
-      state.players.player.hand.push(state.players.player.deck.shift());
+  // Initial draw: 4 cards each with Contract Partner guarantee (Rule 3.5 & R39)
+  for (const s of ['player', 'opponent']) {
+    const p = state.players[s];
+    if (ETERNAL_RULES.setup.guaranteedContractPartner) {
+      const partnerIdx = p.deck.findIndex(c => c.isContractPartner);
+      if (partnerIdx !== -1) {
+        p.hand.push(p.deck.splice(partnerIdx, 1)[0]);
+      }
     }
-    if (state.players.opponent.deck.length > 0) {
-      state.players.opponent.hand.push(state.players.opponent.deck.shift());
+    while (p.hand.length < ETERNAL_RULES.setup.initialHandSize && p.deck.length > 0) {
+      p.hand.push(p.deck.shift());
     }
   }
 

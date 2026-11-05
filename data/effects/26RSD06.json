@@ -1,209 +1,1485 @@
 {
- "26RSD06-007": {
-  "name": "Armalido",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
+  "26RSD06-007": {
+    "name": "Armalido",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV2]True ReleaseDuring Block [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-007",
+      "name": "Armalido",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.",
+              "cleanText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]True ReleaseDuring Block [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.",
-  "is_vanilla": false
- },
- "26RSD06-002": {
-  "name": "Deertora",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   }
+  "26RSD06-002": {
+    "name": "Deertora",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1-2]When Summoned\nYou can reveal three cards from your decktop. Among them, add a \"Ferobeast\" family Nexus card to the Hand. Return any remaining cards to the deckbottom in any order.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-002",
+      "name": "Deertora",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add a \"Ferobeast\" family Nexus card to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a \"Ferobeast\" family Nexus card to the Hand.",
+              "cleanText": "Among them, add a \"Ferobeast\" family Nexus card to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Summoned\nYou can reveal three cards from your decktop. Among them, add a \"Ferobeast\" family Nexus card to the Hand. Return any remaining cards to the deckbottom in any order.",
-  "is_vanilla": false
- },
- "26RSD06-012": {
-  "name": "Feeding Draw",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nDraw three cards, then return two cards from your Hand to the deckbottom in any order.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
-  "is_vanilla": false
- },
- "26RSD06-014": {
-  "name": "Full Stomach",
-  "type": "Magic",
-  "levels": {},
-  "effect": "Legacy\n[Main]\nTarget a Nexus you or the opponent controls that isn't during True Release. Destroy it. If you've done so, draw a card.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
-  "is_vanilla": false
- },
- "26RSD06-003": {
-  "name": "Melrak",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "26RSD06-012": {
+    "name": "Feeding Draw",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nDraw three cards, then return two cards from your Hand to the deckbottom in any order.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-012",
+      "name": "Feeding Draw",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Draw three cards, then return two cards from your Hand to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw three cards, then return two cards from your Hand to the deckbottom in any order.",
+              "cleanText": "Draw three cards, then return two cards from your Hand to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 3,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target one of your Spirits. During this turn, give it +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your Spirits.",
+              "cleanText": "Target one of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "During this turn, give it +3000 BP.",
+              "cleanText": "give it +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2]True ReleaseWhen Destroyed\nTarget an opposing Cost 3 or less Spirit. Destroy it.",
-  "is_vanilla": false
- },
- "26RBS01-126": {
-  "name": "Merciless Blow",
-  "type": "Magic",
-  "levels": {},
-  "effect": "Legacy\n\n[Flash]\nTarget an opposing Cost 5 or less Spirit. Destroy it. Then, if your Life was reduced this turn, target an opposing Cost 3 or less Spirit. Destroy it.",
-  "is_vanilla": false
- },
- "26RSD06-001": {
-  "name": "Nausa",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   }
+  "26RSD06-014": {
+    "name": "Full Stomach",
+    "type": "Magic",
+    "levels": {},
+    "effect": "Legacy\n[Main]\nTarget a Nexus you or the opponent controls that isn't during True Release. Destroy it. If you've done so, draw a card.\n\n[Flash]\nTarget one of your Spirits. During this turn, give it +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-014",
+      "name": "Full Stomach",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Target a Nexus you or the opponent controls that isn't during [True Release] . Destroy it. If you've done so, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Target a Nexus you or the opponent controls that isn't during [True Release] .",
+              "cleanText": "Target a Nexus you or the opponent controls that isn't during [True Release]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            },
+            {
+              "rawText": "If you've done so, draw a card.",
+              "cleanText": "draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you've done so",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target one of your Spirits. During this turn, give it +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Target one of your Spirits.",
+              "cleanText": "Target one of your Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "During this turn, give it +3000 BP.",
+              "cleanText": "give it +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Destroyed\nTarget a Nexus you control. Put a core from the Void to it.",
-  "is_vanilla": false
- },
- "26RSD06-004": {
-  "name": "Rhiceros",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "26RSD06-003": {
+    "name": "Melrak",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV2]True ReleaseWhen Destroyed\nTarget an opposing Cost 3 or less Spirit. Destroy it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-003",
+      "name": "Melrak",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Cost 3 or less Spirit. Destroy it."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Cost 3 or less Spirit.",
+              "cleanText": "Target an opposing Cost 3 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]During Block [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.\n\n[LV2]During Attack [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ Put a core from the Void to your Trash.",
-  "is_vanilla": false
- },
- "26RSD06-005": {
-  "name": "Slouth",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   }
+  "26RBS01-126": {
+    "name": "Merciless Blow",
+    "type": "Magic",
+    "levels": {},
+    "effect": "Legacy\n\n[Flash]\nTarget an opposing Cost 5 or less Spirit. Destroy it. Then, if your Life was reduced this turn, target an opposing Cost 3 or less Spirit. Destroy it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RBS01-126",
+      "name": "Merciless Blow",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RBS01-126#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target an opposing Cost 5 or less Spirit. Destroy it. Then, if your Life was reduced this turn, target an opposing Cost 3 or less Spirit. Destroy it."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Cost 5 or less Spirit.",
+              "cleanText": "Target an opposing Cost 5 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            },
+            {
+              "rawText": "if your Life was reduced this turn, target an opposing Cost 3 or less Spirit.",
+              "cleanText": "target an opposing Cost 3 or less Spirit",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if your Life was reduced this turn",
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "",
-  "is_vanilla": true
- },
- "26RSD06-006": {
-  "name": "Svarris",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "26RSD06-001": {
+    "name": "Nausa",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1-2]When Destroyed\nTarget a Nexus you control. Put a core from the Void to it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-001",
+      "name": "Nausa",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target a Nexus you control. Put a core from the Void to it."
+          },
+          "clauses": [
+            {
+              "rawText": "Target a Nexus you control.",
+              "cleanText": "Target a Nexus you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_CARD"
+              }
+            },
+            {
+              "rawText": "Put a core from the Void to it.",
+              "cleanText": "Put a core from the Void to it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1-2]When Summoned\nDraw two cards, then return two cards from your Hand to the deckbottom in any order.",
-  "is_vanilla": false
- },
- "26RSD06-011": {
-  "name": "The Barrage Forest",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1-2] When Deployed\nTarget an opposing Cost 3 or less Spirit. Destroy it.\n\n[LV2] Opposing Attack StepCan't Stack\nWhen an opposing LV1 Spirit would attack, unless the opponent pay one cost, it can't attack.",
-  "is_vanilla": false
- },
- "26RSD06-X02": {
-  "name": "The ExtremeTree Elephas",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 14000
-   }
+  "26RSD06-004": {
+    "name": "Rhiceros",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1-2]During Block [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.\n\n[LV2]During Attack [Invoke: Flash] Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ Put a core from the Void to your Trash.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-004",
+      "name": "Rhiceros",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP.",
+              "cleanText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ During this battle, this Spirit gains +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Put a core from the Void to your Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Put a core from the Void to your Trash.",
+              "cleanText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Put a core from the Void to your Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Legacy\n[LV1-2] During Attack[Invoke: Flash]Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ Target an opposing Cost 7 or less Spirit. Destroy it.\n\n[LV2] During Attack\nWhen this Spirit's attack would reduce the opposing Life, reduce +1 core.",
-  "is_vanilla": false
- },
- "26RSD06-009": {
-  "name": "The Misty Forest",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1-2] Your Attack Step\nAll your attacking \"Ferobeast\" family Spirits gain +1000 BP.\n\n[LV2] Your End StepCan't Stack\nFor every two Nexuses you control, you can target one \"Ferobeast\" family Spirit you control. Refresh them.",
-  "is_vanilla": false
- },
- "26RSD06-X01": {
-  "name": "The ShieldHorn Gigantherion",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 9000
-   }
+  "26RSD06-005": {
+    "name": "Slouth",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      }
+    },
+    "effect": "",
+    "is_vanilla": true,
+    "compiledIr": {
+      "cardNumber": "26RSD06-005",
+      "name": "Slouth",
+      "isFullySupported": true,
+      "isVanilla": true,
+      "compiledClausesCount": 0,
+      "unsupportedClausesCount": 0,
+      "abilities": [],
+      "keywords": []
+    }
   },
-  "effect": "Legacy\n[LV1-2] When Summoned\nTarget an opposing Cost 4 or less Spirit. Destroy it. If you control three or more Nexuses, the targeting Cost becomes 6 or less instead.\n\n[LV2] True Release During Attack\nWhen the opponent would block, unless they exhaust a Spirit they control other than the blocking Spirit, they can't block.",
-  "is_vanilla": false
- },
- "26RSD06-008": {
-  "name": "The TreeShadow Felio",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   }
+  "26RSD06-006": {
+    "name": "Svarris",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1-2]When Summoned\nDraw two cards, then return two cards from your Hand to the deckbottom in any order.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-006",
+      "name": "Svarris",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards, then return two cards from your Hand to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards, then return two cards from your Hand to the deckbottom in any order.",
+              "cleanText": "Draw two cards, then return two cards from your Hand to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Legacy\n[LV1-2] When Summoned\nFor each Nexus you control, during this turn, this Spirit gains +1000 BP.",
-  "is_vanilla": false
- },
- "26RSD06-010": {
-  "name": "Utmost Depth: The Extreme Giant Tree",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1-2] Your Main Step\nIf you control three or more Blue Nexuses, this Nexus gains an extra Blue symbol.\n\n[LV2] True ReleaseOpposing Attack Step\nWhen an opposing Spirit attacks, you can target one of your \"Ferobeast\" family Spirits with the same cost as that Spirit. Refresh it.",
-  "is_vanilla": false
- }
+  "26RSD06-011": {
+    "name": "The Barrage Forest",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1-2] When Deployed\nTarget an opposing Cost 3 or less Spirit. Destroy it.\n\n[LV2] Opposing Attack StepCan't Stack\nWhen an opposing LV1 Spirit would attack, unless the opponent pay one cost, it can't attack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-011",
+      "name": "The Barrage Forest",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Cost 3 or less Spirit. Destroy it."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Cost 3 or less Spirit.",
+              "cleanText": "Target an opposing Cost 3 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When an opposing LV1 Spirit would attack, unless the opponent pay one cost, it can't attack."
+          },
+          "clauses": [
+            {
+              "rawText": "When an opposing LV1 Spirit would attack, unless the opponent pay one cost, it can't attack.",
+              "cleanText": "When an opposing LV1 Spirit would attack, unless the opponent pay one cost, it can't attack",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD06-X02": {
+    "name": "The ExtremeTree Elephas",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 14000
+      }
+    },
+    "effect": "Legacy\n[LV1-2] During Attack[Invoke: Flash]Once Per Turn\nExhaust one of your \"Ferobeast\" family Nexuses ▶ Target an opposing Cost 7 or less Spirit. Destroy it.\n\n[LV2] During Attack\nWhen this Spirit's attack would reduce the opposing Life, reduce +1 core.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-X02",
+      "name": "The ExtremeTree Elephas",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Target an opposing Cost 7 or less Spirit. Destroy it."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Target an opposing Cost 7 or less Spirit.",
+              "cleanText": "Exhaust one of your \"Ferobeast\" family Nexuses ▶ Target an opposing Cost 7 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "During Attack",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit's attack would reduce the opposing Life, reduce +1 core."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit's attack would reduce the opposing Life, reduce +1 core.",
+              "cleanText": "When this Spirit's attack would reduce the opposing Life, reduce +1 core",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CARD_RULE_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD06-009": {
+    "name": "The Misty Forest",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1-2] Your Attack Step\nAll your attacking \"Ferobeast\" family Spirits gain +1000 BP.\n\n[LV2] Your End StepCan't Stack\nFor every two Nexuses you control, you can target one \"Ferobeast\" family Spirit you control. Refresh them.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-009",
+      "name": "The Misty Forest",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your attacking \"Ferobeast\" family Spirits gain +1000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your attacking \"Ferobeast\" family Spirits gain +1000 BP.",
+              "cleanText": "All your attacking \"Ferobeast\" family Spirits gain +1000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "targetGroup": "ATTACKING",
+                "family": "Ferobeast",
+                "target": "all_friendly",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For every two Nexuses you control, you can target one \"Ferobeast\" family Spirit you control. Refresh them."
+          },
+          "clauses": [
+            {
+              "rawText": "For every two Nexuses you control, you can target one \"Ferobeast\" family Spirit you control.",
+              "cleanText": "For every two Nexuses you control, you can target one \"Ferobeast\" family Spirit you control",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            },
+            {
+              "rawText": "Refresh them.",
+              "cleanText": "Refresh them",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD06-X01": {
+    "name": "The ShieldHorn Gigantherion",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 9000
+      }
+    },
+    "effect": "Legacy\n[LV1-2] When Summoned\nTarget an opposing Cost 4 or less Spirit. Destroy it. If you control three or more Nexuses, the targeting Cost becomes 6 or less instead.\n\n[LV2] True Release During Attack\nWhen the opponent would block, unless they exhaust a Spirit they control other than the blocking Spirit, they can't block.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-X01",
+      "name": "The ShieldHorn Gigantherion",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Cost 4 or less Spirit. Destroy it. If you control three or more Nexuses, the targeting Cost becomes 6 or less instead."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Cost 4 or less Spirit.",
+              "cleanText": "Target an opposing Cost 4 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Destroy it.",
+              "cleanText": "Destroy it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": "PREVIOUS_TARGET"
+              }
+            },
+            {
+              "rawText": "If you control three or more Nexuses, the targeting Cost becomes 6 or less instead.",
+              "cleanText": "the targeting Cost becomes 6 or less instead",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control three or more Nexuses",
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "During Attack",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent would block, unless they exhaust a Spirit they control other than the blocking Spirit, they can't block."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent would block, unless they exhaust a Spirit they control other than the blocking Spirit, they can't block.",
+              "cleanText": "When the opponent would block, unless they exhaust a Spirit they control other than the blocking Spirit, they can't block",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD06-008": {
+    "name": "The TreeShadow Felio",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      }
+    },
+    "effect": "Legacy\n[LV1-2] When Summoned\nFor each Nexus you control, during this turn, this Spirit gains +1000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-008",
+      "name": "The TreeShadow Felio",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Nexus you control, during this turn, this Spirit gains +1000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Nexus you control, during this turn, this Spirit gains +1000 BP.",
+              "cleanText": "For each Nexus you control, during this turn, this Spirit gains +1000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "26RSD06-010": {
+    "name": "Utmost Depth: The Extreme Giant Tree",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1-2] Your Main Step\nIf you control three or more Blue Nexuses, this Nexus gains an extra Blue symbol.\n\n[LV2] True ReleaseOpposing Attack Step\nWhen an opposing Spirit attacks, you can target one of your \"Ferobeast\" family Spirits with the same cost as that Spirit. Refresh it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "26RSD06-010",
+      "name": "Utmost Depth: The Extreme Giant Tree",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "26RSD06-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control three or more Blue Nexuses, this Nexus gains an extra Blue symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control three or more Blue Nexuses, this Nexus gains an extra Blue symbol.",
+              "cleanText": "this Nexus gains an extra Blue symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control three or more Blue Nexuses",
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "26RSD06-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "True Release"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When an opposing Spirit attacks, you can target one of your \"Ferobeast\" family Spirits with the same cost as that Spirit. Refresh it."
+          },
+          "clauses": [
+            {
+              "rawText": "When an opposing Spirit attacks, you can target one of your \"Ferobeast\" family Spirits with the same cost as that Spirit.",
+              "cleanText": "When an opposing Spirit attacks, you can target one of your \"Ferobeast\" family Spirits with the same cost as that Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "Refresh it.",
+              "cleanText": "Refresh it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "PREVIOUS_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

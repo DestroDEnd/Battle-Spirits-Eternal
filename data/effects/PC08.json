@@ -1,154 +1,1286 @@
 {
- "PC08-004": {
-  "name": "Floor of the Starry Sky",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Type: Song]\n\n[Flash]\nYou can return an opposing Spirit to the Hand. Also, if you control any \"Oozora Akari\", you can return an opposing Spirit to the deckbottom. If you control any \"Hoshimiya Ichigo\", these effects can't be prevented by opposing effects.",
-  "is_vanilla": false
- },
- "PC08-005": {
-  "name": "MY STARWAY",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Type: Song]\n\n[Mirage: Cost 3 ([Yellow Core][Yellow Core])]\n[During Set] (Your Main Step)\nWhen you're summoning \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", fulfill one of its reduction symbols.\n\n[Flash]\nRefresh an \"Idol\" family Spirit you control. Then, you can immediately end the battle.",
-  "is_vanilla": false
- },
- "PC08-003": {
-  "name": "［Magical Emerald Coord］Kamiya Shion",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 10000
-   }
+  "PC08-004": {
+    "name": "Floor of the Starry Sky",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Type: Song]\n\n[Flash]\nYou can return an opposing Spirit to the Hand. Also, if you control any \"Oozora Akari\", you can return an opposing Spirit to the deckbottom. If you control any \"Hoshimiya Ichigo\", these effects can't be prevented by opposing effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-004",
+      "name": "Floor of the Starry Sky",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "PC08-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Song",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can return an opposing Spirit to the Hand. Also, if you control any \"Oozora Akari\", you can return an opposing Spirit to the deckbottom. If you control any \"Hoshimiya Ichigo\", these effects can't be prevented by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "You can return an opposing Spirit to the Hand.",
+              "cleanText": "You can return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            },
+            {
+              "rawText": "if you control any \"Oozora Akari\", you can return an opposing Spirit to the deckbottom.",
+              "cleanText": "you can return an opposing Spirit to the deckbottom",
+              "link": "also",
+              "isOptional": true,
+              "isCost": false,
+              "condition": "if you control any \"Oozora Akari\"",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            },
+            {
+              "rawText": "If you control any \"Hoshimiya Ichigo\", these effects can't be prevented by opposing effects.",
+              "cleanText": "these effects can't be prevented by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any \"Hoshimiya Ichigo\"",
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[team: Powapowa-Puririn]\n\n[Burst: After your Life is reduced]\nPut a core from the Void to your Life/any of your \"Idol\" family Spirit, and return an opposing Spirit to the deckbottom. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (Your Attack Step)\nWhile your \"Kiriya Aoi\" or [Powapowa-Puririn] Spirit is attacking, the opponent can't activate Burst effects.",
-  "is_vanilla": false
- },
- "PC08-001": {
-  "name": "［Magical Garden Coord］Kitaouji Sakura",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 9000
-   }
+  "PC08-005": {
+    "name": "MY STARWAY",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Type: Song]\n\n[Mirage: Cost 3 ([Yellow Core][Yellow Core])]\n[During Set] (Your Main Step)\nWhen you're summoning \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", fulfill one of its reduction symbols.\n\n[Flash]\nRefresh an \"Idol\" family Spirit you control. Then, you can immediately end the battle.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-005",
+      "name": "MY STARWAY",
+      "keywords": [
+        {
+          "name": "Mirage",
+          "parameter": "Cost 3 ([Yellow Core",
+          "wave": 2,
+          "hook": "mirage",
+          "bracketed": true,
+          "index": 14
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Song",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Mirage: Cost ([Yellow Core][Yellow Core])"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-005#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Set"
+            ],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you're summoning \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", fulfill one of its reduction symbols."
+          },
+          "clauses": [
+            {
+              "rawText": "When you're summoning \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", fulfill one of its reduction symbols.",
+              "cleanText": "When you're summoning \"Hoshimiya Ichigo\"/\"Kiriya Aoi\"/\"Shibuki Ran\", fulfill one of its reduction symbols",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-005#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Refresh an \"Idol\" family Spirit you control. Then, you can immediately end the battle."
+          },
+          "clauses": [
+            {
+              "rawText": "Refresh an \"Idol\" family Spirit you control.",
+              "cleanText": "Refresh an \"Idol\" family Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "you can immediately end the battle.",
+              "cleanText": "you can immediately end the battle",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "END_BATTLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Powapowa-Puririn STAR ANIS]\n\nFlash - (Opposing Attack Step)\nBy sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step.\n\n[LV2][LV3] (Either Attack Step)\nAll your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
-  "is_vanilla": false
- },
- "PC08-002": {
-  "name": "［Magical Yellow Coord］Arisugawa Otome",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   }
+  "PC08-003": {
+    "name": "［Magical Emerald Coord］Kamiya Shion",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 10000
+      }
+    },
+    "effect": "[team: Powapowa-Puririn]\n\n[Burst: After your Life is reduced]\nPut a core from the Void to your Life/any of your \"Idol\" family Spirit, and return an opposing Spirit to the deckbottom. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (Your Attack Step)\nWhile your \"Kiriya Aoi\" or [Powapowa-Puririn] Spirit is attacking, the opponent can't activate Burst effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-003",
+      "name": "［Magical Emerald Coord］Kamiya Shion",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Powapowa-Puririn",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 26
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to your Life/any of your \"Idol\" family Spirit, and return an opposing Spirit to the deckbottom. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to your Life/any of your \"Idol\" family Spirit",
+              "cleanText": "Put a core from the Void to your Life/any of your \"Idol\" family Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RECOVER_LIFE",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "return an opposing Spirit to the deckbottom.",
+              "cleanText": "return an opposing Spirit to the deckbottom",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your \"Kiriya Aoi\" or [Powapowa-Puririn] Spirit is attacking, the opponent can't activate Burst effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While your \"Kiriya Aoi\" or [Powapowa-Puririn] Spirit is attacking, the opponent can't activate Burst effects.",
+              "cleanText": "the opponent can't activate Burst effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your \"Kiriya Aoi\" or [Powapowa-Puririn] Spirit is attacking",
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Powapowa-Puririn STAR ANIS]\n\n[LV1][LV2][LV3] (When Summoned)\nPut two cores from the Void to any of your \"Idol\" family Spirits.\n\n[LV2][LV3]\nWhen your \"Idol\" family Spirits would leave the Field due to opposing effects, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "PC08-X03": {
-  "name": "［Sunset Starway Coord］Shibuki Ran",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 15000
-   }
+  "PC08-001": {
+    "name": "［Magical Garden Coord］Kitaouji Sakura",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 9000
+      }
+    },
+    "effect": "[teams: Powapowa-Puririn STAR ANIS]\n\nFlash - (Opposing Attack Step)\nBy sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step.\n\n[LV2][LV3] (Either Attack Step)\nAll your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-001",
+      "name": "［Magical Garden Coord］Kitaouji Sakura",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Powapowa-Puririn STAR ANIS",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit, summon this card from the Hand without paying the cost. When you've done so, when this battle ends, end the Attack Step."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit",
+              "cleanText": "By sending your [Soul Core] from your Trash to any of your \"Idol\" & \"Stage Style\" family Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            },
+            {
+              "rawText": "summon this card from the Hand without paying the cost.",
+              "cleanText": "summon this card from the Hand without paying the cost",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "HAND"
+              }
+            },
+            {
+              "rawText": "when this battle ends, end the Attack Step.",
+              "cleanText": "when this battle ends, end the Attack Step",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-001#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects."
+          },
+          "clauses": [
+            {
+              "rawText": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects.",
+              "cleanText": "All your [Powapowa-Puririn] or [Tristar] Spirits are unaffected by opposing Spirit effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunset Coord］Shibuki Ran\" you control in the same condition. When you've done so, during this turn, the opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (Your Attack Step)\nWhen your [Soleil] Spirit is switched into the Field/attacks, during this turn, give an opposing Spirit -10000 BP, and destroy it when its BP is brought to 0.",
-  "is_vanilla": false
- },
- "PC08-X02": {
-  "name": "［Sunshine Starway Coord］Hoshimiya Ichigo",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 16000
-   }
+  "PC08-002": {
+    "name": "［Magical Yellow Coord］Arisugawa Otome",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[teams: Powapowa-Puririn STAR ANIS]\n\n[LV1][LV2][LV3] (When Summoned)\nPut two cores from the Void to any of your \"Idol\" family Spirits.\n\n[LV2][LV3]\nWhen your \"Idol\" family Spirits would leave the Field due to opposing effects, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-002",
+      "name": "［Magical Yellow Coord］Arisugawa Otome",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Powapowa-Puririn STAR ANIS",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put two cores from the Void to any of your \"Idol\" family Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Put two cores from the Void to any of your \"Idol\" family Spirits.",
+              "cleanText": "Put two cores from the Void to any of your \"Idol\" family Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-002#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Idol\" family Spirits would leave the Field due to opposing effects, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Idol\" family Spirits would leave the Field due to opposing effects, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost.",
+              "cleanText": "When your \"Idol\" family Spirits would leave the Field due to opposing effects, you can summon an \"Idol\" family Spirit card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunshine Coord］Hoshimiya Ichigo\" you control in the same condition. When you've done so, return an opposing Spirit to the deckbottom.\n\n[LV2][LV3] (Either Attack Step)\nYour [Soleil] Spirits can't be destroyed by opposing effects, and once per turn per Spirit, can refresh at the end of battle.",
-  "is_vanilla": false
- },
- "PC08-X01": {
-  "name": "［Sunrise Starway Coord］Kiriya Aoi",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 13000
-   }
+  "PC08-X03": {
+    "name": "［Sunset Starway Coord］Shibuki Ran",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 15000
+      }
+    },
+    "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunset Coord］Shibuki Ran\" you control in the same condition. When you've done so, during this turn, the opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (Your Attack Step)\nWhen your [Soleil] Spirit is switched into the Field/attacks, during this turn, give an opposing Spirit -10000 BP, and destroy it when its BP is brought to 0.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-X03",
+      "name": "［Sunset Starway Coord］Shibuki Ran",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Soleil STAR ANIS",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-X03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X03#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can switch this card from the Hand with a \"［Sunset Coord］Shibuki Ran\" you control in the same condition. When you've done so, during this turn, the opponent can't end the Attack Step via effects."
+          },
+          "clauses": [
+            {
+              "rawText": "You can switch this card from the Hand with a \"［Sunset Coord］Shibuki Ran\" you control in the same condition.",
+              "cleanText": "You can switch this card from the Hand with a \"［Sunset Coord］Shibuki Ran\" you control in the same condition",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SWITCH_CARD"
+              }
+            },
+            {
+              "rawText": "during this turn, the opponent can't end the Attack Step via effects.",
+              "cleanText": "the opponent can't end the Attack Step via effects",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X03#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your [Soleil] Spirit is switched into the Field/attacks, during this turn, give an opposing Spirit -10000 BP, and destroy it when its BP is brought to 0."
+          },
+          "clauses": [
+            {
+              "rawText": "When your [Soleil] Spirit is switched into the Field/attacks, during this turn, give an opposing Spirit -10000 BP",
+              "cleanText": "When your [Soleil] Spirit is switched into the Field/attacks, during this turn, give an opposing Spirit -10000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 10000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            },
+            {
+              "rawText": "destroy it when its BP is brought to 0.",
+              "cleanText": "destroy it when its BP is brought to 0",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunrise Coord］Kiriya Aoi\" you control in the same condition. When you've done so, draw two cards.\n\n[LV3] (Your Attack Step)\nAll your [Soleil] Spirits gain an extra Yellow symbol, and can't be blocked.",
-  "is_vanilla": false
- }
+  "PC08-X02": {
+    "name": "［Sunshine Starway Coord］Hoshimiya Ichigo",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 16000
+      }
+    },
+    "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunshine Coord］Hoshimiya Ichigo\" you control in the same condition. When you've done so, return an opposing Spirit to the deckbottom.\n\n[LV2][LV3] (Either Attack Step)\nYour [Soleil] Spirits can't be destroyed by opposing effects, and once per turn per Spirit, can refresh at the end of battle.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-X02",
+      "name": "［Sunshine Starway Coord］Hoshimiya Ichigo",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Soleil STAR ANIS",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can switch this card from the Hand with a \"［Sunshine Coord］Hoshimiya Ichigo\" you control in the same condition. When you've done so, return an opposing Spirit to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can switch this card from the Hand with a \"［Sunshine Coord］Hoshimiya Ichigo\" you control in the same condition.",
+              "cleanText": "You can switch this card from the Hand with a \"［Sunshine Coord］Hoshimiya Ichigo\" you control in the same condition",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SWITCH_CARD"
+              }
+            },
+            {
+              "rawText": "return an opposing Spirit to the deckbottom.",
+              "cleanText": "return an opposing Spirit to the deckbottom",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Your [Soleil] Spirits can't be destroyed by opposing effects, and once per turn per Spirit, can refresh at the end of battle."
+          },
+          "clauses": [
+            {
+              "rawText": "Your [Soleil] Spirits can't be destroyed by opposing effects, and once per turn per Spirit, can refresh at the end of battle.",
+              "cleanText": "Your [Soleil] Spirits can't be destroyed by opposing effects, and once per turn per Spirit, can refresh at the end of battle",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "PC08-X01": {
+    "name": "［Sunrise Starway Coord］Kiriya Aoi",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 13000
+      }
+    },
+    "effect": "[teams: Soleil STAR ANIS]\n\nFlash - (Your Turn)\nYou can switch this card from the Hand with a \"［Sunrise Coord］Kiriya Aoi\" you control in the same condition. When you've done so, draw two cards.\n\n[LV3] (Your Attack Step)\nAll your [Soleil] Spirits gain an extra Yellow symbol, and can't be blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PC08-X01",
+      "name": "［Sunrise Starway Coord］Kiriya Aoi",
+      "keywords": [
+        {
+          "name": "Team",
+          "parameter": "Soleil STAR ANIS",
+          "wave": 5,
+          "hook": "team",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PC08-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "TURN_TRIGGER",
+            "timingLabel": "Your Turn",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can switch this card from the Hand with a \"［Sunrise Coord］Kiriya Aoi\" you control in the same condition. When you've done so, draw two cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can switch this card from the Hand with a \"［Sunrise Coord］Kiriya Aoi\" you control in the same condition.",
+              "cleanText": "You can switch this card from the Hand with a \"［Sunrise Coord］Kiriya Aoi\" you control in the same condition",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SWITCH_CARD"
+              }
+            },
+            {
+              "rawText": "draw two cards.",
+              "cleanText": "draw two cards",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PC08-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your [Soleil] Spirits gain an extra Yellow symbol, and can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "All your [Soleil] Spirits gain an extra Yellow symbol, and can't be blocked.",
+              "cleanText": "All your [Soleil] Spirits gain an extra Yellow symbol, and can't be blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

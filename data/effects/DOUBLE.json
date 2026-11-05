@@ -1,25 +1,98 @@
 {
- "P15-14": {
-  "name": "Jinraidragon-True",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDraw a card. While [Soul Core](Soul Core) is on this Spirit, also, it gains \"[True-Clash] Opposing Spirits/Ultimates must block if possible.\"",
-  "is_vanilla": false
- }
+  "P15-14": {
+    "name": "Jinraidragon-True",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDraw a card. While [Soul Core](Soul Core) is on this Spirit, also, it gains \"[True-Clash] Opposing Spirits/Ultimates must block if possible.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P15-14",
+      "name": "Jinraidragon-True",
+      "keywords": [
+        {
+          "name": "True-Clash",
+          "parameter": null,
+          "wave": 1,
+          "hook": "clash",
+          "bracketed": true,
+          "index": 108
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P15-14#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card. While [Soul Core](Soul Core) is on this Spirit, also, it gains \"[True-Clash] Opposing Spirits/Ultimates must block if possible.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "While [Soul Core] is on this Spirit, also, it gains \"[True-Clash] Opposing Spirits/Ultimates must block if possible.\"",
+              "cleanText": "also, it gains \"[True-Clash] Opposing Spirits/Ultimates must block if possible.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While [Soul Core] is on this Spirit",
+              "duration": null,
+              "op": {
+                "op": "FORCE_BLOCK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

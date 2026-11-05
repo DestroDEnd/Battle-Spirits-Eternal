@@ -1,15 +1,218 @@
 {
- "PB16-DD01": {
-  "name": "Light Demon-God",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 0,
-    "bp": 12000
-   }
-  },
-  "effect": "[Brave Condition: [Left/Right] Cost 5 or more]\n\nThis Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.\n\n[LV1] (When Summoned)\nDiscard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate.\n\n[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
-  "is_vanilla": false
- }
+  "PB16-DD01": {
+    "name": "Light Demon-God",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 0,
+        "bp": 12000
+      }
+    },
+    "effect": "[Brave Condition: [Left/Right] Cost 5 or more]\n\nThis Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.\n\n[LV1] (When Summoned)\nDiscard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate.\n\n[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "PB16-DD01",
+      "name": "Light Demon-God",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "[Left/Right",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Double Drive",
+          "parameter": null,
+          "wave": 3,
+          "hook": "double_drive",
+          "bracketed": true,
+          "index": 453
+        }
+      ],
+      "abilities": [
+        {
+          "id": "PB16-DD01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: [Left/Right",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Cost 5 or more]"
+          },
+          "rawText": "[Brave Condition: [Left/Right] Cost 5 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "PB16-DD01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost."
+          },
+          "clauses": [
+            {
+              "rawText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost.",
+              "cleanText": "This Brave doesn't exhaust, can't attack or block while in Spirit condition, and can't be summoned without paying at least one cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SET_RESTRICTION",
+                "restriction": "CANNOT_ATTACK_OR_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB16-DD01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Discard your entire deck. Then, you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirits can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "Discard your entire deck.",
+              "cleanText": "Discard your entire deck",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_ZONE"
+              }
+            },
+            {
+              "rawText": "you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost.",
+              "cleanText": "you can summon up to twelve \"God-King\" family Spirit cards from your Trash, without paying the cost",
+              "link": "then",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "any (When Summoned) effects of the Spirits can't activate.",
+              "cleanText": "any (When Summoned) effects of the Spirits can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "PREVENT_WHEN_SUMMONED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "PB16-DD01#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "[When Braved on the Left/Right] (When Attacks)\n[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "[When Braved on the Left/Right] (When Attacks)",
+              "cleanText": "[When Braved on the Left/Right] (When Attacks)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits.",
+              "cleanText": "[Double Drive] While there are \"God-King\" family Spirits braved to the Left and Right of this Brave, this Spirit's BP is the sum of the BP of both braved Spirits, and gains the symbols of all your \"God-King\" family Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

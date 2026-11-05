@@ -1,20 +1,126 @@
 {
- "P16-02": {
-  "name": "The BlackDeathDragon Bloodbone",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
-  },
-  "effect": "[LV1][LV2] (When Summoned)\nSend a core each from every opposing Cost 3 or less Spirit to their Reserve. If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve.\n\n[When Braved] [LV2] (When Attacks)\nDestroy an opposing Nexus without any core on it.",
-  "is_vanilla": false
- }
+  "P16-02": {
+    "name": "The BlackDeathDragon Bloodbone",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nSend a core each from every opposing Cost 3 or less Spirit to their Reserve. If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve.\n\n[When Braved] [LV2] (When Attacks)\nDestroy an opposing Nexus without any core on it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P16-02",
+      "name": "The BlackDeathDragon Bloodbone",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P16-02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core each from every opposing Cost 3 or less Spirit to their Reserve. If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core each from every opposing Cost 3 or less Spirit to their Reserve.",
+              "cleanText": "Send a core each from every opposing Cost 3 or less Spirit to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve.",
+              "cleanText": "send a core from the opposing Field to their Reserve",
+              "link": "instead",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If [Soul Core] (Soul Core) is used to pay the summon cost",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P16-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Nexus without any core on it."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Nexus without any core on it.",
+              "cleanText": "Destroy an opposing Nexus without any core on it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

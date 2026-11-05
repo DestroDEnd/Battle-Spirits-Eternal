@@ -1,202 +1,2240 @@
 {
- "SD43-X02": {
-  "name": "The MoonlightDragon Strike-Siegwurm X",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 13000
-   }
+  "SD43-X02": {
+    "name": "The MoonlightDragon Strike-Siegwurm X",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 13000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (Either Attack Step)\nWhen an opposing Spirit is exhausted, refresh this Spirit.\n\n[LV1][LV2][LV3] (When Attacks/Blocks)\nReturn an opposing Spirit with BP equal or inferior to this Spirit's to the deckbottom. Also, this Spirit is unaffected by opposing Spirit effects.\n\n[LV2][LV3] (When Attacks/Blocks)\nThis Spirit gains +5000 BP. Also, while you control any White Grandwalker Nexus, this attacking Spirit can't be blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-X02",
+      "name": "The MoonlightDragon Strike-Siegwurm X",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD43-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When an opposing Spirit is exhausted, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When an opposing Spirit is exhausted, refresh this Spirit.",
+              "cleanText": "When an opposing Spirit is exhausted, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit with BP equal or inferior to this Spirit's to the deckbottom. Also, this Spirit is unaffected by opposing Spirit effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit with BP equal or inferior to this Spirit's to the deckbottom.",
+              "cleanText": "Return an opposing Spirit with BP equal or inferior to this Spirit's to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "this Spirit is unaffected by opposing Spirit effects.",
+              "cleanText": "this Spirit is unaffected by opposing Spirit effects",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +5000 BP. Also, while you control any White Grandwalker Nexus, this attacking Spirit can't be blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +5000 BP.",
+              "cleanText": "This Spirit gains +5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            },
+            {
+              "rawText": "while you control any White Grandwalker Nexus, this attacking Spirit can't be blocked.",
+              "cleanText": "this attacking Spirit can't be blocked",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "while you control any White Grandwalker Nexus",
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (Either Attack Step)\nWhen an opposing Spirit is exhausted, refresh this Spirit.\n\n[LV1][LV2][LV3] (When Attacks/Blocks)\nReturn an opposing Spirit with BP equal or inferior to this Spirit's to the deckbottom. Also, this Spirit is unaffected by opposing Spirit effects.\n\n[LV2][LV3] (When Attacks/Blocks)\nThis Spirit gains +5000 BP. Also, while you control any White Grandwalker Nexus, this attacking Spirit can't be blocked.",
-  "is_vanilla": false
- },
- "SD43-003": {
-  "name": "The ReticleSoldier Muses",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "SD43-003": {
+    "name": "The ReticleSoldier Muses",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nFor every three cards on the opposing Hand, put one core from the Void to this Spirit.\n\n[LV1][LV2][LV3]\nExcept via Burst effects, neither player can summon Spirit cards without paying the cost.\n\n[LV2][LV3] [Heavy Armor: Red/Green]\nThis Spirit is unaffected by opposing Red/Green Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-003",
+      "name": "The ReticleSoldier Muses",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red/Green",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 233
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For every three cards on the opposing Hand, put one core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "For every three cards on the opposing Hand, put one core from the Void to this Spirit.",
+              "cleanText": "For every three cards on the opposing Hand, put one core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Except via Burst effects, neither player can summon Spirit cards without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Except via Burst effects, neither player can summon Spirit cards without paying the cost.",
+              "cleanText": "Except via Burst effects, neither player can summon Spirit cards without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-003#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Red/Green",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red/Green Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red/Green Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red/Green Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nFor every three cards on the opposing Hand, put one core from the Void to this Spirit.\n\n[LV1][LV2][LV3]\nExcept via Burst effects, neither player can summon Spirit cards without paying the cost.\n\n[LV2][LV3] [Heavy Armor: Red/Green]\nThis Spirit is unaffected by opposing Red/Green Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "SD43-CP01": {
-  "name": "Bashin Dan",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Astral Dragon/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)]\n◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[Grand Skill: 2] [LV1][LV2] Flash -\n(Send two core from this Nexus to the Void) Destroy an opposing 4000 BP or less Spirit. Or, destroy an opposing Nexus.\n\n[Grand Field] [LV2] (Your Attack Step)\nAt the end of your Brave Spirit's battle, send an opposing Life to their Reserve.",
-  "is_vanilla": false
- },
- "SD43-009": {
-  "name": "Bladraw",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nDraw two cards. Then, reveal four cards from your decktop. Among them, deploy one exactly-named \"Bashin Dan\"/\"The Moonlight Barone\", without paying the cost. Return any remaining cards to the deckbottom in any order.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
-  "is_vanilla": false
- },
- "SD43-002": {
-  "name": "Dorado-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 7000
-   }
+  "SD43-CP01": {
+    "name": "Bashin Dan",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Astral Dragon/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)]\n◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[Grand Skill: 2] [LV1][LV2] Flash -\n(Send two core from this Nexus to the Void) Destroy an opposing 4000 BP or less Spirit. Or, destroy an opposing Nexus.\n\n[Grand Field] [LV2] (Your Attack Step)\nAt the end of your Brave Spirit's battle, send an opposing Life to their Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-CP01",
+      "name": "Bashin Dan",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Astral Dragon/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "2",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 718
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 874
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-CP01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Astral Dragon/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP01#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP01#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 2"
+            ],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send two core from this Nexus to the Void) Destroy an opposing 4000 BP or less Spirit. Or, destroy an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send two core from this Nexus to the Void) Destroy an opposing 4000 BP or less Spirit.",
+              "cleanText": "(Send two core from this Nexus to the Void) Destroy an opposing 4000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 4000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "destroy an opposing Nexus.",
+              "cleanText": "destroy an opposing Nexus",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP01#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of your Brave Spirit's battle, send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of your Brave Spirit's battle, send an opposing Life to their Reserve.",
+              "cleanText": "At the end of your Brave Spirit's battle, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 8,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nBy destroying an opposing 5000 BP or less Spirit, draw one card.\n\n[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as White.",
-  "is_vanilla": false
- },
- "SD43-001": {
-  "name": "Igua-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "SD43-009": {
+    "name": "Bladraw",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nDraw two cards. Then, reveal four cards from your decktop. Among them, deploy one exactly-named \"Bashin Dan\"/\"The Moonlight Barone\", without paying the cost. Return any remaining cards to the deckbottom in any order.\n\n[Flash]\nDuring this turn, give a Spirit +2000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-009",
+      "name": "Bladraw",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD43-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Draw two cards. Then, reveal four cards from your decktop. Among them, deploy one exactly-named \"Bashin Dan\"/\"The Moonlight Barone\", without paying the cost. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "reveal four cards from your decktop.",
+              "cleanText": "reveal four cards from your decktop",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 4
+              }
+            },
+            {
+              "rawText": "Among them, deploy one exactly-named \"Bashin Dan\"/\"The Moonlight Barone\", without paying the cost.",
+              "cleanText": "Among them, deploy one exactly-named \"Bashin Dan\"/\"The Moonlight Barone\", without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit +2000 BP.",
+              "cleanText": "give a Spirit +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nDraw a card.\n\n[During Brave] [LV1][LV2]\nAll your \"Astral Soul\"/ \"Astral Deity\"/ \"Galaxian\" family Spirits get +5000 BP.",
-  "is_vanilla": false
- },
- "SD43-010": {
-  "name": "Rising Flame",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Burst: After your Spirit is depleted/destroyed by the Opponent]\nYou can summon an \"Astral Dragon\" family Spirit card that was depleted/destroyed when this Burst activated from your Trash by paying one cost. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDestroy any number of opposing Spirits up to a total of 8000 BP. Effects of the Spirits destroyed by this effect don't activate.",
-  "is_vanilla": false
- },
- "SD43-004": {
-  "name": "Slider Bear",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "SD43-002": {
+    "name": "Dorado-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nBy destroying an opposing 5000 BP or less Spirit, draw one card.\n\n[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as White.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-002",
+      "name": "Dorado-Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD43-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By destroying an opposing 5000 BP or less Spirit, draw one card."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying an opposing 5000 BP or less Spirit",
+              "cleanText": "By destroying an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "draw one card.",
+              "cleanText": "draw one card",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as White."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as White.",
+              "cleanText": "This Spirit's color and symbol are also treated as White",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "White"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Red.\n\n[LV1][LV2][LV3] [Heavy Armor: Red/Purple/Blue]\nThis Spirit is unaffected by opposing Red/Purple/Blue Spirit/Brave/Nexus/Magic effects.\n\n[LV2][LV3] (Opposing Attack Step)\nThis Spirit can block while exhausted.",
-  "is_vanilla": false
- },
- "SD43-006": {
-  "name": "The KingSnake Pend-Viper",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "SD43-001": {
+    "name": "Igua-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nDraw a card.\n\n[During Brave] [LV1][LV2]\nAll your \"Astral Soul\"/ \"Astral Deity\"/ \"Galaxian\" family Spirits get +5000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-001",
+      "name": "Igua-Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD43-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Astral Soul\"/ \"Astral Deity\"/ \"Galaxian\" family Spirits get +5000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Astral Soul\"/ \"Astral Deity\"/ \"Galaxian\" family Spirits get +5000 BP.",
+              "cleanText": "All your \"Astral Soul\"/ \"Astral Deity\"/ \"Galaxian\" family Spirits get +5000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 5000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 3 or more]\n\n[LV1] (When Summoned)\nDestroy an opposing exhausted Spirit.\n\n[During Brave] (When Attacks)\nSend a core from any opposing Spirit to their Reserve. When this effect depletes a Spirit, draw a card.",
-  "is_vanilla": false
- },
- "SD43-CP02": {
-  "name": "The Moonlight Barone",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Armed Machine/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)]\n◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two core from this Nexus to the Void) Refresh an \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit you control.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen your \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit is blocked, refresh that Spirit.",
-  "is_vanilla": false
- },
- "SD43-X01": {
-  "name": "The SunDragon Sieg-Apollodragon X",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 9000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 13000
-   }
+  "SD43-010": {
+    "name": "Rising Flame",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Burst: After your Spirit is depleted/destroyed by the Opponent]\nYou can summon an \"Astral Dragon\" family Spirit card that was depleted/destroyed when this Burst activated from your Trash by paying one cost. Then by paying the cost, activate this card's Flash effect.\n\n[Flash]\nDestroy any number of opposing Spirits up to a total of 8000 BP. Effects of the Spirits destroyed by this effect don't activate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-010",
+      "name": "Rising Flame",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit is depleted/destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon an \"Astral Dragon\" family Spirit card that was depleted/destroyed when this Burst activated from your Trash by paying one cost. Then by paying the cost, activate this card's Flash effect."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon an \"Astral Dragon\" family Spirit card that was depleted/destroyed when this Burst activated from your Trash by paying one cost.",
+              "cleanText": "You can summon an \"Astral Dragon\" family Spirit card that was depleted/destroyed when this Burst activated from your Trash by paying one cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "Then by paying the cost, activate this card's Flash effect.",
+              "cleanText": "Then by paying the cost, activate this card's Flash effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ACTIVATE_FLASH"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Destroy any number of opposing Spirits up to a total of 8000 BP. Effects of the Spirits destroyed by this effect don't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy any number of opposing Spirits up to a total of 8000 BP.",
+              "cleanText": "Destroy any number of opposing Spirits up to a total of 8000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "mode": "TOTAL_BP_LTE",
+                "maxTotalBp": 8000,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "Effects of the Spirits destroyed by this effect don't activate.",
+              "cleanText": "Effects of the Spirits destroyed by this effect don't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "PLAY_CONDITION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nYou can target and attack an opposing refreshed Spirit/Ultimate. When you've done so, destroy an opposing blocking target.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing 9000 BP or less Spirit/Ultimate. Also, if you control any Red Grandwalker Nexus, send an opposing life to the Reserve.",
-  "is_vanilla": false
- },
- "SD43-008": {
-  "name": "The TwinFangEmperor Orth-Lord",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
+  "SD43-004": {
+    "name": "Slider Bear",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nThis Spirit's color and symbol are also treated as Red.\n\n[LV1][LV2][LV3] [Heavy Armor: Red/Purple/Blue]\nThis Spirit is unaffected by opposing Red/Purple/Blue Spirit/Brave/Nexus/Magic effects.\n\n[LV2][LV3] (Opposing Attack Step)\nThis Spirit can block while exhausted.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-004",
+      "name": "Slider Bear",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Red/Purple/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 89
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit's color and symbol are also treated as Red."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit's color and symbol are also treated as Red.",
+              "cleanText": "This Spirit's color and symbol are also treated as Red",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_COLOR_SYMBOL",
+                "color": "Red"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Red/Purple/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Red/Purple/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Red/Purple/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Red/Purple/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block while exhausted.",
+              "cleanText": "This Spirit can block while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUSTED_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more]\n\n[During Brave] (When Attacks)\nYou can discard three cards from your Hand. When you've done so, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "SD43-007": {
-  "name": "The WhiteGun Phoenix-Blaster",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "SD43-006": {
+    "name": "The KingSnake Pend-Viper",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 3 or more]\n\n[LV1] (When Summoned)\nDestroy an opposing exhausted Spirit.\n\n[During Brave] (When Attacks)\nSend a core from any opposing Spirit to their Reserve. When this effect depletes a Spirit, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-006",
+      "name": "The KingSnake Pend-Viper",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 3 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-006#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 3 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 3 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing exhausted Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing exhausted Spirit.",
+              "cleanText": "Destroy an opposing exhausted Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "state": "EXHAUSTED"
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-006#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send a core from any opposing Spirit to their Reserve. When this effect depletes a Spirit, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Send a core from any opposing Spirit to their Reserve.",
+              "cleanText": "Send a core from any opposing Spirit to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "field",
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                },
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "When this effect depletes a Spirit, draw a card.",
+              "cleanText": "When this effect depletes a Spirit, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 3 or more]\n\n[LV1] (When Summoned)\nReturn two opposing Spirits/Ultimates to the Hand. Or, return an opposing Spirit/Ultimate to the deckbottom.\n\n[During Brave] [Heavy Armor: Purple/White]\nThis Spirit is unaffected by opposing Purple/White Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- }
+  "SD43-CP02": {
+    "name": "The Moonlight Barone",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[Grandwalker Nexus]\nThis Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.\n\n[Core Charge: (Armed Machine/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)]\n◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.\n◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus.\n\n[Grand Skill: 2] [LV1][LV2] Flash - (Either Attack Step)\n(Once per turn, send two core from this Nexus to the Void) Refresh an \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit you control.\n\n[Grand Field] [LV2] (Your Attack Step)\nWhen your \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit is blocked, refresh that Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-CP02",
+      "name": "The Moonlight Barone",
+      "keywords": [
+        {
+          "name": "Core Charge",
+          "parameter": "(Armed Machine/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)",
+          "wave": 3,
+          "hook": "core_charge",
+          "bracketed": true,
+          "index": 284
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "2",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 718
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 929
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-CP02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grandwalker Nexus"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+              "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_PROTECTION"
+              }
+            },
+            {
+              "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+              "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANDWALKER_CORE_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Core Charge: (Armed Machine/Astral Soul/Astral Deity/Galaxian/Worldswalker & Cost 3 or more) (Brave)",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus.",
+              "cleanText": "When you summon/advent a target Spirit/Brave, you can put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP02#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put one core from the Void onto this Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "◆When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+              "cleanText": "When this Nexus is deployed, if you do not control a Grnadwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 3,
+                "source": "DECK_TOP",
+                "destination": "TRASH"
+              }
+            },
+            {
+              "rawText": "For each target card among them, put one core from the Void onto this Nexus.",
+              "cleanText": "For each target card among them, put one core from the Void onto this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "source": "VOID",
+                "destination": "THIS_NEXUS",
+                "forEach": "TARGET_CARDS_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP02#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Skill: 2"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send two core from this Nexus to the Void) Refresh an \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send two core from this Nexus to the Void) Refresh an \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit you control.",
+              "cleanText": "(Once per turn, send two core from this Nexus to the Void) Refresh an \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-CP02#a5",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit is blocked, refresh that Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit is blocked, refresh that Spirit.",
+              "cleanText": "When your \"Armed Machine\"/\"Astral Soul\"/\"Astral Deity\"/\"Galaxian\" family Spirit is blocked, refresh that Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD43-X01": {
+    "name": "The SunDragon Sieg-Apollodragon X",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 9000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 13000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nYou can target and attack an opposing refreshed Spirit/Ultimate. When you've done so, destroy an opposing blocking target.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing 9000 BP or less Spirit/Ultimate. Also, if you control any Red Grandwalker Nexus, send an opposing life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-X01",
+      "name": "The SunDragon Sieg-Apollodragon X",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD43-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can target and attack an opposing refreshed Spirit/Ultimate. When you've done so, destroy an opposing blocking target."
+          },
+          "clauses": [
+            {
+              "rawText": "You can target and attack an opposing refreshed Spirit/Ultimate.",
+              "cleanText": "You can target and attack an opposing refreshed Spirit/Ultimate",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "CAN_ATTACK_REFRESHED"
+              }
+            },
+            {
+              "rawText": "destroy an opposing blocking target.",
+              "cleanText": "destroy an opposing blocking target",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 9000 BP or less Spirit/Ultimate. Also, if you control any Red Grandwalker Nexus, send an opposing life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 9000 BP or less Spirit/Ultimate.",
+              "cleanText": "Destroy an opposing 9000 BP or less Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 9000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "if you control any Red Grandwalker Nexus, send an opposing life to the Reserve.",
+              "cleanText": "send an opposing life to the Reserve",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you control any Red Grandwalker Nexus",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD43-008": {
+    "name": "The TwinFangEmperor Orth-Lord",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\n[During Brave] (When Attacks)\nYou can discard three cards from your Hand. When you've done so, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-008",
+      "name": "The TwinFangEmperor Orth-Lord",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-008#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can discard three cards from your Hand. When you've done so, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "You can discard three cards from your Hand.",
+              "cleanText": "You can discard three cards from your Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 3,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD43-007": {
+    "name": "The WhiteGun Phoenix-Blaster",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 3 or more]\n\n[LV1] (When Summoned)\nReturn two opposing Spirits/Ultimates to the Hand. Or, return an opposing Spirit/Ultimate to the deckbottom.\n\n[During Brave] [Heavy Armor: Purple/White]\nThis Spirit is unaffected by opposing Purple/White Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD43-007",
+      "name": "The WhiteGun Phoenix-Blaster",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 3 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Purple/White",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 182
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD43-007#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 3 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 3 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return two opposing Spirits/Ultimates to the Hand. Or, return an opposing Spirit/Ultimate to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "Return two opposing Spirits/Ultimates to the Hand.",
+              "cleanText": "Return two opposing Spirits/Ultimates to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "return an opposing Spirit/Ultimate to the deckbottom.",
+              "cleanText": "return an opposing Spirit/Ultimate to the deckbottom",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD43-007#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Purple/White",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Purple/White Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Purple/White Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Purple/White Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

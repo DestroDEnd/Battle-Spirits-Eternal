@@ -1,245 +1,2780 @@
 {
- "SD54-013": {
-  "name": "Garanciere",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "This card in Trash is unaffected by any effect.\n\n[LV1][LV2] (Your Main Step)\nAdd a \"Pilot\" family Brave card revealed from deck by your Spirit effects to the Hand.\n\n[LV2] Flash - (Opposing Attack Step)\nBy destroying this Nexus, during this battle, your Life can't be reduced by the opponent. This effect can only be used once per turn.",
-  "is_vanilla": false
- },
- "SD54-014": {
-  "name": "Nahel Argama (UC)",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] [Barrage: Cost 5 or less]\nThis Nexus is unaffected by opposing Cost 5 or less effects.\n\n[LV1][LV2] Flash - (Your Attack Step)\nBy exhausting this Nexus, destroy every opposing Nexus. This effect can't be prevented by [Barrage]. This effect can only be used once per game.\n\n[LV2] (Your Main Step)\nBy exhausting this Nexus, return an \"MS\" family Spirit card from the Trash to your Hand.",
-  "is_vanilla": false
- },
- "SD54-016": {
-  "name": "Beam Magnum",
-  "type": "Magic",
-  "levels": {},
-  "effect": "While your \"Unicorn Gundam\"-named Spirit is battling, treat all of this card's reduction as filled.\n\n[Flash]\nIgnoring the \"BP+\" of Braves, destroy an opposing 15000 BP or less Spirit and two 3000 BP or less Spirits. Or, destroy an opposing Nexus and, ignoring the \"BP+\" of Braves, destroy two opposing 3000 BP or less Spirits.",
-  "is_vanilla": false
- },
- "SD54-010": {
-  "name": "Banagher Links",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 0,
-    "bp": 1000
-   }
+  "SD54-013": {
+    "name": "Garanciere",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "This card in Trash is unaffected by any effect.\n\n[LV1][LV2] (Your Main Step)\nAdd a \"Pilot\" family Brave card revealed from deck by your Spirit effects to the Hand.\n\n[LV2] Flash - (Opposing Attack Step)\nBy destroying this Nexus, during this battle, your Life can't be reduced by the opponent. This effect can only be used once per turn.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-013",
+      "name": "Garanciere",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This card in Trash is unaffected by any effect."
+          },
+          "clauses": [
+            {
+              "rawText": "This card in Trash is unaffected by any effect.",
+              "cleanText": "This card in Trash is unaffected by any effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Add a \"Pilot\" family Brave card revealed from deck by your Spirit effects to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Add a \"Pilot\" family Brave card revealed from deck by your Spirit effects to the Hand.",
+              "cleanText": "Add a \"Pilot\" family Brave card revealed from deck by your Spirit effects to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-013#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By destroying this Nexus, during this battle, your Life can't be reduced by the opponent."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying this Nexus",
+              "cleanText": "By destroying this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "during this battle, your Life can't be reduced by the opponent.",
+              "cleanText": "your Life can't be reduced by the opponent",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: MS & Cost 4 or more]\n\nThis Brave in Spirit condition can't attack/block.\n\n[During Brave]\nWhen this Spirit would leave the Field due to an opposing effect, by discarding one \"MS\" family card from your Hand, it remains on the Field, exhausted.\n\n[During Brave] (When Attacks)\nDraw a card.",
-  "is_vanilla": false
- },
- "SD54-006": {
-  "name": "Delta Plus",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 9000
-   }
+  "SD54-014": {
+    "name": "Nahel Argama (UC)",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] [Barrage: Cost 5 or less]\nThis Nexus is unaffected by opposing Cost 5 or less effects.\n\n[LV1][LV2] Flash - (Your Attack Step)\nBy exhausting this Nexus, destroy every opposing Nexus. This effect can't be prevented by [Barrage]. This effect can only be used once per game.\n\n[LV2] (Your Main Step)\nBy exhausting this Nexus, return an \"MS\" family Spirit card from the Trash to your Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-014",
+      "name": "Nahel Argama (UC)",
+      "keywords": [
+        {
+          "name": "Barrage",
+          "parameter": "Cost 5 or less",
+          "wave": 5,
+          "hook": "barrage",
+          "bracketed": true,
+          "index": 11
+        },
+        {
+          "name": "Barrage",
+          "parameter": null,
+          "wave": 5,
+          "hook": "barrage",
+          "bracketed": true,
+          "index": 227
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Barrage: Cost 5 or less",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Nexus is unaffected by opposing Cost 5 or less effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Nexus is unaffected by opposing Cost 5 or less effects.",
+              "cleanText": "This Nexus is unaffected by opposing Cost 5 or less effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By exhausting this Nexus, destroy every opposing Nexus. This effect can't be prevented by [Barrage]. This effect can only be used once per game."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting this Nexus",
+              "cleanText": "By exhausting this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "destroy every opposing Nexus.",
+              "cleanText": "destroy every opposing Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "This effect can't be prevented by [Barrage].",
+              "cleanText": "This effect can't be prevented by [Barrage]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            },
+            {
+              "rawText": "This effect can only be used once per game.",
+              "cleanText": "This effect can only be used once per game",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "PLAY_CONDITION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-014#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting this Nexus, return an \"MS\" family Spirit card from the Trash to your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting this Nexus",
+              "cleanText": "By exhausting this Nexus",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "return an \"MS\" family Spirit card from the Trash to your Hand.",
+              "cleanText": "return an \"MS\" family Spirit card from the Trash to your Hand",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 7,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 10000 BP or less Spirit.\n\n[LV1][LV2][LV3]\nThis Spirit and all your \"Unicorn Gundam\"-named Spirits can't be returned to the Hand/Deck by opposing effects.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing Spirit with the lowest BP.",
-  "is_vanilla": false
- },
- "SD54-002": {
-  "name": "Geara Zulu",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "SD54-016": {
+    "name": "Beam Magnum",
+    "type": "Magic",
+    "levels": {},
+    "effect": "While your \"Unicorn Gundam\"-named Spirit is battling, treat all of this card's reduction as filled.\n\n[Flash]\nIgnoring the \"BP+\" of Braves, destroy an opposing 15000 BP or less Spirit and two 3000 BP or less Spirits. Or, destroy an opposing Nexus and, ignoring the \"BP+\" of Braves, destroy two opposing 3000 BP or less Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-016",
+      "name": "Beam Magnum",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-016#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While your \"Unicorn Gundam\"-named Spirit is battling, treat all of this card's reduction as filled."
+          },
+          "clauses": [
+            {
+              "rawText": "While your \"Unicorn Gundam\"-named Spirit is battling, treat all of this card's reduction as filled.",
+              "cleanText": "treat all of this card's reduction as filled",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While your \"Unicorn Gundam\"-named Spirit is battling",
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-016#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Ignoring the \"BP+\" of Braves, destroy an opposing 15000 BP or less Spirit and two 3000 BP or less Spirits. Or, destroy an opposing Nexus and, ignoring the \"BP+\" of Braves, destroy two opposing 3000 BP or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Ignoring the \"BP+\" of Braves, destroy an opposing 15000 BP or less Spirit and two 3000 BP or less Spirits.",
+              "cleanText": "Ignoring the \"BP+\" of Braves, destroy an opposing 15000 BP or less Spirit and two 3000 BP or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 15000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "destroy an opposing Nexus and, ignoring the \"BP+\" of Braves, destroy two opposing 3000 BP or less Spirits.",
+              "cleanText": "destroy an opposing Nexus and, ignoring the \"BP+\" of Braves, destroy two opposing 3000 BP or less Spirits",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Nexus"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nYou can reveal three cards from your decktop. Add a Red \"Mothership\" family Nexus card and an exactly-named \"Kshatriya\" among them to the Hand. Return the remaining cards to either only the decktop or only the deckbottom in any order.\n\n[LV2] (Your Main Step)\nAdd an \"Unicorn Gundam\"-named card revealed by this Spirit's effect to the Hand.",
-  "is_vanilla": false
- },
- "SD54-012": {
-  "name": "Haro",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (When Deployed)\nYou can reveal two cards from your decktop. Add a Red \"MS\"/\"MA\"/\"Mothership\"/\"Support Fighter\"/\"Pilot\"/\"Captain\"/\"Crew\" family card among them to your Hand. Discard any remaining cards.\n\n[LV2] (Start of Your Attack Step)\nBesides [Soul Core], send up to three cores from your Trash to a Red \"MS\" family Spirit you control.",
-  "is_vanilla": false
- },
- "SD54-004": {
-  "name": "Jegan",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "SD54-010": {
+    "name": "Banagher Links",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 0,
+        "bp": 1000
+      }
+    },
+    "effect": "[Brave Condition: MS & Cost 4 or more]\n\nThis Brave in Spirit condition can't attack/block.\n\n[During Brave]\nWhen this Spirit would leave the Field due to an opposing effect, by discarding one \"MS\" family card from your Hand, it remains on the Field, exhausted.\n\n[During Brave] (When Attacks)\nDraw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-010",
+      "name": "Banagher Links",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "MS & Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-010#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: MS & Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: MS & Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Brave in Spirit condition can't attack/block."
+          },
+          "clauses": [
+            {
+              "rawText": "This Brave in Spirit condition can't attack/block.",
+              "cleanText": "This Brave in Spirit condition can't attack/block",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SET_RESTRICTION",
+                "restriction": "CANNOT_ATTACK_OR_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-010#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit would leave the Field due to an opposing effect, by discarding one \"MS\" family card from your Hand, it remains on the Field, exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit would leave the Field due to an opposing effect, by discarding one \"MS\" family card from your Hand, it remains on the Field, exhausted.",
+              "cleanText": "When this Spirit would leave the Field due to an opposing effect, by discarding one \"MS\" family card from your Hand, it remains on the Field, exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "chooser": "self",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-010#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "You can put any amount of copies of this card in your deck.\n\n[LV1][LV2] (When Attacks)\nSummon any number of \"Jegan\" Spirit cards from your Hand, without paying the cost.",
-  "is_vanilla": false
- },
- "SD54-009": {
-  "name": "Kshatriya",
-  "type": "Spirit",
-  "levels": {},
-  "effect": "[LV1][LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], put any amount of cores from your Trash to this Spirit.\n\n[LV1][LV2][LV3] Flash - (Either Attack Step)\nYou can send one core from this Spirit to the Trash. When you've done so, destroy an opposing 4000 BP or less Spirit.\n\n[LV1][LV2][LV3] Flash - (Your Attack Step)\nYou can send three cores from this Spirit to the Trash. When you've done so, either destroy an opposing 12000 BP or less Spirit, or an opposing Nexus.",
-  "is_vanilla": false
- },
- "SD54-001": {
-  "name": "Loto",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD54-006": {
+    "name": "Delta Plus",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy an opposing 10000 BP or less Spirit.\n\n[LV1][LV2][LV3]\nThis Spirit and all your \"Unicorn Gundam\"-named Spirits can't be returned to the Hand/Deck by opposing effects.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing Spirit with the lowest BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-006",
+      "name": "Delta Plus",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 10000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 10000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 10000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 10000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-006#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit and all your \"Unicorn Gundam\"-named Spirits can't be returned to the Hand/Deck by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit and all your \"Unicorn Gundam\"-named Spirits can't be returned to the Hand/Deck by opposing effects.",
+              "cleanText": "This Spirit and all your \"Unicorn Gundam\"-named Spirits can't be returned to the Hand/Deck by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-006#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Spirit with the lowest BP."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Spirit with the lowest BP.",
+              "cleanText": "Destroy an opposing Spirit with the lowest BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nBesides this Spirit, if you don't control any exactly-named \"Loto\", you can summon an exactly-named \"Loto\" from your Hand, without paying the cost.\n\n[LV1][LV2][LV3]\nWhen this Spirit would leave the Field due to opposing effects, destroy an opposing 3000 BP or less Spirit, and draw a card.",
-  "is_vanilla": false
- },
- "SD54-011": {
-  "name": "Marida Cruz",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 0,
-    "bp": 1000
-   }
+  "SD54-002": {
+    "name": "Geara Zulu",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nYou can reveal three cards from your decktop. Add a Red \"Mothership\" family Nexus card and an exactly-named \"Kshatriya\" among them to the Hand. Return the remaining cards to either only the decktop or only the deckbottom in any order.\n\n[LV2] (Your Main Step)\nAdd an \"Unicorn Gundam\"-named card revealed by this Spirit's effect to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-002",
+      "name": "Geara Zulu",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Add a Red \"Mothership\" family Nexus card and an exactly-named \"Kshatriya\" among them to the Hand. Return the remaining cards to either only the decktop or only the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Add a Red \"Mothership\" family Nexus card and an exactly-named \"Kshatriya\" among them to the Hand.",
+              "cleanText": "Add a Red \"Mothership\" family Nexus card and an exactly-named \"Kshatriya\" among them to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return the remaining cards to either only the decktop or only the deckbottom in any order.",
+              "cleanText": "Return the remaining cards to either only the decktop or only the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-002#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Add an \"Unicorn Gundam\"-named card revealed by this Spirit's effect to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Add an \"Unicorn Gundam\"-named card revealed by this Spirit's effect to the Hand.",
+              "cleanText": "Add an \"Unicorn Gundam\"-named card revealed by this Spirit's effect to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: MS & Cost 3 or more]\n\nThis Brave in Spirit condition can't attack/block.\n\n[During Brave] (When Attacks)\nYou can put a core from the Trash to this Spirit. When you've done so, destroy an opposing 5000 BP or less Spirit.\n\n[During Brave] (When Attacks)\nWhile this Spirit is Cost 8 or more, it gains an extra Red symbol.",
-  "is_vanilla": false
- },
- "SD54-005": {
-  "name": "ReZEL",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD54-012": {
+    "name": "Haro",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (When Deployed)\nYou can reveal two cards from your decktop. Add a Red \"MS\"/\"MA\"/\"Mothership\"/\"Support Fighter\"/\"Pilot\"/\"Captain\"/\"Crew\" family card among them to your Hand. Discard any remaining cards.\n\n[LV2] (Start of Your Attack Step)\nBesides [Soul Core], send up to three cores from your Trash to a Red \"MS\" family Spirit you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-012",
+      "name": "Haro",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DEPLOYED",
+            "timingLabel": "When Deployed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal two cards from your decktop. Add a Red \"MS\"/\"MA\"/\"Mothership\"/\"Support Fighter\"/\"Pilot\"/\"Captain\"/\"Crew\" family card among them to your Hand. Discard any remaining cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal two cards from your decktop.",
+              "cleanText": "You can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "Add a Red \"MS\"/\"MA\"/\"Mothership\"/\"Support Fighter\"/\"Pilot\"/\"Captain\"/\"Crew\" family card among them to your Hand.",
+              "cleanText": "Add a Red \"MS\"/\"MA\"/\"Mothership\"/\"Support Fighter\"/\"Pilot\"/\"Captain\"/\"Crew\" family card among them to your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Discard any remaining cards.",
+              "cleanText": "Discard any remaining cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REVEALED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Besides [Soul Core], send up to three cores from your Trash to a Red \"MS\" family Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Besides [Soul Core], send up to three cores from your Trash to a Red \"MS\" family Spirit you control.",
+              "cleanText": "Besides [Soul Core], send up to three cores from your Trash to a Red \"MS\" family Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nDraw a card. Also, while braved to a \"Pilot\" family Brave, this Spirit can't be blocked by opposing 10000 BP or less Spirits.\n\n[LV2] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SD54-003": {
-  "name": "Stark Jegan",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 7000
-   }
+  "SD54-004": {
+    "name": "Jegan",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "You can put any amount of copies of this card in your deck.\n\n[LV1][LV2] (When Attacks)\nSummon any number of \"Jegan\" Spirit cards from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-004",
+      "name": "Jegan",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can put any amount of copies of this card in your deck."
+          },
+          "clauses": [
+            {
+              "rawText": "You can put any amount of copies of this card in your deck.",
+              "cleanText": "You can put any amount of copies of this card in your deck",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DECK_BUILDING_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon any number of \"Jegan\" Spirit cards from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon any number of \"Jegan\" Spirit cards from your Hand, without paying the cost.",
+              "cleanText": "Summon any number of \"Jegan\" Spirit cards from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a Red \"Mothership\" family Nexus card, and an \"Unicorn Gundam\" to the Hand. Return the remaining cards to only the deckbottom or decktop.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Jegan\" Spirit attacks, you can draw a card.",
-  "is_vanilla": false
- },
- "SD54-X02": {
-  "name": "Unicorn Gundam 02 Banshee［Destroy Mode］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 17000
-   }
+  "SD54-009": {
+    "name": "Kshatriya",
+    "type": "Spirit",
+    "levels": {},
+    "effect": "[LV1][LV2][LV3] (Start of Your Attack Step)\nBesides [Soul Core], put any amount of cores from your Trash to this Spirit.\n\n[LV1][LV2][LV3] Flash - (Either Attack Step)\nYou can send one core from this Spirit to the Trash. When you've done so, destroy an opposing 4000 BP or less Spirit.\n\n[LV1][LV2][LV3] Flash - (Your Attack Step)\nYou can send three cores from this Spirit to the Trash. When you've done so, either destroy an opposing 12000 BP or less Spirit, or an opposing Nexus.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-009",
+      "name": "Kshatriya",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "START_OF_ATTACK_STEP",
+            "timingLabel": "Start of Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Besides [Soul Core], put any amount of cores from your Trash to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Besides [Soul Core], put any amount of cores from your Trash to this Spirit.",
+              "cleanText": "Besides [Soul Core], put any amount of cores from your Trash to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can send one core from this Spirit to the Trash. When you've done so, destroy an opposing 4000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can send one core from this Spirit to the Trash.",
+              "cleanText": "You can send one core from this Spirit to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "destroy an opposing 4000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 4000 BP or less Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 4000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-009#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "You can send three cores from this Spirit to the Trash. When you've done so, either destroy an opposing 12000 BP or less Spirit, or an opposing Nexus."
+          },
+          "clauses": [
+            {
+              "rawText": "You can send three cores from this Spirit to the Trash.",
+              "cleanText": "You can send three cores from this Spirit to the Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "either destroy an opposing 12000 BP or less Spirit, or an opposing Nexus.",
+              "cleanText": "either destroy an opposing 12000 BP or less Spirit, or an opposing Nexus",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition.\n\n[Burst: After your Life is reduced]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy three opposing Spirits with two cores or less on them.\n\n[LV3] (When Attacks)\nDestroy an opposing Spirit with five cores or less on it.",
-  "is_vanilla": false
- },
- "SD54-007": {
-  "name": "Unicorn Gundam ［Unicorn Mode］",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   }
+  "SD54-001": {
+    "name": "Loto",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nBesides this Spirit, if you don't control any exactly-named \"Loto\", you can summon an exactly-named \"Loto\" from your Hand, without paying the cost.\n\n[LV1][LV2][LV3]\nWhen this Spirit would leave the Field due to opposing effects, destroy an opposing 3000 BP or less Spirit, and draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-001",
+      "name": "Loto",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Besides this Spirit, if you don't control any exactly-named \"Loto\", you can summon an exactly-named \"Loto\" from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Besides this Spirit, if you don't control any exactly-named \"Loto\", you can summon an exactly-named \"Loto\" from your Hand, without paying the cost.",
+              "cleanText": "Besides this Spirit, if you don't control any exactly-named \"Loto\", you can summon an exactly-named \"Loto\" from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-001#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit would leave the Field due to opposing effects, destroy an opposing 3000 BP or less Spirit, and draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit would leave the Field due to opposing effects, destroy an opposing 3000 BP or less Spirit",
+              "cleanText": "When this Spirit would leave the Field due to opposing effects, destroy an opposing 3000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 3000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return the remaining cards to the deckbottom.\n\n[LV1][LV2][LV3] Flash- [NT-D]\nWhen any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you do, destroy an opposing Spirit.",
-  "is_vanilla": false
- },
- "SD54-X01": {
-  "name": "Unicorn Gundam［Destroy Mode］",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 16000
-   }
+  "SD54-011": {
+    "name": "Marida Cruz",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 0,
+        "bp": 1000
+      }
+    },
+    "effect": "[Brave Condition: MS & Cost 3 or more]\n\nThis Brave in Spirit condition can't attack/block.\n\n[During Brave] (When Attacks)\nYou can put a core from the Trash to this Spirit. When you've done so, destroy an opposing 5000 BP or less Spirit.\n\n[During Brave] (When Attacks)\nWhile this Spirit is Cost 8 or more, it gains an extra Red symbol.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-011",
+      "name": "Marida Cruz",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "MS & Cost 3 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-011#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: MS & Cost 3 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: MS & Cost 3 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Brave in Spirit condition can't attack/block."
+          },
+          "clauses": [
+            {
+              "rawText": "This Brave in Spirit condition can't attack/block.",
+              "cleanText": "This Brave in Spirit condition can't attack/block",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SET_RESTRICTION",
+                "restriction": "CANNOT_ATTACK_OR_BLOCK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-011#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can put a core from the Trash to this Spirit. When you've done so, destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can put a core from the Trash to this Spirit.",
+              "cleanText": "You can put a core from the Trash to this Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE"
+              }
+            },
+            {
+              "rawText": "destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "destroy an opposing 5000 BP or less Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-011#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While this Spirit is Cost 8 or more, it gains an extra Red symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "While this Spirit is Cost 8 or more, it gains an extra Red symbol.",
+              "cleanText": "it gains an extra Red symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While this Spirit is Cost 8 or more",
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDestroy every opposing Spirit with two symbols or more.\n\n[LV1][LV2][LV3] (When Attacks)\nThe opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit with the highest BP. When this effect destroys, this Spirit refreshes. At the end of battle, send an opposing Life to the Reserve.",
-  "is_vanilla": false
- },
- "SD54-015": {
-  "name": "Universal Century Charter",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Type: Field]\nWhile on the field, all the following effects are active:\n█ Neither player can put more than one core on each Grandwalker Nexus per turn.\n█ When your [NT-D] activates, you can return this card to your Hand.\n\n[Main]\nDraw two cards. Then put this card on your Field.",
-  "is_vanilla": false
- },
- "SD54-008": {
-  "name": "Unicorn Gundam 02 Banshee ［Unicorn Mode］",
-  "type": "Spirit",
-  "levels": {
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   }
+  "SD54-005": {
+    "name": "ReZEL",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nDraw a card. Also, while braved to a \"Pilot\" family Brave, this Spirit can't be blocked by opposing 10000 BP or less Spirits.\n\n[LV2] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-005",
+      "name": "ReZEL",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw a card. Also, while braved to a \"Pilot\" family Brave, this Spirit can't be blocked by opposing 10000 BP or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw a card.",
+              "cleanText": "Draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "while braved to a \"Pilot\" family Brave, this Spirit can't be blocked by opposing 10000 BP or less Spirits.",
+              "cleanText": "this Spirit can't be blocked by opposing 10000 BP or less Spirits",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "while braved to a \"Pilot\" family Brave",
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return any remaining cards to the deckbottom.\n\n[LV1][LV2][LV3] Flash - [NT-D]\nWhen any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you've done so, send three cores from any opposing Spirits to the Trash.",
-  "is_vanilla": false
- }
+  "SD54-003": {
+    "name": "Stark Jegan",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal three cards from your decktop. Among them, add a Red \"Mothership\" family Nexus card, and an \"Unicorn Gundam\" to the Hand. Return the remaining cards to only the deckbottom or decktop.\n\n[LV2][LV3] (Your Attack Step)\nWhen your \"Jegan\" Spirit attacks, you can draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-003",
+      "name": "Stark Jegan",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal three cards from your decktop. Among them, add a Red \"Mothership\" family Nexus card, and an \"Unicorn Gundam\" to the Hand. Return the remaining cards to only the deckbottom or decktop."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal three cards from your decktop.",
+              "cleanText": "You can reveal three cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Among them, add a Red \"Mothership\" family Nexus card, and an \"Unicorn Gundam\" to the Hand.",
+              "cleanText": "Among them, add a Red \"Mothership\" family Nexus card, and an \"Unicorn Gundam\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            },
+            {
+              "rawText": "Return the remaining cards to only the deckbottom or decktop.",
+              "cleanText": "Return the remaining cards to only the deckbottom or decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your \"Jegan\" Spirit attacks, you can draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "When your \"Jegan\" Spirit attacks, you can draw a card.",
+              "cleanText": "When your \"Jegan\" Spirit attacks, you can draw a card",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD54-X02": {
+    "name": "Unicorn Gundam 02 Banshee［Destroy Mode］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 17000
+      }
+    },
+    "effect": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition.\n\n[Burst: After your Life is reduced]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] (When Summoned)\nDestroy three opposing Spirits with two cores or less on them.\n\n[LV3] (When Attacks)\nDestroy an opposing Spirit with five cores or less on it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-X02",
+      "name": "Unicorn Gundam 02 Banshee［Destroy Mode］",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 101
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-X02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition."
+          },
+          "clauses": [
+            {
+              "rawText": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition.",
+              "cleanText": "When this set card is discarded by the opponent, you can activate it, ignoring the Burst condition",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-X02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this card without paying the cost.",
+              "cleanText": "Summon this card without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-X02#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy three opposing Spirits with two cores or less on them."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy three opposing Spirits with two cores or less on them.",
+              "cleanText": "Destroy three opposing Spirits with two cores or less on them",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 3,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-X02#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Spirit with five cores or less on it."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Spirit with five cores or less on it.",
+              "cleanText": "Destroy an opposing Spirit with five cores or less on it",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD54-007": {
+    "name": "Unicorn Gundam ［Unicorn Mode］",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return the remaining cards to the deckbottom.\n\n[LV1][LV2][LV3] Flash- [NT-D]\nWhen any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you do, destroy an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-007",
+      "name": "Unicorn Gundam ［Unicorn Mode］",
+      "keywords": [
+        {
+          "name": "NT-D",
+          "parameter": null,
+          "wave": 5,
+          "hook": "nt_d",
+          "bracketed": true,
+          "index": 197
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return the remaining cards to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal five cards from your decktop.",
+              "cleanText": "You can reveal five cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 5
+              }
+            },
+            {
+              "rawText": "Among them, add every \"Destroy Mode\" to the Hand.",
+              "cleanText": "Among them, add every \"Destroy Mode\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Return the remaining cards to the deckbottom.",
+              "cleanText": "Return the remaining cards to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-007#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "NT-D",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you do, destroy an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state.",
+              "cleanText": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "When you do, destroy an opposing Spirit.",
+              "cleanText": "When you do, destroy an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD54-X01": {
+    "name": "Unicorn Gundam［Destroy Mode］",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 16000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDestroy every opposing Spirit with two symbols or more.\n\n[LV1][LV2][LV3] (When Attacks)\nThe opponent can't end the Attack Step via effects.\n\n[LV2][LV3] (When Attacks)\nYou can destroy an opposing Spirit with the highest BP. When this effect destroys, this Spirit refreshes. At the end of battle, send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-X01",
+      "name": "Unicorn Gundam［Destroy Mode］",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD54-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy every opposing Spirit with two symbols or more."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy every opposing Spirit with two symbols or more.",
+              "cleanText": "Destroy every opposing Spirit with two symbols or more",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The opponent can't end the Attack Step via effects."
+          },
+          "clauses": [
+            {
+              "rawText": "The opponent can't end the Attack Step via effects.",
+              "cleanText": "The opponent can't end the Attack Step via effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-X01#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing Spirit with the highest BP. When this effect destroys, this Spirit refreshes. At the end of battle, send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing Spirit with the highest BP.",
+              "cleanText": "You can destroy an opposing Spirit with the highest BP",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "When this effect destroys, this Spirit refreshes.",
+              "cleanText": "When this effect destroys, this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            },
+            {
+              "rawText": "At the end of battle, send an opposing Life to the Reserve.",
+              "cleanText": "At the end of battle, send an opposing Life to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD54-015": {
+    "name": "Universal Century Charter",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Type: Field]\nWhile on the field, all the following effects are active:\n█ Neither player can put more than one core on each Grandwalker Nexus per turn.\n█ When your [NT-D] activates, you can return this card to your Hand.\n\n[Main]\nDraw two cards. Then put this card on your Field.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-015",
+      "name": "Universal Century Charter",
+      "keywords": [
+        {
+          "name": "NT-D",
+          "parameter": null,
+          "wave": 5,
+          "hook": "nt_d",
+          "bracketed": true,
+          "index": 164
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Type: Field",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "█ Neither player can put more than one core on each Grandwalker Nexus per turn.\n█ When your [NT-D] activates, you can return this card to your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "█ Neither player can put more than one core on each Grandwalker Nexus per turn.",
+              "cleanText": "Neither player can put more than one core on each Grandwalker Nexus per turn",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RESTRICTION"
+              }
+            },
+            {
+              "rawText": "█ When your [NT-D] activates, you can return this card to your Hand.",
+              "cleanText": "When your [NT-D] activates, you can return this card to your Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-015#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Draw two cards. Then put this card on your Field."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "Then put this card on your Field.",
+              "cleanText": "Then put this card on your Field",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REMAIN_ON_FIELD"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD54-008": {
+    "name": "Unicorn Gundam 02 Banshee ［Unicorn Mode］",
+    "type": "Spirit",
+    "levels": {
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return any remaining cards to the deckbottom.\n\n[LV1][LV2][LV3] Flash - [NT-D]\nWhen any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you've done so, send three cores from any opposing Spirits to the Trash.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD54-008",
+      "name": "Unicorn Gundam 02 Banshee ［Unicorn Mode］",
+      "keywords": [
+        {
+          "name": "NT-D",
+          "parameter": null,
+          "wave": 5,
+          "hook": "nt_d",
+          "bracketed": true,
+          "index": 198
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD54-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can reveal five cards from your decktop. Among them, add every \"Destroy Mode\" to the Hand. Return any remaining cards to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "You can reveal five cards from your decktop.",
+              "cleanText": "You can reveal five cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 5
+              }
+            },
+            {
+              "rawText": "Among them, add every \"Destroy Mode\" to the Hand.",
+              "cleanText": "Among them, add every \"Destroy Mode\" to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom.",
+              "cleanText": "Return any remaining cards to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD54-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "NT-D",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state. When you've done so, send three cores from any opposing Spirits to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state.",
+              "cleanText": "When any player controls a Spirit with at least two symbols, this Spirit can change places with a \"Destroy Mode\" Spirit card from your Hand in refreshed state",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "send three cores from any opposing Spirits to the Trash.",
+              "cleanText": "send three cores from any opposing Spirits to the Trash",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,102 +1,1001 @@
 {
- "SJ17-09": {
-  "name": "The NobleArtillery Tour-Billon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   }
+  "SJ17-09": {
+    "name": "The NobleArtillery Tour-Billon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nPut a core from the Void to this Spirit. Also, if this Spirit was [advented], return an opposing Spirit to the Hand.\n\n[LV2] [Heavy Armor: Purple/Yellow/Blue]\nThis Spirit is unaffected by opposing Purple/Yellow/Blue Spirit/Brave/Nexus/Magic effects.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ17-09",
+      "name": "The NobleArtillery Tour-Billon",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 2 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Advent",
+          "parameter": null,
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 250
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Purple/Yellow/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 308
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ17-09#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 2 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-09#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to this Spirit. Also, if this Spirit was [advented], return an opposing Spirit to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to this Spirit.",
+              "cleanText": "Put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "if this Spirit was [advented], return an opposing Spirit to the Hand.",
+              "cleanText": "return an opposing Spirit to the Hand",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if this Spirit was [advented]",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-09#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Purple/Yellow/Blue",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Purple/Yellow/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Purple/Yellow/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Purple/Yellow/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 2 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Summoned/Advents)\nPut a core from the Void to this Spirit. Also, if this Spirit was [advented], return an opposing Spirit to the Hand.\n\n[LV2] [Heavy Armor: Purple/Yellow/Blue]\nThis Spirit is unaffected by opposing Purple/Yellow/Blue Spirit/Brave/Nexus/Magic effects.",
-  "is_vanilla": false
- },
- "SJ17-06": {
-  "name": "The DualGunnerPirate D. Jones",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 6000
-   }
+  "SJ17-06": {
+    "name": "The DualGunnerPirate D. Jones",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards. Then, discard two cards from your Hand. For each Blue card discarded by this effect, destroy an opposing Cost 5 or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ17-06",
+      "name": "The DualGunnerPirate D. Jones",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SJ17-06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Draw two cards. Then, discard two cards from your Hand. For each Blue card discarded by this effect, destroy an opposing Cost 5 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw two cards.",
+              "cleanText": "Draw two cards",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 2,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "discard two cards from your Hand.",
+              "cleanText": "discard two cards from your Hand",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 2,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "For each Blue card discarded by this effect, destroy an opposing Cost 5 or less Spirit.",
+              "cleanText": "For each Blue card discarded by this effect, destroy an opposing Cost 5 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 5
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDraw two cards. Then, discard two cards from your Hand. For each Blue card discarded by this effect, destroy an opposing Cost 5 or less Spirit.",
-  "is_vanilla": false
- },
- "SJ17-07": {
-  "name": "The GreatPirate Jetfin-Shark",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 14000
-   }
+  "SJ17-07": {
+    "name": "The GreatPirate Jetfin-Shark",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 14000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nLook at the contents of the opposing Hand, and discard a Magic card, or a Spirit card with [Accel] among them.\n\n[During Advent] [LV2] (When Attacks)\nOnce per turn, by destroying an opposing Cost 7 or less Spirit, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ17-07",
+      "name": "The GreatPirate Jetfin-Shark",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Accel",
+          "parameter": null,
+          "wave": 2,
+          "hook": "accel",
+          "bracketed": true,
+          "index": 266
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ17-07#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-07#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Look at the contents of the opposing Hand, and discard a Magic card, or a Spirit card with [Accel] among them."
+          },
+          "clauses": [
+            {
+              "rawText": "Look at the contents of the opposing Hand",
+              "cleanText": "Look at the contents of the opposing Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "LOOK_AT_HAND"
+              }
+            },
+            {
+              "rawText": "discard a Magic card, or a Spirit card with [Accel] among them.",
+              "cleanText": "discard a Magic card, or a Spirit card with [Accel] among them",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_AMONG"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-07#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Advent"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "by destroying an opposing Cost 7 or less Spirit, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying an opposing Cost 7 or less Spirit",
+              "cleanText": "By destroying an opposing Cost 7 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "this Spirit refreshes.",
+              "cleanText": "this Spirit refreshes",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] (When Advents)\nLook at the contents of the opposing Hand, and discard a Magic card, or a Spirit card with [Accel] among them.\n\n[During Advent] [LV2] (When Attacks)\nOnce per turn, by destroying an opposing Cost 7 or less Spirit, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "SJ17-05": {
-  "name": "The SilverGunEmperor Walther-Tiger",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 13000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 18000
-   }
+  "SJ17-05": {
+    "name": "The SilverGunEmperor Walther-Tiger",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 13000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 18000
+      }
+    },
+    "effect": "Flash - [Advent: Red & Cost 5 or more] ((Your Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] [Twinkle Bombardment] (When Advents)\nIf you control any [During Advent] Spirit, you can reveal two cards from your decktop. For each \"Emperor Beast\" family Spirit card among them, send an opposing Life to their Reserve. Add the revealed cards to the Hand.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing 12000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ17-05",
+      "name": "The SilverGunEmperor Walther-Tiger",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Red & Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Twinkle Bombardment",
+          "parameter": null,
+          "wave": 4,
+          "hook": "bombardment",
+          "bracketed": true,
+          "index": 170
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ17-05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Red & Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Spirit.",
+              "cleanText": "stack this from your Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Twinkle Bombardment",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any [During Advent] Spirit, you can reveal two cards from your decktop. For each \"Emperor Beast\" family Spirit card among them, send an opposing Life to their Reserve. Add the revealed cards to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any [During Advent] Spirit, you can reveal two cards from your decktop.",
+              "cleanText": "you can reveal two cards from your decktop",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If you control any [During Advent] Spirit",
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 2
+              }
+            },
+            {
+              "rawText": "For each \"Emperor Beast\" family Spirit card among them, send an opposing Life to their Reserve.",
+              "cleanText": "For each \"Emperor Beast\" family Spirit card among them, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            },
+            {
+              "rawText": "Add the revealed cards to the Hand.",
+              "cleanText": "Add the revealed cards to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 12000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 12000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 12000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 12000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Red & Cost 5 or more] ((Your Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit.\n\n[LV1][LV2][LV3] [Twinkle Bombardment] (When Advents)\nIf you control any [During Advent] Spirit, you can reveal two cards from your decktop. For each \"Emperor Beast\" family Spirit card among them, send an opposing Life to their Reserve. Add the revealed cards to the Hand.\n\n[LV2][LV3] (When Attacks)\nDestroy an opposing 12000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "SJ17-08": {
-  "name": "The TwinkleForestKing AncientWolf",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 11000
-   }
-  },
-  "effect": "Flash - [Advent: Green & Cost 4 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] 1 (When Advents/Attacks)\nHeavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2] Flash - (Either Attack Step)\nBy discarding a pre-advent card under this Spirit, refresh one of your Spirits with [Whirlwind].",
-  "is_vanilla": false
- }
+  "SJ17-08": {
+    "name": "The TwinkleForestKing AncientWolf",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 11000
+      }
+    },
+    "effect": "Flash - [Advent: Green & Cost 4 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit.\n\n[LV1][LV2] 1 (When Advents/Attacks)\nHeavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2] Flash - (Either Attack Step)\nBy discarding a pre-advent card under this Spirit, refresh one of your Spirits with [Whirlwind].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ17-08",
+      "name": "The TwinkleForestKing AncientWolf",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Green & Cost 4 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        },
+        {
+          "name": "Whirlwind",
+          "parameter": null,
+          "wave": 1,
+          "hook": "whirlwind",
+          "bracketed": true,
+          "index": 362
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ17-08#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Green & Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit.",
+              "cleanText": "stack this from the Hand onto your target Spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-08#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Heavy exhaust an opposing Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "Heavy exhaust an opposing Spirit/Ultimate.",
+              "cleanText": "Heavy exhaust an opposing Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": true,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ17-08#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By discarding a pre-advent card under this Spirit, refresh one of your Spirits with [Whirlwind]."
+          },
+          "clauses": [
+            {
+              "rawText": "By discarding a pre-advent card under this Spirit",
+              "cleanText": "By discarding a pre-advent card under this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_PRE_ADVENT"
+              }
+            },
+            {
+              "rawText": "refresh one of your Spirits with [Whirlwind].",
+              "cleanText": "refresh one of your Spirits with [Whirlwind]",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

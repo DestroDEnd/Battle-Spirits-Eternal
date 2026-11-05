@@ -1,25 +1,168 @@
 {
- "BATTLE-SPIRITS-A9158": {
-  "name": "The CretaceousMarshal Lay-Saurer",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
-  },
-  "effect": "[LV1][LV2][LV3]\nThis Spirit is unaffected by opposing Spirit effects.\n\n[LV1][LV2][LV3] (Start of Opposing Attack Step)\nYou can target an opposing Spirit. During this turn, that targeted Spirit can't attack.\n\n[LV2][LV3] (When Attacks/Blocks)\nAt the end of the battle, by returning a White Spirit you control to your Hand, this Spirit refreshes.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A9158": {
+    "name": "The CretaceousMarshal Lay-Saurer",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nThis Spirit is unaffected by opposing Spirit effects.\n\n[LV1][LV2][LV3] (Start of Opposing Attack Step)\nYou can target an opposing Spirit. During this turn, that targeted Spirit can't attack.\n\n[LV2][LV3] (When Attacks/Blocks)\nAt the end of the battle, by returning a White Spirit you control to your Hand, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9158",
+      "name": "The CretaceousMarshal Lay-Saurer",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9158#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Spirit effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Spirit effects.",
+              "cleanText": "This Spirit is unaffected by opposing Spirit effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9158#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Start of Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can target an opposing Spirit. During this turn, that targeted Spirit can't attack."
+          },
+          "clauses": [
+            {
+              "rawText": "You can target an opposing Spirit.",
+              "cleanText": "You can target an opposing Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "During this turn, that targeted Spirit can't attack.",
+              "cleanText": "that targeted Spirit can't attack",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9158#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of the battle, by returning a White Spirit you control to your Hand, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of the battle, by returning a White Spirit you control to your Hand, this Spirit refreshes.",
+              "cleanText": "At the end of the battle, by returning a White Spirit you control to your Hand, this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,71 +1,499 @@
 {
- "X13-04": {
-  "name": "The LionMachineArmorDeity Walhalance-Leo",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 10000
-   }
+  "X13-04": {
+    "name": "The LionMachineArmorDeity Walhalance-Leo",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Heavy Armor: Purple/Green/White/Yellow]\nThis Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects.\n\n[LV1][LV2][LV3] (Opposing Attack Step)\nWhen an opposing Spirit attacks, refresh a Spirit you control.\n\n[LV2][LV3] (When Battles)\nBy exhausting a White Spirit you control, this Spirit gains +(BP of the exhausted Spirit) BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "X13-04",
+      "name": "The LionMachineArmorDeity Walhalance-Leo",
+      "keywords": [
+        {
+          "name": "Heavy Armor",
+          "parameter": "Purple/Green/White/Yellow",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "X13-04#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Heavy Armor: Purple/Green/White/Yellow",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "X13-04#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When an opposing Spirit attacks, refresh a Spirit you control."
+          },
+          "clauses": [
+            {
+              "rawText": "When an opposing Spirit attacks, refresh a Spirit you control.",
+              "cleanText": "When an opposing Spirit attacks, refresh a Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "X13-04#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting a White Spirit you control, this Spirit gains +(BP of the exhausted Spirit) BP."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting a White Spirit you control",
+              "cleanText": "By exhausting a White Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "this Spirit gains +(BP of the exhausted Spirit) BP.",
+              "cleanText": "this Spirit gains +(BP of the exhausted Spirit) BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Heavy Armor: Purple/Green/White/Yellow]\nThis Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects.\n\n[LV1][LV2][LV3] (Opposing Attack Step)\nWhen an opposing Spirit attacks, refresh a Spirit you control.\n\n[LV2][LV3] (When Battles)\nBy exhausting a White Spirit you control, this Spirit gains +(BP of the exhausted Spirit) BP.",
-  "is_vanilla": false
- },
- "X13-05": {
-  "name": "The StarAngelia Mikarean",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 7000
-   }
+  "X13-05": {
+    "name": "The StarAngelia Mikarean",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDuring this turn, give an opposing Spirit -3000 BP.\n\n[LV1][LV2][LV3]\nThis Spirit can brave ignoring brave conditions.\n\n[LV3] (When Attacks)\nReveal three cards from your decktop. Add a Magic card among them to your Hand. Return any remaining cards to the decktop in any order.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "X13-05",
+      "name": "The StarAngelia Mikarean",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "X13-05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, give an opposing Spirit -3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+              "cleanText": "give an opposing Spirit -3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 3000,
+                "target": "PREVIOUS_TARGET",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "X13-05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can brave ignoring brave conditions."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can brave ignoring brave conditions.",
+              "cleanText": "This Spirit can brave ignoring brave conditions",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "X13-05#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Reveal three cards from your decktop. Add a Magic card among them to your Hand. Return any remaining cards to the decktop in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "Reveal three cards from your decktop.",
+              "cleanText": "Reveal three cards from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 3
+              }
+            },
+            {
+              "rawText": "Add a Magic card among them to your Hand.",
+              "cleanText": "Add a Magic card among them to your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SALVAGE",
+                "cardType": "Magic"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the decktop in any order.",
+              "cleanText": "Return any remaining cards to the decktop in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDuring this turn, give an opposing Spirit -3000 BP.\n\n[LV1][LV2][LV3]\nThis Spirit can brave ignoring brave conditions.\n\n[LV3] (When Attacks)\nReveal three cards from your decktop. Add a Magic card among them to your Hand. Return any remaining cards to the decktop in any order.",
-  "is_vanilla": false
- },
- "X13-01": {
-  "name": "The SunDino Apollo-Gundinos",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 12000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit. When a Spirit is destroyed by this effect, once per turn, refresh this Spirit.\n\n[LV2][LV3] (When Attacks)\nYou can target and attack an opposing Spirit.",
-  "is_vanilla": false
- }
+  "X13-01": {
+    "name": "The SunDino Apollo-Gundinos",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Attacks)\nDestroy an opposing 5000 BP or less Spirit. When a Spirit is destroyed by this effect, once per turn, refresh this Spirit.\n\n[LV2][LV3] (When Attacks)\nYou can target and attack an opposing Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "X13-01",
+      "name": "The SunDino Apollo-Gundinos",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "X13-01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit. When a Spirit is destroyed by this effect, once per turn, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            },
+            {
+              "rawText": "When a Spirit is destroyed by this effect, once per turn, refresh this Spirit.",
+              "cleanText": "When a Spirit is destroyed by this effect, once per turn, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "X13-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can target and attack an opposing Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can target and attack an opposing Spirit.",
+              "cleanText": "You can target and attack an opposing Spirit",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_ATTACK",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

@@ -1,128 +1,787 @@
 {
- "SJ13-09": {
-  "name": "The ExertedBrave Saikyo-King",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   }
+  "SJ13-09": {
+    "name": "The ExertedBrave Saikyo-King",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] [Charge]\nIncrease the number of bodies to be refreshed by your “Spirit-refreshing effects” by +1.\n\n[LV2] (When Battles)\nFor each \"Armed Machine\" family Spirit you control, this Spirit gains +1000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-09",
+      "name": "The ExertedBrave Saikyo-King",
+      "keywords": [
+        {
+          "name": "Charge",
+          "parameter": null,
+          "wave": 2,
+          "hook": "charge",
+          "bracketed": true,
+          "index": 11
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ13-09#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Charge",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Increase the number of bodies to be refreshed by your “Spirit-refreshing effects” by +1."
+          },
+          "clauses": [
+            {
+              "rawText": "Increase the number of bodies to be refreshed by your \"Spirit-refreshing effects\" by +1.",
+              "cleanText": "Increase the number of bodies to be refreshed by your \"Spirit-refreshing effects\" by +1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ13-09#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BATTLES",
+            "timingLabel": "When Battles",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each \"Armed Machine\" family Spirit you control, this Spirit gains +1000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "For each \"Armed Machine\" family Spirit you control, this Spirit gains +1000 BP.",
+              "cleanText": "For each \"Armed Machine\" family Spirit you control, this Spirit gains +1000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 1000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Charge]\nIncrease the number of bodies to be refreshed by your “Spirit-refreshing effects” by +1.\n\n[LV2] (When Battles)\nFor each \"Armed Machine\" family Spirit you control, this Spirit gains +1000 BP.",
-  "is_vanilla": false
- },
- "SJ13-08": {
-  "name": "The FriendlyRobo Saikyo-Leon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "SJ13-08": {
+    "name": "The FriendlyRobo Saikyo-Leon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-08",
+      "name": "The FriendlyRobo Saikyo-Leon",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Yellow",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 66
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ13-08#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit to the Hand.",
+              "cleanText": "Return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            },
+            {
+              "rawText": "[Rush: Yellow]",
+              "cleanText": "[Rush: Yellow]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Yellow"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Yellow symbol, the following effect activates next)",
+              "cleanText": "(While you have a Yellow symbol, the following effect activates next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Yellow"
+                }
+              }
+            },
+            {
+              "rawText": "Return a Cost 2 Spirit card from your Trash to the Hand.",
+              "cleanText": "Return a Cost 2 Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nReturn an opposing Spirit to the Hand.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next)\n[Yellow Core]: Return a Cost 2 Spirit card from your Trash to the Hand.",
-  "is_vanilla": false
- },
- "SJ13-26": {
-  "name": "Pharaon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SJ13-26": {
+    "name": "Pharaon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-26",
+      "name": "Pharaon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SJ13-26#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to this Spirit.",
+              "cleanText": "Put a core from the Void to this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nPut a core from the Void to this Spirit.",
-  "is_vanilla": false
- },
- "SJ13-24": {
-  "name": "The CraneScythe Kuroduru",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SJ13-24": {
+    "name": "The CraneScythe Kuroduru",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nThis Spirit gains +2000 BP.\n\n[LV1][LV2] (When Attacks)\nIf you control any Bunshin spirit, the opponent exhausts a Spirit they control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-24",
+      "name": "The CraneScythe Kuroduru",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SJ13-24#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit gains +2000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit gains +2000 BP.",
+              "cleanText": "This Spirit gains +2000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ13-24#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any Bunshin spirit, the opponent exhausts a Spirit they control."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any Bunshin spirit, the opponent exhausts a Spirit they control.",
+              "cleanText": "the opponent exhausts a Spirit they control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any Bunshin spirit",
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "count": 1,
+                "chooser": "opp",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nThis Spirit gains +2000 BP.\n\n[LV1][LV2] (When Attacks)\nIf you control any Bunshin spirit, the opponent exhausts a Spirit they control.",
-  "is_vanilla": false
- },
- "SJ13-25": {
-  "name": "The NinjaArtsBird Ginrai",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   }
+  "SJ13-25": {
+    "name": "The NinjaArtsBird Ginrai",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2] [Bunshin: 1] (When Summoned)\nBy placing one card from your decktop onto the Field facedown and putting at least one core from the Reserve on it, until the end of the game, it is treated as \"Cost 0/\"Bunshin\" family/LV1: 1 core, 3000 BP/[Green Core]\" Green Bunshin Spirits. (Bunshin Spirits can't be braved, and are discarded when returned to the Hand/Deck.)",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-25",
+      "name": "The NinjaArtsBird Ginrai",
+      "keywords": [
+        {
+          "name": "Bunshin",
+          "parameter": "1",
+          "wave": 4,
+          "hook": "bunshin",
+          "bracketed": true,
+          "index": 11
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ13-25#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Bunshin: 1",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By placing one card from your decktop onto the Field facedown and putting at least one core from the Reserve on it, until the end of the game, it is treated as \"Cost 0/\"Bunshin\" family/LV1: 1 core, 3000 BP/[Green Core]\" Green Bunshin Spirits. (Bunshin Spirits can't be braved, and are discarded when returned to the Hand/Deck.)"
+          },
+          "clauses": [
+            {
+              "rawText": "By placing one card from your decktop onto the Field facedown and putting at least one core from the Reserve on it",
+              "cleanText": "By placing one card from your decktop onto the Field facedown and putting at least one core from the Reserve on it",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BUNSHIN_SUMMON"
+              }
+            },
+            {
+              "rawText": "until the end of the game, it is treated as \"Cost 0/\"Bunshin\" family/LV1: 1 core, 3000 BP/[Green Core]\" Green Bunshin Spirits.",
+              "cleanText": "until the end of the game, it is treated as \"Cost 0/\"Bunshin\" family/LV1: 1 core, 3000 BP/[Green Core]\" Green Bunshin Spirits",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            },
+            {
+              "rawText": "(Bunshin Spirits can't be braved, and are discarded when returned to the Hand/Deck.)",
+              "cleanText": "(Bunshin Spirits can't be braved, and are discarded when returned to the Hand/Deck.)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] [Bunshin: 1] (When Summoned)\nBy placing one card from your decktop onto the Field facedown and putting at least one core from the Reserve on it, until the end of the game, it is treated as \"Cost 0/\"Bunshin\" family/LV1: 1 core, 3000 BP/[Green Core]\" Green Bunshin Spirits. (Bunshin Spirits can't be braved, and are discarded when returned to the Hand/Deck.)",
-  "is_vanilla": false
- },
- "SJ13-01": {
-  "name": "The TwinFlameBlade Blaze-Edge",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   }
+  "SJ13-01": {
+    "name": "The TwinFlameBlade Blaze-Edge",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more]\n\n[When Braved] (When Brave Attacks)\nDestroy two opposing 3000 BP or less Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-01",
+      "name": "The TwinFlameBlade Blaze-Edge",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ13-01#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SJ13-01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy two opposing 3000 BP or less Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy two opposing 3000 BP or less Spirits.",
+              "cleanText": "Destroy two opposing 3000 BP or less Spirits",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 3000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more]\n\n[When Braved] (When Brave Attacks)\nDestroy two opposing 3000 BP or less Spirits.",
-  "is_vanilla": false
- },
- "SJ13-02": {
-  "name": "Weaponmaster-Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 7000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
-  },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can summon a Brave card from your Hand, without paying the cost. When this effect summons any \"Exalted Sword\" family Brave, destroy an opposing 7000 BP or less Spirit.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
-  "is_vanilla": false
- }
+  "SJ13-02": {
+    "name": "Weaponmaster-Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can summon a Brave card from your Hand, without paying the cost. When this effect summons any \"Exalted Sword\" family Brave, destroy an opposing 7000 BP or less Spirit.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nDestroy an opposing 5000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ13-02",
+      "name": "Weaponmaster-Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SJ13-02#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon a Brave card from your Hand, without paying the cost. When this effect summons any \"Exalted Sword\" family Brave, destroy an opposing 7000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon a Brave card from your Hand, without paying the cost.",
+              "cleanText": "You can summon a Brave card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "When this effect summons any \"Exalted Sword\" family Brave, destroy an opposing 7000 BP or less Spirit.",
+              "cleanText": "When this effect summons any \"Exalted Sword\" family Brave, destroy an opposing 7000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 7000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ13-02#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing 5000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 5000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

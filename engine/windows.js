@@ -15,17 +15,20 @@ export class TimingWindowManager {
 
   /**
    * Evaluates Burst triggers following an event.
-   * Priority: Turn player first, then Non-turn player.
+   * In Eternal 17.0: Simultaneous declaration with hand triggers.
+   * Declaration Priority: Non-turn player declares first, then Turn player.
+   * Resolution: Declared Bursts resolve in FIFO order.
    */
   async openBurstWindow(triggerEvent) {
     const { state, resolver } = this.game;
     const activePlayer = state.activePlayer;
     const inactivePlayer = activePlayer === 'player' ? 'opponent' : 'player';
 
-    // APNAP ordering: Turn player first, then inactive player
-    const checkOrder = [activePlayer, inactivePlayer];
+    // Eternal 17.0: Non-turn player declares first, followed by turn player
+    const declarationOrder = [inactivePlayer, activePlayer];
+    const declaredBursts = [];
 
-    for (const side of checkOrder) {
+    for (const side of declarationOrder) {
       const p = state.players[side];
       if (!p.burst) continue;
 
@@ -38,7 +41,7 @@ export class TimingWindowManager {
       const isLocked = state.modifiers.some(m => m.type === 'BURST_LOCK' && m.side === side);
       if (isLocked) continue;
 
-      // Prompt player to activate burst
+      // Prompt player to declare burst
       const decision = await resolver.promptResolver.choose({
         type: 'BURST_TRIGGER',
         title: `Activate Burst [${burstCard.name}]?`,
@@ -47,33 +50,44 @@ export class TimingWindowManager {
       });
 
       if (decision && decision.activate) {
-        // Activate Burst
-        p.burst = null; // Removed from burst area
+        // Declared! Remove from burst slot immediately
+        p.burst = null;
+        declaredBursts.push({ side, burstCard });
 
+        // Emit declaration event (allows interrupters like Spitzer Dragon to hook)
         await this.game.events.emit({
-          type: 'BURST_ACTIVATED',
+          type: 'BURST_DECLARED',
           card: burstCard,
           player: side,
           triggerEvent
         });
+      }
+    }
 
-        // Resolve Burst abilities
-        if (burstCard.compiledIr && burstCard.compiledIr.abilities) {
-          for (const ab of burstCard.compiledIr.abilities) {
-            if (ab.header.timing === 'BURST') {
-              await resolver.resolveAbility(state, ab, { controller: side, sourceCard: burstCard }, this.game.events);
-            }
+    // Resolve declared Bursts in FIFO declaration order
+    for (const { side, burstCard } of declaredBursts) {
+      const p = state.players[side];
+
+      await this.game.events.emit({
+        type: 'BURST_ACTIVATED',
+        card: burstCard,
+        player: side,
+        triggerEvent
+      });
+
+      // Resolve Burst abilities
+      if (burstCard.compiledIr && burstCard.compiledIr.abilities) {
+        for (const ab of burstCard.compiledIr.abilities) {
+          if (ab.header.timing === 'BURST') {
+            await resolver.resolveAbility(state, ab, { controller: side, sourceCard: burstCard }, this.game.events);
           }
         }
+      }
 
-        // If burst card was not summoned to field by effect, send to grave
-        const onField = p.field.some(st => st.top.id === burstCard.id);
-        if (!onField) {
-          await moveCard(state, burstCard, 'grave', side, { cause: 'burst_resolved' }, this.game.events);
-        }
-
-        // In Battle Spirits, only 1 Burst can resolve per trigger event
-        break;
+      // If burst card was not summoned to field by effect, send to grave
+      const onField = p.field.some(st => st.top.id === burstCard.id);
+      if (!onField) {
+        await moveCard(state, burstCard, 'grave', side, { cause: 'burst_resolved' }, this.game.events);
       }
     }
   }
@@ -83,7 +97,7 @@ export class TimingWindowManager {
       // Fallback text check
       const eff = (burstCard.effect || '').toLowerCase();
       if (event.type === 'LIFE_REDUCED' && eff.includes('life is reduced') && event.player === side) return true;
-      if (event.type === 'DESTROYED' && eff.includes('destroyed by the opponent') && event.card.owner === side && event.by !== side) return true;
+      if (event.type === 'DESTROYED' && eff.includes('destroyed by the opponent') && (!event.card || event.card.owner === side) && event.by !== side) return true;
       return false;
     }
 
@@ -95,11 +109,11 @@ export class TimingWindowManager {
 
     // R20: Sacrifice destroys own spirit -> NOT destroyed by opponent!
     if (cond === 'AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT') {
-      return event.type === 'DESTROYED' && event.card.owner === side && event.by === oppSide;
+      return event.type === 'DESTROYED' && (!event.card || event.card.owner === side) && event.by === oppSide;
     }
 
     if (cond === 'AFTER_YOUR_SPIRIT_DESTROYED') {
-      return event.type === 'DESTROYED' && event.card.owner === side;
+      return event.type === 'DESTROYED' && (!event.card || event.card.owner === side);
     }
 
     // R21: Life reduced only triggers AFTER_YOUR_LIFE_REDUCED
@@ -109,7 +123,7 @@ export class TimingWindowManager {
 
     // R22: Vanilla summon does NOT trigger AFTER_OPPONENT_SUMMON_EFFECT
     if (cond === 'AFTER_OPPONENT_SUMMON_EFFECT') {
-      return event.type === 'SUMMONED' && event.player === oppSide && !event.card.isVanilla;
+      return event.type === 'SUMMONED' && event.player === oppSide && (!event.card || !event.card.isVanilla);
     }
 
     if (cond === 'AFTER_OPPONENT_ATTACK') {
@@ -121,16 +135,15 @@ export class TimingWindowManager {
 
   /**
    * Executes a Flash Window with alternating priority until both players pass consecutively.
-   * flashTiming: 'FLASH_1' (defender first) or 'FLASH_2' (attacker first).
+   * In Battle Spirits: Defending (non-turn) player ALWAYS gets first priority in both Flash 1 and Flash 2.
    */
   async runFlashWindow(flashTiming = 'FLASH_1') {
     const { state, resolver } = this.game;
     const attackerSide = state.activePlayer;
     const defenderSide = attackerSide === 'player' ? 'opponent' : 'player';
 
-    // Flash Timing 1: Blocker (defender) gets priority first.
-    // Flash Timing 2: Attacker gets priority first.
-    let currentPriority = flashTiming === 'FLASH_1' ? defenderSide : attackerSide;
+    // Defending player always gets first priority in both Flash timings
+    let currentPriority = defenderSide;
     let consecutivePasses = 0;
 
     await this.game.events.emit({

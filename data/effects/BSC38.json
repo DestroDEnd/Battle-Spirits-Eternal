@@ -1,68 +1,591 @@
 {
- "BRAVE-TIGER": {
-  "name": "The ArmoredEmperorTigerDeity Brave-Tiger",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BRAVE-TIGER": {
+    "name": "The ArmoredEmperorTigerDeity Brave-Tiger",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Red-only & Cost 4 or more]\n\n[During Brave]\nNeither player can gain cores from the Void though effects.\n\n[During Brave] (When Attacks)\nYou can destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and effects of the destroyed Spirit/Ultimate cannot activate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BRAVE-TIGER",
+      "name": "The ArmoredEmperorTigerDeity Brave-Tiger",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Red-only & Cost 4 or more",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BRAVE-TIGER#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Red-only & Cost 4 or more",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Red-only & Cost 4 or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BRAVE-TIGER#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Neither player can gain cores from the Void though effects."
+          },
+          "clauses": [
+            {
+              "rawText": "Neither player can gain cores from the Void though effects.",
+              "cleanText": "Neither player can gain cores from the Void though effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GLOBAL_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BRAVE-TIGER#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and effects of the destroyed Spirit/Ultimate cannot activate."
+          },
+          "clauses": [
+            {
+              "rawText": "You can destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and effects of the destroyed Spirit/Ultimate cannot activate.",
+              "cleanText": "You can destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and effects of the destroyed Spirit/Ultimate cannot activate",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Red-only & Cost 4 or more]\n\n[During Brave]\nNeither player can gain cores from the Void though effects.\n\n[During Brave] (When Attacks)\nYou can destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's, and effects of the destroyed Spirit/Ultimate cannot activate.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A12545": {
-  "name": "The SkyHero Lord-Dragon-Bazzel",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A12545": {
+    "name": "The SkyHero Lord-Dragon-Bazzel",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "[Burst: After your Life is reduced]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] 1 (When Summoned/Attacks)\nHeavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2][LV3] (When Attacks)\nYou can immediately activate one of your \"Supreme Hero\"/\"Winged Beast\" family Bursts. After that Burst activates, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A12545",
+      "name": "The SkyHero Lord-Dragon-Bazzel",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A12545#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this card without paying the cost.",
+              "cleanText": "Summon this card without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12545#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Heavy exhaust an opposing Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "Heavy exhaust an opposing Spirit/Ultimate.",
+              "cleanText": "Heavy exhaust an opposing Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": true,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12545#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can immediately activate one of your \"Supreme Hero\"/\"Winged Beast\" family Bursts. After that Burst activates, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "You can immediately activate one of your \"Supreme Hero\"/\"Winged Beast\" family Bursts.",
+              "cleanText": "You can immediately activate one of your \"Supreme Hero\"/\"Winged Beast\" family Bursts",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "After that Burst activates, refresh this Spirit.",
+              "cleanText": "After that Burst activates, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Burst: After your Life is reduced]\nSummon this card without paying the cost.\n\n[LV1][LV2][LV3] 1 (When Summoned/Attacks)\nHeavy exhaust an opposing Spirit/Ultimate.\n[heb]\n\n[LV2][LV3] (When Attacks)\nYou can immediately activate one of your \"Supreme Hero\"/\"Winged Beast\" family Bursts. After that Burst activates, refresh this Spirit.",
-  "is_vanilla": false
- },
- "P16-06": {
-  "name": "The Summer Means Swimming With Everyone",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nBetween June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted.\n\n[LV2]\nThe LV2 cost of all Blue Spirits you control becomes 2.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A14035": {
-  "name": "Ultimate-Sagitto-Apollodragon-Epitaph",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 12000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 16000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 22000
-   }
+  "P16-06": {
+    "name": "The Summer Means Swimming With Everyone",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nBetween June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted.\n\n[LV2]\nThe LV2 cost of all Blue Spirits you control becomes 2.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P16-06",
+      "name": "The Summer Means Swimming With Everyone",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P16-06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted.",
+              "cleanText": "Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P16-06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The LV2 cost of all Blue Spirits you control becomes 2."
+          },
+          "clauses": [
+            {
+              "rawText": "The LV2 cost of all Blue Spirits you control becomes 2.",
+              "cleanText": "The LV2 cost of all Blue Spirits you control becomes 2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Blue Ultimates]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Ultimate Trigger hit, destroy an opposing Spirit with the lowest cost.\n[Double Hit] Also, when both Ultimate Triggers hit, give this Ultimate an extra Ultimate symbol.\n[wutb]\n\n[LV4][LV5] (When Attacks)\nWhen this Ultimate's Double Ultimate Trigger double hits, refresh another Ultimate you control.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A14035": {
+    "name": "Ultimate-Sagitto-Apollodragon-Epitaph",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 12000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 16000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 22000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Blue Ultimates]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nFor each Ultimate Trigger hit, destroy an opposing Spirit with the lowest cost.\n[Double Hit] Also, when both Ultimate Triggers hit, give this Ultimate an extra Ultimate symbol.\n[wutb]\n\n[LV4][LV5] (When Attacks)\nWhen this Ultimate's Double Ultimate Trigger double hits, refresh another Ultimate you control.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A14035",
+      "name": "Ultimate-Sagitto-Apollodragon-Epitaph",
+      "keywords": [
+        {
+          "name": "Double Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 60
+        },
+        {
+          "name": "Double Hit",
+          "parameter": null,
+          "wave": 3,
+          "hook": "double_hit",
+          "bracketed": true,
+          "index": 198
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A14035#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Blue Ultimates"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Blue Ultimates]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14035#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Double Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Ultimate Trigger hit, destroy an opposing Spirit with the lowest cost.\n[Double Hit] Also, when both Ultimate Triggers hit, give this Ultimate an extra Ultimate symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Ultimate Trigger hit, destroy an opposing Spirit with the lowest cost.",
+              "cleanText": "For each Ultimate Trigger hit, destroy an opposing Spirit with the lowest cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "[Double Hit] Also, when both Ultimate Triggers hit, give this Ultimate an extra Ultimate symbol.",
+              "cleanText": "[Double Hit] Also, when both Ultimate Triggers hit, give this Ultimate an extra Ultimate symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A14035#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Ultimate's Double Ultimate Trigger double hits, refresh another Ultimate you control."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Ultimate's Double Ultimate Trigger double hits, refresh another Ultimate you control.",
+              "cleanText": "When this Ultimate's Double Ultimate Trigger double hits, refresh another Ultimate you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

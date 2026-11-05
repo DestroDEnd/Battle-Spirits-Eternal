@@ -1,0 +1,136 @@
+{
+  "BATTLE-SPIRITS-A7434": {
+    "cardNumber": "BATTLE-SPIRITS-A7434",
+    "name": "Revol-Arms",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 3 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A7434#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 3 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 3 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A7434#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put two cores from the Void to a Nexus you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put two cores from the Void to a Nexus you control.",
+            "cleanText": "Put two cores from the Void to a Nexus you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A7434#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target either Cost 3 or 4. During this battle, Magic cards with the targeted cost can't be used by the opponent."
+        },
+        "clauses": [
+          {
+            "rawText": "Target either Cost 3 or 4.",
+            "cleanText": "Target either Cost 3 or 4",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "During this battle, Magic cards with the targeted cost can't be used by the opponent.",
+            "cleanText": "Magic cards with the targeted cost can't be used by the opponent",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

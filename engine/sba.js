@@ -8,11 +8,13 @@
  * - Start-step deck-out verification
  */
 
-import { moveCard } from './zones.js';
+import { moveCard, commitStackExit } from './zones.js';
+import { computeLevel } from './continuous.js';
 
-export async function checkStateBasedActions(state, events = null) {
+export async function checkStateBasedActions(state, events = null, options = {}) {
   let changed = false;
   const depletedCards = [];
+  const stageOnly = Boolean(options.stageOnly);
 
   // 1. Life 0 checks
   if (!state.winner) {
@@ -37,9 +39,11 @@ export async function checkStateBasedActions(state, events = null) {
   // 2. Field Depletion Checks: Any stack with total cores < LV1 cost requirement
   for (const side of ['player', 'opponent']) {
     const p = state.players[side];
-    const remainingStacks = [];
+    const stacksToProcess = [...(p.field || [])];
 
-    for (const stack of p.field || []) {
+    for (const stack of stacksToProcess) {
+      if (stack.isSoulState) continue; // Soul State cards do not deplete
+
       const top = stack.top;
       if (!top) continue;
 
@@ -52,14 +56,31 @@ export async function checkStateBasedActions(state, events = null) {
         changed = true;
         depletedCards.push(top);
 
-        // Move stack to grave with cause 'depletion'
-        await moveCard(state, top, 'grave', side, { cause: 'depletion', by: 'rule' }, events);
-      } else {
-        remainingStacks.push(stack);
+        const prevLevel = stack.standby?.previousLevel || stack.lastActiveLevel || computeLevel(stack);
+
+        if (stageOnly) {
+          // Rule 40: Bounce/banish standby preserves its destination even if depleted
+          const targetZone = (stack.standby && (stack.standby.type === 'bounce' || stack.standby.type === 'banish'))
+            ? stack.standby.destZone
+            : 'grave';
+
+          stack.standby = {
+            type: 'depletion',
+            previousLevel: prevLevel,
+            by: 'self',
+            cause: 'depletion',
+            destZone: targetZone
+          };
+        } else {
+          // If already in standby, mark as depletion by self before commit
+          if (stack.standby) {
+            stack.standby.type = 'depletion';
+            stack.standby.by = 'self';
+          }
+          await commitStackExit(state, stack, 'grave', { cause: 'depletion', by: 'rule' }, events);
+        }
       }
     }
-
-    p.field = remainingStacks;
   }
 
   return {

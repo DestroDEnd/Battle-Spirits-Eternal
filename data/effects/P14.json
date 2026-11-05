@@ -1,135 +1,734 @@
 {
- "P14-23": {
-  "name": "The TrueGuardian Doubleburn",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 6,
-    "bp": 13000
-   }
+  "P14-23": {
+    "name": "The TrueGuardian Doubleburn",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 13000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nIf this Spirit is braved with an \"Exalted Sword\" family Brave, once per turn, this Spirit refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-23",
+      "name": "The TrueGuardian Doubleburn",
+      "keywords": [
+        {
+          "name": "Unsheathe",
+          "parameter": null,
+          "wave": 4,
+          "hook": "unsheathe",
+          "bracketed": true,
+          "index": 16
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P14-23#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Unsheathe",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.",
+              "cleanText": "You can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-23#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "WHEN_BRAVE_ATTACKS",
+            "timingLabel": "When Brave Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If this Spirit is braved with an \"Exalted Sword\" family Brave, once per turn, this Spirit refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "If this Spirit is braved with an \"Exalted Sword\" family Brave, once per turn, this Spirit refreshes.",
+              "cleanText": "once per turn, this Spirit refreshes",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If this Spirit is braved with an \"Exalted Sword\" family Brave",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Unsheathe] (When Summoned)\nYou can summon an \"Exalted Sword\" family Brave card that can brave with this Spirit from your Hand, without paying the cost.\n\n[When Braved] [LV2][LV3] (When Brave Attacks)\nIf this Spirit is braved with an \"Exalted Sword\" family Brave, once per turn, this Spirit refreshes.",
-  "is_vanilla": false
- },
- "P14-03": {
-  "name": "Leaf Blager",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "P14-03": {
+    "name": "Leaf Blager",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nPut a core from the Void to any of your Ultimate.\n[Rush: Red]\n(While you have a Red symbol, the following effect activate next)\n[Red Core]: Destroy an opposing 4000 BP or less Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-03",
+      "name": "Leaf Blager",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": "Red",
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 76
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P14-03#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any of your Ultimate.\n[Rush: Red]\n(While you have a Red symbol, the following effect activate next)\n[Red Core]: Destroy an opposing 4000 BP or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any of your Ultimate.",
+              "cleanText": "Put a core from the Void to any of your Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "[Rush: Red]",
+              "cleanText": "[Rush: Red]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ABILITY",
+                "keyword": "Rush",
+                "condition": {
+                  "colorSymbol": "Red"
+                }
+              }
+            },
+            {
+              "rawText": "(While you have a Red symbol, the following effect activate next)",
+              "cleanText": "(While you have a Red symbol, the following effect activate next)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            },
+            {
+              "rawText": "Destroy an opposing 4000 BP or less Spirit.",
+              "cleanText": "Destroy an opposing 4000 BP or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 4000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nPut a core from the Void to any of your Ultimate.\n[Rush: Red]\n(While you have a Red symbol, the following effect activate next)\n[Red Core]: Destroy an opposing 4000 BP or less Spirit.",
-  "is_vanilla": false
- },
- "P14-06": {
-  "name": "Roller-Golem",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 7000
-   }
+  "P14-06": {
+    "name": "Roller-Golem",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard a number of cards from the opposing decktop equal to this Spirit's LV.\n\n[LV1][LV2][LV3]\nWhile you control any Ultimate, when your Spirit with [Crush] is destroyed by the opponent, discard a number of cards from the opposing decktop equal to the destroyed Spirit's cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-06",
+      "name": "Roller-Golem",
+      "keywords": [
+        {
+          "name": "Crush",
+          "parameter": null,
+          "wave": 1,
+          "hook": "crush",
+          "bracketed": true,
+          "index": 16
+        },
+        {
+          "name": "Crush",
+          "parameter": null,
+          "wave": 1,
+          "hook": "crush",
+          "bracketed": true,
+          "index": 189
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P14-06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Crush",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Discard a number of cards from the opposing decktop equal to this Spirit's LV."
+          },
+          "clauses": [
+            {
+              "rawText": "Discard a number of cards from the opposing decktop equal to this Spirit's LV.",
+              "cleanText": "Discard a number of cards from the opposing decktop equal to this Spirit's LV",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": "LEVEL",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While you control any Ultimate, when your Spirit with [Crush] is destroyed by the opponent, discard a number of cards from the opposing decktop equal to the destroyed Spirit's cost."
+          },
+          "clauses": [
+            {
+              "rawText": "While you control any Ultimate, when your Spirit with [Crush] is destroyed by the opponent, discard a number of cards from the opposing decktop equal to the destroyed Spirit's cost.",
+              "cleanText": "when your Spirit with [Crush] is destroyed by the opponent, discard a number of cards from the opposing decktop equal to the destroyed Spirit's cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While you control any Ultimate",
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] [Crush] (When Attacks)\nDiscard a number of cards from the opposing decktop equal to this Spirit's LV.\n\n[LV1][LV2][LV3]\nWhile you control any Ultimate, when your Spirit with [Crush] is destroyed by the opponent, discard a number of cards from the opposing decktop equal to the destroyed Spirit's cost.",
-  "is_vanilla": false
- },
- "P14-X01": {
-  "name": "Shining-Pentan-Overray",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 14000
-   }
+  "P14-X01": {
+    "name": "Shining-Pentan-Overray",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 14000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nAll your \"Pentan\"-named Spirits can brave with up to a total of two Red/Purple/Yellow Braves.\n\n[LV3]\nAll your \"Pentan\"-named Spirits gain +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-X01",
+      "name": "Shining-Pentan-Overray",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P14-X01#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Pentan\"-named Spirits can brave with up to a total of two Red/Purple/Yellow Braves."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Pentan\"-named Spirits can brave with up to a total of two Red/Purple/Yellow Braves.",
+              "cleanText": "All your \"Pentan\"-named Spirits can brave with up to a total of two Red/Purple/Yellow Braves",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-X01#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your \"Pentan\"-named Spirits gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your \"Pentan\"-named Spirits gain +3000 BP.",
+              "cleanText": "All your \"Pentan\"-named Spirits gain +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nAll your \"Pentan\"-named Spirits can brave with up to a total of two Red/Purple/Yellow Braves.\n\n[LV3]\nAll your \"Pentan\"-named Spirits gain +3000 BP.",
-  "is_vanilla": false
- },
- "P14-X05": {
-  "name": "The DarknessGuide Rutile",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 7000
-   }
+  "P14-X05": {
+    "name": "The DarknessGuide Rutile",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 7000
+      }
+    },
+    "effect": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nIf your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-X05",
+      "name": "The DarknessGuide Rutile",
+      "keywords": [
+        {
+          "name": "Rush",
+          "parameter": null,
+          "wave": 2,
+          "hook": "rush",
+          "bracketed": true,
+          "index": 18
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P14-X05#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.",
+              "cleanText": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-X05#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "If your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
+              "cleanText": "you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If your Life is three or less",
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When Spirits with [Rush] you control are destroyed by the opponent, return this Spirit card from your Trash to the Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nIf your Life is three or less, you can summon an \"Exalted Sword\" family Brave card from your Hand/Trash, without paying the cost.",
-  "is_vanilla": false
- },
- "P14-X06": {
-  "name": "The LightGuide Lapis",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 5000
-   }
-  },
-  "effect": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
-  "is_vanilla": false
- }
+  "P14-X06": {
+    "name": "The LightGuide Lapis",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.\n\n[LV1][LV2][LV3] (When Summoned)\nWhen your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P14-X06",
+      "name": "The LightGuide Lapis",
+      "keywords": [
+        {
+          "name": "Charge",
+          "parameter": null,
+          "wave": 2,
+          "hook": "charge",
+          "bracketed": true,
+          "index": 18
+        }
+      ],
+      "abilities": [
+        {
+          "id": "P14-X06#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand.",
+              "cleanText": "When Spirits with [Charge] you control are destroyed by the opponent, return this Spirit card from the Trash to your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SALVAGE",
+                "count": 1,
+                "family": "this",
+                "targetType": "Spirit",
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P14-X06#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost.",
+              "cleanText": "When your Life is three or less, you can summon a \"Fencer\" family Spirit card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

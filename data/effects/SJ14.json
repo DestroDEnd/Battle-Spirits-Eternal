@@ -1,61 +1,494 @@
 {
- "SJ14-28": {
-  "name": "The AstralTrident Aspidiske",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   }
+  "SJ14-28": {
+    "name": "The AstralTrident Aspidiske",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      }
+    },
+    "effect": "[Brave Condition: Cost 3 or more Spirit/Ultimate]\n\n[When Braved] (When this Spirit Brave Attacks)\nDestroy an opposing Cost 4 or less Spirit.\n\n[When Braved] (When this Ultimate Brave Attacks)\nExhaust an opposing non-braved Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ14-28",
+      "name": "The AstralTrident Aspidiske",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 3 or more Spirit/Ultimate",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ14-28#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 3 or more Spirit/Ultimate",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 3 or more Spirit/Ultimate]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-28#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(When this Spirit Brave Attacks)\nDestroy an opposing Cost 4 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "(When this Spirit Brave Attacks)",
+              "cleanText": "(When this Spirit Brave Attacks)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Destroy an opposing Cost 4 or less Spirit.",
+              "cleanText": "Destroy an opposing Cost 4 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 4
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-28#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "When Braved"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(When this Ultimate Brave Attacks)\nExhaust an opposing non-braved Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "(When this Ultimate Brave Attacks)",
+              "cleanText": "(When this Ultimate Brave Attacks)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "Exhaust an opposing non-braved Spirit.",
+              "cleanText": "Exhaust an opposing non-braved Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 3 or more Spirit/Ultimate]\n\n[When Braved] (When this Spirit Brave Attacks)\nDestroy an opposing Cost 4 or less Spirit.\n\n[When Braved] (When this Ultimate Brave Attacks)\nExhaust an opposing non-braved Spirit.",
-  "is_vanilla": false
- },
- "SJ14-21": {
-  "name": "Ultimate-Lord-Dragon",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 18000
-   }
+  "SJ14-21": {
+    "name": "Ultimate-Lord-Dragon",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 18000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Red/White Spirits]\n\n[Burst: After your Life is reduced]\nSummon this Ultimate card.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate-Trigger hits, at the end of battle, by setting a card with Burst effects from your Hand, send an opposing Life to their Reserve.\n[utb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ14-21",
+      "name": "Ultimate-Lord-Dragon",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Life is reduced",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 63
+        },
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV4",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 127
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ14-21#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Red/White Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Red/White Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-21#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Summon this Ultimate card."
+          },
+          "clauses": [
+            {
+              "rawText": "Summon this Ultimate card.",
+              "cleanText": "Summon this Ultimate card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-21#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate-Trigger hits, at the end of battle, by setting a card with Burst effects from your Hand, send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate-Trigger hits, at the end of battle, by setting a card with Burst effects from your Hand, send an opposing Life to their Reserve.",
+              "cleanText": "When Ultimate-Trigger hits, at the end of battle, by setting a card with Burst effects from your Hand, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Red/White Spirits]\n\n[Burst: After your Life is reduced]\nSummon this Ultimate card.\n\n[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate-Trigger hits, at the end of battle, by setting a card with Burst effects from your Hand, send an opposing Life to their Reserve.\n[utb]",
-  "is_vanilla": false
- },
- "SJ14-27": {
-  "name": "Ultimate-Shining-Dragon",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 14000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 20000
-   }
-  },
-  "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, by destroying an opposing 5000 BP or less Spirit, summon a Red Brave card from your Hand, without paying the cost.\n[utb]\n\n[LV4][LV5] (When Attacks)\nIncrease the limit of this Ultimate's Ultimate Trigger's \"BP Destruction effect\" by +10000.",
-  "is_vanilla": false
- }
+  "SJ14-27": {
+    "name": "Ultimate-Shining-Dragon",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 14000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 20000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Red Spirits]\n\n[Ultimate Trigger: [LV3][LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, by destroying an opposing 5000 BP or less Spirit, summon a Red Brave card from your Hand, without paying the cost.\n[utb]\n\n[LV4][LV5] (When Attacks)\nIncrease the limit of this Ultimate's Ultimate Trigger's \"BP Destruction effect\" by +10000.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SJ14-27",
+      "name": "Ultimate-Shining-Dragon",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 57
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SJ14-27#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Red Spirits"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Red Spirits]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-27#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, by destroying an opposing 5000 BP or less Spirit, summon a Red Brave card from your Hand, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, by destroying an opposing 5000 BP or less Spirit, summon a Red Brave card from your Hand, without paying the cost.",
+              "cleanText": "When Ultimate Trigger hits, by destroying an opposing 5000 BP or less Spirit, summon a Red Brave card from your Hand, without paying the cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SJ14-27#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Increase the limit of this Ultimate's Ultimate Trigger's \"BP Destruction effect\" by +10000."
+          },
+          "clauses": [
+            {
+              "rawText": "Increase the limit of this Ultimate's Ultimate Trigger's \"BP Destruction effect\" by +10000.",
+              "cleanText": "Increase the limit of this Ultimate's Ultimate Trigger's \"BP Destruction effect\" by +10000",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 10000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

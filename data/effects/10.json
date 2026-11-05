@@ -1,20 +1,130 @@
 {
- "P15-12": {
-  "name": "Halloween Fuurin",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   }
-  },
-  "effect": "This Spirit card is also treated as a Magic card.\n\n[Flash] (This effect can't be used while on the Field.)\nTarget two opposing Spirits/Ultimates. Swap all the cores between the targeted Spirits/Ultimates.",
-  "is_vanilla": false
- }
+  "P15-12": {
+    "name": "Halloween Fuurin",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      }
+    },
+    "effect": "This Spirit card is also treated as a Magic card.\n\n[Flash] (This effect can't be used while on the Field.)\nTarget two opposing Spirits/Ultimates. Swap all the cores between the targeted Spirits/Ultimates.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "P15-12",
+      "name": "Halloween Fuurin",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "P15-12#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit card is also treated as a Magic card."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit card is also treated as a Magic card.",
+              "cleanText": "This Spirit card is also treated as a Magic card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "P15-12#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(This effect can't be used while on the Field.)\nTarget two opposing Spirits/Ultimates. Swap all the cores between the targeted Spirits/Ultimates."
+          },
+          "clauses": [
+            {
+              "rawText": "(This effect can't be used while on the Field.)",
+              "cleanText": "(This effect can't be used while on the Field.)",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            },
+            {
+              "rawText": "Target two opposing Spirits/Ultimates.",
+              "cleanText": "Target two opposing Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_SELECT"
+              }
+            },
+            {
+              "rawText": "Swap all the cores between the targeted Spirits/Ultimates.",
+              "cleanText": "Swap all the cores between the targeted Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SWAP_CORES"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

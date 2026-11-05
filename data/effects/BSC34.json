@@ -1,397 +1,3596 @@
 {
- "BATTLE-SPIRITS-A70": {
-  "name": "The SkyDragonEmperor Siegfried-Horus",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 14000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 17000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 6,
-    "bp": 26000
-   }
+  "BATTLE-SPIRITS-A70": {
+    "name": "The SkyDragonEmperor Siegfried-Horus",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 14000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 17000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 6,
+        "bp": 26000
+      }
+    },
+    "effect": "Flash - [Advent: Green & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]\n\nWhen summoning this revealed card, ignore the Summon Condition.\n\n[LV3][LV4][LV5] (When Summoned/Advents)\nPut three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control.\n\n[LV4][LV5] (When Depleted/Destroyed by the Opponent)\nYou can pay one cost to summon one of this Ultimate's pre-Advent cards.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A70",
+      "name": "The SkyDragonEmperor Siegfried-Horus",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Green & Cost 6 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A70#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Green & Cost 6 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Ultimate.",
+              "cleanText": "stack this from your Hand onto your target Ultimate",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A70#a1",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Winged Beast Spirit/Ultimate"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A70#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning this revealed card, ignore the Summon Condition."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning this revealed card, ignore the Summon Condition.",
+              "cleanText": "When summoning this revealed card, ignore the Summon Condition",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A70#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned/Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control."
+          },
+          "clauses": [
+            {
+              "rawText": "Put three core from the Void to this Ultimate.",
+              "cleanText": "Put three core from the Void to this Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 3,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            },
+            {
+              "rawText": "if it's your turn, refresh one Green Ultimate you control.",
+              "cleanText": "refresh one Green Ultimate you control",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if it's your turn",
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A70#a4",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "STEP_RESTRICTED",
+            "timingLabel": "When Depleted/Destroyed by the Opponent",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can pay one cost to summon one of this Ultimate's pre-Advent cards."
+          },
+          "clauses": [
+            {
+              "rawText": "You can pay one cost to summon one of this Ultimate's pre-Advent cards.",
+              "cleanText": "You can pay one cost to summon one of this Ultimate's pre-Advent cards",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Green & Cost 6 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]\n\nWhen summoning this revealed card, ignore the Summon Condition.\n\n[LV3][LV4][LV5] (When Summoned/Advents)\nPut three core from the Void to this Ultimate. Also, if it's your turn, refresh one Green Ultimate you control.\n\n[LV4][LV5] (When Depleted/Destroyed by the Opponent)\nYou can pay one cost to summon one of this Ultimate's pre-Advent cards.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A77": {
-  "name": "The DestroyerDragonEmperor Siegfried-Rudra",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 16000
-   }
+  "BATTLE-SPIRITS-A77": {
+    "name": "The DestroyerDragonEmperor Siegfried-Rudra",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 16000
+      }
+    },
+    "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate.\n\n[LV1][LV2][LV3] (When Advents)\nSend three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.\n\n[LV2][LV3] (When Attacks)\nUnless the opponent destroys five Spirits/Ultimates they control, they can't block.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A77",
+      "name": "The DestroyerDragonEmperor Siegfried-Rudra",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A77#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from the Hand onto your target Spirit/Ultimate.",
+              "cleanText": "stack this from the Hand onto your target Spirit/Ultimate",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A77#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate."
+          },
+          "clauses": [
+            {
+              "rawText": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.",
+              "cleanText": "Send three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NEGATE_EFFECT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A77#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block."
+          },
+          "clauses": [
+            {
+              "rawText": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block.",
+              "cleanText": "Unless the opponent destroys five Spirits/Ultimates they control, they can't block",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit/Ultimate.\n\n[LV1][LV2][LV3] (When Advents)\nSend three cores each from five opposing Spirits/Ultimates to the Reserve, and effects of the depleted Spirits/Ultimates can't activate.\n\n[LV2][LV3] (When Attacks)\nUnless the opponent destroys five Spirits/Ultimates they control, they can't block.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A90": {
-  "name": "The HieroglyphDragonEmperor Jehutic-Siegfried",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 15000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 20000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 5,
-    "bp": 25000
-   }
+  "BATTLE-SPIRITS-A90": {
+    "name": "The HieroglyphDragonEmperor Jehutic-Siegfried",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 15000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 20000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 5,
+        "bp": 25000
+      }
+    },
+    "effect": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]\n\n[LV3][LV4][LV5] (When Advents)\nYou can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card.\n\n[During Brave] [LV4][LV5] Flash - (When Attacks/Blocks)\nBy returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A90",
+      "name": "The HieroglyphDragonEmperor Jehutic-Siegfried",
+      "keywords": [
+        {
+          "name": "Advent",
+          "parameter": "White & Cost 5 or more",
+          "wave": 2,
+          "hook": "advent",
+          "bracketed": true,
+          "index": 8
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A90#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step)",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: White & Cost 5 or more",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your Hand onto your target Ultimate.",
+              "cleanText": "stack this from your Hand onto your target Ultimate",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A90#a1",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Armed Machine Spirit/Ultimate"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A90#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded.",
+              "cleanText": "You can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            },
+            {
+              "rawText": "you can pay one cost to summon that card.",
+              "cleanText": "you can pay one cost to summon that card",
+              "link": "byDoing",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A90#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes."
+          },
+          "clauses": [
+            {
+              "rawText": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order",
+              "cleanText": "By returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "this Ultimate refreshes.",
+              "cleanText": "this Ultimate refreshes",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - [Advent: White & Cost 5 or more] ((Either Attack Step))\nBy sending your [Soul Core] to the Trash, stack this from your Hand onto your target Ultimate.\n\n[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]\n\n[LV3][LV4][LV5] (When Advents)\nYou can discard cards from your deck until a \"Saga\"/\"Exalted Sword\" family card is discarded. When you've done so, you can pay one cost to summon that card.\n\n[During Brave] [LV4][LV5] Flash - (When Attacks/Blocks)\nBy returning five \"Armed Machine\" family cards from your Trash to the deckbottom in any order, this Ultimate refreshes.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A99": {
-  "name": "The CreationDragonEmperor Generator-Siegfried",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 10000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 12000
-   }
+  "BATTLE-SPIRITS-A99": {
+    "name": "The CreationDragonEmperor Generator-Siegfried",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 12000
+      }
+    },
+    "effect": "Flash - Advent: Red & Cost 3 or more (Either Attack Step)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\n[LV1][LV2][LV3] (When Advents/Attacks) During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.\n\n[LV2][LV3]Flash - (Either Attack Step) Once per turn, by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A99",
+      "name": "The CreationDragonEmperor Generator-Siegfried",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A99#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Red & Cost 3 or more (Either Attack Step)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your hand onto your target spirit.",
+              "cleanText": "stack this from your hand onto your target spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A99#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ADVENTS",
+            "timingLabel": "When Advents/Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.",
+              "cleanText": "every \"Creation\" family Spirit you control gains an extra Red symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A99#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits."
+          },
+          "clauses": [
+            {
+              "rawText": "By either discarding a card from your hand",
+              "cleanText": "By either discarding a card from your hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "count": 1,
+                "upTo": false,
+                "filter": null,
+                "chooser": "self"
+              }
+            },
+            {
+              "rawText": "or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
+              "cleanText": "or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - Advent: Red & Cost 3 or more (Either Attack Step)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\n[LV1][LV2][LV3] (When Advents/Attacks) During this turn, every \"Creation\" family Spirit you control gains an extra Red symbol.\n\n[LV2][LV3]Flash - (Either Attack Step) Once per turn, by either discarding a card from your hand, or one of this Spirit's pre-Advent cards, refresh this Spirit and up to three of your \"Creation\" family Spirits.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A107": {
-  "name": "The GrandflowerDragonEmperor Siegfried-Aphrodite",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 11000
-   }
+  "BATTLE-SPIRITS-A107": {
+    "name": "The GrandflowerDragonEmperor Siegfried-Aphrodite",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "effect": "Flash - Advent: Yellow & Cost 3 or more (Your Turn)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\nBy sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it.\n\n[LV1][LV2][LV3] (When Attacks) You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A107",
+      "name": "The GrandflowerDragonEmperor Siegfried-Aphrodite",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A107#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Advent: Yellow & Cost 3 or more (Your Turn)",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending your [Soul Core] to the Trash",
+              "cleanText": "By sending your [Soul Core] to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "isSoulCore": true,
+                "from": {
+                  "zone": "field_or_reserve",
+                  "side": "self"
+                },
+                "to": {
+                  "zone": "trash",
+                  "side": "self"
+                }
+              }
+            },
+            {
+              "rawText": "stack this from your hand onto your target spirit.",
+              "cleanText": "stack this from your hand onto your target spirit",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_STACK",
+                "from": "HAND",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A107#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it."
+          },
+          "clauses": [
+            {
+              "rawText": "By sending one or more cores from your Reserve to a Magic card on your field",
+              "cleanText": "By sending one or more cores from your Reserve to a Magic card on your field",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "this card can Advent on it.",
+              "cleanText": "this card can Advent on it",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADVENT_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A107#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost.",
+              "cleanText": "You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CAST_MAGIC_FREE"
+              }
+            },
+            {
+              "rawText": "if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
+              "cleanText": "send an opposing Life to the Reserve",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if you have at least three Magic cards on your Field",
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "Flash - Advent: Yellow & Cost 3 or more (Your Turn)\nBy sending your [Soul Core] to the Trash, stack this from your hand onto your target spirit.\n\nBy sending one or more cores from your Reserve to a Magic card on your field, this card can Advent on it.\n\n[LV1][LV2][LV3] (When Attacks) You can immediately use the Main/Flash effect of a \"Fairy\" family Magic card on your Hand or this Spirit's pre-Advent cards without paying the cost. After that effect resolves, if you have at least three Magic cards on your Field, send an opposing Life to the Reserve.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A1446": {
-  "name": "The HieroglyphCavalry Proto-Iahf",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 8000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 12000
-   },
-   "LV5": {
-    "level": 5,
-    "cost": 4,
-    "bp": 14000
-   }
+  "BATTLE-SPIRITS-A1446": {
+    "name": "The HieroglyphCavalry Proto-Iahf",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 12000
+      },
+      "LV5": {
+        "level": 5,
+        "cost": 4,
+        "bp": 14000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks/Blocks)]\nFor each Ultimate Trigger hit, return an opposing Spirit to the Hand. [Double Hit] Also, when the Ultimate Trigger hits twice, return an opposing Ultimate to the deckbottom.\n[wutb]\n\n[LV4][LV5] Flash - (Either Attack Step)\nOnce per step, by exhausting this Ultimate, activate one of its [Double Ultimate Trigger].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A1446",
+      "name": "The HieroglyphCavalry Proto-Iahf",
+      "keywords": [
+        {
+          "name": "Double Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 75
+        },
+        {
+          "name": "Double Hit",
+          "parameter": null,
+          "wave": 3,
+          "hook": "double_hit",
+          "bracketed": true,
+          "index": 210
+        },
+        {
+          "name": "Double Ultimate Trigger",
+          "parameter": null,
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 426
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A1446#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Armed Machine Spirit/Ultimate"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A1446#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Double Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Ultimate Trigger hit, return an opposing Spirit to the Hand. [Double Hit] Also, when the Ultimate Trigger hits twice, return an opposing Ultimate to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Ultimate Trigger hit, return an opposing Spirit to the Hand.",
+              "cleanText": "For each Ultimate Trigger hit, return an opposing Spirit to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "destination": "HAND"
+              }
+            },
+            {
+              "rawText": "[Double Hit] Also, when the Ultimate Trigger hits twice, return an opposing Ultimate to the deckbottom.",
+              "cleanText": "[Double Hit] Also, when the Ultimate Trigger hits twice, return an opposing Ultimate to the deckbottom",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Ultimate"
+                  ]
+                },
+                "destination": "DECK"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A1446#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4,
+              5
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Once per step, by exhausting this Ultimate, activate one of its [Double Ultimate Trigger]."
+          },
+          "clauses": [
+            {
+              "rawText": "Once per step, by exhausting this Ultimate, activate one of its [Double Ultimate Trigger].",
+              "cleanText": "Once per step, by exhausting this Ultimate, activate one of its [Double Ultimate Trigger]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Armed Machine Spirit/Ultimate]\n\n[Double Ultimate Trigger: [LV3][LV4][LV5] (When Attacks/Blocks)]\nFor each Ultimate Trigger hit, return an opposing Spirit to the Hand. [Double Hit] Also, when the Ultimate Trigger hits twice, return an opposing Ultimate to the deckbottom.\n[wutb]\n\n[LV4][LV5] Flash - (Either Attack Step)\nOnce per step, by exhausting this Ultimate, activate one of its [Double Ultimate Trigger].",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A1456": {
-  "name": "The HieroglyphSoldier Defender-Gelef",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 13000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 2,
-    "bp": 15000
-   }
+  "BATTLE-SPIRITS-A1456": {
+    "name": "The HieroglyphSoldier Defender-Gelef",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 13000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 2,
+        "bp": 15000
+      }
+    },
+    "effect": "[Summon Condition: Your Life at two or more]\n\nWhen you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control.\n\n[LV4] (Your Attack Step)\nWhile there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol. This effect doesn't stack.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A1456",
+      "name": "The HieroglyphSoldier Defender-Gelef",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A1456#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: Your Life at two or more"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: Your Life at two or more]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A1456#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control."
+          },
+          "clauses": [
+            {
+              "rawText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst",
+              "cleanText": "When you have used a White Magic card from your Hand/activated a White Magic card Burst",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "you can pay one cost to summon this card from your Hand.",
+              "cleanText": "you can pay one cost to summon this card from your Hand",
+              "link": "afterResolves",
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_THIS_CARD",
+                "from": "HAND_OR_BURST"
+              }
+            },
+            {
+              "rawText": "refresh three \"Armed Machine\" family Ultimates you control.",
+              "cleanText": "refresh three \"Armed Machine\" family Ultimates you control",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A1456#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol."
+          },
+          "clauses": [
+            {
+              "rawText": "While there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol.",
+              "cleanText": "every White Ultimate you control gains an extra White symbol",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While there are three or more White-only Magic cards in your Trash",
+              "duration": null,
+              "op": {
+                "op": "ADD_SYMBOL"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: Your Life at two or more]\n\nWhen you have used a White Magic card from your Hand/activated a White Magic card Burst, after that effect resolves, you can pay one cost to summon this card from your Hand. When you've done so, refresh three \"Armed Machine\" family Ultimates you control.\n\n[LV4] (Your Attack Step)\nWhile there are three or more White-only Magic cards in your Trash, every White Ultimate you control gains an extra White symbol. This effect doesn't stack.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A9232": {
-  "name": "The CursedSpiritSword Longhorn Blade",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A9232": {
+    "name": "The CursedSpiritSword Longhorn Blade",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more<br>Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nExhaust an opposing Spirit, and put one core from the Void to this Spirit.\n\n[During Nexus Brave] [Grand Skill: 3] Flash - (Either Attack Step)\n(Send three cores from this Nexus to the Void) Exhaust an opposing Spirit. Or, heavy exhaust an opposing exhausted Spirit/Ultimate.\n[heb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9232",
+      "name": "The CursedSpiritSword Longhorn Blade",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more<br>Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "3",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 190
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9232#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more<br>Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more<br>Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9232#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Exhaust an opposing Spirit, and put one core from the Void to this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust an opposing Spirit",
+              "cleanText": "Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "put one core from the Void to this Spirit.",
+              "cleanText": "put one core from the Void to this Spirit",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "field",
+                  "target": "self"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9232#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Skill: 3"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send three cores from this Nexus to the Void) Exhaust an opposing Spirit. Or, heavy exhaust an opposing exhausted Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send three cores from this Nexus to the Void) Exhaust an opposing Spirit.",
+              "cleanText": "(Send three cores from this Nexus to the Void) Exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": false,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "heavy exhaust an opposing exhausted Spirit/Ultimate.",
+              "cleanText": "heavy exhaust an opposing exhausted Spirit/Ultimate",
+              "link": "or",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more<br>Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nExhaust an opposing Spirit, and put one core from the Void to this Spirit.\n\n[During Nexus Brave] [Grand Skill: 3] Flash - (Either Attack Step)\n(Send three cores from this Nexus to the Void) Exhaust an opposing Spirit. Or, heavy exhaust an opposing exhausted Spirit/Ultimate.\n[heb]",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A9257": {
-  "name": "The DarkSnakeGrandstaff Ogdoad",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A9257": {
+    "name": "The DarkSnakeGrandstaff Ogdoad",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more\n\"Grandwalker Osiris\"]\n\n[During Spirit Brave] (When Attacks)\nSend two cores from an opposing Spirit to their Reserve.\n\n[During Nexus Brave] [Grand Field] (Your Attack Step)\n(At least six cores on this Nexus) When cores would be sent to the opposing Reserve via your \"Dark Snake\" family Spirit effects, send them to the Trash instead.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9257",
+      "name": "The DarkSnakeGrandstaff Ogdoad",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more\n\"Grandwalker Osiris\"",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Field",
+          "parameter": null,
+          "wave": 3,
+          "hook": "grand_field",
+          "bracketed": true,
+          "index": 172
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9257#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more\n\"Grandwalker Osiris\"",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more\n\"Grandwalker Osiris\"]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9257#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Send two cores from an opposing Spirit to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "Send two cores from an opposing Spirit to their Reserve.",
+              "cleanText": "Send two cores from an opposing Spirit to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9257#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Field"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "(At least six cores on this Nexus) When cores would be sent to the opposing Reserve via your \"Dark Snake\" family Spirit effects, send them to the Trash instead."
+          },
+          "clauses": [
+            {
+              "rawText": "(At least six cores on this Nexus) When cores would be sent to the opposing Reserve via your \"Dark Snake\" family Spirit effects, send them to the Trash instead.",
+              "cleanText": "(At least six cores on this Nexus) When cores would be sent to the opposing Reserve via your \"Dark Snake\" family Spirit effects, send them to the Trash instead",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "GRANT_FAMILY"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more\n\"Grandwalker Osiris\"]\n\n[During Spirit Brave] (When Attacks)\nSend two cores from an opposing Spirit to their Reserve.\n\n[During Nexus Brave] [Grand Field] (Your Attack Step)\n(At least six cores on this Nexus) When cores would be sent to the opposing Reserve via your \"Dark Snake\" family Spirit effects, send them to the Trash instead.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A9657": {
-  "name": "The EastWindBeast Henkhisesui",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 6000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "BATTLE-SPIRITS-A9657": {
+    "name": "The EastWindBeast Henkhisesui",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 6000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "If you control any Yellow-only Saga Brave, this card in your Hand becomes Cost 2.\n\nWhen summoning this card via an effect, it becomes Cost 2.\n\n[LV1][LV2][LV3] (When Summoned)\nFor each Saga Brave you control, draw a card. This effect can only be used once per turn.\n\n[LV3] (When Attacks)\nIf your Life is five or less, put one core from the Void to your Life.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A9657",
+      "name": "The EastWindBeast Henkhisesui",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A9657#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If you control any Yellow-only Saga Brave, this card in your Hand becomes Cost 2."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any Yellow-only Saga Brave, this card in your Hand becomes Cost 2.",
+              "cleanText": "this card in your Hand becomes Cost 2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any Yellow-only Saga Brave",
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9657#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning this card via an effect, it becomes Cost 2."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning this card via an effect, it becomes Cost 2.",
+              "cleanText": "When summoning this card via an effect, it becomes Cost 2",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9657#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Saga Brave you control, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Saga Brave you control, draw a card.",
+              "cleanText": "For each Saga Brave you control, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": "DISCARDED_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A9657#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If your Life is five or less, put one core from the Void to your Life."
+          },
+          "clauses": [
+            {
+              "rawText": "If your Life is five or less, put one core from the Void to your Life.",
+              "cleanText": "put one core from the Void to your Life",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If your Life is five or less",
+              "duration": null,
+              "op": {
+                "op": "RECOVER_LIFE",
+                "count": 1
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "If you control any Yellow-only Saga Brave, this card in your Hand becomes Cost 2.\n\nWhen summoning this card via an effect, it becomes Cost 2.\n\n[LV1][LV2][LV3] (When Summoned)\nFor each Saga Brave you control, draw a card. This effect can only be used once per turn.\n\n[LV3] (When Attacks)\nIf your Life is five or less, put one core from the Void to your Life.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A10421": {
-  "name": "The GrandflowerFairy Nadeshiko",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 7000
-   }
+  "BATTLE-SPIRITS-A10421": {
+    "name": "The GrandflowerFairy Nadeshiko",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (Your End Step)\nIf there's any \"Fairy\" family Magic card on your Field, draw a card. This effect doesn't stack.\n\n[LV2][LV3] (When Attacks/Blocks)\nBy exhausting a Magic card on your Field, during this turn, give an opposing Spirit/Ultimate -7000 BP. Destroy it when it id brought to 0 BP by this effect.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10421",
+      "name": "The GrandflowerFairy Nadeshiko",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A10421#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "END_OF_TURN",
+            "timingLabel": "Your End Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": true,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "If there's any \"Fairy\" family Magic card on your Field, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "If there's any \"Fairy\" family Magic card on your Field, draw a card.",
+              "cleanText": "draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If there's any \"Fairy\" family Magic card on your Field",
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A10421#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By exhausting a Magic card on your Field, during this turn, give an opposing Spirit/Ultimate -7000 BP. Destroy it when it id brought to 0 BP by this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "By exhausting a Magic card on your Field",
+              "cleanText": "By exhausting a Magic card on your Field",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "during this turn, give an opposing Spirit/Ultimate -7000 BP.",
+              "cleanText": "give an opposing Spirit/Ultimate -7000 BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 7000
+              }
+            },
+            {
+              "rawText": "Destroy it when it id brought to 0 BP by this effect.",
+              "cleanText": "Destroy it when it id brought to 0 BP by this effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (Your End Step)\nIf there's any \"Fairy\" family Magic card on your Field, draw a card. This effect doesn't stack.\n\n[LV2][LV3] (When Attacks/Blocks)\nBy exhausting a Magic card on your Field, during this turn, give an opposing Spirit/Ultimate -7000 BP. Destroy it when it id brought to 0 BP by this effect.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A10496": {
-  "name": "The GrandsnakeKing Snefel",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "BATTLE-SPIRITS-A10496": {
+    "name": "The GrandsnakeKing Snefel",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10496",
+      "name": "The GrandsnakeKing Snefel",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A10496#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost.",
+              "cleanText": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.",
+              "cleanText": "during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A10496#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "You can pay one cost to summon a Saga Brave card from your Hand/Trash.",
+              "cleanText": "You can pay one cost to summon a Saga Brave card from your Hand/Trash",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "discard a card from the opposing Removed Zone",
+              "cleanText": "discard a card from the opposing Removed Zone",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_REMOVED"
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this card is discarded by an opposing \"deck discarding\" effect, you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck due to opposing \"deck discarding\" effects.\n\n[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand/Trash. When you've done so, discard a card from the opposing Removed Zone, and draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A10500": {
-  "name": "The GrandsunDragon Saga Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 9000
-   }
+  "BATTLE-SPIRITS-A10500": {
+    "name": "The GrandsunDragon Saga Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand. When you've done so, during this turn, every Spirit you control gain +3000 BP.\n\n[During Brave] [LV2][LV3] (When Attacks)\nBy destroying an opposing Spirit with a BP equal or inferior to this Spirit's, draw a card.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A10500",
+      "name": "The GrandsunDragon Saga Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A10500#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can pay one cost to summon a Saga Brave card from your Hand. When you've done so, during this turn, every Spirit you control gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "You can pay one cost to summon a Saga Brave card from your Hand.",
+              "cleanText": "You can pay one cost to summon a Saga Brave card from your Hand",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "during this turn, every Spirit you control gain +3000 BP.",
+              "cleanText": "every Spirit you control gain +3000 BP",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A10500#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [
+              "During Brave"
+            ],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "By destroying an opposing Spirit with a BP equal or inferior to this Spirit's, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "By destroying an opposing Spirit with a BP equal or inferior to this Spirit's",
+              "cleanText": "By destroying an opposing Spirit with a BP equal or inferior to this Spirit's",
+              "link": null,
+              "isOptional": false,
+              "isCost": true,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "byDoing",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nYou can pay one cost to summon a Saga Brave card from your Hand. When you've done so, during this turn, every Spirit you control gain +3000 BP.\n\n[During Brave] [LV2][LV3] (When Attacks)\nBy destroying an opposing Spirit with a BP equal or inferior to this Spirit's, draw a card.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A11207": {
-  "name": "The LifeAmulet Ankh",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   }
+  "BATTLE-SPIRITS-A11207": {
+    "name": "The LifeAmulet Ankh",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more Spirit<br>Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nTarget an opposing Spirit. During this turn, it can't block.\n\n[During Nexus Brave] [Grand Skill: 2] Flash - (Either Attack Step)\n(Send two cores from this Nexus to the Void) During this turn, give an opposing Spirit/Ultimate -6000 BP. Destroy it when it is brought to 0 BP by this effect.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A11207",
+      "name": "The LifeAmulet Ankh",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more Spirit<br>Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "2",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 183
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A11207#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more Spirit<br>Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more Spirit<br>Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11207#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Target an opposing Spirit. During this turn, it can't block."
+          },
+          "clauses": [
+            {
+              "rawText": "Target an opposing Spirit.",
+              "cleanText": "Target an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "During this turn, it can't block.",
+              "cleanText": "it can't block",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "COMBAT_RESTRICTION"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11207#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Skill: 2"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send two cores from this Nexus to the Void) During this turn, give an opposing Spirit/Ultimate -6000 BP. Destroy it when it is brought to 0 BP by this effect."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send two cores from this Nexus to the Void) During this turn, give an opposing Spirit/Ultimate -6000 BP.",
+              "cleanText": "(Send two cores from this Nexus to the Void) During this turn, give an opposing Spirit/Ultimate -6000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_DEBUFF",
+                "amount": 6000
+              }
+            },
+            {
+              "rawText": "Destroy it when it is brought to 0 BP by this effect.",
+              "cleanText": "Destroy it when it is brought to 0 BP by this effect",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                },
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more Spirit<br>Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nTarget an opposing Spirit. During this turn, it can't block.\n\n[During Nexus Brave] [Grand Skill: 2] Flash - (Either Attack Step)\n(Send two cores from this Nexus to the Void) During this turn, give an opposing Spirit/Ultimate -6000 BP. Destroy it when it is brought to 0 BP by this effect.",
-  "is_vanilla": false
- },
- "BSC34-015": {
-  "name": "The LionLightEmperor Radiant-Leo",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 6000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 15000
-   }
+  "BSC34-015": {
+    "name": "The LionLightEmperor Radiant-Leo",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 15000
+      }
+    },
+    "effect": "While the opposing Hand is five or more, this set card is unaffected by opposing effects.\n\n[Burst: After your Spirit/Ultimate is Depleted/Destroyed by the Opponent]\nReturn an opposing Spirit/Ultimate to the Hand. Then, draw a card. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks/Blocks)\nPut a core from the Void to any Spirit you control. When this effect levels that Spirit up into LV3, refresh this Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC34-015",
+      "name": "The LionLightEmperor Radiant-Leo",
+      "keywords": [
+        {
+          "name": "Burst",
+          "parameter": "After your Spirit/Ultimate is Depleted/Destroyed by the Opponent",
+          "wave": 2,
+          "hook": "burst",
+          "bracketed": true,
+          "index": 91
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC34-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While the opposing Hand is five or more, this set card is unaffected by opposing effects."
+          },
+          "clauses": [
+            {
+              "rawText": "While the opposing Hand is five or more, this set card is unaffected by opposing effects.",
+              "cleanText": "this set card is unaffected by opposing effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While the opposing Hand is five or more",
+              "duration": null,
+              "op": {
+                "op": "IMMUNITY",
+                "immuneTo": "OPPOSING_EFFECTS"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC34-015#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "BURST",
+            "timingLabel": "Burst",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return an opposing Spirit/Ultimate to the Hand. Then, draw a card. After this effect resolves, summon this card without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "Return an opposing Spirit/Ultimate to the Hand.",
+              "cleanText": "Return an opposing Spirit/Ultimate to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "draw a card.",
+              "cleanText": "draw a card",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": null
+              }
+            },
+            {
+              "rawText": "summon this card without paying the cost.",
+              "cleanText": "summon this card without paying the cost",
+              "link": "afterResolves",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON_FREE",
+                "target": "this_card",
+                "from": "BURST"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC34-015#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS_OR_BLOCKS",
+            "timingLabel": "When Attacks/Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Put a core from the Void to any Spirit you control. When this effect levels that Spirit up into LV3, refresh this Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Put a core from the Void to any Spirit you control.",
+              "cleanText": "Put a core from the Void to any Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            },
+            {
+              "rawText": "When this effect levels that Spirit up into LV3, refresh this Spirit.",
+              "cleanText": "When this effect levels that Spirit up into LV3, refresh this Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 6,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "While the opposing Hand is five or more, this set card is unaffected by opposing effects.\n\n[Burst: After your Spirit/Ultimate is Depleted/Destroyed by the Opponent]\nReturn an opposing Spirit/Ultimate to the Hand. Then, draw a card. After this effect resolves, summon this card without paying the cost.\n\n[LV2][LV3] (When Attacks/Blocks)\nPut a core from the Void to any Spirit you control. When this effect levels that Spirit up into LV3, refresh this Spirit.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A11460": {
-  "name": "The MoonWingblade Crescent Boomerang",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   }
+  "BATTLE-SPIRITS-A11460": {
+    "name": "The MoonWingblade Crescent Boomerang",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      }
+    },
+    "effect": "[Brave Condition: Cost 4 or more Spirit/Ultimate<br>Grandwalker Nexus]\n\nWhile Braved, this Brave becomes Cost 0.\n\n[During Spirit/Ultimate Brave] [Heavy Armor: Purple/Blue]\nThis Spirit/Ultimate is unaffected by opposing Purple/Blue Spirit/Brave/Nexus/Magic effects.\n\n[During Nexus Brave] [Grand Skill: 1] Flash - (Opposing Attack Step)\n(Once per turn, send one core from this Nexus to the Void) Refresh one of your Spirits/Ultimates.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A11460",
+      "name": "The MoonWingblade Crescent Boomerang",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 4 or more Spirit/Ultimate<br>Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Heavy Armor",
+          "parameter": "Purple/Blue",
+          "wave": 1,
+          "hook": "heavy_armor",
+          "bracketed": true,
+          "index": 145
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "1",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 287
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A11460#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 4 or more Spirit/Ultimate<br>Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 4 or more Spirit/Ultimate<br>Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11460#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "While Braved, this Brave becomes Cost 0."
+          },
+          "clauses": [
+            {
+              "rawText": "While Braved, this Brave becomes Cost 0.",
+              "cleanText": "this Brave becomes Cost 0",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "While Braved",
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11460#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "[During Spirit/Ultimate Brave] [Heavy Armor: Purple/Blue]\nThis Spirit/Ultimate is unaffected by opposing Purple/Blue Spirit/Brave/Nexus/Magic effects."
+          },
+          "clauses": [
+            {
+              "rawText": "[During Spirit/Ultimate Brave] [Heavy Armor: Purple/Blue]",
+              "cleanText": "[During Spirit/Ultimate Brave] [Heavy Armor: Purple/Blue]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_RULE"
+              }
+            },
+            {
+              "rawText": "This Spirit/Ultimate is unaffected by opposing Purple/Blue Spirit/Brave/Nexus/Magic effects.",
+              "cleanText": "This Spirit/Ultimate is unaffected by opposing Purple/Blue Spirit/Brave/Nexus/Magic effects",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "IMMUNITY"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11460#a3",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Skill: 1"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Once per turn, send one core from this Nexus to the Void) Refresh one of your Spirits/Ultimates."
+          },
+          "clauses": [
+            {
+              "rawText": "(Once per turn, send one core from this Nexus to the Void) Refresh one of your Spirits/Ultimates.",
+              "cleanText": "(Once per turn, send one core from this Nexus to the Void) Refresh one of your Spirits/Ultimates",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Brave Condition: Cost 4 or more Spirit/Ultimate<br>Grandwalker Nexus]\n\nWhile Braved, this Brave becomes Cost 0.\n\n[During Spirit/Ultimate Brave] [Heavy Armor: Purple/Blue]\nThis Spirit/Ultimate is unaffected by opposing Purple/Blue Spirit/Brave/Nexus/Magic effects.\n\n[During Nexus Brave] [Grand Skill: 1] Flash - (Opposing Attack Step)\n(Once per turn, send one core from this Nexus to the Void) Refresh one of your Spirits/Ultimates.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A11611": {
-  "name": "The OldKingDragon Ma-Dura -Humanoid Form-",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 10000
-   }
+  "BATTLE-SPIRITS-A11611": {
+    "name": "The OldKingDragon Ma-Dura -Humanoid Form-",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 10000
+      }
+    },
+    "effect": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".\n\n[LV1][LV2][LV3] (When Summoned)\nReturn either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A11611",
+      "name": "The OldKingDragon Ma-Dura -Humanoid Form-",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A11611#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\"."
+          },
+          "clauses": [
+            {
+              "rawText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost.",
+              "cleanText": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            },
+            {
+              "rawText": "during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".",
+              "cleanText": "during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\"",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A11611#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it."
+          },
+          "clauses": [
+            {
+              "rawText": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand.",
+              "cleanText": "Return either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            },
+            {
+              "rawText": "If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
+              "cleanText": "instead of returning it to the Hand, you can summon it",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": "If that card has \"Creation\" family",
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "When this card is discarded via an opposing \"Deck Discarding effect\", you can summon it without paying the cost. Also, during this game, cards can't be discarded from your deck via opposing \"Deck Discarding effects\".\n\n[LV1][LV2][LV3] (When Summoned)\nReturn either a Red Spirit card, or a \"Brahma\" Nexus card from your Trash to the Hand. If that card has \"Creation\" family, instead of returning it to the Hand, you can summon it.",
-  "is_vanilla": false
- },
- "BSC34-016": {
-  "name": "The SkyLionheart Hoopoeheader",
-  "type": "Ultimate",
-  "levels": {
-   "LV3": {
-    "level": 3,
-    "cost": 1,
-    "bp": 10000
-   },
-   "LV4": {
-    "level": 4,
-    "cost": 3,
-    "bp": 13000
-   }
+  "BSC34-016": {
+    "name": "The SkyLionheart Hoopoeheader",
+    "type": "Ultimate",
+    "levels": {
+      "LV3": {
+        "level": 3,
+        "cost": 1,
+        "bp": 10000
+      },
+      "LV4": {
+        "level": 4,
+        "cost": 3,
+        "bp": 13000
+      }
+    },
+    "effect": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]\n\nWhen summoning this revealed card, ignore the Summon Condition.\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, heavy exhaust an opposing Spirit.\n[heb]\nAfter Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate Trigger.\n[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, if the opponent controls any heavily exhausted Spirits, send an opposing Life to their Reserve.\n[xutb]",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BSC34-016",
+      "name": "The SkyLionheart Hoopoeheader",
+      "keywords": [
+        {
+          "name": "Ultimate Trigger",
+          "parameter": "[LV3",
+          "wave": 3,
+          "hook": "ultimate_trigger",
+          "bracketed": true,
+          "index": 139
+        },
+        {
+          "name": "Cross Ultimate Trigger",
+          "parameter": null,
+          "wave": 3,
+          "hook": "cross_ultimate_trigger",
+          "bracketed": true,
+          "index": 352
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BSC34-016#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Summon Condition: You control one or more Winged Beast Spirit/Ultimate"
+            ],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BSC34-016#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning this revealed card, ignore the Summon Condition."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning this revealed card, ignore the Summon Condition.",
+              "cleanText": "When summoning this revealed card, ignore the Summon Condition",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SUMMON",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BSC34-016#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3,
+              4
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Ultimate Trigger",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When Ultimate Trigger hits, heavy exhaust an opposing Spirit.\n\nAfter Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate Trigger.\n[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, if the opponent controls any heavily exhausted Spirits, send an opposing Life to their Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When Ultimate Trigger hits, heavy exhaust an opposing Spirit.",
+              "cleanText": "When Ultimate Trigger hits, heavy exhaust an opposing Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "isHeavy": true,
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate Trigger.",
+              "cleanText": "After Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate Trigger",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CROSS_TRIGGER"
+              }
+            },
+            {
+              "rawText": "[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, if the opponent controls any heavily exhausted Spirits, send an opposing Life to their Reserve.",
+              "cleanText": "[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, if the opponent controls any heavily exhausted Spirits, send an opposing Life to their Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 1,
+                "from": {
+                  "zone": "life",
+                  "side": "opp"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "opp"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Summon Condition: You control one or more Winged Beast Spirit/Ultimate]\n\nWhen summoning this revealed card, ignore the Summon Condition.\n\n[Ultimate Trigger: [LV3][LV4] (When Attacks)]\nWhen Ultimate Trigger hits, heavy exhaust an opposing Spirit.\n[heb]\nAfter Ultimate Trigger, if your Life is at three or less, also, proceed to Cross Ultimate Trigger.\n[Cross Ultimate Trigger] When Cross Ultimate Trigger hits, if the opponent controls any heavily exhausted Spirits, send an opposing Life to their Reserve.\n[xutb]",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A12654": {
-  "name": "The StarTravelerDragon Chronic Dragon",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "BATTLE-SPIRITS-A12654": {
+    "name": "The StarTravelerDragon Chronic Dragon",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Summoned)\nReturn a Saga Brave card from your Trash to the Hand.\n\n[LV2] Flash - (Either Attack Step)\nIf you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A12654",
+      "name": "The StarTravelerDragon Chronic Dragon",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A12654#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Return a Saga Brave card from your Trash to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Return a Saga Brave card from your Trash to the Hand.",
+              "cleanText": "Return a Saga Brave card from your Trash to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "count": 1,
+                "target": {
+                  "side": "either"
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12654#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Either Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "If you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "If you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
+              "cleanText": "by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If you control any Saga Brave",
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 6000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Summoned)\nReturn a Saga Brave card from your Trash to the Hand.\n\n[LV2] Flash - (Either Attack Step)\nIf you control any Saga Brave, by paying two costs, destroy an opposing 6000 BP or less Spirit/Ultimate.",
-  "is_vanilla": false
- },
- "BATTLE-SPIRITS-A12912": {
-  "name": "The SunGrandbow Sunburst",
-  "type": "Brave",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   }
-  },
-  "effect": "[Brave Condition: Cost 5 or more <br>\"Apollon\"-named Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nOnce per turn, at the end of a battle where an opposing 6000 BP or less Spirit/Ultimate was destroyed, send an opposing Life to the Reserve.\n\n[During Nexus Brave] [Grand Skill: 4] Flash - (Your Attack Step)\n(Send four cores from this Nexus to the Void) Destroy an opposing 12000 BP or more Spirit/Ultimate.",
-  "is_vanilla": false
- }
+  "BATTLE-SPIRITS-A12912": {
+    "name": "The SunGrandbow Sunburst",
+    "type": "Brave",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      }
+    },
+    "effect": "[Brave Condition: Cost 5 or more <br>\"Apollon\"-named Grandwalker Nexus]\n\n[During Spirit Brave] (When Attacks)\nOnce per turn, at the end of a battle where an opposing 6000 BP or less Spirit/Ultimate was destroyed, send an opposing Life to the Reserve.\n\n[During Nexus Brave] [Grand Skill: 4] Flash - (Your Attack Step)\n(Send four cores from this Nexus to the Void) Destroy an opposing 12000 BP or more Spirit/Ultimate.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "BATTLE-SPIRITS-A12912",
+      "name": "The SunGrandbow Sunburst",
+      "keywords": [
+        {
+          "name": "Brave",
+          "parameter": "Cost 5 or more <br>\"Apollon\"-named Grandwalker Nexus",
+          "wave": 3,
+          "hook": "brave",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Grand Skill",
+          "parameter": "4",
+          "wave": 3,
+          "hook": "grand_skill",
+          "bracketed": true,
+          "index": 273
+        }
+      ],
+      "abilities": [
+        {
+          "id": "BATTLE-SPIRITS-A12912#a0",
+          "type": "CONDITION",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brave Condition: Cost 5 or more <br>\"Apollon\"-named Grandwalker Nexus",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": ""
+          },
+          "rawText": "[Brave Condition: Cost 5 or more <br>\"Apollon\"-named Grandwalker Nexus]",
+          "clauses": [],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12912#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": "ONCE_PER_TURN",
+            "cantStack": false,
+            "keyword": "During Spirit Brave",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "at the end of a battle where an opposing 6000 BP or less Spirit/Ultimate was destroyed, send an opposing Life to the Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "at the end of a battle where an opposing 6000 BP or less Spirit/Ultimate was destroyed, send an opposing Life to the Reserve.",
+              "cleanText": "at the end of a battle where an opposing 6000 BP or less Spirit/Ultimate was destroyed, send an opposing Life to the Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "BATTLE-SPIRITS-A12912#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [
+              "Grand Skill: 4"
+            ],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "During Nexus Brave",
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "(Send four cores from this Nexus to the Void) Destroy an opposing 12000 BP or more Spirit/Ultimate."
+          },
+          "clauses": [
+            {
+              "rawText": "(Send four cores from this Nexus to the Void) Destroy an opposing 12000 BP or more Spirit/Ultimate.",
+              "cleanText": "(Send four cores from this Nexus to the Void) Destroy an opposing 12000 BP or more Spirit/Ultimate",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "isCost": false
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }

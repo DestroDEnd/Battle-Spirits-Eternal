@@ -1,0 +1,694 @@
+{
+  "BATTLE-SPIRITS-A6251": {
+    "cardNumber": "BATTLE-SPIRITS-A6251",
+    "name": "Lou-Koutyu",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A6251#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve.",
+            "cleanText": "Put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A6251#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By sending two cores from your Reserve to your Trash, the opponent can't activate their Bursts."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending two cores from your Reserve to your Trash",
+            "cleanText": "By sending two cores from your Reserve to your Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "the opponent can't activate their Bursts.",
+            "cleanText": "the opponent can't activate their Bursts",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10879": {
+    "cardNumber": "BATTLE-SPIRITS-A10879",
+    "name": "The HornetKing Fong-Need",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10879#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put three cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Put three cores from the Void to this Spirit.",
+            "cleanText": "Put three cores from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 3,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10879#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust any number of opposing Spirits up to a total of 10000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust any number of opposing Spirits up to a total of 10000 BP.",
+            "cleanText": "Exhaust any number of opposing Spirits up to a total of 10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10879#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit.",
+            "cleanText": "When the opposing Life is reduced, by sending three cores from this Spirit to your Trash, refresh this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A11245": {
+    "cardNumber": "BATTLE-SPIRITS-A11245",
+    "name": "The Little Samurai Issun Antman",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Brave's (When Summoned) effect resolves",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "High Speed",
+        "parameter": null,
+        "wave": 2,
+        "hook": "high_speed",
+        "bracketed": true,
+        "index": 101
+      },
+      {
+        "name": "Windstorm",
+        "parameter": null,
+        "wave": 1,
+        "hook": "windstorm",
+        "bracketed": true,
+        "index": 114
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A11245#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning a Spirit with [High Speed]/[Windstorm] you control to the Hand, summon this Spirit card."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning a Spirit with [High Speed]/[Windstorm] you control to the Hand",
+            "cleanText": "By returning a Spirit with [High Speed]/[Windstorm] you control to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "summon this Spirit card.",
+            "cleanText": "summon this Spirit card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A11245#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the start of the step, by exhausting this Spirit, exhaust an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "At the start of the step, by exhausting this Spirit, exhaust an opposing Spirit.",
+            "cleanText": "At the start of the step, by exhausting this Spirit, exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A11333": {
+    "cardNumber": "BATTLE-SPIRITS-A11333",
+    "name": "The MagicalPrincessDeity Geraldy",
+    "keywords": [
+      {
+        "name": "Immortality",
+        "parameter": "Cost 2/3/4",
+        "wave": 4,
+        "hook": "immortality",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A11333#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Immortality: Cost 2/3/4",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed.",
+            "cleanText": "You can summon this Spirit card from the Trash when your Cost 2/3/4 Spirit is destroyed",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A11333#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck."
+        },
+        "clauses": [
+          {
+            "rawText": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck.",
+            "cleanText": "When any Magic card is discarded from your deck by an opposing Spirit effect, during this turn, cards can't be discarded from your deck",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A11333#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BATTLES",
+          "timingLabel": "When Battles",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning a card from your Trash to the deckbottom, send two cores from any opposing Spirits to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning a card from your Trash to the deckbottom",
+            "cleanText": "By returning a card from your Trash to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "send two cores from any opposing Spirits to their Reserve.",
+            "cleanText": "send two cores from any opposing Spirits to their Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12867": {
+    "cardNumber": "BATTLE-SPIRITS-A12867",
+    "name": "The SuperEmperor Siegpentan-Nova",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": "Song Bird → Void",
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 221
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12867#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Tribute: Song Bird → Void",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void.",
+            "cleanText": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12867#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost. However, the (When Summoned) effects of those Spirits can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "If \"The Kaiser Empereur\" was used for the [Tribute], summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost.",
+            "cleanText": "summon any number of \"Pentan\"-named Spirit cards from your Hand/Trash, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If \"The Kaiser Empereur\" was used for the [Tribute]",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "the (When Summoned) effects of those Spirits can't activate.",
+            "cleanText": "the (When Summoned) effects of those Spirits can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12867#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying three \"Pentan\"-named Spirits you control, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying three \"Pentan\"-named Spirits you control",
+            "cleanText": "By destroying three \"Pentan\"-named Spirits you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "this Spirit refreshes.",
+            "cleanText": "this Spirit refreshes",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

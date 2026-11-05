@@ -6,9 +6,21 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 
-const testFiles = fs.readdirSync(__dirname)
-  .filter(f => f.endsWith('.test.js'))
-  .map(f => path.join('tests', f));
+function findTestFiles(dir) {
+  let results = [];
+  const list = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of list) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results = results.concat(findTestFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith('.test.js')) {
+      results.push(path.relative(rootDir, fullPath));
+    }
+  }
+  return results.sort();
+}
+
+const testFiles = findTestFiles(__dirname);
 
 console.log('Running Battle Spirits Eternal Test Suite...\n');
 console.log(`Found ${testFiles.length} test suites:`, testFiles.join(', '));

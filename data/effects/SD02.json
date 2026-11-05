@@ -1,354 +1,2313 @@
 {
- "SD02-015": {
-  "name": "Friendly Power",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nDuring this turn, give one of your Spirits +1000 BP for each of your Spirits in the same family as the targeted Spirit.",
-  "is_vanilla": false
- },
- "SD02-002": {
-  "name": "Misaal",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 3000
-   }
+  "SD02-015": {
+    "name": "Friendly Power",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nDuring this turn, give one of your Spirits +1000 BP for each of your Spirits in the same family as the targeted Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-015",
+      "name": "Friendly Power",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-015#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give one of your Spirits +1000 BP for each of your Spirits in the same family as the targeted Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give one of your Spirits +1000 BP for each of your Spirits in the same family as the targeted Spirit.",
+              "cleanText": "give one of your Spirits +1000 BP for each of your Spirits in the same family as the targeted Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "forEach": "SAME_FAMILY_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Blocks)\nExhaust every Spirit with the same cost as the opposing attacking Spirit.",
-  "is_vanilla": false
- },
- "SD02-017": {
-  "name": "Strong Draw",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Main]\nDraw three cards, then discard two cards from your Hand.\n\n[Flash]\nDuring this turn, give a Spirit +3000 BP.",
-  "is_vanilla": false
- },
- "SD02-005": {
-  "name": "The Angelia Cherubim",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD02-002": {
+    "name": "Misaal",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV1][LV2] (When Blocks)\nExhaust every Spirit with the same cost as the opposing attacking Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-002",
+      "name": "Misaal",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-002#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Exhaust every Spirit with the same cost as the opposing attacking Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Exhaust every Spirit with the same cost as the opposing attacking Spirit.",
+              "cleanText": "Exhaust every Spirit with the same cost as the opposing attacking Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "EXHAUST",
+                "all": true,
+                "target": {
+                  "types": [
+                    "Spirit"
+                  ],
+                  "matchAttackingCost": true
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nFor each Yellow Symbol on your Field, reveal a card from your decktop. Add a Magic card among them to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] (Your Attack Step)\nEvery opposing Spirit that is blocking your Spirits with [Brilliance] is treated as LV1.\n\n[LV3] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to the Hand.",
-  "is_vanilla": false
- },
- "SD02-003": {
-  "name": "The Angelia Dunamis",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 5000
-   }
+  "SD02-017": {
+    "name": "Strong Draw",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Main]\nDraw three cards, then discard two cards from your Hand.\n\n[Flash]\nDuring this turn, give a Spirit +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-017",
+      "name": "Strong Draw",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-017#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": true,
+            "cleanBody": "Draw three cards, then discard two cards from your Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "Draw three cards, then discard two cards from your Hand.",
+              "cleanText": "Draw three cards, then discard two cards from your Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 3,
+                "chooser": "self",
+                "forEach": null
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-017#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "During this turn, give a Spirit +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "During this turn, give a Spirit +3000 BP.",
+              "cleanText": "give a Spirit +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": "target",
+                "duration": "DURING_THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen this Spirit blocks an opposing Cost 2 or less Spirit, when the current battle ends, end the Attack Step.\n\n[LV2][LV3] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to the Hand.",
-  "is_vanilla": false
- },
- "SD02-006": {
-  "name": "The Assassin Weaseve",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   }
+  "SD02-005": {
+    "name": "The Angelia Cherubim",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nFor each Yellow Symbol on your Field, reveal a card from your decktop. Add a Magic card among them to the Hand. Return any remaining cards to the deckbottom in any order.\n\n[LV2][LV3] (Your Attack Step)\nEvery opposing Spirit that is blocking your Spirits with [Brilliance] is treated as LV1.\n\n[LV3] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-005",
+      "name": "The Angelia Cherubim",
+      "keywords": [
+        {
+          "name": "Brilliance",
+          "parameter": null,
+          "wave": 3,
+          "hook": "brilliance",
+          "bracketed": true,
+          "index": 291
+        },
+        {
+          "name": "Brilliance",
+          "parameter": null,
+          "wave": 3,
+          "hook": "brilliance",
+          "bracketed": true,
+          "index": 330
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-005#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "For each Yellow Symbol on your Field, reveal a card from your decktop. Add a Magic card among them to the Hand. Return any remaining cards to the deckbottom in any order."
+          },
+          "clauses": [
+            {
+              "rawText": "For each Yellow Symbol on your Field, reveal a card from your decktop.",
+              "cleanText": "For each Yellow Symbol on your Field, reveal a card from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REVEAL_DECKTOP",
+                "count": 1
+              }
+            },
+            {
+              "rawText": "Add a Magic card among them to the Hand.",
+              "cleanText": "Add a Magic card among them to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SALVAGE",
+                "cardType": "Magic"
+              }
+            },
+            {
+              "rawText": "Return any remaining cards to the deckbottom in any order.",
+              "cleanText": "Return any remaining cards to the deckbottom in any order",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "RETURN_REVEALED_BOTTOM"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-005#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Every opposing Spirit that is blocking your Spirits with [Brilliance] is treated as LV1."
+          },
+          "clauses": [
+            {
+              "rawText": "Every opposing Spirit that is blocking your Spirits with [Brilliance] is treated as LV1.",
+              "cleanText": "Every opposing Spirit that is blocking your Spirits with [Brilliance] is treated as LV1",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TREAT_LEVEL",
+                "level": 1
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-005#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brilliance",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of battle, return all Magic cards you used during this battle to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of battle, return all Magic cards you used during this battle to the Hand.",
+              "cleanText": "At the end of battle, return all Magic cards you used during this battle to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "SALVAGE",
+                "targetType": "Magic",
+                "filter": "USED_THIS_BATTLE",
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 5,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2] (When Destroyed)\nYou can deploy a Nexus card from your Trash, without paying the cost.",
-  "is_vanilla": false
- },
- "SD02-009": {
-  "name": "The BeastCommander Kuyultha",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 6000
-   }
+  "SD02-003": {
+    "name": "The Angelia Dunamis",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Blocks)\nWhen this Spirit blocks an opposing Cost 2 or less Spirit, when the current battle ends, end the Attack Step.\n\n[LV2][LV3] [Brilliance] (When Attacks)\nAt the end of battle, return all Magic cards you used during this battle to the Hand.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-003",
+      "name": "The Angelia Dunamis",
+      "keywords": [
+        {
+          "name": "Brilliance",
+          "parameter": null,
+          "wave": 3,
+          "hook": "brilliance",
+          "bracketed": true,
+          "index": 152
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-003#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_BLOCKS",
+            "timingLabel": "When Blocks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit blocks an opposing Cost 2 or less Spirit, when the current battle ends, end the Attack Step."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit blocks an opposing Cost 2 or less Spirit, when the current battle ends, end the Attack Step.",
+              "cleanText": "When this Spirit blocks an opposing Cost 2 or less Spirit, when the current battle ends, end the Attack Step",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "END_ATTACK_STEP"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-003#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Brilliance",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "At the end of battle, return all Magic cards you used during this battle to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "At the end of battle, return all Magic cards you used during this battle to the Hand.",
+              "cleanText": "At the end of battle, return all Magic cards you used during this battle to the Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_BATTLE",
+              "op": {
+                "op": "SALVAGE",
+                "targetType": "Magic",
+                "filter": "USED_THIS_BATTLE",
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], by returning this Spirit to the Hand, treat as having sent the cores on this Spirit to the designated area.\n\n[LV2]\nGive this Spirit and every Spirit with [Tribute] you control the effect: \"(When Battles) This Spirit gains +2000 BP.\"",
-  "is_vanilla": false
- },
- "SD02-021": {
-  "name": "The BeastMachine Sai-Drill",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 4000
-   }
+  "SD02-006": {
+    "name": "The Assassin Weaseve",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      }
+    },
+    "effect": "[LV2] (When Destroyed)\nYou can deploy a Nexus card from your Trash, without paying the cost.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-006",
+      "name": "The Assassin Weaseve",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-006#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_DESTROYED",
+            "timingLabel": "When Destroyed",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "You can deploy a Nexus card from your Trash, without paying the cost."
+          },
+          "clauses": [
+            {
+              "rawText": "You can deploy a Nexus card from your Trash, without paying the cost.",
+              "cleanText": "You can deploy a Nexus card from your Trash, without paying the cost",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DEPLOY_NEXUS",
+                "from": "trash",
+                "free": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], return an opposing 5000 BP or less Spirit without [Tribute] to the decktop.",
-  "is_vanilla": false
- },
- "SD02-011": {
-  "name": "The BeastPrince Bahamunt",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 7000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 8000
-   }
+  "SD02-009": {
+    "name": "The BeastCommander Kuyultha",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 6000
+      }
+    },
+    "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], by returning this Spirit to the Hand, treat as having sent the cores on this Spirit to the designated area.\n\n[LV2]\nGive this Spirit and every Spirit with [Tribute] you control the effect: \"(When Battles) This Spirit gains +2000 BP.\"",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-009",
+      "name": "The BeastCommander Kuyultha",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 50
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 215
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-009#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit becomes the target of [Tribute], by returning this Spirit to the Hand, treat as having sent the cores on this Spirit to the designated area."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit becomes the target of [Tribute], by returning this Spirit to the Hand, treat as having sent the cores on this Spirit to the designated area.",
+              "cleanText": "When this Spirit becomes the target of [Tribute], by returning this Spirit to the Hand, treat as having sent the cores on this Spirit to the designated area",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE",
+                "target": "self",
+                "destination": "HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-009#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Give this Spirit and every Spirit with [Tribute] you control the effect: \"(When Battles) This Spirit gains +2000 BP.\""
+          },
+          "clauses": [
+            {
+              "rawText": "Give this Spirit and every Spirit with [Tribute] you control the effect: \"(When Battles) This Spirit gains +2000 BP.\"",
+              "cleanText": "Give this Spirit and every Spirit with [Tribute] you control the effect: \"(When Battles) This Spirit gains +2000 BP.\"",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 2000,
+                "target": "target",
+                "duration": "THIS_TURN"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from a Spirit you control with a designated or higher cost to the targeted area.\n\n[LV1][LV2][LV3] (When Summoned)\nLook at the entire opposing Hand, and discard a Magic card among them.\n\n[LV2][LV3] (Your Attack Step)\nThe opponent can't use Magic effects of the same color as the Magic cards in their Trash.",
-  "is_vanilla": false
- },
- "SD02-018": {
-  "name": "The BraveColonel Dragron",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 5000
-   }
+  "SD02-021": {
+    "name": "The BeastMachine Sai-Drill",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], return an opposing 5000 BP or less Spirit without [Tribute] to the decktop.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-021",
+      "name": "The BeastMachine Sai-Drill",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 50
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 111
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-021#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit becomes the target of [Tribute], return an opposing 5000 BP or less Spirit without [Tribute] to the decktop."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit becomes the target of [Tribute], return an opposing 5000 BP or less Spirit without [Tribute] to the decktop.",
+              "cleanText": "When this Spirit becomes the target of [Tribute], return an opposing 5000 BP or less Spirit without [Tribute] to the decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TRIGGERED_ACTION",
+                "trigger": "ON_TRIBUTE_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nWhen this Spirit becomes the target of [Tribute], destroy two opposing 4000 BP or less Spirits without [Tribute].",
-  "is_vanilla": false
- },
- "SD02-019": {
-  "name": "The DarkKnight Schwart",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 3000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD02-011": {
+    "name": "The BeastPrince Bahamunt",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 8000
+      }
+    },
+    "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from a Spirit you control with a designated or higher cost to the targeted area.\n\n[LV1][LV2][LV3] (When Summoned)\nLook at the entire opposing Hand, and discard a Magic card among them.\n\n[LV2][LV3] (Your Attack Step)\nThe opponent can't use Magic effects of the same color as the Magic cards in their Trash.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-011",
+      "name": "The BeastPrince Bahamunt",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": "Cost 3 or more → Trash",
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 0
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-011#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Tribute: Cost 3 or more → Trash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "After paying for the summoning cost, you must send all cores from a Spirit you control with a designated or higher cost to the targeted area."
+          },
+          "clauses": [
+            {
+              "rawText": "After paying for the summoning cost, you must send all cores from a Spirit you control with a designated or higher cost to the targeted area.",
+              "cleanText": "After paying for the summoning cost, you must send all cores from a Spirit you control with a designated or higher cost to the targeted area",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ACTION",
+                "keyword": "Tribute"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-011#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Look at the entire opposing Hand, and discard a Magic card among them."
+          },
+          "clauses": [
+            {
+              "rawText": "Look at the entire opposing Hand",
+              "cleanText": "Look at the entire opposing Hand",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "LOOK_HAND",
+                "side": "opp"
+              }
+            },
+            {
+              "rawText": "discard a Magic card among them.",
+              "cleanText": "discard a Magic card among them",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DISCARD_HAND",
+                "cardType": "Magic"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-011#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The opponent can't use Magic effects of the same color as the Magic cards in their Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "The opponent can't use Magic effects of the same color as the Magic cards in their Trash.",
+              "cleanText": "The opponent can't use Magic effects of the same color as the Magic cards in their Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "SET_RESTRICTION",
+                "restriction": "PREVENT_MAGIC_MATCHING_TRASH_COLOR",
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3]\nWhen this Spirit becomes the target of [Tribute], send two cores from any opposing Spirits without [Tribute] to their Trash.",
-  "is_vanilla": false
- },
- "SD02-007": {
-  "name": "The DogPoliceman Bernald",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 2000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD02-018": {
+    "name": "The BraveColonel Dragron",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nWhen this Spirit becomes the target of [Tribute], destroy two opposing 4000 BP or less Spirits without [Tribute].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-018",
+      "name": "The BraveColonel Dragron",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 55
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 119
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-018#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit becomes the target of [Tribute], destroy two opposing 4000 BP or less Spirits without [Tribute]."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit becomes the target of [Tribute], destroy two opposing 4000 BP or less Spirits without [Tribute].",
+              "cleanText": "When this Spirit becomes the target of [Tribute], destroy two opposing 4000 BP or less Spirits without [Tribute]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 2,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "bpLte": 4000
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nThis Spirit can block opposing Cost 3 or less Spirits while exhausted.",
-  "is_vanilla": false
- },
- "SD02-013": {
-  "name": "The Generate Altar",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen the opponent would summon a Cost 3 or less Spirit card without [Tribute], they must pay one extra cost.\n\n[LV2] (Your Main Step)\nWhen summoning a Spirit card with [Tribute], the cost of all your Spirits with the same family as that Spirit card increases by +3.",
-  "is_vanilla": false
- },
- "SD02-012": {
-  "name": "The Heaven's Door",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2] (Opposing Attack Step)\nWhen your Life would be reduced by the attack of an opposing LV1 Spirit without [Tribute], discard a card from your decktop. If that card is a Spirit card, your Life won't be reduced. Also, if it has [Tribute], add it to the Hand.\n\n[LV2] (Your Attack Step)\nThe attack of your Spirit with [Tribute] can't be blocked by opposing Spirits with a level equal or inferior to that Spirit's.",
-  "is_vanilla": false
- },
- "SD02-014": {
-  "name": "The Magic Control Tower",
-  "type": "Nexus",
-  "levels": {},
-  "effect": "[LV1][LV2]\nWhen your Nexuses are destroyed, by sending a core from your Field/Reserve to your Trash, one of the destroyed Nexuses returns to the Field, in the same condition.\n\n[LV2]\nWhen the opponents uses a Magic effect, you can negate that effect. Then, return this Nexus to the deckbottom.",
-  "is_vanilla": false
- },
- "SD02-001": {
-  "name": "The MysteriousBeast Pooxan",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 1000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 2000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 4,
-    "bp": 3000
-   }
+  "SD02-019": {
+    "name": "The DarkKnight Schwart",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 3000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2][LV3]\nWhen this Spirit becomes the target of [Tribute], send two cores from any opposing Spirits without [Tribute] to their Trash.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-019",
+      "name": "The DarkKnight Schwart",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 55
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 115
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-019#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit becomes the target of [Tribute], send two cores from any opposing Spirits without [Tribute] to their Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit becomes the target of [Tribute], send two cores from any opposing Spirits without [Tribute] to their Trash.",
+              "cleanText": "When this Spirit becomes the target of [Tribute], send two cores from any opposing Spirits without [Tribute] to their Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TRIGGERED_ACTION",
+                "trigger": "ON_TRIBUTE_TARGET"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV2][LV3]\nThis Spirit is also treated as a Blue Spirit.",
-  "is_vanilla": false
- },
- "SD02-020": {
-  "name": "The RainbowWings Jewelg",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 4000
-   }
+  "SD02-007": {
+    "name": "The DogPoliceman Bernald",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 2000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nThis Spirit can block opposing Cost 3 or less Spirits while exhausted.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-007",
+      "name": "The DogPoliceman Bernald",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-007#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can block opposing Cost 3 or less Spirits while exhausted."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can block opposing Cost 3 or less Spirits while exhausted.",
+              "cleanText": "This Spirit can block opposing Cost 3 or less Spirits while exhausted",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CONTINUOUS_RULE",
+                "rule": "CAN_BLOCK_WHILE_EXHAUSTED",
+                "target": "SELF"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], put two cores from the Void to your Reserve.",
-  "is_vanilla": false
- },
- "SD02-008": {
-  "name": "The RhinoMousquetair Grhinos",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 3000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 3,
-    "bp": 5000
-   }
+  "SD02-013": {
+    "name": "The Generate Altar",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen the opponent would summon a Cost 3 or less Spirit card without [Tribute], they must pay one extra cost.\n\n[LV2] (Your Main Step)\nWhen summoning a Spirit card with [Tribute], the cost of all your Spirits with the same family as that Spirit card increases by +3.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-013",
+      "name": "The Generate Altar",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 79
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 178
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-013#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponent would summon a Cost 3 or less Spirit card without [Tribute], they must pay one extra cost."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponent would summon a Cost 3 or less Spirit card without [Tribute], they must pay one extra cost.",
+              "cleanText": "When the opponent would summon a Cost 3 or less Spirit card without [Tribute], they must pay one extra cost",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER",
+                "amount": 1,
+                "side": "opp"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-013#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "MAIN_STEP",
+            "timingLabel": "Your Main Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When summoning a Spirit card with [Tribute], the cost of all your Spirits with the same family as that Spirit card increases by +3."
+          },
+          "clauses": [
+            {
+              "rawText": "When summoning a Spirit card with [Tribute], the cost of all your Spirits with the same family as that Spirit card increases by +3.",
+              "cleanText": "When summoning a Spirit card with [Tribute], the cost of all your Spirits with the same family as that Spirit card increases by +3",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "COST_MODIFIER",
+                "amount": 3
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2] (When Attacks)\nDestroy an opposing Cost 1 or less Spirit.\n\n[LV2] [Assault: 1] (When Attacks)\nThis Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.",
-  "is_vanilla": false
- },
- "SD02-010": {
-  "name": "The RoaringSwordmaster Lowen",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 5000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 4,
-    "bp": 8000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 5,
-    "bp": 9000
-   }
+  "SD02-012": {
+    "name": "The Heaven's Door",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2] (Opposing Attack Step)\nWhen your Life would be reduced by the attack of an opposing LV1 Spirit without [Tribute], discard a card from your decktop. If that card is a Spirit card, your Life won't be reduced. Also, if it has [Tribute], add it to the Hand.\n\n[LV2] (Your Attack Step)\nThe attack of your Spirit with [Tribute] can't be blocked by opposing Spirits with a level equal or inferior to that Spirit's.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-012",
+      "name": "The Heaven's Door",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 114
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 234
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 322
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-012#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Opposing Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Life would be reduced by the attack of an opposing LV1 Spirit without [Tribute], discard a card from your decktop. If that card is a Spirit card, your Life won't be reduced. Also, if it has [Tribute], add it to the Hand."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Life would be reduced by the attack of an opposing LV1 Spirit without [Tribute], discard a card from your decktop.",
+              "cleanText": "When your Life would be reduced by the attack of an opposing LV1 Spirit without [Tribute], discard a card from your decktop",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MILL_DECK",
+                "count": 1,
+                "side": "self"
+              }
+            },
+            {
+              "rawText": "If that card is a Spirit card, your Life won't be reduced.",
+              "cleanText": "your Life won't be reduced",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": "If that card is a Spirit card",
+              "duration": null,
+              "op": {
+                "op": "PREVENT_LIFE_LOSS"
+              }
+            },
+            {
+              "rawText": "if it has [Tribute], add it to the Hand.",
+              "cleanText": "add it to the Hand",
+              "link": "also",
+              "isOptional": false,
+              "isCost": false,
+              "condition": "if it has [Tribute]",
+              "duration": null,
+              "op": {
+                "op": "ADD_TO_HAND"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-012#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "The attack of your Spirit with [Tribute] can't be blocked by opposing Spirits with a level equal or inferior to that Spirit's."
+          },
+          "clauses": [
+            {
+              "rawText": "The attack of your Spirit with [Tribute] can't be blocked by opposing Spirits with a level equal or inferior to that Spirit's.",
+              "cleanText": "The attack of your Spirit with [Tribute] can't be blocked by opposing Spirits with a level equal or inferior to that Spirit's",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "UNBLOCKABLE",
+                "condition": "LEVEL_LTE"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy opposing Cost 0/1/2/3/4 Spirits, one of each.\n\n[LV2][LV3] [Assault: 1] (When Attacks)\nThis Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV3] (Your Attack Step)\nAll your Spirits with [Assault] gain +3000 BP.",
-  "is_vanilla": false
- },
- "SD02-004": {
-  "name": "The SacredBeast Haktak",
-  "type": "Spirit",
-  "levels": {
-   "LV1": {
-    "level": 1,
-    "cost": 1,
-    "bp": 4000
-   },
-   "LV2": {
-    "level": 2,
-    "cost": 2,
-    "bp": 5000
-   },
-   "LV3": {
-    "level": 3,
-    "cost": 3,
-    "bp": 7000
-   }
+  "SD02-014": {
+    "name": "The Magic Control Tower",
+    "type": "Nexus",
+    "levels": {},
+    "effect": "[LV1][LV2]\nWhen your Nexuses are destroyed, by sending a core from your Field/Reserve to your Trash, one of the destroyed Nexuses returns to the Field, in the same condition.\n\n[LV2]\nWhen the opponents uses a Magic effect, you can negate that effect. Then, return this Nexus to the deckbottom.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-014",
+      "name": "The Magic Control Tower",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-014#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Nexuses are destroyed, by sending a core from your Field/Reserve to your Trash, one of the destroyed Nexuses returns to the Field, in the same condition."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Nexuses are destroyed, by sending a core from your Field/Reserve to your Trash, one of the destroyed Nexuses returns to the Field, in the same condition.",
+              "cleanText": "When your Nexuses are destroyed, by sending a core from your Field/Reserve to your Trash, one of the destroyed Nexuses returns to the Field, in the same condition",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REPLACEMENT_EFFECT",
+                "trigger": "NEXUS_DESTROYED"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-014#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When the opponents uses a Magic effect, you can negate that effect. Then, return this Nexus to the deckbottom."
+          },
+          "clauses": [
+            {
+              "rawText": "When the opponents uses a Magic effect, you can negate that effect.",
+              "cleanText": "When the opponents uses a Magic effect, you can negate that effect",
+              "link": null,
+              "isOptional": true,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "NEGATE_MAGIC"
+              }
+            },
+            {
+              "rawText": "return this Nexus to the deckbottom.",
+              "cleanText": "return this Nexus to the deckbottom",
+              "link": "then",
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BOUNCE_TO_DECKBOTTOM",
+                "target": "SELF"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
   },
-  "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from one of your Cost 3 or more Spirits to the Trash.\n\n[LV1][LV2][LV3] (When Summoned)\nChoose either the \"Imaginary Beast\" or the \"Beast Head\" family. For each Spirit you control in that family, draw a card.\n\n[LV2][LV3] (Your Attack Step)\nWhen your Spirit is blocked by an opposing Cost 4 or less Spirit, refresh one of your Spirits with [Tribute].",
-  "is_vanilla": false
- },
- "SD02-016": {
-  "name": "Wing Boots",
-  "type": "Magic",
-  "levels": {},
-  "effect": "[Flash]\nTarget a Spirit you control. During this turn, when battle resolves, if that Spirit's level is equal to or higher than the blocking opposing Spirit's, without comparing BP, treat the attack as not having been blocked.",
-  "is_vanilla": false
- }
+  "SD02-001": {
+    "name": "The MysteriousBeast Pooxan",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 1000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 2000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 3000
+      }
+    },
+    "effect": "[LV2][LV3]\nThis Spirit is also treated as a Blue Spirit.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-001",
+      "name": "The MysteriousBeast Pooxan",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-001#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit is also treated as a Blue Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit is also treated as a Blue Spirit.",
+              "cleanText": "This Spirit is also treated as a Blue Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "ADD_COLOR",
+                "color": "Blue"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD02-020": {
+    "name": "The RainbowWings Jewelg",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "effect": "[LV1][LV2]\nWhen this Spirit becomes the target of [Tribute], put two cores from the Void to your Reserve.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-020",
+      "name": "The RainbowWings Jewelg",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 50
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-020#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When this Spirit becomes the target of [Tribute], put two cores from the Void to your Reserve."
+          },
+          "clauses": [
+            {
+              "rawText": "When this Spirit becomes the target of [Tribute], put two cores from the Void to your Reserve.",
+              "cleanText": "When this Spirit becomes the target of [Tribute], put two cores from the Void to your Reserve",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "MOVE_CORE",
+                "count": 2,
+                "from": {
+                  "zone": "void"
+                },
+                "to": {
+                  "zone": "reserve",
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                },
+                "chooser": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 1,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD02-008": {
+    "name": "The RhinoMousquetair Grhinos",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
+    "effect": "[LV1][LV2] (When Attacks)\nDestroy an opposing Cost 1 or less Spirit.\n\n[LV2] [Assault: 1] (When Attacks)\nThis Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-008",
+      "name": "The RhinoMousquetair Grhinos",
+      "keywords": [
+        {
+          "name": "Assault",
+          "parameter": "1",
+          "wave": 1,
+          "hook": "assault",
+          "bracketed": true,
+          "index": 76
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-008#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy an opposing Cost 1 or less Spirit."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy an opposing Cost 1 or less Spirit.",
+              "cleanText": "Destroy an opposing Cost 1 or less Spirit",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "count": 1,
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "filters": {
+                    "costLte": 1
+                  }
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-008#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Assault: 1",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.",
+              "cleanText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD02-010": {
+    "name": "The RoaringSwordmaster Lowen",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 4,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 9000
+      }
+    },
+    "effect": "[LV1][LV2][LV3] (When Summoned)\nDestroy opposing Cost 0/1/2/3/4 Spirits, one of each.\n\n[LV2][LV3] [Assault: 1] (When Attacks)\nThis Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.\n\n[LV3] (Your Attack Step)\nAll your Spirits with [Assault] gain +3000 BP.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-010",
+      "name": "The RoaringSwordmaster Lowen",
+      "keywords": [
+        {
+          "name": "Assault",
+          "parameter": "1",
+          "wave": 1,
+          "hook": "assault",
+          "bracketed": true,
+          "index": 98
+        },
+        {
+          "name": "Assault",
+          "parameter": null,
+          "wave": 1,
+          "hook": "assault",
+          "bracketed": true,
+          "index": 254
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-010#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Destroy opposing Cost 0/1/2/3/4 Spirits, one of each."
+          },
+          "clauses": [
+            {
+              "rawText": "Destroy opposing Cost 0/1/2/3/4 Spirits, one of each.",
+              "cleanText": "Destroy opposing Cost 0/1/2/3/4 Spirits, one of each",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DESTROY",
+                "target": {
+                  "side": "opp",
+                  "types": [
+                    "Spirit"
+                  ],
+                  "costRange": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-010#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_ATTACKS",
+            "timingLabel": "When Attacks",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Assault: 1",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses."
+          },
+          "clauses": [
+            {
+              "rawText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses.",
+              "cleanText": "This Spirit can, once per turn, be refreshed by exhausting one of your Nexuses",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+                "target": "self"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-010#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "All your Spirits with [Assault] gain +3000 BP."
+          },
+          "clauses": [
+            {
+              "rawText": "All your Spirits with [Assault] gain +3000 BP.",
+              "cleanText": "All your Spirits with [Assault] gain +3000 BP",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "BP_BUFF",
+                "amount": 3000,
+                "target": {
+                  "side": "self",
+                  "hasKeyword": "Assault"
+                },
+                "all": true
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 3,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD02-004": {
+    "name": "The SacredBeast Haktak",
+    "type": "Spirit",
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 3,
+        "bp": 7000
+      }
+    },
+    "effect": "[Tribute: Cost 3 or more → Trash]\nAfter paying for the summoning cost, you must send all cores from one of your Cost 3 or more Spirits to the Trash.\n\n[LV1][LV2][LV3] (When Summoned)\nChoose either the \"Imaginary Beast\" or the \"Beast Head\" family. For each Spirit you control in that family, draw a card.\n\n[LV2][LV3] (Your Attack Step)\nWhen your Spirit is blocked by an opposing Cost 4 or less Spirit, refresh one of your Spirits with [Tribute].",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-004",
+      "name": "The SacredBeast Haktak",
+      "keywords": [
+        {
+          "name": "Tribute",
+          "parameter": "Cost 3 or more → Trash",
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 0
+        },
+        {
+          "name": "Tribute",
+          "parameter": null,
+          "wave": 4,
+          "hook": "tribute",
+          "bracketed": true,
+          "index": 433
+        }
+      ],
+      "abilities": [
+        {
+          "id": "SD02-004#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "PASSIVE",
+            "timingLabel": "",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": "Tribute: Cost 3 or more → Trash",
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "After paying for the summoning cost, you must send all cores from one of your Cost 3 or more Spirits to the Trash."
+          },
+          "clauses": [
+            {
+              "rawText": "After paying for the summoning cost, you must send all cores from one of your Cost 3 or more Spirits to the Trash.",
+              "cleanText": "After paying for the summoning cost, you must send all cores from one of your Cost 3 or more Spirits to the Trash",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "KEYWORD_ACTION",
+                "keyword": "Tribute"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-004#a1",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "WHEN_SUMMONED",
+            "timingLabel": "When Summoned",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "Choose either the \"Imaginary Beast\" or the \"Beast Head\" family. For each Spirit you control in that family, draw a card."
+          },
+          "clauses": [
+            {
+              "rawText": "Choose either the \"Imaginary Beast\" or the \"Beast Head\" family.",
+              "cleanText": "Choose either the \"Imaginary Beast\" or the \"Beast Head\" family",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "CHOOSE_FAMILY"
+              }
+            },
+            {
+              "rawText": "For each Spirit you control in that family, draw a card.",
+              "cleanText": "For each Spirit you control in that family, draw a card",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "DRAW",
+                "count": 1,
+                "chooser": "self",
+                "forEach": "DISCARDED_COUNT"
+              }
+            }
+          ],
+          "unsupported": []
+        },
+        {
+          "id": "SD02-004#a2",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              2,
+              3
+            ],
+            "levelExplicit": true,
+            "prefixes": [],
+            "timing": "ATTACK_STEP",
+            "timingLabel": "Your Attack Step",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": false,
+            "isMain": false,
+            "cleanBody": "When your Spirit is blocked by an opposing Cost 4 or less Spirit, refresh one of your Spirits with [Tribute]."
+          },
+          "clauses": [
+            {
+              "rawText": "When your Spirit is blocked by an opposing Cost 4 or less Spirit, refresh one of your Spirits with [Tribute].",
+              "cleanText": "When your Spirit is blocked by an opposing Cost 4 or less Spirit, refresh one of your Spirits with [Tribute]",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "REFRESH",
+                "count": 1,
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 4,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  },
+  "SD02-016": {
+    "name": "Wing Boots",
+    "type": "Magic",
+    "levels": {},
+    "effect": "[Flash]\nTarget a Spirit you control. During this turn, when battle resolves, if that Spirit's level is equal to or higher than the blocking opposing Spirit's, without comparing BP, treat the attack as not having been blocked.",
+    "is_vanilla": false,
+    "compiledIr": {
+      "cardNumber": "SD02-016",
+      "name": "Wing Boots",
+      "keywords": [],
+      "abilities": [
+        {
+          "id": "SD02-016#a0",
+          "type": "ABILITY",
+          "header": {
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "prefixes": [],
+            "timing": "FLASH",
+            "timingLabel": "Flash",
+            "timingStep": "ANY",
+            "limit": null,
+            "cantStack": false,
+            "keyword": null,
+            "burstCondition": null,
+            "isFlash": true,
+            "isMain": false,
+            "cleanBody": "Target a Spirit you control. During this turn, when battle resolves, if that Spirit's level is equal to or higher than the blocking opposing Spirit's, without comparing BP, treat the attack as not having been blocked."
+          },
+          "clauses": [
+            {
+              "rawText": "Target a Spirit you control.",
+              "cleanText": "Target a Spirit you control",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": null,
+              "op": {
+                "op": "TARGET_SELECT",
+                "target": {
+                  "side": "self",
+                  "types": [
+                    "Spirit"
+                  ]
+                }
+              }
+            },
+            {
+              "rawText": "During this turn, when battle resolves, if that Spirit's level is equal to or higher than the blocking opposing Spirit's, without comparing BP, treat the attack as not having been blocked.",
+              "cleanText": "when battle resolves, if that Spirit's level is equal to or higher than the blocking opposing Spirit's, without comparing BP, treat the attack as not having been blocked",
+              "link": null,
+              "isOptional": false,
+              "isCost": false,
+              "condition": null,
+              "duration": "DURING_THIS_TURN",
+              "op": {
+                "op": "UNBLOCKABLE",
+                "target": "ATTACKING_SPIRIT"
+              }
+            }
+          ],
+          "unsupported": []
+        }
+      ],
+      "compiledClausesCount": 2,
+      "unsupportedClausesCount": 0,
+      "isFullySupported": true
+    }
+  }
 }
