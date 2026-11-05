@@ -5353,11 +5353,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       navSubtitle.textContent = isPlayer ? 'Execute steps in order to advance the duel.' : 'Opponent is carrying out turn phases.';
     }
 
+    const isFirstPlayerTurn1 = (DuelState.turn === 1 && ((isPlayer && DuelState.firstPlayer === 'player') || (!isPlayer && DuelState.firstPlayer === 'opponent')));
+
     DuelState.phases.forEach((p, idx) => {
       const cardEl = document.getElementById(`stepCard_${p}`);
       const statusEl = document.getElementById(`stepStatus_${p}`);
       const btnEl = document.getElementById(`btnStep_${p}`);
       if (!cardEl) return;
+
+      if (isFirstPlayerTurn1 && (p === 'CORE' || p === 'ATTACK')) {
+        cardEl.className = (p === 'CORE' && currentIdx > 0) ? 'step-card is-completed-step is-skipped-step' : 'step-card is-locked-step is-skipped-step';
+        if (statusEl) {
+          statusEl.className = 'sc-status status-skipped';
+          statusEl.textContent = 'Skipped (Rule 1.1)';
+        }
+        if (btnEl) {
+          const skipLabel = p === 'CORE' ? 'Core Step Skipped (Turn 1)' : 'Attack Step Skipped (Turn 1)';
+          setStepButtonContent(btnEl, skipLabel, (p === 'CORE' && currentIdx > 0) ? 'btn-step-action btn-step-done' : 'btn-step-action btn-step-pending', true);
+        }
+        return;
+      }
 
       if (isPlayer) {
         if (idx < currentIdx) {
@@ -11937,6 +11952,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const currentPhase = DuelState.phases[DuelState.phaseIndex];
     if (stepName && stepName !== currentPhase) {
+      if (DuelState.turn === 1 && DuelState.firstPlayer === 'player') {
+        if (stepName === 'CORE') {
+          if (typeof showToast === 'function') showToast('Core Step is skipped on Turn 1 under Battle Spirits Eternal rules!', 'info');
+          return;
+        }
+        if (stepName === 'ATTACK') {
+          if (typeof showToast === 'function') showToast('Attack Step is skipped on Turn 1 under Battle Spirits Eternal rules!', 'info');
+          return;
+        }
+      }
       const targetIdx = DuelState.phases.indexOf(stepName);
       if (targetIdx < DuelState.phaseIndex) {
         if (typeof showToast === 'function') showToast(`The ${stepName} Step has already been completed this turn!`, 'info');
@@ -11958,8 +11983,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         DuelState.summonLockPlacedBy = null;
         addLog('🔓 Opponent is now permitted to summon Spirit cards again.', 'info');
       }
-      addLog(`▶️ **START STEP**: Turn ${DuelState.turn} commenced! Next: Claim your Core from the Void.`, 'step');
-      DuelState.phaseIndex = 1; // to CORE
+      if (DuelState.turn === 1 && DuelState.firstPlayer === 'player') {
+        addLog(`▶️ **START STEP**: Turn 1 commenced! (Core Step skipped on Turn 1 for First Player). Next: Draw Step.`, 'step');
+        DuelState.phaseIndex = 2; // skip CORE, advance directly to DRAW
+      } else {
+        addLog(`▶️ **START STEP**: Turn ${DuelState.turn} commenced! Next: Claim your Core from the Void.`, 'step');
+        DuelState.phaseIndex = 1; // to CORE
+      }
       renderDuelTable();
     } else if (step === 'CORE') {
       // 1. Cosmic pulse on Central Void Reservoir
@@ -12154,8 +12184,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         DuelState.summonLockPlacedBy = null;
         addLog('🔓 Player is now permitted to summon Spirit cards again.', 'info');
       }
-      addLog(`▶️ **START STEP**: Opponent begins Turn ${DuelState.turn}.`, 'step');
-      DuelState.phaseIndex = 1; // to CORE
+      if (DuelState.turn === 1 && DuelState.firstPlayer === 'opponent') {
+        addLog(`▶️ **START STEP**: Opponent begins Turn 1. (Core Step skipped on Turn 1 under Eternal Format Rule 1.1). Next: Draw Step.`, 'step');
+        DuelState.phaseIndex = 2; // skip CORE, advance directly to DRAW
+      } else {
+        addLog(`▶️ **START STEP**: Opponent begins Turn ${DuelState.turn}.`, 'step');
+        DuelState.phaseIndex = 1; // to CORE
+      }
       renderDuelTable();
       safeTimeout(advanceOpponentStep, 800);
     } else if (currentPhase === 'CORE') {
