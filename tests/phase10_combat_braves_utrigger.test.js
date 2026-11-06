@@ -9,6 +9,13 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
 
 function canUnitAttack(unit) {
   if (!unit || unit.isExhausted) return false;
@@ -175,4 +182,69 @@ test('Phase 10 - Ultimate-Trickster U-Trigger hits and refreshes other Ultimates
   assert.equal(friendlyHand.length, 1, 'Trash card returned to Hand on U-Trigger Hit');
   assert.equal(friendlyHand[0].name, 'Recoverable Magic');
   assert.equal(otherUltimate.isExhausted, false, 'Other Ultimate refreshed on Critical Hit');
+});
+
+test('Phase 10 - Official Rule Enforcement: Only Ultimates with U-Trigger can execute U-Trigger', () => {
+  function canExecuteUTrigger(card) {
+    if (!card || !card.effect) return false;
+    const isUltimate = card.type === 'Ultimate' || (typeof card.type === 'string' && card.type.includes('Ultimate'));
+    if (!isUltimate) return false;
+    const hasKeyword = Array.isArray(card.keywords) && card.keywords.some(k => k && (k.name === 'Ultimate Trigger' || k.hook === 'ultimate_trigger' || (k.name && k.name.includes('Trigger'))));
+    const hasTriggerInText = /(?:\[(?:u-trigger|ultimate trigger|double u-trigger|great u-trigger|triple u-trigger|quadruple u-trigger|octa u-trigger|count ultimate trigger|cross ultimate trigger|w-trigger)|【(?:u|w|cu|wu)?トリガー)/i.test(card.effect || '');
+    return Boolean(hasKeyword || hasTriggerInText);
+  }
+
+  const terad = {
+    name: 'The PartnerWingedDragon Terad',
+    type: 'Contract Spirit',
+    cost: 2,
+    effect: '[Contract Advent] / [When Attacks] Besides [Soul Core], send a core from your Trash to this Spirit.'
+  };
+
+  const normalSpirit = {
+    name: 'Bladebeak',
+    type: 'Spirit',
+    cost: 1,
+    effect: '[LV1][LV2] (When Summoned) Draw 1 card.'
+  };
+
+  const javad = {
+    name: 'The PartnerDemonLord Javad',
+    type: 'Contract Ultimate',
+    cost: 3,
+    effect: '[Summon Condition: Your Life is at two or more]\n[Contract Pre-Advent] [When Attacks] Put one core from the Void to your Field.'
+  };
+
+  const trickster = {
+    name: 'Ultimate-Trickster',
+    type: 'Ultimate',
+    cost: 6,
+    effect: '[Summon Condition: You control one or more Ultimates]\n[Ultimate Trigger: [LV4][LV5] (When Attacks)] When Ultimate Trigger hits, return a card from your Trash to the Hand.'
+  };
+
+  const strikewurm = {
+    name: 'Ultimate-Strikewurm-Leo',
+    type: 'Ultimate',
+    cost: 7,
+    keywords: [{ name: 'Ultimate Trigger', hook: 'ultimate_trigger' }],
+    effect: '[Summon Condition: You control one or more White Spirits]\n[LV3][LV4][LV5] When Attacks, U-Trigger hits...'
+  };
+
+  assert.equal(canExecuteUTrigger(terad), false, 'The PartnerWingedDragon Terad (Contract Spirit) must NEVER activate U-Trigger');
+  assert.equal(canExecuteUTrigger(normalSpirit), false, 'Normal Spirits must NEVER activate U-Trigger');
+  assert.equal(canExecuteUTrigger(javad), false, 'Ultimates without U-Trigger abilities must NOT activate U-Trigger');
+  assert.equal(canExecuteUTrigger(trickster), true, 'Ultimate with [Ultimate Trigger] can activate U-Trigger');
+  assert.equal(canExecuteUTrigger(strikewurm), true, 'Ultimate with U-Trigger keyword can activate U-Trigger');
+});
+
+test('Phase 10 - battle_arena.js strictly gates triggerUTrigger to Ultimates with U-Trigger keyword', () => {
+  const arenaPath = path.join(rootDir, 'battle_arena.js');
+  const code = fs.readFileSync(arenaPath, 'utf8');
+
+  // Must have type check in triggerUTrigger
+  const fnMatch = code.match(/function triggerUTrigger\s*\([^\)]*\)\s*\{([\s\S]*?)(?:renderDuelTable|\n\s*\})/);
+  assert.ok(fnMatch, 'triggerUTrigger function must exist in battle_arena.js');
+  const body = fnMatch[1];
+  assert.ok(body.includes('Ultimate'), 'triggerUTrigger must verify card type is Ultimate');
+  assert.ok(body.includes('Trigger') || body.includes('trigger'), 'triggerUTrigger must verify presence of U-Trigger ability');
 });

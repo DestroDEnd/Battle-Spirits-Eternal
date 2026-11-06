@@ -1711,6 +1711,13 @@
 
   function triggerUTrigger(card, side = 'player') {
     if (!card || !card.effect) return;
+    // Official Rule: Only Ultimates with U-Trigger keyword can execute U-Trigger
+    const isUltimate = card.type === 'Ultimate' || (typeof card.type === 'string' && card.type.includes('Ultimate'));
+    if (!isUltimate) return;
+    const hasKeyword = Array.isArray(card.keywords) && card.keywords.some(k => k && (k.name === 'Ultimate Trigger' || k.hook === 'ultimate_trigger' || (k.name && k.name.includes('Trigger'))));
+    const hasTriggerInText = /(?:\[(?:u-trigger|ultimate trigger|double u-trigger|great u-trigger|triple u-trigger|quadruple u-trigger|octa u-trigger|count ultimate trigger|cross ultimate trigger|w-trigger)|【(?:u|w|cu|wu)?トリガー)/i.test(card.effect || '');
+    if (!hasKeyword && !hasTriggerInText) return;
+
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemyState = DuelState[enemySide];
@@ -11645,7 +11652,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'player');
-    executeUltimateTrigger(attacker, 'player');
+    if (attacker && (attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate'))) {
+      executeUltimateTrigger(attacker, 'player');
+    }
 
     // Fallback if not processed via ability blocks
     const fallbackBoost = getWhenAttacksBpBoost(attacker);
@@ -12513,7 +12522,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'opponent');
-    executeUltimateTrigger(attacker, 'opponent');
+    if (attacker && (attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate'))) {
+      executeUltimateTrigger(attacker, 'opponent');
+    }
 
     const fallbackBoost = getWhenAttacksBpBoost(attacker);
     if (fallbackBoost > 0 && !attacker.battleBpBoost) {
