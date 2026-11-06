@@ -2809,7 +2809,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         const descText = (act.raw_text || act.desc || '').toLowerCase();
         
         // 1. Decktop Mill
-        const millMatch = descText.match(/(?:discard|send)\s+(?:up to\s+)?(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?(?:top\s+of\s+(?:your\s+)?)?(opposing\s+)?decktop(?:\s+to\s+(?:the\s+)?trash)?/i);
+        const millMatch = descText.match(/(?:discard|send)\s+(?:up to\s+)?(a|an|one|two|three|four|five|six|\d+)\s+cards?\s+from\s+(?:the\s+|your\s+)?(?:top\s+of\s+(?:your\s+)?)?(opposing\s+)?(?:decktop|desktop)(?:\s+to\s+(?:the\s+)?trash)?/i);
         if (millMatch) {
           const mCount = parseWordNumber(millMatch[1]);
           const isOpp = Boolean(millMatch[2]) || descText.includes('opposing');
@@ -6534,8 +6534,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     // VAN-TOUS / HAND TO DECKTOP CORE GAIN & BURST LOCK:
-    // "By returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects."
-    if (/return(?:ing)?\s+a\s+card\s+from\s+your\s+hand\s+to\s+the\s+decktop/i.test(bodyLower) && /opponent\s+can't\s+activate\s+burst\s+effects/i.test(bodyLower)) {
+    // "By returning a card from your Hand to the decktop/desktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects."
+    if (/return(?:ing)?\s+a\s+card\s+from\s+your\s+hand\s+to\s+(?:the\s+)?(?:decktop|desktop|top\s+of\s+(?:the\s+|your\s+)?deck)/i.test(bodyLower) && /(?:opponent\s+(?:can't|cannot)\s+activate\s+burst\s+effects|バースト効果を発揮できない)/i.test(bodyLower)) {
       if (myHand && myHand.length > 0) {
         if (isPlayer && typeof promptUniversalTargetModal === 'function') {
           promptUniversalTargetModal({
@@ -7310,8 +7310,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     // 19. DECK DISCARD / MILL (Titus, Titus XV, Golem Mill)
-    if (/discard\s+(\d+|ten)\s+cards?\s+from\s+the\s+opposing\s+decktop/i.test(bodyLower) || (card.name.includes('Titus') && triggerName === 'SUMMON')) {
-      const match = bodyLower.match(/discard\s+(\d+|ten)\s+cards?\s+from\s+the\s+opposing\s+decktop/i);
+    if (/discard\s+(\d+|ten)\s+cards?\s+from\s+the\s+opposing\s+(?:decktop|desktop)/i.test(bodyLower) || (card.name.includes('Titus') && triggerName === 'SUMMON')) {
+      const match = bodyLower.match(/discard\s+(\d+|ten)\s+cards?\s+from\s+the\s+opposing\s+(?:decktop|desktop)/i);
       const millCount = match ? parseWordNumber(match[1]) : 10;
       let milled = 0;
       const enemyDeck = enemySide === 'player' ? DuelState.player.deck : DuelState.opponent.deck;

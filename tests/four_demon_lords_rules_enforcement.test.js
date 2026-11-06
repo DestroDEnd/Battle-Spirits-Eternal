@@ -117,6 +117,19 @@ test('1. Van-Tous (SD65-X03) attack triggers burst lock and prevents Burst activ
   assert.equal(simulateCheckBurstTrigger(duelState, 'opponent', 'AFTER_LIFE_DECREASED', { attacker }), false);
 });
 
+test('1c. Van-Tous effect matching robustness: supports both "decktop" and "desktop" spellings', () => {
+  const pattern = /return(?:ing)?\s+a\s+card\s+from\s+your\s+hand\s+to\s+(?:the\s+)?(?:decktop|desktop|top\s+of\s+(?:the\s+|your\s+)?deck)/i;
+  const burstLockPattern = /(?:opponent\s+(?:can't|cannot)\s+activate\s+burst\s+effects|バースト効果を発揮できない)/i;
+
+  const textDecktop = "By returning a card from your Hand to the decktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects.";
+  const textDesktop = "By returning a card from your Hand to the desktop, put two cores from the Void to any of your Ultimates, and during this turn, the opponent can't activate Burst effects.";
+
+  assert.ok(pattern.test(textDecktop), 'Matches standard decktop text');
+  assert.ok(pattern.test(textDesktop), 'Matches wiki translation with desktop typo');
+  assert.ok(burstLockPattern.test(textDecktop), 'Matches burst lock text');
+  assert.ok(burstLockPattern.test(textDesktop), 'Matches burst lock text');
+});
+
 test('1b. Attacker with Gaianohoko [During Brave] The opposing Burst can\'t activate blocks Bursts', () => {
   const duelState = {
     burstLockThisTurn: null,
