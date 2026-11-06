@@ -858,6 +858,8 @@
 
   // ── UNIVERSAL NLP CARD EFFECT EXECUTION ENGINE (14,529 CARDS DATABASE) ──
   let CardEffectsDB = {};
+  let CardEffectsDBByNumber = {};
+
   async function loadCardEffectsDB() {
     if (typeof fetch === 'function' && typeof window !== 'undefined' && window.location && window.location.origin) {
       try {
@@ -883,7 +885,47 @@
         }
         if (data && typeof data === 'object') {
           CardEffectsDB = data;
-          if (typeof window !== 'undefined' && window.BattleArena) window.BattleArena.CardEffectsDB = CardEffectsDB;
+          for (const [k, v] of Object.entries(CardEffectsDB)) {
+            if (v && (v.card_number || v.cardNumber)) {
+              CardEffectsDBByNumber[String(v.card_number || v.cardNumber)] = v;
+            }
+            if (/^[A-Za-z0-9]+-[A-Za-z0-9]+/.test(k)) {
+              CardEffectsDBByNumber[k] = v;
+            }
+          }
+          try {
+            let idxData = null;
+            try {
+              const idxRes = await fetch('./data/cards_index.json');
+              if (idxRes.ok) idxData = await idxRes.json();
+            } catch (e) {}
+            if (!idxData) {
+              try {
+                const idxRes = await fetch('/data/cards_index.json');
+                if (idxRes.ok) idxData = await idxRes.json();
+              } catch (e) {}
+            }
+            if (!idxData && window.location.origin) {
+              try {
+                const idxRes = await fetch(window.location.origin + '/data/cards_index.json');
+                if (idxRes.ok) idxData = await idxRes.json();
+              } catch (e) {}
+            }
+            if (idxData) {
+              for (const [cNum, entry] of Object.entries(idxData)) {
+                if (entry && entry.name && CardEffectsDB[entry.name]) {
+                  CardEffectsDBByNumber[cNum] = CardEffectsDB[entry.name];
+                  if (entry.id != null) {
+                    CardEffectsDBByNumber[String(entry.id)] = CardEffectsDB[entry.name];
+                  }
+                }
+              }
+            }
+          } catch (e) {}
+          if (typeof window !== 'undefined' && window.BattleArena) {
+            window.BattleArena.CardEffectsDB = CardEffectsDB;
+            window.BattleArena.CardEffectsDBByNumber = CardEffectsDBByNumber;
+          }
           console.log(`[NLP Effects Engine] Loaded operational database for ${Object.keys(CardEffectsDB).length} cards.`);
         }
       } catch (e) {
@@ -893,12 +935,81 @@
       try {
         const fs = require('fs');
         const path = require('path');
-        const dbPath = path.resolve(__dirname, 'card_effects_db.json');
+        const baseDir = typeof __dirname !== 'undefined' ? __dirname : (typeof process !== 'undefined' && process.cwd ? process.cwd() : '.');
+        const dbPath = path.resolve(baseDir, 'card_effects_db.json');
         if (fs.existsSync(dbPath)) {
           CardEffectsDB = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
         }
+        const idxPath = path.resolve(baseDir, 'data/cards_index.json');
+        if (fs.existsSync(idxPath)) {
+          const idxData = JSON.parse(fs.readFileSync(idxPath, 'utf-8'));
+          for (const [cNum, entry] of Object.entries(idxData)) {
+            if (entry && entry.name && CardEffectsDB[entry.name]) {
+              CardEffectsDBByNumber[cNum] = CardEffectsDB[entry.name];
+              if (entry.id != null) {
+                CardEffectsDBByNumber[String(entry.id)] = CardEffectsDB[entry.name];
+              }
+            }
+          }
+        }
+        for (const [k, v] of Object.entries(CardEffectsDB)) {
+          if (v && (v.card_number || v.cardNumber)) {
+            CardEffectsDBByNumber[String(v.card_number || v.cardNumber)] = v;
+          }
+          if (/^[A-Za-z0-9]+-[A-Za-z0-9]+/.test(k)) {
+            CardEffectsDBByNumber[k] = v;
+          }
+        }
+        if (typeof window !== 'undefined' && window.BattleArena) {
+          window.BattleArena.CardEffectsDB = CardEffectsDB;
+          window.BattleArena.CardEffectsDBByNumber = CardEffectsDBByNumber;
+        }
       } catch (e) {}
     }
+  }
+
+  // Canonical Card Effect Resolution & CardEffectsDB Lookup Helper (AGENTS.md Rules 1 & 4)
+  // Resolves effects primarily by canonical card number and compiled IR, deprecating direct card name keying.
+  function getCardEffectsData(card) {
+    if (!card) return null;
+    const cardNum = String(card.card_number || card.cardNumber || card.id || '').trim();
+    if (card.compiledIr) {
+      if (!card.compiledIr.triggers && Array.isArray(card.compiledIr.abilities)) {
+        const trigs = {};
+        for (const ab of card.compiledIr.abilities) {
+          const timing = (ab.header && ab.header.timing) || 'PASSIVE';
+          if (!trigs[timing]) trigs[timing] = [];
+          trigs[timing].push({
+            type: ab.clauses?.[0]?.op?.op || 'SPECIAL_EFFECT',
+            desc: ab.clauses?.[0]?.cleanText || ab.clauses?.[0]?.rawText || '',
+            raw_text: ab.clauses?.[0]?.rawText || '',
+            min_level: (ab.header?.levels && ab.header.levels[0]) || 1,
+            canva_rules: {
+              limit: ab.header?.limit || null,
+              is_optional: ab.clauses?.some(c => c.isOptional) || false,
+              is_mandatory: !ab.clauses?.some(c => c.isOptional)
+            },
+            compiledAbility: ab
+          });
+        }
+        card.compiledIr.triggers = trigs;
+      }
+      if (card.compiledIr.triggers || card.compiledIr.abilities) {
+        return card.compiledIr;
+      }
+    }
+    if (cardNum) {
+      if (CardEffectsDBByNumber && CardEffectsDBByNumber[cardNum]) {
+        return CardEffectsDBByNumber[cardNum];
+      }
+      if (CardEffectsDB && CardEffectsDB[cardNum]) {
+        return CardEffectsDB[cardNum];
+      }
+    }
+    if (card.name && CardEffectsDB && CardEffectsDB[card.name]) {
+      return CardEffectsDB[card.name];
+    }
+    return null;
   }
 
   // ── OPTIONAL ("can" / "may") EFFECT CONFIRMATION POPUP ──
@@ -2182,12 +2293,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!limit) return true;
     const curTurn = DuelState.turn || 1;
     const actKey = `${act.type}_${(act.raw_text || '').slice(0, 32)}`;
+    const cardKey = String(card.card_number || card.cardNumber || card.id || card.name || 'UNKNOWN');
     if (limit === 'HARD_ONCE_PER_TURN') {
       if (!friendlyState.__hardOptUsed || friendlyState.__hardOptTurn !== curTurn) {
         friendlyState.__hardOptUsed = new Set();
         friendlyState.__hardOptTurn = curTurn;
       }
-      const key = `${card.name}::${actKey}`;
+      const key = `${cardKey}::${actKey}`;
       if (friendlyState.__hardOptUsed.has(key)) return false;
       friendlyState.__hardOptUsed.add(key);
       return true;
@@ -2203,7 +2315,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     if (limit === 'ONCE_PER_GAME') {
       if (!friendlyState.__oncePerGameUsed) friendlyState.__oncePerGameUsed = new Set();
-      const key = `${card.name}::${actKey}`;
+      const key = `${cardKey}::${actKey}`;
       if (friendlyState.__oncePerGameUsed.has(key)) return false;
       friendlyState.__oncePerGameUsed.add(key);
       return true;
@@ -2214,7 +2326,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeUniversalCardEffect(card, side, trigger, context = {}) {
     if (!card) return;
-    const cardData = CardEffectsDB[card.name];
+    const cardData = getCardEffectsData(card);
     if (!cardData || !cardData.triggers) return;
     const actions = cardData.triggers[trigger];
     if (!actions || !Array.isArray(actions) || !actions.length) return;
@@ -2253,7 +2365,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeUniversalCardEffectCore(card, side, trigger, context = {}) {
     if (!card) return;
-    const cardData = CardEffectsDB[card.name];
+    const cardData = getCardEffectsData(card);
     if (!cardData || !cardData.triggers) return;
 
     const actions = cardData.triggers[trigger];
@@ -14486,6 +14598,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     endTurn,
     renderPlayerHand,
     loadCardEffectsDB,
+    getCardEffectsData,
+    CardEffectsDBByNumber,
     safeEndOpponentTurn,
     handleAuthClick,
     renderArenaLobby,

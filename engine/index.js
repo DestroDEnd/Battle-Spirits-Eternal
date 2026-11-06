@@ -250,6 +250,15 @@ export function createGame(options = {}) {
       const defenderSide = attackerSide === 'player' ? 'opponent' : 'player';
       const defPlayer = state.players[defenderSide];
 
+      // Check PREVENT_LIFE_LOSS modifier
+      const hasLifeLossPrevented = (state.modifiers || []).some(m =>
+        m.type === 'PREVENT_LIFE_LOSS' && (m.side === defenderSide || m.side === 'both' || !m.side)
+      );
+      if (hasLifeLossPrevented) {
+        state.combat = null;
+        return { success: true, defenderLife: defPlayer.life, prevented: true };
+      }
+
       // Remove 1 Life core -> Reserve (Standard Battle Spirits combat damage)
       if (defPlayer.life > 0) {
         defPlayer.life -= 1;

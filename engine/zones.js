@@ -326,6 +326,12 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
       fromPlayer.trash.normal -= count;
     }
   } else if (fromZone === 'life') {
+    const hasLifeLossPrevented = (state.modifiers || []).some(m =>
+      m.type === 'PREVENT_LIFE_LOSS' && (m.side === fromSide || m.side === 'both' || !m.side)
+    );
+    if (hasLifeLossPrevented && cause !== 'cost' && cause !== 'rule') {
+      return false;
+    }
     const actual = Math.min(count, fromPlayer.life);
     fromPlayer.life -= actual;
   } else if (fromZone === 'field') {

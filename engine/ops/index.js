@@ -9,6 +9,60 @@ import { moveCard, moveCore } from '../zones.js';
 import { createFieldStack } from '../state.js';
 import { queryCandidates } from '../selectors.js';
 
+export function matchesCardFilter(card, filter = {}, op = {}) {
+  if (!card) return false;
+
+  // Types filter
+  const targetTypes = filter.types || (op.cardType ? [op.cardType] : (filter.type ? [filter.type] : (op.types || [])));
+  if (Array.isArray(targetTypes) && targetTypes.length > 0) {
+    const cardType = (card.type || '').toLowerCase();
+    const typeMatch = targetTypes.some(t => {
+      if (!t) return false;
+      const lowT = t.toLowerCase();
+      if (cardType === lowT) return true;
+      if (lowT === 'grandwalker nexus' && cardType.includes('nexus') && ((card.family || '').toLowerCase().includes('grandwalker') || (card.name || '').toLowerCase().includes('grandwalker'))) return true;
+      if (cardType.includes(lowT)) return true;
+      return false;
+    });
+    if (!typeMatch) return false;
+  }
+
+  // Colors filter
+  const targetColor = filter.color || op.color;
+  if (targetColor) {
+    const cardColors = card.colors || (card.color ? [card.color] : []);
+    if (!cardColors.some(c => c && c.toLowerCase() === targetColor.toLowerCase())) return false;
+  }
+
+  // Yellow-only or single color only
+  if (filter.singleColorOnly || op.singleColorOnly) {
+    const cardColors = card.colors || (card.color ? [card.color] : []);
+    if (cardColors.length !== 1) return false;
+  }
+
+  // Family filter
+  const targetFamily = filter.family || op.family;
+  if (targetFamily) {
+    const cardFams = card.families || (card.family ? [card.family] : []);
+    if (!cardFams.some(f => f && f.toLowerCase().includes(targetFamily.toLowerCase()))) return false;
+  }
+
+  // Name includes filter
+  const nameInc = filter.nameIncludes || op.nameIncludes;
+  if (nameInc) {
+    if (!card.name || !card.name.toLowerCase().includes(nameInc.toLowerCase())) return false;
+  }
+
+  // Cost filter
+  const cost = typeof card.cost === 'number' ? card.cost : parseInt(card.cost || '0', 10);
+  if (filter.costLte !== undefined && cost > filter.costLte) return false;
+  if (filter.costGte !== undefined && cost < filter.costGte) return false;
+  if (op.costLte !== undefined && cost > op.costLte) return false;
+  if (op.costGte !== undefined && cost < op.costGte) return false;
+
+  return true;
+}
+
 export async function executeOp(state, op, context, promptResolver, events = null) {
   if (!op || !op.op) return { success: true };
 
@@ -412,6 +466,532 @@ export async function executeOp(state, op, context, promptResolver, events = nul
     case 'OPEN_ZONE': {
       await moveCard(state, sourceCard, 'removed', controller, { cause: 'open_zone', sourceCard }, events);
       return { success: true };
+    }
+
+    case 'REVEAL_DECKTOP': {
+      const p = state.players[controller];
+      if (!p.revealed) p.revealed = [];
+      const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      const actualCount = Math.min(count, p.deck.length);
+      const revealed = p.deck.splice(0, actualCount);
+      p.revealed.push(...revealed);
+      if (!context.revealedCards) context.revealedCards = [];
+      context.revealedCards.push(...revealed);
+
+      if (events) {
+        await events.emit({
+          type: 'CARDS_REVEALED',
+          cards: revealed,
+          player: controller,
+          count: revealed.length,
+          sourceCard
+        });
+      }
+
+      return { success: revealed.length > 0, count: revealed.length, cards: revealed };
+    }
+
+    case 'ADD_TO_HAND': {
+      const p = state.players[controller];
+      const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      let pool = [];
+      let isFromRevealed = false;
+
+      // Prefer revealed zone if cards were revealed
+      if (context.revealedCards && context.revealedCards.length > 0) {
+        pool = context.revealedCards;
+        isFromRevealed = true;
+      } else if (p.revealed && p.revealed.length > 0) {
+        pool = p.revealed;
+        isFromRevealed = true;
+      } else if (op.from === 'grave' || op.from === 'trash') {
+        pool = p.grave;
+      } else if (op.from === 'removed' || op.from === 'open') {
+        pool = p.removed;
+      } else if (context.previousTarget) {
+        pool = [context.previousTarget];
+      }
+
+      // Filter matching candidates
+      const matching = pool.filter(c => matchesCardFilter(c, op.filter, op));
+      if (matching.length === 0) return { success: false, addedCount: 0, cards: [] };
+
+      let chosen = matching;
+      if (matching.length > count && promptResolver) {
+        const selection = await promptResolver.choose({
+          type: 'SELECT_CARDS',
+          title: 'Choose card(s) to add to Hand',
+          candidates: matching.map(c => ({ card: c })),
+          count,
+          chooser: controller
+        });
+        if (selection && selection.length > 0) {
+          chosen = selection.map(item => item.card || item);
+        } else {
+          chosen = matching.slice(0, count);
+        }
+      } else if (matching.length > count) {
+        chosen = matching.slice(0, count);
+      }
+
+      const added = [];
+      for (const card of chosen) {
+        await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard }, events);
+        if (isFromRevealed) {
+          if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== card.id);
+          if (context.revealedCards) context.revealedCards = context.revealedCards.filter(c => c.id !== card.id);
+        }
+        added.push(card);
+      }
+
+      return { success: added.length > 0, addedCount: added.length, cards: added };
+    }
+
+    case 'DISCARD_REVEALED':
+    case 'DISCARD_REMAINING': {
+      const p = state.players[controller];
+      const pool = (context.revealedCards && context.revealedCards.length > 0)
+        ? [...context.revealedCards]
+        : (p.revealed ? [...p.revealed] : []);
+
+      const discarded = [];
+      for (const card of pool) {
+        await moveCard(state, card, 'grave', controller, { cause: 'discard_revealed', sourceCard }, events);
+        discarded.push(card);
+      }
+
+      p.revealed = [];
+      context.revealedCards = [];
+
+      return { success: true, count: discarded.length, cards: discarded };
+    }
+
+    case 'RETURN_REVEALED_BOTTOM':
+    case 'RETURN_REMAINING_TO_DECK': {
+      const p = state.players[controller];
+      const pool = (context.revealedCards && context.revealedCards.length > 0)
+        ? [...context.revealedCards]
+        : (p.revealed ? [...p.revealed] : []);
+
+      const pos = (op.position || 'bottom').toLowerCase();
+      const destZone = pos === 'top' ? 'deck_top' : 'deck_bottom';
+
+      const returned = [];
+      for (const card of pool) {
+        await moveCard(state, card, destZone, controller, { cause: 'return_revealed', sourceCard }, events);
+        returned.push(card);
+      }
+
+      p.revealed = [];
+      context.revealedCards = [];
+
+      return { success: true, count: returned.length, cards: returned };
+    }
+
+    case 'SUMMON': {
+      const p = state.players[controller];
+      let pool = [];
+      let isRevealed = false;
+
+      if (op.target === 'this_card' || op.from === 'this_card') {
+        pool = sourceCard ? [sourceCard] : [];
+      } else if (context.revealedCards && context.revealedCards.length > 0) {
+        pool = context.revealedCards;
+        isRevealed = true;
+      } else if (p.revealed && p.revealed.length > 0) {
+        pool = p.revealed;
+        isRevealed = true;
+      } else if (op.from === 'grave' || op.from === 'trash') {
+        pool = p.grave;
+      } else if (op.from === 'removed' || op.from === 'open') {
+        pool = p.removed;
+      } else {
+        // default from hand
+        pool = p.hand;
+      }
+
+      const matching = pool.filter(c => matchesCardFilter(c, op.filter, op));
+      if (matching.length === 0) return { success: false, reason: 'NO_TARGET_CARDS' };
+
+      let cardToSummon = matching[0];
+      if (matching.length > 1 && promptResolver) {
+        const choice = await promptResolver.choose({
+          type: 'SELECT_SUMMON',
+          title: 'Choose card to summon',
+          candidates: matching.map(c => ({ card: c })),
+          count: 1,
+          chooser: controller
+        });
+        if (choice && choice[0]) {
+          cardToSummon = choice[0].card || choice[0];
+        }
+      }
+
+      if (!cardToSummon) return { success: false };
+
+      // Pay cost if not free
+      const isFree = op.free || op.noCost || op.withoutPayingCost;
+      if (!isFree) {
+        const cost = cardToSummon.cost || 0;
+        if (p.reserve.normal < cost) {
+          return { success: false, reason: 'INSUFFICIENT_COST_CORES' };
+        }
+        await moveCore(state, cost, { zone: 'reserve', side: controller }, { zone: 'trash', side: controller }, {
+          cause: 'summon_cost',
+          by: controller,
+          sourceCard
+        }, events);
+      }
+
+      // Allocate cores for LV1 (default 1 core)
+      const coresNeeded = typeof op.initialCores === 'number' ? op.initialCores : 1;
+      let usedSoul = false;
+      let usedNormal = 0;
+
+      if (coresNeeded > 0) {
+        if (p.reserve.normal >= coresNeeded) {
+          usedNormal = coresNeeded;
+        } else if (p.reserve.normal + (p.reserve.soul > 0 ? 1 : 0) >= coresNeeded) {
+          usedSoul = true;
+          usedNormal = Math.max(0, coresNeeded - 1);
+        } else {
+          return { success: false, reason: 'INSUFFICIENT_LV1_CORES' };
+        }
+
+        if (usedNormal > 0) {
+          await moveCore(state, usedNormal, { zone: 'reserve', side: controller }, { zone: 'field', side: controller }, {
+            cause: 'summon',
+            by: controller
+          }, events);
+        }
+        if (usedSoul) {
+          await moveCore(state, 1, { zone: 'reserve', side: controller }, { zone: 'field', side: controller }, {
+            isSoulCore: true,
+            cause: 'summon',
+            by: controller
+          }, events);
+        }
+      }
+
+      const newStack = createFieldStack(cardToSummon, { normal: usedNormal, soul: usedSoul ? 1 : 0 });
+      if (op.exhausted) {
+        newStack.state = 'EXHAUSTED';
+      } else {
+        newStack.state = 'REFRESHED';
+      }
+      p.field.push(newStack);
+
+      // Remove from prior zone
+      p.hand = p.hand.filter(c => c.id !== cardToSummon.id);
+      p.grave = p.grave.filter(c => c.id !== cardToSummon.id);
+      p.removed = p.removed.filter(c => c.id !== cardToSummon.id);
+      if (p.burst && p.burst.id === cardToSummon.id) p.burst = null;
+      if (isRevealed) {
+        if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== cardToSummon.id);
+        if (context.revealedCards) context.revealedCards = context.revealedCards.filter(c => c.id !== cardToSummon.id);
+      }
+
+      if (events) {
+        await events.emit({
+          type: 'SUMMONED',
+          card: cardToSummon,
+          stack: newStack,
+          player: controller,
+          cause: 'effect',
+          sourceCard
+        });
+      }
+
+      return { success: true, card: cardToSummon, stack: newStack };
+    }
+
+    case 'SUMMON_THIS_CARD': {
+      if (!sourceCard) return { success: false, reason: 'NO_SOURCE_CARD' };
+      const p = state.players[controller];
+
+      const hasCores = p.reserve.normal > 0 || p.reserve.soul > 0;
+      if (!hasCores) return { success: false, reason: 'INSUFFICIENT_LV1_CORES' };
+
+      const useSoul = p.reserve.normal === 0 && p.reserve.soul > 0;
+      await moveCore(state, 1, { zone: 'reserve', side: controller }, { zone: 'field', side: controller }, {
+        isSoulCore: useSoul,
+        cause: 'summon',
+        by: controller,
+        sourceCard
+      }, events);
+
+      const newStack = createFieldStack(sourceCard, { normal: useSoul ? 0 : 1, soul: useSoul ? 1 : 0 });
+      if (op.exhausted) newStack.state = 'EXHAUSTED';
+      p.field.push(newStack);
+
+      p.hand = p.hand.filter(c => c.id !== sourceCard.id);
+      p.grave = p.grave.filter(c => c.id !== sourceCard.id);
+      p.removed = p.removed.filter(c => c.id !== sourceCard.id);
+      if (p.burst && p.burst.id === sourceCard.id) p.burst = null;
+      if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== sourceCard.id);
+      if (context.revealedCards) context.revealedCards = context.revealedCards.filter(c => c.id !== sourceCard.id);
+
+      if (events) {
+        await events.emit({
+          type: 'SUMMONED',
+          card: sourceCard,
+          stack: newStack,
+          player: controller,
+          cause: 'effect',
+          sourceCard
+        });
+      }
+
+      return { success: true, card: sourceCard, stack: newStack };
+    }
+
+    case 'DEPLOY_NEXUS': {
+      const p = state.players[controller];
+      let pool = [];
+      let isRevealed = false;
+
+      if (op.target === 'this_card' || op.from === 'this_card') {
+        pool = sourceCard ? [sourceCard] : [];
+      } else if (context.revealedCards && context.revealedCards.length > 0) {
+        pool = context.revealedCards;
+        isRevealed = true;
+      } else if (p.revealed && p.revealed.length > 0) {
+        pool = p.revealed;
+        isRevealed = true;
+      } else if (op.from === 'grave' || op.from === 'trash') {
+        pool = p.grave;
+      } else {
+        pool = p.hand;
+      }
+
+      const matching = pool.filter(c => {
+        const type = (c.type || '').toLowerCase();
+        if (!type.includes('nexus')) return false;
+        return matchesCardFilter(c, op.filter, op);
+      });
+
+      if (matching.length === 0) return { success: false, reason: 'NO_NEXUS_TARGET' };
+
+      let cardToDeploy = matching[0];
+      if (matching.length > 1 && promptResolver) {
+        const choice = await promptResolver.choose({
+          type: 'SELECT_NEXUS',
+          title: 'Choose Nexus to deploy',
+          candidates: matching.map(c => ({ card: c })),
+          count: 1,
+          chooser: controller
+        });
+        if (choice && choice[0]) {
+          cardToDeploy = choice[0].card || choice[0];
+        }
+      }
+
+      if (!cardToDeploy) return { success: false };
+
+      const cores = typeof op.cores === 'number' ? op.cores : 0;
+      if (cores > 0) {
+        await moveCore(state, cores, { zone: 'reserve', side: controller }, { zone: 'field', side: controller }, {
+          cause: 'deploy',
+          by: controller
+        }, events);
+      }
+
+      const newStack = createFieldStack(cardToDeploy, { normal: cores, soul: 0 });
+      newStack.state = 'REFRESHED';
+      p.field.push(newStack);
+      if (!p.nexus) p.nexus = [];
+      p.nexus.push(newStack);
+
+      p.hand = p.hand.filter(c => c.id !== cardToDeploy.id);
+      p.grave = p.grave.filter(c => c.id !== cardToDeploy.id);
+      p.removed = p.removed.filter(c => c.id !== cardToDeploy.id);
+      if (isRevealed) {
+        if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== cardToDeploy.id);
+        if (context.revealedCards) context.revealedCards = context.revealedCards.filter(c => c.id !== cardToDeploy.id);
+      }
+
+      if (events) {
+        await events.emit({
+          type: 'DEPLOYED',
+          card: cardToDeploy,
+          stack: newStack,
+          player: controller,
+          cause: 'effect',
+          sourceCard
+        });
+      }
+
+      return { success: true, card: cardToDeploy, stack: newStack };
+    }
+
+    case 'SUMMON_RESERVE_ONLY': {
+      const p = state.players[controller];
+      let cardToSummon = sourceCard;
+
+      if (!cardToSummon && p.hand.length > 0) {
+        const candidates = queryCandidates(state, { zone: 'hand', side: 'self', types: ['Spirit'] }, context);
+        if (candidates.length > 0 && promptResolver) {
+          const chosen = await promptResolver.choose({
+            type: 'SELECT_SUMMON',
+            title: 'Choose Spirit to summon (reserve cores only)',
+            candidates,
+            count: 1,
+            chooser: controller
+          });
+          if (chosen && chosen[0]) cardToSummon = chosen[0].card || chosen[0];
+        }
+      }
+
+      if (!cardToSummon) return { success: false, reason: 'NO_CARD_TO_SUMMON' };
+
+      // Strictly enforce cores from reserve
+      if (p.reserve.normal < 1 && p.reserve.soul < 1) {
+        return { success: false, reason: 'NO_RESERVE_CORES' };
+      }
+
+      const useSoul = p.reserve.normal === 0 && p.reserve.soul > 0;
+      await moveCore(state, 1, { zone: 'reserve', side: controller }, { zone: 'field', side: controller }, {
+        isSoulCore: useSoul,
+        cause: 'summon_reserve_only',
+        by: controller
+      }, events);
+
+      const newStack = createFieldStack(cardToSummon, { normal: useSoul ? 0 : 1, soul: useSoul ? 1 : 0 });
+      p.field.push(newStack);
+
+      p.hand = p.hand.filter(c => c.id !== cardToSummon.id);
+      if (p.burst && p.burst.id === cardToSummon.id) p.burst = null;
+
+      if (events) {
+        await events.emit({
+          type: 'SUMMONED',
+          card: cardToSummon,
+          stack: newStack,
+          player: controller,
+          cause: 'summon_reserve_only',
+          sourceCard
+        });
+      }
+
+      return { success: true, card: cardToSummon, stack: newStack };
+    }
+
+    case 'RECOVER_LIFE': {
+      const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      const targetSide = op.side === 'opp' ? oppSide : controller;
+      const res = await moveCore(
+        state,
+        count,
+        { zone: 'void' },
+        { zone: 'life', side: targetSide },
+        { cause: 'recover_life', by: controller, sourceCard },
+        events
+      );
+
+      return { success: res, recoveredCount: count, currentLife: state.players[targetSide].life };
+    }
+
+    case 'PREVENT_LIFE_LOSS': {
+      const targetSide = op.side === 'opp' ? oppSide : controller;
+      const duration = op.duration || 'THIS_TURN';
+
+      state.modifiers.push({
+        id: `mod_${Date.now()}_prevent_life_${Math.random().toString(36).substr(2, 5)}`,
+        type: 'PREVENT_LIFE_LOSS',
+        side: targetSide,
+        duration,
+        sourceCardId: sourceCard ? sourceCard.id : null
+      });
+
+      if (events) {
+        await events.emit({
+          type: 'LIFE_LOSS_PREVENTED_REGISTERED',
+          player: targetSide,
+          duration,
+          sourceCard
+        });
+      }
+
+      return { success: true, duration, side: targetSide };
+    }
+
+    case 'SALVAGE': {
+      const p = state.players[controller];
+      let pool = [];
+      let isRevealed = false;
+
+      // Prefer revealed zone if present, otherwise grave
+      if (context.revealedCards && context.revealedCards.length > 0) {
+        pool = context.revealedCards;
+        isRevealed = true;
+      } else if (p.revealed && p.revealed.length > 0) {
+        pool = p.revealed;
+        isRevealed = true;
+      } else {
+        pool = p.grave;
+      }
+
+      const matching = pool.filter(c => matchesCardFilter(c, op.filter, op));
+      if (matching.length === 0) return { success: false, count: 0, cards: [] };
+
+      const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      let chosen = matching;
+
+      if (matching.length > count && promptResolver) {
+        const choice = await promptResolver.choose({
+          type: 'SELECT_SALVAGE',
+          title: 'Choose card(s) to salvage to Hand',
+          candidates: matching.map(c => ({ card: c })),
+          count,
+          chooser: controller
+        });
+        if (choice && choice.length > 0) {
+          chosen = choice.map(item => item.card || item);
+        } else {
+          chosen = matching.slice(0, count);
+        }
+      } else if (matching.length > count) {
+        chosen = matching.slice(0, count);
+      }
+
+      const salvaged = [];
+      for (const card of chosen) {
+        await moveCard(state, card, 'hand', controller, { cause: 'salvage', sourceCard }, events);
+        if (isRevealed) {
+          if (p.revealed) p.revealed = p.revealed.filter(c => c.id !== card.id);
+          if (context.revealedCards) context.revealedCards = context.revealedCards.filter(c => c.id !== card.id);
+        }
+        salvaged.push(card);
+      }
+
+      return { success: salvaged.length > 0, count: salvaged.length, cards: salvaged };
+    }
+
+    case 'DISCARD_BURST': {
+      const targetSide = op.side === 'self' ? controller : oppSide;
+      const targetPlayer = state.players[targetSide];
+      if (!targetPlayer.burst) {
+        return { success: false, reason: 'NO_BURST' };
+      }
+
+      const burstCard = targetPlayer.burst;
+      await moveCard(state, burstCard, 'grave', targetSide, {
+        cause: 'discard_burst',
+        by: controller,
+        sourceCard
+      }, events);
+
+      if (events) {
+        await events.emit({
+          type: 'BURST_DISCARDED',
+          card: burstCard,
+          player: targetSide,
+          by: controller,
+          sourceCard
+        });
+      }
+
+      return { success: true, card: burstCard, player: targetSide };
     }
 
     default:
