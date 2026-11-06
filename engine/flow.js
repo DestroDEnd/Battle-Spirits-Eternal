@@ -35,9 +35,15 @@ export class FlowController {
     let nextStep = this.getNextStepName(currentStep, isFirstTurn);
 
     if (currentStep === 'END') {
-      // Transition to next turn
+      // Transition to next turn (or Extra Turn if granted)
       this.state.turnNumber++;
-      this.state.activePlayer = activePlayer === 'player' ? 'opponent' : 'player';
+      const activeP = this.state.players[activePlayer];
+      if (activeP && activeP.extraTurns && activeP.extraTurns > 0) {
+        activeP.extraTurns -= 1;
+        this.state.activePlayer = activePlayer;
+      } else {
+        this.state.activePlayer = activePlayer === 'player' ? 'opponent' : 'player';
+      }
       nextStep = 'START';
 
       // Clear THIS_TURN modifiers

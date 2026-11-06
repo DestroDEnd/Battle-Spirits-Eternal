@@ -8,6 +8,7 @@
 import { moveCard, moveCore } from '../zones.js';
 import { createFieldStack } from '../state.js';
 import { queryCandidates } from '../selectors.js';
+import { computeLevel } from '../continuous.js';
 
 export function matchesCardFilter(card, filter = {}, op = {}) {
   if (!card || typeof card !== 'object') return false;
@@ -1524,6 +1525,763 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
         });
       }
       return { success: true, modifier: mod };
+    }
+
+    // -------------------------------------------------------------
+    // MILESTONE 4: Modern Mechanics (Grandwalker, Rebirth & Advanced Keywords)
+    // -------------------------------------------------------------
+    case 'CORE_CHARGE_TRIGGER':
+    case 'CORE_CHARGE_ADD': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const gwStack = (sourceStack && ((sourceStack.top.type || '').toLowerCase().includes('grandwalker') || (sourceStack.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))))
+        ? sourceStack
+        : p.field.find(s => (s.top.type || '').toLowerCase().includes('grandwalker') || (s.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))) || sourceStack || p.field[0] || null;
+
+      if (op.op === 'CORE_CHARGE_TRIGGER') {
+        const millCount = typeof op.millCount === 'number' ? op.millCount : (typeof op.count === 'number' ? op.count : 3);
+        const milled = [];
+        for (let i = 0; i < millCount; i++) {
+          if (p.deck.length === 0) break;
+          const card = p.deck.shift();
+          p.grave.push(card);
+          milled.push(card);
+        }
+        context.coreChargeMilled = milled;
+        const matched = op.filter ? milled.filter(c => matchesCardFilter(c, op.filter)) : milled;
+        const addedCores = matched.length;
+        if (gwStack && addedCores > 0) {
+          gwStack.cores.normal = (gwStack.cores.normal || 0) + addedCores;
+        }
+        if (events) {
+          await events.emit({
+            type: 'CORE_CHARGE_ADDED',
+            player: targetSide,
+            milledCount: milled.length,
+            addedCores,
+            stackId: gwStack ? (gwStack.id || gwStack.stackId) : null,
+            sourceCard
+          });
+        }
+        return { success: true, milledCount: milled.length, addedCores, milled };
+      }
+
+      // CORE_CHARGE_ADD
+      let count = typeof op.count === 'number' ? op.count : 1;
+      if (Array.isArray(context.coreChargeMilled) && op.filter) {
+        const matched = context.coreChargeMilled.filter(c => matchesCardFilter(c, op.filter));
+        count = matched.length * (typeof op.perMatch === 'number' ? op.perMatch : 1);
+      }
+      if (gwStack && count > 0) {
+        gwStack.cores.normal = (gwStack.cores.normal || 0) + count;
+      }
+      if (events) {
+        await events.emit({
+          type: 'CORE_CHARGE_ADDED',
+          player: targetSide,
+          addedCores: count,
+          stackId: gwStack ? (gwStack.id || gwStack.stackId) : null,
+          sourceCard
+        });
+      }
+      return { success: true, addedCores: count, stackId: gwStack ? (gwStack.id || gwStack.stackId) : null };
+    }
+
+    case 'GRANDWALKER_CORE_RULE':
+    case 'GRANDWALKER_PROTECTION': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const gwStack = sourceStack || p.field.find(s => (s.top.type || '').toLowerCase().includes('grandwalker')) || null;
+      const targetStackId = op.targetStackId || (gwStack ? (gwStack.id || gwStack.stackId) : null);
+      const initialCores = typeof op.cores === 'number' ? op.cores : (typeof op.count === 'number' ? op.count : 0);
+      if (gwStack && initialCores > 0) {
+        gwStack.cores.normal = (gwStack.cores.normal || 0) + initialCores;
+      }
+      const mod = {
+        id: `mod_${Date.now()}_gw_rule_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op,
+        side: targetSide,
+        targetStackId,
+        onlyAffectedByGrandwalkerEffects: true,
+        coreChargeOnly: op.op === 'GRANDWALKER_CORE_RULE',
+        duration: op.duration || 'PERMANENT',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, modifier: mod, addedCores: initialCores };
+    }
+
+    case 'GRANDWALKER_ACTION': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const gwStack = (sourceStack && ((sourceStack.top.type || '').toLowerCase().includes('grandwalker') || (sourceStack.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))))
+        ? sourceStack
+        : p.field.find(s => (s.top.type || '').toLowerCase().includes('grandwalker') || (s.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))) || sourceStack || p.field[0] || null;
+
+      if (!gwStack) {
+        return { success: false, reason: 'NO_GRANDWALKER_FOUND' };
+      }
+
+      const costCores = typeof op.costCores === 'number' ? op.costCores : (typeof op.sendToVoid === 'number' ? op.sendToVoid : 0);
+      if (costCores > 0) {
+        const available = gwStack.cores.normal || 0;
+        if (available < costCores) {
+          return { success: false, reason: 'INSUFFICIENT_GRANDWALKER_CORES', required: costCores, available };
+        }
+        gwStack.cores.normal -= costCores;
+        if (events) {
+          await events.emit({
+            type: 'GRANDWALKER_ACTION_RESOLVED',
+            player: targetSide,
+            action: op.action || 'GRANDWALKER_SKILL',
+            costPaid: costCores,
+            stackId: gwStack.id || gwStack.stackId,
+            sourceCard
+          });
+        }
+        return { success: true, costPaid: costCores, remainingCores: gwStack.cores.normal };
+      }
+
+      const addCores = typeof op.addCores === 'number' ? op.addCores : (typeof op.count === 'number' ? op.count : 0);
+      if (addCores > 0) {
+        gwStack.cores.normal = (gwStack.cores.normal || 0) + addCores;
+      }
+      if (events) {
+        await events.emit({
+          type: 'GRANDWALKER_ACTION_RESOLVED',
+          player: targetSide,
+          action: op.action || 'GRANDWALKER_ACTION',
+          addedCores: addCores,
+          stackId: gwStack.id || gwStack.stackId,
+          sourceCard
+        });
+      }
+      return { success: true, addedCores: addCores, stackId: gwStack.id || gwStack.stackId };
+    }
+
+    case 'REBIRTH_FLIP':
+    case 'REBIRTH_ACTION': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
+      if (!targetStack) {
+        return { success: false, reason: 'NO_STACK_TO_REBIRTH' };
+      }
+
+      const bSide = op.bSideData || targetStack.top.backSide || targetStack.top.rebirthSide || targetStack.top.bSide || null;
+      if (bSide && typeof bSide === 'object') {
+        targetStack.aSideSnapshot = { ...targetStack.top };
+        Object.assign(targetStack.top, bSide);
+      }
+      targetStack.isReborn = true;
+      targetStack.top.isReborn = true;
+      if (op.refresh !== false) {
+        targetStack.exhausted = false;
+      }
+      if (op.placeSoulCore) {
+        if (p.reserve.soul > 0) {
+          p.reserve.soul = 0;
+          targetStack.cores.soul = 1;
+        } else if (p.trash.soul > 0) {
+          p.trash.soul = 0;
+          targetStack.cores.soul = 1;
+        } else {
+          targetStack.cores.soul = 1;
+        }
+      }
+      if (typeof op.addCores === 'number' && op.addCores > 0) {
+        targetStack.cores.normal = (targetStack.cores.normal || 0) + op.addCores;
+      }
+      p.count = (p.count || 0) + (typeof op.addCount === 'number' ? op.addCount : 1);
+
+      if (events) {
+        await events.emit({
+          type: 'REBORN',
+          player: targetSide,
+          stackId: targetStack.id || targetStack.stackId,
+          card: targetStack.top,
+          count: p.count
+        });
+      }
+      return { success: true, isReborn: true, stackId: targetStack.id || targetStack.stackId, count: p.count };
+    }
+
+    case 'REBIRTH_CORE_PLACEMENT': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const targetStack = sourceStack || p.field.find(s => s.isReborn || (s.top && s.top.isReborn)) || p.field[0] || null;
+      if (!targetStack) {
+        return { success: false, reason: 'NO_REBORN_STACK' };
+      }
+      const count = typeof op.count === 'number' ? op.count : 1;
+      const from = (op.from || 'void').toLowerCase();
+      let moved = 0;
+      if (from === 'reserve') {
+        const take = Math.min(count, p.reserve.normal || 0);
+        p.reserve.normal -= take;
+        targetStack.cores.normal = (targetStack.cores.normal || 0) + take;
+        moved = take;
+      } else if (from === 'trash') {
+        const take = Math.min(count, p.trash.normal || 0);
+        p.trash.normal -= take;
+        targetStack.cores.normal = (targetStack.cores.normal || 0) + take;
+        moved = take;
+      } else {
+        targetStack.cores.normal = (targetStack.cores.normal || 0) + count;
+        moved = count;
+      }
+      return { success: true, movedCores: moved, stackId: targetStack.id || targetStack.stackId };
+    }
+
+    case 'KEYWORD_RULE':
+    case 'KEYWORD_ABILITY':
+    case 'KEYWORD_ACTION':
+    case 'GRANT_KEYWORD':
+    case 'GRANT_ABILITY':
+    case 'MODIFY_KEYWORD': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const opp = state.players[targetSide === 'player' ? 'opponent' : 'player'];
+      const keyword = String(op.keyword || op.ability || op.rule || 'Keyword').trim();
+      const kwLower = keyword.toLowerCase();
+      const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
+
+      let actionResult = {};
+
+      if (kwLower.includes('high speed')) {
+        if (op.cardId || op.summonCardId) {
+          const cid = op.cardId || op.summonCardId;
+          const cIdx = p.hand.findIndex(c => c.id === cid || c.cardId === cid || c.cardNumber === cid);
+          if (cIdx !== -1) {
+            const costToPay = typeof op.cost === 'number' ? op.cost : 1;
+            if ((p.reserve.normal + p.reserve.soul) >= costToPay) {
+              const normalPaid = Math.min(p.reserve.normal, costToPay);
+              p.reserve.normal -= normalPaid;
+              p.trash.normal += normalPaid;
+              if (costToPay - normalPaid > 0 && p.reserve.soul > 0) {
+                p.reserve.soul = 0;
+                p.trash.soul = 1;
+              }
+              const res = await moveCard(state, p.hand[cIdx], 'field', targetSide, { cause: 'effect' }, events);
+              if (res && p.reserve.normal > 0) {
+                const newStack = p.field.find(st => st.top.id === cid || st.top.cardId === cid || st.top.cardNumber === cid);
+                if (newStack) {
+                  p.reserve.normal -= 1;
+                  newStack.cores.normal += 1;
+                  actionResult.summonedStack = newStack;
+                }
+              }
+            }
+          }
+        }
+      } else if (kwLower.includes('clash') || kwLower.includes('showdown') || kwLower.includes('excite')) {
+        state.modifiers.push({
+          id: `mod_${Date.now()}_kw_clash_${Math.random().toString(36).substr(2, 5)}`,
+          type: 'FORCE_BLOCK',
+          side: targetSide === 'player' ? 'opponent' : 'player',
+          keyword,
+          duration: op.duration || 'THIS_BATTLE',
+          sourceCardId: sourceCard ? sourceCard.id : null
+        });
+        actionResult.forcedBlock = true;
+      } else if (kwLower.includes('crush')) {
+        const lv = targetStack ? computeLevel(targetStack, state) : (op.level || 1);
+        const millCount = typeof op.count === 'number' ? op.count : lv;
+        const milled = [];
+        for (let i = 0; i < millCount; i++) {
+          if (opp.deck.length === 0) break;
+          const c = opp.deck.shift();
+          opp.grave.push(c);
+          milled.push(c);
+        }
+        actionResult.milledCount = milled.length;
+      } else if (kwLower.includes('windstorm')) {
+        const exhaustCount = typeof op.count === 'number' ? op.count : 1;
+        let exhausted = 0;
+        for (const s of opp.field) {
+          if (exhausted >= exhaustCount) break;
+          if (!s.exhausted) {
+            s.exhausted = true;
+            exhausted++;
+          }
+        }
+        actionResult.exhaustedCount = exhausted;
+      } else if (kwLower.includes('holy life')) {
+        p.life += 1;
+        actionResult.lifeRecovered = 1;
+      } else if (kwLower.includes('armor') || kwLower.includes('a.t. field')) {
+        const colors = Array.isArray(op.colors) ? op.colors : (op.color ? [op.color] : ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue']);
+        state.modifiers.push({
+          id: `mod_${Date.now()}_kw_armor_${Math.random().toString(36).substr(2, 5)}`,
+          type: 'IMMUNITY',
+          side: targetSide,
+          targetStackId: targetStack ? (targetStack.id || targetStack.stackId) : null,
+          colors,
+          categories: ['SPIRIT', 'ULTIMATE', 'NEXUS', 'MAGIC'],
+          duration: op.duration || 'THIS_TURN',
+          sourceCardId: sourceCard ? sourceCard.id : null
+        });
+        actionResult.armorColors = colors;
+      } else if (kwLower.includes('mirage')) {
+        if (sourceCard) {
+          p.mirage = sourceCard;
+          actionResult.mirageSet = sourceCard.id;
+        }
+      } else if (kwLower.includes('accel')) {
+        if (sourceCard) {
+          if (!Array.isArray(p.removed)) p.removed = [];
+          const hIdx = p.hand.findIndex(c => c.id === sourceCard.id);
+          if (hIdx !== -1) p.hand.splice(hIdx, 1);
+          p.removed.push(sourceCard);
+          actionResult.accelMovedToRemoved = true;
+        }
+      }
+
+      const mod = {
+        id: `mod_${Date.now()}_kw_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op,
+        side: targetSide,
+        targetStackId: targetStack ? (targetStack.id || targetStack.stackId) : null,
+        targetFilter: op.filter || null,
+        keyword,
+        value: op.value || null,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, keyword, modifier: mod, ...actionResult };
+    }
+
+    case 'TRIBUTE_COST': {
+      const p = state.players[controller];
+      const minCost = typeof op.minCost === 'number' ? op.minCost : 0;
+      const candidates = p.field.filter(s => {
+        if (sourceStack && (s.id || s.stackId) === (sourceStack.id || sourceStack.stackId)) return false;
+        const typeStr = (s.top.type || 'Spirit').toLowerCase();
+        if (typeStr.includes('nexus')) return false;
+        if ((s.top.cost || 0) < minCost) return false;
+        if (op.family && !(s.top.family || []).some(f => f.toLowerCase().includes(String(op.family).toLowerCase()))) return false;
+        if (op.filter && !matchesCardFilter(s.top, op.filter)) return false;
+        return true;
+      });
+
+      if (candidates.length === 0) {
+        return { success: false, reason: 'NO_VALID_TRIBUTE_TARGET' };
+      }
+
+      let chosen = candidates[0];
+      if (op.targetStackId) {
+        const explicit = candidates.find(s => (s.id || s.stackId) === op.targetStackId || s.top.id === op.targetStackId);
+        if (explicit) chosen = explicit;
+      } else if (candidates.length > 1 && promptResolver && typeof promptResolver.choose === 'function') {
+        const choice = await promptResolver.choose({
+          type: 'SELECT_TRIBUTE',
+          player: controller,
+          options: candidates.map(s => s.id || s.stackId)
+        });
+        const found = candidates.find(s => (s.id || s.stackId) === choice || s.top.id === choice);
+        if (found) chosen = found;
+      }
+
+      const dest = (op.destination || 'VOID').toUpperCase();
+      const normalCores = chosen.cores.normal || 0;
+      const soulCores = chosen.cores.soul || 0;
+      chosen.cores.normal = 0;
+      chosen.cores.soul = 0;
+
+      if (dest === 'TRASH') {
+        p.trash.normal += normalCores;
+        p.trash.soul += soulCores;
+      } else if (dest === 'RESERVE') {
+        p.reserve.normal += normalCores;
+        p.reserve.soul += soulCores;
+      } else {
+        // Default Tribute: cores go to Void (except Soul Core if rule protects it, or sent to trash/void per op)
+        if (soulCores > 0 && op.keepSoulCoreInTrash) {
+          p.trash.soul += soulCores;
+        }
+      }
+
+      await moveCard(state, chosen.top, 'grave', controller, { cause: 'tribute', by: controller }, events);
+      if (events) {
+        await events.emit({
+          type: 'TRIBUTE_PAID',
+          player: controller,
+          tributedCard: chosen.top,
+          coresMoved: normalCores + soulCores,
+          destination: dest
+        });
+      }
+      return { success: true, tributedStackId: chosen.id || chosen.stackId, tributedCard: chosen.top, coresMoved: normalCores + soulCores };
+    }
+
+    case 'AWAKEN_CORE_MOVE': {
+      const p = state.players[controller];
+      const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
+      if (!targetStack) {
+        return { success: false, reason: 'NO_AWAKEN_TARGET' };
+      }
+
+      const requested = op.count === 'ANY' ? (typeof op.requestedCount === 'number' ? op.requestedCount : 1) : (typeof op.count === 'number' ? op.count : 1);
+      let moved = 0;
+
+      // Move from other friendly spirits first
+      for (const s of p.field) {
+        if ((s.id || s.stackId) === (targetStack.id || targetStack.stackId)) continue;
+        while (moved < requested && (s.cores.normal || 0) > 0) {
+          s.cores.normal -= 1;
+          targetStack.cores.normal = (targetStack.cores.normal || 0) + 1;
+          moved++;
+        }
+        if (moved >= requested) break;
+      }
+
+      // Also allow taking from reserve if fromReserve is allowed or no other spirits had enough cores
+      if (moved < requested && op.allowReserve !== false && (p.reserve.normal || 0) > 0) {
+        const take = Math.min(requested - moved, p.reserve.normal);
+        p.reserve.normal -= take;
+        targetStack.cores.normal = (targetStack.cores.normal || 0) + take;
+        moved += take;
+      }
+
+      if (events) {
+        await events.emit({
+          type: 'AWAKEN_RESOLVED',
+          player: controller,
+          stackId: targetStack.id || targetStack.stackId,
+          movedCores: moved
+        });
+      }
+      return { success: moved > 0, movedCores: moved, stackId: targetStack.id || targetStack.stackId };
+    }
+
+    case 'SEAL_MOVE': {
+      const p = state.players[controller];
+      let movedSoulCore = false;
+      if (sourceStack && (sourceStack.cores.soul || 0) > 0) {
+        sourceStack.cores.soul = 0;
+        movedSoulCore = true;
+      } else if ((p.reserve.soul || 0) > 0) {
+        p.reserve.soul = 0;
+        movedSoulCore = true;
+      } else {
+        const stackWithSoul = p.field.find(s => (s.cores.soul || 0) > 0);
+        if (stackWithSoul) {
+          stackWithSoul.cores.soul = 0;
+          movedSoulCore = true;
+        }
+      }
+
+      if (!movedSoulCore) {
+        return { success: false, reason: 'SOUL_CORE_NOT_AVAILABLE_FOR_SEAL' };
+      }
+
+      p.life += 1;
+      p.isDuringSeal = true;
+      p.soulCoreInLife = true;
+
+      if (events) {
+        await events.emit({
+          type: 'SEAL_ACTIVATED',
+          player: controller,
+          life: p.life,
+          sourceCard
+        });
+      }
+      return { success: true, isDuringSeal: true, life: p.life };
+    }
+
+    case 'MOVE_SOUL_CORE':
+    case 'ADVENT_SOUL_CORE_ACTION': {
+      const p = state.players[controller];
+      const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
+      const toZone = (op.to || 'field').toLowerCase();
+
+      // Remove soul core from current location
+      if ((p.reserve.soul || 0) > 0) p.reserve.soul = 0;
+      if ((p.trash.soul || 0) > 0) p.trash.soul = 0;
+      for (const s of p.field) {
+        if ((s.cores.soul || 0) > 0) s.cores.soul = 0;
+      }
+
+      if (toZone === 'life') {
+        p.life += 1;
+        p.soulCoreInLife = true;
+      } else if (toZone === 'trash') {
+        p.trash.soul = 1;
+      } else if (toZone === 'reserve') {
+        p.reserve.soul = 1;
+      } else if (targetStack) {
+        targetStack.cores.soul = 1;
+      } else {
+        p.reserve.soul = 1;
+      }
+      return { success: true, to: toZone, stackId: targetStack ? (targetStack.id || targetStack.stackId) : null };
+    }
+
+    case 'REFRESH_BY_EXHAUSTING_NEXUS': {
+      const p = state.players[controller];
+      const targetStack = sourceStack || p.field.find(s => s.exhausted && !(s.top.type || '').toLowerCase().includes('nexus')) || null;
+      const readyNexus = p.field.find(s => !s.exhausted && (s.top.type || '').toLowerCase().includes('nexus'));
+      if (!readyNexus || !targetStack) {
+        return { success: false, reason: 'NO_READY_NEXUS_OR_TARGET' };
+      }
+      readyNexus.exhausted = true;
+      targetStack.exhausted = false;
+      return { success: true, exhaustedNexusId: readyNexus.id || readyNexus.stackId, refreshedStackId: targetStack.id || targetStack.stackId };
+    }
+
+    case 'REMAIN_ON_FIELD_EXHAUSTED':
+    case 'REMAIN_ON_FIELD':
+    case 'RESURRECT': {
+      const p = state.players[controller];
+      const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
+      if (targetStack) {
+        if (op.op === 'REMAIN_ON_FIELD_EXHAUSTED' || op.state === 'EXHAUSTED' || op.exhaust !== false) {
+          targetStack.exhausted = true;
+        } else {
+          targetStack.exhausted = false;
+        }
+        state.modifiers.push({
+          id: `mod_${Date.now()}_remain_${Math.random().toString(36).substr(2, 5)}`,
+          type: 'PROTECTION',
+          side: controller,
+          targetStackId: targetStack.id || targetStack.stackId,
+          remainState: targetStack.exhausted ? 'EXHAUSTED' : 'READY',
+          duration: op.duration || 'THIS_STEP',
+          sourceCardId: sourceCard ? sourceCard.id : null
+        });
+        return { success: true, stackId: targetStack.id || targetStack.stackId, exhausted: targetStack.exhausted };
+      }
+      // If card is in grave and RESURRECT is called
+      if (op.op === 'RESURRECT' && p.grave.length > 0) {
+        const card = op.cardId ? p.grave.find(c => c.id === op.cardId) || p.grave[p.grave.length - 1] : p.grave[p.grave.length - 1];
+        const res = await moveCard(state, card, 'field', controller, { cause: 'effect', by: controller }, events);
+        if (res) {
+          const newStack = p.field.find(st => st.top.id === card.id);
+          if (newStack) {
+            newStack.cores.normal = Math.max(1, newStack.cores.normal || 0);
+            return { success: true, stack: newStack };
+          }
+        }
+      }
+      return { success: false, reason: 'NO_TARGET_FOR_REMAIN' };
+    }
+
+    case 'BANISH':
+    case 'BANISH_TRASH':
+    case 'BANISH_DECK':
+    case 'BANISH_HAND':
+    case 'REMOVE_FROM_GAME':
+    case 'REMOVED_ZONE_ACTION':
+    case 'DISCARD_REMOVED': {
+      const targetSide = op.side === 'self' ? controller : oppSide;
+      const p = state.players[targetSide];
+      if (!Array.isArray(p.removed)) p.removed = [];
+      const count = typeof op.count === 'number' ? op.count : 1;
+      const banished = [];
+
+      const zoneName = op.op === 'BANISH_TRASH' ? 'grave'
+        : op.op === 'BANISH_DECK' ? 'deck'
+        : op.op === 'BANISH_HAND' ? 'hand'
+        : (op.from || 'grave').toLowerCase();
+
+      const sourceArr = zoneName === 'deck' ? p.deck
+        : zoneName === 'hand' ? p.hand
+        : p.grave;
+
+      for (let i = 0; i < count; i++) {
+        const idx = op.filter ? sourceArr.findIndex(c => matchesCardFilter(c, op.filter)) : (sourceArr.length > 0 ? 0 : -1);
+        if (idx === -1) break;
+        const [removedCard] = sourceArr.splice(idx, 1);
+        p.removed.push(removedCard);
+        banished.push(removedCard);
+      }
+      return { success: true, banishedCount: banished.length, banished };
+    }
+
+    case 'DISCARD_REMAINING':
+    case 'DISCARD':
+    case 'DISCARD_CARD':
+    case 'DISCARD_COST': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      if (op.op === 'DISCARD_REMAINING' && Array.isArray(context.revealedCards) && context.revealedCards.length > 0) {
+        const remaining = [...context.revealedCards];
+        for (const c of remaining) {
+          const rIdx = p.open ? p.open.findIndex(x => x.id === c.id) : -1;
+          if (rIdx !== -1) p.open.splice(rIdx, 1);
+          p.grave.push(c);
+        }
+        context.revealedCards = [];
+        return { success: true, discardedCount: remaining.length };
+      }
+      const count = typeof op.count === 'number' ? op.count : 1;
+      const discarded = [];
+      for (let i = 0; i < count; i++) {
+        if (p.hand.length === 0) break;
+        const idx = op.filter ? p.hand.findIndex(c => matchesCardFilter(c, op.filter)) : 0;
+        if (idx === -1) break;
+        const [c] = p.hand.splice(idx, 1);
+        p.grave.push(c);
+        discarded.push(c);
+      }
+      return { success: discarded.length > 0, discardedCount: discarded.length, discarded };
+    }
+
+    case 'EXTRA_TURN': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const count = typeof op.count === 'number' ? op.count : 1;
+      p.extraTurns = (p.extraTurns || 0) + count;
+      return { success: true, extraTurns: p.extraTurns };
+    }
+
+    case 'END_TURN':
+    case 'END_ATTACK_STEP':
+    case 'END_MAIN_STEP':
+    case 'SKIP_STEP':
+    case 'STEP_MODIFIER': {
+      if (op.op === 'END_ATTACK_STEP') {
+        const cantEnd = state.modifiers.some(m =>
+          (m.type === 'SET_RESTRICTION' || m.type === 'COMBAT_RESTRICTION' || m.type === 'STEP_MODIFIER') &&
+          (m.restriction === 'CANNOT_END_ATTACK_STEP' || m.rule === 'CANNOT_END_ATTACK_STEP')
+        );
+        if (cantEnd) {
+          return { success: false, reason: 'CANNOT_END_ATTACK_STEP_RESTRICTED' };
+        }
+        state.combat = null;
+        state.step = 'END';
+        return { success: true, step: state.step };
+      }
+      if (op.op === 'END_MAIN_STEP') {
+        state.step = 'ATTACK';
+        return { success: true, step: state.step };
+      }
+      if (op.op === 'END_TURN') {
+        state.combat = null;
+        state.step = 'END';
+        return { success: true, step: state.step };
+      }
+      const mod = {
+        id: `mod_${Date.now()}_step_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op,
+        side: op.side === 'opponent' ? oppSide : controller,
+        step: op.step || null,
+        restriction: op.restriction || op.rule || null,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, modifier: mod };
+    }
+
+    case 'COMPARE_BP':
+    case 'COMPARE_LEVELS':
+    case 'COMPARE_LV_INSTEAD_OF_BP':
+    case 'BP_OR_LEVEL_MODIFIER':
+    case 'SET_BP':
+    case 'SET_LEVEL': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const opp = state.players[targetSide === 'player' ? 'opponent' : 'player'];
+      if (op.op === 'COMPARE_BP' && sourceStack && opp.field.length > 0) {
+        const targetOpp = op.targetStackId ? opp.field.find(s => (s.id || s.stackId) === op.targetStackId) : opp.field[0];
+        if (targetOpp) {
+          const myLv = computeLevel(sourceStack, state);
+          const oppLv = computeLevel(targetOpp, state);
+          const myBp = (sourceStack.top.levels && sourceStack.top.levels[myLv]) ? sourceStack.top.levels[myLv].bp : (sourceStack.top.bp || 5000);
+          const oppBp = (targetOpp.top.levels && targetOpp.top.levels[oppLv]) ? targetOpp.top.levels[oppLv].bp : (targetOpp.top.bp || 3000);
+          if (myBp >= oppBp) {
+            const oppOwner = targetSide === 'player' ? 'opponent' : 'player';
+            await moveCard(state, targetOpp.top, 'grave', oppOwner, { cause: 'destroy', by: controller }, events);
+            return { success: true, winner: controller, destroyedStackId: targetOpp.id || targetOpp.stackId };
+          }
+          return { success: true, winner: oppSide, destroyedStackId: null };
+        }
+      }
+      const mod = {
+        id: `mod_${Date.now()}_bp_lv_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op === 'SET_LEVEL' ? 'MODIFY_LEVEL' : op.op,
+        side: targetSide,
+        targetStackId: op.targetStackId || (sourceStack ? (sourceStack.id || sourceStack.stackId) : null),
+        value: typeof op.value === 'number' ? op.value : (typeof op.amount === 'number' ? op.amount : 1),
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, modifier: mod };
+    }
+
+    case 'MODIFY_LIFE':
+    case 'PAY_LIFE':
+    case 'LIFE_PAY_COST':
+    case 'REDUCE_LIFE':
+    case 'BOOST_LIFE':
+    case 'DAMAGE_CAP':
+    case 'PREVENT_LOSS': {
+      const targetSide = op.side === 'opponent' ? oppSide : controller;
+      const p = state.players[targetSide];
+      const count = typeof op.count === 'number' ? op.count : (typeof op.amount === 'number' ? Math.abs(op.amount) : 1);
+      if (op.op === 'PAY_LIFE' || op.op === 'LIFE_PAY_COST') {
+        if (p.life < count) return { success: false, reason: 'INSUFFICIENT_LIFE' };
+        p.life -= count;
+        if ((op.to || 'void').toLowerCase() === 'reserve') p.reserve.normal += count;
+        return { success: true, life: p.life };
+      }
+      if (op.op === 'REDUCE_LIFE') {
+        const res = moveCore(state, targetSide, 'life', op.to || 'reserve', count, 'normal', { cause: 'EFFECT_DAMAGE', sourceCard });
+        return { success: res.success, life: p.life };
+      }
+      if (op.op === 'BOOST_LIFE' || (op.op === 'MODIFY_LIFE' && (op.amount || 1) > 0)) {
+        p.life += count;
+        return { success: true, life: p.life };
+      }
+      const mod = {
+        id: `mod_${Date.now()}_life_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op,
+        side: targetSide,
+        maxDamage: op.maxDamage || op.cap || 1,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, modifier: mod };
+    }
+
+    case 'CONTINUOUS_RULE':
+    case 'CARD_RULE_MODIFIER':
+    case 'RULE_OR_TEXT_MODIFIER':
+    case 'RESTRICTION':
+    case 'OPPONENT_RESTRICTION':
+    case 'MAGIC_RESTRICTION':
+    case 'PLAY_CONDITION': {
+      const targetSide = (op.op === 'OPPONENT_RESTRICTION' || op.side === 'opponent') ? oppSide : controller;
+      const mod = {
+        id: `mod_${Date.now()}_rule_${Math.random().toString(36).substr(2, 5)}`,
+        type: op.op === 'OPPONENT_RESTRICTION' || op.op === 'RESTRICTION' ? 'SET_RESTRICTION' : op.op,
+        side: targetSide,
+        restriction: op.restriction || op.rule || 'CUSTOM_RULE',
+        targetFilter: op.filter || null,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(mod);
+      return { success: true, modifier: mod };
+    }
+
+    case 'TARGET_CARD':
+    case 'TARGET':
+    case 'TARGET_SELECT':
+    case 'TARGET_CARDS':
+    case 'CHOOSE_TARGETS': {
+      const targetSide = op.side === 'self' ? controller : oppSide;
+      const p = state.players[targetSide];
+      const candidates = p.field.filter(s => op.filter ? matchesCardFilter(s.top, op.filter) : true);
+      const count = typeof op.count === 'number' ? op.count : 1;
+      const selected = candidates.slice(0, count);
+      context.selectedTargets = selected;
+      return { success: true, selectedTargets: selected };
     }
 
     default:
