@@ -230,21 +230,101 @@ test('Phase 10 - Official Rule Enforcement: Only Ultimates with U-Trigger can ex
     effect: '[Summon Condition: You control one or more White Spirits]\n[LV3][LV4][LV5] When Attacks, U-Trigger hits...'
   };
 
+  const ajaccio = {
+    name: 'The NetherCorpseKnight Ajaccio',
+    type: 'Spirit',
+    cost: 5,
+    effect: '[LV1][LV2][LV3] While this Spirit has zero cores on it, it is unaffected by opposing effects.'
+  };
+
+  const zombieSnake = {
+    name: 'Zombie-Snake',
+    type: 'Spirit',
+    cost: 1,
+    effect: '[LV1][LV2] (When Summoned) Send 1 core from opposing Spirit to Reserve.'
+  };
+
+  const vantous = {
+    name: 'The Hellwind FourDemonLord Van-Tous',
+    type: 'Ultimate',
+    cost: 7,
+    effect: '[Summon Condition: The PartnerDemonLord Javad]\n[LV3][LV4][LV5] (When Attacks) By returning a card from your Hand to the desktop...'
+  };
+
+  const bramZahfag = {
+    name: 'The Hellflame FourDemonLord Bram-Zahfag',
+    type: 'Ultimate',
+    cost: 8,
+    effect: '[Summon Condition: The PartnerDemonLord Javad]\n[LV3][LV4][LV5] (When Summoned) Destroy every opposing Spirit.'
+  };
+
   assert.equal(canExecuteUTrigger(terad), false, 'The PartnerWingedDragon Terad (Contract Spirit) must NEVER activate U-Trigger');
   assert.equal(canExecuteUTrigger(normalSpirit), false, 'Normal Spirits must NEVER activate U-Trigger');
+  assert.equal(canExecuteUTrigger(ajaccio), false, 'The NetherCorpseKnight Ajaccio (Spirit) must NEVER activate U-Trigger');
+  assert.equal(canExecuteUTrigger(zombieSnake), false, 'Zombie-Snake (Spirit) must NEVER activate U-Trigger');
   assert.equal(canExecuteUTrigger(javad), false, 'Ultimates without U-Trigger abilities must NOT activate U-Trigger');
+  assert.equal(canExecuteUTrigger(vantous), false, 'Van-Tous without U-Trigger abilities must NOT activate U-Trigger');
+  assert.equal(canExecuteUTrigger(bramZahfag), false, 'Bram-Zahfag without U-Trigger abilities must NOT activate U-Trigger');
   assert.equal(canExecuteUTrigger(trickster), true, 'Ultimate with [Ultimate Trigger] can activate U-Trigger');
   assert.equal(canExecuteUTrigger(strikewurm), true, 'Ultimate with U-Trigger keyword can activate U-Trigger');
 });
 
-test('Phase 10 - battle_arena.js strictly gates triggerUTrigger to Ultimates with U-Trigger keyword', () => {
+test('Phase 10 - Ultimate Trigger requires meeting the card LV requirement (e.g. LV4 for Ultimate-Trickster)', () => {
+  function isUTriggerLevelMet(card, level) {
+    const eff = card.effect || '';
+    const lines = eff.split('\n');
+    let triggerHeader = '';
+    for (const line of lines) {
+      if (/(?:u[- ]?trigger|ultimate[- ]?trigger|【(?:u|w|cu|wu|xu)?トリガー】)/i.test(line)) {
+        triggerHeader = line;
+        break;
+      }
+    }
+
+    let reqLevels = null;
+    if (triggerHeader) {
+      const rangeM = triggerHeader.match(/LV(\d+)[-~]LV(\d+)/i);
+      if (rangeM) {
+        reqLevels = [];
+        for (let i = parseInt(rangeM[1], 10); i <= parseInt(rangeM[2], 10); i++) reqLevels.push(i);
+      } else {
+        const lvls = triggerHeader.match(/LV\d+/gi);
+        if (lvls && lvls.length) {
+          reqLevels = lvls.map(l => parseInt(l.replace(/\D/g, ''), 10));
+        }
+      }
+    }
+
+    if (reqLevels && reqLevels.length > 0) {
+      return reqLevels.includes(level);
+    }
+    return true;
+  }
+
+  const trickster = {
+    name: 'Ultimate-Trickster',
+    type: 'Ultimate',
+    cost: 6,
+    effect: '[Ultimate Trigger: [LV4][LV5] (When Attacks)]\nWhen Ultimate Trigger hits, return a card from your Trash to the Hand.'
+  };
+
+  assert.equal(isUTriggerLevelMet(trickster, 3), false, 'Ultimate-Trickster at LV3 does NOT meet LV4 requirement');
+  assert.equal(isUTriggerLevelMet(trickster, 4), true, 'Ultimate-Trickster at LV4 meets LV4 requirement');
+  assert.equal(isUTriggerLevelMet(trickster, 5), true, 'Ultimate-Trickster at LV5 meets LV4 requirement');
+});
+
+test('Phase 10 - battle_arena.js strictly gates triggerUTrigger to Ultimates with U-Trigger keyword and level check', () => {
   const arenaPath = path.join(rootDir, 'battle_arena.js');
   const code = fs.readFileSync(arenaPath, 'utf8');
 
-  // Must have type check in triggerUTrigger
-  const fnMatch = code.match(/function triggerUTrigger\s*\([^\)]*\)\s*\{([\s\S]*?)(?:renderDuelTable|\n\s*\})/);
-  assert.ok(fnMatch, 'triggerUTrigger function must exist in battle_arena.js');
-  const body = fnMatch[1];
-  assert.ok(body.includes('Ultimate'), 'triggerUTrigger must verify card type is Ultimate');
-  assert.ok(body.includes('Trigger') || body.includes('trigger'), 'triggerUTrigger must verify presence of U-Trigger ability');
+  // Must have hasUTrigger and isUTriggerLevelMet functions
+  assert.ok(code.includes('function hasUTrigger'), 'hasUTrigger helper must exist in battle_arena.js');
+  assert.ok(code.includes('function isUTriggerLevelMet'), 'isUTriggerLevelMet helper must exist in battle_arena.js');
+
+  // Must gate attack trigger execution
+  assert.ok(code.includes('if (hasUTrigger(attacker) && isUTriggerLevelMet(attacker))'), 'Attacking units must be checked with hasUTrigger and isUTriggerLevelMet');
+
+  // Must export helpers on BattleArena
+  assert.ok(code.includes('hasUTrigger,'), 'hasUTrigger must be exported on BattleArena');
+  assert.ok(code.includes('isUTriggerLevelMet,'), 'isUTriggerLevelMet must be exported on BattleArena');
 });

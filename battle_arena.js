@@ -1709,21 +1709,62 @@
     if (side === 'player') renderPlayerHand();
   }
 
-  function triggerUTrigger(card, side = 'player') {
-    if (!card || !card.effect) return;
-    // Official Rule: Only Ultimates with U-Trigger keyword can execute U-Trigger
+  function hasUTrigger(card) {
+    if (!card) return false;
     const isUltimate = card.type === 'Ultimate' || (typeof card.type === 'string' && card.type.includes('Ultimate'));
-    if (!isUltimate) return;
+    if (!isUltimate) return false;
     const hasKeyword = Array.isArray(card.keywords) && card.keywords.some(k => k && (k.name === 'Ultimate Trigger' || k.hook === 'ultimate_trigger' || (k.name && k.name.includes('Trigger'))));
-    const hasTriggerInText = /(?:\[(?:u-trigger|ultimate trigger|double u-trigger|great u-trigger|triple u-trigger|quadruple u-trigger|octa u-trigger|count ultimate trigger|cross ultimate trigger|w-trigger)|【(?:u|w|cu|wu)?トリガー)/i.test(card.effect || '');
-    if (!hasKeyword && !hasTriggerInText) return;
+    const eff = card.effect || card.raw_effect || '';
+    const hasTriggerInText = /(?:\[(?:u[- ]?trigger|ultimate[- ]?trigger|double[- ]?u[- ]?trigger|great[- ]?u[- ]?trigger|triple[- ]?u[- ]?trigger|quadruple[- ]?u[- ]?trigger|octa[- ]?u[- ]?trigger|count[- ]?ultimate[- ]?trigger|cross[- ]?ultimate[- ]?trigger|w[- ]?trigger|xu[- ]?trigger)[^\]]*\]|【(?:u|w|cu|wu|xu)?トリガー】)/i.test(eff);
+    return Boolean(hasKeyword || hasTriggerInText);
+  }
+
+  function isUTriggerLevelMet(card) {
+    if (!hasUTrigger(card)) return false;
+    const eff = card.effect || card.raw_effect || '';
+    const lines = eff.split('\n');
+    let triggerHeader = '';
+    for (const line of lines) {
+      if (/(?:u[- ]?trigger|ultimate[- ]?trigger|【(?:u|w|cu|wu|xu)?トリガー】)/i.test(line)) {
+        triggerHeader = line;
+        break;
+      }
+    }
+
+    let reqLevels = null;
+    if (triggerHeader) {
+      const rangeM = triggerHeader.match(/LV(\d+)[-~]LV(\d+)/i);
+      if (rangeM) {
+        reqLevels = [];
+        for (let i = parseInt(rangeM[1], 10); i <= parseInt(rangeM[2], 10); i++) reqLevels.push(i);
+      } else {
+        const lvls = triggerHeader.match(/LV\d+/gi);
+        if (lvls && lvls.length) {
+          reqLevels = lvls.map(l => parseInt(l.replace(/\D/g, ''), 10));
+        }
+      }
+    }
+
+    if (reqLevels && reqLevels.length > 0) {
+      const curLvl = card.currentLevel || 1;
+      return reqLevels.includes(curLvl);
+    }
+    return true;
+  }
+
+  function triggerUTrigger(card, side = 'player') {
+    if (!card || !hasUTrigger(card)) return;
+    if (!isUTriggerLevelMet(card)) {
+      addLog(`ℹ️ **[U-TRIGGER]**: "${card.name}" is LV${card.currentLevel || 1}, but U-Trigger level requirement is not met. U-Trigger not activated.`, 'step');
+      return;
+    }
 
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemyState = DuelState[enemySide];
 
     if (!enemyState.deck || !enemyState.deck.length) {
-      addLog(`?? **[U-TRIGGER: ${card.name}]**: Opposing deck is empty! U-Trigger cannot resolve.`, 'step');
+      addLog(`⚠️ **[U-TRIGGER: ${card.name}]**: Opposing deck is empty! U-Trigger cannot resolve.`, 'step');
       return;
     }
 
@@ -1734,19 +1775,29 @@
     const ourCost = card.cost || 0;
     const oppCost = revealed.cost || 0;
     const isHit = ourCost > oppCost;
-    const isCritical = isHit && oppCost === 0;
+
+    const eff = card.effect || card.raw_effect || '';
+    let isCritical = false;
+    if (isHit) {
+      const critMatch = eff.match(/\[Critical Hit\]\s*(?:If the hit card is Cost (\d+) or less)?/i);
+      if (critMatch && critMatch[1]) {
+        isCritical = oppCost <= parseInt(critMatch[1], 10);
+      } else {
+        isCritical = oppCost === 0;
+      }
+    }
 
     AudioFX.burstIgnite ? AudioFX.burstIgnite() : AudioFX.magic();
 
     if (isCritical) {
-      addLog(`???? **[U-TRIGGER CRITICAL HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! Critical Hit activated!`, 'damage');
-      if (typeof showToast === 'function') showToast(`?? [U-Trigger Critical Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
+      addLog(`🌟 **[U-TRIGGER CRITICAL HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! Critical Hit activated!`, 'damage');
+      if (typeof showToast === 'function') showToast(`🌟 [U-Trigger Critical Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
     } else if (isHit) {
-      addLog(`?? **[U-TRIGGER HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! U-Trigger Hit activated!`, 'magic');
-      if (typeof showToast === 'function') showToast(`?? [U-Trigger Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
+      addLog(`🎯 **[U-TRIGGER HIT: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} vs Your Cost ${ourCost})! U-Trigger Hit activated!`, 'magic');
+      if (typeof showToast === 'function') showToast(`🎯 [U-Trigger Hit]: Cost ${ourCost} vs ${oppCost}!`, 'success');
     } else {
-      addLog(`??? **[U-TRIGGER GUARD: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} >= Your Cost ${ourCost})! Opponent guarded U-Trigger.`, 'step');
-      if (typeof showToast === 'function') showToast(`??? [U-Trigger Guard]: Opponent Cost ${oppCost} guarded.`, 'info');
+      addLog(`🛡️ **[U-TRIGGER GUARD: ${card.name}]**: Revealed "${revealed.name}" (Cost ${oppCost} >= Your Cost ${ourCost})! Opponent guarded U-Trigger.`, 'step');
+      if (typeof showToast === 'function') showToast(`🛡️ [U-Trigger Guard]: Opponent Cost ${oppCost} guarded.`, 'info');
     }
 
     renderDuelTable();
@@ -11652,7 +11703,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'player');
-    if (attacker && (attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate'))) {
+    if (hasUTrigger(attacker) && isUTriggerLevelMet(attacker)) {
       executeUltimateTrigger(attacker, 'player');
     }
 
@@ -12522,7 +12573,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     AudioFX.slash();
     executeWhenAttacksEffects(attacker, 'opponent');
-    if (attacker && (attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate'))) {
+    if (hasUTrigger(attacker) && isUTriggerLevelMet(attacker)) {
       executeUltimateTrigger(attacker, 'opponent');
     }
 
@@ -14261,6 +14312,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     setMirage,
     canCastAccel,
     castAccel,
+    hasUTrigger,
+    isUTriggerLevelMet,
     triggerUTrigger,
     getCardEffectiveCost,
     validateUltimateSummonCondition,
