@@ -5964,7 +5964,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if (card.brave) {
           braveInspectorBtn = `<button class="btn-inspector-action btn-inspect-debrave" onclick="BattleArena.separateBrave('${card.uid}')">🔄 Separate Brave (${card.brave.name})</button>`;
         } else if (card.type === 'Brave' || card.isBraveCard) {
-          braveInspectorBtn = `<button class="btn-inspector-action btn-inspect-brave" onclick="BattleArena.openBraveCombineModal('${card.uid}', 'field')">🔗 Combine Brave onto Spirit</button>`;
+          const reqUltimate = /(?:^|[^a-z])ultimate(?:[^a-z]|$)|アルティメット/i.test((card.brave_condition || card.braveCondition || card.effect || ''));
+          const targetTypeLabel = reqUltimate ? 'Ultimate' : 'Spirit';
+          braveInspectorBtn = `<button class="btn-inspector-action btn-inspect-brave" onclick="BattleArena.openBraveCombineModal('${card.uid}', 'field')">🔗 Combine Brave onto ${targetTypeLabel}</button>`;
         }
       }
       let scBtn = '';
@@ -6237,9 +6239,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           action: () => separateBrave(activeFieldUnit.uid)
         });
       } else if ((activeFieldUnit.type === 'Brave' || activeFieldUnit.isBraveCard) && isOurTurn && phase === 'MAIN') {
+        const reqUltimate = /(?:^|[^a-z])ultimate(?:[^a-z]|$)|アルティメット/i.test((activeFieldUnit.brave_condition || activeFieldUnit.braveCondition || activeFieldUnit.effect || ''));
+        const targetLabel = reqUltimate ? 'Ultimate' : 'Spirit';
         actions.push({
           id: 'brave_combine',
-          label: '🔗 Combine Brave onto Spirit',
+          label: `🔗 Combine Brave onto ${targetLabel}`,
           cls: 'eab-brave',
           disabled: false,
           action: () => openBraveCombineModal(activeFieldUnit.uid, 'field')
