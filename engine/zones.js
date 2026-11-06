@@ -199,8 +199,22 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
     else if (fromZone === 'burst') p.burst = null;
     else if (fromZone === 'mirage') p.mirage = null;
     else if (fromZone === 'field' && fromStack) {
-      // If the top card leaves field, the entire stack dismantles
+      // If the top card leaves field, check PROTECTION modifiers before dismantling stack
       if (fromStack.top.id === card.id) {
+        const cause = options.cause || 'rule';
+        const isProtected = (state.modifiers || []).some(m => {
+          if (m.type !== 'PROTECTION') return false;
+          if (m.targetStackId && m.targetStackId !== fromStack.id) return false;
+          if (m.side && m.side !== 'both' && m.side !== fromSide) return false;
+          if ((cause === 'destroy' || (toZone === 'grave' && cause === 'effect')) && m.cannotBeDestroyed !== false) return true;
+          if ((cause === 'bounce' || ((toZone === 'hand' || toZone === 'deck' || toZone === 'deck_bottom' || toZone === 'deck_top') && cause === 'effect')) && m.cannotBeBounced) return true;
+          if ((cause === 'depletion' || cause === 'deplete') && m.cannotBeDepleted) return true;
+          return false;
+        });
+        if (isProtected) {
+          return false;
+        }
+
         // Return cores on the stack to reserve
         const returnCores = { ...fromStack.cores };
         p.reserve.normal += returnCores.normal;
@@ -327,7 +341,7 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
     }
   } else if (fromZone === 'life') {
     const hasLifeLossPrevented = (state.modifiers || []).some(m =>
-      m.type === 'PREVENT_LIFE_LOSS' && (m.side === fromSide || m.side === 'both' || !m.side)
+      (m.type === 'PREVENT_LIFE_LOSS' || m.type === 'PREVENT_DAMAGE') && (m.side === fromSide || m.side === 'both' || !m.side)
     );
     if (hasLifeLossPrevented && cause !== 'cost' && cause !== 'rule') {
       return false;

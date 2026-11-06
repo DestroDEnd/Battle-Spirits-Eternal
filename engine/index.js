@@ -76,6 +76,24 @@ export function createGame(options = {}) {
       const card = p.hand.find(c => c.id === cardId);
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
 
+      // Check SET_RESTRICTION modifiers
+      for (const mod of state.modifiers || []) {
+        if (mod.type === 'SET_RESTRICTION' && (!mod.side || mod.side === 'both' || mod.side === playerSide)) {
+          const r = String(mod.restriction || '').toUpperCase();
+          if (r === 'CANNOT_SUMMON' && (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave')) {
+            if (!mod.cardType || mod.cardType === card.type) {
+              return { success: false, reason: 'SUMMON_RESTRICTED' };
+            }
+          }
+          if (r === 'CANNOT_USE_MAGIC' && card.type === 'Magic') {
+            return { success: false, reason: 'MAGIC_RESTRICTED' };
+          }
+          if (r === 'CANNOT_DEPLOY_NEXUS' && card.type && card.type.includes('Nexus')) {
+            return { success: false, reason: 'NEXUS_RESTRICTED' };
+          }
+        }
+      }
+
       // Timing check: During Attack Step, cannot summon spirits without Flash ability (R27)
       if (state.step === 'ATTACK' && (card.type === 'Spirit' || card.type === 'Ultimate' || card.type === 'Brave')) {
         const hasFlash = card.compiledIr && card.compiledIr.abilities && card.compiledIr.abilities.some(a => a.header.isFlash);
@@ -140,6 +158,26 @@ export function createGame(options = {}) {
         p.hand = p.hand.filter(c => c.id !== card.id);
         p.grave.push(card);
 
+        // Check NEGATE_EFFECT modifiers
+        const cardColors = Array.isArray(card.colors) ? card.colors : [card.color || 'Red'];
+        const isNegated = (state.modifiers || []).some(m => {
+          if (m.type !== 'NEGATE_EFFECT') return false;
+          if (m.side && m.side !== 'both' && m.side !== playerSide) return false;
+          if (m.targetType && m.targetType !== 'ALL' && m.targetType !== card.type) return false;
+          if (Array.isArray(m.colors) && m.colors.length > 0 && !cardColors.some(c => m.colors.includes(c))) return false;
+          return true;
+        });
+
+        if (isNegated) {
+          await events.emit({
+            type: 'EFFECT_NEGATED',
+            card,
+            player: playerSide
+          });
+          await checkStateBasedActions(state, events);
+          return { success: true, card, costPaid: cost, negated: true };
+        }
+
         if (card.compiledIr && card.compiledIr.abilities) {
           for (const ab of card.compiledIr.abilities) {
             if (ab.header.isMain && state.step === 'MAIN') {
@@ -158,6 +196,13 @@ export function createGame(options = {}) {
     async setBurst(cardId, playerSide = 'player') {
       const p = state.players[playerSide];
       if (p.burstSetThisTurn) return { success: false, reason: 'BURST_ALREADY_SET_THIS_TURN' };
+
+      const burstSetRestricted = (state.modifiers || []).some(m =>
+        m.type === 'SET_RESTRICTION' &&
+        (!m.side || m.side === 'both' || m.side === playerSide) &&
+        String(m.restriction || '').toUpperCase() === 'CANNOT_SET_BURST'
+      );
+      if (burstSetRestricted) return { success: false, reason: 'BURST_SET_RESTRICTED' };
 
       const card = p.hand.find(c => c.id === cardId);
       if (!card) return { success: false, reason: 'CARD_NOT_IN_HAND' };
@@ -241,6 +286,9 @@ export function createGame(options = {}) {
       }
 
       state.combat = null;
+      if (Array.isArray(state.modifiers)) {
+        state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+      }
       await checkStateBasedActions(state, events);
       return { success: true, attackerBp, blockerBp };
     },
@@ -250,12 +298,15 @@ export function createGame(options = {}) {
       const defenderSide = attackerSide === 'player' ? 'opponent' : 'player';
       const defPlayer = state.players[defenderSide];
 
-      // Check PREVENT_LIFE_LOSS modifier
+      // Check PREVENT_LIFE_LOSS / PREVENT_DAMAGE modifier
       const hasLifeLossPrevented = (state.modifiers || []).some(m =>
-        m.type === 'PREVENT_LIFE_LOSS' && (m.side === defenderSide || m.side === 'both' || !m.side)
+        (m.type === 'PREVENT_LIFE_LOSS' || m.type === 'PREVENT_DAMAGE') && (m.side === defenderSide || m.side === 'both' || !m.side)
       );
       if (hasLifeLossPrevented) {
         state.combat = null;
+        if (Array.isArray(state.modifiers)) {
+          state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+        }
         return { success: true, defenderLife: defPlayer.life, prevented: true };
       }
 
@@ -274,6 +325,9 @@ export function createGame(options = {}) {
       }
 
       state.combat = null;
+      if (Array.isArray(state.modifiers)) {
+        state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+      }
       await checkStateBasedActions(state, events);
       return { success: true, defenderLife: defPlayer.life };
     }

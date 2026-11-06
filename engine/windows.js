@@ -37,8 +37,11 @@ export class TimingWindowManager {
         continue;
       }
 
-      // Check BURST_LOCK
-      const isLocked = state.modifiers.some(m => m.type === 'BURST_LOCK' && m.side === side);
+      // Check BURST_LOCK or SET_RESTRICTION (CANNOT_ACTIVATE_BURST)
+      const isLocked = (state.modifiers || []).some(m =>
+        (m.type === 'BURST_LOCK' && (!m.side || m.side === 'both' || m.side === side)) ||
+        (m.type === 'SET_RESTRICTION' && (!m.side || m.side === 'both' || m.side === side) && String(m.restriction || '').toUpperCase() === 'CANNOT_ACTIVATE_BURST')
+      );
       if (isLocked) continue;
 
       // Prompt player to declare burst

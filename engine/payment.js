@@ -10,7 +10,44 @@ import { moveCore } from './zones.js';
 
 export function calculateEffectiveCost(state, card, playerSide = 'player') {
   if (!card) return 0;
-  const baseCost = card.cost || 0;
+  let baseCost = typeof card.cost === 'number' ? card.cost : parseInt(card.cost || '0', 10);
+
+  // Apply COST_MODIFIER and TREAT_RULE (cost overrides / deltas)
+  if (state && Array.isArray(state.modifiers)) {
+    for (const mod of state.modifiers) {
+      if (mod.type === 'COST_MODIFIER' || (mod.type === 'TREAT_RULE' && (mod.setCost !== undefined || mod.costDelta !== undefined))) {
+        if (mod.side && mod.side !== 'both' && mod.side !== playerSide) continue;
+        if (mod.targetCardId && mod.targetCardId !== card.id) continue;
+        if (mod.targetFilter) {
+          const tf = mod.targetFilter;
+          if (tf.type && card.type !== tf.type) continue;
+          if (Array.isArray(tf.types) && tf.types.length > 0 && !tf.types.includes(card.type)) continue;
+          if (tf.color) {
+            const cols = Array.isArray(card.colors) ? card.colors : [card.color || 'Red'];
+            if (!cols.some(c => c && c.toLowerCase() === tf.color.toLowerCase())) continue;
+          }
+          if (tf.family) {
+            const fams = Array.isArray(card.families) ? card.families : (card.family ? [card.family] : []);
+            if (!fams.some(f => f && f.toLowerCase().includes(tf.family.toLowerCase()))) continue;
+          }
+        }
+        if (typeof mod.setCost === 'number') {
+          baseCost = Math.max(0, mod.setCost);
+        } else if (typeof mod.amount === 'number') {
+          if (mod.mode === 'REDUCE' || mod.reduce) {
+            baseCost = Math.max(0, baseCost - Math.abs(mod.amount));
+          } else {
+            baseCost = Math.max(0, baseCost + mod.amount);
+          }
+        } else if (typeof mod.delta === 'number') {
+          baseCost = Math.max(0, baseCost + mod.delta);
+        } else if (typeof mod.costDelta === 'number') {
+          baseCost = Math.max(0, baseCost + mod.costDelta);
+        }
+      }
+    }
+  }
+
   if (baseCost === 0) return 0;
 
   const reduction = card.reduction || {};
