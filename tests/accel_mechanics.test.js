@@ -9,6 +9,7 @@ import { PerCardRegistry } from '../engine/cards/index.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 const appSource = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+const bundleSource = fs.readFileSync(path.join(rootDir, 'engine/cards/bundle.js'), 'utf8');
 const battleArenaSource = fs.readFileSync(path.join(rootDir, 'battle_arena.js'), 'utf8');
 const cardsDetailed = JSON.parse(fs.readFileSync(path.join(rootDir, 'data/cards_detailed.json'), 'utf8'));
 
@@ -78,6 +79,7 @@ function createArenaTestEnvironment() {
   sandbox.window.window = sandbox.window;
 
   vm.createContext(sandbox);
+  vm.runInContext(bundleSource, sandbox);
   vm.runInContext(battleArenaSource, sandbox);
 
   return { arena: sandbox.window.BattleArena, sandbox };
