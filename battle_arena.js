@@ -15818,6 +15818,56 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+  // ── KEYBOARD SHORTCUTS FOR SMOOTH DUELING ──
+  if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+    window.addEventListener('keydown', (e) => {
+      const targetTag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+      if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || targetTag === 'SELECT') return;
+
+      // Escape closes open arena modals
+      if (e.key === 'Escape') {
+        const coreModal = document.getElementById('battleSummonModal');
+        if (coreModal && coreModal.classList.contains('active')) {
+          e.preventDefault();
+          closeSummonModal();
+          return;
+        }
+        const adventModal = document.getElementById('battleAdventModal');
+        if (adventModal && adventModal.classList.contains('active')) {
+          e.preventDefault();
+          closeAdventModal();
+          return;
+        }
+        const sacModal = document.getElementById('battleSacrificeModal');
+        if (sacModal && sacModal.classList.contains('active')) {
+          e.preventDefault();
+          closeSacrificeModal();
+          return;
+        }
+        return;
+      }
+
+      // Enter confirms summon payment if core allocation modal is open
+      if (e.key === 'Enter') {
+        const coreModal = document.getElementById('battleSummonModal');
+        if (coreModal && coreModal.classList.contains('active')) {
+          e.preventDefault();
+          confirmSummonPayment();
+          return;
+        }
+      }
+
+      // Space advances turn phase if in duel and player's turn
+      if (e.key === ' ' || e.code === 'Space') {
+        const anyModalActive = document.querySelector('.active-modal, .modal-overlay.open, #battleSummonModal.active, #battleAdventModal.active, #battleSacrificeModal.active');
+        if (!anyModalActive && DuelState && DuelState.inDuel && DuelState.activePlayer === 'player') {
+          e.preventDefault();
+          nextPhase();
+        }
+      }
+    });
+  }
+
   window.BattleArena = {
     switchMode: switchArenaMode,
     copyMyDuelistId,
