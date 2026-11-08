@@ -5,6 +5,7 @@
  */
 
 import { CardRegistry, PerCardRegistry } from './registry.js';
+import './bundle.js';
 import './sets/sd65_four_demon_lords.js';
 import './sets/standard_and_custom_decks.js';
 

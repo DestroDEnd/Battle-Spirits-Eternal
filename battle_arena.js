@@ -1896,9 +1896,9 @@
 
   function canCastAccel(card, side = 'player') {
     if (!card || !card.effect) return { allowed: false, cost: 0, baseCost: 0 };
-    const m = card.effect.match(/\[Accel:\s*Cost\s*(\d+)(?:\s*\(([^)]+)\))?\]|【アクセル】コスト(\d+)/i);
+    const m = card.effect.match(/(?:\[\s*)?Accel\s*:\s*Cost\s*(\d+)(?:\s*\(([^)]+)\))?(?:\])?|【アクセル(?:：コスト(\d+))?[^】]*】/i);
     if (!m) return { allowed: false, cost: 0, baseCost: 0 };
-    const rawCost = parseInt(m[1] || m[3], 10);
+    const rawCost = parseInt(m[1] || m[3] || '0', 10);
     const friendly = (typeof getFriendlySymbols === 'function') ? getFriendlySymbols(side) : { total: 0, byColor: {}, rainbow: 0 };
     const cardColors = (typeof parseCardColors === 'function') ? parseCardColors(card) : ['red'];
     let matchedSymbols = 0;
@@ -1910,7 +1910,7 @@
     const redMatch = (m[2] || '').match(/(\d+)/);
     const maxReduction = redMatch ? parseInt(redMatch[1], 10) : Math.min(Math.max(0, rawCost - 1), matchedSymbols);
     const actualReduction = Math.min(matchedSymbols, maxReduction);
-    const effCost = Math.max(1, rawCost - actualReduction);
+    const effCost = Math.max(0, rawCost - actualReduction);
 
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     const canAfford = (friendlyState.reserve || 0) >= effCost;
@@ -1929,26 +1929,56 @@
       return;
     }
 
-    friendlyState.reserve -= check.cost;
-    friendlyState.trash += check.cost;
+    if (check.cost > 0) {
+      friendlyState.reserve -= check.cost;
+      friendlyState.trash += check.cost;
+    }
 
     AudioFX.magic();
-    addLog(`? **[ACCEL ACTIVATED]**: "${card.name}" activated [Accel: Cost ${check.cost}]!`, 'magic');
-    if (typeof showToast === 'function') showToast(`? Cast Accel: "${card.name}"!`, 'success');
+    addLog(`⚡ **[ACCEL ACTIVATED]**: "${card.name}" activated [Accel: Cost ${check.cost}]!`, 'magic');
+    if (typeof showToast === 'function') showToast(`⚡ Cast Accel: "${card.name}"!`, 'success');
 
     // Extract Accel effect block and execute
-    const accelBlockMatch = card.effect.match(/\[Accel:[^\]]+\]([\s\S]*?)(?=\[LV|\(When|$)/i);
+    const accelBlockMatch = card.effect.match(/(?:\[\s*)?Accel(?:\s*:\s*Cost[^\n\r\]<]+)?(?:\])?([\s\S]*?)(?=\[LV|\[During|\(When|$)/i);
     const accelText = accelBlockMatch ? accelBlockMatch[1].trim() : card.effect;
 
-    executeAbilityActions(accelText, card, side, 'MAGIC');
-    executeUniversalCardEffect(card, side, 'FLASH');
+    // Check PerCardRegistry first for deterministic card logic
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    const cNum = card.card_number || card.cardNumber || card.id;
+    let handledByRegistry = false;
+    if (pRegistry && cNum && (pRegistry.has(cNum, 'ACCEL') || pRegistry.has(cNum, 'FLASH') || pRegistry.has(cNum, 'MAIN'))) {
+      const trig = pRegistry.has(cNum, 'ACCEL') ? 'ACCEL' : (pRegistry.has(cNum, 'FLASH') ? 'FLASH' : 'MAIN');
+      pRegistry.execute(cNum, trig, {
+        card,
+        sourceCard: card,
+        side,
+        duelState: DuelState,
+        arenaApi: window.BattleArena
+      });
+      handledByRegistry = true;
+    }
 
-    // Official Rule: After Accel resolves, card is placed face-up in Open Zone (Removed from Game Zone), NOT Trash!
+    if (!handledByRegistry) {
+      executeAbilityActions(accelText, card, side, 'MAGIC');
+      executeUniversalCardEffect(card, side, 'FLASH');
+    }
+
+    // Official Rule: After Accel resolves, card is placed face-up in Open Zone (Removed Zone), NOT Trash!
     friendlyState.hand.splice(cardIdx, 1);
     if (!friendlyState.openCards) friendlyState.openCards = [];
     friendlyState.openCards.push(card);
     addLog(`🎴 **[ACCEL RESOLVED]**: "${card.name}" placed face-up into your Open Zone. You can click "Open: ${friendlyState.openCards.length}" on your HUD to summon it during your Main Step!`, 'magic');
-  if (side === 'player' && typeof showToast === 'function') showToast(`🎴 Accel resolved: "${card.name}" moved to Open Zone!`, 'success');
+    if (side === 'player' && typeof showToast === 'function') showToast(`🎴 Accel resolved: "${card.name}" moved to Open Zone!`, 'success');
+
+    // Check if END_ATTACK_STEP was triggered by Accel (e.g. Silver Guardian Blade)
+    if (DuelState.modifiers && DuelState.modifiers.some(m => m.type === 'END_ATTACK_STEP')) {
+      DuelState.modifiers = DuelState.modifiers.filter(m => m.type !== 'END_ATTACK_STEP');
+      addLog(`🛑 **[ATTACK STEP ENDED]**: Attack Step immediately concluded by effect!`, 'warning');
+      DuelState.phaseIndex = 6;
+      if (typeof safeEndOpponentTurn === 'function' && DuelState.activePlayer === 'opponent') {
+        safeEndOpponentTurn();
+      }
+    }
 
     renderDuelTable();
     if (side === 'player') renderPlayerHand();
@@ -6004,7 +6034,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (cardType.includes('spirit')) {
       if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
       if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
-      if (eff.includes('[accel:') && /flash/i.test(eff)) return true;
+      if (/(?:\[\s*)?accel(?:\s*:\s*cost)?/i.test(card.effect) && /flash/i.test(card.effect)) return true;
       return false;
     }
 
@@ -6016,7 +6046,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // 5. Braves / Ultimates
     if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
     if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
-    if (eff.includes('[accel:') && /flash/i.test(eff)) return true;
+    if (/(?:\[\s*)?accel(?:\s*:\s*cost)?/i.test(card.effect) && /flash/i.test(card.effect)) return true;
 
     return false;
   }
@@ -6844,12 +6874,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       // 2. Accel
       const accel = canCastAccel(handCard, side);
-      if (accel && accel.allowed) {
+      if (accel && (accel.baseCost !== undefined || accel.cost !== undefined)) {
+        const isMainStep = (phase === 'MAIN' && isOurTurn);
+        const isAttackStep = (phase === 'ATTACK');
+        const hasFlash = /flash/i.test(handCard.effect || '');
+        const hasMain = /main/i.test(handCard.effect || '');
+        const stepAllowed = (isAttackStep && hasFlash) || (isMainStep && (hasMain || hasFlash));
+        const canAfford = accel.allowed;
         actions.push({
           id: 'accel',
           label: `⚡ Cast Accel (Cost ${accel.cost})`,
           cls: 'eab-accel',
-          disabled: false,
+          disabled: !stepAllowed || !canAfford,
+          reason: !stepAllowed ? 'Timing not met (Flash/Main)' : (!canAfford ? `Need ${accel.cost} cores` : ''),
           action: () => castAccel(handCard.uid, side)
         });
       }
@@ -6882,6 +6919,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           });
         }
       }
+    }
+
+    // Case 3: Card in Open Zone (e.g. after Accel resolved)
+    const openCard = (DuelState.player.openCards || []).find(c => c.uid === card.uid || c.name === card.name);
+    if (openCard && isOurTurn && phase === 'MAIN') {
+      const effCost = getCardEffectiveCost(openCard, side);
+      const canAfford = (DuelState.player.reserve >= effCost);
+      actions.push({
+        id: 'summon_from_open',
+        label: `🎴 Summon from Open Zone (Cost ${effCost})`,
+        cls: 'eab-summon',
+        disabled: !canAfford,
+        reason: canAfford ? '' : `Need ${effCost} cores`,
+        action: () => summonCardFromOpen(openCard.uid, side)
+      });
     }
 
     return actions;

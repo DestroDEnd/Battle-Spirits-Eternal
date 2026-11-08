@@ -2905,7 +2905,7 @@ if (typeof globalThis !== 'undefined') {
     }
   });
 
-  PerCardRegistry.registerCard('BATTLE-SPIRITS-A12405', {
+  const silverGuardianBladeHandler = {
     name: 'The Silver Guardian Blade',
     cardType: 'Brave',
     triggers: {
@@ -2919,9 +2919,22 @@ if (typeof globalThis !== 'undefined') {
         audio(ctx, 'magic');
         log(ctx, `⚔️ **[SILVER GUARDIAN BLADE: Flash Accel]**: Immediately ended Attack Step!`, 'magic');
         render(ctx);
+      },
+      ACCEL: function(ctx) {
+        const { duelState } = ctx;
+        if (!duelState.modifiers) duelState.modifiers = [];
+        duelState.modifiers.push({
+          type: 'END_ATTACK_STEP',
+          source: 'The Silver Guardian Blade'
+        });
+        audio(ctx, 'magic');
+        log(ctx, `⚔️ **[SILVER GUARDIAN BLADE: Flash Accel]**: Immediately ended Attack Step!`, 'magic');
+        render(ctx);
       }
     }
-  });
+  };
+  PerCardRegistry.registerCard('BATTLE-SPIRITS-A12405', silverGuardianBladeHandler);
+  PerCardRegistry.registerCard('EX02-004', silverGuardianBladeHandler);
 
   PerCardRegistry.registerCard('BS67-083', {
     name: 'Beam Blast',
