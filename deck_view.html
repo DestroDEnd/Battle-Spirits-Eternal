@@ -159,7 +159,7 @@
     /* Stats Grid */
     .deckview-stats-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.25rem;
       margin-bottom: 2rem;
     }
@@ -475,6 +475,23 @@
       </div>
       <div class="curve-wrap" id="curveBars" style="height: 52px; display: flex; align-items: flex-end; gap: 6px;"></div>
     </div>
+
+    <!-- Color Distribution & Symbols -->
+    <div class="deckview-stat-card">
+      <div class="stat-card-title">
+        <span>Color Distribution</span>
+        <span id="statColorDominant" style="font-family:'JetBrains Mono', monospace;color:#f59e0b;font-size:0.75rem;"></span>
+      </div>
+      <div class="color-bar-strip" id="colorBarStrip" style="height:10px;display:flex;border-radius:5px;overflow:hidden;background:#1e293b;margin:8px 0 12px 0;"></div>
+      <div class="type-dist-grid" id="colorDistGrid" style="grid-template-columns:repeat(6, 1fr);gap:4px;">
+        <div class="type-dist-box" style="padding:6px 2px;" title="Red Cards"><div class="type-dist-count" id="countColRed" style="font-size:0.85rem;color:#fca5a5;">0</div><div class="type-dist-label" style="font-size:0.6rem;">🔴 Red</div></div>
+        <div class="type-dist-box" style="padding:6px 2px;" title="Purple Cards"><div class="type-dist-count" id="countColPurple" style="font-size:0.85rem;color:#d8b4fe;">0</div><div class="type-dist-label" style="font-size:0.6rem;">🟣 Pur</div></div>
+        <div class="type-dist-box" style="padding:6px 2px;" title="Green Cards"><div class="type-dist-count" id="countColGreen" style="font-size:0.85rem;color:#86efac;">0</div><div class="type-dist-label" style="font-size:0.6rem;">🟢 Grn</div></div>
+        <div class="type-dist-box" style="padding:6px 2px;" title="White Cards"><div class="type-dist-count" id="countColWhite" style="font-size:0.85rem;color:#f8fafc;">0</div><div class="type-dist-label" style="font-size:0.6rem;">⚪ Wht</div></div>
+        <div class="type-dist-box" style="padding:6px 2px;" title="Yellow Cards"><div class="type-dist-count" id="countColYellow" style="font-size:0.85rem;color:#fde047;">0</div><div class="type-dist-label" style="font-size:0.6rem;">🟡 Yel</div></div>
+        <div class="type-dist-box" style="padding:6px 2px;" title="Blue Cards"><div class="type-dist-count" id="countColBlue" style="font-size:0.85rem;color:#93c5fd;">0</div><div class="type-dist-label" style="font-size:0.6rem;">🔵 Blu</div></div>
+      </div>
+    </div>
   </div>
 
   <!-- Cards Gallery Section -->
@@ -674,6 +691,7 @@
     let spirits = 0, braves = 0, magic = 0, nexus = 0;
     let bursts = 0, advents = 0, contracts = 0, mirages = 0;
     const curve = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 0 to 8+
+    const colorCounts = { Red: 0, Purple: 0, Green: 0, White: 0, Yellow: 0, Blue: 0 };
 
     entries.forEach(([name, count]) => {
       const info = deckCardsData[name] || {};
@@ -683,6 +701,15 @@
       else if (type.includes('magic')) magic += count;
       else if (type.includes('nexus')) nexus += count;
       else spirits += count;
+
+      const rawCol = (info.color || 'Red').trim();
+      const cardColors = (info.colors && Array.isArray(info.colors) && info.colors.length > 0)
+        ? info.colors
+        : (rawCol ? rawCol.split(/[\/,]/).map(s => s.trim()).filter(Boolean) : ['Red']);
+      cardColors.forEach(c => {
+        const cap = c.charAt(0).toUpperCase() + c.slice(1).toLowerCase();
+        if (colorCounts[cap] !== undefined) colorCounts[cap] += count;
+      });
 
       const eff = (info.effect || '') + ' ' + (name || '') + ' ' + (info.type || '');
       if (/\[burst|【バースト】/i.test(eff)) bursts += count;
@@ -730,6 +757,47 @@
         </div>
       `;
     }).join('');
+
+    // Render Color Distribution
+    const totalColorCount = Object.values(colorCounts).reduce((a, b) => a + b, 0);
+    const colorStrip = document.getElementById('colorBarStrip');
+    if (colorStrip) {
+      if (totalColorCount === 0) {
+        colorStrip.innerHTML = '<div style="flex:1;background:#334155;"></div>';
+      } else {
+        const colorPalette = {
+          Red: '#ef4444',
+          Purple: '#a855f7',
+          Green: '#22c55e',
+          White: '#e2e8f0',
+          Yellow: '#eab308',
+          Blue: '#3b82f6'
+        };
+        colorStrip.innerHTML = Object.entries(colorCounts).map(([col, cnt]) => {
+          if (cnt === 0) return '';
+          const pct = ((cnt / totalColorCount) * 100).toFixed(1);
+          return `<div style="width:${pct}%;background:${colorPalette[col]};" title="${col}: ${cnt} cards (${pct}%)"></div>`;
+        }).join('');
+      }
+    }
+    const elCR = document.getElementById('countColRed');
+    const elCP = document.getElementById('countColPurple');
+    const elCG = document.getElementById('countColGreen');
+    const elCW = document.getElementById('countColWhite');
+    const elCY = document.getElementById('countColYellow');
+    const elCB = document.getElementById('countColBlue');
+    if (elCR) elCR.textContent = colorCounts.Red;
+    if (elCP) elCP.textContent = colorCounts.Purple;
+    if (elCG) elCG.textContent = colorCounts.Green;
+    if (elCW) elCW.textContent = colorCounts.White;
+    if (elCY) elCY.textContent = colorCounts.Yellow;
+    if (elCB) elCB.textContent = colorCounts.Blue;
+
+    const dominant = Object.entries(colorCounts).sort((a, b) => b[1] - a[1])[0];
+    const domEl = document.getElementById('statColorDominant');
+    if (domEl) {
+      domEl.textContent = (dominant && dominant[1] > 0) ? `Dominant: ${dominant[0]} (${dominant[1]})` : '';
+    }
   }
 
   function setGalleryFilter(filter, btn) {

@@ -133,6 +133,16 @@
         <div class="type-stat-pill" title="Cards with [Mirage]"><span style="font-size:0.75rem;">🔮</span> <span id="statMirages">0 Mirages</span></div>
       </div>
 
+      <!-- Color Distribution Stats -->
+      <div class="deck-type-stats" id="deckColorStats" style="margin-top:0.35rem;display:grid;grid-template-columns:repeat(3, 1fr);gap:4px;">
+        <div class="type-stat-pill" style="border-color:#ef4444;background:rgba(239,68,68,0.12);"><span id="statColRed" style="color:#fca5a5;font-weight:700;">🔴 0 Red</span></div>
+        <div class="type-stat-pill" style="border-color:#a855f7;background:rgba(168,85,247,0.12);"><span id="statColPurple" style="color:#d8b4fe;font-weight:700;">🟣 0 Pur</span></div>
+        <div class="type-stat-pill" style="border-color:#22c55e;background:rgba(34,197,94,0.12);"><span id="statColGreen" style="color:#86efac;font-weight:700;">🟢 0 Grn</span></div>
+        <div class="type-stat-pill" style="border-color:#f8fafc;background:rgba(248,250,252,0.1);"><span id="statColWhite" style="color:#f8fafc;font-weight:700;">⚪ 0 Wht</span></div>
+        <div class="type-stat-pill" style="border-color:#eab308;background:rgba(234,179,8,0.12);"><span id="statColYellow" style="color:#fde047;font-weight:700;">🟡 0 Yel</span></div>
+        <div class="type-stat-pill" style="border-color:#3b82f6;background:rgba(59,130,246,0.12);"><span id="statColBlue" style="color:#93c5fd;font-weight:700;">🔵 0 Blu</span></div>
+      </div>
+
       <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
         <button class="btn-modal-primary" onclick="openDeckImportModal()">📥 Import Deck from Computer</button>
         <button class="btn-page" style="background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(5,150,105,0.3));border-color:rgba(16,185,129,0.5);color:#6ee7b7;font-weight:700;" onclick="DeckManagerUI.saveActiveDeckAndReset()">💾 Save Deck</button>
@@ -964,6 +974,7 @@ function calculateAndRenderStats() {
   const bins = { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8+': 0 };
   const typeStats = { spirit: 0, brave: 0, magic: 0, nexus: 0 };
   const mechStats = { burst: 0, advent: 0, contract: 0, mirage: 0 };
+  const colorStats = { Red: 0, Purple: 0, Green: 0, White: 0, Yellow: 0, Blue: 0 };
 
   for (const [name, count] of entries) {
     const card = deckCardCache[name] || {};
@@ -978,6 +989,15 @@ function calculateAndRenderStats() {
     else if (t.includes('nexus')) typeStats.nexus += count;
     else typeStats.spirit += count;
 
+    const rawCol = (card.color || 'Red').trim();
+    const cardColors = (card.colors && Array.isArray(card.colors) && card.colors.length > 0)
+      ? card.colors
+      : (rawCol ? rawCol.split(/[\/,]/).map(s => s.trim()).filter(Boolean) : ['Red']);
+    cardColors.forEach(c => {
+      const cap = c.charAt(0).toUpperCase() + c.slice(1).toLowerCase();
+      if (colorStats[cap] !== undefined) colorStats[cap] += count;
+    });
+
     const eff = (card.effect || '') + ' ' + (card.name || '') + ' ' + (card.type || '');
     if (/\[burst|【バースト】/i.test(eff)) mechStats.burst += count;
     if (/\[(?:contract\s+)?advent|【(?:契約)?煌臨】/i.test(eff)) mechStats.advent += count;
@@ -986,10 +1006,10 @@ function calculateAndRenderStats() {
   }
 
   renderCurveFromBins(bins);
-  updateTypeStats(typeStats, mechStats);
+  updateTypeStats(typeStats, mechStats, colorStats);
 }
 
-function updateTypeStats(stats, mechs = {}) {
+function updateTypeStats(stats, mechs = {}, colors = {}) {
   const sp = document.getElementById('statSpirits');
   const br = document.getElementById('statBraves');
   const mg = document.getElementById('statMagic');
@@ -1007,6 +1027,19 @@ function updateTypeStats(stats, mechs = {}) {
   if (sAd) sAd.textContent = `${mechs.advent || 0} Advents`;
   if (sCo) sCo.textContent = `${mechs.contract || 0} Contracts`;
   if (sMi) sMi.textContent = `${mechs.mirage || 0} Mirages`;
+
+  const elCR = document.getElementById('statColRed');
+  const elCP = document.getElementById('statColPurple');
+  const elCG = document.getElementById('statColGreen');
+  const elCW = document.getElementById('statColWhite');
+  const elCY = document.getElementById('statColYellow');
+  const elCB = document.getElementById('statColBlue');
+  if (elCR) elCR.textContent = `🔴 ${colors.Red || 0} Red`;
+  if (elCP) elCP.textContent = `🟣 ${colors.Purple || 0} Pur`;
+  if (elCG) elCG.textContent = `🟢 ${colors.Green || 0} Grn`;
+  if (elCW) elCW.textContent = `⚪ ${colors.White || 0} Wht`;
+  if (elCY) elCY.textContent = `🟡 ${colors.Yellow || 0} Yel`;
+  if (elCB) elCB.textContent = `🔵 ${colors.Blue || 0} Blu`;
 }
 
 function renderCurveFromBins(bins) {
