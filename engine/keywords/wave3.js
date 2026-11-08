@@ -101,12 +101,55 @@ export const BrillianceKeyword = {
   }
 };
 
+export const SpiritSoulKeyword = {
+  id: 'Spirit Soul',
+  hooks: {}
+};
+
+export const CoreChargeKeyword = {
+  id: 'Core Charge',
+  hooks: {}
+};
+
+export const GrandSkillKeyword = {
+  id: 'Grand Skill',
+  hooks: {}
+};
+
+export const BraveKeyword = {
+  id: 'Brave',
+  hooks: {}
+};
+
 export function registerWave3Keywords(registry) {
   registry.register(UltimateTriggerKeyword);
   registry.register({ ...UltimateTriggerKeyword, id: 'U-Trigger' });
   registry.register({ ...UltimateTriggerKeyword, id: 'Double Ultimate Trigger' });
   registry.register({ ...UltimateTriggerKeyword, id: 'Triple Ultimate Trigger' });
   registry.register({ ...UltimateTriggerKeyword, id: 'Quadruple Ultimate Trigger' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Octa Ultimate Trigger' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Count Ultimate Trigger' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Double Count Ultimate Trigger' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Cross Ultimate Trigger' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Critical Hit' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Double Hit' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Triple Hit' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Quadruple Hit' });
+  registry.register({ ...UltimateTriggerKeyword, id: 'Trigger Counter' });
   registry.register(ATFieldKeyword);
   registry.register(BrillianceKeyword);
+  registry.register(SpiritSoulKeyword);
+  registry.register(CoreChargeKeyword);
+  registry.register({ ...CoreChargeKeyword, id: 'Neo-Core Charge' });
+  registry.register(GrandSkillKeyword);
+  registry.register({ ...GrandSkillKeyword, id: 'Grand Field' });
+  registry.register({ ...GrandSkillKeyword, id: 'Contract Skill' });
+  registry.register({ ...GrandSkillKeyword, id: 'Contract Field' });
+  registry.register({ ...GrandSkillKeyword, id: 'Release' });
+  registry.register(BraveKeyword);
+  registry.register({ ...BraveKeyword, id: 'Brave Engage' });
+  registry.register({ ...BraveKeyword, id: 'Double Drive' });
+  registry.register({ ...BraveKeyword, id: 'Reload' });
+  registry.register({ ...BraveKeyword, id: 'Contract Reload' });
+  registry.register({ ...BraveKeyword, id: 'Revive' });
 }

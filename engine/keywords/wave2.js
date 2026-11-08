@@ -344,11 +344,43 @@ export const CatalyzeKeyword = {
   }
 };
 
+export const AdventKeyword = {
+  id: 'Advent',
+  hooks: {}
+};
+
+export const BurstKeyword = {
+  id: 'Burst',
+  hooks: {}
+};
+
+export const ChargeKeyword = {
+  id: 'Charge',
+  hooks: {}
+};
+
 export function registerWave2Keywords(registry) {
+  registry.register(AdventKeyword);
+  registry.register({ ...AdventKeyword, id: 'Contract Advent' });
+  registry.register({ ...AdventKeyword, id: 'Grand Advent' });
+  registry.register({ ...AdventKeyword, id: 'Reverse Contract Advent' });
+  registry.register({ ...AdventKeyword, id: 'Ultra Contract Advent' });
+  registry.register(BurstKeyword);
+  registry.register({ ...BurstKeyword, id: 'Soul Burst' });
+  registry.register({ ...BurstKeyword, id: 'Burst Seal' });
   registry.register(AccelKeyword);
   registry.register(MirageKeyword);
+  registry.register({ ...MirageKeyword, id: 'Mirage Boost' });
+  registry.register({ ...MirageKeyword, id: 'Mirage Drain' });
+  registry.register({ ...MirageKeyword, id: 'Mirage Flash' });
+  registry.register({ ...MirageKeyword, id: 'Mirage Trance' });
+  registry.register({ ...MirageKeyword, id: 'Mirage Synchro' });
   registry.register(ChangeKeyword);
   registry.register(HighSpeedKeyword);
+  registry.register({ ...HighSpeedKeyword, id: 'Absolute Sound Speed' });
+  registry.register({ ...HighSpeedKeyword, id: 'Sound Speed' });
+  registry.register({ ...HighSpeedKeyword, id: 'Soul Swift' });
+  registry.register({ ...HighSpeedKeyword, id: 'Thunder Swift' });
   registry.register(ViolentHighSpeedKeyword);
   registry.register({ ...ViolentHighSpeedKeyword, id: 'Flashing Swift' });
   registry.register(ContractKeyword);
@@ -359,16 +391,41 @@ export function registerWave2Keywords(registry) {
   registry.register({ ...RebirthKeyword, id: 'Zero Rebirth' });
   registry.register({ ...RebirthKeyword, id: 'Sortie Rebirth' });
   registry.register({ ...RebirthKeyword, id: 'Six Heaven Rebirth' });
+  registry.register({ ...RebirthKeyword, id: 'Absolute Rebirth' });
+  registry.register({ ...RebirthKeyword, id: 'Illusive Rebirth' });
   registry.register(SealKeyword);
+  registry.register({ ...SealKeyword, id: 'Super Seal' });
+  registry.register({ ...SealKeyword, id: 'Pyroxene Seal' });
+  registry.register({ ...SealKeyword, id: 'Constellation Seal' });
+  registry.register({ ...SealKeyword, id: 'Twinkle Seal' });
+  registry.register({ ...SealKeyword, id: 'Sky Seal' });
+  registry.register({ ...SealKeyword, id: 'Moonlight Seal' });
   registry.register(UnleashKeyword);
   registry.register({ ...UnleashKeyword, id: 'Nether Unleash' });
   registry.register({ ...UnleashKeyword, id: 'Yomi Unleash' });
   registry.register({ ...UnleashKeyword, id: 'Kamiumi Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Contract Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Celestial Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Super Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Absolute Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Astral Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Dark Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Flame Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Ice Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Moon Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Thunder Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Chaos Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Silver Arm Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Time Unleash' });
   registry.register(SoulDriveKeyword);
   registry.register({ ...SoulDriveKeyword, id: 'Light-Dark Soul Drive' });
   registry.register(RushKeyword);
   registry.register(SixHeavenRushKeyword);
+  registry.register({ ...RushKeyword, id: 'Six Pentan Rush' });
+  registry.register(ChargeKeyword);
+  registry.register({ ...ChargeKeyword, id: 'Ringing Charge' });
   registry.register(CatalyzeKeyword);
   registry.register({ ...CatalyzeKeyword, id: 'True Catalyze' });
   registry.register({ ...CatalyzeKeyword, id: 'War Catalyze' });
+  registry.register({ ...CatalyzeKeyword, id: 'Twinkle Catalyze' });
 }

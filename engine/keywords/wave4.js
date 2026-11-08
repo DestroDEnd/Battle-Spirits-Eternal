@@ -875,25 +875,54 @@ export const BarrierKeyword = {
   }
 };
 
+export const HollowSkyKeyword = {
+  id: 'Hollow Sky',
+  hooks: {}
+};
+
+export const TwinkleNecromancyKeyword = {
+  id: 'Twinkle Necromancy',
+  hooks: {}
+};
+
+export const EvilLightKeyword = {
+  id: 'Evil Light',
+  hooks: {}
+};
+
 export function registerWave4Keywords(registry) {
   registry.register(PursuitKeyword);
+  registry.register({ ...PursuitKeyword, id: 'Great Pursuit' });
   registry.register(SoarKeyword);
   registry.register({ ...SoarKeyword, id: 'True-Soar' });
   registry.register({ ...SoarKeyword, id: 'Grand Soar' });
   registry.register({ ...SoarKeyword, id: 'Grand Twinkle Soar' });
+  registry.register({ ...SoarKeyword, id: 'Thundering Soar' });
+  registry.register({ ...SoarKeyword, id: 'Twinkle Soar' });
   registry.register(BunshinKeyword);
   registry.register(IceWallKeyword);
+  registry.register({ ...IceWallKeyword, id: 'Grand Ice Wall' });
   registry.register(LoadKeyword);
   registry.register({ ...LoadKeyword, id: 'Steel Load' });
   registry.register(ImmortalityKeyword);
+  registry.register({ ...ImmortalityKeyword, id: 'Nether Immortality' });
+  registry.register({ ...ImmortalityKeyword, id: 'Illusive Immortality' });
   registry.register(TributeKeyword);
+  registry.register({ ...TributeKeyword, id: 'Burst Tribute' });
   registry.register(UnsheatheKeyword);
+  registry.register({ ...UnsheatheKeyword, id: 'Great Unsheathe' });
+  registry.register({ ...UnsheatheKeyword, id: 'Ultimate Unsheathe' });
   registry.register(BombardmentKeyword);
   registry.register({ ...BombardmentKeyword, id: 'Bombardment-D' });
   registry.register({ ...BombardmentKeyword, id: 'Bombardment-Zero' });
+  registry.register({ ...BombardmentKeyword, id: 'Twinkle Bombardment' });
+  registry.register({ ...BombardmentKeyword, id: 'Grand Bombardment' });
+  registry.register({ ...BombardmentKeyword, id: 'Thunder God Bombardment' });
   registry.register(ShowdownKeyword);
+  registry.register({ ...ShowdownKeyword, id: 'Rekka Showdown' });
   registry.register(PoisonBladeKeyword);
   registry.register(SpellbindKeyword);
+  registry.register({ ...SpellbindKeyword, id: 'Twinkle Spellbind' });
   registry.register(SpellBlightKeyword);
   registry.register(KagemushaKeyword);
   registry.register({ ...KagemushaKeyword, id: 'True-Kagemusha' });
@@ -903,12 +932,14 @@ export function registerWave4Keywords(registry) {
   registry.register({ ...ExciteKeyword, id: 'Ultra Excite' });
   registry.register(FastDrawKeyword);
   registry.register(DispersionKeyword);
+  registry.register({ ...DispersionKeyword, id: 'Disp' });
   registry.register(SummonBoltKeyword);
   registry.register(AFOKeyword);
   registry.register(StampedeKeyword);
   registry.register({ ...StampedeKeyword, id: 'Roaring Stampede' });
   registry.register(FortressKeyword);
   registry.register(TrueFortressKeyword);
+  registry.register({ ...FortressKeyword, id: 'Twinkle Fortress' });
   registry.register(LeapKeyword);
   registry.register({ ...LeapKeyword, id: 'Grand Leap' });
   registry.register(ZeroCounterKeyword);
@@ -923,4 +954,13 @@ export function registerWave4Keywords(registry) {
   registry.register(MealtiplyKeyword);
   registry.register({ ...MealtiplyKeyword, id: 'Meal' });
   registry.register(BarrierKeyword);
+  registry.register(HollowSkyKeyword);
+  registry.register(TwinkleNecromancyKeyword);
+  registry.register(EvilLightKeyword);
+  registry.register({ ...EvilLightKeyword, id: 'Heavenly Light' });
+  registry.register({ ...EvilLightKeyword, id: 'Twinkle Revolution' });
+  registry.register({ ...EvilLightKeyword, id: 'Type: Song' });
+  registry.register({ ...EvilLightKeyword, id: 'Type: Field' });
+  registry.register({ ...EvilLightKeyword, id: 'Type: Flower' });
+  registry.register({ ...EvilLightKeyword, id: 'Type: Vision' });
 }

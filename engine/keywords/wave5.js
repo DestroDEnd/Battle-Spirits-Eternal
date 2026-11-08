@@ -234,23 +234,63 @@ export const BarrageKeyword = {
   }
 };
 
+export const DivaRushKeyword = {
+  id: 'Diva Rush',
+  hooks: {}
+};
+
+export const CollabActionKeyword = {
+  id: 'Bushido',
+  hooks: {}
+};
+
 export function registerWave5Keywords(registry) {
   registry.register(ClockUpKeyword);
   registry.register({ ...ClockUpKeyword, id: 'Hyper Cast Off' });
+  registry.register({ ...ClockUpKeyword, id: 'Hyper Clock Up' });
+  registry.register({ ...ClockUpKeyword, id: 'Cast Off' });
   registry.register(OnStageKeyword);
   registry.register({ ...OnStageKeyword, id: 'Stage' });
   registry.register({ ...OnStageKeyword, id: 'Solo Stage' });
   registry.register({ ...OnStageKeyword, id: 'Aikatsu On Stage' });
+  registry.register({ ...OnStageKeyword, id: 'Chaos Stage' });
+  registry.register({ ...OnStageKeyword, id: 'Grand Stage' });
+  registry.register({ ...OnStageKeyword, id: 'Curtain Call' });
   registry.register(ShowUpKeyword);
   registry.register(FriendKeyword);
   registry.register(AppealKeyword);
+  registry.register({ ...AppealKeyword, id: 'Fever Appeal' });
+  registry.register({ ...AppealKeyword, id: 'Constellation Appeal' });
+  registry.register({ ...AppealKeyword, id: 'Starlight Appeal' });
   registry.register(MyUnitKeyword);
   registry.register(SoloPartKeyword);
+  registry.register({ ...SoloPartKeyword, id: 'CoZ12 Part' });
+  registry.register({ ...SoloPartKeyword, id: 'Fleur Part' });
   registry.register(DuetPartKeyword);
+  registry.register({ ...DuetPartKeyword, id: 'Contract Duet Part' });
   registry.register(DigivolutionKeyword);
   registry.register({ ...DigivolutionKeyword, id: 'Digivolve' });
   registry.register({ ...DigivolutionKeyword, id: 'Warp Digivolve' });
+  registry.register({ ...DigivolutionKeyword, id: 'Super Digivolution' });
+  registry.register({ ...DigivolutionKeyword, id: 'DNA Digivolution' });
+  registry.register({ ...DigivolutionKeyword, id: 'Armor Digivolution' });
+  registry.register({ ...DigivolutionKeyword, id: 'Card Slash' });
   registry.register(TransAmKeyword);
   registry.register(FunnelKeyword);
   registry.register(BarrageKeyword);
+  registry.register(DivaRushKeyword);
+  registry.register({ ...DivaRushKeyword, id: 'Spellsong' });
+  registry.register({ ...DivaRushKeyword, id: 'Team' });
+  registry.register(CollabActionKeyword);
+  registry.register({ ...CollabActionKeyword, id: 'Chou Henshin' });
+  registry.register({ ...CollabActionKeyword, id: 'Form Change' });
+  registry.register({ ...CollabActionKeyword, id: 'Armed Intervention' });
+  registry.register({ ...CollabActionKeyword, id: 'Exchange' });
+  registry.register({ ...CollabActionKeyword, id: 'NT-D' });
+  registry.register({ ...CollabActionKeyword, id: 'Quantum Burst' });
+  registry.register({ ...CollabActionKeyword, id: 'Top Gun' });
+  registry.register({ ...CollabActionKeyword, id: 'Yata-no-Kagami' });
+  registry.register({ ...CollabActionKeyword, id: 'Buddy' });
+  registry.register({ ...CollabActionKeyword, id: 'Time Vent' });
+  registry.register({ ...CollabActionKeyword, id: 'Type: Driver' });
 }

@@ -142,6 +142,16 @@ export const LevelUpKeyword = {
   }
 };
 
+export const LegacyKeyword = {
+  id: 'Legacy',
+  hooks: {}
+};
+
+export const BattleSkillKeyword = {
+  id: 'Fish Troop',
+  hooks: {}
+};
+
 export function registerWave6Keywords(registry) {
   registry.register(RumbleKeyword);
   registry.register(FlagContractAdventKeyword);
@@ -159,4 +169,8 @@ export function registerWave6Keywords(registry) {
   registry.register({ ...AmplifyKeyword, id: 'Grandphosis' });
   registry.register({ ...AmplifyKeyword, id: 'Grand Mystery' });
   registry.register({ ...AmplifyKeyword, id: 'Hyakka Ryouran' });
+  registry.register(LegacyKeyword);
+  registry.register(BattleSkillKeyword);
+  registry.register({ ...BattleSkillKeyword, id: 'Camouflage' });
+  registry.register({ ...BattleSkillKeyword, id: 'Magirrate' });
 }
