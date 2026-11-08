@@ -408,7 +408,8 @@
       showToast: typeof showToast === 'function' ? showToast : (m) => typeof addLog === 'function' && addLog(m, 'info'),
       checkGameOver: typeof checkGameOver === 'function' ? checkGameOver : () => {},
       executeWhenSummonedEffects: typeof executeWhenSummonedEffects === 'function' ? executeWhenSummonedEffects : () => {},
-      recycleSpiritCoresToReserve: typeof recycleSpiritCoresToReserve === 'function' ? recycleSpiritCoresToReserve : () => {}
+      recycleSpiritCoresToReserve: typeof recycleSpiritCoresToReserve === 'function' ? recycleSpiritCoresToReserve : () => {},
+      grantEffectToUnit: typeof grantEffectToUnit === 'function' ? grantEffectToUnit : () => {}
     };
   }
 
@@ -1028,18 +1029,21 @@
         for (const ab of card.compiledIr.abilities) {
           const timing = (ab.header && ab.header.timing) || 'PASSIVE';
           if (!trigs[timing]) trigs[timing] = [];
-          trigs[timing].push({
-            type: ab.clauses?.[0]?.op?.op || 'SPECIAL_EFFECT',
-            desc: ab.clauses?.[0]?.cleanText || ab.clauses?.[0]?.rawText || '',
-            raw_text: ab.clauses?.[0]?.rawText || '',
-            min_level: (ab.header?.levels && ab.header.levels[0]) || 1,
-            canva_rules: {
-              limit: ab.header?.limit || null,
-              is_optional: ab.clauses?.some(c => c.isOptional) || false,
-              is_mandatory: !ab.clauses?.some(c => c.isOptional)
-            },
-            compiledAbility: ab
-          });
+          for (const cl of (ab.clauses || [])) {
+            trigs[timing].push({
+              type: cl?.op?.op || 'SPECIAL_EFFECT',
+              desc: cl?.cleanText || cl?.rawText || '',
+              raw_text: cl?.rawText || '',
+              min_level: (ab.header?.levels && ab.header.levels[0]) || 1,
+              canva_rules: {
+                limit: ab.header?.limit || null,
+                is_optional: cl?.isOptional || false,
+                is_mandatory: !cl?.isOptional
+              },
+              compiledAbility: ab,
+              clause: cl
+            });
+          }
         }
         card.compiledIr.triggers = trigs;
       }
@@ -3228,14 +3232,142 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return [];
   }
 
+  function findCardMetadata(nameOrCardNum, fallbackColor = 'Red') {
+    if (!nameOrCardNum) return null;
+    const key = String(nameOrCardNum).trim();
+    const lowerKey = key.toLowerCase();
+
+    // 1. Check window.WasmDB if initialized (fastest SQLite index with full schema)
+    if (typeof window !== 'undefined' && window.WasmDB && typeof window.WasmDB.getCardByName === 'function') {
+      try {
+        const wasmCard = window.WasmDB.getCardByName(key);
+        if (wasmCard) return wasmCard;
+      } catch (e) {}
+    }
+
+    // 2. In Node / test environment or attached DuelState index, check cards_detailed / cards_index
+    let indexed = null;
+    if (DuelState.cardsIndex) {
+      if (DuelState.cardsIndex[key]) indexed = DuelState.cardsIndex[key];
+      else {
+        for (const [cNum, entry] of Object.entries(DuelState.cardsIndex)) {
+          if (entry && (entry.name === key || (entry.name && entry.name.toLowerCase() === lowerKey))) {
+            indexed = entry;
+            break;
+          }
+        }
+      }
+    }
+    if (!indexed && typeof require === 'function') {
+      try {
+        if (!DuelState._nodeCardsDetailed) {
+          const fs = require('fs');
+          const path = require('path');
+          const baseDir = typeof __dirname !== 'undefined' ? __dirname : (typeof process !== 'undefined' && process.cwd ? process.cwd() : '.');
+          const detailedPath = path.resolve(baseDir, 'data/cards_detailed.json');
+          if (fs.existsSync(detailedPath)) {
+            DuelState._nodeCardsDetailed = JSON.parse(fs.readFileSync(detailedPath, 'utf8'));
+            DuelState._nodeCardsDetailedByName = {};
+            for (const [cNum, entry] of Object.entries(DuelState._nodeCardsDetailed)) {
+              if (entry && entry.name) {
+                DuelState._nodeCardsDetailedByName[entry.name.toLowerCase()] = entry;
+              }
+            }
+          }
+        }
+        if (DuelState._nodeCardsDetailed && DuelState._nodeCardsDetailed[key]) {
+          indexed = DuelState._nodeCardsDetailed[key];
+        } else if (DuelState._nodeCardsDetailedByName && DuelState._nodeCardsDetailedByName[lowerKey]) {
+          indexed = DuelState._nodeCardsDetailedByName[lowerKey];
+        }
+      } catch (e) {}
+    }
+
+    if (indexed) return indexed;
+
+    // 3. Fallback to CardEffectsDB by canonical card number or name
+    if (CardEffectsDBByNumber && CardEffectsDBByNumber[key]) {
+      const c = CardEffectsDBByNumber[key];
+      return {
+        card_number: c.card_number || key,
+        name: c.name || key,
+        type: c.type || 'Spirit',
+        color: c.color || fallbackColor,
+        cost: c.cost !== undefined ? c.cost : 2,
+        family: c.family || '',
+        effect: c.raw_effect || c.effect || '',
+        levels: c.levels,
+        image_url: c.image_url || './assets/card_back.png'
+      };
+    }
+    if (CardEffectsDB && CardEffectsDB[key]) {
+      const c = CardEffectsDB[key];
+      return {
+        card_number: c.card_number || '',
+        name: key,
+        type: c.type || 'Spirit',
+        color: c.color || fallbackColor,
+        cost: c.cost !== undefined ? c.cost : 2,
+        family: c.family || '',
+        effect: c.raw_effect || c.effect || '',
+        levels: c.levels,
+        image_url: c.image_url || './assets/card_back.png'
+      };
+    }
+
+    return null;
+  }
+
+  function buildCardInstance(rawOrName, fallbackColor = 'Red') {
+    const raw = typeof rawOrName === 'string' ? { name: rawOrName } : (rawOrName || {});
+    const name = raw.name || rawOrName;
+    const meta = findCardMetadata(name || raw.card_number, fallbackColor);
+    if (!meta) {
+      return {
+        ...raw,
+        name: name || 'Unknown',
+        cost: raw.cost !== undefined ? raw.cost : 2,
+        type: raw.type || 'Spirit',
+        color: raw.color || fallbackColor,
+        image_url: raw.image_url || './assets/card_back.png'
+      };
+    }
+    const color = raw.color || meta.color || (meta.colors && meta.colors[0]) || fallbackColor;
+    const pLevels = raw.parsed_levels || (meta.levels && typeof meta.levels === 'object' && !Array.isArray(meta.levels) ? Object.values(meta.levels) : (Array.isArray(meta.levels) ? meta.levels : null));
+    return {
+      ...meta,
+      ...raw,
+      name: meta.name || name,
+      card_number: raw.card_number || meta.card_number || meta.cardNumber || '',
+      type: raw.type || meta.type || 'Spirit',
+      cost: raw.cost !== undefined ? raw.cost : (meta.cost !== undefined ? meta.cost : 2),
+      color,
+      colors: raw.colors || meta.colors || [color],
+      family: raw.family || meta.family || (meta.families ? (Array.isArray(meta.families) ? meta.families.join(', ') : meta.families) : ''),
+      families: raw.families || (Array.isArray(meta.families) ? meta.families : (meta.family ? [meta.family] : [])),
+      levels: raw.levels || meta.levels || null,
+      parsed_levels: pLevels,
+      raw_levels: raw.raw_levels || meta.raw_levels || (typeof meta.levels === 'string' ? meta.levels : ''),
+      effect: raw.effect || meta.effect || meta.raw_effect || '',
+      summary: raw.summary || meta.summary || '',
+      flavor: raw.flavor || meta.flavor || '',
+      rarity: raw.rarity || meta.rarity || '',
+      symbols: raw.symbols || meta.symbols || [color],
+      reduction: raw.reduction !== undefined ? raw.reduction : meta.reduction,
+      image_url: raw.image_url || meta.image_url || './assets/card_back.png'
+    };
+  }
+
   function extractCardsListFromDeck(deck) {
     if (!deck) return [];
     const list = [];
+    const fallbackColor = deck.color || 'Red';
     if (Array.isArray(deck.validated_cards) && deck.validated_cards.length > 0) {
       deck.validated_cards.forEach(c => {
         const count = typeof c.count === 'number' ? c.count : 1;
+        const cardInst = buildCardInstance(c, fallbackColor);
         for (let i = 0; i < count; i++) {
-          list.push({ ...c });
+          list.push({ ...cardInst });
         }
       });
       return list;
@@ -3245,16 +3377,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if (Array.isArray(c)) {
           const name = c[0];
           const count = typeof c[1] === 'number' ? c[1] : 1;
+          const cardInst = buildCardInstance(name, fallbackColor);
           for (let i = 0; i < count; i++) {
-            list.push({ name, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+            list.push({ ...cardInst });
           }
         } else if (typeof c === 'object' && c !== null) {
           const count = typeof c.count === 'number' ? c.count : 1;
+          const cardInst = buildCardInstance(c, fallbackColor);
           for (let i = 0; i < count; i++) {
-            list.push({ ...c, name: c.name || 'Unknown', cost: c.cost !== undefined ? c.cost : 2, type: c.type || 'Spirit', color: c.color || deck.color || 'Red', image_url: c.image_url || './assets/card_back.png' });
+            list.push({ ...cardInst });
           }
         } else if (typeof c === 'string') {
-          list.push({ name: c, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+          const cardInst = buildCardInstance(c, fallbackColor);
+          list.push({ ...cardInst });
         }
       });
       return list;
@@ -3262,8 +3397,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (deck.cards && typeof deck.cards === 'object') {
       for (const [name, count] of Object.entries(deck.cards)) {
         const num = typeof count === 'number' ? count : (Array.isArray(count) ? (count[1] || 1) : 1);
+        const cardInst = buildCardInstance(name, fallbackColor);
         for (let i = 0; i < num; i++) {
-          list.push({ name, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+          list.push({ ...cardInst });
         }
       }
       return list;
@@ -10437,8 +10573,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const trig = isFlashTiming ? 'FLASH' : 'MAIN';
-    if (pRegistry && card && card.card_number && pRegistry.has(card.card_number, trig)) {
-      pRegistry.execute(card.card_number, trig, {
+    const cNum = card.card_number || card.cardNumber;
+    if (pRegistry && card && cNum && (pRegistry.has(cNum, trig) || pRegistry.has(cNum, 'FLASH'))) {
+      const activeTrig = pRegistry.has(cNum, trig) ? trig : 'FLASH';
+      const execResult = pRegistry.execute(cNum, activeTrig, {
         card,
         side,
         duelState: DuelState,
@@ -10447,7 +10585,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         targetSpiritUid,
         forcedEffectType
       });
-      return;
+      return typeof execResult === 'string' ? execResult : `Activated ${activeTrig} effect of "${card.name}"`;
     }
 
     if (name.includes('Evil Draw')) {
@@ -10652,6 +10790,25 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         const bpMatch = eff.match(/(?:\+|plus\s*)(\d+)\s*bp/i) || eff.match(/bp\s*(?:\+|plus\s*)(\d+)/i);
         const bpAmount = bpMatch ? parseInt(bpMatch[1], 10) : 2000;
 
+        // Check if card also has a Draw effect (e.g. Sudden Death Draw: "Draw a card. During this turn, give a Spirit +1000 BP.")
+        let drewCount = 0;
+        const effectString = String(activeEffectText || card.effect || '');
+        const hasDraw = /draw\s+(?:a|1|one|two|2)\s+cards?|デッキから\s*(?:[12１２]|一|二)?\s*枚ドロー/i.test(effectString);
+        if (hasDraw) {
+          const isDraw2 = /draw\s+(?:two|2)\s+cards?|2枚ドロー/i.test(effectString);
+          const count = isDraw2 ? 2 : 1;
+          for (let i = 0; i < count; i++) {
+            const drawn = myDeck.shift();
+            if (drawn) {
+              myHand.push(drawn);
+              drewCount++;
+            }
+          }
+          if (drewCount > 0 && typeof AudioFX !== 'undefined' && AudioFX.draw) {
+            AudioFX.draw();
+          }
+        }
+
         if (isTeamWide) {
           myField.forEach(s => {
             grantEffectToUnit(s, {
@@ -10660,11 +10817,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               expires: 'end_of_turn'
             }, card.name);
           });
-          effectDesc = `Granted +${bpAmount} BP to all allied spirits!`;
+          effectDesc = drewCount > 0
+            ? `${isPlayer ? 'You drew' : 'Opponent drew'} ${drewCount} card(s) from deck and granted +${bpAmount} BP to all allied spirits!`
+            : `Granted +${bpAmount} BP to all allied spirits!`;
         } else {
           // SINGLE-TARGET BP BUFF (e.g. Insect Aura, Double Draw flash, Carry Cores, etc.)
           if (!myField.length) {
-            effectDesc = `Magic activated, but no allied Spirits were on the field to receive +${bpAmount} BP.`;
+            effectDesc = drewCount > 0
+              ? `${isPlayer ? 'You drew' : 'Opponent drew'} ${drewCount} card(s) from deck! (No allied Spirits on field to receive +${bpAmount} BP)`
+              : `Magic activated, but no allied Spirits were on the field to receive +${bpAmount} BP.`;
           } else {
             let target = null;
             if (targetSpiritUid) {
@@ -10701,6 +10862,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               if (name.includes('Carry Cores') || eff.includes('void to your reserve')) {
                 (isPlayer ? DuelState.player : DuelState.opponent).reserve += 1;
                 effectDesc = `Transferred 1 Core from Void to Reserve and granted +${bpAmount} BP to "${target.name}" (now ${target.currentBp} BP)!`;
+              } else if (drewCount > 0) {
+                effectDesc = `${isPlayer ? 'You drew' : 'Opponent drew'} ${drewCount} card(s) from deck and granted +${bpAmount} BP to "${target.name}" (now ${target.currentBp} BP)!`;
               } else {
                 effectDesc = `Granted +${bpAmount} BP to "${target.name}" (now ${target.currentBp} BP)!`;
               }
@@ -14576,6 +14739,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     copyRoomLink,
     init: initBattleArena,
     startDuel,
+    findCardMetadata,
+    buildCardInstance,
+    extractCardsListFromDeck,
+    getSafeDeckCardCount,
     renderDuelTable,
     renderPlayerHand,
     nextPhase,

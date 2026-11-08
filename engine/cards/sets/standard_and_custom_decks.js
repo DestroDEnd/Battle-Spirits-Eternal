@@ -1104,6 +1104,74 @@ import { PerCardRegistry } from '../registry.js';
   });
 
   // ────────────────────────────────────────────────────────────
+  // 29b. SD01-035: Sudden Death Draw
+  // [FLASH] Draw a card. During this turn, give a Spirit +1000 BP.
+  // ────────────────────────────────────────────────────────────
+  PerCardRegistry.registerCard('SD01-035', {
+    name: 'Sudden Death Draw',
+    cardType: 'Magic',
+    triggers: {
+      FLASH: function(ctx) {
+        const friendly = getFriendlyState(ctx);
+        const { card, targetSpiritUid, contextAttacker, side } = ctx;
+        const isPlayer = side === 'player';
+
+        // 1. Draw 1 card from deck
+        let drewCount = 0;
+        const drawn = friendly.deck.shift();
+        if (drawn) {
+          friendly.hand.push(drawn);
+          drewCount++;
+          audio(ctx, 'draw');
+        }
+
+        // 2. Select target Spirit to give +1000 BP
+        const field = friendly.field || [];
+        let target = null;
+        if (targetSpiritUid) {
+          target = field.find(s => s.uid === targetSpiritUid);
+        }
+        if (!target) {
+          if (ctx.duelState && ctx.duelState.combatEvent) {
+            const ce = ctx.duelState.combatEvent;
+            if (ce.attacker && field.some(s => s.uid === ce.attacker.uid)) {
+              target = ce.attacker;
+            } else if (ce.blocker && field.some(s => s.uid === ce.blocker.uid)) {
+              target = ce.blocker;
+            }
+          }
+          if (!target && contextAttacker && field.some(s => s.uid === contextAttacker.uid)) {
+            target = contextAttacker;
+          }
+          if (!target && field.length > 0) {
+            target = [...field].sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0))[0];
+          }
+        }
+
+        if (target && ctx.arenaApi && typeof ctx.arenaApi.grantEffectToUnit === 'function') {
+          ctx.arenaApi.grantEffectToUnit(target, {
+            bp: 1000,
+            text: '+1000 BP until end of turn',
+            expires: 'end_of_turn'
+          }, card ? card.name : 'Sudden Death Draw');
+          const desc = `${isPlayer ? 'You drew' : 'Opponent drew'} 1 card from deck and granted +1000 BP to "${target.name}" (now ${target.currentBp} BP)!`;
+          log(ctx, `🔮 **[SUDDEN DEATH DRAW]**: ${desc}`, 'magic');
+          render(ctx);
+          return desc;
+        } else {
+          const desc = `${isPlayer ? 'You drew' : 'Opponent drew'} 1 card from deck!${field.length === 0 ? ' (No allied Spirits on field to receive +1000 BP)' : ''}`;
+          log(ctx, `🔮 **[SUDDEN DEATH DRAW]**: ${desc}`, 'magic');
+          render(ctx);
+          return desc;
+        }
+      },
+      MAIN: function(ctx) {
+        return PerCardRegistry.get('SD01-035').triggers.FLASH(ctx);
+      }
+    }
+  });
+
+  // ────────────────────────────────────────────────────────────
   // 30. SD65 Additional Handlers (Nouvelle-Vague, Ila-Riva, Magnazappah, Ill-Dezal)
   // (Core SD65 staples: CX01, 001, 002, 003, 006, X01, X03 are in sd65_four_demon_lords.js)
   // ────────────────────────────────────────────────────────────

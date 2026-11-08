@@ -68,6 +68,13 @@ describe('Standard Deck Purple (Netherworld Curse) Regression Suite', () => {
       assert.ok(handler, 'Puppet Soldier must be registered in PerCardRegistry');
       assert.ok(handler.triggers.WHEN_DESTROYED, 'Puppet Soldier must have WHEN_DESTROYED trigger');
     });
+
+    it('SD01-035 (Sudden Death Draw) is registered with FLASH and MAIN triggers', () => {
+      const handler = PerCardRegistry.get('SD01-035');
+      assert.ok(handler, 'Sudden Death Draw must be registered in PerCardRegistry');
+      assert.ok(handler.triggers.FLASH, 'Sudden Death Draw must have FLASH trigger');
+      assert.ok(handler.triggers.MAIN, 'Sudden Death Draw must have MAIN trigger');
+    });
   });
 
   describe('3. Execution Scenarios', () => {
@@ -153,6 +160,81 @@ describe('Standard Deck Purple (Netherworld Curse) Regression Suite', () => {
       assert.equal(duelState.player.hand[0].name, 'The PoisonSnakeScythe Alphard');
       assert.equal(duelState.player.trashCards.length, 1);
       assert.equal(duelState.player.trashCards[0].name, 'Foger');
+    });
+
+    it('SD01-035 (Sudden Death Draw) FLASH draws 1 card and gives a Spirit +1000 BP', async () => {
+      const handler = PerCardRegistry.get('SD01-035');
+      assert.ok(handler && handler.triggers.FLASH);
+
+      const targetSpirit = { uid: 'sp_target', name: 'The Infantry Dragron', currentBp: 2000 };
+      const deckCard = { uid: 'card_draw', name: 'Camelot-Pawn' };
+      const duelState = {
+        player: {
+          deck: [deckCard],
+          hand: [],
+          field: [targetSpirit]
+        },
+        opponent: {}
+      };
+
+      let effectGranted = null;
+      const ctx = {
+        card: { id: 'sdd_1', cardNumber: 'SD01-035', name: 'Sudden Death Draw' },
+        side: 'player',
+        duelState,
+        arenaApi: {
+          addLog: () => {},
+          grantEffectToUnit: (target, effect, sourceName) => {
+            effectGranted = { target, effect, sourceName };
+            target.currentBp += effect.bp;
+          }
+        }
+      };
+
+      const result = await handler.triggers.FLASH(ctx);
+
+      // Verifies: 1. Card was drawn into hand
+      assert.equal(duelState.player.hand.length, 1, 'Must draw 1 card into hand');
+      assert.equal(duelState.player.hand[0].name, 'Camelot-Pawn');
+      assert.equal(duelState.player.deck.length, 0, 'Deck must have 1 less card');
+
+      // Verifies: 2. +1000 BP granted to spirit
+      assert.ok(effectGranted, 'grantEffectToUnit must be called');
+      assert.equal(effectGranted.effect.bp, 1000, 'Must grant +1000 BP');
+      assert.equal(targetSpirit.currentBp, 3000, 'Target spirit BP must increase by +1000 (2000 -> 3000)');
+      assert.match(result, /drew 1 card/i);
+      assert.match(result, /\+1000 BP/i);
+    });
+
+    it('SD01-035 (Sudden Death Draw) FLASH draws 1 card even if no Spirits are on the field', async () => {
+      const handler = PerCardRegistry.get('SD01-035');
+      assert.ok(handler && handler.triggers.FLASH);
+
+      const deckCard = { uid: 'card_draw2', name: 'Camelot-Pawn' };
+      const duelState = {
+        player: {
+          deck: [deckCard],
+          hand: [],
+          field: [] // No spirits on field
+        },
+        opponent: {}
+      };
+
+      const ctx = {
+        card: { id: 'sdd_2', cardNumber: 'SD01-035', name: 'Sudden Death Draw' },
+        side: 'player',
+        duelState,
+        arenaApi: {
+          addLog: () => {}
+        }
+      };
+
+      const result = await handler.triggers.FLASH(ctx);
+
+      // Verifies: Card is still drawn even without any allied spirits
+      assert.equal(duelState.player.hand.length, 1, 'Must draw 1 card even with 0 spirits on field');
+      assert.equal(duelState.player.deck.length, 0);
+      assert.match(result, /drew 1 card/i);
     });
 
   });

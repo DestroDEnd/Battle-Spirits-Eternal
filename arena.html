@@ -957,6 +957,60 @@
 
       </div>
 
+      <!-- SUMMON COST PAYMENT & CORE ALLOCATION MODAL -->
+      <div class="battle-modal-overlay" id="battleSummonPaymentModal">
+        <div class="battle-modal-card" style="max-width:580px; text-align:left; max-height:92vh; overflow-y:auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+            <div class="result-badge" style="background:linear-gradient(135deg, rgba(59,130,246,0.35), rgba(37,99,235,0.35)); color:#93c5fd; border:1px solid #3b82f6; margin-bottom:0;">
+              ⚔️ SUMMON COST &amp; CORE ALLOCATION
+            </div>
+            <button class="modal-close" onclick="BattleArena.closeSummonModal()" style="position:static; font-size:1.4rem; padding:0 6px;">&times;</button>
+          </div>
+
+          <div style="display:flex; gap:0.9rem; align-items:center; margin-bottom:0.85rem;">
+            <div id="summonModalCardArt" style="width:48px; height:68px; border-radius:6px; background-size:cover; background-position:center; border:1px solid rgba(255,255,255,0.2); flex-shrink:0;"></div>
+            <div>
+              <h3 class="modal-title" style="margin-bottom:0.25rem; font-size:1.15rem;" id="summonModalTitle">Summon Spirit</h3>
+              <div id="summonModalCardMeta" style="font-size:0.8rem; color:#94a3b8;">Spirit • Cost 3</div>
+            </div>
+          </div>
+
+          <!-- Live Summary Box: Breakdown of Cores & Level -->
+          <div class="sacrifice-summary-box" id="summonModalSummaryBox" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:0.65rem; padding:0.85rem 1rem; margin-bottom:0.9rem;">
+            <!-- Injected Core math and level breakdown -->
+          </div>
+
+          <!-- Soul Core Selection Options -->
+          <div id="summonModalSoulCoreBox" style="background:rgba(249,115,22,0.08); border:1px solid rgba(249,115,22,0.25); border-radius:0.65rem; padding:0.85rem 1rem; margin-bottom:0.9rem;">
+            <!-- Injected Soul Core payment and placement options -->
+          </div>
+
+          <!-- Cores on Summoned Spirit Stepper -->
+          <div id="summonModalPlacementBox" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:0.65rem; padding:0.75rem 1rem; margin-bottom:0.9rem;">
+            <!-- Injected Cores to place on spirit stepper and level preview -->
+          </div>
+
+          <!-- Optional Field Spirits Core Transfer (if paying with or moving field cores) -->
+          <div id="summonModalFieldChoicesContainer" style="display:none; margin-bottom:1rem; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.07); border-radius:0.65rem; padding:0.75rem 1rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span style="font-size:0.82rem; font-weight:700; color:#cbd5e1;">Move Cores from Field Spirits:</span>
+              <span id="summonModalFieldSelectedCount" style="font-size:0.75rem; color:#94a3b8;">0 cores allocated</span>
+            </div>
+            <div id="summonModalFieldChoices" style="max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:0.5rem;">
+              <!-- Field spirit choices -->
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div style="display:flex; gap:0.75rem; justify-content:flex-end;">
+            <button class="btn-duel-tool" onclick="BattleArena.closeSummonModal()">Cancel</button>
+            <button class="btn-step-action btn-step-core" id="btnConfirmSummonPayment" onclick="BattleArena.confirmSummonPayment()" style="width:auto; padding:0.6rem 1.4rem;">
+              ⚡ Confirm Summon
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- CORE SACRIFICE & SUMMON MODAL -->
       <div class="battle-modal-overlay" id="battleSacrificeModal">
         <div class="battle-modal-card" style="max-width:540px; text-align:left;">

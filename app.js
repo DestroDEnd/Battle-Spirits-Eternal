@@ -2014,7 +2014,8 @@ function handlePasteInput() {
 }
 
 function cleanCardLine(str) {
-  let cleaned = str.replace(/^\[[A-Za-z0-9-]+\]\s*/i, '');
+  let cleaned = (str || '').trim().replace(/^\[[A-Za-z0-9-]+\]\s*/i, '');
+  cleaned = cleaned.replace(/\s*\([A-Za-z0-9-]+\)$/i, '');
   return cleaned.trim();
 }
 
@@ -2249,12 +2250,32 @@ async function executeDeckImport() {
 
 
 // ═══════════════════ STANDARD COLOR DECKS CONTROLLER ═══════════════════
+async function fetchStandardDeckData(colorKey) {
+  let deckData = null;
+  try {
+    const res = await fetch('/api/standard-decks?color=' + encodeURIComponent(colorKey));
+    if (res.ok) deckData = await res.json();
+  } catch (e) {}
+
+  if (!deckData) {
+    try {
+      let stdRes = await fetch('./standard_decks_data.json');
+      if (!stdRes.ok) stdRes = await fetch('/standard_decks_data.json');
+      if (stdRes.ok) {
+        const stdJson = await stdRes.json();
+        const list = stdJson.decks || (Array.isArray(stdJson) ? stdJson : []);
+        deckData = list.find(d => (d.color || '').toLowerCase() === colorKey.toLowerCase());
+      }
+    } catch (e) {}
+  }
+  return deckData;
+}
+
 async function loadStandardDeck(colorKey) {
   try {
     showToast(`Registering standard ${colorKey.toUpperCase()} deck…`, 'info');
-    const res = await fetch('/api/standard-decks?color=' + encodeURIComponent(colorKey));
-    if (!res.ok) throw new Error('Deck not found');
-    const deckData = await res.json();
+    const deckData = await fetchStandardDeckData(colorKey);
+    if (!deckData) throw new Error('Deck not found');
 
     // Register / load into DeckManager
     if (window.DeckManager) {
@@ -2263,8 +2284,24 @@ async function loadStandardDeck(colorKey) {
 
     // Set S.deck
     S.deck = {};
-    for (const card of deckData.validated_cards) {
-      S.deck[card.name] = card.count;
+    if (Array.isArray(deckData.validated_cards) && deckData.validated_cards.length > 0) {
+      for (const card of deckData.validated_cards) {
+        S.deck[card.name] = card.count || 1;
+      }
+    } else if (Array.isArray(deckData.cards)) {
+      for (const card of deckData.cards) {
+        if (Array.isArray(card)) {
+          S.deck[card[0]] = typeof card[1] === 'number' ? card[1] : 1;
+        } else if (typeof card === 'object' && card !== null) {
+          S.deck[card.name] = card.count || 1;
+        } else if (typeof card === 'string') {
+          S.deck[card] = 1;
+        }
+      }
+    } else if (deckData.cards && typeof deckData.cards === 'object') {
+      for (const [name, count] of Object.entries(deckData.cards)) {
+        S.deck[name] = typeof count === 'number' ? count : (Array.isArray(count) ? (count[1] || 1) : 1);
+      }
     }
 
     saveDeck();
@@ -2272,7 +2309,7 @@ async function loadStandardDeck(colorKey) {
 
     // Auto-save to server deck library
     try {
-      const cardArray = deckData.validated_cards.map(c => ({ name: c.name, count: c.count }));
+      const cardArray = Object.entries(S.deck).map(([name, count]) => ({ name, count }));
       await fetch('/api/decks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2299,9 +2336,8 @@ async function loadStandardDeck(colorKey) {
 
 async function previewStandardDeck(colorKey) {
   try {
-    const res = await fetch('/api/standard-decks?color=' + encodeURIComponent(colorKey));
-    if (!res.ok) throw new Error('Deck not found');
-    const deckData = await res.json();
+    const deckData = await fetchStandardDeckData(colorKey);
+    if (!deckData) throw new Error('Deck not found');
 
     openDeckImportModal();
     const parsed = {
@@ -2310,9 +2346,20 @@ async function previewStandardDeck(colorKey) {
       total: 40,
       errors: []
     };
-    for (const card of deckData.validated_cards) {
-      parsed.cards[card.name] = card.count;
+    if (Array.isArray(deckData.validated_cards) && deckData.validated_cards.length > 0) {
+      for (const card of deckData.validated_cards) {
+        parsed.cards[card.name] = card.count || 1;
+      }
+    } else if (Array.isArray(deckData.cards)) {
+      for (const card of deckData.cards) {
+        if (Array.isArray(card)) {
+          parsed.cards[card[0]] = typeof card[1] === 'number' ? card[1] : 1;
+        } else if (typeof card === 'object' && card !== null) {
+          parsed.cards[card.name] = card.count || 1;
+        }
+      }
     }
+    parsed.total = Object.values(parsed.cards).reduce((a, b) => a + b, 0);
     document.getElementById('importDeckName').value = parsed.name;
     updateImportPreview(parsed);
   } catch (err) {

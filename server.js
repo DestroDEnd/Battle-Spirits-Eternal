@@ -45,10 +45,14 @@ const ROUTE_MAP = {
   '/register': '/register.html'
 };
 
+let cachedStandardDecks = null;
+let cachedCardsIndex = null;
+let cachedCardsByName = null;
+
 const server = http.createServer((req, res) => {
   // CORS & caching headers for local development
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
 
   if (req.method === 'OPTIONS') {
@@ -59,6 +63,70 @@ const server = http.createServer((req, res) => {
 
   const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   let pathname = decodeURIComponent(parsedUrl.pathname);
+
+  // ── API ROUTES ──
+  if (pathname.toLowerCase() === '/api/standard-decks') {
+    if (!cachedStandardDecks) {
+      try {
+        const stdRaw = fs.readFileSync(path.join(__dirname, 'standard_decks_data.json'), 'utf8');
+        cachedStandardDecks = JSON.parse(stdRaw);
+      } catch (e) {
+        cachedStandardDecks = { decks: [] };
+      }
+    }
+    const color = parsedUrl.searchParams.get('color');
+    if (color) {
+      const list = cachedStandardDecks.decks || [];
+      const found = list.find(d => (d.color || '').toLowerCase() === color.toLowerCase());
+      if (found) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(found));
+        return;
+      }
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: `Standard deck for color ${color} not found` }));
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(cachedStandardDecks));
+    return;
+  }
+
+  if (pathname.toLowerCase() === '/api/cards-batch') {
+    if (!cachedCardsIndex) {
+      try {
+        const idxRaw = fs.readFileSync(path.join(__dirname, 'data', 'cards_index.json'), 'utf8');
+        cachedCardsIndex = JSON.parse(idxRaw);
+        cachedCardsByName = {};
+        for (const [cNum, entry] of Object.entries(cachedCardsIndex)) {
+          if (entry && entry.name) {
+            cachedCardsByName[entry.name.toLowerCase()] = entry;
+          }
+        }
+      } catch (e) {
+        cachedCardsIndex = {};
+        cachedCardsByName = {};
+      }
+    }
+    const namesParam = parsedUrl.searchParams.get('names') || '';
+    const names = namesParam.split('|').map(n => n.trim()).filter(Boolean);
+    const result = {};
+    for (const name of names) {
+      const match = cachedCardsByName[name.toLowerCase()] || cachedCardsIndex[name];
+      if (match) {
+        result[name] = match;
+      }
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(result));
+    return;
+  }
+
+  if (pathname.toLowerCase() === '/api/decks') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: true }));
+    return;
+  }
 
   // Check route map
   if (ROUTE_MAP[pathname.toLowerCase()]) {
