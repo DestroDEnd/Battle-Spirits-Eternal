@@ -4714,6 +4714,40 @@ body {
 .modal-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.5; margin-bottom: 1.75rem; }
 .modal-btn-row { display: flex; gap: 0.75rem; justify-content: center; }
 
+/* Duel Result Stats Grid */
+.result-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+  width: 100%;
+}
+
+.result-stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: center;
+}
+
+.result-stat-val {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: var(--mono);
+}
+
+.result-stat-lbl {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Blocker Choices */
 .blocker-choice-card {
   background: rgba(255, 255, 255, 0.04);
@@ -9078,8 +9112,8 @@ body {
 
 /* ── COMPREHENSIVE BATTLE SPIRITS KEYWORD PILLS ── */
 .effect-keyword-pill {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
+  vertical-align: middle;
   padding: 0.15rem 0.5rem;
   border-radius: 0.35rem;
   font-weight: 800;
@@ -9366,10 +9400,12 @@ body {
   word-break: break-word;
 }
 
+.kw-summon-cond .card-ref-link,
 .kw-summon-cond .effect-card-link {
   color: #93c5fd;
   text-decoration: underline;
   text-underline-offset: 2px;
+  display: inline;
 }
 
 .effect-card-link {

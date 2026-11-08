@@ -680,8 +680,8 @@ function formatEffectKeywordsInModal(text) {
   // 8. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
   safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
 
-  // 9. Timing and Step triggers
-  safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
+  // 9. Timing and Step triggers (guarded against matching inside brackets)
+  safe = safe.replace(/(?<!\[[^\]]*)(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
     return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
   });
 
@@ -733,7 +733,7 @@ function formatEffectKeywordsInModal(text) {
   });
 
   // 13. Card Name References: Make referenced card names in quotes clickable!
-  safe = safe.replace(/(?:&quot;|"|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|"|[”"」])/gu, (match, cardName) => {
+  safe = safe.replace(/(?:&quot;|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|[”"」])/gu, (match, cardName) => {
     const trimmed = cardName.trim();
     const exclude = new Set([
       'Ancient Dragon', 'Astral Dragon', 'Ogre Wizard', 'Evil God', 'DemonLord',

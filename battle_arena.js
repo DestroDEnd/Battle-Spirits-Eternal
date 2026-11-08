@@ -6526,8 +6526,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // 8. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
     safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
 
-    // 9. Timing & Step triggers
-    safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
+    // 9. Timing & Step triggers (guarded against matching inside brackets)
+    safe = safe.replace(/(?<!\[[^\]]*)(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
       return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
     });
 
@@ -6579,7 +6579,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     });
 
     // 5. Card Name References: Make referenced card names in quotes clickable!
-    safe = safe.replace(/(?:&quot;|"|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|"|[”"」])/gu, (match, cardName) => {
+    safe = safe.replace(/(?:&quot;|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|[”"」])/gu, (match, cardName) => {
       const trimmed = cardName.trim();
       const exclude = new Set([
         'Ancient Dragon', 'Astral Dragon', 'Ogre Wizard', 'Evil God', 'DemonLord',
@@ -8962,10 +8962,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (shouldSummon) {
         if (side === 'player') {
           askOptionalEffect(card, promptMsg, () => {
-            executeFreeSummon(card.uid, side);
+            executeFreeSummon(card.uid, side, true);
           });
         } else {
-          executeFreeSummon(card.uid, side);
+          executeFreeSummon(card.uid, side, true);
         }
         break;
       }
@@ -8999,10 +8999,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (match) {
         if (side === 'player') {
           askOptionalEffect(card, `Your [Advent] Spirit "${adventCard.name}" was summoned! Summon "${card.name}" from Hand for free?`, () => {
-            executeFreeSummon(card.uid, side);
+            executeFreeSummon(card.uid, side, true);
           });
         } else {
-          executeFreeSummon(card.uid, side);
+          executeFreeSummon(card.uid, side, true);
         }
         break;
       }
@@ -9022,10 +9022,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if (isRedOrWhite) {
           if (side === 'player') {
             askOptionalEffect(card, `Red/White Mirage was set by paying cost! Summon "${card.name}" from Hand for free?`, () => {
-              executeFreeSummon(card.uid, side);
+              executeFreeSummon(card.uid, side, true);
             });
           } else {
-            executeFreeSummon(card.uid, side);
+            executeFreeSummon(card.uid, side, true);
           }
           break;
         }
@@ -9227,18 +9227,33 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    // 9. MAIN STEP BLUE NEXUS RETURN FREE SUMMON (BS10-058 Mercurius-Serpent)
+    if (card.card_number === 'BS10-058' || (effLower.includes('returning a blue nexus') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'MAIN') {
+        const hasBlueNexus = (friendly.nexus || []).some(n => (n.color === 'Blue') || (n.colors && n.colors.includes('Blue')));
+        if (hasBlueNexus) {
+          return {
+            eligible: true,
+            type: 'MAIN_NEXUS_RETURN_FREE',
+            btnLabel: '⚡ Return Nexus & Free (0)',
+            reason: 'Return Blue Nexus to deckbottom'
+          };
+        }
+      }
+    }
+
     return { eligible: false };
   }
 
   // ── UNIVERSAL FREE SUMMON EXECUTOR ──
-  function executeFreeSummon(uid, side = 'player') {
+  function executeFreeSummon(uid, side = 'player', forceReaction = false) {
     const friendly = side === 'player' ? DuelState.player : DuelState.opponent;
     const cardIdx = friendly.hand.findIndex(c => c.uid === uid);
     if (cardIdx === -1) return;
     const card = friendly.hand[cardIdx];
 
     const eligibility = checkCardFreeSummonEligibility(card, side);
-    if (!eligibility.eligible) {
+    if (!forceReaction && !eligibility.eligible) {
       if (typeof showToast === 'function') showToast(eligibility.reason || 'Free summon condition not met!', 'warning');
       return;
     }
@@ -9358,6 +9373,33 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       AudioFX.summon();
       addLog(`🧬 **[DNA DIGIVOLUTION]**: Returned 2 Champion spirits to Hand and summoned "${card.name}" for 0 cost!`, 'magic');
+      executeWhenSummonedEffects(card, side);
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    // 4b. MAIN STEP NEXUS RETURN FREE SUMMON
+    if (eligibility.type === 'MAIN_NEXUS_RETURN_FREE') {
+      const nIdx = (friendly.nexus || []).findIndex(n => (n.color === 'Blue') || (n.colors && n.colors.includes('Blue')));
+      if (nIdx !== -1) {
+        const returned = friendly.nexus.splice(nIdx, 1)[0];
+        friendly.deck = friendly.deck || [];
+        friendly.deck.push(returned);
+        addLog(`🏛️ Returned "${returned.name}" to the deckbottom to summon "${card.name}" for free!`, 'info');
+      }
+      friendly.hand.splice(cardIdx, 1);
+      const placedCores = (friendly.reserve >= 1) ? 1 : 1;
+      if (friendly.reserve >= placedCores) friendly.reserve -= placedCores;
+      const { level, bp } = calculateBpAndLevel(card.levels, placedCores);
+      card.currentCores = placedCores;
+      card.currentLevel = level || 1;
+      card.currentBp = bp || 6000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      friendly.field.push(card);
+      AudioFX.summon();
+      addLog(`⚡ **[FREE SUMMON]**: "${card.name}" summoned from Hand for 0 cost!`, 'magic');
       executeWhenSummonedEffects(card, side);
       renderDuelTable();
       renderPlayerHand();
@@ -15015,6 +15057,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const titleEl = document.getElementById('resultModalTitle');
     const descEl = document.getElementById('resultModalDesc');
     const badgeEl = document.getElementById('resultModalBadge');
+    const statsEl = document.getElementById('resultModalStats');
 
     if (isVictory) {
       badgeEl.className = 'result-badge result-win';
@@ -15026,6 +15069,41 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       badgeEl.textContent = '💀 DEFEAT IN THE ARENA';
       titleEl.textContent = 'Your Life Cores Were Depleted!';
       descEl.textContent = `The opponent broke through your defenses and wiped your Life to zero. Refine your deck, re-balance your mana curve, and return for vengeance!`;
+    }
+
+    if (statsEl) {
+      const turns = (DuelState && DuelState.turn) || 1;
+      const pLife = Math.max(0, (DuelState && DuelState.player && DuelState.player.life) || 0);
+      const oLife = Math.max(0, (DuelState && DuelState.opponent && DuelState.opponent.life) || 0);
+      const pHand = (DuelState && DuelState.player && DuelState.player.hand) ? DuelState.player.hand.length : 0;
+      const oHand = (DuelState && DuelState.opponent && DuelState.opponent.hand) ? DuelState.opponent.hand.length : 0;
+      const pField = (DuelState && DuelState.player && DuelState.player.field) ? DuelState.player.field.length : 0;
+      const oField = (DuelState && DuelState.opponent && DuelState.opponent.field) ? DuelState.opponent.field.length : 0;
+      const pTrash = (DuelState && DuelState.player && DuelState.player.trashCards) ? DuelState.player.trashCards.length : (DuelState && DuelState.player && DuelState.player.trash) || 0;
+      const oTrash = (DuelState && DuelState.opponent && DuelState.opponent.trashCards) ? DuelState.opponent.trashCards.length : (DuelState && DuelState.opponent && DuelState.opponent.trash) || 0;
+
+      statsEl.innerHTML = `
+        <div class="result-stat-card">
+          <span class="result-stat-val">Turn ${turns}</span>
+          <span class="result-stat-lbl">⏱️ Turns</span>
+        </div>
+        <div class="result-stat-card">
+          <span class="result-stat-val" style="color:#ef4444;">${pLife} vs ${oLife}</span>
+          <span class="result-stat-lbl">❤️ Life</span>
+        </div>
+        <div class="result-stat-card">
+          <span class="result-stat-val" style="color:#8b5cf6;">${pField} vs ${oField}</span>
+          <span class="result-stat-lbl">⚔️ Field Units</span>
+        </div>
+        <div class="result-stat-card">
+          <span class="result-stat-val" style="color:#38bdf8;">${pHand} vs ${oHand}</span>
+          <span class="result-stat-lbl">🎴 In Hand</span>
+        </div>
+        <div class="result-stat-card">
+          <span class="result-stat-val" style="color:#94a3b8;">${pTrash} vs ${oTrash}</span>
+          <span class="result-stat-lbl">🪦 In Trash</span>
+        </div>
+      `;
     }
 
     modal.classList.add('active');
@@ -16444,6 +16522,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     canPlayCardInCurrentPhase,
     checkCardFreeSummonEligibility,
     executeFreeSummon,
+    checkHandReactionsOnDestruction,
+    checkHandReactionsOnAdvent,
+    checkHandReactionsOnMirageSet,
     summonCard,
     castMagic,
     handleSpiritClick,
