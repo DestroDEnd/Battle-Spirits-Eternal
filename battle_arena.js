@@ -1957,9 +1957,10 @@
     friendlyState.mirage = card;
 
     AudioFX.magic();
-    addLog(`??? **[MIRAGE SET]**: "${card.name}" placed in Mirage Zone! Paid Cost ${check.cost}.`, 'magic');
-    if (typeof showToast === 'function') showToast(`?? Set "${card.name}" in Mirage Zone!`, 'success');
+    addLog(`🔮 **[MIRAGE SET]**: "${card.name}" placed in Mirage Zone! Paid Cost ${check.cost}.`, 'magic');
+    if (typeof showToast === 'function') showToast(`🔮 Set "${card.name}" in Mirage Zone!`, 'success');
 
+    checkHandReactionsOnMirageSet(card, check.cost, side);
     dispatchContinuousRules();
     renderDuelTable();
     if (side === 'player') renderPlayerHand();
@@ -8912,7 +8913,124 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
     executeUniversalCardEffect(destroyedSpirit, side, 'WHEN_DESTROYED');
+    checkHandReactionsOnDestruction(destroyedSpirit, side);
     renderDuelTable();
+  }
+
+  // ── HAND REACTION FREE SUMMON HELPERS ──
+  function checkHandReactionsOnDestruction(destroyedUnit, side = 'player') {
+    if (!destroyedUnit) return;
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    if (!friendlyState || !friendlyState.hand) return;
+
+    for (const card of [...friendlyState.hand]) {
+      const eff = (card.effect || '').toLowerCase();
+      let shouldSummon = false;
+      let promptMsg = '';
+
+      // 1. Ultimate-Siegfried-Neo (SJ14-02): When Siegfried destroyed
+      if (card.card_number === 'SJ14-02' || (eff.includes('"siegfried"-named') && eff.includes('destroyed') && eff.includes('without paying the cost'))) {
+        if ((destroyedUnit.name || '').toLowerCase().includes('siegfried')) {
+          shouldSummon = true;
+          promptMsg = `Your "${destroyedUnit.name}" was destroyed! Summon "${card.name}" from Hand for free?`;
+        }
+      }
+      // 2. The BlackHeavenFox Nega-Ninetail (BS20-X04): When White Cost 6+ Spirit destroyed
+      else if (card.card_number === 'BS20-X04' || (eff.includes('white cost 6 or more spirit is destroyed') && eff.includes('without paying the cost'))) {
+        const isWhite = (destroyedUnit.color === 'White') || (destroyedUnit.colors && destroyedUnit.colors.includes('White'));
+        if (isWhite && (destroyedUnit.cost || 0) >= 6) {
+          shouldSummon = true;
+          promptMsg = `Your White Cost ${(destroyedUnit.cost || 6)} Spirit "${destroyedUnit.name}" was destroyed! Summon "${card.name}" from Hand for free?`;
+        }
+      }
+      // 3. Keizer Ghidorah (BSC19-015): When Monster X destroyed
+      else if (card.card_number === 'BSC19-015' || (eff.includes('[monster x] is destroyed') && eff.includes('without paying the cost'))) {
+        if ((destroyedUnit.name || '').toLowerCase().includes('monster x')) {
+          shouldSummon = true;
+          promptMsg = `Your [Monster X] was destroyed! Summon "${card.name}" from Hand for free?`;
+        }
+      }
+      // 4. The EvilLanceEmperor Dom-Perignon (BS71-X02): When Curse spirit leaves field
+      else if (card.card_number === 'BS71-X02' || (eff.includes('"curse"-named effects') && eff.includes('leave the field') && eff.includes('without paying the cost'))) {
+        const hasCurse = (destroyedUnit.effect || '').toLowerCase().includes('curse') || (destroyedUnit.grantedKeywords || []).some(k => k.toLowerCase().includes('curse'));
+        if (hasCurse) {
+          shouldSummon = true;
+          promptMsg = `Your Spirit with Curse "${destroyedUnit.name}" was destroyed! Summon "${card.name}" from Hand for free?`;
+        }
+      }
+
+      if (shouldSummon) {
+        if (side === 'player') {
+          askOptionalEffect(card, promptMsg, () => {
+            executeFreeSummon(card.uid, side);
+          });
+        } else {
+          executeFreeSummon(card.uid, side);
+        }
+        break;
+      }
+    }
+  }
+
+  function checkHandReactionsOnAdvent(adventCard, side = 'player') {
+    if (!adventCard) return;
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    if (!friendlyState || !friendlyState.hand) return;
+
+    const colors = parseCardColors(adventCard);
+    for (const card of [...friendlyState.hand]) {
+      const eff = (card.effect || '').toLowerCase();
+      let match = false;
+      if (card.card_number === 'LM17-02' && colors.includes('red')) match = true;
+      else if (card.card_number === 'LM17-04' && colors.includes('purple')) match = true;
+      else if (card.card_number === 'LM17-06' && colors.includes('green')) match = true;
+      else if (card.card_number === 'LM17-08' && colors.includes('white')) match = true;
+      else if (card.card_number === 'LM17-10' && colors.includes('yellow')) match = true;
+      else if (card.card_number === 'LM17-12' && colors.includes('blue')) match = true;
+      else if (eff.includes('spirit with [advent] is summoned/[advents]') && eff.includes('without paying the cost')) {
+        for (const col of colors) {
+          if (eff.includes(`when your ${col} spirit with [advent]`)) {
+            match = true;
+            break;
+          }
+        }
+      }
+
+      if (match) {
+        if (side === 'player') {
+          askOptionalEffect(card, `Your [Advent] Spirit "${adventCard.name}" was summoned! Summon "${card.name}" from Hand for free?`, () => {
+            executeFreeSummon(card.uid, side);
+          });
+        } else {
+          executeFreeSummon(card.uid, side);
+        }
+        break;
+      }
+    }
+  }
+
+  function checkHandReactionsOnMirageSet(mirageCard, paidCost, side = 'player') {
+    if (!mirageCard || paidCost <= 0) return;
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    if (!friendlyState || !friendlyState.hand) return;
+
+    const colors = parseCardColors(mirageCard);
+    const isRedOrWhite = colors.includes('red') || colors.includes('white');
+
+    for (const card of [...friendlyState.hand]) {
+      if (card.card_number === 'BS57-003' || (card.effect || '').toLowerCase().includes('red/white mirage is set by paying the cost')) {
+        if (isRedOrWhite) {
+          if (side === 'player') {
+            askOptionalEffect(card, `Red/White Mirage was set by paying cost! Summon "${card.name}" from Hand for free?`, () => {
+              executeFreeSummon(card.uid, side);
+            });
+          } else {
+            executeFreeSummon(card.uid, side);
+          }
+          break;
+        }
+      }
+    }
   }
 
   function isViolentHighSpeedCard(card) {
@@ -10949,6 +11067,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     // 6. Also trigger any general (When Summoned) effects
     executeWhenSummonedEffects(targetSpirit, side);
+    checkHandReactionsOnAdvent(targetSpirit, side);
 
     renderDuelTable();
     if (isPlayer) renderPlayerHand();
