@@ -5080,6 +5080,67 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.4);
 }
 
+/* ── SUMMON PAYMENT & SOUL CORE MODAL ── */
+.summon-sc-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.summon-sc-option:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.summon-sc-option.is-selected {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.14), rgba(234, 88, 12, 0.05));
+  border-color: #f97316;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.2);
+}
+.summon-sc-option.is-selected.normal-core-theme {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(14, 165, 233, 0.05));
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+.summon-sc-radio-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.15s ease;
+}
+.summon-sc-option.is-selected .summon-sc-radio-icon {
+  border-color: #f97316;
+  background: rgba(249, 115, 22, 0.2);
+}
+.summon-sc-option.is-selected.normal-core-theme .summon-sc-radio-icon {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.2);
+}
+.summon-sc-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+.summon-sc-option.is-selected .summon-sc-radio-dot {
+  background: #f97316;
+}
+.summon-sc-option.is-selected.normal-core-theme .summon-sc-radio-dot {
+  background: #38bdf8;
+}
+
 
 /* ── THE VOID CORE RESERVOIR & BURST ZONES ── */
 .battle-center-hub {

@@ -1018,11 +1018,92 @@
     }
   }
 
+  // ── DYNAMIC IR SHARDS LOADER (data/ir_shards/) ──
+  const LoadedIrShards = {};
+
+  async function loadSetIrShard(setPrefix) {
+    if (!setPrefix || typeof setPrefix !== 'string') return null;
+    const prefix = setPrefix.trim().toUpperCase();
+    if (LoadedIrShards[prefix]) return LoadedIrShards[prefix];
+
+    // 1. Browser environment fetch
+    if (typeof fetch === 'function' && typeof window !== 'undefined' && window.location && window.location.origin) {
+      try {
+        let res = await fetch(`./data/ir_shards/${prefix}.json`);
+        if (!res.ok) res = await fetch(`/data/ir_shards/${prefix}.json`);
+        if (res.ok) {
+          const shard = await res.json();
+          LoadedIrShards[prefix] = shard;
+          return shard;
+        }
+      } catch (e) {}
+    }
+
+    // 2. Node.js environment
+    if (typeof require === 'function') {
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const baseDir = typeof __dirname !== 'undefined' ? __dirname : (typeof process !== 'undefined' && process.cwd ? process.cwd() : '.');
+        const shardPath = path.resolve(baseDir, `data/ir_shards/${prefix}.json`);
+        if (fs.existsSync(shardPath)) {
+          const shard = JSON.parse(fs.readFileSync(shardPath, 'utf8'));
+          LoadedIrShards[prefix] = shard;
+          return shard;
+        }
+      } catch (e) {}
+    }
+
+    return null;
+  }
+
+  async function loadCardIrShard(cardNum) {
+    if (!cardNum || typeof cardNum !== 'string') return null;
+    const parts = cardNum.trim().split('-');
+    if (parts.length < 2) return null;
+    const setPrefix = parts[0].toUpperCase();
+    const shard = await loadSetIrShard(setPrefix);
+    return shard ? (shard[cardNum] || null) : null;
+  }
+
+  function getLoadedCardIr(cardNum) {
+    if (!cardNum || typeof cardNum !== 'string') return null;
+    const parts = cardNum.trim().split('-');
+    if (parts.length < 2) return null;
+    const setPrefix = parts[0].toUpperCase();
+
+    if (LoadedIrShards[setPrefix]) {
+      return LoadedIrShards[setPrefix][cardNum] || null;
+    }
+
+    if (typeof require === 'function') {
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const baseDir = typeof __dirname !== 'undefined' ? __dirname : (typeof process !== 'undefined' && process.cwd ? process.cwd() : '.');
+        const shardPath = path.resolve(baseDir, `data/ir_shards/${setPrefix}.json`);
+        if (fs.existsSync(shardPath)) {
+          const shard = JSON.parse(fs.readFileSync(shardPath, 'utf8'));
+          LoadedIrShards[prefix || setPrefix] = shard;
+          return shard[cardNum] || null;
+        }
+      } catch (e) {}
+    }
+
+    return null;
+  }
+
   // Canonical Card Effect Resolution & CardEffectsDB Lookup Helper (AGENTS.md Rules 1 & 4)
   // Resolves effects primarily by canonical card number and compiled IR, deprecating direct card name keying.
   function getCardEffectsData(card) {
     if (!card) return null;
     const cardNum = String(card.card_number || card.cardNumber || card.id || '').trim();
+    if (!card.compiledIr && cardNum) {
+      const shardIr = getLoadedCardIr(cardNum);
+      if (shardIr) {
+        card.compiledIr = JSON.parse(JSON.stringify(shardIr));
+      }
+    }
     if (card.compiledIr) {
       if (!card.compiledIr.triggers && Array.isArray(card.compiledIr.abilities)) {
         const trigs = {};
@@ -4083,6 +4164,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       oColor = oStd.color;
       oCards = extractCardsListFromDeck(oStd);
     }
+
+    // Pre-load compiled IR shards for cards across both decks (AGENTS.md Rule 1)
+    try {
+      const allDeckCards = [...pCards, ...oCards];
+      const prefixes = new Set();
+      for (const c of allDeckCards) {
+        const cNum = c.card_number || c.cardNumber;
+        if (cNum && typeof cNum === 'string' && cNum.includes('-')) {
+          prefixes.add(cNum.split('-')[0].toUpperCase());
+        }
+      }
+      await Promise.all([...prefixes].map(p => loadSetIrShard(p)));
+    } catch (e) {}
 
     // Prepare card instances with UIDs and parsed levels
     let uidCounter = 1;
@@ -8456,7 +8550,433 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return true;
   }
 
-  function summonCard(uid, customCoresToPlace, useSoulCore = null) {
+  // ── SUMMON COST PAYMENT & CORE ALLOCATION MODAL CONTROLLER ──
+  let pendingSummon = null;
+
+  function openSummonModal(uid) {
+    if (DuelState.activePlayer !== 'player') {
+      if (typeof showToast === 'function') showToast("Cannot summon during opponent's turn!", 'warning');
+      return;
+    }
+    const cardIdx = DuelState.player.hand.findIndex(c => c.uid === uid);
+    if (cardIdx === -1) return;
+    const card = DuelState.player.hand[cardIdx];
+
+    const phase = DuelState.phases[DuelState.phaseIndex];
+    if (phase !== 'MAIN' && phase !== 'ATTACK') {
+      if (typeof showToast === 'function') showToast("Spirits & Ultimates can only be summoned during MAIN or ATTACK (Flash) steps!", 'warning');
+      return;
+    }
+
+    if (phase === 'ATTACK' && !hasFlashTiming(card)) {
+      if (typeof showToast === 'function') showToast(`Official Rule: Normal Spirits & Ultimates cannot be summoned during the Attack Step! "${card.name}" does not have [Flash] timing.`, 'warning');
+      return;
+    }
+
+    const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
+    if (isUltimate) {
+      const ultCheck = validateUltimateSummonCondition(card, 'player');
+      if (!ultCheck.allowed) {
+        if (typeof showToast === 'function') {
+          showToast(`Official Rule: Cannot summon Ultimate "${card.name}"! Condition not met: ${ultCheck.reason}`, 'warning');
+        }
+        return;
+      }
+    }
+
+    const baseCost = card.cost || 0;
+    const cost = getCardEffectiveCost(card, 'player');
+    const { regularReserve, hasSoulCoreInReserve, fieldCores, total: totalAvailable } = getPlayerAvailableCores();
+
+    if (totalAvailable < cost + 1) {
+      if (typeof showToast === 'function') {
+        showToast(`Need at least ${cost + 1} total cores (Cost ${cost} + 1 on Spirit), but only have ${totalAvailable} across Reserve and Field!`, 'warning');
+      }
+      return;
+    }
+
+    const hasSoulCoreBonus = /if \[soul core\] was used to pay the summon cost|\[soul core\] was used to pay/i.test(card.effect || '');
+
+    // Default choices:
+    // Option: Pay with Soul Core vs Pay with Normal Cores Only
+    // Default payWithSoulCore to false so user keeps Soul Core (unless regularReserve + fieldCores < cost and only soul core can bridge it)
+    let payWithSoulCore = false;
+    if (hasSoulCoreInReserve && cost > 0 && regularReserve < cost && (regularReserve + fieldCores < cost)) {
+      payWithSoulCore = true;
+    }
+
+    // Option: Place Soul Core on Spirit?
+    // If Soul Core is in Reserve and not paying with Soul Core, default placeSoulCoreOnSpirit to TRUE!
+    let placeSoulCoreOnSpirit = hasSoulCoreInReserve && !payWithSoulCore;
+
+    // Normal cores to place on spirit:
+    // If placeSoulCoreOnSpirit is true, spirit already gets 1 core (the Soul Core), so normalCoresToPlace can start at 0 (total cores = 1).
+    // If placeSoulCoreOnSpirit is false, normalCoresToPlace starts at 1.
+    let normalCoresToPlace = placeSoulCoreOnSpirit ? 0 : 1;
+
+    // Field allocations map: { [spiritUid]: 0 }
+    const fieldAllocations = {};
+    (DuelState.player.field || []).forEach(s => {
+      fieldAllocations[s.uid] = 0;
+    });
+
+    // Check if we need field cores to cover regular reserve deficit
+    const normalCostToPay = payWithSoulCore ? Math.max(0, cost - 1) : cost;
+    const totalNormalNeeded = normalCostToPay + normalCoresToPlace;
+    if (regularReserve < totalNormalNeeded) {
+      let deficit = totalNormalNeeded - regularReserve;
+      const sortedField = [...(DuelState.player.field || [])].sort((a, b) => (a.currentBp || 0) - (b.currentBp || 0));
+      for (const s of sortedField) {
+        if (deficit <= 0) break;
+        const take = Math.min(s.currentCores, deficit);
+        fieldAllocations[s.uid] = take;
+        deficit -= take;
+      }
+    }
+
+    pendingSummon = {
+      card,
+      baseCost,
+      cost,
+      payWithSoulCore,
+      placeSoulCoreOnSpirit,
+      normalCoresToPlace,
+      fieldAllocations,
+      hasSoulCoreBonus
+    };
+
+    renderSummonModal();
+    const modalEl = document.getElementById('battleSummonPaymentModal');
+    if (modalEl) modalEl.classList.add('active');
+  }
+
+  function renderSummonModal() {
+    if (!pendingSummon) return;
+    const { card, baseCost, cost, payWithSoulCore, placeSoulCoreOnSpirit, normalCoresToPlace, fieldAllocations, hasSoulCoreBonus } = pendingSummon;
+    const { regularReserve, hasSoulCoreInReserve, fieldCores } = getPlayerAvailableCores();
+    const scLocation = DuelState.player.soulCoreLocation || 'reserve';
+
+    const totalCoresOnSpirit = normalCoresToPlace + (placeSoulCoreOnSpirit ? 1 : 0);
+    const normalCostToPay = payWithSoulCore ? Math.max(0, cost - 1) : cost;
+    const totalNormalNeeded = normalCostToPay + normalCoresToPlace;
+    const fieldSelectedTotal = Object.values(fieldAllocations).reduce((sum, v) => sum + v, 0);
+    const normalNeededFromReserve = Math.max(0, totalNormalNeeded - fieldSelectedTotal);
+
+    const isCoreBudgetValid = (totalCoresOnSpirit >= 1) &&
+                              (normalNeededFromReserve <= regularReserve) &&
+                              (totalNormalNeeded <= regularReserve + fieldCores);
+
+    // Card Art & Meta
+    const artEl = document.getElementById('summonModalCardArt');
+    if (artEl) {
+      const artUrl = card.image_url || card.imageUrl || '';
+      artEl.style.backgroundImage = artUrl ? `url("${artUrl}")` : 'none';
+      artEl.style.backgroundColor = '#1e1b4b';
+    }
+    const titleEl = document.getElementById('summonModalTitle');
+    if (titleEl) {
+      titleEl.textContent = `Summon ${card.name}`;
+    }
+    const metaEl = document.getElementById('summonModalCardMeta');
+    if (metaEl) {
+      const redText = baseCost > cost ? ` (Reduced from ${baseCost} via symbols)` : '';
+      metaEl.innerHTML = `<span style="color:#60a5fa; font-weight:700;">${card.type || 'Spirit'}</span> • ${card.color || 'Red'} • Effective Cost: <span style="color:#f59e0b; font-weight:800;">${cost}</span>${redText}`;
+    }
+
+    // 1. Soul Core Selection Box
+    const scBox = document.getElementById('summonModalSoulCoreBox');
+    if (scBox) {
+      if (hasSoulCoreInReserve) {
+        scBox.style.display = 'block';
+        scBox.innerHTML = `
+          <div style="font-size:0.85rem; font-weight:800; color:#fbbf24; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.4rem;">
+            ${getHexCoreSvg('soul', 16)} SOUL CORE PAYMENT &amp; PLACEMENT OPTIONS:
+          </div>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:0.65rem;">
+            <!-- Option A: Pay with Normal Cores Only (Keep Soul Core) -->
+            <div class="summon-sc-option ${!payWithSoulCore ? 'is-selected normal-core-theme' : ''}" onclick="BattleArena.setSummonSoulCorePayment(false)">
+              <div class="summon-sc-radio-icon">
+                <div class="summon-sc-radio-dot"></div>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-weight:800; color:#e2e8f0; font-size:0.88rem;">Pay with Normal Cores Only</span>
+                  <span style="font-size:0.7rem; font-weight:800; background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid rgba(56,189,248,0.4); padding:0.15rem 0.45rem; border-radius:0.3rem;">🛡️ Soul Core Safe</span>
+                </div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem;">
+                  Pay all ${cost} cost cores using Normal Cores from Reserve/Field. Soul Core is preserved.
+                </div>
+                <!-- Sub-option: Place Soul Core on this Spirit -->
+                ${!payWithSoulCore ? `
+                  <div style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px dashed rgba(255,255,255,0.1); display:flex; align-items:center; gap:0.5rem;" onclick="event.stopPropagation()">
+                    <input type="checkbox" id="chkPlaceSoulCore" ${placeSoulCoreOnSpirit ? 'checked' : ''} onchange="BattleArena.setSummonSoulCorePlacement(this.checked)" style="accent-color:#f97316; cursor:pointer; width:16px; height:16px;">
+                    <label for="chkPlaceSoulCore" style="font-size:0.78rem; font-weight:700; color:#fed7aa; cursor:pointer; user-select:none;">
+                      🔥 Place [Soul Core] on "${card.name}" (enters field with Soul Core active)
+                    </label>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Option B: Pay Summon Cost with Soul Core -->
+            <div class="summon-sc-option ${payWithSoulCore ? 'is-selected' : ''}" onclick="BattleArena.setSummonSoulCorePayment(true)">
+              <div class="summon-sc-radio-icon">
+                <div class="summon-sc-radio-dot"></div>
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-weight:800; color:#e2e8f0; font-size:0.88rem;">Pay 1 Cost with [Soul Core]</span>
+                  <span style="font-size:0.7rem; font-weight:800; background:rgba(249,115,22,0.25); color:#fdba74; border:1px solid rgba(249,115,22,0.4); padding:0.15rem 0.45rem; border-radius:0.3rem;">⚡ Sends SC to Trash</span>
+                </div>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem;">
+                  1 cost core paid by Soul Core to Trash. Remaining normal cost to pay: ${Math.max(0, cost - 1)} Core(s).
+                </div>
+                ${hasSoulCoreBonus ? `
+                  <div style="margin-top:0.35rem; font-size:0.74rem; font-weight:800; color:#fde047;">
+                    ✨ ACTIVATES BONUS EFFECT: "${card.name}" triggers additional ability when paid with Soul Core!
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (scLocation === 'field') {
+        const fieldScOwner = (DuelState.player.field || []).find(s => s.uid === DuelState.player.soulCoreSpiritUid) || (DuelState.player.field || []).find(s => s.hasSoulCore);
+        const ownerName = fieldScOwner ? fieldScOwner.name : 'Field Spirit';
+        scBox.style.display = 'block';
+        scBox.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:0.8rem; color:#94a3b8;">
+              ${getHexCoreSvg('soul', 14)} Soul Core is currently on field: <strong style="color:#fdba74;">${ownerName}</strong>
+            </div>
+            <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.78rem; font-weight:700; color:#fed7aa; cursor:pointer;">
+              <input type="checkbox" id="chkPlaceSoulCore" ${placeSoulCoreOnSpirit ? 'checked' : ''} onchange="BattleArena.setSummonSoulCorePlacement(this.checked)" style="accent-color:#f97316; cursor:pointer;">
+              Transfer Soul Core to "${card.name}"
+            </label>
+          </div>
+        `;
+      } else {
+        scBox.style.display = 'block';
+        scBox.innerHTML = `
+          <div style="font-size:0.8rem; color:#94a3b8; display:flex; align-items:center; gap:0.4rem;">
+            ${getHexCoreSvg('soul', 14)} Soul Core is in Trash (Will return to Reserve at next Refresh Step). Summon cost paid with normal cores only.
+          </div>
+        `;
+      }
+    }
+
+    // 2. Cores on Summoned Spirit Stepper & Level/BP Preview
+    const { level, bp } = calculateBpAndLevel(card.levels, totalCoresOnSpirit, placeSoulCoreOnSpirit, card.effect);
+    const placementBox = document.getElementById('summonModalPlacementBox');
+    if (placementBox) {
+      let nextLvlInfo = '';
+      if (Array.isArray(card.levels)) {
+        const higherLevels = card.levels.filter(l => (parseInt(l.level || l.lvl || 0, 10) > level));
+        if (higherLevels.length > 0) {
+          const next = higherLevels[0];
+          const needed = parseInt(next.cost || next.cores || 0, 10);
+          nextLvlInfo = `<span style="font-size:0.74rem; color:#94a3b8; margin-left:0.5rem;">(Next: LV${next.level || next.lvl} at ${needed} Cores, ${next.bp} BP)</span>`;
+        }
+      }
+
+      const canReducePlacement = (placeSoulCoreOnSpirit ? (normalCoresToPlace > 0) : (normalCoresToPlace > 1));
+      const canIncreasePlacement = isCoreBudgetValid && (normalNeededFromReserve < regularReserve || fieldSelectedTotal < fieldCores);
+
+      placementBox.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <div>
+            <div style="font-size:0.85rem; font-weight:800; color:#e2e8f0;">Cores Allocated to "${card.name}":</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">
+              ${normalCoresToPlace} Normal Core(s) ${placeSoulCoreOnSpirit ? `+ 1 Soul Core ${getHexCoreSvg('soul', 13)}` : ''} = <strong style="color:#fbbf24;">${totalCoresOnSpirit} Total</strong>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <button class="ssc-btn-step" onclick="BattleArena.adjustSummonPlacement(-1)" ${canReducePlacement ? '' : 'disabled'} title="Decrease cores on Spirit">−</button>
+            <span style="font-size:1.1rem; font-weight:900; color:#fbbf24; min-width:32px; text-align:center;">${totalCoresOnSpirit}</span>
+            <button class="ssc-btn-step" onclick="BattleArena.adjustSummonPlacement(1)" ${canIncreasePlacement ? '' : 'disabled'} title="Increase cores on Spirit">+</button>
+          </div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3); border-radius:0.4rem; padding:0.4rem 0.75rem; display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:0.8rem; font-weight:800; color:#38bdf8;">
+            ⭐ LV${level} &nbsp;•&nbsp; ⚡ ${bp} BP ${placeSoulCoreOnSpirit ? '<span style="color:#f59e0b; font-size:0.72rem; margin-left:0.3rem;">[SC ACTIVE]</span>' : ''}
+          </div>
+          <div>${nextLvlInfo}</div>
+        </div>
+      `;
+    }
+
+    // 3. Field Spirits Core Reallocation (if any field spirits exist)
+    const fieldContainer = document.getElementById('summonModalFieldChoicesContainer');
+    const fieldChoicesEl = document.getElementById('summonModalFieldChoices');
+    const fieldSelectedCountEl = document.getElementById('summonModalFieldSelectedCount');
+    const playerField = DuelState.player.field || [];
+
+    if (playerField.length > 0) {
+      if (fieldContainer) fieldContainer.style.display = 'block';
+      if (fieldSelectedCountEl) {
+        fieldSelectedCountEl.textContent = `${fieldSelectedTotal} Cores moved from Field`;
+      }
+      if (fieldChoicesEl) {
+        fieldChoicesEl.innerHTML = playerField.map(s => {
+          const allocated = fieldAllocations[s.uid] || 0;
+          const remaining = s.currentCores - allocated;
+          const isDepleted = remaining <= 0;
+          const cardCls = isDepleted ? 'sacrifice-spirit-card is-depleted' : (allocated > 0 ? 'sacrifice-spirit-card is-surviving' : 'sacrifice-spirit-card');
+
+          return `
+            <div class="${cardCls}" style="padding:0.45rem 0.75rem;">
+              <div class="ssc-info">
+                <div class="ssc-name" style="font-size:0.8rem;">${s.name} ${s.hasSoulCore ? getHexCoreSvg('soul', 12) : ''}</div>
+                <div class="ssc-meta" style="font-size:0.7rem;">Cores: ${s.currentCores} • LV${s.currentLevel} (${s.currentBp} BP)</div>
+              </div>
+              <div class="ssc-stepper">
+                <button class="ssc-btn-step" style="width:24px; height:24px; font-size:0.85rem;" onclick="BattleArena.adjustSummonFieldCore('${s.uid}', -1)" ${allocated <= 0 ? 'disabled' : ''}>−</button>
+                <span class="ssc-core-count" style="min-width:44px; font-size:0.78rem;">${allocated} / ${s.currentCores}</span>
+                <button class="ssc-btn-step" style="width:24px; height:24px; font-size:0.85rem;" onclick="BattleArena.adjustSummonFieldCore('${s.uid}', 1)" ${allocated >= s.currentCores ? 'disabled' : ''}>+</button>
+              </div>
+              <div class="ssc-status-badge ${isDepleted ? 'ssb-depleted' : 'ssb-survives'}" style="min-width:90px; font-size:0.62rem; padding:0.15rem 0.35rem;">
+                ${isDepleted ? '💀 Depletes to Trash' : `🛡️ Survives (${remaining})`}
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    } else {
+      if (fieldContainer) fieldContainer.style.display = 'none';
+    }
+
+    // 4. Live Summary Box
+    const summaryBox = document.getElementById('summonModalSummaryBox');
+    if (summaryBox) {
+      const reserveAfter = regularReserve - normalNeededFromReserve;
+      summaryBox.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+          <span style="font-weight:700; color:#e2e8f0; font-size:0.82rem;">Payment &amp; Core Math:</span>
+          <span style="font-weight:900; color:${isCoreBudgetValid ? '#34d399' : '#f87171'}; font-size:0.82rem;">
+            ${isCoreBudgetValid ? '✓ Valid Core Allocation' : '⚠️ Need More Cores'}
+          </span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; font-size:0.76rem; background:rgba(0,0,0,0.25); border-radius:0.4rem; padding:0.5rem 0.75rem;">
+          <div>
+            <span style="color:#94a3b8;">Summon Cost:</span>
+            <strong style="color:#fbbf24;"> ${cost} Cores</strong>
+            <div style="font-size:0.7rem; color:#cbd5e1;">(${normalCostToPay} Normal${payWithSoulCore ? ' + 1 Soul Core' : ''})</div>
+          </div>
+          <div>
+            <span style="color:#94a3b8;">On "${card.name}":</span>
+            <strong style="color:#38bdf8;"> ${totalCoresOnSpirit} Cores (LV${level})</strong>
+            <div style="font-size:0.7rem; color:#cbd5e1;">(${normalCoresToPlace} Normal${placeSoulCoreOnSpirit ? ' + 1 Soul Core' : ''})</div>
+          </div>
+          <div>
+            <span style="color:#94a3b8;">Reserve (Before → After):</span>
+            <strong style="color:${reserveAfter >= 0 ? '#e2e8f0' : '#f87171'};"> ${regularReserve} → ${reserveAfter}</strong>
+          </div>
+          <div>
+            <span style="color:#94a3b8;">From Field Spirits:</span>
+            <strong style="color:#a78bfa;"> ${fieldSelectedTotal} Cores moved</strong>
+          </div>
+        </div>
+      `;
+    }
+
+    // 5. Confirm Button
+    const btnConfirm = document.getElementById('btnConfirmSummonPayment');
+    if (btnConfirm) {
+      btnConfirm.disabled = !isCoreBudgetValid;
+      btnConfirm.style.opacity = isCoreBudgetValid ? '1' : '0.4';
+      btnConfirm.innerHTML = isCoreBudgetValid
+        ? `⚡ Confirm Summon (${totalCoresOnSpirit} Core${totalCoresOnSpirit > 1 ? 's' : ''}, LV${level})`
+        : `Cannot Summon (Check Core Budget)`;
+    }
+  }
+
+  function setSummonSoulCorePayment(useSoulCore) {
+    if (!pendingSummon) return;
+    pendingSummon.payWithSoulCore = Boolean(useSoulCore);
+    if (pendingSummon.payWithSoulCore) {
+      pendingSummon.placeSoulCoreOnSpirit = false;
+      if (pendingSummon.normalCoresToPlace === 0) {
+        pendingSummon.normalCoresToPlace = 1;
+      }
+    } else {
+      if (DuelState.player.soulCoreLocation === 'reserve') {
+        pendingSummon.placeSoulCoreOnSpirit = true;
+      }
+    }
+    renderSummonModal();
+  }
+
+  function setSummonSoulCorePlacement(placeOnSpirit) {
+    if (!pendingSummon) return;
+    pendingSummon.placeSoulCoreOnSpirit = Boolean(placeOnSpirit);
+    if (!pendingSummon.placeSoulCoreOnSpirit && pendingSummon.normalCoresToPlace === 0) {
+      pendingSummon.normalCoresToPlace = 1;
+    }
+    renderSummonModal();
+  }
+
+  function adjustSummonPlacement(delta) {
+    if (!pendingSummon) return;
+    const minNormal = pendingSummon.placeSoulCoreOnSpirit ? 0 : 1;
+    const nextVal = pendingSummon.normalCoresToPlace + delta;
+    if (nextVal >= minNormal) {
+      pendingSummon.normalCoresToPlace = nextVal;
+      renderSummonModal();
+    }
+  }
+
+  function adjustSummonFieldCore(spiritUid, delta) {
+    if (!pendingSummon) return;
+    const s = (DuelState.player.field || []).find(sp => sp.uid === spiritUid);
+    if (!s) return;
+    const cur = pendingSummon.fieldAllocations[spiritUid] || 0;
+    const nextVal = cur + delta;
+    if (nextVal >= 0 && nextVal <= s.currentCores) {
+      pendingSummon.fieldAllocations[spiritUid] = nextVal;
+      renderSummonModal();
+    }
+  }
+
+  function closeSummonModal() {
+    pendingSummon = null;
+    const modalEl = document.getElementById('battleSummonPaymentModal');
+    if (modalEl) modalEl.classList.remove('active');
+  }
+
+  function confirmSummonPayment() {
+    if (!pendingSummon) return;
+    const { card, cost, payWithSoulCore, placeSoulCoreOnSpirit, normalCoresToPlace, fieldAllocations } = pendingSummon;
+    const totalCoresOnSpirit = normalCoresToPlace + (placeSoulCoreOnSpirit ? 1 : 0);
+
+    const normalCostToPay = payWithSoulCore ? Math.max(0, cost - 1) : cost;
+    const totalNormalNeeded = normalCostToPay + normalCoresToPlace;
+    const fieldTotal = Object.values(fieldAllocations).reduce((sum, v) => sum + v, 0);
+    const normalNeededFromReserve = Math.max(0, totalNormalNeeded - fieldTotal);
+    const regularReserve = DuelState.player.reserve || 0;
+
+    if (totalCoresOnSpirit < 1) {
+      if (typeof showToast === 'function') showToast("A Spirit must have at least 1 core to stay on the field!", 'warning');
+      return;
+    }
+
+    if (normalNeededFromReserve > regularReserve) {
+      if (typeof showToast === 'function') showToast(`Not enough cores in Reserve! Need ${normalNeededFromReserve} normal cores, but only have ${regularReserve}.`, 'warning');
+      return;
+    }
+
+    const cardUid = card.uid;
+    closeSummonModal();
+
+    summonCard(cardUid, totalCoresOnSpirit, payWithSoulCore, {
+      confirmed: true,
+      payWithSoulCore,
+      placeSoulCore: placeSoulCoreOnSpirit,
+      normalCoresToPlace,
+      fieldAllocations
+    });
+  }
+
+  function summonCard(uid, customCoresToPlace, useSoulCore = null, options = {}) {
     if (DuelState.activePlayer !== 'player') {
       if (typeof showToast === 'function') showToast("Cannot summon during opponent's turn!", 'warning');
       return;
@@ -8477,7 +8997,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
-        // Violent High Speed check: If Ultimate-Seiryubi / Violent High Speed and trash >= 5, summon for 0 cost using Trash cores!
+    // Violent High Speed check: If Ultimate-Seiryubi / Violent High Speed and trash >= 5, summon for 0 cost using Trash cores!
     const isVhs = isViolentHighSpeedCard(card) && canActivateViolentHighSpeed(card, 'player') && (phase === 'ATTACK');
     if (isVhs) {
       const trashCount = DuelState.player.trash || 0;
@@ -8510,11 +9030,132 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    // Interactive Browser Modal Trigger:
+    const isBrowserUi = typeof document !== 'undefined' && document.getElementById && document.getElementById('battleSummonPaymentModal');
+    const isDirectCall = Boolean(DuelState.autoPlay || (options && (options.confirmed || options.bypassModal)));
+
+    if (isBrowserUi && !isDirectCall) {
+      openSummonModal(uid);
+      return;
+    }
+
     const baseCost = card.cost || 0;
     const cost = getCardEffectiveCost(card, 'player');
     const isCostReduced = cost < baseCost;
+
+    // ── CONFIRMED SUMMON PAYMENT EXECUTION (via modal or programmatic options) ──
+    if (options && options.confirmed) {
+      const payWithSoulCore = Boolean(options.payWithSoulCore);
+      const placeSoulCore = Boolean(options.placeSoulCore);
+      const normalCostToPay = payWithSoulCore ? Math.max(0, cost - 1) : cost;
+      const normalCoresToPlace = options.normalCoresToPlace !== undefined ? options.normalCoresToPlace : (placeSoulCore ? Math.max(0, (customCoresToPlace || 1) - 1) : (customCoresToPlace || 1));
+      const totalCoresOnSpirit = normalCoresToPlace + (placeSoulCore ? 1 : 0);
+      const fieldAllocations = options.fieldAllocations || {};
+
+      // 1. Reallocate cores from field spirits
+      let fieldCoresTaken = 0;
+      Object.keys(fieldAllocations).forEach(spUid => {
+        const take = fieldAllocations[spUid] || 0;
+        if (take > 0) {
+          const sp = DuelState.player.field.find(s => s.uid === spUid);
+          if (sp) {
+            sp.currentCores -= take;
+            fieldCoresTaken += take;
+            if (sp.currentCores <= 0) {
+              DuelState.player.field = DuelState.player.field.filter(s => s.uid !== sp.uid);
+              if (sp.hasSoulCore && !placeSoulCore) {
+                DuelState.player.soulCoreLocation = 'trash';
+                DuelState.player.soulCoreSpiritUid = null;
+              }
+              addLog(`💀 **[DEPLETED]**: "${sp.name}" had all cores removed and was sent to Trash!`, 'combat');
+            } else {
+              recalculateSpiritBp(sp);
+            }
+          }
+        }
+      });
+
+      // 2. Deduct normal cores from Reserve and add normal cost to Trash
+      const totalNormalNeeded = normalCostToPay + normalCoresToPlace;
+      const normalFromReserve = Math.max(0, totalNormalNeeded - fieldCoresTaken);
+      DuelState.player.reserve = Math.max(0, DuelState.player.reserve - normalFromReserve);
+      DuelState.player.trash += normalCostToPay;
+      DuelState.player.hand.splice(cardIdx, 1);
+
+      // 3. Handle Soul Core state
+      if (payWithSoulCore) {
+        card.usedSoulCore = true;
+        card.paidWithSoulCore = true;
+        card.hasSoulCore = false;
+        DuelState.player.soulCoreLocation = 'trash';
+        DuelState.player.soulCoreSpiritUid = null;
+        addLog(`🔮 **[SOUL CORE PAID]**: Used [Soul Core] from Reserve to pay summon cost for "${card.name}"!`, 'magic');
+      } else if (placeSoulCore) {
+        if (DuelState.player.soulCoreLocation === 'field' && DuelState.player.soulCoreSpiritUid) {
+          const prevSp = DuelState.player.field.find(s => s.uid === DuelState.player.soulCoreSpiritUid);
+          if (prevSp) prevSp.hasSoulCore = false;
+        }
+        DuelState.player.soulCoreLocation = 'field';
+        DuelState.player.soulCoreSpiritUid = card.uid;
+        card.hasSoulCore = true;
+        card.paidWithSoulCore = false;
+        addLog(`🔥 **[SOUL CORE PLACED]**: Placed [Soul Core] directly onto "${card.name}"!`, 'magic');
+      } else {
+        card.hasSoulCore = false;
+        card.paidWithSoulCore = false;
+      }
+
+      // 4. Calculate BP & Level
+      const { level, bp } = calculateBpAndLevel(card.levels, totalCoresOnSpirit, card.hasSoulCore, card.effect);
+      card.currentCores = totalCoresOnSpirit;
+      card.currentLevel = level;
+      card.currentBp = bp;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+
+      // 5. Tribute Check (if applicable)
+      const tributeReq = getCardTributeRequirement(card);
+      if (tributeReq) {
+        const eligible = getEligibleTributeSpirits(tributeReq, DuelState.player.field);
+        if (eligible.length === 1) {
+          executeTribute(card, eligible[0], tributeReq, cost, totalCoresOnSpirit);
+          DuelState.selectedPlayerCard = null;
+          return;
+        } else if (eligible.length > 1) {
+          openTributeModal(card, tributeReq, cost, totalCoresOnSpirit, eligible);
+          DuelState.selectedPlayerCard = null;
+          return;
+        } else {
+          DuelState.player.reserve += normalFromReserve;
+          DuelState.player.trash = Math.max(0, DuelState.player.trash - normalCostToPay);
+          if (payWithSoulCore || placeSoulCore) DuelState.player.soulCoreLocation = 'reserve';
+          DuelState.player.hand.splice(cardIdx, 0, card);
+          if (typeof showToast === 'function') {
+            showToast(`Cannot Tribute Summon "${card.name}": requires [Tribute: ${tributeReq.condText}], but you have no eligible Spirits on field!`, 'error');
+          }
+          return;
+        }
+      }
+
+      DuelState.player.field.push(card);
+      DuelState.selectedPlayerCard = null;
+
+      AudioFX.summon();
+      const cardKind = card.type || 'Spirit';
+      addLog(`✨ **SUMMONED**: "${card.name}" (${cardKind}) placed on field! Paid ${cost} cores${isCostReduced ? ` (reduced from ${baseCost} via field symbols)` : ''}, allocated ${totalCoresOnSpirit} core(s)${card.hasSoulCore ? ' (including Soul Core 🔥)' : ''} (Lv${level}, ${bp} BP).`, 'step');
+      executeWhenSummonedEffects(card, 'player');
+      const isSummonedUlt = (card.type === 'Ultimate' || (card.type || '').includes('Ultimate'));
+      if (isSummonedUlt) {
+        checkHandOnUltimateSummon(card, 'player');
+      }
+      renderDuelTable();
+      return;
+    }
+
+    // ── HEADLESS / DIRECT PROGRAMMATIC SUMMON EXECUTION ──
     const coresToPlace = customCoresToPlace || 1; // Default 1 core to stay alive on field
     const hasScInReserve = (DuelState.player.soulCoreLocation === 'reserve');
+    const placeSoulCoreDirect = Boolean(options && options.placeSoulCore);
 
     // Soul Core Payment Option (e.g. Kagerou-Seeker or general Soul Core payment):
     const hasSoulCoreBonus = /if \[soul core\] was used to pay the summon cost|\[soul core\] was used to pay/i.test(card.effect || '');
@@ -8523,8 +9164,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         askOptionalEffect(
           card,
           `Pay summon cost using [Soul Core] from Reserve to activate bonus effect? ("${card.name}")`,
-          () => summonCard(uid, customCoresToPlace, true),
-          () => summonCard(uid, customCoresToPlace, false)
+          () => summonCard(uid, customCoresToPlace, true, options),
+          () => summonCard(uid, customCoresToPlace, false, options)
         );
         return;
       }
@@ -8537,7 +9178,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (payingWithSoulCore ? (availableReserve < totalNeeded) : (DuelState.player.reserve < totalNeeded)) {
       if (availableReserve >= totalNeeded && !payingWithSoulCore) {
         // Must use Soul Core to meet total cores
-        return summonCard(uid, customCoresToPlace, true);
+        return summonCard(uid, customCoresToPlace, true, options);
       }
       const { total } = getPlayerAvailableCores();
       if (total >= totalNeeded) {
@@ -8553,6 +9194,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       usedSoulCoreFromReserve = true;
       card.usedSoulCore = true;
       card.paidWithSoulCore = true;
+      card.hasSoulCore = false;
       DuelState.player.soulCoreLocation = 'trash';
       // Soul Core paid as 1 cost core to Trash, remaining (cost - 1) cores to Trash, plus coresToPlace to card
       const regularCostToPay = Math.max(0, cost - 1);
@@ -8564,11 +9206,18 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.player.reserve -= totalNeeded;
       DuelState.player.trash += cost;
       DuelState.player.hand.splice(cardIdx, 1);
+      if (placeSoulCoreDirect && hasScInReserve) {
+        DuelState.player.soulCoreLocation = 'field';
+        DuelState.player.soulCoreSpiritUid = card.uid;
+        card.hasSoulCore = true;
+        // 1 core allocated to spirit is Soul Core, refund 1 normal core to reserve
+        DuelState.player.reserve += 1;
+      } else {
+        card.hasSoulCore = false;
+      }
     }
 
-    // When Soul Core is paid as summon cost, it resides in Trash and is NOT placed on the summoned unit.
-    card.hasSoulCore = false;
-    const { level, bp } = calculateBpAndLevel(card.levels, coresToPlace, false, card.effect);
+    const { level, bp } = calculateBpAndLevel(card.levels, coresToPlace, !!card.hasSoulCore, card.effect);
     card.currentCores = coresToPlace;
     card.currentLevel = level;
     card.currentBp = bp;
@@ -14743,6 +15392,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     buildCardInstance,
     extractCardsListFromDeck,
     getSafeDeckCardCount,
+    loadSetIrShard,
+    loadCardIrShard,
+    getLoadedCardIr,
+    getCardEffectsData,
     renderDuelTable,
     renderPlayerHand,
     nextPhase,
@@ -14751,6 +15404,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     toggleOpponentAuto,
     getState: () => DuelState,
     getPlayerAvailableCores,
+    openSummonModal,
+    renderSummonModal,
+    setSummonSoulCorePayment,
+    setSummonSoulCorePlacement,
+    adjustSummonPlacement,
+    adjustSummonFieldCore,
+    closeSummonModal,
+    confirmSummonPayment,
+    getPendingSummon: () => pendingSummon,
     openSacrificeModal,
     adjustSacrificeCore,
     closeSacrificeModal,
