@@ -9535,6 +9535,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.player.field.push(card);
       DuelState.selectedPlayerCard = null;
 
+      if (DuelState.isOnline && window.MultiplayerService) {
+        window.MultiplayerService.sendAction('SUMMON_CARD', {
+          cardName: card.name,
+          costPaid: cost
+        });
+      }
+
       AudioFX.summon();
       const cardKind = card.type || 'Spirit';
       addLog(`✨ **SUMMONED**: "${card.name}" (${cardKind}) placed on field! Paid ${cost} cores${isCostReduced ? ` (reduced from ${baseCost} via field symbols)` : ''}, allocated ${totalCoresOnSpirit} core(s)${card.hasSoulCore ? ' (including Soul Core 🔥)' : ''} (Lv${level}, ${bp} BP).`, 'step');
@@ -10560,6 +10567,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // 4. Audio & Visuals
     AudioFX.soulCoreIgnite();
     AudioFX.summon();
+
+    if (DuelState.isOnline && isPlayer && window.MultiplayerService) {
+      window.MultiplayerService.sendAction('ADVENT_STACK', {
+        adventCardName: adventCard.name,
+        targetName: prevName,
+        targetUid: targetSpirit.uid
+      });
+    }
 
     addLog(`🌟 **[ADVENT / 煌臨 ACCOMPLISHED!]**: ${isPlayer ? 'You' : 'Opponent'} sent [Soul Core] to Trash! Stacked "${adventCard.name}" onto "${prevName}" (elevated to Lv${newLvl}, ${newBp} BP)!`, 'magic');
     if (typeof showToast === 'function') {
@@ -15785,6 +15800,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (typeof AudioFX !== 'undefined' && AudioFX.magic) AudioFX.magic();
     } else if (type === 'STEP_ADVANCE') {
       addLog(`⏩ **STEP ADVANCE**: Opponent advanced to ${payload.step} Step.`, 'step');
+    } else if (type === 'ADVENT_STACK') {
+      const advName = payload.adventCardName || 'Advent Card';
+      const tgtName = payload.targetName || 'Field Unit';
+      addLog(`🌟 **ONLINE OPPONENT ADVENT**: Opponent stacked "${advName}" onto "${tgtName}"!`, 'magic');
+      if (typeof AudioFX !== 'undefined' && AudioFX.soulCoreIgnite) AudioFX.soulCoreIgnite();
+      if (typeof AudioFX !== 'undefined' && AudioFX.summon) AudioFX.summon();
+    } else if (type === 'SUMMON_CARD') {
+      const cName = payload.cardName || 'Card';
+      addLog(`✨ **ONLINE OPPONENT SUMMON**: Opponent summoned "${cName}"!`, 'step');
+      if (typeof AudioFX !== 'undefined' && AudioFX.summon) AudioFX.summon();
     } else if (type === 'LIFE_DAMAGE') {
       DuelState.opponent.life = payload.remainingLife;
       if (typeof AudioFX !== 'undefined' && AudioFX.lifeDamage) AudioFX.lifeDamage();
