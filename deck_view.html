@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.2">
+  <link rel="stylesheet" href="/styles.css?v=5.4">
   <style>
     .deckview-page {
       max-width: 1400px;
@@ -353,23 +353,22 @@
 </head>
 <body>
 
-<!-- Navigation Header -->
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
-  <div class="nav-left">
-    <a class="nav-logo" href="/">
-      <span class="logo-gem">✦</span>
-      <span class="logo-text">Battle Spirits</span>
-    </a>
-  </div>
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
   <nav class="nav-tabs">
-    <a class="tab-btn" href="/">🏠 Home</a>
-    <a class="tab-btn" href="/browse">🔍 Browse Cards</a>
-    <a class="tab-btn" href="/family">🧬 Family</a>
-    <a class="tab-btn" href="/sets">📦 Sets</a>
-    <a class="tab-btn active" href="/deck">🎴 Deck Builder</a>
-    <a class="tab-btn tab-arena" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn active" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+    </div>
   </nav>
-  <div class="nav-auth-slot" id="navAuthSlot"></div>
 </header>
 
 <main class="deckview-page">
@@ -446,6 +445,26 @@
           <div class="type-dist-label">Nexus</div>
         </div>
       </div>
+
+      <!-- Mechanics Breakdown Grid -->
+      <div class="type-dist-grid" style="margin-top:0.6rem;">
+        <div class="type-dist-box" title="Cards with [Burst]">
+          <div class="type-dist-count" id="countBursts">0</div>
+          <div class="type-dist-label">💥 Bursts</div>
+        </div>
+        <div class="type-dist-box" title="Cards with [Advent] / [Contract Advent]">
+          <div class="type-dist-count" id="countAdvents">0</div>
+          <div class="type-dist-label">🌟 Advents</div>
+        </div>
+        <div class="type-dist-box" title="Contract cards">
+          <div class="type-dist-count" id="countContracts">0</div>
+          <div class="type-dist-label">📜 Contracts</div>
+        </div>
+        <div class="type-dist-box" title="Cards with [Mirage]">
+          <div class="type-dist-count" id="countMirages">0</div>
+          <div class="type-dist-label">🔮 Mirages</div>
+        </div>
+      </div>
     </div>
 
     <!-- Cost Curve -->
@@ -485,7 +504,7 @@
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-body" id="modalBody">
       <div class="modal-img-col">
-        <img class="modal-img" id="modalImg" src="/assets/card_back.png" alt="Card Art" referrerpolicy="no-referrer">
+        <img class="modal-img" id="modalImg" src="https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg" alt="Card Art" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';">
       </div>
       <div class="modal-info-col">
         <div class="modal-tag-row" id="modalTagRow"></div>
@@ -511,7 +530,7 @@
   <script src="/firebase_service.js?v=1.1"></script>
 
 
-<script src="/app.js?v=5.2"></script>
+<script src="/app.js?v=5.4"></script>
 <script>
   let currentDeck = null;
   let currentDeckId = '';
@@ -653,6 +672,7 @@
   function renderDeckStats() {
     const entries = Object.entries(currentDeck.cards || {});
     let spirits = 0, braves = 0, magic = 0, nexus = 0;
+    let bursts = 0, advents = 0, contracts = 0, mirages = 0;
     const curve = [0, 0, 0, 0, 0, 0, 0, 0, 0]; // 0 to 8+
 
     entries.forEach(([name, count]) => {
@@ -664,6 +684,12 @@
       else if (type.includes('nexus')) nexus += count;
       else spirits += count;
 
+      const eff = (info.effect || '') + ' ' + (name || '') + ' ' + (info.type || '');
+      if (/\[burst|【バースト】/i.test(eff)) bursts += count;
+      if (/\[(?:contract\s+)?advent|【(?:契約)?煌臨】/i.test(eff)) advents += count;
+      if (info.is_contract_partner || /contract\s+(?:spirit|brave|nexus)|【契約/i.test(info.type || '') || /contract/i.test(info.rarity || '')) contracts += count;
+      if (/\[mirage|【ミラージュ】/i.test(eff)) mirages += count;
+
       const cost = typeof info.cost === 'number' ? info.cost : parseInt(info.cost, 10) || 0;
       const bucket = Math.min(8, Math.max(0, cost));
       curve[bucket] += count;
@@ -673,6 +699,15 @@
     document.getElementById('countBraves').textContent = braves;
     document.getElementById('countMagic').textContent = magic;
     document.getElementById('countNexus').textContent = nexus;
+
+    const elBu = document.getElementById('countBursts');
+    const elAd = document.getElementById('countAdvents');
+    const elCo = document.getElementById('countContracts');
+    const elMi = document.getElementById('countMirages');
+    if (elBu) elBu.textContent = bursts;
+    if (elAd) elAd.textContent = advents;
+    if (elCo) elCo.textContent = contracts;
+    if (elMi) elMi.textContent = mirages;
 
     const total = spirits + braves + magic + nexus;
     document.getElementById('statRatioLabel').textContent = total > 0 
@@ -843,9 +878,16 @@
     if (!card) return;
     document.getElementById('modalTitle').textContent = card.name;
     document.getElementById('modalJp').textContent = card.kanji || card.jpname || '';
-    const modalArt = (card.image_url ? card.image_url.split('/revision/latest')[0] : '') || '/assets/card_back.png';
-    document.getElementById('modalImg').src = modalArt;
-    document.getElementById('modalEffect').innerHTML = card.effect ? card.effect.replace(/\n/g, '<br>') : 'Vanilla Spirit.';
+    const modalArt = (card.image_url ? card.image_url.split('/revision/latest')[0] : '') || 'https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';
+    const mImg = document.getElementById('modalImg');
+    mImg.onerror = function() {
+      this.onerror = null;
+      this.src = '/api/proxy-image?url=' + encodeURIComponent(modalArt);
+    };
+    mImg.src = modalArt;
+    document.getElementById('modalEffect').innerHTML = typeof formatEffectKeywordsInModal === 'function'
+      ? formatEffectKeywordsInModal(card.effect)
+      : (card.effect ? card.effect.replace(/\n/g, '<br>') : 'Vanilla Spirit.');
     document.getElementById('modalLevels').innerHTML = card.levels ? card.levels.replace(/\n/g, '<br>') : 'Level 1: 1 core';
     document.getElementById('modalFlavor').textContent = card.flavor || '';
     document.getElementById('cardModal').classList.add('open');
@@ -861,5 +903,30 @@
     if (e.target.id === 'cardModal') closeModal();
   }
 </script>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <a href="/arena" class="mobile-nav-item">
+    <span class="mobile-nav-icon">⚔️</span>
+    <span>Arena</span>
+  </a>
+  <a href="/browse" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🎴</span>
+    <span>Browse</span>
+  </a>
+  <a href="/deck" class="mobile-nav-item active">
+    <span class="mobile-nav-icon">🗃️</span>
+    <span>Deck</span>
+    <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
+  </a>
+  <a href="/sets" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📦</span>
+    <span>Sets</span>
+  </a>
+  <a href="/family" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📜</span>
+    <span>Family</span>
+  </a>
+</nav>
+
 </body>
 </html>

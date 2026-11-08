@@ -132,7 +132,7 @@ function splitAbilityBlocks(effectText) {
   normalized = normalized.replace(/\{LV(\d+)\]/gi, '[LV$1]');
 
   // Split by double newlines OR single newlines preceding ability headers / parenthesized timing tags
-  const headerSplitRegex = /\n{2,}|\n+(?=\d+\s+\[LV\d+\]|Striker\s+Pack\b|Silhouette\s+System\b|\[(?:LV\d+|During|When|Flash|Main|Burst|Contract|Soul State|Grand|Summon Condition|SuAdcon|Rebirth|Mirage|Supremacy|Show Up|Assemble)|\((?:When|During|Your|Opposing|Opponent's|Either|Flash|Main|Start|Core|Draw|Refresh|Attack|End|Permanent)\)|Flash\s*[-–]|Main\s*[-–]|Legacy\b|◆)/gi;
+  const headerSplitRegex = /\n{2,}|\n+(?=\d+\s+\[LV\d+\]|Striker\s+Pack\b|Silhouette\s+System\b|\[(?:LV\d+|During|When|Flash|Main|Burst|Soul\s+Burst|Contract|Soul State|Grand|Summon Condition|SuAdcon|Rebirth|Mirage|Supremacy|Show Up|Assemble)|\((?:When|During|Your|Opposing|Opponent's|Either|Flash|Main|Start|Core|Draw|Refresh|Attack|End|Permanent)\)|Flash\s*[-–]|Main\s*[-–]|Legacy\b|◆)/gi;
   const paragraphs = normalized.split(headerSplitRegex).map(p => p.trim()).filter(Boolean);
 
   const blocks = [];
@@ -140,7 +140,7 @@ function splitAbilityBlocks(effectText) {
   for (const para of paragraphs) {
     // If multiple abilities are within a single paragraph separated by sentence end before a header
     // e.g. "some effect text. [LV2] ..."
-    const subMatches = para.split(/(?<=\.)\s+(?=\[(?:LV\d+|During|Flash|Main|Burst:))/g);
+    const subMatches = para.split(/(?<=\.)\s+(?=\[(?:LV\d+|During|Flash|Main|Burst|Soul\s+Burst))/g);
     for (const sub of subMatches) {
       const trimmed = sub.trim();
       if (trimmed) {

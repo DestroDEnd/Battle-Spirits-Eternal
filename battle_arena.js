@@ -538,7 +538,7 @@
       spirit.currentBp += bBonus;
     }
     const side = (DuelState && DuelState.player && DuelState.player.field && DuelState.player.field.some(s => s.uid === spirit.uid)) ? 'player' : 'opponent';
-    const curCount = (DuelState && DuelState[side] && DuelState[side].count) || 0;
+    const curCount = (DuelState && DuelState[side] && (DuelState[side].count !== undefined ? DuelState[side].count : (DuelState[side].counters || 0))) || 0;
     const ocBp = getOverCountBpBonus(spirit, curCount);
     if (ocBp > 0) {
       spirit.currentBp += ocBp;
@@ -588,10 +588,10 @@
     if (typeof parsedLevels === 'string') {
       parsedLevels = parseLevels(parsedLevels);
     } else if (parsedLevels && typeof parsedLevels === 'object' && !Array.isArray(parsedLevels)) {
-      parsedLevels = Object.values(parsedLevels).map(l => ({
-        level: l.level !== undefined ? l.level : (parseInt(String(l).replace(/\D/g, ''), 10) || 1),
-        cores: l.cost !== undefined ? l.cost : (l.cores !== undefined ? l.cores : 1),
-        bp: l.bp !== undefined ? l.bp : 0
+      parsedLevels = Object.entries(parsedLevels).map(([k, l]) => ({
+        level: (l && l.level !== undefined) ? l.level : (parseInt(String(k).replace(/\D/g, ''), 10) || 1),
+        cores: (l && l.cost !== undefined) ? l.cost : ((l && l.cores !== undefined) ? l.cores : 1),
+        bp: (l && l.bp !== undefined) ? l.bp : 0
       }));
     }
     if (!parsedLevels || !Array.isArray(parsedLevels) || !parsedLevels.length) {
@@ -5307,7 +5307,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const eff = card.effect || '';
-    const m = eff.match(/(?:\[(?:Summon Condition|SuAdcon):?|【(?:召喚条件|召喚\/煌臨条件)：?)\s*([^\]】\n]+)/i);
+    const m = eff.match(/(?:\[(?:Summon Condition|Summon\/Advent Condition|SuAdcon):?|【(?:召喚条件|召喚\/煌臨条件)：?)\s*([^\]】\n]+)/i);
     if (!m) return { allowed: true };
 
     const condText = m[1].trim();
@@ -5579,24 +5579,32 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const isNexus = (card.type || '').includes('Nexus');
       const baseCost = card.cost !== undefined ? Number(card.cost) : 0;
       const reductionInfo = calculateSymbolReduction(card, 'player');
-      const cost = reductionInfo.effectiveCost;
+      let cost = reductionInfo.effectiveCost;
       const isReduced = cost < baseCost;
       const reductionText = isReduced ? ` [Reduced from ${baseCost}]` : '';
-      const totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
+      let totalNeeded = (isSpirit || isBrave || isUltimate) ? cost + 1 : cost;
+
+      // Free summon check (Violent High Speed, Flash Free, Condition Free)
+      const freeSummonInfo = checkCardFreeSummonEligibility(card, 'player');
+      const isFreeSummon = freeSummonInfo.eligible;
+      if (isFreeSummon) {
+        cost = 0;
+        totalNeeded = 0;
+      }
 
       // Strict Battle Spirits Rule: Attack step ONLY permits Flash cards!
-      const canPlayStep = canPlayCardInCurrentPhase(card);
+      const canPlayStep = isFreeSummon || canPlayCardInCurrentPhase(card);
       const tributeReq = getCardTributeRequirement(card);
       const eligibleTributes = tributeReq ? getEligibleTributeSpirits(tributeReq, DuelState.player.field) : [];
       const hasTributeCondition = !tributeReq || (eligibleTributes.length > 0);
 
       // Ultimate summon condition check
       const ultCheck = isUltimate ? validateUltimateSummonCondition(card, 'player') : { allowed: true };
-      const meetsCondition = ultCheck.allowed;
+      const meetsCondition = isFreeSummon || ultCheck.allowed;
 
-      const canAfford = canPlayStep && hasTributeCondition && meetsCondition && (totalAvailableCores >= totalNeeded);
-      const canAffordDirect = canPlayStep && meetsCondition && (reserve >= totalNeeded);
-      const needsSacrifice = canAfford && !canAffordDirect;
+      const canAfford = isFreeSummon || (canPlayStep && hasTributeCondition && meetsCondition && (totalAvailableCores >= totalNeeded));
+      const canAffordDirect = isFreeSummon || (canPlayStep && meetsCondition && (reserve >= totalNeeded));
+      const needsSacrifice = !isFreeSummon && canAfford && !canAffordDirect;
 
       let cls = `hand-card-item card-theme-${(card.color || 'red').toLowerCase()}`;
       if (isSelected) cls += ' selected-hand-card';
@@ -5624,7 +5632,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const accelCheck = canCastAccel(card, 'player');
       const accelBtnHtml = (canPlayStep && accelCheck.allowed) ? `<button class="btn-quick-accel" style="background:linear-gradient(135deg, #f59e0b, #d97706); border-color:#fbbf24; margin-top:4px;" onclick="event.stopPropagation(); BattleArena.castAccel('${card.uid}')">? Accel (${accelCheck.cost})</button>` : '';
 
-      if (isUltimate && !meetsCondition) {
+      if (isFreeSummon) {
+        actionBtnHtml = `<button class="btn-quick-summon btn-quick-free-summon" style="background:linear-gradient(135deg, #059669, #10b981); border-color:#34d399; font-weight:900; box-shadow:0 0 10px rgba(52, 211, 153, 0.5);" onclick="event.stopPropagation(); BattleArena.executeFreeSummon('${card.uid}')">${freeSummonInfo.btnLabel}</button>`;
+      } else if (isUltimate && !meetsCondition) {
         actionBtnHtml = `<button class="btn-quick-disabled" disabled title="Summon Condition: ${ultCheck.reason}">🔒 ${ultCheck.reason || 'Summon Condition Not Met'}</button>`;
       } else if (canPlayStep && isBrave && isMainStep) {
         const eligibleHosts = DuelState.player.field.filter(s => isEligibleBraveHost(card, s).eligible);
@@ -5701,6 +5711,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           <button class="hc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeCardName}', 'hand')" title="View Full Card Details">🔍</button>
           ${costBadgeHtml}
           ${(DuelState.player && DuelState.player.contractCard && DuelState.player.contractCard.uid === card.uid) ? `<div class="hc-partner-badge" title="Designated Contract Partner" style="position:absolute;top:6px;left:6px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:0.6rem;font-weight:900;padding:2px 6px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,0.6);z-index:3;letter-spacing:0.5px;">🌟 PARTNER</div>` : ''}
+          ${adventReq ? `<div class="hc-advent-badge" title="Has Advent capability: ${(adventReq.rawText || '').replace(/"/g, '&quot;')}" style="position:absolute;top:6px;${(DuelState.player && DuelState.player.contractCard && DuelState.player.contractCard.uid === card.uid) ? 'left:76px;' : 'left:6px;'}background:linear-gradient(135deg,#8b5cf6,#6366f1);color:#fff;font-size:0.58rem;font-weight:900;padding:2px 5px;border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,0.6);z-index:3;letter-spacing:0.5px;border:1px solid rgba(255,255,255,0.4);${canAdvent ? 'box-shadow:0 0 10px rgba(168,85,247,0.8);border-color:#c084fc;' : ''}">🌟 ADVENT</div>` : ''}
           <div class="hc-img-wrap">
             <img src="${card.image_url || FALLBACK_CARD_ART}" alt="${card.name}" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
           </div>
@@ -5983,7 +5994,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return false;
     }
 
-    // 2. Spirits can only be summoned from Hand during Flash timing if they have Swift (神速), Violent High Speed (烈神速), Accel, or an explicit Flash-summon ability
+    // 2. Advent / Contract Advent (Spirits / Ultimates) ALWAYS have Flash timing during Attack Step
+    if (/\[(?:Contract\s+)?Advent:[^\]]+\]|【(?:契約)?煌臨：[^】]+】|flash\s*-\s*\[(?:contract\s+)?advent/i.test(card.effect)) {
+      return true;
+    }
+
+    // 3. Spirits can only be summoned from Hand during Flash timing if they have Swift (神速), Violent High Speed (烈神速), Accel, or an explicit Flash-summon ability
     if (cardType.includes('spirit')) {
       if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
       if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
@@ -5991,12 +6007,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return false;
     }
 
-    // 3. Magic cards have Flash timing if they have [Flash], (Flash), Flash:, or Flash -
+    // 4. Magic cards have Flash timing if they have [Flash], (Flash), Flash:, or Flash -
     if (cardType === 'magic') {
       return eff.includes('[flash]') || eff.includes('(flash)') || eff.includes('flash:') || eff.includes('flash -');
     }
 
-    // 4. Braves / Ultimates
+    // 5. Braves / Ultimates
     if (eff.includes('swift') || eff.includes('神速') || eff.includes('violent high speed') || eff.includes('烈神速')) return true;
     if (/flash[\s\S]*?(?:you can\s+)?summon this (?:spirit\s+|ultimate\s+|brave\s+)?card from (?:the\s+|your\s+)?hand/i.test(card.effect)) return true;
     if (eff.includes('[accel:') && /flash/i.test(eff)) return true;
@@ -6134,50 +6150,91 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;'));
 
-    // 1. Advent & Contract Advent (matching outer brackets cleanly)
+    // 1. Advent, Contract Advent, Manifest (顕現)
     safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
+    safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Manifest|Mani):[^\]]+\]|【顕現：[^】]+】/gi, '<span class="effect-keyword-pill kw-manifest">$&</span>');
+    safe = safe.replace(/\[Mani\]/gi, '<span class="effect-keyword-pill kw-manifest">[Manifest]</span>');
 
-    // 2. Summon Conditions & SuAdcon
-    safe = safe.replace(/\[(?:Summon Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+    // 1b. Reminder text expansions for wiki abbreviations ([utb], [wutb], [tutb], [qutb], [cutb], [outb], [heb])
+    safe = safe.replace(/\[heb\]/gi, '<span class="effect-reminder-box">ℹ️ (Heavy Exhaust: Exhausted card is turned upside down and requires two refreshes to return to ready.)</span>');
+    safe = safe.replace(/\[utb\]/gi, '<span class="effect-reminder-box">ℹ️ (Ultimate Trigger: Send 1 card from opposing Deck top to Trash. If that card\'s cost is lower than this Ultimate\'s, it hits.)</span>');
+    safe = safe.replace(/\[wutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Double Ultimate Trigger: Send 2 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+    safe = safe.replace(/\[tutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Triple Ultimate Trigger: Send 3 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+    safe = safe.replace(/\[qutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Quadruple Ultimate Trigger: Send 4 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+    safe = safe.replace(/\[cutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Count Ultimate Trigger: Send 1 card from opposing Deck top to Trash. If that card\'s cost is lower than this Ultimate\'s current Count, it hits.)</span>');
+    safe = safe.replace(/\[outb\]/gi, '<span class="effect-reminder-box">ℹ️ (Octa Ultimate Trigger: Send 8 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+    safe = safe.replace(/\[xutb\]/gi, '<span class="effect-keyword-pill kw-utrigger">[Cross Ultimate Trigger]</span>');
+    safe = safe.replace(/\[dcutb\]/gi, '<span class="effect-keyword-pill kw-utrigger">[Double Count Ultimate Trigger]</span>');
+    safe = safe.replace(/\[team:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-team">[Team: $1]</span>');
+    safe = safe.replace(/\[teams:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-team">[Teams: $1]</span>');
+    safe = safe.replace(/\[uhand:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-uhand">[U-Hand: $1]</span>');
+    safe = safe.replace(/\[catl:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-catalyze">[Catalyze: $1]</span>');
+    safe = safe.replace(/\[zc\]/gi, '<span class="effect-keyword-pill kw-zc">[Zero Counter]</span>');
+    safe = safe.replace(/\[advents\]/gi, 'Advents');
+    safe = safe.replace(/\[advented\]/gi, 'Advented');
+    safe = safe.replace(/\[adventing\]/gi, 'Adventing');
+    safe = safe.replace(/\[manis\]/gi, 'Manifests');
+    safe = safe.replace(/\[manid\]/gi, 'Manifested');
+    safe = safe.replace(/\[rtp\]/gi, '');
+    safe = safe.replace(/\[deh:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-limit">[Heavy Exhaust: $1]</span>');
+    safe = safe.replace(/\[mflash:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Mirage Flash: $1]</span>');
+    safe = safe.replace(/\[mdrain:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Magic Drain: $1]</span>');
+    safe = safe.replace(/\[msyn:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Magic Synergy: $1]</span>');
 
-    // 3. Brave Conditions
+    // 2. Soul Burst, Burst, and Burst Condition
+    safe = safe.replace(/\[Soul Burst(?::[^\]]+)?\]|\[Burst:\s*[sS]\]|【(?:ソウルバースト|バースト：[SＳｓ])(?::[^】]+)?】/gi, '<span class="effect-keyword-pill kw-soul-burst">[Soul Burst]</span>');
+    safe = safe.replace(/\[Burst Condition(?::[^\]]+)?\]|\[Burst:\s*con\]|【バースト条件(?::[^】]+)?】/gi, '<span class="effect-keyword-pill kw-burst-cond">[Burst Condition]</span>');
+    safe = safe.replace(/\[Burst(?::[^\]]+)?\]|【バースト(?::[^】]+)?】/gi, (match) => {
+      if (/soul\s*burst/i.test(match)) return `<span class="effect-keyword-pill kw-soul-burst">${match}</span>`;
+      return `<span class="effect-keyword-pill kw-burst">${match}</span>`;
+    });
+
+    // 3. Summon Conditions & SuAdcon
+    safe = safe.replace(/\[(?:Summon Condition|Summon\/Advent Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+
+    // 4. Brave Conditions
     safe = safe.replace(/\[(?:Brave Condition|Brave condition):[^\]]+\]|【合体条件：[^】]+】/gi, '<span class="effect-keyword-pill kw-brave-cond">$&</span>');
 
-    // 4. Over Count, Soul State, and Active States
+    // 5. Over Count, Soul State, and Active States
     safe = safe.replace(/\[During\s*OC\]|【OC中】|\[OC\s*Condition:[^\]]+\]/gi, '<span class="effect-keyword-pill kw-oc">$&</span>');
     safe = safe.replace(/\[Soul\s*State\]|【ソウル状態】/gi, '<span class="effect-keyword-pill kw-soul-state">$&</span>');
-    safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave)\]|【(?:合体中|合体時|煌臨中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
+    safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave|During\s+Set|During\s+Nexus\s+Brave|During\s+Spirit\s+Brave)\]|【(?:合体中|合体時|煌臨中|セット中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
 
-    // 5. Level tags like [LV1], [LV2][LV3], LV1-LV3
+    // 6. Level tags like [LV1], [LV2][LV3], LV1-LV3
     safe = safe.replace(/\[(LV\d+(?:[-~]LV\d+)*)\]/gi, '<span class="effect-keyword-pill kw-level">[$1]</span>');
 
-    // 6. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field])
+    // 7. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field], [Contract Skill: N], [Contract Field])
     safe = safe.replace(/\[(?:Main|MAIN)\]|【メイン】/g, '<span class="effect-keyword-pill kw-main">[Main]</span>');
     safe = safe.replace(/\[(?:Flash|FLASH)\]|【フラッシュ】/g, '<span class="effect-keyword-pill kw-flash">[Flash]</span>');
-    safe = safe.replace(/\[Grand Skill:\s*(\d+)\]|【神技：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
-    safe = safe.replace(/\[Grand Field\]|【神域】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+    safe = safe.replace(/\[(?:Grand|Contract)\s*Skill:\s*(\d+)\]|【(?:神技|契約技)：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+    safe = safe.replace(/\[(?:Grand|Contract)\s*Field\]|【(?:神域|契約域)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
 
-    // 7. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
+    // 8. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
     safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
 
-    // 8. Timing & Step triggers
+    // 9. Timing & Step triggers
     safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
       return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
     });
 
-    // 9. Soul Core
+    // 10. Soul Core & Color Cores ([Soul Core], [Red Core], [Purple Core], etc.)
     safe = safe.replace(/(?<!<[^>]*)(?:\[Soul Core(?::[^\]]+)?\]|【ソウルコア】)/gi, '<span class="effect-keyword-pill kw-soul-core">$&</span>');
+    safe = safe.replace(/\[(Red|Purple|Green|White|Yellow|Blue)\s+Core\]/gi, (match, color) => {
+      return `<span class="effect-keyword-pill kw-core-${color.toLowerCase()}">${match}</span>`;
+    });
 
-    // 10. Ultimate Triggers
+    // 11. Ultimate Triggers
     safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
-    // 11. Highlight all 102 Official Battle Spirits Wiki Keywords + bracketed effects
-    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flag Contract Advent|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+    // 12. Highlight all Official Battle Spirits Wiki Keywords + bracketed effects
+    const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flag Contract Advent|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
     safe = safe.replace(allKwPattern, (match) => {
       let cls = 'kw-generic';
       const low = match.toLowerCase();
-      if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
+      if (low.includes('soul burst')) cls = 'kw-soul-burst';
+      else if (low.includes('manifest') || low.includes('mani')) cls = 'kw-manifest';
+      else if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
       else if (low.includes('clash')) cls = 'kw-clash';
       else if (low.includes('curse')) cls = 'kw-curse';
       else if (low.includes('crush')) cls = 'kw-crush';
@@ -6196,7 +6253,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       else if (low.includes('tribute')) cls = 'kw-tribute';
       else if (low.includes('consecutive blade')) cls = 'kw-consecutive';
       else if (low.includes('mirage')) cls = 'kw-mirage';
-      else if (low.includes('spellbind')) cls = 'kw-spellbind';
+      else if (low.includes('spellbind') || low.includes('spell blight')) cls = 'kw-spellbind';
       else if (low.includes('accel')) cls = 'kw-accel';
       else if (low.includes('change')) cls = 'kw-change';
       else if (low.includes('charge')) cls = 'kw-charge';
@@ -6343,16 +6400,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         }
         actionBtnHtml = bBtns;
       } else if (canPlayStep && isInspectUnit) {
-        const btnText = (phase === 'ATTACK')
-          ? `⚡ Flash Summon (${cost})`
-          : (isInspectUltimate ? `⚔️ Summon Ultimate (Cost ${cost})` : `⚡ Summon Spirit (Cost ${cost})`);
-        const btnStyle = isInspectUltimate ? 'style="background:linear-gradient(135deg, #eab308, #ca8a04); border-color:#fde047;"' : '';
-        if (canAffordDirect) {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-summon" ${btnStyle} onclick="BattleArena.summonCard('${card.uid}')">${btnText}</button>`;
-        } else if (canAffordWithSacrifice) {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; Summon (${cost})</button>`;
+        const freeSummonInfo = checkCardFreeSummonEligibility(card, 'player');
+        if (freeSummonInfo.eligible) {
+          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-summon" style="background:linear-gradient(135deg, #059669, #10b981); border-color:#34d399; font-weight:900; box-shadow:0 0 10px rgba(52, 211, 153, 0.5);" onclick="BattleArena.executeFreeSummon('${card.uid}')">${freeSummonInfo.btnLabel}</button>`;
         } else {
-          actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${totalNeeded} Cores</button>`;
+          const btnText = (phase === 'ATTACK')
+            ? `⚡ Flash Summon (${cost})`
+            : (isInspectUltimate ? `⚔️ Summon Ultimate (Cost ${cost})` : `⚡ Summon Spirit (Cost ${cost})`);
+          const btnStyle = isInspectUltimate ? 'style="background:linear-gradient(135deg, #eab308, #ca8a04); border-color:#fde047;"' : '';
+          if (canAffordDirect) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-summon" ${btnStyle} onclick="BattleArena.summonCard('${card.uid}')">${btnText}</button>`;
+          } else if (canAffordWithSacrifice) {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-sac" onclick="BattleArena.openSacrificeModal('${card.uid}')">💀 Sacrifice &amp; Summon (${cost})</button>`;
+          } else {
+            actionBtnHtml = `<button class="btn-inspector-action btn-inspect-disabled" disabled>⚠️ Need ${totalNeeded} Cores</button>`;
+          }
         }
       } else if (canPlayStep && isMagic) {
         const eff = card.effect || '';
@@ -6415,6 +6477,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           actionBtnHtml += `<button class="btn-inspector-action btn-inspect-disabled" disabled title="Advent timing is ${adventReq.timingLabel}">⚔️ Advent: ${adventReq.timingLabel} Only</button>`;
         } else if (DuelState.player.soulCoreLocation === 'trash') {
           actionBtnHtml += `<button class="btn-inspector-action btn-inspect-disabled" disabled title="Advent requires your [Soul Core], but it is in Trash">⚠️ Advent: Soul Core in Trash</button>`;
+        } else if (adventReq.minCount !== null && ((DuelState.player.count !== undefined ? DuelState.player.count : DuelState.player.counters) || 0) < adventReq.minCount) {
+          const curC = ((DuelState.player.count !== undefined ? DuelState.player.count : DuelState.player.counters) || 0);
+          actionBtnHtml += `<button class="btn-inspector-action btn-inspect-disabled" disabled title="Requires Count ${adventReq.minCount}+ (Current: ${curC})">⚠️ Advent: Need Count ${adventReq.minCount}+ (Current: ${curC})</button>`;
         } else {
           actionBtnHtml += `<button class="btn-inspector-action btn-inspect-disabled" disabled title="No eligible field Spirit satisfies [Advent: ${adventReq.condText}]">⚠️ Advent: No Target (${adventReq.condText})</button>`;
         }
@@ -6916,7 +6981,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                     bodyText.match(/\[OC(?:\s*Condition)?:\s*C(\d+)[^\]]*?\]/i);
     if (ocMatch) {
       const reqCount = parseInt(ocMatch[1], 10);
-      const currentCount = (DuelState && DuelState[side] && DuelState[side].count) || 0;
+      const currentCount = (DuelState && DuelState[side] && ((DuelState[side].count !== undefined ? DuelState[side].count : DuelState[side].counters) || 0)) || 0;
       if (currentCount < reqCount) {
         return;
       }
@@ -7904,7 +7969,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const match = bodyLower.match(/your counter(?:s)?\s*\+(\d+)|your count\s*\+(\d+)|カウント\+(\d+)/i);
       const amt = match ? parseInt(match[1] || match[2] || match[3], 10) : 1;
       const friendlyState = isPlayer ? DuelState.player : DuelState.opponent;
-      friendlyState.counters = (friendlyState.counters || 0) + amt;
+      const nextCountVal = ((friendlyState.counters !== undefined ? friendlyState.counters : friendlyState.count) || 0) + amt;
+      friendlyState.counters = nextCountVal;
+      friendlyState.count = nextCountVal;
       AudioFX.coreChime();
       addLog(`💠 **[${card.name}]**: Count +${amt}! (Total Count: ${friendlyState.counters})`, 'step');
       renderDuelTable();
@@ -8266,7 +8333,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const isAttackerUlt = attacker.type === 'Ultimate' || (attacker.type || '').includes('Ultimate');
     if (limbo && isEvilGodAttacker && isAttackerUlt) {
       const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
-      friendlyState.counters = (friendlyState.counters || 0) + 1;
+      const nextLimboC = ((friendlyState.counters !== undefined ? friendlyState.counters : friendlyState.count) || 0) + 1;
+      friendlyState.counters = nextLimboC;
+      friendlyState.count = nextLimboC;
       addLog(`💠 **[The Four Towers of Limbo]**: Count +1 upon "${attacker.name}" attack! (Total Count: ${friendlyState.counters})`, 'step');
       
       // Then, (Once per Turn: Same Name) either draw a card, or put a core from the Void to that Ultimate:
@@ -8498,7 +8567,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderDuelTable();
   }
 
-    function isViolentHighSpeedCard(card) {
+  function isViolentHighSpeedCard(card) {
     if (!card || !card.effect) return false;
     const eff = card.effect.toLowerCase();
     return eff.includes('violent high speed') || eff.includes('烈神速');
@@ -8507,7 +8576,348 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function canActivateViolentHighSpeed(card, side = 'player') {
     if (!isViolentHighSpeedCard(card)) return false;
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
-    return (friendlyState.trash || 0) >= 5;
+    const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+    if (currentPhase !== 'ATTACK') return false;
+    if ((friendlyState.trash || 0) < 5) return false;
+    if (card.type === 'Ultimate' || (card.type || '').includes('Ultimate')) {
+      const ultCheck = validateUltimateSummonCondition(card, side);
+      if (!ultCheck.allowed) return false;
+    }
+    return true;
+  }
+
+  // ── UNIVERSAL FREE SUMMON EVALUATOR (No-Cost / 0-Cost Hand & Field Summons) ──
+  function checkCardFreeSummonEligibility(card, side = 'player') {
+    if (!card) return { eligible: false };
+    const friendly = side === 'player' ? DuelState.player : DuelState.opponent;
+    const opp = side === 'player' ? DuelState.opponent : DuelState.player;
+    const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+    const eff = card.effect || '';
+    const effLower = eff.toLowerCase();
+
+    // 1. VIOLENT HIGH SPEED (烈神速)
+    // Cards: BS28-X05 (Ultimate-Seiryubi), BS16-X03 (The RetsuHero Seiryubi), BS16-026 (Kumatakanwu)
+    if (isViolentHighSpeedCard(card)) {
+      if (currentPhase === 'ATTACK') {
+        const trashCount = friendly.trash || 0;
+        if (trashCount >= 5) {
+          if (card.type === 'Ultimate' || (card.type || '').includes('Ultimate')) {
+            const ultCheck = validateUltimateSummonCondition(card, side);
+            if (!ultCheck.allowed) {
+              return { eligible: false, reason: ultCheck.reason };
+            }
+          }
+          return {
+            eligible: true,
+            type: 'VIOLENT_HIGH_SPEED',
+            btnLabel: '⚡ [Violent High Speed] Free (0)',
+            reason: `Violent High Speed: ${trashCount} Trash Cores`
+          };
+        }
+      }
+    }
+
+    // 2. FLASH COUNT-GATED FREE SUMMONS
+    // BS65-XV01 (The DarkDragonEmperor Siegfried XV): 7+ counters & Red Contract Spirit
+    if (card.card_number === 'BS65-XV01' || (effLower.includes('seven counters or more') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK' && (friendly.count || 0) >= 7) {
+        const hasRedContract = (friendly.field || []).some(s =>
+          (s.isContract || (s.name || '').toLowerCase().includes('contract')) &&
+          ((s.color === 'Red') || (s.colors && s.colors.includes('Red')))
+        );
+        if (hasRedContract) {
+          return {
+            eligible: true,
+            type: 'FLASH_COUNT_FREE',
+            btnLabel: '⚡ Free Summon (0)',
+            reason: 'Count 7+ and Red Contract Spirit'
+          };
+        }
+      }
+    }
+
+    // SD65-004 (The HellwindCount Nouvelle-Vague) & SD65-X02 (The Hellsoil FourDemonLord Magnazappah)
+    // Flash - (Either Attack Step) When you have 1 or more counters, summon without paying cost
+    if ((card.card_number === 'SD65-004' || card.card_number === 'SD65-X02') ||
+        (effLower.includes('flash') && effLower.includes('one or more counters') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK' && (friendly.count || 0) >= 1) {
+        const ultCheck = validateUltimateSummonCondition(card, side);
+        if (ultCheck.allowed) {
+          return {
+            eligible: true,
+            type: 'FLASH_COUNT_FREE',
+            btnLabel: '⚡ Free Summon (0)',
+            reason: 'Count 1+ and Ultimate Condition Met'
+          };
+        }
+      }
+    }
+
+    // 3. FLASH SOUL CORE FREE SUMMON
+    // SD28-X02 (The EarthDeitySword Gaianohoko)
+    if (effLower.includes('by sending your [soul core] to the trash') && effLower.includes('without paying the cost')) {
+      if (currentPhase === 'ATTACK') {
+        const hasSoulCore = friendly.soulCoreLocation === 'reserve' || friendly.soulCoreLocation === 'field';
+        if (hasSoulCore) {
+          return {
+            eligible: true,
+            type: 'FLASH_SOUL_CORE_FREE',
+            btnLabel: '⚡ Soul Core Free (0)',
+            reason: 'Send Soul Core to Trash'
+          };
+        }
+      }
+    }
+
+    // 4. FLASH DISCARD CARDS FREE SUMMON
+    // SD41-002 (The MakaiFogDragon Mistwurm): Discard 2 cards from Hand
+    // BS76-013 (The HorseKnight Santor): Discard Amon from Hand
+    if (card.card_number === 'SD41-002' || (effLower.includes('flash') && effLower.includes('discarding two cards from your hand') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK' && (friendly.hand || []).length >= 3) {
+        return {
+          eligible: true,
+          type: 'FLASH_DISCARD_FREE',
+          discardCount: 2,
+          btnLabel: '⚡ Discard 2 & Free (0)',
+          reason: 'Discard 2 cards to summon'
+        };
+      }
+    }
+    if (card.card_number === 'BS76-013' || (effLower.includes('flash') && effLower.includes('discarding a "the demonarmyflagbearer amon"') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK') {
+        const hasAmon = (friendly.hand || []).some(c => (c.name || '').toLowerCase().includes('amon'));
+        if (hasAmon) {
+          return {
+            eligible: true,
+            type: 'FLASH_DISCARD_FREE',
+            discardName: 'Amon',
+            btnLabel: '⚡ Discard Amon & Free (0)',
+            reason: 'Discard Amon to summon'
+          };
+        }
+      }
+    }
+
+    // 5. FLASH FIELD CONDITION FREE SUMMON
+    // CB01-021 (Dark Lugiel): When you or opponent controls Ultraman
+    if (card.card_number === 'CB01-021' || (effLower.includes('flash') && effLower.includes('controls any "ultraman"') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK') {
+        const allUnits = [...(friendly.field || []), ...(opp.field || [])];
+        const hasUltraman = allUnits.some(u => (u.name || '').toLowerCase().includes('ultraman'));
+        if (hasUltraman) {
+          return {
+            eligible: true,
+            type: 'FLASH_FIELD_FREE',
+            btnLabel: '⚡ Free Summon (0)',
+            reason: 'Ultraman on field'
+          };
+        }
+      }
+    }
+
+    // 6. FLASH SEAL FREE SUMMON
+    // BS41-033 (The Count Dudleya Owl): During [Seal]
+    if (card.card_number === 'BS41-033' || (effLower.includes('flash') && effLower.includes('during [seal]') && effLower.includes('without paying the cost'))) {
+      if (currentPhase === 'ATTACK' && friendly.isSealed) {
+        return {
+          eligible: true,
+          type: 'FLASH_SEAL_FREE',
+          btnLabel: '⚡ Seal Free (0)',
+          reason: 'During Seal'
+        };
+      }
+    }
+
+    // 7. DNA DIGIVOLUTION / FIELD RETURN FREE SUMMON
+    // CB05-X04 (Paildramon), CB05-009 (Silphymon), CB05-044 (Shakkoumon)
+    if (effLower.includes('dna digivolution') || (effLower.includes('by returning two') && effLower.includes('champion') && effLower.includes('without paying the cost'))) {
+      const champions = (friendly.field || []).filter(s =>
+        (s.family || '').toLowerCase().includes('champion') ||
+        (s.families && s.families.some(f => f.toLowerCase().includes('champion')))
+      );
+      if (champions.length >= 2) {
+        return {
+          eligible: true,
+          type: 'FLASH_RETURN_FREE',
+          btnLabel: '⚡ DNA Digivolve (0)',
+          reason: 'Return 2 Champions to Hand'
+        };
+      }
+    }
+
+    // 8. GENERIC FLASH FREE SUMMON MATCHER
+    if (currentPhase === 'ATTACK' && (effLower.includes('[flash]') || effLower.includes('flash -') || effLower.includes('flash:'))) {
+      if (/(?:summon\s+this\s+(?:card|spirit|ultimate|brave)[^.]*?without\s+paying\s+(?:the\s+|its\s+|any\s+)?cost|without\s+paying\s+(?:the\s+|its\s+|any\s+)?cost[^.]*?summon\s+this)/i.test(eff)) {
+        if (card.type === 'Ultimate' || (card.type || '').includes('Ultimate')) {
+          const ultCheck = validateUltimateSummonCondition(card, side);
+          if (!ultCheck.allowed) return { eligible: false, reason: ultCheck.reason };
+        }
+        return {
+          eligible: true,
+          type: 'GENERIC_FLASH_FREE',
+          btnLabel: '⚡ Free Summon (0)',
+          reason: 'Flash Free Summon'
+        };
+      }
+    }
+
+    return { eligible: false };
+  }
+
+  // ── UNIVERSAL FREE SUMMON EXECUTOR ──
+  function executeFreeSummon(uid, side = 'player') {
+    const friendly = side === 'player' ? DuelState.player : DuelState.opponent;
+    const cardIdx = friendly.hand.findIndex(c => c.uid === uid);
+    if (cardIdx === -1) return;
+    const card = friendly.hand[cardIdx];
+
+    const eligibility = checkCardFreeSummonEligibility(card, side);
+    if (!eligibility.eligible) {
+      if (typeof showToast === 'function') showToast(eligibility.reason || 'Free summon condition not met!', 'warning');
+      return;
+    }
+
+    // 1. VIOLENT HIGH SPEED EXECUTION
+    if (eligibility.type === 'VIOLENT_HIGH_SPEED') {
+      const trashCount = friendly.trash || 0;
+      friendly.hand.splice(cardIdx, 1);
+
+      // Cores from Trash: 1 core placed on the summoned unit for LV1/LV3,
+      // and remaining cores (trashCount - 1) return to Reserve!
+      const coresOnUnit = 1;
+      const { level, bp } = calculateBpAndLevel(card.levels, coresOnUnit);
+      card.currentCores = coresOnUnit;
+      card.currentLevel = level || (card.type === 'Ultimate' ? 3 : 1);
+      card.currentBp = bp || 10000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      friendly.field.push(card);
+
+      friendly.reserve = (friendly.reserve || 0) + (trashCount - coresOnUnit);
+      friendly.trash = 0;
+
+      AudioFX.slash();
+      addLog(`⚡ **[VIOLENT HIGH SPEED]**: "${card.name}" Flash-summoned from Hand for 0 cost! Moved all ${trashCount} cores from Trash to Field & Reserve!`, 'magic');
+      executeWhenSummonedEffects(card, side);
+      checkHandOnUltimateSummon(card, side);
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    // 2. FLASH SOUL CORE FREE SUMMON
+    if (eligibility.type === 'FLASH_SOUL_CORE_FREE') {
+      friendly.hand.splice(cardIdx, 1);
+      friendly.soulCoreLocation = 'trash';
+      friendly.trash = (friendly.trash || 0) + 1;
+      const placedCores = (friendly.reserve >= 1) ? 1 : 0;
+      if (placedCores > 0) friendly.reserve -= 1;
+      const { level, bp } = calculateBpAndLevel(card.levels, placedCores);
+      card.currentCores = placedCores;
+      card.currentLevel = level || 1;
+      card.currentBp = bp || 3000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      friendly.field.push(card);
+
+      AudioFX.summon();
+      addLog(`⚡ **[FLASH SUMMON]**: "${card.name}" summoned for 0 cost by sending Soul Core to Trash!`, 'magic');
+      executeWhenSummonedEffects(card, side);
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    // 3. FLASH DISCARD FREE SUMMON
+    if (eligibility.type === 'FLASH_DISCARD_FREE') {
+      friendly.hand.splice(cardIdx, 1);
+      if (eligibility.discardName) {
+        const dIdx = friendly.hand.findIndex(c => (c.name || '').toLowerCase().includes(eligibility.discardName.toLowerCase()));
+        if (dIdx !== -1) {
+          const discarded = friendly.hand.splice(dIdx, 1)[0];
+          friendly.grave = friendly.grave || [];
+          friendly.grave.push(discarded);
+          addLog(`🃏 Discarded "${discarded.name}" from Hand to summon "${card.name}".`, 'info');
+        }
+      } else if (eligibility.discardCount) {
+        const count = Math.min(eligibility.discardCount, friendly.hand.length);
+        const discarded = friendly.hand.splice(0, count);
+        friendly.grave = friendly.grave || [];
+        friendly.grave.push(...discarded);
+        addLog(`🃏 Discarded ${discarded.length} card(s) from Hand to summon "${card.name}".`, 'info');
+      }
+
+      const placedCores = (friendly.reserve >= 1) ? 1 : 0;
+      if (placedCores > 0) friendly.reserve -= 1;
+      const { level, bp } = calculateBpAndLevel(card.levels, placedCores);
+      card.currentCores = placedCores;
+      card.currentLevel = level || 1;
+      card.currentBp = bp || 3000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      friendly.field.push(card);
+
+      AudioFX.summon();
+      addLog(`⚡ **[FLASH SUMMON]**: "${card.name}" summoned from Hand for 0 cost!`, 'magic');
+      executeWhenSummonedEffects(card, side);
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    // 4. DNA DIGIVOLUTION FREE SUMMON
+    if (eligibility.type === 'FLASH_RETURN_FREE') {
+      const champIndices = [];
+      friendly.field.forEach((s, idx) => {
+        if ((s.family || '').toLowerCase().includes('champion') || (s.families && s.families.some(f => f.toLowerCase().includes('champion')))) {
+          if (champIndices.length < 2) champIndices.push(idx);
+        }
+      });
+      champIndices.reverse().forEach(idx => {
+        const returned = friendly.field.splice(idx, 1)[0];
+        friendly.reserve = (friendly.reserve || 0) + (returned.currentCores || 0);
+        friendly.hand.push(returned);
+      });
+
+      friendly.hand.splice(friendly.hand.findIndex(c => c.uid === uid), 1);
+      const placedCores = Math.max(1, Math.min(2, friendly.reserve));
+      friendly.reserve -= placedCores;
+      const { level, bp } = calculateBpAndLevel(card.levels, placedCores);
+      card.currentCores = placedCores;
+      card.currentLevel = level || 1;
+      card.currentBp = bp || 7000;
+      card.isExhausted = false;
+      card.hasAttacked = false;
+      friendly.field.push(card);
+
+      AudioFX.summon();
+      addLog(`🧬 **[DNA DIGIVOLUTION]**: Returned 2 Champion spirits to Hand and summoned "${card.name}" for 0 cost!`, 'magic');
+      executeWhenSummonedEffects(card, side);
+      renderDuelTable();
+      renderPlayerHand();
+      return;
+    }
+
+    // 5. STANDARD / GENERIC FREE SUMMON
+    friendly.hand.splice(cardIdx, 1);
+    const placedCores = (friendly.reserve >= 1) ? 1 : (card.type === 'Ultimate' ? 1 : 1);
+    if (friendly.reserve >= placedCores) {
+      friendly.reserve -= placedCores;
+    }
+    const { level, bp } = calculateBpAndLevel(card.levels, placedCores);
+    card.currentCores = placedCores;
+    card.currentLevel = level || (card.type === 'Ultimate' ? 3 : 1);
+    card.currentBp = bp || 5000;
+    card.isExhausted = false;
+    card.hasAttacked = false;
+    friendly.field.push(card);
+
+    AudioFX.summon();
+    addLog(`⚡ **[FREE SUMMON]**: "${card.name}" summoned for 0 cost! (${eligibility.reason})`, 'magic');
+    executeWhenSummonedEffects(card, side);
+    if (card.type === 'Ultimate') checkHandOnUltimateSummon(card, side);
+    renderDuelTable();
+    renderPlayerHand();
   }
 
 
@@ -8997,26 +9407,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const isUltimate = card.type === 'Ultimate' || (card.type || '').includes('Ultimate');
-    // Violent High Speed check: If Ultimate-Seiryubi / Violent High Speed and trash >= 5, summon for 0 cost using Trash cores!
-    const isVhs = isViolentHighSpeedCard(card) && canActivateViolentHighSpeed(card, 'player') && (phase === 'ATTACK');
-    if (isVhs) {
-      const trashCount = DuelState.player.trash || 0;
-      DuelState.player.hand.splice(cardIdx, 1);
-      // Place 1 core on Seiryubi to sustain it, remaining cores return to Reserve
-      card.currentCores = 1;
-      card.currentLevel = 3;
-      card.currentBp = 10000;
-      card.isExhausted = false;
-      card.hasAttacked = false;
-      DuelState.player.field.push(card);
-      DuelState.player.reserve = (DuelState.player.reserve || 0) + (trashCount - 1);
-      DuelState.player.trash = 0;
-      AudioFX.slash();
-      addLog(`⚡ **[VIOLENT HIGH SPEED]**: "${card.name}" Flash-summoned from Hand for 0 cost! Moved all ${trashCount} cores from Trash to Field/Reserve!`, 'magic');
-      executeWhenSummonedEffects(card, 'player');
-      checkHandOnUltimateSummon(card, 'player');
-      renderDuelTable();
-      renderPlayerHand();
+    // Universal Free Summon check (Violent High Speed, Flash Free, Condition Free)
+    const freeSummonInfo = checkCardFreeSummonEligibility(card, 'player');
+    if (freeSummonInfo.eligible) {
+      executeFreeSummon(uid, 'player');
       return;
     }
 
@@ -9841,15 +10235,25 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!m) return null;
     const isContractAdvent = /(?:flag\s+)?contract\s+advent|(?:旗)?契約煌臨/i.test(m[0]);
     const isFlagContractAdvent = /flag\s+contract\s+advent|旗契約煌臨/i.test(m[0]);
-    const rawCond = (m[1] || m[2]).trim();
+    let rawCond = (m[1] || m[2]).trim();
 
-    // Parse timing in parentheses following [Advent: ...]
+    // Parse timing in parentheses following [Advent: ...] OR inside [Advent: ...]
     // e.g. "((Either Attack Step))", "(Your Attack Step)", "(Opposing Attack Step)", "(Your Main Step)"
     let timing = 'either_attack_step';
     let timingLabel = 'Either Attack Step';
     
-    const timeMatch = card.effect.match(/(?:\[(?:Contract\s+)?Advent:[^\]]+\]|【(?:契約)?煌臨:[^】]+】)\s*(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)/i);
-    let rawTime = timeMatch ? (timeMatch[1] || timeMatch[2] || timeMatch[3] || '').trim().toLowerCase() : '';
+    // Check if timing is inside rawCond, e.g. "Hell Contract & C3 or more, (Either Attack Step)"
+    const insideTimeMatch = rawCond.match(/\(?\s*\(([^)]+)\)\)?|『([^』]+)』/i);
+    let rawTime = '';
+    if (insideTimeMatch) {
+      rawTime = (insideTimeMatch[1] || insideTimeMatch[2] || '').trim().toLowerCase();
+      rawCond = rawCond.replace(insideTimeMatch[0], '').replace(/,\s*$/, '').trim();
+    }
+
+    if (!rawTime) {
+      const timeMatch = card.effect.match(/(?:\[(?:Contract\s+)?Advent:[^\]]+\]|【(?:契約)?煌臨:[^】]+】)\s*(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)/i);
+      rawTime = timeMatch ? (timeMatch[1] || timeMatch[2] || timeMatch[3] || '').trim().toLowerCase() : '';
+    }
     if (!rawTime) {
       const beforeMatch = card.effect.match(/(?:\(?\s*\(([^)]+)\)\)?|\(([^)]+)\)|『([^』]+)』)\s*(?:\[(?:Contract\s+)?Advent:|【(?:契約)?煌臨:)/i);
       if (beforeMatch) {
@@ -9916,7 +10320,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function getEligibleAdventTargets(adventReq, fieldSpirits, side = 'player') {
     if (!adventReq) return [];
     const st = DuelState[side];
-    if (adventReq.minCount !== null && (st.count || 0) < adventReq.minCount) {
+    const curCount = st ? ((st.count !== undefined ? st.count : st.counters) || 0) : 0;
+    if (adventReq.minCount !== null && curCount < adventReq.minCount) {
       return [];
     }
 
@@ -9982,7 +10387,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!isAdventTimingValid(req, side)) return false;
     const st = DuelState[side];
     if (!st || st.soulCoreLocation === 'trash') return false; // Soul Core required
-    const eligible = getEligibleAdventTargets(req, st.field);
+    const eligible = getEligibleAdventTargets(req, st.field, side);
     return eligible.length > 0;
   }
 
@@ -10006,6 +10411,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     if (DuelState.player.soulCoreLocation === 'trash') {
       if (typeof showToast === 'function') showToast('Official Rule: [Advent] requires your [Soul Core], but it is currently in Trash!', 'warning');
+      return;
+    }
+    const pCurrentCount = ((DuelState.player.count !== undefined ? DuelState.player.count : DuelState.player.counters) || 0);
+    if (req.minCount !== null && pCurrentCount < req.minCount) {
+      if (typeof showToast === 'function') {
+        showToast(`Official Rule: [Advent] for "${card.name}" requires Count ${req.minCount} or more, but your current Count is ${pCurrentCount}!`, 'warning');
+      }
       return;
     }
     const eligible = getEligibleAdventTargets(req, DuelState.player.field, 'player');
@@ -10123,10 +10535,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }]);
 
     targetSpirit.name = adventCard.name;
+    targetSpirit.card_number = adventCard.card_number || targetSpirit.card_number;
+    targetSpirit.type = adventCard.type || targetSpirit.type;
     targetSpirit.cost = adventCard.cost;
     targetSpirit.color = adventCard.color;
+    targetSpirit.colors = adventCard.colors || (adventCard.color ? [adventCard.color] : targetSpirit.colors);
     targetSpirit.family = adventCard.family;
+    targetSpirit.families = adventCard.families || (adventCard.family ? [adventCard.family] : targetSpirit.families);
     targetSpirit.symbol = adventCard.symbol;
+    targetSpirit.symbols = adventCard.symbols || (adventCard.symbol ? [adventCard.symbol] : targetSpirit.symbols);
     targetSpirit.levels = adventCard.levels;
     targetSpirit.effect = adventCard.effect;
     targetSpirit.image_url = adventCard.image_url || '';
@@ -15459,6 +15876,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     formatEffectKeywords,
     hasFlashTiming,
     canPlayCardInCurrentPhase,
+    checkCardFreeSummonEligibility,
+    executeFreeSummon,
     summonCard,
     castMagic,
     handleSpiritClick,

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.0">
+  <link rel="stylesheet" href="/styles.css?v=5.4">
 </head>
 <body>
 
@@ -74,6 +74,24 @@
           <input type="text" id="browseSearchInput" placeholder="Search any card across Battle Spirits… (e.g. Makai, Siegfried, BS01, Puppet Soldier)" autocomplete="off"/>
           <button class="search-clear" id="browseClearBtn" onclick="clearBrowseSearch()">&times;</button>
           <div class="autocomplete-list" id="browseACList"></div>
+        </div>
+      </div>
+
+      <!-- Popular Mechanics & Keywords Quick Filter -->
+      <div class="quick-keywords-strip" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;margin-bottom:16px;">
+        <span style="font-size:0.75rem;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.5px;margin-right:4px;">⚡ Popular Keywords:</span>
+        <div class="filter-pills" id="browseKeywordPills" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <button class="filter-pill kw-pill" data-kw="Soul Burst" onclick="toggleKeywordFilter('Soul Burst')">💥 Soul Burst</button>
+          <button class="filter-pill kw-pill" data-kw="Contract Advent" onclick="toggleKeywordFilter('Contract Advent')">🌟 Contract Advent</button>
+          <button class="filter-pill kw-pill" data-kw="Advent" onclick="toggleKeywordFilter('Advent')">✨ Advent</button>
+          <button class="filter-pill kw-pill" data-kw="Mirage" onclick="toggleKeywordFilter('Mirage')">🔮 Mirage</button>
+          <button class="filter-pill kw-pill" data-kw="Manifest" onclick="toggleKeywordFilter('Manifest')">👁️ Manifest</button>
+          <button class="filter-pill kw-pill" data-kw="Violent High Speed" onclick="toggleKeywordFilter('Violent High Speed')">⚡ Violent High Speed</button>
+          <button class="filter-pill kw-pill" data-kw="Heavy Exhaust" onclick="toggleKeywordFilter('Heavy Exhaust')">🌀 Heavy Exhaust</button>
+          <button class="filter-pill kw-pill" data-kw="Ultimate Trigger" onclick="toggleKeywordFilter('Ultimate Trigger')">🎯 Ultimate Trigger</button>
+          <button class="filter-pill kw-pill" data-kw="Clash" onclick="toggleKeywordFilter('Clash')">⚔️ Clash</button>
+          <button class="filter-pill kw-pill" data-kw="Spellbind" onclick="toggleKeywordFilter('Spellbind')">🕸️ Spellbind</button>
+          <button class="filter-pill kw-pill" data-kw="Over Count" onclick="toggleKeywordFilter('Over Count')">📈 Over Count</button>
         </div>
       </div>
 
@@ -224,7 +242,7 @@
     <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
     <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
       <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
-        data-art="${esc(card.image_url || '')}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=FALLBACK_CARD_ART; }" />
+        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
       <div class="modal-actions">
         <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
         <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
@@ -360,7 +378,7 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="/wasm_db.js?v=3.0"></script>
+  <script src="/wasm_db.js?v=3.1"></script>
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -369,7 +387,7 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
   <script src="/firebase_service.js?v=1.1"></script>
 
-  <script src="/app.js?v=4.7"></script>
+  <script src="/app.js?v=5.4"></script>
 <script>
 // ═══════════════════ BROWSE CONTROLLER ═══════════════════
 const browseState = {
@@ -440,7 +458,39 @@ function syncPillsFromState() {
       pill.classList.toggle('active', isActive);
     });
   });
+
+  const kwContainer = document.getElementById('browseKeywordPills');
+  if (kwContainer) {
+    const curQ = (browseState.q || '').trim().toLowerCase();
+    kwContainer.querySelectorAll('.filter-pill').forEach(pill => {
+      const kw = (pill.getAttribute('data-kw') || '').toLowerCase();
+      const isKwActive = curQ === kw || (kw === 'soul burst' && (curQ === 'burst s' || curQ === 'soul burst'));
+      pill.classList.toggle('active', isKwActive);
+    });
+  }
+
   updateFamilyDropdownBtnState();
+}
+
+function toggleKeywordFilter(kw) {
+  const current = (browseState.q || '').trim();
+  if (current.toLowerCase() === kw.toLowerCase() || (kw.toLowerCase() === 'soul burst' && current.toLowerCase() === 'burst s')) {
+    browseState.q = '';
+    const searchInput = document.getElementById('browseSearchInput');
+    if (searchInput) searchInput.value = '';
+    const clearBtn = document.getElementById('browseClearBtn');
+    if (clearBtn) clearBtn.style.display = 'none';
+  } else {
+    browseState.q = kw;
+    const searchInput = document.getElementById('browseSearchInput');
+    if (searchInput) searchInput.value = kw;
+    const clearBtn = document.getElementById('browseClearBtn');
+    if (clearBtn) clearBtn.style.display = 'block';
+  }
+  browseState.page = 1;
+  syncPillsFromState();
+  updateUrlHistory();
+  loadBrowseCards();
 }
 
 function updateTargetHeader() {
@@ -1047,7 +1097,8 @@ document.addEventListener('click', (e) => { if (!e.target.closest('.search-wrap'
 async function fetchBrowseAC(q) {
   try {
     const res = await fetch(`/api/autocomplete?q=${encodeURIComponent(q)}&limit=8`);
-    const cards = await res.json();
+    const raw = await res.json();
+    const cards = Array.isArray(raw) ? raw : (raw.results || []);
     if (!cards.length) { closeBrowseAC(); return; }
     acList.innerHTML = cards.map(c => `
       <div class="ac-item" data-name="${esc(c.name)}">
@@ -1183,5 +1234,30 @@ function updateFloatingDeckDrawer() {
 }
 
 </script>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <a href="/arena" class="mobile-nav-item">
+    <span class="mobile-nav-icon">⚔️</span>
+    <span>Arena</span>
+  </a>
+  <a href="/browse" class="mobile-nav-item active">
+    <span class="mobile-nav-icon">🎴</span>
+    <span>Browse</span>
+  </a>
+  <a href="/deck" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🗃️</span>
+    <span>Deck</span>
+    <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
+  </a>
+  <a href="/sets" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📦</span>
+    <span>Sets</span>
+  </a>
+  <a href="/family" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📜</span>
+    <span>Family</span>
+  </a>
+</nav>
+
 </body>
 </html>

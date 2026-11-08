@@ -144,13 +144,16 @@ export function parseAbilityHeaders(blockText) {
   }
 
   // 2. Parse Burst block
-  const burstMatch = body.match(/^\[Burst:\s*(.+?)\](?=\r?\n|$|\s*\()/i);
+  const burstMatch = body.match(/^\[(?:Soul\s+)?Burst(?:\s*Condition)?(?::\s*(.+?))?\](?=\r?\n|$|\s*\()/i);
   if (burstMatch) {
     result.timing = 'BURST';
-    result.timingLabel = 'Burst';
-    let condRaw = burstMatch[1].trim();
+    result.timingLabel = /soul/i.test(burstMatch[0]) ? 'Soul Burst' : 'Burst';
+    if (/soul/i.test(burstMatch[0])) {
+      result.keyword = 'Soul Burst';
+    }
+    let condRaw = burstMatch[1] ? burstMatch[1].trim() : '';
     body = body.slice(burstMatch[0].length).trim();
-    // If condition was in parentheses immediately following [Burst: ...] e.g. [Burst: s] (After your Life is reduced)
+    // If condition was in parentheses immediately following [Burst: ...] or [Soul Burst] e.g. [Soul Burst] (After your Life is reduced)
     const parenCondMatch = body.match(/^\((After\s+(?:(?:\([^)]*\)|[^)])+))\)\s*/i);
     if (parenCondMatch) {
       condRaw = parenCondMatch[1].trim();

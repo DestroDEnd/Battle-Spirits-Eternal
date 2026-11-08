@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.1">
+  <link rel="stylesheet" href="/styles.css?v=5.4">
 </head>
 <body class="arena-page-body">
 
@@ -1180,7 +1180,7 @@
 <!-- Scripts -->
 <!-- WebAssembly SQLite Engine (sql.js) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-<script src="/wasm_db.js?v=2.2"></script>
+<script src="/wasm_db.js?v=3.1"></script>
 
 <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1190,9 +1190,9 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
 <script src="/firebase_service.js?v=1.1"></script>
 <script src="/multiplayer_service.js?v=1.0"></script>
-<script src="/app.js?v=5.3"></script>
+<script src="/app.js?v=5.4"></script>
 <script src="/engine/cards/bundle.js?v=1.0"></script>
-<script src="/battle_arena.js?v=5.3"></script>
+<script src="/battle_arena.js?v=5.4"></script>
 <script>
   // Check for auto-start or query parameters on dedicated arena page
   (function() {
@@ -1220,5 +1220,30 @@
     });
   })();
 </script>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <a href="/arena" class="mobile-nav-item active">
+    <span class="mobile-nav-icon">⚔️</span>
+    <span>Arena</span>
+  </a>
+  <a href="/browse" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🎴</span>
+    <span>Browse</span>
+  </a>
+  <a href="/deck" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🗃️</span>
+    <span>Deck</span>
+    <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
+  </a>
+  <a href="/sets" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📦</span>
+    <span>Sets</span>
+  </a>
+  <a href="/family" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📜</span>
+    <span>Family</span>
+  </a>
+</nav>
+
 </body>
 </html>

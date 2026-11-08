@@ -509,8 +509,10 @@ if (typeof globalThis !== 'undefined') {
         const friendlyState = getFriendlyState(ctx);
         if (!friendlyState.javadCountBoostUsedThisTurn) {
           friendlyState.javadCountBoostUsedThisTurn = true;
-          friendlyState.counters = (friendlyState.counters || 0) + 2;
-          log(ctx, `✨ **[JAVAD SOUL STATE]**: Evil God core drain triggered! Count +2 (Total: ${friendlyState.counters})!`, 'step');
+          const nextCount = ((friendlyState.counters !== undefined ? friendlyState.counters : friendlyState.count) || 0) + 2;
+          friendlyState.counters = nextCount;
+          friendlyState.count = nextCount;
+          log(ctx, `✨ **[JAVAD SOUL STATE]**: Evil God core drain triggered! Count +2 (Total: ${nextCount})!`, 'step');
           render(ctx);
         }
       },

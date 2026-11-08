@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.0">
+  <link rel="stylesheet" href="/styles.css?v=5.4">
 </head>
 <body>
 
@@ -123,6 +123,14 @@
         <div class="type-stat-pill"><span class="type-dot dot-brave"></span><span id="statBraves">0 Braves</span></div>
         <div class="type-stat-pill"><span class="type-dot dot-magic"></span><span id="statMagic">0 Magic</span></div>
         <div class="type-stat-pill"><span class="type-dot dot-nexus"></span><span id="statNexus">0 Nexus</span></div>
+      </div>
+
+      <!-- Mechanics Breakdown Stats -->
+      <div class="deck-type-stats" id="deckMechanicsStats" style="margin-top:0.35rem;">
+        <div class="type-stat-pill" title="Cards with [Burst]"><span style="font-size:0.75rem;">💥</span> <span id="statBursts">0 Bursts</span></div>
+        <div class="type-stat-pill" title="Cards with [Advent] / [Contract Advent]"><span style="font-size:0.75rem;">🌟</span> <span id="statAdvents">0 Advents</span></div>
+        <div class="type-stat-pill" title="Contract cards"><span style="font-size:0.75rem;">📜</span> <span id="statContracts">0 Contracts</span></div>
+        <div class="type-stat-pill" title="Cards with [Mirage]"><span style="font-size:0.75rem;">🔮</span> <span id="statMirages">0 Mirages</span></div>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
@@ -328,7 +336,7 @@
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="/wasm_db.js?v=2.2"></script>
+  <script src="/wasm_db.js?v=3.1"></script>
 
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -337,7 +345,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
   <script src="/firebase_service.js?v=1.1"></script>
-  <script src="/app.js?v=4.7"></script>
+  <script src="/app.js?v=5.4"></script>
 <script>
 // Cache for card data objects
 const deckCardCache = {};
@@ -955,6 +963,7 @@ function calculateAndRenderStats() {
   const entries = Object.entries(S.deck);
   const bins = { '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8+': 0 };
   const typeStats = { spirit: 0, brave: 0, magic: 0, nexus: 0 };
+  const mechStats = { burst: 0, advent: 0, contract: 0, mirage: 0 };
 
   for (const [name, count] of entries) {
     const card = deckCardCache[name] || {};
@@ -968,13 +977,19 @@ function calculateAndRenderStats() {
     else if (t.includes('magic')) typeStats.magic += count;
     else if (t.includes('nexus')) typeStats.nexus += count;
     else typeStats.spirit += count;
+
+    const eff = (card.effect || '') + ' ' + (card.name || '') + ' ' + (card.type || '');
+    if (/\[burst|【バースト】/i.test(eff)) mechStats.burst += count;
+    if (/\[(?:contract\s+)?advent|【(?:契約)?煌臨】/i.test(eff)) mechStats.advent += count;
+    if (card.is_contract_partner || /contract\s+(?:spirit|brave|nexus)|【契約/i.test(card.type || '') || /contract/i.test(card.rarity || '')) mechStats.contract += count;
+    if (/\[mirage|【ミラージュ】/i.test(eff)) mechStats.mirage += count;
   }
 
   renderCurveFromBins(bins);
-  updateTypeStats(typeStats);
+  updateTypeStats(typeStats, mechStats);
 }
 
-function updateTypeStats(stats) {
+function updateTypeStats(stats, mechs = {}) {
   const sp = document.getElementById('statSpirits');
   const br = document.getElementById('statBraves');
   const mg = document.getElementById('statMagic');
@@ -983,6 +998,15 @@ function updateTypeStats(stats) {
   if (br) br.textContent = `${stats.brave} Braves`;
   if (mg) mg.textContent = `${stats.magic} Magic`;
   if (nx) nx.textContent = `${stats.nexus} Nexus`;
+
+  const sBu = document.getElementById('statBursts');
+  const sAd = document.getElementById('statAdvents');
+  const sCo = document.getElementById('statContracts');
+  const sMi = document.getElementById('statMirages');
+  if (sBu) sBu.textContent = `${mechs.burst || 0} Bursts`;
+  if (sAd) sAd.textContent = `${mechs.advent || 0} Advents`;
+  if (sCo) sCo.textContent = `${mechs.contract || 0} Contracts`;
+  if (sMi) sMi.textContent = `${mechs.mirage || 0} Mirages`;
 }
 
 function renderCurveFromBins(bins) {
@@ -1045,5 +1069,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 </script>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <a href="/arena" class="mobile-nav-item">
+    <span class="mobile-nav-icon">⚔️</span>
+    <span>Arena</span>
+  </a>
+  <a href="/browse" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🎴</span>
+    <span>Browse</span>
+  </a>
+  <a href="/deck" class="mobile-nav-item active">
+    <span class="mobile-nav-icon">🗃️</span>
+    <span>Deck</span>
+    <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
+  </a>
+  <a href="/sets" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📦</span>
+    <span>Sets</span>
+  </a>
+  <a href="/family" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📜</span>
+    <span>Family</span>
+  </a>
+</nav>
+
 </body>
 </html>

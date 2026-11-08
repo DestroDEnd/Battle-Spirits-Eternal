@@ -298,7 +298,8 @@
             SELECT name, cost, color, type, family, rarity, image_url, card_number, effect, levels
             FROM cards
             WHERE color = ?
-              AND (rarity LIKE '%X%' OR rarity LIKE '%XX%')
+              AND LOWER(type) = 'spirit'
+              AND cost >= 8
               AND image_url IS NOT NULL AND image_url != ''
             ORDER BY RANDOM() LIMIT ?
           `);
@@ -315,7 +316,7 @@
           }
           stmt.free();
         }
-        return cards;
+        return cards.sort(() => Math.random() - 0.5);
       } catch (e) {
         console.error('[WasmDB] getFeaturedXRares error:', e);
         return [];
@@ -359,31 +360,62 @@
 
       if (query && query.trim()) {
         const qRaw = query.trim();
-        const qLike = `%${qRaw}%`;
         const ql = qRaw.toLowerCase();
 
-        let qParts = [];
-        let qArgs = [];
-
-        if (scope === 'name') {
-          qParts = ['name LIKE ?', 'kanji LIKE ?', 'jpname LIKE ?'];
-          qArgs = [qLike, qLike, qLike];
-        } else if (scope === 'effect' || scope === 'desc') {
-          qParts = ['effect LIKE ?', 'flavor LIKE ?'];
-          qArgs = [qLike, qLike];
-        } else if (scope === 'family') {
-          qParts = ['family LIKE ?', 'families_json LIKE ?'];
-          qArgs = [qLike, qLike];
-        } else {
-          qParts = [
-            'name LIKE ?', 'family LIKE ?', 'families_json LIKE ?',
-            'effect LIKE ?', 'flavor LIKE ?', 'kanji LIKE ?',
-            'jpname LIKE ?', 'card_number LIKE ?'
-          ];
-          qArgs = [qLike, qLike, qLike, qLike, qLike, qLike, qLike, qLike];
+        // Keyword query alias expansions
+        let searchTerms = [qRaw];
+        if (ql === 'soul burst' || ql === 'soulburst' || ql === 'soul-burst' || ql === 'burst s' || ql === 'burst: s' || ql === 'burst:s' || ql === 'burst s:') {
+          searchTerms = ['Soul Burst', '[Soul Burst]', 'ソウルバースト', 'Burst: s', 'Burst: S'];
+        } else if (ql === 'burst' || ql === 'bursts') {
+          searchTerms = ['Burst', '[Burst', 'バースト'];
+        } else if (ql === 'manifest' || ql === 'mani' || ql === 'kengen') {
+          searchTerms = ['Manifest', '[Manifest', '顕現'];
+        } else if (ql === 'heavy exhaust' || ql === 'heb') {
+          searchTerms = ['Heavy Exhaust', '重疲労'];
+        } else if (ql === 'ultimate trigger' || ql === 'ut' || ql === 'u trigger' || ql === 'u-trigger') {
+          searchTerms = ['Ultimate Trigger', 'U-Trigger', 'Uトリガー'];
+        } else if (ql === 'contract advent' || ql === 'contractadvent' || ql === 'keiyaku kourin') {
+          searchTerms = ['Contract Advent', '契約煌臨'];
+        } else if (ql === 'advent' || ql === 'kourin') {
+          searchTerms = ['Advent', '煌臨'];
+        } else if (ql === 'violent high speed' || ql === 'vhs' || ql === 'retsujinsoku') {
+          searchTerms = ['Violent High Speed', '烈神速'];
+        } else if (ql === 'swift' || ql === 'high speed' || ql === 'jinsoku') {
+          searchTerms = ['High Speed', 'Swift', '神速'];
+        } else if (ql === 'over count' || ql === 'oc') {
+          searchTerms = ['During OC', 'OC Condition', 'OC中'];
+        } else if (ql === 'soul state') {
+          searchTerms = ['Soul State', 'ソウル状態'];
+        } else if (ql === 'suadcon' || ql === 'summon advent condition' || ql === 'summon condition') {
+          searchTerms = ['Summon Condition', 'Summon/Advent Condition', 'SuAdcon', '召喚条件', '召喚/煌臨条件'];
+        } else if (ql === 'spellbind' || ql === 'spell blight' || ql === 'spellblight') {
+          searchTerms = ['Spellbind', 'Spell Blight', '呪縛'];
         }
-        conditions.push(`(${qParts.join(' OR ')})`);
-        sqlParams.push(...qArgs);
+
+        const orClauses = [];
+        for (const term of searchTerms) {
+          const tLike = `%${term}%`;
+          let qParts = [];
+          if (scope === 'name') {
+            qParts = ['name LIKE ?', 'kanji LIKE ?', 'jpname LIKE ?'];
+            sqlParams.push(tLike, tLike, tLike);
+          } else if (scope === 'effect' || scope === 'desc') {
+            qParts = ['effect LIKE ?', 'flavor LIKE ?'];
+            sqlParams.push(tLike, tLike);
+          } else if (scope === 'family') {
+            qParts = ['family LIKE ?', 'families_json LIKE ?'];
+            sqlParams.push(tLike, tLike);
+          } else {
+            qParts = [
+              'name LIKE ?', 'family LIKE ?', 'families_json LIKE ?',
+              'effect LIKE ?', 'flavor LIKE ?', 'kanji LIKE ?',
+              'jpname LIKE ?', 'card_number LIKE ?'
+            ];
+            sqlParams.push(tLike, tLike, tLike, tLike, tLike, tLike, tLike, tLike);
+          }
+          orClauses.push(`(${qParts.join(' OR ')})`);
+        }
+        conditions.push(`(${orClauses.join(' OR ')})`);
       }
 
       if (color && color !== 'all') {
@@ -579,13 +611,20 @@
                 if (color && staticData.by_color) {
                   const capColor = color.charAt(0).toUpperCase() + color.slice(1).toLowerCase();
                   if (staticData.by_color[capColor]) {
-                    cards = staticData.by_color[capColor];
+                    cards = [...staticData.by_color[capColor]].sort(() => Math.random() - 0.5).slice(0, 20);
                   }
+                } else if (staticData.by_color) {
+                  const colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+                  colors.forEach(col => {
+                    const pool = staticData.by_color[col] || [];
+                    const sample = [...pool].sort(() => Math.random() - 0.5).slice(0, 4);
+                    cards.push(...sample);
+                  });
+                  cards = cards.sort(() => Math.random() - 0.5);
                 }
                 if (!cards || !cards.length) {
-                  cards = staticData.cards || [];
+                  cards = [...(staticData.cards || [])].sort(() => Math.random() - 0.5).slice(0, 24);
                 }
-                cards = [...cards].sort(() => Math.random() - 0.5);
               }
             } catch(e) {}
           }

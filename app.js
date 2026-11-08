@@ -460,6 +460,8 @@ function updateDeckBadge() {
   const total = Object.values(S.deck).reduce((a, b) => a + b, 0);
   const badge = document.getElementById('deckBadge');
   if (badge) badge.textContent = total;
+  const mobileBadge = document.getElementById('mobileDeckBadge');
+  if (mobileBadge) mobileBadge.textContent = total;
   if (typeof DeckQuickView !== 'undefined') {
     DeckQuickView.update();
   }
@@ -585,50 +587,91 @@ function formatEffectKeywordsInModal(text) {
   if (!text) return '<span style="color:var(--muted);font-style:italic;">No special effects or abilities.</span>';
   let safe = esc(text);
 
-  // 1. Advent & Contract Advent (matching outer brackets cleanly)
+  // 1. Advent, Contract Advent, Manifest (顕現)
   safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
+  safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Manifest|Mani):[^\]]+\]|【顕現：[^】]+】/gi, '<span class="effect-keyword-pill kw-manifest">$&</span>');
+  safe = safe.replace(/\[Mani\]/gi, '<span class="effect-keyword-pill kw-manifest">[Manifest]</span>');
 
-  // 2. Summon Conditions & SuAdcon
-  safe = safe.replace(/\[(?:Summon Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+  // 1b. Reminder text expansions for wiki abbreviations ([utb], [wutb], [tutb], [qutb], [cutb], [outb], [heb])
+  safe = safe.replace(/\[heb\]/gi, '<span class="effect-reminder-box">ℹ️ (Heavy Exhaust: Exhausted card is turned upside down and requires two refreshes to return to ready.)</span>');
+  safe = safe.replace(/\[utb\]/gi, '<span class="effect-reminder-box">ℹ️ (Ultimate Trigger: Send 1 card from opposing Deck top to Trash. If that card\'s cost is lower than this Ultimate\'s, it hits.)</span>');
+  safe = safe.replace(/\[wutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Double Ultimate Trigger: Send 2 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+  safe = safe.replace(/\[tutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Triple Ultimate Trigger: Send 3 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+  safe = safe.replace(/\[qutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Quadruple Ultimate Trigger: Send 4 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+  safe = safe.replace(/\[cutb\]/gi, '<span class="effect-reminder-box">ℹ️ (Count Ultimate Trigger: Send 1 card from opposing Deck top to Trash. If that card\'s cost is lower than this Ultimate\'s current Count, it hits.)</span>');
+  safe = safe.replace(/\[outb\]/gi, '<span class="effect-reminder-box">ℹ️ (Octa Ultimate Trigger: Send 8 cards from opposing Deck top to Trash. For each card whose cost is lower than this Ultimate\'s, it hits.)</span>');
+  safe = safe.replace(/\[xutb\]/gi, '<span class="effect-keyword-pill kw-utrigger">[Cross Ultimate Trigger]</span>');
+  safe = safe.replace(/\[dcutb\]/gi, '<span class="effect-keyword-pill kw-utrigger">[Double Count Ultimate Trigger]</span>');
+  safe = safe.replace(/\[team:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-team">[Team: $1]</span>');
+  safe = safe.replace(/\[teams:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-team">[Teams: $1]</span>');
+  safe = safe.replace(/\[uhand:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-uhand">[U-Hand: $1]</span>');
+  safe = safe.replace(/\[catl:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-catalyze">[Catalyze: $1]</span>');
+  safe = safe.replace(/\[zc\]/gi, '<span class="effect-keyword-pill kw-zc">[Zero Counter]</span>');
+  safe = safe.replace(/\[advents\]/gi, 'Advents');
+  safe = safe.replace(/\[advented\]/gi, 'Advented');
+  safe = safe.replace(/\[adventing\]/gi, 'Adventing');
+  safe = safe.replace(/\[manis\]/gi, 'Manifests');
+  safe = safe.replace(/\[manid\]/gi, 'Manifested');
+  safe = safe.replace(/\[rtp\]/gi, '');
+  safe = safe.replace(/\[deh:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-limit">[Heavy Exhaust: $1]</span>');
+  safe = safe.replace(/\[mflash:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Mirage Flash: $1]</span>');
+  safe = safe.replace(/\[mdrain:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Magic Drain: $1]</span>');
+  safe = safe.replace(/\[msyn:\s*([^\]]+)\]/gi, '<span class="effect-keyword-pill kw-flash">[Magic Synergy: $1]</span>');
 
-  // 3. Brave Conditions
+  // 2. Soul Burst, Burst, and Burst Condition
+  safe = safe.replace(/\[Soul Burst(?::[^\]]+)?\]|\[Burst:\s*[sS]\]|【(?:ソウルバースト|バースト：[SＳｓ])(?::[^】]+)?】/gi, '<span class="effect-keyword-pill kw-soul-burst">[Soul Burst]</span>');
+  safe = safe.replace(/\[Burst Condition(?::[^\]]+)?\]|\[Burst:\s*con\]|【バースト条件(?::[^】]+)?】/gi, '<span class="effect-keyword-pill kw-burst-cond">[Burst Condition]</span>');
+  safe = safe.replace(/\[Burst(?::[^\]]+)?\]|【バースト(?::[^】]+)?】/gi, (match) => {
+    if (/soul\s*burst/i.test(match)) return `<span class="effect-keyword-pill kw-soul-burst">${match}</span>`;
+    return `<span class="effect-keyword-pill kw-burst">${match}</span>`;
+  });
+
+  // 3. Summon Conditions & SuAdcon
+  safe = safe.replace(/\[(?:Summon Condition|Summon\/Advent Condition|SuAdcon):[^\]]+\]|【(?:召喚条件|召喚\/煌臨条件)：[^】]+】/gi, '<span class="effect-keyword-pill kw-summon-cond">$&</span>');
+
+  // 4. Brave Conditions
   safe = safe.replace(/\[(?:Brave Condition|Brave condition):[^\]]+\]|【合体条件：[^】]+】/gi, '<span class="effect-keyword-pill kw-brave-cond">$&</span>');
 
-  // 4. Over Count, Soul State, and Active States
+  // 5. Over Count, Soul State, and Active States
   safe = safe.replace(/\[During\s*OC\]|【OC中】|\[OC\s*Condition:[^\]]+\]/gi, '<span class="effect-keyword-pill kw-oc">$&</span>');
   safe = safe.replace(/\[Soul\s*State\]|【ソウル状態】/gi, '<span class="effect-keyword-pill kw-soul-state">$&</span>');
-  safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave)\]|【(?:合体中|合体時|煌臨中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
+  safe = safe.replace(/\[(?:During\s+Advent|When\s+Braved|During\s+Brave|During\s+Set|During\s+Nexus\s+Brave|During\s+Spirit\s+Brave)\]|【(?:合体中|合体時|煌臨中|セット中)】/gi, '<span class="effect-keyword-pill kw-state">$&</span>');
 
-  // 5. Level tags like [LV1], [LV2][LV3]
+  // 6. Level tags like [LV1], [LV2][LV3]
   safe = safe.replace(/\[(LV\d+(?:[-~]LV\d+)*)\]/gi, '<span class="effect-keyword-pill kw-level">[$1]</span>');
 
-  // 6. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field])
+  // 7. Manual Actions & God Skills ([Main], [Flash], [Grand Skill: N], [Grand Field], [Contract Skill: N], [Contract Field])
   safe = safe.replace(/\[(?:Main|MAIN)\]|【メイン】/g, '<span class="effect-keyword-pill kw-main">[Main]</span>');
   safe = safe.replace(/\[(?:Flash|FLASH)\]|【フラッシュ】/g, '<span class="effect-keyword-pill kw-flash">[Flash]</span>');
-  safe = safe.replace(/\[Grand Skill:\s*(\d+)\]|【神技：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
-  safe = safe.replace(/\[Grand Field\]|【神域】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+  safe = safe.replace(/\[(?:Grand|Contract)\s*Skill:\s*(\d+)\]|【(?:神技|契約技)：(\d+)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
+  safe = safe.replace(/\[(?:Grand|Contract)\s*Field\]|【(?:神域|契約域)】/gi, '<span class="effect-keyword-pill kw-grand">$&</span>');
 
-  // 7. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
+  // 8. Limiters: (Once per Turn: Same Name), (Once per Turn), etc.
   safe = safe.replace(/\((Once per Turn(?::\s*[^)]+)?|Once per turn(?::\s*[^)]+)?|Once per Game)\)|【(ターンに\d+回[^】]*)】/gi, '<span class="effect-keyword-pill kw-limit">$&</span>');
 
-  // 8. Timing and Step triggers
+  // 9. Timing and Step triggers
   safe = safe.replace(/(?<!<[^>]*)\((When (?:Brave\s+)?(?:Attacks|Summoned|Advents|Battles|Blocks|Manifests|Reborn|Destroyed)(?:\/[^)]+)?|After (?:Your |a )?Burst [^)]+|Twinkle Necromancy|(?:Your|Opponent's|Opposing|Either)\s+Attack\s+Step|(?:Main|Refresh|Start|Core|Draw|End)\s+Step|During (?:either|your|opposing|opponent's) Attack Step)\)/gi, (match) => {
     return `<span class="effect-keyword-pill kw-timing">${match}</span>`;
   });
 
-  // 9. Soul Core
+  // 10. Soul Core & Color Cores ([Soul Core], [Red Core], [Purple Core], etc.)
   safe = safe.replace(/(?<!<[^>]*)(?:\[Soul Core(?::[^\]]+)?\]|【ソウルコア】)/gi, '<span class="effect-keyword-pill kw-soul-core">$&</span>');
+  safe = safe.replace(/\[(Red|Purple|Green|White|Yellow|Blue)\s+Core\]/gi, (match, color) => {
+    return `<span class="effect-keyword-pill kw-core-${color.toLowerCase()}">${match}</span>`;
+  });
 
-  // 10. Ultimate Triggers
+  // 11. Ultimate Triggers
   safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
-  // 11. Highlight all 102 Official Battle Spirits Wiki Keywords
-  const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Manifest|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spirit Soul|Stampede|Super Boost|Super Unleash|Supreme Clash|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+  // 12. Highlight all Official Battle Spirits Wiki Keywords
+  const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
   safe = safe.replace(allKwPattern, (match) => {
     let cls = 'kw-generic';
     const low = match.toLowerCase();
-    if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
+    if (low.includes('soul burst')) cls = 'kw-soul-burst';
+    else if (low.includes('manifest') || low.includes('mani')) cls = 'kw-manifest';
+    else if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
     else if (low.includes('clash')) cls = 'kw-clash';
     else if (low.includes('curse')) cls = 'kw-curse';
     else if (low.includes('crush')) cls = 'kw-crush';
@@ -647,7 +690,7 @@ function formatEffectKeywordsInModal(text) {
     else if (low.includes('tribute')) cls = 'kw-tribute';
     else if (low.includes('consecutive blade')) cls = 'kw-consecutive';
     else if (low.includes('mirage')) cls = 'kw-mirage';
-    else if (low.includes('spellbind')) cls = 'kw-spellbind';
+    else if (low.includes('spellbind') || low.includes('spell blight')) cls = 'kw-spellbind';
     else if (low.includes('accel')) cls = 'kw-accel';
     else if (low.includes('change')) cls = 'kw-change';
     else if (low.includes('charge')) cls = 'kw-charge';
@@ -658,7 +701,7 @@ function formatEffectKeywordsInModal(text) {
     return `<span class="effect-keyword-pill ${cls}">${match}</span>`;
   });
 
-  // 5. Card Name References: Make referenced card names in quotes clickable!
+  // 13. Card Name References: Make referenced card names in quotes clickable!
   safe = safe.replace(/(?:&quot;|"|[“”「」])([A-Za-z0-9\s,'\-\.]+?)(?:&quot;|"|[”"」])/gu, (match, cardName) => {
     const trimmed = cardName.trim();
     const exclude = new Set([
@@ -1520,6 +1563,27 @@ async function openCardDetail(name, contextList, cardUid = null) {
           ? BattleArena.canPlayCardInCurrentPhase(handCard, 'player')
           : (isPlayerTurn && (phase === 'MAIN' || (isAttackStep && (handCard.effect || '').includes('[Flash]')))));
 
+        const adventReq = (typeof BattleArena !== 'undefined' && BattleArena.getCardAdventRequirement)
+          ? BattleArena.getCardAdventRequirement(handCard)
+          : null;
+        const canAdvent = adventReq && (typeof BattleArena !== 'undefined' && BattleArena.canPerformAdvent)
+          ? BattleArena.canPerformAdvent(handCard, 'player')
+          : false;
+
+        let adventReason = '';
+        if (adventReq) {
+          const pCount = ((DuelState.player.count !== undefined ? DuelState.player.count : DuelState.player.counters) || 0);
+          if (typeof BattleArena !== 'undefined' && BattleArena.isAdventTimingValid && !BattleArena.isAdventTimingValid(adventReq, 'player')) {
+            adventReason = `⚔️ Advent: ${adventReq.timingLabel} Only`;
+          } else if (DuelState.player.soulCoreLocation === 'trash') {
+            adventReason = '⚠️ Advent: Soul Core in Trash';
+          } else if (adventReq.minCount !== null && pCount < adventReq.minCount) {
+            adventReason = `⚠️ Advent: Need Count ${adventReq.minCount}+ (Current: ${pCount})`;
+          } else {
+            adventReason = `⚠️ Advent: No Target (${adventReq.condText})`;
+          }
+        }
+
         const avail = (typeof BattleArena !== 'undefined' && BattleArena.getPlayerAvailableCores) 
           ? BattleArena.getPlayerAvailableCores() 
           : { reserve: DuelState.player.reserve, total: DuelState.player.reserve };
@@ -1534,16 +1598,29 @@ async function openCardDetail(name, contextList, cardUid = null) {
           duelBtn.style.opacity = '0.5';
           duelBtn.style.background = '#475569';
           duelBtn.onclick = null;
+        } else if (canAdvent && (!canPlay || isAttackStep)) {
+          // If eligible to Advent in Flash timing, provide direct Advent action
+          duelBtn.textContent = `🌟 Stack [Advent] (${adventReq.timingLabel})`;
+          duelBtn.title = `Stack onto an eligible target using your Soul Core`;
+          duelBtn.disabled = false;
+          duelBtn.style.opacity = '1';
+          duelBtn.style.background = 'linear-gradient(135deg, #7e22ce, #9333ea)';
+          duelBtn.style.border = '1px solid #c084fc';
+          duelBtn.onclick = () => {
+            closeModal();
+            BattleArena.openAdventPrompt(handCard.uid);
+          };
         } else if (!ultCheck.allowed) {
-          duelBtn.textContent = `🔒 ${ultCheck.reason || 'Summon Condition Not Met'}`;
-          duelBtn.title = ultCheck.reason;
+          duelBtn.textContent = (adventReq && isAttackStep) ? adventReason : `🔒 ${ultCheck.reason || 'Summon Condition Not Met'}`;
+          duelBtn.title = (adventReq && isAttackStep) ? adventReason : ultCheck.reason;
           duelBtn.disabled = true;
           duelBtn.style.opacity = '0.5';
           duelBtn.style.background = '#475569';
           duelBtn.onclick = null;
           if (modalBraveBtn) modalBraveBtn.style.display = 'none';
         } else if (!canPlay) {
-          duelBtn.textContent = isAttackStep ? '⚔️ Main Step Only (No Flash)' : `⏳ Cannot Play in ${phase} Step`;
+          duelBtn.textContent = (adventReq && isAttackStep) ? adventReason : (isAttackStep ? '⚔️ Main Step Only (No Flash)' : `⏳ Cannot Play in ${phase} Step`);
+          duelBtn.title = (adventReq && isAttackStep) ? adventReason : 'Normal cards without [Flash] cannot be played in Attack Step';
           duelBtn.disabled = true;
           duelBtn.style.opacity = '0.5';
           duelBtn.style.background = '#475569';
@@ -1710,7 +1787,8 @@ async function openCardDetail(name, contextList, cardUid = null) {
             };
           }
         } else {
-          duelBtn.textContent = `⚠️ Need ${totalNeeded} Cores`;
+          duelBtn.textContent = (adventReq && isAttackStep) ? adventReason : `⚠️ Need ${totalNeeded} Cores`;
+          duelBtn.title = (adventReq && isAttackStep) ? adventReason : `Requires ${totalNeeded} cores (Reserve: ${avail.reserve}, Total: ${avail.total})`;
           duelBtn.disabled = true;
           duelBtn.style.opacity = '0.5';
           duelBtn.style.background = '#475569';

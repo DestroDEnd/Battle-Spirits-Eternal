@@ -18,6 +18,8 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { PerCardRegistry } from '../engine/cards/registry.js';
 import '../engine/cards/index.js';
 
@@ -188,6 +190,86 @@ describe('SD65 Contract Starter Deck: Four Demon Lords Suite', () => {
       assert.equal(ctx.duelState.opponent.field.length, 2);
       assert.ok(!ctx.duelState.opponent.field.includes(s2), 'Highest cost spirit (cost 8) must be destroyed');
       assert.equal(ctx.duelState.opponent.trashCards[0].id, 's2');
+    });
+  });
+
+  describe('3. SD65-003 Contract Advent & Timing Invariants', () => {
+    // Load battle_arena script functions in sandboxed test context
+    const arenaCode = fs.readFileSync(path.resolve('./battle_arena.js'), 'utf8');
+
+    const mockDoc = {
+      getElementById: () => null,
+      querySelector: () => null,
+      querySelectorAll: () => [],
+      createElement: () => ({ style: {}, classList: { add() {}, remove() {} }, innerHTML: '', querySelectorAll: () => [], querySelector: () => null }),
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      body: { appendChild() {} }
+    };
+
+    const globalObj = {
+      console, Math, parseInt, Date, Array, Object, String, Number, Boolean, RegExp,
+      setTimeout: (fn) => fn(), clearTimeout: () => {},
+      document: mockDoc,
+      window: { location: { origin: 'http://localhost' }, addEventListener: () => {} }
+    };
+    globalObj.window.document = mockDoc;
+
+    const fn = new Function('window', 'document', 'DuelState', arenaCode + '\nreturn window.BattleArena;');
+    const sandboxDuelState = {
+      phases: ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'],
+      phaseIndex: 5, // ATTACK step
+      activePlayer: 'player',
+      player: { count: 0, field: [], soulCoreLocation: 'field' }
+    };
+    const BattleArena = fn(globalObj.window, mockDoc, sandboxDuelState);
+    const { getCardAdventRequirement, getEligibleAdventTargets, hasFlashTiming } = BattleArena;
+
+    const lordJavad = {
+      uid: 'sd65_003_test',
+      name: 'The Ruler of FourDemonLords Lord-Javad',
+      card_number: 'SD65-003',
+      type: 'Ultimate',
+      cost: 6,
+      family: 'Hell Contract',
+      effect: 'Flash - [Contract Advent: Hell Contract & C3 or more, (Either Attack Step)]\nBy sending your [Soul Core] to the Trash, stack this from the Hand onto your target Ultimate.'
+    };
+
+    const partnerJavad = {
+      uid: 'javad_partner',
+      name: 'The PartnerDemonLord Javad',
+      card_number: 'SD65-CX01',
+      type: 'Contract Ultimate',
+      family: 'Hell Contract',
+      families: ['Hell Contract', 'Evil God']
+    };
+
+    it('SD65-003 parses Contract Advent requirement correctly without treating timing as family', () => {
+      const req = getCardAdventRequirement(lordJavad);
+      assert.ok(req, 'Requirement must be parsed');
+      assert.equal(req.isContractAdvent, true);
+      assert.equal(req.minCount, 3, 'Requires Count 3 or more');
+      assert.equal(req.timing, 'either_attack_step');
+      assert.deepEqual(req.families, ['Hell Contract'], 'Families should only contain Hell Contract, not timing string');
+    });
+
+    it('SD65-003 is recognized as having Flash timing during Attack Step', () => {
+      assert.equal(hasFlashTiming(lordJavad), true, 'Contract Advent card has Flash timing');
+    });
+
+    it('SD65-003 fails advent target check when player Count is 0 (below C3)', () => {
+      globalObj.window.DuelState.player.count = 0;
+      const req = getCardAdventRequirement(lordJavad);
+      const targets = getEligibleAdventTargets(req, [partnerJavad], 'player');
+      assert.equal(targets.length, 0, 'Cannot advent when Count < 3');
+    });
+
+    it('SD65-003 successfully targets PartnerDemonLord Javad when player Count is 3 or more', () => {
+      globalObj.window.DuelState.player.count = 3;
+      const req = getCardAdventRequirement(lordJavad);
+      const targets = getEligibleAdventTargets(req, [partnerJavad], 'player');
+      assert.equal(targets.length, 1, 'Partner Javad is an eligible target at Count 3');
+      assert.equal(targets[0].uid, partnerJavad.uid);
     });
   });
 
