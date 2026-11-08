@@ -184,31 +184,70 @@ const server = http.createServer((req, res) => {
 
   // /api/featured-x-rares
   if (pathname.toLowerCase() === '/api/featured-x-rares') {
-    try {
-      const raw = fs.readFileSync(path.join(__dirname, 'featured_x_rares.json'), 'utf8');
-      cachedFeaturedXRares = JSON.parse(raw);
-    } catch (e) {
-      if (!cachedFeaturedXRares) cachedFeaturedXRares = { cards: [], by_color: {} };
-    }
     const color = parsedUrl.searchParams.get('color');
     let cards = [];
-    if (color && cachedFeaturedXRares.by_color) {
-      const capColor = color.charAt(0).toUpperCase() + color.slice(1).toLowerCase();
-      const pool = cachedFeaturedXRares.by_color[capColor] || [];
-      cards = [...pool].sort(() => Math.random() - 0.5).slice(0, 20);
-    } else if (cachedFeaturedXRares.by_color) {
-      // Pick a balanced, randomized mix across all 6 colors (4 per color = 24 cards)
-      const colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
-      colors.forEach(col => {
-        const pool = cachedFeaturedXRares.by_color[col] || [];
-        const sample = [...pool].sort(() => Math.random() - 0.5).slice(0, 4);
-        cards.push(...sample);
-      });
-      cards = cards.sort(() => Math.random() - 0.5);
-    } else {
-      const pool = cachedFeaturedXRares.cards || [];
-      cards = [...pool].sort(() => Math.random() - 0.5).slice(0, 24);
+    if (serverDb) {
+      try {
+        const colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+        let targetColors = colors;
+        let perColor = 4;
+        if (color && colors.map(c => c.toLowerCase()).includes(color.toLowerCase())) {
+          targetColors = [color.charAt(0).toUpperCase() + color.slice(1).toLowerCase()];
+          perColor = 18;
+        }
+        for (const col of targetColors) {
+          const stmt = serverDb.prepare(`
+            SELECT name, cost, color, type, family, rarity, image_url, card_number, effect, levels
+            FROM cards
+            WHERE color = ?
+              AND LOWER(type) = 'spirit'
+              AND cost >= 8
+              AND image_url IS NOT NULL AND image_url != ''
+            ORDER BY RANDOM() LIMIT ?
+          `);
+          const rows = stmt.all(col, perColor);
+          for (const row of rows) {
+            if (row.levels && typeof row.levels === 'string') {
+              try { row.levels = JSON.parse(row.levels); } catch(e) {}
+            }
+            if (row.image_url && row.image_url.includes('static.wikia.nocookie.net') && row.image_url.includes('/revision/latest')) {
+              row.image_url = row.image_url.split('/revision/latest')[0];
+            }
+            cards.push(row);
+          }
+        }
+        cards = cards.sort(() => Math.random() - 0.5);
+      } catch (e) {
+        console.warn('[Server] Error querying live featured spirits:', e.message);
+      }
     }
+
+    if (!cards || !cards.length) {
+      try {
+        const raw = fs.readFileSync(path.join(__dirname, 'featured_x_rares.json'), 'utf8');
+        cachedFeaturedXRares = JSON.parse(raw);
+      } catch (e) {
+        if (!cachedFeaturedXRares) cachedFeaturedXRares = { cards: [], by_color: {} };
+      }
+      if (color && cachedFeaturedXRares.by_color) {
+        const capColor = color.charAt(0).toUpperCase() + color.slice(1).toLowerCase();
+        const pool = cachedFeaturedXRares.by_color[capColor] || [];
+        cards = [...pool].sort(() => Math.random() - 0.5).slice(0, 20);
+      } else if (cachedFeaturedXRares.by_color) {
+        // Pick a balanced, randomized mix across all 6 colors (4 per color = 24 cards)
+        const colors = ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+        colors.forEach(col => {
+          const pool = cachedFeaturedXRares.by_color[col] || [];
+          const sample = [...pool].sort(() => Math.random() - 0.5).slice(0, 4);
+          cards.push(...sample);
+        });
+        cards = cards.sort(() => Math.random() - 0.5);
+      } else {
+        const pool = cachedFeaturedXRares.cards || [];
+        cards = [...pool].sort(() => Math.random() - 0.5).slice(0, 24);
+      }
+    }
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ cards }));
     return;

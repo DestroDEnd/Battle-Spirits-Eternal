@@ -2723,6 +2723,7 @@ if (typeof globalThis !== 'undefined') {
           type: 'END_ATTACK_STEP',
           source: 'Clear Wall'
         });
+        duelState.endAttackStepAtEndOfBattle = true;
         audio(ctx, 'magic');
         log(ctx, `🛡️ **[CLEAR WALL: Flash]**: Attack Step will end at end of battle!`, 'magic');
         render(ctx);
@@ -2967,6 +2968,422 @@ if (typeof globalThis !== 'undefined') {
           log(ctx, `💖 **[ROMANCIA DREAM: Flash]**: Returned ${target.name || 'opposing spirit'} to Hand!`, 'magic');
           render(ctx);
         }
+      }
+    }
+  });
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // SOUL DRIVE ULTIMATE REGISTRY
+  // ══════════════════════════════════════════════════════════════════════════
+
+  // 1. The SengokuSixGeneral Mudou (BS33-X02 & BS74-AX01)
+  const mudouSoulDriveHandler = {
+    name: 'The SengokuSixGeneral Mudou',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { card, side, duelState, arenaApi } = ctx;
+        const enemySide = side === 'player' ? 'opponent' : 'player';
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        const level = card.currentLevel || 3;
+        const coresToVoid = level * 2; // Lv3: 6 cores, Lv4: 8 cores
+        let removed = 0;
+
+        // Remove from opposing Spirits/Ultimates first
+        const enemyUnits = enemyState.field || [];
+        for (const unit of [...enemyUnits]) {
+          if (removed >= coresToVoid) break;
+          const available = unit.currentCores || unit.cores || 1;
+          const take = Math.min(available, coresToVoid - removed);
+          if (take > 0) {
+            unit.currentCores = Math.max(0, (unit.currentCores || 1) - take);
+            removed += take;
+            if (unit.currentCores === 0) {
+              const idx = enemyUnits.findIndex(u => u.uid === unit.uid);
+              if (idx !== -1) {
+                const dest = enemyUnits.splice(idx, 1)[0];
+                if (arenaApi && typeof arenaApi.sendToTrash === 'function') {
+                  arenaApi.sendToTrash(dest, enemySide, 'Depleted to 0 cores by Mudou [Soul Drive]');
+                }
+              }
+            }
+          }
+        }
+
+        // Remove remaining quota from opposing Trash to Void
+        if (removed < coresToVoid && enemyState.trash > 0) {
+          const fromTrash = Math.min(enemyState.trash, coresToVoid - removed);
+          enemyState.trash -= fromTrash;
+          removed += fromTrash;
+        }
+
+        audio(ctx, 'dark');
+        log(ctx, `💀 **[MUDOU: SOUL DRIVE]**: Banished ${removed} cores from opposing field/trash to the Void! (Lv${level}: Target was ${coresToVoid} cores)`, 'damage');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('BS33-X02', mudouSoulDriveHandler);
+  PerCardRegistry.registerCard('BS74-AX01', mudouSoulDriveHandler);
+
+  // 2. The Hellflame FourDemonLord Bram-Zand (SD36-X01 & BRAM-ZAND)
+  const bramZandSoulDriveHandler = {
+    name: 'The Hellflame FourDemonLord Bram-Zand',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState, arenaApi } = ctx;
+        const enemySide = side === 'player' ? 'opponent' : 'player';
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let remainingBp = 100000;
+        let destroyedCount = 0;
+        const enemyUnits = [...(enemyState.field || [])].sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+        for (const unit of enemyUnits) {
+          const bp = unit.currentBp || 5000;
+          if (bp <= remainingBp) {
+            remainingBp -= bp;
+            destroyedCount++;
+            const idx = enemyState.field.findIndex(u => u.uid === unit.uid);
+            if (idx !== -1) {
+              const dest = enemyState.field.splice(idx, 1)[0];
+              if (arenaApi && typeof arenaApi.recycleSpiritCoresToReserve === 'function') {
+                arenaApi.recycleSpiritCoresToReserve(dest, enemySide);
+              }
+              if (arenaApi && typeof arenaApi.sendToTrash === 'function') {
+                arenaApi.sendToTrash(dest, enemySide, `Destroyed by Bram-Zand [Soul Drive] (${bp} BP)`);
+              }
+            }
+          }
+        }
+        const lifeDamage = Math.min(2, enemyState.life);
+        enemyState.life = Math.max(0, enemyState.life - lifeDamage);
+        audio(ctx, 'destroy');
+        log(ctx, `💥 **[BRAM-ZAND: SOUL DRIVE]**: Destroyed ${destroyedCount} opposing unit(s) and banished ${lifeDamage} opposing Life to the Void! (Opponent Life: ${enemyState.life})`, 'damage');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('SD36-X01', bramZandSoulDriveHandler);
+  PerCardRegistry.registerCard('BRAM-ZAND', bramZandSoulDriveHandler);
+
+  // 3. The SengokuSixGeneral Senryuukaku (BS33-X04)
+  PerCardRegistry.registerCard('BS33-X04', {
+    name: 'The SengokuSixGeneral Senryuukaku',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        const friendlyState = side === 'player' ? duelState.player : duelState.opponent;
+        let totalSent = 0;
+        for (const unit of (enemyState.field || [])) {
+          unit.isExhausted = true;
+          const take = Math.min(2, unit.currentCores || 1);
+          unit.currentCores = Math.max(0, (unit.currentCores || 1) - take);
+          totalSent += take;
+        }
+        for (const unit of (friendlyState.field || [])) {
+          unit.isExhausted = false;
+        }
+        audio(ctx, 'refresh');
+        log(ctx, `🌪️ **[SENRYUUKAKU: SOUL DRIVE]**: Exhausted all opposing units, sent ${totalSent} cores to Void, and refreshed all allies!`, 'magic');
+        render(ctx);
+      }
+    }
+  });
+
+  // 4. The SengokuSixGeneral Tensei (BS33-029)
+  PerCardRegistry.registerCard('BS33-029', {
+    name: 'The SengokuSixGeneral Tensei',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let coresSent = 0;
+        for (const unit of (enemyState.field || [])) {
+          if (unit.isExhausted && unit.currentCores > 0) {
+            coresSent += unit.currentCores;
+            enemyState.trash += unit.currentCores;
+            unit.currentCores = 0;
+          }
+        }
+        enemyState.field = (enemyState.field || []).filter(u => u.currentCores > 0);
+        audio(ctx, 'magic');
+        log(ctx, `⚡ **[TENSEI: SOUL DRIVE]**: Sent ${coresSent} cores on all opposing exhausted units to Trash!`, 'magic');
+        render(ctx);
+      }
+    }
+  });
+
+  // 5. The SengokuSixGeneral Bakelkatze (BS33-049)
+  PerCardRegistry.registerCard('BS33-049', {
+    name: 'The SengokuSixGeneral Bakelkatze',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { duelState } = ctx;
+        duelState.opponentAttackLockedUntilTurn = duelState.turn + 1;
+        audio(ctx, 'shield');
+        log(ctx, `🛡️ **[BAKELKATZE: SOUL DRIVE]**: Opponent cannot declare attacks or use Magic/Brave effects until your next End Step!`, 'magic');
+        render(ctx);
+      }
+    }
+  });
+
+  // 6. The SengokuSixGeneral LeonLancer (BS34-CP07 & BS74-X12)
+  const leonLancerSoulDriveHandler = {
+    name: 'The SengokuSixGeneral LeonLancer',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        const toBottom = [];
+        enemyState.field = (enemyState.field || []).filter(unit => {
+          const syms = unit.symbols ? unit.symbols.length : 1;
+          if (syms <= 2) {
+            toBottom.push(unit);
+            return false;
+          }
+          return true;
+        });
+        if (!enemyState.deck) enemyState.deck = [];
+        for (const u of toBottom) {
+          enemyState.deck.push(u);
+        }
+        audio(ctx, 'bounce');
+        log(ctx, `⚔️ **[LEONLANCER: SOUL DRIVE]**: Bottom-decked ${toBottom.length} opposing unit(s) with 2 or fewer symbols!`, 'step');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('BS34-CP07', leonLancerSoulDriveHandler);
+  PerCardRegistry.registerCard('BS74-X12', leonLancerSoulDriveHandler);
+
+  // 7. The SengokuSixGeneral Tidal-Blue (BATTLE-SPIRITS-A12187)
+  PerCardRegistry.registerCard('BATTLE-SPIRITS-A12187', {
+    name: 'The SengokuSixGeneral Tidal-Blue',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let discarded = 0;
+        if (!enemyState.trashCards) enemyState.trashCards = [];
+        while (enemyState.deck && enemyState.deck.length > 5) {
+          const c = enemyState.deck.shift();
+          if (c) {
+            enemyState.trashCards.push(c);
+            discarded++;
+          }
+        }
+        audio(ctx, 'mill');
+        log(ctx, `🌊 **[TIDAL-BLUE: SOUL DRIVE]**: Discarded ${discarded} cards from opposing deck until 5 cards remained!`, 'damage');
+        render(ctx);
+      }
+    }
+  });
+
+  // 8. The Hellsea FourDemonLord Ill-Immersio (SD36-X04 & IL-IMARJO)
+  const illImmersioSoulDriveHandler = {
+    name: 'The Hellsea FourDemonLord Ill-Immersio',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const friendlyState = side === 'player' ? duelState.player : duelState.opponent;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        const millCount = (friendlyState.life || 1) * 5;
+        let milled = 0;
+        if (!enemyState.trashCards) enemyState.trashCards = [];
+        for (let i = 0; i < millCount && enemyState.deck && enemyState.deck.length > 0; i++) {
+          const c = enemyState.deck.shift();
+          if (c) {
+            enemyState.trashCards.push(c);
+            milled++;
+          }
+        }
+        audio(ctx, 'mill');
+        log(ctx, `🌊 **[ILL-IMMERSIO: SOUL DRIVE]**: Milled ${milled} cards (${friendlyState.life} Life x 5) from opposing deck!`, 'damage');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('SD36-X04', illImmersioSoulDriveHandler);
+  PerCardRegistry.registerCard('IL-IMARJO', illImmersioSoulDriveHandler);
+
+  // 9. The Hellwind FourDemonLord Vandiel (SD36-X02 & BATTLE-SPIRITS-A10766)
+  const vandielSoulDriveHandler = {
+    name: 'The Hellwind FourDemonLord Vandiel',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let totalSent = 0;
+        for (const unit of (enemyState.field || [])) {
+          if (unit.isExhausted) {
+            const take = Math.min(2, unit.currentCores || 1);
+            unit.currentCores = Math.max(0, (unit.currentCores || 1) - take);
+            totalSent += take;
+          }
+        }
+        audio(ctx, 'magic');
+        log(ctx, `🌪️ **[VANDIEL: SOUL DRIVE]**: Sent ${totalSent} cores from opposing rested units to the Void!`, 'magic');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('SD36-X02', vandielSoulDriveHandler);
+  PerCardRegistry.registerCard('BATTLE-SPIRITS-A10766', vandielSoulDriveHandler);
+
+  // 10. The SengokuDragonGod Tenkafubu (BS34-XX01 & BATTLE-SPIRITS-A12227)
+  const tenkafubuSoulDriveHandler = {
+    name: 'The SengokuDragonGod Tenkafubu',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { duelState } = ctx;
+        duelState.opposingEffectsNegatedUntilEnd = true;
+        audio(ctx, 'warning');
+        log(ctx, `🔥 **[TENKAFUBU: SOUL DRIVE]**: All opposing cards in hand and field lose their effects and cannot activate effects until end of turn!`, 'warning');
+        render(ctx);
+      }
+    }
+  };
+  PerCardRegistry.registerCard('BS34-XX01', tenkafubuSoulDriveHandler);
+  PerCardRegistry.registerCard('BATTLE-SPIRITS-A12227', tenkafubuSoulDriveHandler);
+
+  // 11. The SengokuSnakeGeneral Ultimate-Asklepiooze (BS46-10THX03)
+  PerCardRegistry.registerCard('BS46-10THX03', {
+    name: 'The SengokuSnakeGeneral Ultimate-Asklepiooze',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let totalSent = 0;
+        for (const unit of (enemyState.field || [])) {
+          const take = Math.min(3, unit.currentCores || 1);
+          unit.currentCores = Math.max(0, (unit.currentCores || 1) - take);
+          totalSent += take;
+        }
+        audio(ctx, 'destroy');
+        log(ctx, `🐍 **[ASKLEPIOOZE: SOUL DRIVE]**: Sent ${totalSent} cores from opposing units to the Void!`, 'damage');
+        render(ctx);
+      }
+    }
+  });
+
+  // 12. The Hellflame Duke Bram-Zand-Noir (P16-21)
+  PerCardRegistry.registerCard('P16-21', {
+    name: 'The Hellflame Duke Bram-Zand-Noir',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let coresSent = 0;
+        for (const unit of (enemyState.field || [])) {
+          const take = Math.min(2, unit.currentCores || 1);
+          unit.currentCores = Math.max(0, (unit.currentCores || 1) - take);
+          enemyState.trash += take;
+          coresSent += take;
+        }
+        audio(ctx, 'destroy');
+        log(ctx, `🔥 **[BRAM-ZAND-NOIR: SOUL DRIVE]**: Sent ${coresSent} cores from opposing units to Trash! Opponent cannot return cores from Trash on next Refresh Step.`, 'damage');
+        render(ctx);
+      }
+    }
+  });
+
+  // 13. The HellsoilSorcerer Denial (BS38-051)
+  PerCardRegistry.registerCard('BS38-051', {
+    name: 'The HellsoilSorcerer Denial',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const enemyState = side === 'player' ? duelState.opponent : duelState.player;
+        let coresMoved = 0;
+        if (enemyState.field && enemyState.field.length > 0) {
+          const target = enemyState.field[0];
+          coresMoved = target.currentCores || 1;
+          target.currentCores = 0;
+          enemyState.reserve = (enemyState.reserve || 0) + coresMoved;
+          enemyState.field = enemyState.field.filter(u => u.currentCores > 0);
+        }
+        audio(ctx, 'magic');
+        log(ctx, `💀 **[DENIAL: SOUL DRIVE]**: Sent ${coresMoved} cores from opposing unit to Reserve!`, 'magic');
+        render(ctx);
+      }
+    }
+  });
+
+  // 14. Senryuukaku-Kagetora (P15-21)
+  PerCardRegistry.registerCard('P15-21', {
+    name: 'Senryuukaku-Kagetora',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { card } = ctx;
+        card.unblockable = true;
+        audio(ctx, 'buff');
+        log(ctx, `🌪️ **[KAGETORA: SOUL DRIVE]**: This Ultimate cannot be blocked for this battle!`, 'buff');
+        render(ctx);
+      }
+    }
+  });
+
+  // 15. The DarkKnight Dusk Dragon (BATTLE-SPIRITS-A9226)
+  PerCardRegistry.registerCard('BATTLE-SPIRITS-A9226', {
+    name: 'The DarkKnight Dusk Dragon',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const friendlyState = side === 'player' ? duelState.player : duelState.opponent;
+        let refreshedCount = 0;
+        for (const u of (friendlyState.field || [])) {
+          if (u.type === 'Ultimate' && u.isExhausted) {
+            u.isExhausted = false;
+            refreshedCount++;
+          }
+        }
+        audio(ctx, 'refresh');
+        log(ctx, `⚔️ **[DUSK DRAGON: SOUL DRIVE]**: Refreshed ${refreshedCount} friendly Ultimates!`, 'step');
+        render(ctx);
+      }
+    }
+  });
+
+  // 16. Unmasked Antarc (P15-15)
+  PerCardRegistry.registerCard('P15-15', {
+    name: 'Unmasked Antarc',
+    cardType: 'Ultimate',
+    triggers: {
+      SOUL_DRIVE: function(ctx) {
+        const { side, duelState } = ctx;
+        const friendlyState = side === 'player' ? duelState.player : duelState.opponent;
+        let summoned = 0;
+        if (friendlyState.deck && friendlyState.deck.length > 0) {
+          const revealed = friendlyState.deck.splice(0, Math.min(20, friendlyState.deck.length));
+          for (const c of revealed) {
+            const fam = Array.isArray(c.family) ? c.family.join(' ') : (c.family || '');
+            if (c.type === 'Spirit' && /Investigator/i.test(fam)) {
+              c.currentCores = 1;
+              friendlyState.field.push(c);
+              summoned++;
+            } else {
+              if (!friendlyState.trashCards) friendlyState.trashCards = [];
+              friendlyState.trashCards.push(c);
+            }
+          }
+        }
+        audio(ctx, 'summon');
+        log(ctx, `🕵️ **[ANTARC: SOUL DRIVE]**: Revealed top 20 cards and summoned ${summoned} Investigator Spirit(s) without paying cost!`, 'step');
+        render(ctx);
       }
     }
   });

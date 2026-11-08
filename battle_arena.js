@@ -10,6 +10,67 @@
   const FALLBACK_CARD_ART = (typeof window !== 'undefined' && window.FALLBACK_CARD_ART) ? window.FALLBACK_CARD_ART : "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='210' height='300' viewBox='0 0 210 300'><rect width='210' height='300' rx='10' fill='%23111827'/><rect x='8' y='8' width='194' height='284' rx='6' fill='%231f2937' stroke='%23374151' stroke-width='2'/><circle cx='105' cy='140' r='40' fill='%23374151'/><text x='105' y='148' font-family='sans-serif' font-size='28' fill='%239ca3af' text-anchor='middle'>⚔️</text><text x='105' y='210' font-family='sans-serif' font-size='12' font-weight='bold' fill='%236b7280' text-anchor='middle'>BATTLE SPIRITS</text></svg>";
 
 
+  // ── COMBAT VISUAL FEEDBACK (Screen Shake & Floating Combat Text) ──
+  function triggerScreenShake() {
+    if (typeof document === 'undefined') return;
+    const board = document.getElementById('arenaBoard') || document.body;
+    if (!board) return;
+    board.classList.remove('shake-screen');
+    void board.offsetWidth;
+    board.classList.add('shake-screen');
+    setTimeout(() => board.classList.remove('shake-screen'), 450);
+  }
+
+  function spawnFloatingCombatText(target, text, type = 'damage') {
+    if (typeof document === 'undefined') return;
+    let container = document.getElementById('combatFloatContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'combatFloatContainer';
+      container.className = 'combat-float-container';
+      document.body.appendChild(container);
+    }
+
+    let posX = (typeof window !== 'undefined' ? window.innerWidth : 800) / 2;
+    let posY = (typeof window !== 'undefined' ? window.innerHeight : 600) / 2;
+
+    if (target === 'player' || target === 'playerLife') {
+      const el = document.getElementById('playerLifeZone') || document.querySelector('.player-life');
+      if (el && typeof el.getBoundingClientRect === 'function') {
+        const r = el.getBoundingClientRect();
+        posX = r.left + r.width / 2;
+        posY = r.top + r.height / 2;
+      } else {
+        posY = (typeof window !== 'undefined' ? window.innerHeight : 600) * 0.75;
+      }
+    } else if (target === 'opponent' || target === 'opponentLife') {
+      const el = document.getElementById('opponentLifeZone') || document.querySelector('.opp-life');
+      if (el && typeof el.getBoundingClientRect === 'function') {
+        const r = el.getBoundingClientRect();
+        posX = r.left + r.width / 2;
+        posY = r.top + r.height / 2;
+      } else {
+        posY = (typeof window !== 'undefined' ? window.innerHeight : 600) * 0.25;
+      }
+    } else if (target && typeof target.getBoundingClientRect === 'function') {
+      const r = target.getBoundingClientRect();
+      posX = r.left + r.width / 2;
+      posY = r.top + r.height / 2;
+    }
+
+    const el = document.createElement('div');
+    el.className = `combat-float-text type-${type}`;
+    el.textContent = text;
+    const jitterX = (Math.random() - 0.5) * 40;
+    el.style.left = `${posX + jitterX}px`;
+    el.style.top = `${posY}px`;
+
+    container.appendChild(el);
+    setTimeout(() => {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }, 1150);
+  }
+
   // ── SOUND FX SYNTHESIS (Zero External Audio Files) ──
   const _RawAudioFX = {
     ctx: null,
@@ -76,6 +137,11 @@
       this.init();
       this.playTone(120, 'sawtooth', 0.3, 0.18);
       setTimeout(() => this.playTone(90, 'sawtooth', 0.4, 0.15), 100);
+      try {
+        triggerScreenShake();
+        const side = (typeof DuelState !== 'undefined' && DuelState.activePlayer === 'player') ? 'opponent' : 'player';
+        spawnFloatingCombatText(side, '-1 LIFE 💔', 'damage');
+      } catch (e) {}
     },
     burstIgnite() {
       this.init();
@@ -806,6 +872,11 @@
 
   // ── SAFE END OPPONENT TURN HELPER (Guarantees turn is NEVER ended on player's behalf) ──
   function safeEndOpponentTurn(delay = 800) {
+    const endIdx = DuelState.phases ? DuelState.phases.indexOf('END') : 6;
+    DuelState.phaseIndex = (endIdx !== -1 ? endIdx : 6);
+    if (typeof renderPhaseIndicator === 'function') renderPhaseIndicator();
+    else if (typeof renderStepNavigator === 'function') renderStepNavigator();
+    if (typeof renderDuelTable === 'function') renderDuelTable();
     safeTimeout(() => {
       if (DuelState.activePlayer === 'opponent') {
         endTurn();
@@ -1159,7 +1230,7 @@
   }
 
   function askOptionalEffect(card, description, onYes, onNo) {
-    if (typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function') {
+    if (typeof document === 'undefined' || !document.body || typeof document.createElement !== 'function' || (typeof window !== 'undefined' && window.__headlessTest)) {
       if (onYes) onYes();
       return;
     }
@@ -1193,8 +1264,8 @@
       } catch (e) { console.error(e); }
       pumpOptionalQueue();
     };
-    const yesBtn = box.querySelector('[data-opt="yes"]');
-    const noBtn = box.querySelector('[data-opt="no"]');
+    const yesBtn = typeof box.querySelector === 'function' ? box.querySelector('[data-opt="yes"]') : null;
+    const noBtn = typeof box.querySelector === 'function' ? box.querySelector('[data-opt="no"]') : null;
     if (!yesBtn || !noBtn) {
       // No usable DOM (headless / mocked environment): resolve automatically.
       _optBusy = false;
@@ -2078,6 +2149,170 @@
     renderDuelTable();
   }
   const executeUltimateTrigger = triggerUTrigger;
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // SOUL DRIVE ENGINE (RULE 8.4)
+  // ══════════════════════════════════════════════════════════════════════════
+
+  function hasSoulDriveKeyword(card) {
+    if (!card || !card.effect) return false;
+    const isUlt = card.type === 'Ultimate' || (typeof card.type === 'string' && card.type.includes('Ultimate'));
+    if (!isUlt) return false;
+    return /(?:\[\s*)?soul\s*drive(?:\])?|【ソウルドライブ】/i.test(card.effect);
+  }
+
+  function canActivateSoulDrive(card, side = 'player') {
+    if (!card || !hasSoulDriveKeyword(card)) {
+      return { allowed: false, reason: 'Not an Ultimate with Soul Drive' };
+    }
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+    if (friendlyState.soulDriveUsed) {
+      return { allowed: false, reason: 'Already activated Soul Drive this game (Once per Game)' };
+    }
+
+    // Denial can use Soul Core from Reserve
+    const isDenial = (card.card_number === 'BS38-051') || (card.name || '').includes('Denial');
+    if (isDenial) {
+      const scInReserve = friendlyState.soulCoreLocation === 'reserve';
+      const scOnCard = (card.hasSoulCore === true) ||
+        (card.cores && card.cores.soul > 0) ||
+        (friendlyState.soulCoreSpiritUid === card.uid && friendlyState.soulCoreLocation === 'field');
+      if (!scInReserve && !scOnCard) {
+        return { allowed: false, reason: 'Requires Soul Core in Reserve or on this Ultimate' };
+      }
+    } else {
+      if (card.hasSoulCore === false) {
+        return { allowed: false, reason: 'Soul Core must be placed on this Ultimate' };
+      }
+      const scOnCard = (card.hasSoulCore === true) ||
+        (card.cores && card.cores.soul > 0) ||
+        (friendlyState.soulCoreSpiritUid === card.uid && friendlyState.soulCoreLocation === 'field');
+      if (!scOnCard) {
+        return { allowed: false, reason: 'Soul Core must be placed on this Ultimate' };
+      }
+    }
+    return { allowed: true };
+  }
+
+  function hasSoulDrive(card, side = 'player') {
+    return canActivateSoulDrive(card, side).allowed;
+  }
+
+  function getSoulDriveEffectDescription(card) {
+    if (!card || !card.effect) return 'Banishes your Soul Core to the Void to unleash devastating effects.';
+    const m = card.effect.match(/(?:\[\s*)?soul\s*drive(?:\])?\s*([\s\S]*?)(?=\n\n|\[LV|\(When|$)/i);
+    return m ? m[1].trim() : 'Banishes your Soul Core from the game to the Void.';
+  }
+
+  function executeSoulDriveAction(attacker, side = 'player') {
+    const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
+
+    // 1. Permanently banish Soul Core to Void!
+    friendlyState.soulDriveUsed = true;
+    friendlyState.soulCoreLocation = 'void';
+    friendlyState.soulCoreSpiritUid = null;
+    attacker.hasSoulCore = false;
+    if (attacker.cores) attacker.cores.soul = 0;
+    recalculateSpiritBp(attacker);
+
+    AudioFX.soulCoreIgnite();
+    addLog(`🔥 **[SOUL DRIVE ACTIVATED]**: "${attacker.name}" banished the Soul Core from the game to the Void! (Once per Game)`, 'warning');
+    if (typeof showToast === 'function') showToast(`🔥 [SOUL DRIVE] Soul Core banished to Void!`, 'warning');
+
+    // 2. Resolve specific Soul Drive effect via PerCardRegistry or fallback
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    const cNum = attacker.card_number || attacker.cardNumber || attacker.id;
+    let handled = false;
+    if (pRegistry && cNum && pRegistry.has(cNum, 'SOUL_DRIVE')) {
+      pRegistry.execute(cNum, 'SOUL_DRIVE', {
+        card: attacker,
+        sourceCard: attacker,
+        side,
+        duelState: DuelState,
+        arenaApi: window.BattleArena
+      });
+      handled = true;
+    }
+
+    if (!handled) {
+      // Fallback: extract Soul Drive text block and execute
+      const m = attacker.effect.match(/(?:\[\s*)?soul\s*drive(?:\])?\s*([\s\S]*?)(?=\n\n|\[LV|\(When|$)/i);
+      const sdText = m ? m[1].trim() : attacker.effect;
+      executeAbilityActions(sdText, attacker, side, 'SOUL_DRIVE');
+    }
+
+    renderDuelTable();
+  }
+
+  function activateSoulDrive(unitUid, side = 'player') {
+    const isPlayer = (side === 'player');
+    const friendlyState = isPlayer ? DuelState.player : DuelState.opponent;
+    const unit = (friendlyState.field || []).find(u => u.uid === unitUid);
+    if (!unit) {
+      if (typeof showToast === 'function') showToast('Ultimate not found on field!', 'error');
+      return;
+    }
+    const check = canActivateSoulDrive(unit, side);
+    if (!check.allowed) {
+      if (typeof showToast === 'function') showToast(`Cannot activate Soul Drive: ${check.reason}`, 'warning');
+      return;
+    }
+
+    if (!isPlayer) {
+      executeSoulDriveAction(unit, 'opponent');
+      return;
+    }
+
+    const desc = getSoulDriveEffectDescription(unit);
+    promptChoiceModal({
+      card: unit,
+      side: 'player',
+      title: '🔥 [SOUL DRIVE] Activation Confirmation',
+      description: `"${unit.name}" is ready to unleash [Soul Drive]!\n\n⚠️ Official Rule: Activating Soul Drive will BANISH your Soul Core from the game to the Void. It cannot be refreshed or retrieved for the remainder of this duel! Soul Drive can only be activated ONCE PER GAME!\n\n${desc}`,
+      choices: [
+        { text: '🔥 Banish Soul Core & Unleash Soul Drive', value: 'activate' },
+        { text: 'Cancel', value: 'cancel' }
+      ]
+    }, (choiceIdx) => {
+      if (choiceIdx === 0) {
+        executeSoulDriveAction(unit, 'player');
+      } else {
+        addLog(`ℹ️ [Soul Drive]: Cancelled Soul Drive activation.`, 'info');
+      }
+    });
+  }
+
+  function checkSoulDriveActivation(attacker, side = 'player', onDone) {
+    if (!hasSoulDrive(attacker, side)) {
+      if (typeof onDone === 'function') onDone();
+      return;
+    }
+
+    if (side !== 'player') {
+      executeSoulDriveAction(attacker, 'opponent');
+      if (typeof onDone === 'function') onDone();
+      return;
+    }
+
+    const desc = getSoulDriveEffectDescription(attacker);
+    promptChoiceModal({
+      card: attacker,
+      side: 'player',
+      title: '🔥 [SOUL DRIVE] Activation Prompt',
+      description: `"${attacker.name}" possesses the Soul Core!\n\nDo you want to activate [Soul Drive]?\n\n⚠️ Official Rule: Activating Soul Drive will BANISH your Soul Core from the game to the Void. It cannot be refreshed or used for the rest of the duel, and Soul Drive can only be activated ONCE PER GAME!\n\n${desc}`,
+      choices: [
+        { text: '🔥 Banish Soul Core & Activate Soul Drive', value: 'activate' },
+        { text: 'Skip (Attack Normally)', value: 'skip' }
+      ]
+    }, (choiceIdx) => {
+      if (choiceIdx === 0) {
+        executeSoulDriveAction(attacker, 'player');
+      } else {
+        addLog(`ℹ️ [Soul Drive]: Skipped Soul Drive activation. Attacking normally.`, 'info');
+      }
+      if (typeof onDone === 'function') onDone();
+    });
+  }
 const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY ARMOR', 'DAMAGE_CAP', 'GRANT_SYMBOL', 'HAND_DISCARD_DRAW', 'HAND_DISCARD']);
 
   function promptHandDiscardModal(card, side, maxDiscard, nameFilter, upTo, onConfirm) {
@@ -5005,6 +5240,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       activeBuffsBadge += `<div class="spirit-bpbuff-badge" title="Active BP Boost">+${totalBuff} BP</div>`;
     }
 
+    let soulDriveFieldActionBtn = '';
+    if (isPlayer && hasSoulDriveKeyword(spirit) && !DuelState.player.soulDriveUsed) {
+      const canSd = canActivateSoulDrive(spirit, 'player');
+      soulDriveFieldActionBtn = `<button class="fsc-souldrive-btn ${canSd.allowed ? 'ready' : 'disabled'}" onclick="event.stopPropagation(); BattleArena.activateSoulDrive('${spirit.uid}', 'player')" title="${canSd.allowed ? '🔥 Activate [Soul Drive] (Once per Game)' : (canSd.reason || 'Soul Drive Unavailable')}">🔥 SOUL DRIVE</button>`;
+    }
+
     return `
       <div class="${classes}" id="spirit_${spirit.uid}" ${dragAttrs} onclick="BattleArena.handleSpiritClick('${spirit.uid}', '${side}')">
         ${dragHandleHtml}
@@ -5023,6 +5264,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         </div>
         <div class="fsc-name" title="${spirit.name}">${spirit.name}</div>
         <div class="fsc-status-pill" ${!canUnitAttack(spirit) && !spirit.isExhausted ? 'title="Rule 7.2: Uncombined Brave cannot attack or block"' : ''}>${spirit.isExhausted ? 'EXHAUSTED' : (!canUnitAttack(spirit) ? 'BRAVE (NO ATTACK)' : 'READY')}</div>
+        ${soulDriveFieldActionBtn}
         ${braveFieldActionBtn}
         ${soulCoreActionBtn}
         ${reorderButtonsHtml}
@@ -5428,15 +5670,24 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       return { allowed: true, condText };
     }
 
-    // 6. Color-specific Spirits
-    const colorMatch = cl.match(/(?:have|control)\s+(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+spirit/i) ||
-                       cl.match(/(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+spirits?\s+on\s+your\s+field/i);
+    // 6. Color-specific Spirits or Ultimates
+    const colorMatch = cl.match(/(?:have|control)\s+(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+(spirit|ultimate|unit)s?/i) ||
+                       cl.match(/(\w+|\d+)\s+or\s+more\s+(red|purple|green|white|yellow|blue)\s+(spirit|ultimate|unit)s?\s+on\s+your\s+field/i);
     if (colorMatch) {
       const reqCount = wordToNum(colorMatch[1]);
       const reqColor = colorMatch[2].toLowerCase();
-      const matching = spirits.filter(s => (s.color || '').toLowerCase().includes(reqColor));
+      const targetType = (colorMatch[3] || 'spirit').toLowerCase();
+      let pool = field;
+      if (targetType.includes('spirit')) pool = spirits;
+      else if (targetType.includes('ultimate')) pool = ultimates;
+      const matching = pool.filter(u => {
+        const c = (u.color || '').toLowerCase();
+        const colors = (u.colors || []).map(x => String(x).toLowerCase());
+        return c.includes(reqColor) || colors.includes(reqColor);
+      });
       if (matching.length < reqCount) {
-        return { allowed: false, reason: `Requires controlling ${reqCount} or more ${colorMatch[2]} Spirits on field`, condText };
+        const typeNoun = targetType.charAt(0).toUpperCase() + targetType.slice(1) + (reqCount > 1 ? 's' : '');
+        return { allowed: false, reason: `Requires controlling ${reqCount} or more ${colorMatch[2]} ${typeNoun} on field`, condText };
       }
       return { allowed: true, condText };
     }
@@ -6851,6 +7102,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           disabled: stageStylesInHand.length === 0,
           reason: stageStylesInHand.length === 0 ? 'No Stage Style in hand' : '',
           action: () => executeOnStageAction(activeFieldUnit.uid)
+        });
+      }
+
+      // 6. Soul Drive Manual Action
+      if (hasSoulDriveKeyword(activeFieldUnit)) {
+        const canSd = canActivateSoulDrive(activeFieldUnit, side);
+        actions.push({
+          id: 'soul_drive',
+          label: '🔥 Activate [Soul Drive] (Once per Game)',
+          cls: 'eab-souldrive',
+          disabled: !canSd.allowed,
+          reason: canSd.reason,
+          action: () => activateSoulDrive(activeFieldUnit.uid, side)
         });
       }
     }
@@ -10650,6 +10914,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // 4. Audio & Visuals
     AudioFX.soulCoreIgnite();
     AudioFX.summon();
+    try {
+      spawnFloatingCombatText(isPlayer ? 'player' : 'opponent', '🌟 CONTRACT ADVENT!', 'advent');
+    } catch (e) {}
 
     if (DuelState.isOnline && isPlayer && window.MultiplayerService) {
       window.MultiplayerService.sendAction('ADVENT_STACK', {
@@ -11592,7 +11859,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function castFlashInBattle(cardUid, attackerUid, targetSpiritUid = null) {
-    const card = DuelState.player.hand.find(c => c.uid === cardUid);
+    const actualUid = (typeof cardUid === 'object' && cardUid) ? cardUid.uid : cardUid;
+    const card = (typeof cardUid === 'object' && cardUid) ? cardUid : DuelState.player.hand.find(c => c.uid === actualUid);
     if (!card) return;
 
     const attacker = DuelState.opponent.field.find(s => s.uid === attackerUid) || DuelState.selectedAttacker;
@@ -11605,7 +11873,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (DuelState.player.reserve < totalNeeded) {
       const { total } = getPlayerAvailableCores();
       if (total >= totalNeeded) {
-        openSacrificeModal(cardUid);
+        openSacrificeModal(actualUid);
         return;
       }
       if (typeof showToast === 'function') showToast(`Need ${totalNeeded} cores to cast "${card.name}"!`, 'warning');
@@ -11621,7 +11889,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // Direct pay from reserve
     DuelState.player.reserve -= totalNeeded;
     DuelState.player.trash += cost;
-    const cardIdx = DuelState.player.hand.findIndex(c => c.uid === cardUid);
+    const cardIdx = DuelState.player.hand.findIndex(c => c.uid === actualUid);
     if (cardIdx !== -1) DuelState.player.hand.splice(cardIdx, 1);
 
     AudioFX.coreChime();
@@ -11647,20 +11915,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       addLog(`✨ **[FLASH MAGIC CAST]**: "${card.name}" activated during Flash timing! ${effectDesc}`, 'magic');
       if (typeof showToast === 'function') showToast(`✨ "${card.name}" Activated!`, 'success');
 
-      // Check: Blizzard Wall, Burst Wall, and cards that end the attack step
-      if (card.name.includes('Blizzard Wall') || card.name.includes('Burst Wall') || /end the attack step|ends the attack step/i.test(card.effect || '')) {
+      // Check: Blizzard Wall, Burst Wall, Clear Wall, White Crystal Wall, and cards that end the attack step
+      if (card.name.includes('Blizzard Wall') || card.name.includes('Burst Wall') || card.name.includes('Clear Wall') || card.name.includes('White Crystal Wall') || /end the attack step|ends the attack step/i.test(card.effect || '')) {
         const isEndOfBattle = /when this battle ends|at the end of the battle/i.test(card.effect || '');
-        if (isEndOfBattle) {
+        if (isEndOfBattle && (DuelState.combatEvent || isCombat)) {
           DuelState.endAttackStepAtEndOfBattle = true;
           addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${card.name}" will terminate the Attack Step when this battle concludes!`, 'magic');
         } else {
-          closeBlockModal();
-          DuelState.combatEvent = null;
           DuelState.attackStepEnded = true;
-          renderDuelTable();
-          addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" extinguished all enemy attacks!`, 'step');
-          if (DuelState.activePlayer === 'opponent') safeEndOpponentTurn(1000);
-          else safeTimeout(endTurn, 1000);
+          checkAndTriggerAttackStepEnd(400);
           return;
         }
       }
@@ -11808,7 +12071,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
       }
-    } else if (name.includes('Blizzard Wall') || name.includes('Burst Wall') || /end the attack step|ends the attack step/i.test(activeEffectText || card.effect || '')) {
+    } else if (name.includes('Blizzard Wall') || name.includes('Burst Wall') || name.includes('Clear Wall') || name.includes('White Crystal Wall') || /end the attack step|ends the attack step/i.test(activeEffectText || card.effect || '')) {
       const isEndOfBattle = /when this battle ends|at the end of the battle/i.test(activeEffectText || card.effect || '');
       if (isEndOfBattle && (DuelState.combatEvent || isCombat)) {
         DuelState.endAttackStepAtEndOfBattle = true;
@@ -11818,7 +12081,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         DuelState.attackStepEnded = true;
         effectDesc = 'Ended the Attack Step.';
         addLog(`🛑 **[ATTACK STEP TERMINATED]**: "${card.name}" terminated the Attack Step!`, 'step');
-        checkAndTriggerAttackStepEnd();
+        checkAndTriggerAttackStepEnd(400);
       }
     } else if (name.includes('Defensive Aura') || (eff.includes('all your blocking spirits') && eff.includes('+3000 bp'))) {
       // Team-wide blocking buff (official text: "give all your blocking Spirits +3000 BP")
@@ -12910,10 +13173,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const resume = DuelState.pendingBurstResume;
     DuelState.pendingBurstResume = null;
     if (DuelState.activeBurstTrigger && DuelState.activeBurstTrigger.side === 'player') {
-      activateBurst('player', true);
-    }
-    if (typeof resume === 'function') {
-      safeTimeout(resume, 700);
+      activateBurst('player', true, resume);
+    } else if (typeof resume === 'function') {
+      resume();
     }
   }
 
@@ -12928,7 +13190,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       renderBurstZones();
     }
     if (typeof resume === 'function') {
-      safeTimeout(resume, 300);
+      resume();
     }
   }
 
@@ -12937,11 +13199,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (modal) modal.classList.remove('active');
   }
 
-  function activateBurst(side = 'player', isConfirmed = false) {
+  function activateBurst(side = 'player', isConfirmed = false, onResume = null) {
     const isPlayer = side === 'player';
+    let hasAsyncFlashPrompt = false;
     const burstCard = isPlayer ? DuelState.player.burst : DuelState.opponent.burst;
     if (!burstCard) {
       if (isPlayer && typeof showToast === 'function') showToast("No Burst card is currently set!", 'info');
+      if (typeof onResume === 'function') onResume();
       return;
     }
 
@@ -12952,6 +13216,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (typeof showToast === 'function') {
         showToast(`🔒 Cannot trigger Burst! Condition not met: "${cond.label}". Bursts can only activate when their specific trigger condition occurs in battle.`, 'warning');
       }
+      if (typeof onResume === 'function') onResume();
       return;
     }
 
@@ -13095,19 +13360,20 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           duelState: DuelState,
           arenaApi: getArenaApi()
         });
-        sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);
-        return;
+      } else {
+        executeAbilityActions(burstText, burstCard, side, 'BURST');
+        executeUniversalCardEffect(burstCard, side, 'BURST');
       }
-      executeAbilityActions(burstText, burstCard, side, 'BURST');
-      executeUniversalCardEffect(burstCard, side, 'BURST');
       sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);
       addLog(`🔮 **BURST MAGIC**: "${burstCard.name}" resolved its burst effect!`, 'magic');
 
+      hasAsyncFlashPrompt = false;
       if (/then,\s*by paying the cost,\s*activate this card's flash effect/i.test(burstText || burstCard.effect || '')) {
         const cost = burstCard.cost || 0;
         const targetState = isPlayer ? DuelState.player : DuelState.opponent;
         if (isPlayer) {
           if ((targetState.reserve || 0) >= cost) {
+            hasAsyncFlashPrompt = true;
             askOptionalEffect(
               burstCard,
               `Pay ${cost} core${cost === 1 ? '' : 's'} from Reserve to activate "${burstCard.name}"'s [Flash] effect?`,
@@ -13124,8 +13390,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                   addLog(`🛑 **[ATTACK STEP TERMINATION QUEUED]**: "${burstCard.name}" will end the Attack Step when this battle concludes!`, 'magic');
                 }
                 renderDuelTable();
+                if (typeof onResume === 'function') {
+                  onResume();
+                }
+                if (DuelState.endAttackStepAtEndOfBattle && !DuelState.combatEvent) {
+                  checkAndTriggerAttackStepEnd(0);
+                }
               },
-              null
+              () => {
+                addLog(`ℹ️ **[${burstCard.name}]**: Chose not to pay Flash cost.`, 'info');
+                if (typeof onResume === 'function') {
+                  onResume();
+                }
+              }
             );
           } else {
             addLog(`ℹ️ **[${burstCard.name}]**: Not enough cores in Reserve (${targetState.reserve || 0}/${cost}) to pay cost for Flash effect.`, 'info');
@@ -13153,6 +13430,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     checkAfterBurstEffects(side, burstCard);
 
     renderDuelTable();
+
+    if (!hasAsyncFlashPrompt) {
+      if (typeof onResume === 'function') {
+        onResume();
+      } else if (DuelState.endAttackStepAtEndOfBattle && !DuelState.combatEvent) {
+        checkAndTriggerAttackStepEnd(400);
+      }
+    }
   }
 
   function checkAfterBurstEffects(side, activatedBurstCard) {
@@ -13287,24 +13572,22 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (DuelState.endAttackStepAtEndOfBattle || DuelState.attackStepEnded) {
       DuelState.endAttackStepAtEndOfBattle = false;
       DuelState.attackStepEnded = true;
-      addLog(`🛑 **[ATTACK STEP TERMINATED]**: The Attack Step was terminated by effect!`, 'step');
-      if (typeof showToast === 'function') showToast('🛑 Attack Step Terminated by effect!', 'info');
+      const endIdx = DuelState.phases ? DuelState.phases.indexOf('END') : 6;
+      DuelState.phaseIndex = (endIdx !== -1 ? endIdx : 6);
       closeBlockModal();
       DuelState.combatEvent = null;
+      if (typeof renderPhaseIndicator === 'function') renderPhaseIndicator();
+      else if (typeof renderStepNavigator === 'function') renderStepNavigator();
       renderDuelTable();
+      addLog(`🛑 **[ATTACK STEP TERMINATED]**: The Attack Step was terminated by effect! Transitioned to End Step.`, 'step');
+      if (typeof showToast === 'function') showToast('🛑 Attack Step Terminated by effect!', 'info');
       if (DuelState.activePlayer === 'opponent') {
         if (delay === 0) endTurn();
         else safeEndOpponentTurn(delay);
       } else {
-        const endIdx = DuelState.phases ? DuelState.phases.indexOf('END') : -1;
-        if (endIdx !== -1) {
-          DuelState.phaseIndex = endIdx;
-          renderPhaseIndicator();
-          updateActionButtons();
-        } else {
-          if (delay === 0) endTurn();
-          else safeTimeout(endTurn, delay);
-        }
+        updateActionButtons();
+        if (delay === 0) endTurn();
+        else safeTimeout(endTurn, delay);
       }
       return true;
     }
@@ -16026,6 +16309,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     hasUTrigger,
     isUTriggerLevelMet,
     triggerUTrigger,
+    hasSoulDriveKeyword,
+    hasSoulDrive,
+    canActivateSoulDrive,
+    executeSoulDriveAction,
+    activateSoulDrive,
     getCardEffectiveCost,
     validateUltimateSummonCondition,
     getFriendlySymbols,
@@ -16201,6 +16489,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     handleAuthClick,
     renderArenaLobby,
     renderLobbyDeckPreview: updateLobbyPreviews,
+    triggerScreenShake,
+    spawnFloatingCombatText,
     updateLobbyPreviews
 };
 

@@ -1502,6 +1502,9 @@ async function openCardDetail(name, contextList, cardUid = null) {
   document.getElementById('modalEffect').innerHTML = '';
   document.getElementById('modalFlavor').style.display = 'none';
   document.getElementById('modalSets').innerHTML = '';
+  if (typeof initCardFoilTilt === 'function') {
+    initCardFoilTilt();
+  }
 
   // Setup Duel Action Button vs Deck Builder Button
   const duelBtn = document.getElementById('modalDuelSummonBtn');
@@ -2952,11 +2955,342 @@ function initCleanRouting() {
   }
 }
 
+// ═════════════════════════════════════════════════════════════════
+// 3D CARD TILT & HOLOGRAPHIC FOIL CONTROLLER
+// ═════════════════════════════════════════════════════════════════
+function initCardFoilTilt() {
+  if (typeof document === 'undefined') return;
+  const modalArt = document.getElementById('modalArt');
+  if (!modalArt) return;
+
+  const parent = modalArt.parentElement;
+  if (!parent) return;
+
+  let foil = parent.querySelector('.modal-foil-sheen');
+  if (!foil) {
+    parent.classList.add('modal-art-wrapper');
+    foil = document.createElement('div');
+    foil.className = 'modal-foil-sheen';
+    parent.appendChild(foil);
+  }
+
+  function handleMove(e) {
+    const rect = modalArt.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const x = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const y = Math.max(0, Math.min(1, (clientY - rect.top) / rect.height));
+
+    const rotX = (0.5 - y) * 22;
+    const rotY = (x - 0.5) * 22;
+    modalArt.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
+    modalArt.style.boxShadow = `${-rotY * 1.5}px ${rotX * 1.5 + 15}px 32px rgba(0,0,0,0.65)`;
+    
+    if (foil) {
+      foil.style.opacity = '1';
+      foil.style.background = `radial-gradient(circle at ${(x * 100).toFixed(1)}% ${(y * 100).toFixed(1)}%, rgba(255,255,255,0.45) 0%, rgba(244,114,182,0.25) 30%, rgba(56,189,248,0.25) 60%, transparent 85%)`;
+    }
+  }
+
+  function handleReset() {
+    modalArt.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    modalArt.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6)';
+    if (foil) {
+      foil.style.opacity = '0';
+    }
+  }
+
+  if (parent._foilMoveHandler) {
+    parent.removeEventListener('mousemove', parent._foilMoveHandler);
+    parent.removeEventListener('mouseleave', parent._foilResetHandler);
+  }
+  parent._foilMoveHandler = handleMove;
+  parent._foilResetHandler = handleReset;
+  parent.addEventListener('mousemove', handleMove);
+  parent.addEventListener('mouseleave', handleReset);
+  parent.addEventListener('touchmove', handleMove, { passive: true });
+  parent.addEventListener('touchend', handleReset);
+}
+
+// ═════════════════════════════════════════════════════════════════
+// SAMPLE OPENING HAND / DRAW SIMULATOR
+// ═════════════════════════════════════════════════════════════════
+const SampleHandSimulator = {
+  _deckName: 'Active Deck',
+  _allCards: [],
+  _deckPool: [],
+  _hand: [],
+  _contractCard: null,
+  _guaranteeContract: true,
+
+  ensureModalInDom() {
+    if (typeof document === 'undefined') return;
+    if (document.getElementById('sampleHandModal')) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'sample-hand-overlay';
+    overlay.id = 'sampleHandModal';
+    overlay.onclick = (e) => SampleHandSimulator.onBgClick(e);
+
+    overlay.innerHTML = `
+      <div class="sample-hand-box" onclick="event.stopPropagation()">
+        <div class="sample-hand-header">
+          <div class="sample-hand-title-wrap">
+            <span style="font-size:1.5rem;">🃏</span>
+            <h2 class="sample-hand-title">Sample Opening Hand Simulator</h2>
+            <span class="sample-hand-badge" id="sampleDeckNameBadge">Deck: Active</span>
+          </div>
+          <button class="sample-hand-close-btn" onclick="SampleHandSimulator.close()" title="Close (Esc)">&times;</button>
+        </div>
+
+        <div class="sample-hand-toolbar">
+          <div class="sample-hand-actions">
+            <button class="sample-hand-btn sample-hand-btn-primary" onclick="SampleHandSimulator.mulligan()" title="Shuffle and draw 4 cards (Shortcut: M or Space)">
+              <span>🔄</span> Mulligan (4 Cards)
+            </button>
+            <button class="sample-hand-btn sample-hand-btn-draw" onclick="SampleHandSimulator.drawOne()" title="Draw +1 card from deck (Shortcut: D)">
+              <span>➕</span> Draw +1 Card
+            </button>
+            <button class="sample-hand-btn" onclick="SampleHandSimulator.reset()" title="Reset back to initial opening hand">
+              <span>🧹</span> Reset Hand
+            </button>
+          </div>
+          
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <label class="sample-hand-toggle-label" title="Start with Contract card in opening hand (Battle Spirits Eternal Contract Rules)">
+              <input type="checkbox" id="sampleContractToggle" onchange="SampleHandSimulator.toggleContractGuarantee(this.checked)" checked>
+              <span>📜 Reveal Contract Card</span>
+            </label>
+            <div class="sample-hand-stats-bar" id="sampleHandStats"></div>
+          </div>
+        </div>
+
+        <div class="sample-cards-grid" id="sampleCardsGrid"></div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('sampleHandModal');
+      if (!modal || !modal.classList.contains('open')) return;
+      const targetTag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+      if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || targetTag === 'SELECT') return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        SampleHandSimulator.close();
+      } else if (e.key.toLowerCase() === 'm' || e.code === 'Space') {
+        e.preventDefault();
+        SampleHandSimulator.mulligan();
+      } else if (e.key.toLowerCase() === 'd') {
+        e.preventDefault();
+        SampleHandSimulator.drawOne();
+      }
+    });
+  },
+
+  onBgClick(e) {
+    if (e.target && e.target.id === 'sampleHandModal') {
+      this.close();
+    }
+  },
+
+  open(customDeck = null) {
+    this.ensureModalInDom();
+    this.loadDeck(customDeck);
+    const modal = document.getElementById('sampleHandModal');
+    if (modal) modal.classList.add('open');
+    this.mulligan();
+  },
+
+  close() {
+    const modal = document.getElementById('sampleHandModal');
+    if (modal) modal.classList.remove('open');
+  },
+
+  toggleContractGuarantee(checked) {
+    this._guaranteeContract = checked;
+    this.mulligan();
+  },
+
+  loadDeck(customDeck = null) {
+    let deckObj = customDeck;
+    if (!deckObj) {
+      if (typeof currentDeck !== 'undefined' && currentDeck && currentDeck.cards) {
+        deckObj = currentDeck;
+      } else if (typeof DeckManager !== 'undefined' && DeckManager.getActiveDeck) {
+        deckObj = DeckManager.getActiveDeck();
+      }
+    }
+
+    this._deckName = (deckObj && deckObj.name) ? deckObj.name : 'Active Deck';
+    const badge = document.getElementById('sampleDeckNameBadge');
+    if (badge) badge.textContent = `Deck: ${this._deckName}`;
+
+    const cardsMap = (deckObj && deckObj.cards) ? deckObj.cards : {};
+    const flattened = [];
+
+    const getCardInfo = (name) => {
+      if (typeof cachedCardsByName !== 'undefined' && cachedCardsByName[name.toLowerCase()]) {
+        return cachedCardsByName[name.toLowerCase()];
+      }
+      if (typeof S !== 'undefined' && S.allCards) {
+        const found = S.allCards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+        if (found) return found;
+      }
+      return { name, cost: 0, color: 'Red', type: 'Spirit' };
+    };
+
+    for (const [name, count] of Object.entries(cardsMap)) {
+      const info = getCardInfo(name);
+      const qty = typeof count === 'number' ? count : (count.count || 1);
+      for (let i = 0; i < qty; i++) {
+        flattened.push({ ...info, name });
+      }
+    }
+
+    this._allCards = flattened;
+    this._contractCard = this._allCards.find(c => {
+      const fam = (c.family || '').toLowerCase();
+      const typ = (c.type || '').toLowerCase();
+      const eff = (c.effect || '').toLowerCase();
+      const nam = (c.name || '').toLowerCase();
+      return fam.includes('contract') || typ.includes('contract') || eff.includes('[contract') || eff.includes('契約') || nam.includes('partner') || fam.includes('partner');
+    }) || null;
+
+    const toggleWrap = document.getElementById('sampleContractToggle');
+    if (toggleWrap) {
+      if (!this._contractCard) {
+        toggleWrap.disabled = true;
+        toggleWrap.parentElement.style.opacity = '0.45';
+        toggleWrap.parentElement.title = 'No Contract card found in this deck';
+      } else {
+        toggleWrap.disabled = false;
+        toggleWrap.parentElement.style.opacity = '1';
+        toggleWrap.parentElement.title = `Guaranteed start with: ${this._contractCard.name}`;
+      }
+    }
+  },
+
+  mulligan() {
+    if (!this._allCards.length) {
+      this._hand = [];
+      this._deckPool = [];
+      this.render();
+      return;
+    }
+
+    let pool = [...this._allCards];
+    this._hand = [];
+
+    if (this._guaranteeContract && this._contractCard) {
+      const cIdx = pool.findIndex(c => (c.name || '').toLowerCase() === (this._contractCard.name || '').toLowerCase());
+      if (cIdx !== -1) {
+        const contract = pool.splice(cIdx, 1)[0];
+        contract._isContract = true;
+        this._hand.push(contract);
+      }
+    }
+
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    while (this._hand.length < 4 && pool.length > 0) {
+      const drawn = pool.shift();
+      drawn._drawOrder = this._hand.length + 1;
+      this._hand.push(drawn);
+    }
+
+    this._deckPool = pool;
+    this.render();
+  },
+
+  drawOne() {
+    if (!this._deckPool.length) return;
+    const drawn = this._deckPool.shift();
+    drawn._drawOrder = this._hand.length + 1;
+    this._hand.push(drawn);
+    this.render();
+  },
+
+  reset() {
+    this.mulligan();
+  },
+
+  render() {
+    const grid = document.getElementById('sampleCardsGrid');
+    const stats = document.getElementById('sampleHandStats');
+    if (!grid) return;
+
+    if (!this._hand.length) {
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#94a3b8;font-size:0.95rem;">This deck is currently empty. Add cards in the Deck Builder to simulate opening hands!</div>';
+      if (stats) stats.innerHTML = '';
+      return;
+    }
+
+    const totalCost = this._hand.reduce((acc, c) => acc + (parseInt(c.cost, 10) || 0), 0);
+    const avgCost = (totalCost / this._hand.length).toFixed(1);
+    const hasTurnOnePlay = this._hand.some(c => (parseInt(c.cost, 10) || 0) <= 3);
+
+    if (stats) {
+      stats.innerHTML = `
+        <div class="sample-hand-stat-item">Hand: <strong>${this._hand.length}</strong></div>
+        <div class="sample-hand-stat-item">Deck: <strong>${this._deckPool.length}</strong> remaining</div>
+        <div class="sample-hand-stat-item">Avg Cost: <strong>${avgCost}</strong></div>
+        <div class="sample-hand-stat-item" style="color:${hasTurnOnePlay ? '#6ee7b7' : '#fca5a5'};">
+          ${hasTurnOnePlay ? '✓ Turn 1 Play Available' : '⚠️ No Cost ≤ 3 Play'}
+        </div>
+      `;
+    }
+
+    grid.innerHTML = this._hand.map((card, idx) => {
+      const safeName = (card.name || '').replace(/"/g, '&quot;');
+      const col = (card.color || 'Yellow').toLowerCase();
+      const typ = card.type || 'Spirit';
+      const costStr = (card.cost !== null && card.cost !== undefined) ? `Cost ${card.cost}` : '';
+      let art = card.image_url || 'https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';
+      if (art.includes('static.wikia.nocookie.net') && art.includes('/revision/latest')) {
+        art = art.split('/revision/latest')[0];
+      }
+
+      const contractTag = card._isContract ? '<span class="sample-card-contract-tag">📜 CONTRACT</span>' : '';
+      const orderTag = `<span class="sample-card-draw-order">#${idx + 1}</span>`;
+
+      return `
+        <div class="sample-card-item card-theme-${col}" onclick="openCardDetail('${safeName}')" title="Click to view ${safeName}" style="animation-delay:${idx * 0.05}s;">
+          ${contractTag}
+          ${orderTag}
+          <div class="sample-card-art-wrap">
+            <img class="sample-card-art" src="${art}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';" />
+          </div>
+          <div class="sample-card-info">
+            <div class="sample-card-name">${safeName}</div>
+            <div class="sample-card-sub">
+              <span>${costStr}</span>
+              <span>${typ}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.SampleHandSimulator = SampleHandSimulator;
+  window.openSampleHandModal = (customDeck) => SampleHandSimulator.open(customDeck);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initCleanRouting();
   updateDeckBadge();
   AuthManager.init();
   DeckQuickView.init();
+  initCardFoilTilt();
 });
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -2976,7 +3310,9 @@ if (typeof module !== 'undefined' && module.exports) {
     addModalCardToDeck,
     removeModalCardFromDeck,
     navigateCardModal,
-    formatEffectKeywordsInModal
+    formatEffectKeywordsInModal,
+    initCardFoilTilt,
+    SampleHandSimulator
   };
 }
 

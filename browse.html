@@ -465,7 +465,7 @@ function syncPillsFromState() {
     const curQ = (browseState.q || '').trim().toLowerCase();
     kwContainer.querySelectorAll('.filter-pill').forEach(pill => {
       const kw = (pill.getAttribute('data-kw') || '').toLowerCase();
-      const isKwActive = curQ === kw || (kw === 'soul burst' && (curQ === 'burst s' || curQ === 'soul burst'));
+      const isKwActive = curQ === kw;
       pill.classList.toggle('active', isKwActive);
     });
   }
@@ -475,7 +475,7 @@ function syncPillsFromState() {
 
 function toggleKeywordFilter(kw) {
   const current = (browseState.q || '').trim();
-  if (current.toLowerCase() === kw.toLowerCase() || (kw.toLowerCase() === 'soul burst' && current.toLowerCase() === 'burst s')) {
+  if (current.toLowerCase() === kw.toLowerCase()) {
     browseState.q = '';
     const searchInput = document.getElementById('browseSearchInput');
     if (searchInput) searchInput.value = '';
