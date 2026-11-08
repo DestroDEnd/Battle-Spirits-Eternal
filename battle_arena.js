@@ -6151,10 +6151,41 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;'));
 
+    // Clean raw html tags from wiki card text (e.g. <sub>, <sup>)
+    safe = safe.replace(/&lt;sub&gt;\s*\((.*?)\)\s*&lt;\/sub&gt;|&lt;sub&gt;\s*(.*?)\s*&lt;\/sub&gt;/gi, ' <span class="effect-reminder-box">ℹ️ ($1$2)</span>');
+    safe = safe.replace(/&lt;sup&gt;\s*(.*?)\s*&lt;\/sup&gt;/gi, '<sup>$1</sup>');
+
     // 1. Advent, Contract Advent, Manifest (顕現)
     safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
     safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Manifest|Mani):[^\]]+\]|【顕現：[^】]+】/gi, '<span class="effect-keyword-pill kw-manifest">$&</span>');
     safe = safe.replace(/\[Mani\]/gi, '<span class="effect-keyword-pill kw-manifest">[Manifest]</span>');
+
+    // 1a. Accel (アクセル) - Flash/Main timing, Cost and Bracketed/Unbracketed variants
+    safe = safe.replace(/(?:(Flash|Main|Flash\/Main|Main\/Flash)\s*[-–—]\s*)?\[Accel:\s*Cost\s*([\s\S]*?(?:\)|\bCore\]|symbols?\]|\d+))\s*\]/gi, (match, timing, costBody) => {
+      let out = '';
+      if (timing) {
+        const tCls = timing.toLowerCase().includes('flash') ? 'kw-flash' : 'kw-main';
+        out += `<span class="effect-keyword-pill ${tCls}">[${timing}]</span> `;
+      }
+      let cleanCost = costBody.trim();
+      if (cleanCost.startsWith('(') && !cleanCost.endsWith(')')) {
+        cleanCost = cleanCost.replace(/\]+$/, '') + ')';
+      }
+      out += `<span class="effect-keyword-pill kw-accel">[Accel: Cost ${cleanCost}]</span>`;
+      return out;
+    });
+
+    safe = safe.replace(/(?:(Flash|Main|Flash\/Main|Main\/Flash)\s*[-–—]\s*)Accel:\s*Cost\s*(\d+)/gi, (match, timing, costNum) => {
+      let out = '';
+      if (timing) {
+        const tCls = timing.toLowerCase().includes('flash') ? 'kw-flash' : 'kw-main';
+        out += `<span class="effect-keyword-pill ${tCls}">[${timing}]</span> `;
+      }
+      out += `<span class="effect-keyword-pill kw-accel">[Accel: Cost ${costNum}]</span>`;
+      return out;
+    });
+
+    safe = safe.replace(/\[Accel\]|【アクセル(?:：コスト[^】]+)?】/gi, '<span class="effect-keyword-pill kw-accel">$&</span>');
 
     // 1b. Reminder text expansions for wiki abbreviations ([utb], [wutb], [tutb], [qutb], [cutb], [outb], [heb])
     safe = safe.replace(/\[heb\]/gi, '<span class="effect-reminder-box">ℹ️ (Heavy Exhaust: Exhausted card is turned upside down and requires two refreshes to return to ready.)</span>');

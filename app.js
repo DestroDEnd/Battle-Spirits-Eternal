@@ -587,10 +587,41 @@ function formatEffectKeywordsInModal(text) {
   if (!text) return '<span style="color:var(--muted);font-style:italic;">No special effects or abilities.</span>';
   let safe = esc(text);
 
+  // Clean raw html tags from wiki card text (e.g. <sub>, <sup>)
+  safe = safe.replace(/&lt;sub&gt;\s*\((.*?)\)\s*&lt;\/sub&gt;|&lt;sub&gt;\s*(.*?)\s*&lt;\/sub&gt;/gi, ' <span class="effect-reminder-box">ℹ️ ($1$2)</span>');
+  safe = safe.replace(/&lt;sup&gt;\s*(.*?)\s*&lt;\/sup&gt;/gi, '<sup>$1</sup>');
+
   // 1. Advent, Contract Advent, Manifest (顕現)
   safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Contract\s+)?Advent:[^\]]+(?:\([^)]*\)[^\]]*)*\]|【(?:契約)?煌臨：[^】]+】/gi, '<span class="effect-keyword-pill kw-advent">$&</span>');
   safe = safe.replace(/(?:Flash\s*-\s*)?\[(?:Manifest|Mani):[^\]]+\]|【顕現：[^】]+】/gi, '<span class="effect-keyword-pill kw-manifest">$&</span>');
   safe = safe.replace(/\[Mani\]/gi, '<span class="effect-keyword-pill kw-manifest">[Manifest]</span>');
+
+  // 1a. Accel (アクセル) - Flash/Main timing, Cost and Bracketed/Unbracketed variants
+  safe = safe.replace(/(?:(Flash|Main|Flash\/Main|Main\/Flash)\s*[-–—]\s*)?\[Accel:\s*Cost\s*([\s\S]*?(?:\)|\bCore\]|symbols?\]|\d+))\s*\]/gi, (match, timing, costBody) => {
+    let out = '';
+    if (timing) {
+      const tCls = timing.toLowerCase().includes('flash') ? 'kw-flash' : 'kw-main';
+      out += `<span class="effect-keyword-pill ${tCls}">[${timing}]</span> `;
+    }
+    let cleanCost = costBody.trim();
+    if (cleanCost.startsWith('(') && !cleanCost.endsWith(')')) {
+      cleanCost = cleanCost.replace(/\]+$/, '') + ')';
+    }
+    out += `<span class="effect-keyword-pill kw-accel">[Accel: Cost ${cleanCost}]</span>`;
+    return out;
+  });
+
+  safe = safe.replace(/(?:(Flash|Main|Flash\/Main|Main\/Flash)\s*[-–—]\s*)Accel:\s*Cost\s*(\d+)/gi, (match, timing, costNum) => {
+    let out = '';
+    if (timing) {
+      const tCls = timing.toLowerCase().includes('flash') ? 'kw-flash' : 'kw-main';
+      out += `<span class="effect-keyword-pill ${tCls}">[${timing}]</span> `;
+    }
+    out += `<span class="effect-keyword-pill kw-accel">[Accel: Cost ${costNum}]</span>`;
+    return out;
+  });
+
+  safe = safe.replace(/\[Accel\]|【アクセル(?:：コスト[^】]+)?】/gi, '<span class="effect-keyword-pill kw-accel">$&</span>');
 
   // 1b. Reminder text expansions for wiki abbreviations ([utb], [wutb], [tutb], [qutb], [cutb], [outb], [heb])
   safe = safe.replace(/\[heb\]/gi, '<span class="effect-reminder-box">ℹ️ (Heavy Exhaust: Exhausted card is turned upside down and requires two refreshes to return to ready.)</span>');
@@ -664,7 +695,7 @@ function formatEffectKeywordsInModal(text) {
   safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
   // 12. Highlight all Official Battle Spirits Wiki Keywords
-  const allKwPattern = /\[(A\.T\.\s*Field|Accel|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+  const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
 
   safe = safe.replace(allKwPattern, (match) => {
     let cls = 'kw-generic';
