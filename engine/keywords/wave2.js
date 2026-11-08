@@ -166,16 +166,209 @@ export const SealKeyword = {
   }
 };
 
+export const SoulDriveKeyword = {
+  id: 'Soul Drive',
+  name: 'Soul Drive',
+  wave: 2,
+  async executeSoulDrive(game, ultimateStack, effectFn) {
+    const { state, events } = game;
+    if (!ultimateStack || !ultimateStack.cores || ultimateStack.cores.soul < 1) {
+      return { success: false, reason: 'NO_SOUL_CORE_ON_ULTIMATE' };
+    }
+    const ownerSide = ultimateStack.owner;
+    const p = state.players[ownerSide];
+    if (p.soulDriveUsed) {
+      return { success: false, reason: 'SOUL_DRIVE_ALREADY_USED' };
+    }
+
+    // Move Soul Core from Ultimate stack to Void (banished from the game)
+    ultimateStack.cores.soul -= 1;
+    p.soulDriveUsed = true;
+
+    await events.emit({
+      type: 'SOUL_DRIVE_ACTIVATED',
+      stack: ultimateStack,
+      player: ownerSide
+    });
+
+    if (typeof effectFn === 'function') {
+      await effectFn();
+    }
+    return { success: true };
+  }
+};
+
+export const ViolentHighSpeedKeyword = {
+  id: 'Violent High Speed',
+  name: 'Violent High Speed',
+  wave: 2,
+  async executeViolentHighSpeedSummon(game, card, playerSide = 'player') {
+    const { state, events } = game;
+    const p = state.players[playerSide];
+
+    // Official Bandai ruling: Must have 5 or more cores in Trash
+    const trashNormal = p.trash.normal || 0;
+    const trashSoul = p.trash.soul ? 1 : 0;
+    const totalTrash = trashNormal + trashSoul;
+    if (totalTrash < 5) return { success: false, reason: 'REQUIRE_AT_LEAST_5_TRASH_CORES' };
+
+    // Summoned without paying cost; all cores in Trash move to field/reserve, with at least 1 placed on this spirit
+    let spiritNormal = 0;
+    let spiritSoul = 0;
+    let remainingNormal = trashNormal;
+    let remainingSoul = trashSoul;
+
+    if (remainingNormal >= 1) {
+      spiritNormal = 1;
+      remainingNormal -= 1;
+    } else if (remainingSoul >= 1) {
+      spiritSoul = 1;
+      remainingSoul -= 1;
+    }
+
+    // Clear trash completely
+    p.trash.normal = 0;
+    p.trash.soul = 0;
+
+    // Remaining trash cores go to reserve
+    p.reserve.normal = (p.reserve.normal || 0) + remainingNormal;
+    if (remainingSoul > 0) {
+      p.reserve.soul = 1;
+    }
+
+    const newStack = createFieldStack(card, { normal: spiritNormal, soul: spiritSoul });
+    p.field.push(newStack);
+    p.hand = p.hand.filter(c => c.id !== card.id);
+
+    await events.emit({
+      type: 'SUMMONED',
+      card,
+      stack: newStack,
+      player: playerSide,
+      cause: 'violent_high_speed'
+    });
+
+    return { success: true, stack: newStack };
+  }
+};
+
+export const UnleashKeyword = {
+  id: 'Unleash',
+  name: 'Unleash',
+  wave: 2,
+  async executeUnleash(game, stack, effectFn) {
+    const { events } = game;
+    if (!stack || !stack.top) return { success: false, reason: 'INVALID_STACK' };
+    const ownerSide = stack.owner;
+
+    // Move Soul Core to this spirit
+    stack.cores.soul = 1;
+
+    await events.emit({
+      type: 'UNLEASH_ACTIVATED',
+      stack,
+      player: ownerSide
+    });
+
+    if (typeof effectFn === 'function') {
+      await effectFn();
+    }
+    return { success: true, stack };
+  }
+};
+
+export const RushKeyword = {
+  id: 'Rush',
+  name: 'Rush',
+  wave: 2,
+  hasRushActive(state, playerSide, requiredColor) {
+    const p = state.players[playerSide];
+    if (!p) return false;
+    const targetColor = String(requiredColor || '').toLowerCase();
+    const friendlyUnits = [...(p.field || []), ...(p.nexus || [])];
+    return friendlyUnits.some(st => {
+      const colors = (st.top?.colors || [st.top?.color]).filter(Boolean).map(c => String(c).toLowerCase());
+      return colors.includes(targetColor);
+    });
+  }
+};
+
+export const SixHeavenRushKeyword = {
+  id: 'Six Heaven Rush',
+  name: 'Six Heaven Rush',
+  wave: 2,
+  hasSixHeavenRushActive(state, playerSide, requiredUniqueColorsCount = 3) {
+    const p = state.players[playerSide];
+    if (!p) return false;
+    const colorSet = new Set();
+    const friendlyUnits = [...(p.field || []), ...(p.nexus || [])];
+    for (const st of friendlyUnits) {
+      const colors = (st.top?.colors || [st.top?.color]).filter(Boolean).map(c => String(c).toLowerCase());
+      for (const col of colors) colorSet.add(col);
+    }
+    return colorSet.size >= requiredUniqueColorsCount;
+  }
+};
+
+export const CatalyzeKeyword = {
+  id: 'Catalyze',
+  name: 'Catalyze',
+  wave: 2,
+  async executeCatalyze(game, activatingStack, targetBurstCard = null) {
+    const { state, events } = game;
+    const ownerSide = activatingStack?.owner || 'player';
+    const p = state.players[ownerSide];
+
+    // Bandai Official Ruling:
+    // By sending [Soul Core] from this Spirit to Trash, immediately activate your set Soul Burst
+    if (!activatingStack || activatingStack.cores.soul <= 0) {
+      return { success: false, reason: 'NO_SOUL_CORE_ON_SPIRIT' };
+    }
+
+    activatingStack.cores.soul -= 1;
+    p.trash.soul = (p.trash.soul || 0) + 1;
+
+    const burst = targetBurstCard || p.burst;
+    if (!burst) return { success: false, reason: 'NO_BURST_SET' };
+
+    if (events) {
+      await events.emit({
+        type: 'CATALYZE_ACTIVATED',
+        stack: activatingStack,
+        burstCard: burst,
+        player: ownerSide
+      });
+    }
+
+    return { success: true, burstCard: burst };
+  }
+};
+
 export function registerWave2Keywords(registry) {
   registry.register(AccelKeyword);
   registry.register(MirageKeyword);
   registry.register(ChangeKeyword);
   registry.register(HighSpeedKeyword);
-  registry.register({ ...HighSpeedKeyword, id: 'Violent High Speed' });
+  registry.register(ViolentHighSpeedKeyword);
+  registry.register({ ...ViolentHighSpeedKeyword, id: 'Flashing Swift' });
   registry.register(ContractKeyword);
   registry.register({ ...ContractKeyword, id: 'Soul State' });
   registry.register({ ...ContractKeyword, id: 'Contract Pre-Advent' });
+  registry.register({ ...ContractKeyword, id: 'Final Contract Advent' });
   registry.register(RebirthKeyword);
+  registry.register({ ...RebirthKeyword, id: 'Zero Rebirth' });
+  registry.register({ ...RebirthKeyword, id: 'Sortie Rebirth' });
+  registry.register({ ...RebirthKeyword, id: 'Six Heaven Rebirth' });
   registry.register(SealKeyword);
-  registry.register({ ...SealKeyword, id: 'Unleash' });
+  registry.register(UnleashKeyword);
+  registry.register({ ...UnleashKeyword, id: 'Nether Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Yomi Unleash' });
+  registry.register({ ...UnleashKeyword, id: 'Kamiumi Unleash' });
+  registry.register(SoulDriveKeyword);
+  registry.register({ ...SoulDriveKeyword, id: 'Light-Dark Soul Drive' });
+  registry.register(RushKeyword);
+  registry.register(SixHeavenRushKeyword);
+  registry.register(CatalyzeKeyword);
+  registry.register({ ...CatalyzeKeyword, id: 'True Catalyze' });
+  registry.register({ ...CatalyzeKeyword, id: 'War Catalyze' });
 }

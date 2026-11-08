@@ -1,1 +1,962 @@
-{"SD15-006":{"cardNumber":"SD15-006","name":"Angeloid","keywords":[{"name":"Brave","parameter":"Divine Spirit","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SD15-006#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Divine Spirit","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Divine Spirit]","clauses":[],"unsupported":[]},{"id":"SD15-006#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost."},"clauses":[{"rawText":"Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost.","cleanText":"Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"SD15-006#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target an opposing Spirit. During this turn, that Spirit can't block."},"clauses":[{"rawText":"Target an opposing Spirit.","cleanText":"Target an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"During this turn, that Spirit can't block.","cleanText":"that Spirit can't block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-007":{"cardNumber":"SD15-007","name":"Ascension Zero","keywords":[],"abilities":[{"id":"SD15-007#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP. Then, during this turn, give an opposing Spirit -2000 BP."},"clauses":[{"rawText":"During this turn, when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP.","cleanText":"when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"EXHAUST","target":{"side":"either"}}},{"rawText":"during this turn, give an opposing Spirit -2000 BP.","cleanText":"give an opposing Spirit -2000 BP","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":2000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-008":{"cardNumber":"SD15-008","name":"Magical Draw","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":93}],"abilities":[{"id":"SD15-008#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw a card. Then, reveal five cards from your decktop, and add all Spirit cards with [Charge] among them to the Hand. Return any remaining cards to the decktop in any order."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"reveal five cards from your decktop","cleanText":"reveal five cards from your decktop","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":5}},{"rawText":"add all Spirit cards with [Charge] among them to the Hand.","cleanText":"add all Spirit cards with [Charge] among them to the Hand","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"Return any remaining cards to the decktop in any order.","cleanText":"Return any remaining cards to the decktop in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SD15-008#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give a Spirit -3000 BP."},"clauses":[{"rawText":"During this turn, give a Spirit -3000 BP.","cleanText":"give a Spirit -3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":3000}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-003":{"cardNumber":"SD15-003","name":"The Angelia Archiel","keywords":[],"abilities":[{"id":"SD15-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -1000 BP."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -1000 BP.","cleanText":"give an opposing Spirit -1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":1000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]},{"id":"SD15-003#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, opposing Cost 3 or less Spirits can't attack."},"clauses":[{"rawText":"During this turn, opposing Cost 3 or less Spirits can't attack.","cleanText":"opposing Cost 3 or less Spirits can't attack","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-004":{"cardNumber":"SD15-004","name":"The Angelia Axela","keywords":[],"abilities":[{"id":"SD15-004#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -2000 BP."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -2000 BP.","cleanText":"give an opposing Spirit -2000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":2000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]},{"id":"SD15-004#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked."},"clauses":[{"rawText":"When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked.","cleanText":"When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-002":{"cardNumber":"SD15-002","name":"The Angelia Machael","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":11}],"abilities":[{"id":"SD15-002#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your “BP- effect” decreases 1000 further."},"clauses":[{"rawText":"Your \"BP- effect\" decreases 1000 further.","cleanText":"Your \"BP- effect\" decreases 1000 further","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECREASE_BP_EFFECT","amount":1000}}],"unsupported":[]},{"id":"SD15-002#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0."},"clauses":[{"rawText":"When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0.","cleanText":"When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-001":{"cardNumber":"SD15-001","name":"The Angelia Pathiel","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":11}],"abilities":[{"id":"SD15-001#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your “BP- effect” decreases 1000 further."},"clauses":[{"rawText":"Your \"BP- effect\" decreases 1000 further.","cleanText":"Your \"BP- effect\" decreases 1000 further","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECREASE_BP_EFFECT","amount":1000}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-005":{"cardNumber":"SD15-005","name":"The Angelia Plastiel","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":16}],"abilities":[{"id":"SD15-005#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your “BP- effect” decreases 1000 further."},"clauses":[{"rawText":"Your \"BP- effect\" decreases 1000 further.","cleanText":"Your \"BP- effect\" decreases 1000 further","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECREASE_BP_EFFECT","amount":1000}}],"unsupported":[]},{"id":"SD15-005#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits."},"clauses":[{"rawText":"Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits.","cleanText":"Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]},{"id":"SD15-005#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return this Spirit to the Hand."},"clauses":[{"rawText":"Return this Spirit to the Hand.","cleanText":"Return this Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD15-X01":{"cardNumber":"SD15-X01","name":"The BattleAngelia Excel","keywords":[],"abilities":[{"id":"SD15-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -3000 BP."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -3000 BP.","cleanText":"give an opposing Spirit -3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":3000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]},{"id":"SD15-X01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand. Then, draw a card."},"clauses":[{"rawText":"When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand.","cleanText":"When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"draw a card.","cleanText":"draw a card","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD15-X01#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0."},"clauses":[{"rawText":"When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0.","cleanText":"When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SD15-006": {
+    "cardNumber": "SD15-006",
+    "name": "Angeloid",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Divine Spirit",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD15-006#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Divine Spirit",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Divine Spirit]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost.",
+            "cleanText": "Summon three Cost 3 or less \"Divine Spirit\" family Spirit cards from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-006#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target an opposing Spirit. During this turn, that Spirit can't block."
+        },
+        "clauses": [
+          {
+            "rawText": "Target an opposing Spirit.",
+            "cleanText": "Target an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, that Spirit can't block.",
+            "cleanText": "that Spirit can't block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-007": {
+    "cardNumber": "SD15-007",
+    "name": "Ascension Zero",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD15-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP. Then, during this turn, give an opposing Spirit -2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP.",
+            "cleanText": "when opposing Spirits become 0 BP, exhaust all Spirits which became 0 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "during this turn, give an opposing Spirit -2000 BP.",
+            "cleanText": "give an opposing Spirit -2000 BP",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 2000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-008": {
+    "cardNumber": "SD15-008",
+    "name": "Magical Draw",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 93
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD15-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw a card. Then, reveal five cards from your decktop, and add all Spirit cards with [Charge] among them to the Hand. Return any remaining cards to the decktop in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "reveal five cards from your decktop",
+            "cleanText": "reveal five cards from your decktop",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 5
+            }
+          },
+          {
+            "rawText": "add all Spirit cards with [Charge] among them to the Hand.",
+            "cleanText": "add all Spirit cards with [Charge] among them to the Hand",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the decktop in any order.",
+            "cleanText": "Return any remaining cards to the decktop in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit -3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit -3000 BP.",
+            "cleanText": "give a Spirit -3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-003": {
+    "cardNumber": "SD15-003",
+    "name": "The Angelia Archiel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD15-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit -1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -1000 BP.",
+            "cleanText": "give an opposing Spirit -1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 1000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-003#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, opposing Cost 3 or less Spirits can't attack."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, opposing Cost 3 or less Spirits can't attack.",
+            "cleanText": "opposing Cost 3 or less Spirits can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-004": {
+    "cardNumber": "SD15-004",
+    "name": "The Angelia Axela",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD15-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit -2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -2000 BP.",
+            "cleanText": "give an opposing Spirit -2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 2000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-004#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked.",
+            "cleanText": "When this Spirit compares BP with an opposing Spirit that has a BP lower than this Spirit's, without comparing BP, treat the attack as not blocked",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-002": {
+    "cardNumber": "SD15-002",
+    "name": "The Angelia Machael",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD15-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your “BP- effect” decreases 1000 further."
+        },
+        "clauses": [
+          {
+            "rawText": "Your \"BP- effect\" decreases 1000 further.",
+            "cleanText": "Your \"BP- effect\" decreases 1000 further",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECREASE_BP_EFFECT",
+              "amount": 1000
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0.",
+            "cleanText": "When opposing Spirits are brought to 0 BP, exhaust all those Spirits that had their BP brought to 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-001": {
+    "cardNumber": "SD15-001",
+    "name": "The Angelia Pathiel",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD15-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your “BP- effect” decreases 1000 further."
+        },
+        "clauses": [
+          {
+            "rawText": "Your \"BP- effect\" decreases 1000 further.",
+            "cleanText": "Your \"BP- effect\" decreases 1000 further",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECREASE_BP_EFFECT",
+              "amount": 1000
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-005": {
+    "cardNumber": "SD15-005",
+    "name": "The Angelia Plastiel",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 16
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD15-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your “BP- effect” decreases 1000 further."
+        },
+        "clauses": [
+          {
+            "rawText": "Your \"BP- effect\" decreases 1000 further.",
+            "cleanText": "Your \"BP- effect\" decreases 1000 further",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECREASE_BP_EFFECT",
+              "amount": 1000
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits.",
+            "cleanText": "Your Life can't be reduced by the attacks of opposing 4000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-005#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return this Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return this Spirit to the Hand.",
+            "cleanText": "Return this Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD15-X01": {
+    "cardNumber": "SD15-X01",
+    "name": "The BattleAngelia Excel",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD15-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit -3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -3000 BP.",
+            "cleanText": "give an opposing Spirit -3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand. Then, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand.",
+            "cleanText": "When your Cost 3 or less Spirits are destroyed by opposing effects, return them to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD15-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0.",
+            "cleanText": "When this Spirit's effect brings the BP of opposing Spirits to 0, destroy all those Spirits which had their BP brought to 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

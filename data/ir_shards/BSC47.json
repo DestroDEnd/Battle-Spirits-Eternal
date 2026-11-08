@@ -1,1 +1,3810 @@
-{"BSC47-008":{"cardNumber":"BSC47-008","name":"Muruga-ChickenKnight","keywords":[{"name":"Mirage","parameter":"Cost 3 ([Yellow Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"BSC47-008#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Yellow Core][Yellow Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-008#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"WHEN_SET","timingLabel":"When Set","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled."},"clauses":[{"rawText":"During this turn, when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled.","cleanText":"when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"BSC47-008#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Life is reduced, you can send a card from your decktop to the Trash. If that card is \"Parvati\", or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP, and destroy it when it is brought to 0 BP."},"clauses":[{"rawText":"When your Life is reduced, you can send a card from your decktop to the Trash.","cleanText":"When your Life is reduced, you can send a card from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":1,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"If that card is \"Parvati\", or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP","cleanText":"or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP","link":null,"isOptional":false,"isCost":false,"condition":"If that card is \"Parvati\"","duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":10000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}},{"rawText":"destroy it when it is brought to 0 BP.","cleanText":"destroy it when it is brought to 0 BP","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-X03":{"cardNumber":"BSC47-X03","name":"The FusionDeity Ardhanarishvara","keywords":[{"name":"Unleash","parameter":"1","wave":2,"hook":"unleash","bracketed":true,"index":110}],"abilities":[{"id":"BSC47-X03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it."},"clauses":[{"rawText":"When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it.","cleanText":"When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"BSC47-X03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Unleash: 1"],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost. When you've done so, (Once per Turn: Same Name) by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect."},"clauses":[{"rawText":"You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost.","cleanText":"You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect.","cleanText":"by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"BSC47-X03#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opponent can't end the Attack Step via effects."},"clauses":[{"rawText":"The opponent can't end the Attack Step via effects.","cleanText":"The opponent can't end the Attack Step via effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-X01":{"cardNumber":"BSC47-X01","name":"The KamiumiYomiBird Amenotorifune","keywords":[{"name":"Burst","parameter":"After an opposing Spirit/Nexus' (When Summoned/Deployed) effect resolves","wave":2,"hook":"burst","bracketed":true,"index":16},{"name":"Burst","parameter":"After your Life is reduced","wave":2,"hook":"burst","bracketed":true,"index":354},{"name":"Yomi Unleash","parameter":null,"wave":2,"hook":"unleash","bracketed":true,"index":702},{"name":"Kamiumi Unleash","parameter":null,"wave":2,"hook":"unleash","bracketed":true,"index":717}],"abilities":[{"id":"BSC47-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Burst: After an opposing Spirit/Nexus' (When Summoned/Deployed) effect resolves","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Summon this card without paying the cost. Then, draw two cards. Then, by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve."},"clauses":[{"rawText":"Summon this card without paying the cost.","cleanText":"Summon this card without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}},{"rawText":"draw two cards.","cleanText":"draw two cards","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve.","cleanText":"by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"BSC47-X01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Burst: After your Life is reduced","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Summon this card without paying the cost. Then, by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits."},"clauses":[{"rawText":"Summon this card without paying the cost.","cleanText":"Summon this card without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}},{"rawText":"by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits.","cleanText":"by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"BSC47-X01#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you control any \"Izanagi & Izanami\", you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash]."},"clauses":[{"rawText":"If you control any \"Izanagi & Izanami\", you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash].","cleanText":"you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash]","link":null,"isOptional":true,"isCost":false,"condition":"If you control any \"Izanagi & Izanami\"","duration":null,"op":{"op":"ACTIVATE_EFFECT_ACTION"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-001":{"cardNumber":"BSC47-001","name":"The YomiThunderGod Toyofutsu","keywords":[{"name":"Accel","parameter":null,"wave":2,"hook":"accel","bracketed":true,"index":460}],"abilities":[{"id":"BSC47-001#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractors Izanagi & Izanami\" & C1 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"BSC47-001#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can draw two cards. Then, for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1."},"clauses":[{"rawText":"You can draw two cards.","cleanText":"You can draw two cards","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1.","cleanText":"for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"BSC47-001#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it."},"clauses":[{"rawText":"When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it.","cleanText":"When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-X04":{"cardNumber":"BSC47-X04","name":"Shin-Chronos-Returnal","keywords":[],"abilities":[{"id":"BSC47-X04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractor Chronos\" & C4 or more, (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"BSC47-X04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"STEP_RESTRICTED","timingLabel":"When Manifests/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"T Unleash: 2","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can destroy an opposing Spirit with the highest cost. Then, you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit. When you've done so, your counter or the opposing counter gets -2."},"clauses":[{"rawText":"You can destroy an opposing Spirit with the highest cost.","cleanText":"You can destroy an opposing Spirit with the highest cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit.","cleanText":"you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"your counter or the opposing counter gets -2.","cleanText":"your counter or the opposing counter gets -2","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CARD_RULE_MODIFIER"}}],"unsupported":[]},{"id":"BSC47-X04#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_GAME_SAME_NAME","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses, and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent."},"clauses":[{"rawText":"By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses","cleanText":"By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent.","cleanText":"and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-X02":{"cardNumber":"BSC47-X02","name":"The IceCreationDeityPrincess Fremia","keywords":[],"abilities":[{"id":"BSC47-X02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractors Fremia\" & C2 or more, (Your Turn)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"BSC47-X02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"I Unleash: 1","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return an opposing Spirit/Ultimate/Nexus to the Hand. Then, you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit. When you've done so, during this battle, this Spirit is unaffected by opposing effects."},"clauses":[{"rawText":"Return an opposing Spirit/Ultimate/Nexus to the Hand.","cleanText":"Return an opposing Spirit/Ultimate/Nexus to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit.","cleanText":"you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"during this battle, this Spirit is unaffected by opposing effects.","cleanText":"this Spirit is unaffected by opposing effects","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"BSC47-X02#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control."},"clauses":[{"rawText":"When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control.","cleanText":"When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-011":{"cardNumber":"BSC47-011","name":"Pink Lotus","keywords":[{"name":"Brave","parameter":"Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"BSC47-011#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"]","clauses":[],"unsupported":[]},{"id":"BSC47-011#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"During Spirit Brave","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -7000 BP, and destroy it when it is brought to 0 BP. When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -7000 BP","cleanText":"give an opposing Spirit -7000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":7000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}},{"rawText":"destroy it when it is brought to 0 BP.","cleanText":"destroy it when it is brought to 0 BP","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop.","cleanText":"When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"BSC47-011#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Grand Skill: 4"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"During Nexus Brave","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses."},"clauses":[{"rawText":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses.","cleanText":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-CX03":{"cardNumber":"BSC47-CX03","name":"The AffectionContractor Parvati","keywords":[{"name":"Neo-Core Charge","parameter":"(Hunter Beast/Devotee/Concluser & Cost 3 or more) (Yellow & God Arms & Brave) (Rebirth Nexus)","wave":3,"hook":"neo_core_charge","bracketed":true,"index":0},{"name":"Revive","parameter":null,"wave":3,"hook":"revive","bracketed":true,"index":375},{"name":"Contract Field","parameter":null,"wave":3,"hook":"contract_field","bracketed":true,"index":708}],"abilities":[{"id":"BSC47-CX03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Neo-Core Charge:: (Hunter Beast/Devotee/Concluser & Cost 3 or more) (Yellow & God Arms & Brave) (Rebirth Nexus)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-CX03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus.","cleanText":"When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX03#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":3,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"BSC47-CX03#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Revive","burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"You can deploy this card from Soul State."},"clauses":[{"rawText":"You can deploy this card from Soul State.","cleanText":"You can deploy this card from Soul State","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX03#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 3"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost. When you've done so, during this turn, an opposing Spirit can't block."},"clauses":[{"rawText":"(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost.","cleanText":"(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"during this turn, an opposing Spirit can't block.","cleanText":"an opposing Spirit can't block","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]},{"id":"BSC47-CX03#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom. Then, you can return a card from your Hand to the decktop."},"clauses":[{"rawText":"when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom.","cleanText":"when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"you can return a card from your Hand to the decktop.","cleanText":"you can return a card from your Hand to the decktop","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-005":{"cardNumber":"BSC47-005","name":"The CavalryIceAngelia Ifessa","keywords":[{"name":"Mirage","parameter":"Cost 3 ([White Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"BSC47-005#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([White Core][White Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-005#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost."},"clauses":[{"rawText":"when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost.","cleanText":"when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"BSC47-005#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS_OR_BLOCKS","timingLabel":"When Attacks/Blocks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"by returning an opposing Spirit/Nexus to the Hand, refresh this Spirit."},"clauses":[{"rawText":"By returning an opposing Spirit/Nexus to the Hand","cleanText":"By returning an opposing Spirit/Nexus to the Hand","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"refresh this Spirit.","cleanText":"refresh this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-010":{"cardNumber":"BSC47-010","name":"The DimensionDragon Uradinos","keywords":[{"name":"Burst","parameter":"After an opposing Spirit/Ultimate attacks","wave":2,"hook":"burst","bracketed":true,"index":133}],"abilities":[{"id":"BSC47-010#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card."},"clauses":[{"rawText":"When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card.","cleanText":"When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"BSC47-010#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_ATTACK","isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus. When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target. After this effect resolves, summon this card, without paying the cost."},"clauses":[{"rawText":"Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus.","cleanText":"Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target.","cleanText":"When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}},{"rawText":"summon this card, without paying the cost.","cleanText":"summon this card, without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"BSC47-010#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send three cores from any opposing Grandwalker Nexuses to the Void."},"clauses":[{"rawText":"Send three cores from any opposing Grandwalker Nexuses to the Void.","cleanText":"Send three cores from any opposing Grandwalker Nexuses to the Void","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-CX02":{"cardNumber":"BSC47-CX02","name":"The IceCreationContractor Fremia","keywords":[{"name":"Neo-Core Charge","parameter":"(Ice Princess/Devotee/Concluser & Cost 3 or more) (Rebirth Nexus)","wave":3,"hook":"neo_core_charge","bracketed":true,"index":0},{"name":"Revive","parameter":null,"wave":3,"hook":"revive","bracketed":true,"index":341},{"name":"Contract Field","parameter":null,"wave":3,"hook":"contract_field","bracketed":true,"index":671}],"abilities":[{"id":"BSC47-CX02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Neo-Core Charge:: (Ice Princess/Devotee/Concluser & Cost 3 or more) (Rebirth Nexus)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-CX02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus.","cleanText":"When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX02#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":3,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"BSC47-CX02#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Revive","burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"You can deploy this card from Soul State."},"clauses":[{"rawText":"You can deploy this card from Soul State.","cleanText":"You can deploy this card from Soul State","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX02#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 3"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand. If you have two counters or more, instead, return an opposing Spirit/Ultimate to the Hand."},"clauses":[{"rawText":"(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand.","cleanText":"(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"If you have two counters or more, instead, return an opposing Spirit/Ultimate to the Hand.","cleanText":"return an opposing Spirit/Ultimate to the Hand","link":"instead","isOptional":false,"isCost":false,"condition":"If you have two counters or more","duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"BSC47-CX02#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card."},"clauses":[{"rawText":"Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card.","cleanText":"Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-002":{"cardNumber":"BSC47-002","name":"The KamiumiBeast Jumoku-no-Shika","keywords":[],"abilities":[{"id":"BSC47-002#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you have less counter than the opponent, this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol."},"clauses":[{"rawText":"While you have less counter than the opponent, this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol.","cleanText":"this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol","link":null,"isOptional":false,"isCost":false,"condition":"While you have less counter than the opponent","duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"BSC47-002#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can put one core from the Void to any of your Spirit. Then, if you control any \"Izanagi & Izanami\", by banishing a card from the opposing Trash, your counter +1. If you have two counters or more, this \"Banish effect\" can't be prevented by opposing effects."},"clauses":[{"rawText":"You can put one core from the Void to any of your Spirit.","cleanText":"You can put one core from the Void to any of your Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"if you control any \"Izanagi & Izanami\", by banishing a card from the opposing Trash, your counter +1.","cleanText":"by banishing a card from the opposing Trash, your counter +1","link":"then","isOptional":false,"isCost":false,"condition":"if you control any \"Izanagi & Izanami\"","duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"If you have two counters or more, this \"Banish effect\" can't be prevented by opposing effects.","cleanText":"this \"Banish effect\" can't be prevented by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"If you have two counters or more","duration":null,"op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-003":{"cardNumber":"BSC47-003","name":"The KamiumiBeast Ooyabiko","keywords":[],"abilities":[{"id":"BSC47-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Mani: \"Contractors Izanagi & Izanami\", (Either Attack Step)","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"pay one cost from the target to summon this card from the Hand.","cleanText":"pay one cost from the target to summon this card from the Hand","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_PAY","from":"HAND"}}],"unsupported":[]},{"id":"BSC47-003#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\". Then, when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses. If this Spirit has three or more cores on it, this \"Exhaustion Effect\" can't be prevented by opposing effects."},"clauses":[{"rawText":"You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\".","cleanText":"You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\"","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses.","cleanText":"when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":true,"count":2,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"If this Spirit has three or more cores on it, this \"Exhaustion Effect\" can't be prevented by opposing effects.","cleanText":"this \"Exhaustion Effect\" can't be prevented by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"If this Spirit has three or more cores on it","duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-CX01":{"cardNumber":"BSC47-CX01","name":"The OriginContractors Izanagi & Izanami","keywords":[{"name":"Neo-Core Charge","parameter":"(Spiritual Beast/Plant Spirit/Devotee/Concluser & Cost 3 or more)","wave":3,"hook":"neo_core_charge","bracketed":true,"index":0},{"name":"Revive","parameter":null,"wave":3,"hook":"revive","bracketed":true,"index":326},{"name":"Contract Field","parameter":null,"wave":3,"hook":"contract_field","bracketed":true,"index":502}],"abilities":[{"id":"BSC47-CX01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Neo-Core Charge:: (Spiritual Beast/Plant Spirit/Devotee/Concluser & Cost 3 or more)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-CX01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When your target Spirit is summoned, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When your target Spirit is summoned, you can +1 core to this Nexus.","cleanText":"When your target Spirit is summoned, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE"}}],"unsupported":[]},{"id":"BSC47-CX01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":3,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"BSC47-CX01#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Revive","burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"You can deploy this card from Soul State."},"clauses":[{"rawText":"You can deploy this card from Soul State.","cleanText":"You can deploy this card from Soul State","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX01#a4","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\"."},"clauses":[{"rawText":"This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\".","cleanText":"This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"BSC47-CX01#a5","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect."},"clauses":[{"rawText":"This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect.","cleanText":"This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"BSC47-CX01#a6","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 4"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand. Or, summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash."},"clauses":[{"rawText":"(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand.","cleanText":"(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash.","cleanText":"summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-006":{"cardNumber":"BSC47-006","name":"The ProphetIceAngelia Harun","keywords":[{"name":"Burst","parameter":"After your Spirit is Depleted/Destroyed by the Opponent","wave":2,"hook":"burst","bracketed":true,"index":127}],"abilities":[{"id":"BSC47-006#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card."},"clauses":[{"rawText":"When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card.","cleanText":"When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}}],"unsupported":[]},{"id":"BSC47-006#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT","isFlash":false,"isMain":false,"cleanBody":"Summon this card without paying the cost."},"clauses":[{"rawText":"Summon this card without paying the cost.","cleanText":"Summon this card without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"BSC47-006#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"you can reveal two cards from the decktop. Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost. Discard any remaining cards."},"clauses":[{"rawText":"you can reveal two cards from the decktop.","cleanText":"you can reveal two cards from the decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":2,"upTo":true}},{"rawText":"Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost.","cleanText":"Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-004":{"cardNumber":"BSC47-004","name":"The SorcererIceAngelia Soravis","keywords":[{"name":"Heavy Armor","parameter":"Red/White","wave":1,"hook":"heavy_armor","bracketed":true,"index":280}],"abilities":[{"id":"BSC47-004#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to this Spirit. Then, by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses."},"clauses":[{"rawText":"Put a core from the Void to this Spirit.","cleanText":"Put a core from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}},{"rawText":"by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses.","cleanText":"by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"BSC47-004#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\""},"clauses":[{"rawText":"Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\"","cleanText":"Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"IMMUNITY"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-CX04":{"cardNumber":"BSC47-CX04","name":"The SpacetimeContractor Chronos","keywords":[{"name":"Neo-Core Charge","parameter":"(Chrownos/Devotee/Concluser & Cost 3 or more) (Chrownos & Nexus)","wave":3,"hook":"neo_core_charge","bracketed":true,"index":0},{"name":"Revive","parameter":null,"wave":3,"hook":"revive","bracketed":true,"index":340},{"name":"Contract Field","parameter":null,"wave":3,"hook":"contract_field","bracketed":true,"index":743}],"abilities":[{"id":"BSC47-CX04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Neo-Core Charge:: (Chrownos/Devotee/Concluser & Cost 3 or more) (Chrownos & Nexus)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"BSC47-CX04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus.","cleanText":"When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX04#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":3,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"BSC47-CX04#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":"ONCE_PER_TURN_SAME_NAME","cantStack":false,"keyword":"Revive","burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"You can deploy this card from Soul State."},"clauses":[{"rawText":"You can deploy this card from Soul State.","cleanText":"You can deploy this card from Soul State","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX04#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 3"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1. Then, draw a card, and then discard a card from your Hand. For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it."},"clauses":[{"rawText":"(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1.","cleanText":"(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_COUNTER","count":1}},{"rawText":"draw a card, and then discard a card from your Hand.","cleanText":"draw a card, and then discard a card from your Hand","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it.","cleanText":"For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]},{"id":"BSC47-CX04#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control."},"clauses":[{"rawText":"when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control.","cleanText":"when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":8,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-009":{"cardNumber":"BSC47-009","name":"The TimeNavigator Watcha","keywords":[],"abilities":[{"id":"BSC47-009#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal five cards from your decktop. Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand, and send up to two \"Chrownos\" family cards to the Trash. Return any remaining cards to the deckbottom."},"clauses":[{"rawText":"You can reveal five cards from your decktop.","cleanText":"You can reveal five cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":5}},{"rawText":"Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand","cleanText":"Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"send up to two \"Chrownos\" family cards to the Trash.","cleanText":"send up to two \"Chrownos\" family cards to the Trash","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}},{"rawText":"Return any remaining cards to the deckbottom.","cleanText":"Return any remaining cards to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REVEALED_BOTTOM"}}],"unsupported":[]},{"id":"BSC47-009#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While your Hand is five or less, your Hand is unaffected by opposing effects."},"clauses":[{"rawText":"While your Hand is five or less, your Hand is unaffected by opposing effects.","cleanText":"your Hand is unaffected by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"While your Hand is five or less","duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"BSC47-007":{"cardNumber":"BSC47-007","name":"The WaterLilyGoddess Ganga","keywords":[],"abilities":[{"id":"BSC47-007#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand"},"clauses":[{"rawText":"When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand","cleanText":"When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]},{"id":"BSC47-007#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand. Return any remaining card to the deckbottom."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand.","cleanText":"Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Return any remaining card to the deckbottom.","cleanText":"Return any remaining card to the deckbottom","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RETURN_REMAINING_TO_DECK","position":"bottom"}}],"unsupported":[]},{"id":"BSC47-007#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand."},"clauses":[{"rawText":"You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand.","cleanText":"You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "BSC47-008": {
+    "cardNumber": "BSC47-008",
+    "name": "Muruga-ChickenKnight",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 3 ([Yellow Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Yellow Core][Yellow Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "WHEN_SET",
+          "timingLabel": "When Set",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled.",
+            "cleanText": "when you're summoning/deploying \"Parvati\", or \"Hunter Beast\" family cards, treat one of its [Yellow Core] reduction symbols as fulfilled",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-008#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life is reduced, you can send a card from your decktop to the Trash. If that card is \"Parvati\", or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP, and destroy it when it is brought to 0 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life is reduced, you can send a card from your decktop to the Trash.",
+            "cleanText": "When your Life is reduced, you can send a card from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 1,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "If that card is \"Parvati\", or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP",
+            "cleanText": "or a \"Devotee\"/\"Hunter Beast\" family card, during this turn, give an opposing Spirit -10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If that card is \"Parvati\"",
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 10000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          },
+          {
+            "rawText": "destroy it when it is brought to 0 BP.",
+            "cleanText": "destroy it when it is brought to 0 BP",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-X03": {
+    "cardNumber": "BSC47-X03",
+    "name": "The FusionDeity Ardhanarishvara",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 110
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-X03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it.",
+            "cleanText": "When this card is sent to the Trash by your Yellow Mirage effect, treat it as Cost 4, and you can summon it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1"
+          ],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost. When you've done so, (Once per Turn: Same Name) by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost.",
+            "cleanText": "You can summon a \"Hunter Beast\" family Mirage card from your Hand/Mirage without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect.",
+            "cleanText": "by sending one core from any of your Yellow Grandwalker Nexus to this Spirit, during this turn, this Spirit activates the Mirage effects that activate at (Your Attack Step) of the target summoned by this effect",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent can't end the Attack Step via effects."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent can't end the Attack Step via effects.",
+            "cleanText": "The opponent can't end the Attack Step via effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-X01": {
+    "cardNumber": "BSC47-X01",
+    "name": "The KamiumiYomiBird Amenotorifune",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Nexus' (When Summoned/Deployed) effect resolves",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 354
+      },
+      {
+        "name": "Yomi Unleash",
+        "parameter": null,
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 702
+      },
+      {
+        "name": "Kamiumi Unleash",
+        "parameter": null,
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 717
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Burst: After an opposing Spirit/Nexus' (When Summoned/Deployed) effect resolves",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this card without paying the cost. Then, draw two cards. Then, by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this card without paying the cost.",
+            "cleanText": "Summon this card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          },
+          {
+            "rawText": "draw two cards.",
+            "cleanText": "draw two cards",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve.",
+            "cleanText": "by sending one core from any of your \"Izanami\" Grandwalker Nexus to this Spirit, send up to two cores from the opposing Field to the Reserve",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Burst: After your Life is reduced",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this card without paying the cost. Then, by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this card without paying the cost.",
+            "cleanText": "Summon this card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          },
+          {
+            "rawText": "by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits.",
+            "cleanText": "by sending one core from any of your \"Izanagi\" Grandwalker Nexus to this Spirit, heavy exhaust up to two opposing Spirits",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control any \"Izanagi & Izanami\", you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash]."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any \"Izanagi & Izanami\", you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash].",
+            "cleanText": "you can activate one of this Spirit's [Yomi Unleash]/[Kamiumi Unleash]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If you control any \"Izanagi & Izanami\"",
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_EFFECT_ACTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-001": {
+    "cardNumber": "BSC47-001",
+    "name": "The YomiThunderGod Toyofutsu",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 460
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractors Izanagi & Izanami\" & C1 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can draw two cards. Then, for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "You can draw two cards.",
+            "cleanText": "You can draw two cards",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1.",
+            "cleanText": "for every three cards in your Hand, during this turn, you can increase the LV cost of a single opposing Spirit/Nexus by +1",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-001#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it.",
+            "cleanText": "When the opponent would use Magic card/[Accel], unless they send one core from their Reserve to the Trash for each \"Izanagi & Izanami\" you control, they can't use it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-X04": {
+    "cardNumber": "BSC47-X04",
+    "name": "Shin-Chronos-Returnal",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-X04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Chronos\" & C4 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "STEP_RESTRICTED",
+          "timingLabel": "When Manifests/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "T Unleash: 2",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can destroy an opposing Spirit with the highest cost. Then, you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit. When you've done so, your counter or the opposing counter gets -2."
+        },
+        "clauses": [
+          {
+            "rawText": "You can destroy an opposing Spirit with the highest cost.",
+            "cleanText": "You can destroy an opposing Spirit with the highest cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit.",
+            "cleanText": "you can send two cores from any of your \"Chronos\" Grandwalker Nexuses to this Spirit",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "your counter or the opposing counter gets -2.",
+            "cleanText": "your counter or the opposing counter gets -2",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CARD_RULE_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X04#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_GAME_SAME_NAME",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses, and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent."
+        },
+        "clauses": [
+          {
+            "rawText": "By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses",
+            "cleanText": "By flipping two of your \"Chrownos\" family Reborn Spirits/Reborn Braves/Reborn Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent.",
+            "cleanText": "and summoning/deploying them, paying one cost each, next turn doesn't occur for the opponent",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-X02": {
+    "cardNumber": "BSC47-X02",
+    "name": "The IceCreationDeityPrincess Fremia",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-X02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractors Fremia\" & C2 or more, (Your Turn)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "I Unleash: 1",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an opposing Spirit/Ultimate/Nexus to the Hand. Then, you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit. When you've done so, during this battle, this Spirit is unaffected by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Spirit/Ultimate/Nexus to the Hand.",
+            "cleanText": "Return an opposing Spirit/Ultimate/Nexus to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit.",
+            "cleanText": "you can send a core from any of your \"Fremia\" Grandwalker Nexus to this Spirit",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this battle, this Spirit is unaffected by opposing effects.",
+            "cleanText": "this Spirit is unaffected by opposing effects",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-X02#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control.",
+            "cleanText": "When the opposing Hand increases via an effect, you can refresh an \"Ice Princess\" family Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-011": {
+    "cardNumber": "BSC47-011",
+    "name": "Pink Lotus",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-011#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Hunter Beast & Cost 4 or more\n\"The AffectionContractor Parvati\"]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-011#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "During Spirit Brave",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give an opposing Spirit -7000 BP, and destroy it when it is brought to 0 BP. When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give an opposing Spirit -7000 BP",
+            "cleanText": "give an opposing Spirit -7000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 7000,
+              "target": "PREVIOUS_TARGET",
+              "duration": "DURING_THIS_TURN"
+            }
+          },
+          {
+            "rawText": "destroy it when it is brought to 0 BP.",
+            "cleanText": "destroy it when it is brought to 0 BP",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop.",
+            "cleanText": "When this effect destroys, draw two cards from the deckbottom, then return a card from your Hand to the decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-011#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "During Nexus Brave",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses.",
+            "cleanText": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as a \"Hunter Beast\" family Spirit with [LV1][LV2] 5000 BP, and can only be destroyed by Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-CX03": {
+    "cardNumber": "BSC47-CX03",
+    "name": "The AffectionContractor Parvati",
+    "keywords": [
+      {
+        "name": "Neo-Core Charge",
+        "parameter": "(Hunter Beast/Devotee/Concluser & Cost 3 or more) (Yellow & God Arms & Brave) (Rebirth Nexus)",
+        "wave": 3,
+        "hook": "neo_core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Revive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "revive",
+        "bracketed": true,
+        "index": 375
+      },
+      {
+        "name": "Contract Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "contract_field",
+        "bracketed": true,
+        "index": 708
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-CX03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Neo-Core Charge:: (Hunter Beast/Devotee/Concluser & Cost 3 or more) (Yellow & God Arms & Brave) (Rebirth Nexus)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus.",
+            "cleanText": "When your target Spirit/Brave/Nexus is summoned/deployed, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX03#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Revive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "You can deploy this card from Soul State."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy this card from Soul State.",
+            "cleanText": "You can deploy this card from Soul State",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX03#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost. When you've done so, during this turn, an opposing Spirit can't block."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost.",
+            "cleanText": "(Once per turn, send three cores from this Nexus to the Void) You can set a \"Hunter Beast\" family Mirage card from your Hand/Trash without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "during this turn, an opposing Spirit can't block.",
+            "cleanText": "an opposing Spirit can't block",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX03#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom. Then, you can return a card from your Hand to the decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom.",
+            "cleanText": "when your \"Hunter Beast\" family Spirit attacks, you can draw a card from the deckbottom",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "you can return a card from your Hand to the decktop.",
+            "cleanText": "you can return a card from your Hand to the decktop",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-005": {
+    "cardNumber": "BSC47-005",
+    "name": "The CavalryIceAngelia Ifessa",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 3 ([White Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([White Core][White Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost.",
+            "cleanText": "when your \"Ice Princess\" family Spirit is refreshed via your effect, you can summon an \"Ice Princess\" family Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-005#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by returning an opposing Spirit/Nexus to the Hand, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning an opposing Spirit/Nexus to the Hand",
+            "cleanText": "By returning an opposing Spirit/Nexus to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "refresh this Spirit.",
+            "cleanText": "refresh this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-010": {
+    "cardNumber": "BSC47-010",
+    "name": "The DimensionDragon Uradinos",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Ultimate attacks",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 133
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-010#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card."
+        },
+        "clauses": [
+          {
+            "rawText": "When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card.",
+            "cleanText": "When \"Chrownos\" family cards are returned from your Trash to your deck via your effect, you can immediately activate this set card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-010#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_ATTACK",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus. When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target. After this effect resolves, summon this card, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus.",
+            "cleanText": "Put a core from the Void to any of your \"Chrownos\" family Spirit/Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target.",
+            "cleanText": "When core is put onto any originally Cost 9 or less pre-Rebirth Spirit/pre-Rebirth Nexus via this effect, you can flip the target",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          },
+          {
+            "rawText": "summon this card, without paying the cost.",
+            "cleanText": "summon this card, without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-010#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send three cores from any opposing Grandwalker Nexuses to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "Send three cores from any opposing Grandwalker Nexuses to the Void.",
+            "cleanText": "Send three cores from any opposing Grandwalker Nexuses to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-CX02": {
+    "cardNumber": "BSC47-CX02",
+    "name": "The IceCreationContractor Fremia",
+    "keywords": [
+      {
+        "name": "Neo-Core Charge",
+        "parameter": "(Ice Princess/Devotee/Concluser & Cost 3 or more) (Rebirth Nexus)",
+        "wave": 3,
+        "hook": "neo_core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Revive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "revive",
+        "bracketed": true,
+        "index": 341
+      },
+      {
+        "name": "Contract Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "contract_field",
+        "bracketed": true,
+        "index": 671
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-CX02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Neo-Core Charge:: (Ice Princess/Devotee/Concluser & Cost 3 or more) (Rebirth Nexus)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus.",
+            "cleanText": "When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX02#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX02#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Revive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "You can deploy this card from Soul State."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy this card from Soul State.",
+            "cleanText": "You can deploy this card from Soul State",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX02#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand. If you have two counters or more, instead, return an opposing Spirit/Ultimate to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand.",
+            "cleanText": "(Send three cores from this Nexus to the Void) Return an opposing Cost 6 or less Spirit/Ultimate to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "If you have two counters or more, instead, return an opposing Spirit/Ultimate to the Hand.",
+            "cleanText": "return an opposing Spirit/Ultimate to the Hand",
+            "link": "instead",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have two counters or more",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX02#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card.",
+            "cleanText": "Once per step, when the opposing Hand increases via an effect, if your Hand is four or less, you can draw a card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-002": {
+    "cardNumber": "BSC47-002",
+    "name": "The KamiumiBeast Jumoku-no-Shika",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have less counter than the opponent, this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have less counter than the opponent, this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol.",
+            "cleanText": "this card in your Hand/Removed Zone gains an extra [Purple Core] reduction symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have less counter than the opponent",
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can put one core from the Void to any of your Spirit. Then, if you control any \"Izanagi & Izanami\", by banishing a card from the opposing Trash, your counter +1. If you have two counters or more, this \"Banish effect\" can't be prevented by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "You can put one core from the Void to any of your Spirit.",
+            "cleanText": "You can put one core from the Void to any of your Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "if you control any \"Izanagi & Izanami\", by banishing a card from the opposing Trash, your counter +1.",
+            "cleanText": "by banishing a card from the opposing Trash, your counter +1",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you control any \"Izanagi & Izanami\"",
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "If you have two counters or more, this \"Banish effect\" can't be prevented by opposing effects.",
+            "cleanText": "this \"Banish effect\" can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have two counters or more",
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-003": {
+    "cardNumber": "BSC47-003",
+    "name": "The KamiumiBeast Ooyabiko",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractors Izanagi & Izanami\", (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-003#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\". Then, when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses. If this Spirit has three or more cores on it, this \"Exhaustion Effect\" can't be prevented by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\".",
+            "cleanText": "You can put a core from the Void to any of your \"Yomi\"/\"Kamiumi\"",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses.",
+            "cleanText": "when summoned via an effect, you can heavy exhaust two opposing Spirits/Ultimates/Grandwalker Nexuses",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": true,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "If this Spirit has three or more cores on it, this \"Exhaustion Effect\" can't be prevented by opposing effects.",
+            "cleanText": "this \"Exhaustion Effect\" can't be prevented by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If this Spirit has three or more cores on it",
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-CX01": {
+    "cardNumber": "BSC47-CX01",
+    "name": "The OriginContractors Izanagi & Izanami",
+    "keywords": [
+      {
+        "name": "Neo-Core Charge",
+        "parameter": "(Spiritual Beast/Plant Spirit/Devotee/Concluser & Cost 3 or more)",
+        "wave": 3,
+        "hook": "neo_core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Revive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "revive",
+        "bracketed": true,
+        "index": 326
+      },
+      {
+        "name": "Contract Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "contract_field",
+        "bracketed": true,
+        "index": 502
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-CX01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Neo-Core Charge:: (Spiritual Beast/Plant Spirit/Devotee/Concluser & Cost 3 or more)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When your target Spirit is summoned, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When your target Spirit is summoned, you can +1 core to this Nexus.",
+            "cleanText": "When your target Spirit is summoned, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Revive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "You can deploy this card from Soul State."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy this card from Soul State.",
+            "cleanText": "You can deploy this card from Soul State",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\"."
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\".",
+            "cleanText": "This card/Nexus is also treated as being exactly-named \"Grandwalkers Izanagi & Izanami\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect."
+        },
+        "clauses": [
+          {
+            "rawText": "This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect.",
+            "cleanText": "This non-braved Nexus is unaffected by opposing originally Cost 5 or less effect",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX01#a6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand. Or, summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand.",
+            "cleanText": "(Once per turn, send four cores from this Nexus to the Void) Return a \"Yomi\"/\"Kamiumi\" from your Trash to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash.",
+            "cleanText": "summon a \"Yomi\"/\"Kamiumi\" from your Hand/Trash",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-006": {
+    "cardNumber": "BSC47-006",
+    "name": "The ProphetIceAngelia Harun",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Spirit is Depleted/Destroyed by the Opponent",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 127
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card.",
+            "cleanText": "When your \"Ice Princess\" family Spirit attacks, if you have two counters or more, you can immediately activate this set card",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon this card without paying the cost.",
+            "cleanText": "Summon this card without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-006#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can reveal two cards from the decktop. Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "you can reveal two cards from the decktop.",
+            "cleanText": "you can reveal two cards from the decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 2,
+              "upTo": true
+            }
+          },
+          {
+            "rawText": "Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost.",
+            "cleanText": "Among them, you can summon/deploy an \"Ice Princess\" family card, besides \"The ProphetIceAngelia Harun\", without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-004": {
+    "cardNumber": "BSC47-004",
+    "name": "The SorcererIceAngelia Soravis",
+    "keywords": [
+      {
+        "name": "Heavy Armor",
+        "parameter": "Red/White",
+        "wave": 1,
+        "hook": "heavy_armor",
+        "bracketed": true,
+        "index": 280
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to this Spirit. Then, by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to this Spirit.",
+            "cleanText": "Put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          },
+          {
+            "rawText": "by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses.",
+            "cleanText": "by sending a core from any of your \"Contractor Fremia\" Grandwalker Nexuses to the Void, +1 core to one of your White-only Grandstone Nexuses",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-004#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\"",
+            "cleanText": "Give all your \"Ice Princess\" family Spirits the effect: \"[Heavy Armor: Red/White] This Spirit is unaffected by opposing Red/White Spirit/Brave/Nexus/Magic effects.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-CX04": {
+    "cardNumber": "BSC47-CX04",
+    "name": "The SpacetimeContractor Chronos",
+    "keywords": [
+      {
+        "name": "Neo-Core Charge",
+        "parameter": "(Chrownos/Devotee/Concluser & Cost 3 or more) (Chrownos & Nexus)",
+        "wave": 3,
+        "hook": "neo_core_charge",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Revive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "revive",
+        "bracketed": true,
+        "index": 340
+      },
+      {
+        "name": "Contract Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "contract_field",
+        "bracketed": true,
+        "index": 743
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BSC47-CX04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Neo-Core Charge:: (Chrownos/Devotee/Concluser & Cost 3 or more) (Chrownos & Nexus)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus.",
+            "cleanText": "When your target Spirit/Nexus is summoned/deployed, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX04#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆(Once per Turn: Same Name) When this Nexus is deployed, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆ When this Nexus is deployed, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX04#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN_SAME_NAME",
+          "cantStack": false,
+          "keyword": "Revive",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "You can deploy this card from Soul State."
+        },
+        "clauses": [
+          {
+            "rawText": "You can deploy this card from Soul State.",
+            "cleanText": "You can deploy this card from Soul State",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX04#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1. Then, draw a card, and then discard a card from your Hand. For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1.",
+            "cleanText": "(Once per turn, send three cores from this Nexus to the Void) Your counter +1/-1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_COUNTER",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "draw a card, and then discard a card from your Hand.",
+            "cleanText": "draw a card, and then discard a card from your Hand",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it.",
+            "cleanText": "For any \"Chrownos\" family card to be discarded via this effect, instead of sending it to the Trash, you can summon/[Mani]/deploy it",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-CX04#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control.",
+            "cleanText": "when your \"Chrownos\" family Spirit/Nexus is summoned/deployed/reborn, you can refresh a Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BS73-056": {
+    "cardNumber": "BS73-056",
+    "name": "The SpacetimeKnightOrderCaptain Lowig",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS73-056#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Mani: \"Contractor Chronos\" & C1 or more, (Either Attack Step)",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, pay one cost from the target to summon this card from the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "pay one cost from the target to summon this card from the Hand.",
+            "cleanText": "pay one cost from the target to summon this card from the Hand",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_PAY",
+              "from": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS73-056#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when this Spirit would leave the Field due to opposing effects, by -1 your counter or the opposing counter, it remains on the Field, refreshed."
+        },
+        "clauses": [
+          {
+            "rawText": "when this Spirit would leave the Field due to opposing effects, by -1 your counter or the opposing counter, it remains on the Field, refreshed.",
+            "cleanText": "when this Spirit would leave the Field due to opposing effects, by -1 your counter or the opposing counter, it remains on the Field, refreshed",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS73-056#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing Spirits/Ultimates attack/block, you can +1 core to one of your \"Chronos\" Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits/Ultimates attack/block, you can +1 core to one of your \"Chronos\" Grandwalker Nexuses.",
+            "cleanText": "When opposing Spirits/Ultimates attack/block, you can +1 core to one of your \"Chronos\" Grandwalker Nexuses",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_ACTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BS74-063": {
+    "cardNumber": "BS74-063",
+    "name": "The TimeBeast Chrono-Dile",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS74-063#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life would be reduced by an opposing effect, if you control any \"Contractor Chronos\", by returning this card from your Trash to the deckbottom, you reduce -1 Life. When you've done so, after that opposing effect resolves, immediately end this step."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life would be reduced by an opposing effect, if you control any \"Contractor Chronos\", by returning this card from your Trash to the deckbottom, you reduce -1 Life.",
+            "cleanText": "When your Life would be reduced by an opposing effect, if you control any \"Contractor Chronos\", by returning this card from your Trash to the deckbottom, you reduce -1 Life",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "after that opposing effect resolves, immediately end this step.",
+            "cleanText": "after that opposing effect resolves, immediately end this step",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "END_STEP"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS74-063#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your \"Chrownos\" family Spirit is attacking, the opposing counter is treated as 5, and can't increase nor decrease."
+        },
+        "clauses": [
+          {
+            "rawText": "While your \"Chrownos\" family Spirit is attacking, the opposing counter is treated as 5, and can't increase nor decrease.",
+            "cleanText": "the opposing counter is treated as 5, and can't increase nor decrease",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your \"Chrownos\" family Spirit is attacking",
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS74-063#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can flip a \"Chrownos\" family pre-rebirth Spirit/pre-rebirth Nexus you control."
+        },
+        "clauses": [
+          {
+            "rawText": "you can flip a \"Chrownos\" family pre-rebirth Spirit/pre-rebirth Nexus you control.",
+            "cleanText": "you can flip a \"Chrownos\" family pre-rebirth Spirit/pre-rebirth Nexus you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-009": {
+    "cardNumber": "BSC47-009",
+    "name": "The TimeNavigator Watcha",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-009#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal five cards from your decktop. Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand, and send up to two \"Chrownos\" family cards to the Trash. Return any remaining cards to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal five cards from your decktop.",
+            "cleanText": "You can reveal five cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 5
+            }
+          },
+          {
+            "rawText": "Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand",
+            "cleanText": "Among them, add a \"Chronos\", or a \"Chrownos\" family Rebirth card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "send up to two \"Chrownos\" family cards to the Trash.",
+            "cleanText": "send up to two \"Chrownos\" family cards to the Trash",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_FAMILY"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the deckbottom.",
+            "cleanText": "Return any remaining cards to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REVEALED_BOTTOM"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-009#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your Hand is five or less, your Hand is unaffected by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "While your Hand is five or less, your Hand is unaffected by opposing effects.",
+            "cleanText": "your Hand is unaffected by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your Hand is five or less",
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BSC47-007": {
+    "cardNumber": "BSC47-007",
+    "name": "The WaterLilyGoddess Ganga",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BSC47-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand"
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand",
+            "cleanText": "When this card is sent to the Trash by your Yellow Mirage effects, you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand. Return any remaining card to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand.",
+            "cleanText": "Among them, add either a \"Parvati\" Grandwalker Nexus card, or a \"Concluser\" family card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining card to the deckbottom.",
+            "cleanText": "Return any remaining card to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REMAINING_TO_DECK",
+              "position": "bottom"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BSC47-007#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand.",
+            "cleanText": "You can add a \"Hunter Beast\" family Mirage card revealed from deck by this Spirit's effect to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

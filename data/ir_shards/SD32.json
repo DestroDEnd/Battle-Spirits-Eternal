@@ -1,1 +1,697 @@
-{"SD32-005":{"cardNumber":"SD32-005","name":"Origamiantler","keywords":[{"name":"Brave","parameter":"Cost 4 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SD32-005#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 4 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"SD32-005#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send a core from any opposing Spirits to their Reserve. Then, put a core from the Void to your White Spirit with Soul Core on it."},"clauses":[{"rawText":"Send a core from any opposing Spirits to their Reserve.","cleanText":"Send a core from any opposing Spirits to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"field","side":"opp","types":["Spirit"]},"to":{"zone":"reserve","side":"opp"},"chooser":"self"}},{"rawText":"put a core from the Void to your White Spirit with Soul Core on it.","cleanText":"put a core from the Void to your White Spirit with Soul Core on it","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-002":{"cardNumber":"SD32-002","name":"Ichibanspear","keywords":[],"abilities":[{"id":"SD32-002#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Red."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Red.","cleanText":"This Spirit's color and symbol are also treated as Red","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Red"}}],"unsupported":[]},{"id":"SD32-002#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6."},"clauses":[{"rawText":"Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6.","cleanText":"Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"SD32-002#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Red/White/Blue\nThis Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects."},"clauses":[{"rawText":"Red/White/Blue","cleanText":"Red/White/Blue","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CHOOSE_COLOR"}},{"rawText":"This Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects.","cleanText":"This Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"IMMUNITY"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-004":{"cardNumber":"SD32-004","name":"The CleverMachineMusha Itekaze","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SD32-004#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT","isFlash":false,"isMain":false,"cleanBody":"Return an opposing Spirit to the Hand. After that effect resolves, summon this Spirit card without paying the cost."},"clauses":[{"rawText":"Return an opposing Spirit to the Hand.","cleanText":"Return an opposing Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"opp","types":["Spirit"]},"destination":"HAND"}},{"rawText":"summon this Spirit card without paying the cost.","cleanText":"summon this Spirit card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","from":"HAND"}}],"unsupported":[]},{"id":"SD32-004#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The color and symbol of this Spirit are also treated as Red/Purple."},"clauses":[{"rawText":"The color and symbol of this Spirit are also treated as Red/Purple.","cleanText":"The color and symbol of this Spirit are also treated as Red/Purple","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"SD32-004#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While there is [Soul Core](Soul Core) on this Spirit, all of your Spirits with two or more colors gain +3000 BP."},"clauses":[{"rawText":"While there is [Soul Core] on this Spirit, all of your Spirits with two or more colors gain +3000 BP.","cleanText":"all of your Spirits with two or more colors gain +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":"While there is [Soul Core] on this Spirit","duration":null,"op":{"op":"BP_BUFF","amount":3000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-003":{"cardNumber":"SD32-003","name":"The CleverMachineMusha Jako","keywords":[],"abilities":[{"id":"SD32-003#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return an opposing Spirit to the Hand. If there is Soul Core on another Red Spirit you control, also, draw a card from your deck."},"clauses":[{"rawText":"Return an opposing Spirit to the Hand.","cleanText":"Return an opposing Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"opp","types":["Spirit"]},"destination":"HAND"}},{"rawText":"If there is Soul Core on another Red Spirit you control, also, draw a card from your deck.","cleanText":"also, draw a card from your deck","link":null,"isOptional":false,"isCost":false,"condition":"If there is Soul Core on another Red Spirit you control","duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD32-003#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Red."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Red.","cleanText":"This Spirit's color and symbol are also treated as Red","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Red"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-X01":{"cardNumber":"SD32-X01","name":"The DarkKingGeneral Darkness-Griffon","keywords":[],"abilities":[{"id":"SD32-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For every color of symbol on your field, return one opposing Spirit/Ultimate to the hand. When [Soul Core](Soul Core) is used to pay the cost, all cores from the Spirits/Ultimates returned to the hand by this effect goes to the Trash rather than the Reserve."},"clauses":[{"rawText":"For every color of symbol on your field, return one opposing Spirit/Ultimate to the hand.","cleanText":"For every color of symbol on your field, return one opposing Spirit/Ultimate to the hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"When [Soul Core] is used to pay the cost, all cores from the Spirits/Ultimates returned to the hand by this effect goes to the Trash rather than the Reserve.","cleanText":"When [Soul Core] is used to pay the cost, all cores from the Spirits/Ultimates returned to the hand by this effect goes to the Trash rather than the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SD32-X01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"destroy an exhausted opposing Spirit, and refresh this Spirit."},"clauses":[{"rawText":"destroy an exhausted opposing Spirit","cleanText":"destroy an exhausted opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"refresh this Spirit.","cleanText":"refresh this Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-007":{"cardNumber":"SD32-007","name":"Demon King Blade","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SD32-007#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_ATTACK","isFlash":false,"isMain":false,"cleanBody":"For each symbol color you have, refresh a Spirit you control. Then, by paying the cost, activate this card's Flash effect."},"clauses":[{"rawText":"For each symbol color you have, refresh a Spirit you control.","cleanText":"For each symbol color you have, refresh a Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"]}}},{"rawText":"by paying the cost, activate this card's Flash effect.","cleanText":"by paying the cost, activate this card's Flash effect","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ACTIVATE_FLASH"}}],"unsupported":[]},{"id":"SD32-007#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Return an opposing Spirit to the Hand. While Soul Core is on your Red/Purple Spirit, also, draw a card."},"clauses":[{"rawText":"Return an opposing Spirit to the Hand.","cleanText":"Return an opposing Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"opp","types":["Spirit"]},"destination":"HAND"}},{"rawText":"While Soul Core is on your Red/Purple Spirit, also, draw a card.","cleanText":"also, draw a card","link":null,"isOptional":false,"isCost":false,"condition":"While Soul Core is on your Red/Purple Spirit","duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-X02":{"cardNumber":"SD32-X02","name":"The HeavenlyDemonKing God-Sechs","keywords":[{"name":"Six Heaven Rush","parameter":"3","wave":2,"hook":"rush","bracketed":true,"index":76}],"abilities":[{"id":"SD32-X02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit is unaffected by opposing Spirit/Magic effects.\n[Six Heaven Rush: 3]\nWhile you have three or more symbol colors, all opposing Spirits/Ultimates can't refresh."},"clauses":[{"rawText":"This Spirit is unaffected by opposing Spirit/Magic effects.","cleanText":"This Spirit is unaffected by opposing Spirit/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}},{"rawText":"[Six Heaven Rush: 3]","cleanText":"[Six Heaven Rush: 3]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"While you have three or more symbol colors, all opposing Spirits/Ultimates can't refresh.","cleanText":"all opposing Spirits/Ultimates can't refresh","link":null,"isOptional":false,"isCost":false,"condition":"While you have three or more symbol colors","duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"SD32-X02#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While [Soul Core] is on this Spirit, when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash."},"clauses":[{"rawText":"While [Soul Core] is on this Spirit, when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash.","cleanText":"when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash","link":null,"isOptional":false,"isCost":false,"condition":"While [Soul Core] is on this Spirit","duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-006":{"cardNumber":"SD32-006","name":"The Six Heaven Castle Dyed in Red","keywords":[],"abilities":[{"id":"SD32-006#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus' color and symbol are also treated as Purple."},"clauses":[{"rawText":"This Nexus' color and symbol are also treated as Purple.","cleanText":"This Nexus' color and symbol are also treated as Purple","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Purple"}}],"unsupported":[]},{"id":"SD32-006#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"DRAW_STEP","timingLabel":"Your Draw Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of cards you draw by +1. After you draw, discard a card from your Hand."},"clauses":[{"rawText":"Increase the number of cards you draw by +1.","cleanText":"Increase the number of cards you draw by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self"}},{"rawText":"After you draw, discard a card from your Hand.","cleanText":"After you draw, discard a card from your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","count":1,"upTo":false,"filter":null,"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD32-001":{"cardNumber":"SD32-001","name":"The Wandering Armor","keywords":[],"abilities":[{"id":"SD32-001#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD32-001#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as White."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as White.","cleanText":"This Spirit's color and symbol are also treated as White","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"White"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SD32-005": {
+    "cardNumber": "SD32-005",
+    "name": "Origamiantler",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD32-005#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send a core from any opposing Spirits to their Reserve. Then, put a core from the Void to your White Spirit with Soul Core on it."
+        },
+        "clauses": [
+          {
+            "rawText": "Send a core from any opposing Spirits to their Reserve.",
+            "cleanText": "Send a core from any opposing Spirits to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "field",
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "put a core from the Void to your White Spirit with Soul Core on it.",
+            "cleanText": "put a core from the Void to your White Spirit with Soul Core on it",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD32-002": {
+    "cardNumber": "SD32-002",
+    "name": "Ichibanspear",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD32-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as Red."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as Red.",
+            "cleanText": "This Spirit's color and symbol are also treated as Red",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Red"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6."
+        },
+        "clauses": [
+          {
+            "rawText": "Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6.",
+            "cleanText": "Treat all the exactly-named \"The HeavenlyDemonKing God-Sechs\" in your Hand as Cost 6",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-002#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Red/White/Blue\nThis Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "Red/White/Blue",
+            "cleanText": "Red/White/Blue",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHOOSE_COLOR"
+            }
+          },
+          {
+            "rawText": "This Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects.",
+            "cleanText": "This Spirit is unaffected by opposing Red/White/Blue Spirit/Ultimate/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD32-007": {
+    "cardNumber": "SD32-007",
+    "name": "Demon King Blade",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD32-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_ATTACK",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each symbol color you have, refresh a Spirit you control. Then, by paying the cost, activate this card's Flash effect."
+        },
+        "clauses": [
+          {
+            "rawText": "For each symbol color you have, refresh a Spirit you control.",
+            "cleanText": "For each symbol color you have, refresh a Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "by paying the cost, activate this card's Flash effect.",
+            "cleanText": "by paying the cost, activate this card's Flash effect",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ACTIVATE_FLASH"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Return an opposing Spirit to the Hand. While Soul Core is on your Red/Purple Spirit, also, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an opposing Spirit to the Hand.",
+            "cleanText": "Return an opposing Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "HAND"
+            }
+          },
+          {
+            "rawText": "While Soul Core is on your Red/Purple Spirit, also, draw a card.",
+            "cleanText": "also, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While Soul Core is on your Red/Purple Spirit",
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD32-X02": {
+    "cardNumber": "SD32-X02",
+    "name": "The HeavenlyDemonKing God-Sechs",
+    "keywords": [
+      {
+        "name": "Six Heaven Rush",
+        "parameter": "3",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 76
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD32-X02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Spirit/Magic effects.\n[Six Heaven Rush: 3]\nWhile you have three or more symbol colors, all opposing Spirits/Ultimates can't refresh."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Spirit/Magic effects.",
+            "cleanText": "This Spirit is unaffected by opposing Spirit/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          },
+          {
+            "rawText": "[Six Heaven Rush: 3]",
+            "cleanText": "[Six Heaven Rush: 3]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "While you have three or more symbol colors, all opposing Spirits/Ultimates can't refresh.",
+            "cleanText": "all opposing Spirits/Ultimates can't refresh",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have three or more symbol colors",
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-X02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While [Soul Core] is on this Spirit, when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "While [Soul Core] is on this Spirit, when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash.",
+            "cleanText": "when your Spirit with two or more colors attacks, send two cores from any opposing Spirits/Ultimates to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While [Soul Core] is on this Spirit",
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD32-006": {
+    "cardNumber": "SD32-006",
+    "name": "The Six Heaven Castle Dyed in Red",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD32-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus' color and symbol are also treated as Purple."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus' color and symbol are also treated as Purple.",
+            "cleanText": "This Nexus' color and symbol are also treated as Purple",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Purple"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "DRAW_STEP",
+          "timingLabel": "Your Draw Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of cards you draw by +1. After you draw, discard a card from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of cards you draw by +1.",
+            "cleanText": "Increase the number of cards you draw by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "After you draw, discard a card from your Hand.",
+            "cleanText": "After you draw, discard a card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD32-001": {
+    "cardNumber": "SD32-001",
+    "name": "The Wandering Armor",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD32-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD32-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as White."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as White.",
+            "cleanText": "This Spirit's color and symbol are also treated as White",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "White"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

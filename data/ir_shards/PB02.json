@@ -1,1 +1,1555 @@
-{"PB02-G04":{"cardNumber":"PB02-G04","name":"Godzilla (1994)","keywords":[],"abilities":[{"id":"PB02-G04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit/Ultimate with the lowest BP. When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control."},"clauses":[{"rawText":"Destroy an opposing Spirit/Ultimate with the lowest BP.","cleanText":"Destroy an opposing Spirit/Ultimate with the lowest BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control.","cleanText":"When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PB02-G04#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate."},"clauses":[{"rawText":"Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate.","cleanText":"Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"NEGATE_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G08":{"cardNumber":"PB02-G08","name":"Godzilla (2004)","keywords":[],"abilities":[{"id":"PB02-G08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash."},"clauses":[{"rawText":"When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash.","cleanText":"When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"PB02-G08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit/Ultimate. When you've done so, put a core from the Void to this Spirit, and refresh it."},"clauses":[{"rawText":"You can target and attack an opposing Spirit/Ultimate.","cleanText":"You can target and attack an opposing Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"put a core from the Void to this Spirit","cleanText":"put a core from the Void to this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}},{"rawText":"refresh it.","cleanText":"refresh it","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"PREVIOUS_TARGET"}}],"unsupported":[]},{"id":"PB02-G08#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol."},"clauses":[{"rawText":"When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol.","cleanText":"When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G10":{"cardNumber":"PB02-G10","name":"Atomic Breath","keywords":[],"abilities":[{"id":"PB02-G10#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand. When you've done so, put a core from the Void to any \"The God Incarnate Godzilla\" you control."},"clauses":[{"rawText":"When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand.","cleanText":"When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"put a core from the Void to any \"The God Incarnate Godzilla\" you control.","cleanText":"put a core from the Void to any \"The God Incarnate Godzilla\" you control","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PB02-G10#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy an opposing 8000 BP or less Spirit/Ultimate. Also, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, destroy an opposing 12000 BP or more Spirit/Ultimate."},"clauses":[{"rawText":"Destroy an opposing 8000 BP or less Spirit/Ultimate.","cleanText":"Destroy an opposing 8000 BP or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":8000}}}},{"rawText":"if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, destroy an opposing 12000 BP or more Spirit/Ultimate.","cleanText":"destroy an opposing 12000 BP or more Spirit/Ultimate","link":"also","isOptional":false,"isCost":false,"condition":"if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G02":{"cardNumber":"PB02-G02","name":"Godzilla (2016) Second Form","keywords":[],"abilities":[{"id":"PB02-G02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\""},"clauses":[{"rawText":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\"","cleanText":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PB02-G02#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand.","cleanText":"Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]},{"id":"PB02-G02#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols."},"clauses":[{"rawText":"When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols.","cleanText":"When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DEPLOY_NEXUS","free":true}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G01":{"cardNumber":"PB02-G01","name":"The FlyingGreatKaiju Rodan (1964)","keywords":[{"name":"Accel","parameter":"Cost 4([Red Core","wave":2,"hook":"accel","bracketed":true,"index":7}],"abilities":[{"id":"PB02-G01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Green Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy an opposing Nexus. When this effect destroys, draw a card. After this effect resolves, put this card face-up on your Removed Zone. If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, instead of putting it on the Removed Zone, you can summon it, without paying the cost."},"clauses":[{"rawText":"Destroy an opposing Nexus.","cleanText":"Destroy an opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}},{"rawText":"When this effect destroys, draw a card.","cleanText":"When this effect destroys, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"put this card face-up on your Removed Zone.","cleanText":"put this card face-up on your Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_OR_HAND_ACTION"}},{"rawText":"If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, instead of putting it on the Removed Zone, you can summon it, without paying the cost.","cleanText":"instead of putting it on the Removed Zone, you can summon it, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":"If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus","duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G09":{"cardNumber":"PB02-G09","name":"The God Incarnate Godzilla","keywords":[{"name":"Core Charge","parameter":"(\"Godzilla\")","wave":3,"hook":"core_charge","bracketed":true,"index":12},{"name":"Grand Field","parameter":null,"wave":3,"hook":"grand_field","bracketed":true,"index":596}],"abilities":[{"id":"PB02-G09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"GPGWrule","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PB02-G09#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (\"Godzilla\")","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PB02-G09#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you Summon/Advent a target Spirit, you can +1 core to this Nexus."},"clauses":[{"rawText":"◆When you Summon/Advent a target Spirit, you can +1 core to this Nexus.","cleanText":"When you Summon/Advent a target Spirit, you can +1 core to this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"PB02-G09#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, +1 core to this Nexus.","cleanText":"For each target card among them, +1 core to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_ADD","count":1}}],"unsupported":[]},{"id":"PB02-G09#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus' symbols are also treated as Red."},"clauses":[{"rawText":"This Nexus' symbols are also treated as Red.","cleanText":"This Nexus' symbols are also treated as Red","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PB02-G09#a5","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 4"],"timing":"START_OF_ATTACK_STEP","timingLabel":"Start of Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses."},"clauses":[{"rawText":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses.","cleanText":"(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PB02-G09#a6","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Field"],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate."},"clauses":[{"rawText":"When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate.","cleanText":"When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G07":{"cardNumber":"PB02-G07","name":"The InfantIslandGuardian Mothra (1966)","keywords":[],"abilities":[{"id":"PB02-G07#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control."},"clauses":[{"rawText":"Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control.","cleanText":"Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PB02-G07#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted."},"clauses":[{"rawText":"When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted.","cleanText":"When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"PB02-G07#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The opposing Burst can't activate."},"clauses":[{"rawText":"The opposing Burst can't activate.","cleanText":"The opposing Burst can't activate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BURST_LOCK","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G03":{"cardNumber":"PB02-G03","name":"The RowdyDinosaur Anguirus (1968)","keywords":[],"abilities":[{"id":"PB02-G03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's color and symbol are also treated as Green."},"clauses":[{"rawText":"This Spirit's color and symbol are also treated as Green.","cleanText":"This Spirit's color and symbol are also treated as Green","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_COLOR_SYMBOL","color":"Green"}}],"unsupported":[]},{"id":"PB02-G03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This exhausted Spirit is unaffected by opposing Spirit/Nexus effects."},"clauses":[{"rawText":"This exhausted Spirit is unaffected by opposing Spirit/Nexus effects.","cleanText":"This exhausted Spirit is unaffected by opposing Spirit/Nexus effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"PB02-G03#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes.","cleanText":"At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G05":{"cardNumber":"PB02-G05","name":"The SpaceSuperKaiju King Ghidorah (1968)","keywords":[{"name":"Advent","parameter":"Red & Cost 4 or more","wave":2,"hook":"advent","bracketed":true,"index":8}],"abilities":[{"id":"PB02-G05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step)","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Red & Cost 4 or more","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from your Hand onto your target Spirit.","cleanText":"stack this from your Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"PB02-G05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 10000 BP or less Spirit/Ultimate. The effects of the Spirit/Ultimate destroyed by this effect can't activate."},"clauses":[{"rawText":"Destroy an opposing 10000 BP or less Spirit/Ultimate.","cleanText":"Destroy an opposing 10000 BP or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":10000}}}},{"rawText":"The effects of the Spirit/Ultimate destroyed by this effect can't activate.","cleanText":"The effects of the Spirit/Ultimate destroyed by this effect can't activate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"NEGATE_EFFECT"}}],"unsupported":[]},{"id":"PB02-G05#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes."},"clauses":[{"rawText":"Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes.","cleanText":"Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB02-G06":{"cardNumber":"PB02-G06","name":"The SpaceViciousBattleBeast Space Godzilla","keywords":[{"name":"Burst","parameter":"After your Life is reduced","wave":2,"hook":"burst","bracketed":true,"index":82}],"abilities":[{"id":"PB02-G06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\""},"clauses":[{"rawText":"This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\"","cleanText":"This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PB02-G06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"Destroy two opposing one-symbol Spirits/Ultimates. The effects of Spirits/Ultimates destroyed by this effect can't activate. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"Destroy two opposing one-symbol Spirits/Ultimates.","cleanText":"Destroy two opposing one-symbol Spirits/Ultimates","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":2,"target":{"side":"opp","types":["Spirit"],"filters":{"symbolCount":1}}}},{"rawText":"The effects of Spirits/Ultimates destroyed by this effect can't activate.","cleanText":"The effects of Spirits/Ultimates destroyed by this effect can't activate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"NEGATE_EFFECT"}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"PB02-G06#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you control any Nexus, this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects."},"clauses":[{"rawText":"While you control any Nexus, this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects.","cleanText":"this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"While you control any Nexus","duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PB02-G04": {
+    "cardNumber": "PB02-G04",
+    "name": "Godzilla (1994)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit/Ultimate with the lowest BP. When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit/Ultimate with the lowest BP.",
+            "cleanText": "Destroy an opposing Spirit/Ultimate with the lowest BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control.",
+            "cleanText": "When this effect destroys, put two cores from the Void to any \"Godzilla\"-named Spirit(s)/Grandwalker Nexus(es) you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate.",
+            "cleanText": "Effects of opposing Spirit/Ultimate destroyed by your \"Godzilla\"-named Spirit/Grandwalker Nexus can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G08": {
+    "cardNumber": "PB02-G08",
+    "name": "Godzilla (2004)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G08#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash.",
+            "cleanText": "When your Life is reduced by the opponent, you can pay two costs to summon this card from the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G08#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit/Ultimate. When you've done so, put a core from the Void to this Spirit, and refresh it."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit/Ultimate.",
+            "cleanText": "You can target and attack an opposing Spirit/Ultimate",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "put a core from the Void to this Spirit",
+            "cleanText": "put a core from the Void to this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          },
+          {
+            "rawText": "refresh it.",
+            "cleanText": "refresh it",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "PREVIOUS_TARGET"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G08#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol.",
+            "cleanText": "When an opposing Spirit/Ultimate would leave the Field, during this turn, this Spirit gains an extra Red symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G10": {
+    "cardNumber": "PB02-G10",
+    "name": "Atomic Breath",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G10#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand. When you've done so, put a core from the Void to any \"The God Incarnate Godzilla\" you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand.",
+            "cleanText": "When this card is revealed from the deck by your \"Godzilla\"-named Spirit effect, or sent to the Trash by the effect of your exactly-named \"The God Incarnate Godzilla,\" you can add it to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "put a core from the Void to any \"The God Incarnate Godzilla\" you control.",
+            "cleanText": "put a core from the Void to any \"The God Incarnate Godzilla\" you control",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G10#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 8000 BP or less Spirit/Ultimate. Also, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, destroy an opposing 12000 BP or more Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 8000 BP or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing 8000 BP or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 8000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, destroy an opposing 12000 BP or more Spirit/Ultimate.",
+            "cleanText": "destroy an opposing 12000 BP or more Spirit/Ultimate",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G02": {
+    "cardNumber": "PB02-G02",
+    "name": "Godzilla (2016) Second Form",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\""
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\"",
+            "cleanText": "This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Second Form).\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand.",
+            "cleanText": "Among them, add an exactly-named \"The God Incarnate Godzilla\", and a Red \"Godzilla\" Spirit card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G02#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols.",
+            "cleanText": "When you're summoning/deploying a \"Godzilla\" Spirit card/Grandwalker Nexus card, this Spirit gains two extra Red symbols",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DEPLOY_NEXUS",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G01": {
+    "cardNumber": "PB02-G01",
+    "name": "The FlyingGreatKaiju Rodan (1964)",
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": "Cost 4([Red Core",
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 7
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB02-G01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Green Core",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Nexus. When this effect destroys, draw a card. After this effect resolves, put this card face-up on your Removed Zone. If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, instead of putting it on the Removed Zone, you can summon it, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Nexus.",
+            "cleanText": "Destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "When this effect destroys, draw a card.",
+            "cleanText": "When this effect destroys, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "put this card face-up on your Removed Zone.",
+            "cleanText": "put this card face-up on your Removed Zone",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DECK_OR_HAND_ACTION"
+            }
+          },
+          {
+            "rawText": "If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, instead of putting it on the Removed Zone, you can summon it, without paying the cost.",
+            "cleanText": "instead of putting it on the Removed Zone, you can summon it, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If you control any \"Godzilla\"-named Spirit/Grandwalker Nexus",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G09": {
+    "cardNumber": "PB02-G09",
+    "name": "The God Incarnate Godzilla",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(\"Godzilla\")",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 12
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 596
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB02-G09#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "GPGWrule",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (\"Godzilla\")",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you Summon/Advent a target Spirit, you can +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you Summon/Advent a target Spirit, you can +1 core to this Nexus.",
+            "cleanText": "When you Summon/Advent a target Spirit, you can +1 core to this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, +1 core to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, +1 core to this Nexus.",
+            "cleanText": "For each target card among them, +1 core to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_ADD",
+              "count": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus' symbols are also treated as Red."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus' symbols are also treated as Red.",
+            "cleanText": "This Nexus' symbols are also treated as Red",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "START_OF_ATTACK_STEP",
+          "timingLabel": "Start of Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses.",
+            "cleanText": "(Send four cores from this Nexus to the Void) During this turn, this Nexus is also treated as Spirit with LV1/LV2 20000 BP, and can only be destroyed by Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G09#a6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate.",
+            "cleanText": "When an opposing 6000 BP or less Spirit/Ultimate attacks, destroy that Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G07": {
+    "cardNumber": "PB02-G07",
+    "name": "The InfantIslandGuardian Mothra (1966)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G07#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control.",
+            "cleanText": "Put one core from the Void each to this Spirit and any \"Godzilla\"-named Spirit/Grandwalker Nexus you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G07#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted.",
+            "cleanText": "When this Spirit would leave the Field due to opposing effects, by putting a core from the Void to this Spirit, it remains on the Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G07#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opposing Burst can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "The opposing Burst can't activate.",
+            "cleanText": "The opposing Burst can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BURST_LOCK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G03": {
+    "cardNumber": "PB02-G03",
+    "name": "The RowdyDinosaur Anguirus (1968)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB02-G03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's color and symbol are also treated as Green."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's color and symbol are also treated as Green.",
+            "cleanText": "This Spirit's color and symbol are also treated as Green",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_COLOR_SYMBOL",
+              "color": "Green"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This exhausted Spirit is unaffected by opposing Spirit/Nexus effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This exhausted Spirit is unaffected by opposing Spirit/Nexus effects.",
+            "cleanText": "This exhausted Spirit is unaffected by opposing Spirit/Nexus effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card. At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes.",
+            "cleanText": "At the end of battle, if you control any \"Godzilla\"-named Spirit/Grandwalker Nexus, once per turn, this Spirit refeshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G05": {
+    "cardNumber": "PB02-G05",
+    "name": "The SpaceSuperKaiju King Ghidorah (1968)",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Red & Cost 4 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB02-G05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Red & Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from your Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from your Hand onto your target Spirit.",
+            "cleanText": "stack this from your Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 10000 BP or less Spirit/Ultimate. The effects of the Spirit/Ultimate destroyed by this effect can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 10000 BP or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing 10000 BP or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 10000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "The effects of the Spirit/Ultimate destroyed by this effect can't activate.",
+            "cleanText": "The effects of the Spirit/Ultimate destroyed by this effect can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G05#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes.",
+            "cleanText": "Twice per turn, by sending a core, other than [Soul Core], from your Trash to this Spirit, this Spirit refreshes",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB02-G06": {
+    "cardNumber": "PB02-G06",
+    "name": "The SpaceViciousBattleBeast Space Godzilla",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 82
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB02-G06#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\""
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\"",
+            "cleanText": "This card/Spirit's name is also treated as being exactly-named \"Space Godzilla.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G06#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing one-symbol Spirits/Ultimates. The effects of Spirits/Ultimates destroyed by this effect can't activate. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing one-symbol Spirits/Ultimates.",
+            "cleanText": "Destroy two opposing one-symbol Spirits/Ultimates",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "symbolCount": 1
+                }
+              }
+            }
+          },
+          {
+            "rawText": "The effects of Spirits/Ultimates destroyed by this effect can't activate.",
+            "cleanText": "The effects of Spirits/Ultimates destroyed by this effect can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB02-G06#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control any Nexus, this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control any Nexus, this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects.",
+            "cleanText": "this Spirit can't be destroyed nor returned to the Hand/Deck by opposing effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control any Nexus",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

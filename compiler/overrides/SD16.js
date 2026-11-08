@@ -1,0 +1,908 @@
+/**
+ * compiler/overrides/SD16.js
+ * 
+ * Explicit deterministic IR definitions for SD16 cards.
+ */
+
+export const SD16_OVERRIDES = {
+  "SD16-007": {
+    "cardNumber": "SD16-007",
+    "name": "Loader-Arms",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Fighting Spirit",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD16-007#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Fighting Spirit",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Fighting Spirit]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to any Nexus you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to any Nexus you control.",
+            "cleanText": "Put a core from the Void to any Nexus you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-007#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 3 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 3 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-004": {
+    "cardNumber": "SD16-004",
+    "name": "The BattleMaul Gordon",
+    "keywords": [
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 16
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD16-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Crush",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard cards from the opposing decktop equal to this Spirit's level."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard cards from the opposing decktop equal to this Spirit's level.",
+            "cleanText": "Discard cards from the opposing decktop equal to this Spirit's level",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-004#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When an opposing Cost 3 or less Spirit would attack, unless the opponent sends a core from their Reserve to their Trash, it can't attack."
+        },
+        "clauses": [
+          {
+            "rawText": "When an opposing Cost 3 or less Spirit would attack, unless the opponent sends a core from their Reserve to their Trash, it can't attack.",
+            "cleanText": "When an opposing Cost 3 or less Spirit would attack, unless the opponent sends a core from their Reserve to their Trash, it can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-001": {
+    "cardNumber": "SD16-001",
+    "name": "The Giant Platoon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD16-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Fighting Spirit\" family Spirits are destroyed by the opponent, discard two cards from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Fighting Spirit\" family Spirits are destroyed by the opponent, discard two cards from the opposing decktop.",
+            "cleanText": "When your \"Fighting Spirit\" family Spirits are destroyed by the opponent, discard two cards from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-X01": {
+    "cardNumber": "SD16-X01",
+    "name": "The GiantEmperor Alexander-XIII",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD16-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 5 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 5 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 5 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard five cards from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard five cards from the opposing decktop.",
+            "cleanText": "Discard five cards from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by exhausting a \"Fighting Spirit\" family Spirit you control, this Spirit refreshes."
+        },
+        "clauses": [
+          {
+            "rawText": "By exhausting a \"Fighting Spirit\" family Spirit you control",
+            "cleanText": "By exhausting a \"Fighting Spirit\" family Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "this Spirit refreshes.",
+            "cleanText": "this Spirit refreshes",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-002": {
+    "cardNumber": "SD16-002",
+    "name": "The GreatFist Roger",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD16-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card."
+        },
+        "clauses": [
+          {
+            "rawText": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card.",
+            "cleanText": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 4 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 4 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 4 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-003": {
+    "cardNumber": "SD16-003",
+    "name": "The HeavyJavelinGiant Lance",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD16-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card."
+        },
+        "clauses": [
+          {
+            "rawText": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card.",
+            "cleanText": "Your non-Ultimate \"opposing-deck-discarding effects\" discard +1 card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-003#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Blue Nexuses can't be destroyed by opposing Spirit/Brave/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Blue Nexuses can't be destroyed by opposing Spirit/Brave/Nexus/Magic effects.",
+            "cleanText": "All your Blue Nexuses can't be destroyed by opposing Spirit/Brave/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "NEXUS_INDESTRUCTIBLE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-005": {
+    "cardNumber": "SD16-005",
+    "name": "The HydraTamer Bernhard",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD16-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing Cost 3 or less Spirits. For each Spirit destroyed by this effect, discard three cards from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing Cost 3 or less Spirits.",
+            "cleanText": "Destroy two opposing Cost 3 or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3
+                }
+              }
+            }
+          },
+          {
+            "rawText": "For each Spirit destroyed by this effect, discard three cards from the opposing decktop.",
+            "cleanText": "For each Spirit destroyed by this effect, discard three cards from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-008": {
+    "cardNumber": "SD16-008",
+    "name": "The Ironwall Giant Fortress",
+    "keywords": [
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 192
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD16-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you Nexuses are destroyed, by exhausting this Nexus, one of the destroyed Blue Nexuses remains on the Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When you Nexuses are destroyed, by exhausting this Nexus, one of the destroyed Blue Nexuses remains on the Field, exhausted.",
+            "cleanText": "When you Nexuses are destroyed, by exhausting this Nexus, one of the destroyed Blue Nexuses remains on the Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your \"Fighting Spirit\" family Spirits: \"[Crush] (When Attacks) Discard cards from the opposing decktop equal to this Spirit's LV.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your \"Fighting Spirit\" family Spirits: \"[Crush] (When Attacks) Discard cards from the opposing decktop equal to this Spirit's LV.\"",
+            "cleanText": "Give all your \"Fighting Spirit\" family Spirits: \"[Crush] (When Attacks) Discard cards from the opposing decktop equal to this Spirit's LV.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": "LEVEL",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD16-006": {
+    "cardNumber": "SD16-006",
+    "name": "The MagicSwordsman Clovis",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD16-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By destroying an opposing Nexus, discard seven cards from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying an opposing Nexus",
+            "cleanText": "By destroying an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "discard seven cards from the opposing decktop.",
+            "cleanText": "discard seven cards from the opposing decktop",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD16-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Opposing Cost 4 or less Spirits can't attack."
+        },
+        "clauses": [
+          {
+            "rawText": "Opposing Cost 4 or less Spirits can't attack.",
+            "cleanText": "Opposing Cost 4 or less Spirits can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  }
+};

@@ -1721,7 +1721,7 @@ export function compileClauseToOp(clause) {
   }
   // "This effect can't bring the number of cores on opposing Spirits to 0"
   if (/can't bring the number of cores on opposing spirits to 0/i.test(text)) {
-    return { op: 'CORE_MOVE_MIN_ONE' };
+    return { op: 'RESTRICTION', restriction: 'MIN_CORES_ONE', minCoresRemaining: 1 };
   }
   // "the opponent sends a core from Spirits they control to the Void"
   if (/opponent sends a core from spirits they control to the void/i.test(text)) {

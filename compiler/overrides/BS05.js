@@ -1,0 +1,4677 @@
+export const BS05_OVERRIDES = {
+  "BS05-X19": {
+    "cardNumber": "BS05-X19",
+    "name": "The SacredEmperor Siegfrieden",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": "Cost 6 or more → Void",
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-X19#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Tribute: Cost 6 or more → Void",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void.",
+            "cleanText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ACTION",
+              "keyword": "Tribute"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X19#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits up to a total of cost 5. When the Tribute was [The DragonEmperor Siegfried]/[The ImpregnableFortress Odin], destroy up to a total of cost 8."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits up to a total of cost 5.",
+            "cleanText": "Destroy any number of opposing Spirits up to a total of cost 5",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When the Tribute was [The DragonEmperor Siegfried]/[The ImpregnableFortress Odin], destroy up to a total of cost 8.",
+            "cleanText": "When the Tribute was [The DragonEmperor Siegfried]/[The ImpregnableFortress Odin], destroy up to a total of cost 8",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X19#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 7000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 7000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 7000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 7000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-072": {
+    "cardNumber": "BS05-072",
+    "name": "Absorb Symbol",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-072#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, when cores are placed, or removed from opposing Spirits via Spirit/Nexus/Magic effects, exhaust those Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when cores are placed, or removed from opposing Spirits via Spirit/Nexus/Magic effects, exhaust those Spirits.",
+            "cleanText": "when cores are placed, or removed from opposing Spirits via Spirit/Nexus/Magic effects, exhaust those Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A186": {
+    "cardNumber": "BATTLE-SPIRITS-A186",
+    "name": "Arcanafighter-Quatre",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BATTLE-SPIRITS-A188": {
+    "cardNumber": "BATTLE-SPIRITS-A188",
+    "name": "Armetcrab",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A188#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Armor : Yellow - This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color."
+        },
+        "clauses": [
+          {
+            "rawText": "Armor : Yellow - This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color.",
+            "cleanText": "Armor : Yellow - This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-074": {
+    "cardNumber": "BS05-074",
+    "name": "Branch Lock",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-074#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "If there are two or more colors of symbols on your Field, exhaust two opposing Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "If there are two or more colors of symbols on your Field, exhaust two opposing Spirits.",
+            "cleanText": "exhaust two opposing Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If there are two or more colors of symbols on your Field",
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BRONZE-GOLEM2": {
+    "cardNumber": "BRONZE-GOLEM2",
+    "name": "Bronze-Golem",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BRONZE-GOLEM2#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Move cards from the top of your opponent's Deck to their Trash equal to this spirits LV."
+        },
+        "clauses": [
+          {
+            "rawText": "Move cards from the top of your opponent's Deck to their Trash equal to this spirits LV.",
+            "cleanText": "Move cards from the top of your opponent's Deck to their Trash equal to this spirits LV",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BRONZE-GOLEM2#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Permanent) Each time a nexus you control would be destroyed, you may move 1 core from this spirit to your Trash. In that case, the nexus remains on your Field instead."
+        },
+        "clauses": [
+          {
+            "rawText": "Each time a nexus you control would be destroyed, you may move 1 core from this spirit to your Trash.",
+            "cleanText": "Each time a nexus you control would be destroyed, you may move 1 core from this spirit to your Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "In that case, the nexus remains on your Field instead.",
+            "cleanText": "In that case, the nexus remains on your Field instead",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RESURRECT"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A198": {
+    "cardNumber": "BATTLE-SPIRITS-A198",
+    "name": "Chorus Birds",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A198#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Move 3 \"Song Bird\" spirit cards from your Trash to your hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Move 3 \"Song Bird\" spirit cards from your Trash to your hand.",
+            "cleanText": "Move 3 \"Song Bird\" spirit cards from your Trash to your hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SALVAGE",
+              "from": "trash",
+              "to": "hand"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A198#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Target spirit gets +2000BP until end of turn."
+        },
+        "clauses": [
+          {
+            "rawText": "Target spirit gets +2000BP until end of turn.",
+            "cleanText": "Target spirit gets +2000BP until end of turn",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "UNTIL_END_OF_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "UNTIL_END_OF_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-045": {
+    "cardNumber": "BS05-045",
+    "name": "Dwarf-Seven",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BS05-076": {
+    "cardNumber": "BS05-076",
+    "name": "Eternal Shield",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-076#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, only up to five cards can be discarded from your deck via opposing Spirit/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, only up to five cards can be discarded from your deck via opposing Spirit/Nexus/Magic effects.",
+            "cleanText": "only up to five cards can be discarded from your deck via opposing Spirit/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "LIMIT_DECK_DISCARD"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-004": {
+    "cardNumber": "BS05-004",
+    "name": "The MysteriousFox Cubic",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a Purple Cost 5/6/7 Spirit card from your Trash, without paying the cost. However, any (When Summoned) effects of the Spirit can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a Purple Cost 5/6/7 Spirit card from your Trash, without paying the cost.",
+            "cleanText": "You can summon a Purple Cost 5/6/7 Spirit card from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "any (When Summoned) effects of the Spirit can't activate.",
+            "cleanText": "any (When Summoned) effects of the Spirit can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PREVENT_WHEN_SUMMONED"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-035": {
+    "cardNumber": "BS05-035",
+    "name": "The EvilDeity Big-Loki",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-035#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +3000 BP.",
+            "cleanText": "This Spirit gains +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-035#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit's attack reduces the opposing Life, except [The EvilDeity Big-Loki], refresh a Spirit with two symbols or more you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit's attack reduces the opposing Life, except [The EvilDeity Big-Loki], refresh a Spirit with two symbols or more you control.",
+            "cleanText": "When this Spirit's attack reduces the opposing Life, except [The EvilDeity Big-Loki], refresh a Spirit with two symbols or more you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "count": 1,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-017": {
+    "cardNumber": "BS05-017",
+    "name": "The PurpleDragonRider Violet",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 55
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-017#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-017#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Draw a card.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Draw a card.\"",
+            "cleanText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Draw a card.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-007": {
+    "cardNumber": "BS05-007",
+    "name": "The ScarletDragonRider Rosso",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 55
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your Attack Step) This Spirit gains +3000 BP.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your Attack Step) This Spirit gains +3000 BP.\"",
+            "cleanText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your Attack Step) This Spirit gains +3000 BP.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-026": {
+    "cardNumber": "BS05-026",
+    "name": "The ViridianDragonRider Grun",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 50
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-026#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-026#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Put a number of cores from the Void, equal to the number of symbols on this Spirit, to your Reserve.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Put a number of cores from the Void, equal to the number of symbols on this Spirit, to your Reserve.\"",
+            "cleanText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Put a number of cores from the Void, equal to the number of symbols on this Spirit, to your Reserve.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-034": {
+    "cardNumber": "BS05-034",
+    "name": "The WhiteDragonRider Albus",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 55
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-034#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-034#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control are unaffected by opposing Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control are unaffected by opposing Magic effects.",
+            "cleanText": "This Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control are unaffected by opposing Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-043": {
+    "cardNumber": "BS05-043",
+    "name": "The YellowDragonRider Flavum",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 55
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-043#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-043#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your End Step) This Spirit refreshes.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your End Step) This Spirit refreshes.\"",
+            "cleanText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(Your End Step) This Spirit refreshes.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-075": {
+    "cardNumber": "BS05-075",
+    "name": "Brave Charge",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-075#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, all the (When Attacks) effects of a Spirit you control activate as (When Blocks)."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, all the (When Attacks) effects of a Spirit you control activate as (When Blocks).",
+            "cleanText": "all the (When Attacks) effects of a Spirit you control activate as (When Blocks)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "CONTINUOUS_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-077": {
+    "cardNumber": "BS05-077",
+    "name": "Crystal Aura",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-077#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Put a core from the Void each to every \"Ice Princess\" family Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void each to every \"Ice Princess\" family Spirit you control.",
+            "cleanText": "Put a core from the Void each to every \"Ice Princess\" family Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-077#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A3810": {
+    "cardNumber": "BATTLE-SPIRITS-A3810",
+    "name": "Dimetrodoron",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BATTLE-SPIRITS-A4467": {
+    "cardNumber": "BATTLE-SPIRITS-A4467",
+    "name": "Gengoron",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BS05-073": {
+    "cardNumber": "BS05-073",
+    "name": "God Speed",
+    "keywords": [
+      {
+        "name": "High Speed",
+        "parameter": null,
+        "wave": 2,
+        "hook": "high_speed",
+        "bracketed": true,
+        "index": 76
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-073#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, the cost of every Cost 6 or more Spirit card with [High Speed] in your Hand becomes 4. This effect can't be used during Main Step."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, the cost of every Cost 6 or more Spirit card with [High Speed] in your Hand becomes 4.",
+            "cleanText": "the cost of every Cost 6 or more Spirit card with [High Speed] in your Hand becomes 4",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "This effect can't be used during Main Step.",
+            "cleanText": "This effect can't be used during Main Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-078": {
+    "cardNumber": "BS05-078",
+    "name": "Icicle Assault",
+    "keywords": [
+      {
+        "name": "Armor",
+        "parameter": null,
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 47
+      },
+      {
+        "name": "Armor",
+        "parameter": null,
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 100
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-078#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, all your Spirits with [Armor] gain +1000 BP for each color targeted by its [Armor]."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, all your Spirits with [Armor] gain +1000 BP for each color targeted by its [Armor].",
+            "cleanText": "all your Spirits with [Armor] gain +1000 BP for each color targeted by its [Armor]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-078#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A6308": {
+    "cardNumber": "BATTLE-SPIRITS-A6308",
+    "name": "LittleKnight-Lancelot",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A6308#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control three or more Cost 2 Spirits, all your Yellow Spirits are unaffected by opposing Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control three or more Cost 2 Spirits, all your Yellow Spirits are unaffected by opposing Magic effects.",
+            "cleanText": "all your Yellow Spirits are unaffected by opposing Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control three or more Cost 2 Spirits",
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A6308#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by the (When Summoned) effects of opposing Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by the (When Summoned) effects of opposing Spirits.",
+            "cleanText": "This Spirit is unaffected by the (When Summoned) effects of opposing Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-050": {
+    "cardNumber": "BS05-050",
+    "name": "MCPanther",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-050#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 1 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 1 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 1 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 1
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-050#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every Cost 1 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every Cost 1 or less Spirit.",
+            "cleanText": "Destroy every Cost 1 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-083": {
+    "cardNumber": "BS05-083",
+    "name": "Magic Spanner",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-083#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Send all cores from one of your \"Artificial Soldier\" family Spirits to the Void. Discard cards from the opposing decktop equal to the cost of that Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Send all cores from one of your \"Artificial Soldier\" family Spirits to the Void.",
+            "cleanText": "Send all cores from one of your \"Artificial Soldier\" family Spirits to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "Discard cards from the opposing decktop equal to the cost of that Spirit.",
+            "cleanText": "Discard cards from the opposing decktop equal to the cost of that Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-052": {
+    "cardNumber": "BS05-052",
+    "name": "Mithril-Golem",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BATTLE-SPIRITS-A7042": {
+    "cardNumber": "BATTLE-SPIRITS-A7042",
+    "name": "Pantomeister",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A7042#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Permanent) The cost of \"Ice Princess\" spirit cards in your hand are treated as 5."
+        },
+        "clauses": [
+          {
+            "rawText": "The cost of \"Ice Princess\" spirit cards in your hand are treated as 5.",
+            "cleanText": "The cost of \"Ice Princess\" spirit cards in your hand are treated as 5",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A7154": {
+    "cardNumber": "BATTLE-SPIRITS-A7154",
+    "name": "Pineappopotamus",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BS05-020": {
+    "cardNumber": "BS05-020",
+    "name": "Polluc&Castar",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-020#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BATTLES",
+          "timingLabel": "When Battles",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed, put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed, put a core from the Void to your Reserve.",
+            "cleanText": "When only the opposing Spirit is destroyed, put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-071": {
+    "cardNumber": "BS05-071",
+    "name": "Reanimate",
+    "keywords": [
+      {
+        "name": "Curse",
+        "parameter": null,
+        "wave": 1,
+        "hook": "curse",
+        "bracketed": true,
+        "index": 49
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-071#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, when your Spirits with [Curse] are destroyed by opposing Spirits via BP comparison, they return to your Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when your Spirits with [Curse] are destroyed by opposing Spirits via BP comparison, they return to your Field, exhausted.",
+            "cleanText": "when your Spirits with [Curse] are destroyed by opposing Spirits via BP comparison, they return to your Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A7371": {
+    "cardNumber": "BATTLE-SPIRITS-A7371",
+    "name": "Redcap",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A7371#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "During Your Battle Phase",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Each time this spirit is blocked, destroy the spirit that blocked this spirit at End of Battle Step."
+        },
+        "clauses": [
+          {
+            "rawText": "Each time this spirit is blocked, destroy the spirit that blocked this spirit at End of Battle Step.",
+            "cleanText": "Each time this spirit is blocked, destroy the spirit that blocked this spirit at End of Battle Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ACTION",
+              "keyword": "Curse"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-070": {
+    "cardNumber": "BS05-070",
+    "name": "Soul Crash",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-070#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, when \"SevenShogun\"-named Spirits are summoned to your Field, destroy all exhausted Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when \"SevenShogun\"-named Spirits are summoned to your Field, destroy all exhausted Spirits.",
+            "cleanText": "when \"SevenShogun\"-named Spirits are summoned to your Field, destroy all exhausted Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-070#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-068": {
+    "cardNumber": "BS05-068",
+    "name": "Synchronicity",
+    "keywords": [
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 47
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-068#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, when your Spirit with [Awaken] attacks, it can target and attack an opposing 4000 BP or more Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when your Spirit with [Awaken] attacks, it can target and attack an opposing 4000 BP or more Spirit.",
+            "cleanText": "when your Spirit with [Awaken] attacks, it can target and attack an opposing 4000 BP or more Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-068#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-057": {
+    "cardNumber": "BS05-057",
+    "name": "The Amethyst Empty Sky",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 165
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-057#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When any Cost 1 or less Spirit is exhausted, send two cores from that Spirit to its owner's Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When any Cost 1 or less Spirit is exhausted, send two cores from that Spirit to its owner's Trash.",
+            "cleanText": "When any Cost 1 or less Spirit is exhausted, send two cores from that Spirit to its owner's Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-057#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Destroy an opposing exhausted Spirit.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Destroy an opposing exhausted Spirit.\"",
+            "cleanText": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Destroy an opposing exhausted Spirit.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-053": {
+    "cardNumber": "BS05-053",
+    "name": "The BlueDragonRider Azure",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 50
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-053#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place.",
+            "cleanText": "When this Spirit becomes the target of [Tribute], by exhausting this Spirit, treat all cores on this Spirit as being sent to the designated place",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-053#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Battles) Discard five cards from the opposing decktop.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Battles) Discard five cards from the opposing decktop.\"",
+            "cleanText": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Battles) Discard five cards from the opposing decktop.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A8856": {
+    "cardNumber": "BATTLE-SPIRITS-A8856",
+    "name": "The BombSoldier Dragno",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A8856#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit with one core on it."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit with one core on it.",
+            "cleanText": "Destroy an opposing Spirit with one core on it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-048": {
+    "cardNumber": "BS05-048",
+    "name": "The ChimeraDinosaur Dinozaur",
+    "keywords": [
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 17
+      },
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 54
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-048#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Change the [Awaken] effect of your Spirits to: \"[Awaken] During Flash Timing, you can send any number of cores from your Spirits or your Reserve to this Spirit.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Change the [Awaken] effect of your Spirits to: \"[Awaken] During Flash Timing, you can send any number of cores from your Spirits or your Reserve to this Spirit.\"",
+            "cleanText": "Change the [Awaken] effect of your Spirits to: \"[Awaken] During Flash Timing, you can send any number of cores from your Spirits or your Reserve to this Spirit.\"",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-032": {
+    "cardNumber": "BS05-032",
+    "name": "The CoralCrab Siomanekid",
+    "keywords": [
+      {
+        "name": "Armor",
+        "parameter": "Red/White",
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 11
+      },
+      {
+        "name": "Armor",
+        "parameter": "Red/White",
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 142
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-032#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Armor: Red/White",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects.",
+            "cleanText": "This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-032#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your Green Spirits: [Armor: Red/White]."
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your Green Spirits: [Armor: Red/White].",
+            "cleanText": "Give all your Green Spirits: [Armor: Red/White]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-059": {
+    "cardNumber": "BS05-059",
+    "name": "The Emerald Empty Sky",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 103
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-059#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cost 0/3 Spirits can't attack/block."
+        },
+        "clauses": [
+          {
+            "rawText": "Cost 0/3 Spirits can't attack/block.",
+            "cleanText": "Cost 0/3 Spirits can't attack/block",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-059#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Exhaust an opposing Spirit.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Exhaust an opposing Spirit.\"",
+            "cleanText": "Give all your Spirits with [Tribute] the effect: \"(When Attacks) Exhaust an opposing Spirit.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-064": {
+    "cardNumber": "BS05-064",
+    "name": "The Empire of Pentan",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-064#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Yellow Spirits are destroyed, you can summon a \"Pentan\"-named Spirit card from your Hand, without paying the cost. However, any (When Summoned) effects of that Spirit can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Yellow Spirits are destroyed, you can summon a \"Pentan\"-named Spirit card from your Hand, without paying the cost.",
+            "cleanText": "When your Yellow Spirits are destroyed, you can summon a \"Pentan\"-named Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "any (When Summoned) effects of that Spirit can't activate.",
+            "cleanText": "any (When Summoned) effects of that Spirit can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PREVENT_WHEN_SUMMONED"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-064#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your attacking \"Pentan\"/\"Empereur\"-named Spirit is blocked by an opposing Spirit with the same LV, refresh the attacking Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When your attacking \"Pentan\"/\"Empereur\"-named Spirit is blocked by an opposing Spirit with the same LV, refresh the attacking Spirit.",
+            "cleanText": "When your attacking \"Pentan\"/\"Empereur\"-named Spirit is blocked by an opposing Spirit with the same LV, refresh the attacking Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A9811": {
+    "cardNumber": "BATTLE-SPIRITS-A9811",
+    "name": "The Eternal Glacier Palace",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A9811#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Permanent) \"Ice Princess\" spirits you control get +1000BP."
+        },
+        "clauses": [
+          {
+            "rawText": "\"Ice Princess\" spirits you control get +1000BP.",
+            "cleanText": "\"Ice Princess\" spirits you control get +1000BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A9811#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(During the Battle Phase) Each time 1 or more \"Ice Princess\" spirits you control are destroyed, move target spirit your opponent controls to its owner's hand (The target's BP cannot exceed that of the destroyed spirits.)"
+        },
+        "clauses": [
+          {
+            "rawText": "(During the Battle Phase) Each time 1 or more \"Ice Princess\" spirits you control are destroyed, move target spirit your opponent controls to its owner's hand (The target's BP cannot exceed that of the destroyed spirits.)",
+            "cleanText": "(During the Battle Phase) Each time 1 or more \"Ice Princess\" spirits you control are destroyed, move target spirit your opponent controls to its owner's hand (The target's BP cannot exceed that of the destroyed spirits.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-051": {
+    "cardNumber": "BS05-051",
+    "name": "The GiantKnight Aldous",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-051#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Nexuses can't be destroyed by opposing Spirit/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Nexuses can't be destroyed by opposing Spirit/Nexus/Magic effects.",
+            "cleanText": "All your Nexuses can't be destroyed by opposing Spirit/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "INDESTRUCTIBLE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-051#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Nexus you control, discard two cards from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Nexus you control, discard two cards from the opposing decktop.",
+            "cleanText": "For each Nexus you control, discard two cards from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-042": {
+    "cardNumber": "BS05-042",
+    "name": "The GreatAngelia Sophia",
+    "keywords": [
+      {
+        "name": "Brilliance",
+        "parameter": null,
+        "wave": 3,
+        "hook": "brilliance",
+        "bracketed": true,
+        "index": 231
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-042#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon an \"Imaginary Beast\" family Spirit card from your Hand, without paying the cost. However, any (When Summoned) effects of the Spirit summoned by this effect can't activate."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon an \"Imaginary Beast\" family Spirit card from your Hand, without paying the cost.",
+            "cleanText": "You can summon an \"Imaginary Beast\" family Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "any (When Summoned) effects of the Spirit summoned by this effect can't activate.",
+            "cleanText": "any (When Summoned) effects of the Spirit summoned by this effect can't activate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PREVENT_WHEN_SUMMONED"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-042#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brilliance",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of the battle, return every Magic card you used during this battle to your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of the battle, return every Magic card you used during this battle to your Hand.",
+            "cleanText": "At the end of the battle, return every Magic card you used during this battle to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "SALVAGE",
+              "cardType": "Magic",
+              "filter": {
+                "usedThisBattle": true
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-X20": {
+    "cardNumber": "BS05-X20",
+    "name": "The GreatArmoredLord Deathtaurus",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": "Cost 6 or more → Void",
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-X20#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Tribute: Cost 6 or more → Void",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void.",
+            "cleanText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ACTION",
+              "keyword": "Tribute"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X20#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each exhausted Spirit, put a core from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each exhausted Spirit, put a core from the Void to this Spirit.",
+            "cleanText": "For each exhausted Spirit, put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X20#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by BP comparison, send two cores from any opposing Spirits to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by BP comparison, send two cores from any opposing Spirits to the Void.",
+            "cleanText": "When only the opposing Spirit is destroyed by BP comparison, send two cores from any opposing Spirits to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-X18": {
+    "cardNumber": "BS05-X18",
+    "name": "The HugeBeastLord Behedoth",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": "Cost 6 or more → Void",
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-X18#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Tribute: Cost 6 or more → Void",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void.",
+            "cleanText": "After paying for the summoning cost, you must send all cores from a Cost 6 or more Spirit you control to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ACTION",
+              "keyword": "Tribute"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X18#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each different color of Magic cards in the opposing Trash, destroy an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each different color of Magic cards in the opposing Trash, destroy an opposing Spirit.",
+            "cleanText": "For each different color of Magic cards in the opposing Trash, destroy an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X18#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this battle, the opponent can't use Magic cards during Flash timing."
+        },
+        "clauses": [
+          {
+            "rawText": "During this battle, the opponent can't use Magic cards during Flash timing.",
+            "cleanText": "the opponent can't use Magic cards during Flash timing",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_BATTLE",
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "PREVENT_MAGIC",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-054": {
+    "cardNumber": "BS05-054",
+    "name": "The IronHammer Oswald",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-054#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy a Nexus you or the opponent controls."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy a Nexus you or the opponent controls.",
+            "cleanText": "Destroy a Nexus you or the opponent controls",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-054#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Nexus or the opposing Nexus is destroyed via this Spirit's effect, the opponent chooses and discards a card from their Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Nexus or the opposing Nexus is destroyed via this Spirit's effect, the opponent chooses and discards a card from their Hand.",
+            "cleanText": "When your Nexus or the opposing Nexus is destroyed via this Spirit's effect, the opponent chooses and discards a card from their Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "chooser": "self",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-X17": {
+    "cardNumber": "BS05-X17",
+    "name": "The PhantomLord Rean",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": "Cost 6 or more → Void",
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-X17#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Tribute: Cost 6 or more → Void",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "After paying for the summoning cost, you must send all cores from one of your Cost 6 or more Spirits to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "After paying for the summoning cost, you must send all cores from one of your Cost 6 or more Spirits to the Void.",
+            "cleanText": "After paying for the summoning cost, you must send all cores from one of your Cost 6 or more Spirits to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ACTION",
+              "keyword": "Tribute"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X17#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Nexus the opponent controls, return an opposing Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Nexus the opponent controls, return an opposing Spirit to the Hand.",
+            "cleanText": "For each Nexus the opponent controls, return an opposing Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "HAND"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-X17#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control three or more Cost 2 Spirits, this Spirit can't be blocked by Spirits with printed effects."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control three or more Cost 2 Spirits, this Spirit can't be blocked by Spirits with printed effects.",
+            "cleanText": "this Spirit can't be blocked by Spirits with printed effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control three or more Cost 2 Spirits",
+            "duration": null,
+            "op": {
+              "op": "UNBLOCKABLE",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-040": {
+    "cardNumber": "BS05-040",
+    "name": "The Princess-Snowwhite",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-040#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "TURN_TRIGGER",
+          "timingLabel": "Opposing Turn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent uses any Spirit/Magic effect that includes your White \"Ice Princess\" family Spirits as targets, you can change the target of that Spirit/Magic effect to affect this Spirit only."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent uses any Spirit/Magic effect that includes your White \"Ice Princess\" family Spirits as targets, you can change the target of that Spirit/Magic effect to affect this Spirit only.",
+            "cleanText": "When the opponent uses any Spirit/Magic effect that includes your White \"Ice Princess\" family Spirits as targets, you can change the target of that Spirit/Magic effect to affect this Spirit only",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REDIRECT_TARGET"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-040#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control any [Dwarf-Seven], return this Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control any [Dwarf-Seven], return this Spirit to the Hand.",
+            "cleanText": "return this Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control any [Dwarf-Seven]",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-016": {
+    "cardNumber": "BS05-016",
+    "name": "The QueenVampire Carmilla",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-016#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every exhausted Cost 1 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every exhausted Cost 1 or less Spirit.",
+            "cleanText": "Destroy every exhausted Cost 1 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-016#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every exhausted Cost 3 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every exhausted Cost 3 or less Spirit.",
+            "cleanText": "Destroy every exhausted Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-016#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Each player chooses and destroys one Spirit they control."
+        },
+        "clauses": [
+          {
+            "rawText": "Each player chooses and destroys one Spirit they control.",
+            "cleanText": "Each player chooses and destroys one Spirit they control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A11902": {
+    "cardNumber": "BATTLE-SPIRITS-A11902",
+    "name": "The Remain of Scaffold",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A11902#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "During your Battle Phase",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "\"Evil Shadow\" spirits you control get +2000BP."
+        },
+        "clauses": [
+          {
+            "rawText": "\"Evil Shadow\" spirits you control get +2000BP.",
+            "cleanText": "\"Evil Shadow\" spirits you control get +2000BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A11902#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_STEP",
+          "timingLabel": "Your Start Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control an \"Evil Shadow\" spirit, exhaust target unexhausted spirit your opponent controls."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control an \"Evil Shadow\" spirit, exhaust target unexhausted spirit your opponent controls.",
+            "cleanText": "exhaust target unexhausted spirit your opponent controls",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control an \"Evil Shadow\" spirit",
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-055": {
+    "cardNumber": "BS05-055",
+    "name": "The Ruby Empty Sky",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 190
+      },
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 213
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-055#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control any \"Dragon Emperor\"/\"Dragon Knight\"/\"Vanity Deity\" family Spirit, every Spirit you control gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control any \"Dragon Emperor\"/\"Dragon Knight\"/\"Vanity Deity\" family Spirit, every Spirit you control gains +2000 BP.",
+            "cleanText": "every Spirit you control gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control any \"Dragon Emperor\"/\"Dragon Knight\"/\"Vanity Deity\" family Spirit",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-055#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your Spirits with [Tribute] the effect: \"[Awaken] You can send any number of cores from Spirits you control to this Spirit.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your Spirits with [Tribute] the effect: \"[Awaken] You can send any number of cores from Spirits you control to this Spirit.\"",
+            "cleanText": "Give all your Spirits with [Tribute] the effect: \"[Awaken] You can send any number of cores from Spirits you control to this Spirit.\"",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "AWAKEN_CORE_MOVE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-066": {
+    "cardNumber": "BS05-066",
+    "name": "The Sacred Torch scorched the Sky",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-066#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Blue Spirit attacks, you can reveal a card from your decktop. If that card is a \"Giant\"-named Spirit card, add it to the Hand. If not, discard it."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Blue Spirit attacks, you can reveal a card from your decktop.",
+            "cleanText": "When your Blue Spirit attacks, you can reveal a card from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "If that card is a \"Giant\"-named Spirit card, add it to the Hand.",
+            "cleanText": "add it to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If that card is a \"Giant\"-named Spirit card",
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "If not, discard it.",
+            "cleanText": "discard it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If not",
+            "duration": null,
+            "op": {
+              "op": "DECK_OR_HAND_ACTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-066#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Giant\"-named Spirit attacks, it can target and attack an opposing Cost 5 or more Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Giant\"-named Spirit attacks, it can target and attack an opposing Cost 5 or more Spirit.",
+            "cleanText": "When your \"Giant\"-named Spirit attacks, it can target and attack an opposing Cost 5 or more Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-022": {
+    "cardNumber": "BS05-022",
+    "name": "The SeaHorse Kelpie",
+    "keywords": [
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 115
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-022#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by comparing BP, refresh all you Blue Spirits with [Crush]."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by comparing BP, refresh all you Blue Spirits with [Crush].",
+            "cleanText": "When only the opposing Spirit is destroyed by comparing BP, refresh all you Blue Spirits with [Crush]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A13007": {
+    "cardNumber": "BATTLE-SPIRITS-A13007",
+    "name": "The Thorny Colosseum",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A13007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "During Your Battle Phase",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Cores cannot be moved from any battling spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Cores cannot be moved from any battling spirits.",
+            "cleanText": "Cores cannot be moved from any battling spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A13007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "During Your Battle Phase",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Battling spirits are unaffected by the effects of spirits or spells either player controls."
+        },
+        "clauses": [
+          {
+            "rawText": "Battling spirits are unaffected by the effects of spirits or spells either player controls.",
+            "cleanText": "Battling spirits are unaffected by the effects of spirits or spells either player controls",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-079": {
+    "cardNumber": "BS05-079",
+    "name": "Three Cards",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-079#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Target a Spirit. During this turn, when counting the targeted Spirit via your Spirit/Nexus effects, count it as three Spirits. You can't use this effect during Main Step."
+        },
+        "clauses": [
+          {
+            "rawText": "Target a Spirit.",
+            "cleanText": "Target a Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_SELECT",
+              "target": {
+                "side": "either",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, when counting the targeted Spirit via your Spirit/Nexus effects, count it as three Spirits.",
+            "cleanText": "when counting the targeted Spirit via your Spirit/Nexus effects, count it as three Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          },
+          {
+            "rawText": "You can't use this effect during Main Step.",
+            "cleanText": "You can't use this effect during Main Step",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PLAY_CONDITION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-024": {
+    "cardNumber": "BS05-024",
+    "name": "The Yojinbo Antman",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BS05-069": {
+    "cardNumber": "BS05-069",
+    "name": "Transmigration",
+    "keywords": [
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 80
+      },
+      {
+        "name": "Tribute",
+        "parameter": null,
+        "wave": 4,
+        "hook": "tribute",
+        "bracketed": true,
+        "index": 184
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BS05-069#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Reveal three cards from your decktop. If there are any Spirit cards with [Tribute] among them, you can summon one of them without paying the cost, and treat as having activated [Tribute]. Discard any remaining cards. Return the Spirit summoned via this effect to your deckbottom at your End Step."
+        },
+        "clauses": [
+          {
+            "rawText": "Reveal three cards from your decktop.",
+            "cleanText": "Reveal three cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "If there are any Spirit cards with [Tribute] among them, you can summon one of them without paying the cost, and treat as having activated [Tribute].",
+            "cleanText": "you can summon one of them without paying the cost, and treat as having activated [Tribute]",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": "If there are any Spirit cards with [Tribute] among them",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          },
+          {
+            "rawText": "Return the Spirit summoned via this effect to your deckbottom at your End Step.",
+            "cleanText": "Return the Spirit summoned via this effect to your deckbottom at your End Step",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-069#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BS05-067": {
+    "cardNumber": "BS05-067",
+    "name": "Warning Attack",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "BS05-067#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, when your \"Winged Dragon\"/\"Flying Fang\" family Spirit attacks, the opponent must block with their 3000 BP or less Spirits if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, when your \"Winged Dragon\"/\"Flying Fang\" family Spirit attacks, the opponent must block with their 3000 BP or less Spirits if possible.",
+            "cleanText": "when your \"Winged Dragon\"/\"Flying Fang\" family Spirit attacks, the opponent must block with their 3000 BP or less Spirits if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BS05-067#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  }
+};

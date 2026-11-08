@@ -8,16 +8,27 @@
 import { parseAbilityHeaders } from './header_parser.js';
 import { splitClauses } from './clause_splitter.js';
 import { compileClauseToOp } from './clause_patterns.js';
-import { extractKeywords } from './keyword_compiler.js';
+import { extractKeywords, bindKeywordsToAbilities } from './keyword_compiler.js';
+import { getCardOverride } from './overrides/index.js';
 
 export function compileCard(card) {
   if (!card) return null;
 
   const cardNumber = card.card_number || card.cardNumber || card.id || 'UNKNOWN';
   const name = card.name || 'Unknown';
-  const rawEffect = card.effect || '';
+  const rawEffect = card.effect || card.raw_effect || card.rawEffect || '';
 
-  const keywords = extractKeywords(rawEffect);
+  // Consult explicit deterministic IR overrides before regex fallback
+  if (!card.skipOverride) {
+    const override = getCardOverride(cardNumber, card);
+    if (override) {
+      const cloned = JSON.parse(JSON.stringify(override));
+      if (cloned.abilities && cloned.abilities.length > 0) {
+        cloned.keywords = bindKeywordsToAbilities(cloned, rawEffect, cloned.abilities);
+      }
+      return cloned;
+    }
+  }
 
   if (!rawEffect.trim()) {
     return {
@@ -93,12 +104,21 @@ export function compileCard(card) {
     });
   }
 
+  const boundKeywords = bindKeywordsToAbilities(card, rawEffect, abilities);
   const isFullySupported = totalUnsupported === 0;
 
   return {
     cardNumber,
     name,
-    keywords,
+    type: card.type,
+    color: card.color,
+    colors: card.colors,
+    cost: card.cost,
+    symbols: card.symbols,
+    reduction: card.reduction,
+    levels: card.levels,
+    face: card.face,
+    keywords: boundKeywords,
     abilities,
     compiledClausesCount: totalCompiled,
     unsupportedClausesCount: totalUnsupported,

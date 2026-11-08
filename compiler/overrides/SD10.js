@@ -1,0 +1,1367 @@
+export const SD10_OVERRIDES = {
+  "SD10-010": {
+    "cardNumber": "SD10-010",
+    "name": "The StormDragon Supercell-Dragoon",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 126
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-010#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 4000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 4000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 4000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-010#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each Spirit with [Charge] you control, this Spirit gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "For each Spirit with [Charge] you control, this Spirit gains +2000 BP.",
+            "cleanText": "For each Spirit with [Charge] you control, this Spirit gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-010#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing Spirit.",
+            "cleanText": "You can target and attack an opposing Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-016": {
+    "cardNumber": "SD10-016",
+    "name": "Charge Draw",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 107
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-016#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards. Then, reveal two cards from your decktop, and add every Spirit card/Brave card with [Charge] among them to the Hand. Return any remaining cards to your decktop in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "reveal two cards from your decktop",
+            "cleanText": "reveal two cards from your decktop",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 2
+            }
+          },
+          {
+            "rawText": "add every Spirit card/Brave card with [Charge] among them to the Hand.",
+            "cleanText": "add every Spirit card/Brave card with [Charge] among them to the Hand",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to your decktop in any order.",
+            "cleanText": "Return any remaining cards to your decktop in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-016#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +3000 BP.",
+            "cleanText": "give a Spirit +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-008": {
+    "cardNumber": "SD10-008",
+    "name": "Dragon-Annura",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 52
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 83
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Spirits with [Charge] gain +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Spirits with [Charge] gain +2000 BP.",
+            "cleanText": "All your Spirits with [Charge] gain +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-011": {
+    "cardNumber": "SD10-011",
+    "name": "Dustwhirl",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "{{tk",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-011#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: {{tk",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: {{tk]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-011#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Nexus.",
+            "cleanText": "Destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-011#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 3000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 3000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 3000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 3000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-015": {
+    "cardNumber": "SD10-015",
+    "name": "Fire Wall",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD10-015#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By destroying a Red Spirit you control, when this battle ends, end the Attack Step. This effect can only be used during (Opposing Attack Step)."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying a Red Spirit you control",
+            "cleanText": "By destroying a Red Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "when this battle ends, end the Attack Step.",
+            "cleanText": "when this battle ends, end the Attack Step",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RULE"
+            }
+          },
+          {
+            "rawText": "This effect can only be used during (Opposing Attack Step).",
+            "cleanText": "This effect can only be used during (Opposing Attack Step)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "PLAY_CONDITION"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-009": {
+    "cardNumber": "SD10-009",
+    "name": "Sunpillar-Dragon",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 119
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-009#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return an \"Astral Dragon\" family Spirit card/Brave card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return an \"Astral Dragon\" family Spirit card/Brave card from your Trash to the Hand.",
+            "cleanText": "Return an \"Astral Dragon\" family Spirit card/Brave card from your Trash to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-009#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-013": {
+    "cardNumber": "SD10-013",
+    "name": "The Dragon Shuttle to the Heavens",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 203
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-013#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life is reduced by the attacks of opposing Spirits, destroy an opposing 5000 BP or less Spirit that attacked."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life is reduced by the attacks of opposing Spirits, destroy an opposing 5000 BP or less Spirit that attacked.",
+            "cleanText": "When your Life is reduced by the attacks of opposing Spirits, destroy an opposing 5000 BP or less Spirit that attacked",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-013#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Spirits with [Charge] destroys any opposing Spirits, destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Spirits with [Charge] destroys any opposing Spirits, destroy an opposing Nexus.",
+            "cleanText": "When your Spirits with [Charge] destroys any opposing Spirits, destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-012": {
+    "cardNumber": "SD10-012",
+    "name": "The Magma Spouting Star City",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD10-012#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Astral Dragon\" family Spirits gain +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Astral Dragon\" family Spirits gain +2000 BP.",
+            "cleanText": "All your \"Astral Dragon\" family Spirits gain +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "targetGroup": "ALL_FRIENDLY",
+              "family": "Astral Dragon",
+              "target": "all_friendly",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-012#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing Spirits are destroyed by your Spirit effects, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing Spirits are destroyed by your Spirit effects, draw a card.",
+            "cleanText": "When opposing Spirits are destroyed by your Spirit effects, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-X01": {
+    "cardNumber": "SD10-X01",
+    "name": "The ShineDragon Shining-Dragon",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 183
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a Red Brave card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a Red Brave card from your Hand, without paying the cost.",
+            "cleanText": "You can summon a Red Brave card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 5000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 5000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 5000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 5000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-X01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-X02": {
+    "cardNumber": "SD10-X02",
+    "name": "The ShiningSacredSword Shining-Sword",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 155
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 254
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD10-X02#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-X02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy every opposing 3000 BP or less Spirit, and for each Spirit destroyed, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy every opposing 3000 BP or less Spirit, and for each Spirit destroyed, draw a card.",
+            "cleanText": "Destroy every opposing 3000 BP or less Spirit, and for each Spirit destroyed, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": "DISCARDED_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-X02#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD10-X02#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your non-Ultimate \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-014": {
+    "cardNumber": "SD10-014",
+    "name": "Twin Flame",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD10-014#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 2000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 2000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 2000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 2000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD10-005": {
+    "cardNumber": "SD10-005",
+    "name": "Bronze-Wurm",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD10-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Charge- Increase the limit of your \"BP destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Charge- Increase the limit of your \"BP destruction effects\" by +1000.",
+            "cleanText": "Charge- Increase the limit of your \"BP destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  }
+};

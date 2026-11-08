@@ -1,1 +1,391 @@
-{"EX13-04":{"cardNumber":"EX13-04","name":"The SatelliteRobo Telescord","keywords":[],"abilities":[{"id":"EX13-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For both players, Spirits with two or more symbols can only attack once per turn."},"clauses":[{"rawText":"For both players, Spirits with two or more symbols can only attack once per turn.","cleanText":"For both players, Spirits with two or more symbols can only attack once per turn","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]},{"id":"EX13-04#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits with one symbol gain +2000 BP."},"clauses":[{"rawText":"All your Spirits with one symbol gain +2000 BP.","cleanText":"All your Spirits with one symbol gain +2000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":2000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-03":{"cardNumber":"EX13-03","name":"Compass-Mingo","keywords":[],"abilities":[{"id":"EX13-03#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit is blocked, the opponent exhausts a Spirit they control."},"clauses":[{"rawText":"When this Spirit is blocked, the opponent exhausts a Spirit they control.","cleanText":"When this Spirit is blocked, the opponent exhausts a Spirit they control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","count":1,"chooser":"opp","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"EX13-03#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve."},"clauses":[{"rawText":"When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve.","cleanText":"When your \"Winged Beast\"/\"Astral Soul\" family Spirits are destroyed by the opponent, put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-05":{"cardNumber":"EX13-05","name":"The Angelia Coma","keywords":[{"name":"Holy Life","parameter":null,"wave":1,"hook":"holy_life","bracketed":true,"index":115}],"abilities":[{"id":"EX13-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target an opposing Spirit. During this battle, that Spirit can't block."},"clauses":[{"rawText":"Target an opposing Spirit.","cleanText":"Target an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"During this battle, that Spirit can't block.","cleanText":"that Spirit can't block","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_BATTLE","op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]},{"id":"EX13-05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Holy Life","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life."},"clauses":[{"rawText":"When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life.","cleanText":"When this Spirit's attack reduces the opposing Life, put a core from the Void to your Life","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RECOVER_LIFE","count":1}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-07":{"cardNumber":"EX13-07","name":"The BlazeDragon Shining-Dragon-Flame","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":133}],"abilities":[{"id":"EX13-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 4000 BP or less Spirit. When this effect destroys any Spirit, draw a card."},"clauses":[{"rawText":"Destroy an opposing 4000 BP or less Spirit.","cleanText":"Destroy an opposing 4000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":4000}}}},{"rawText":"When this effect destroys any Spirit, draw a card.","cleanText":"When this effect destroys any Spirit, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"EX13-07#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the limit of your \"BP Destruction effects\" by +1000."},"clauses":[{"rawText":"Increase the limit of your \"BP Destruction effects\" by +1000.","cleanText":"Increase the limit of your \"BP Destruction effects\" by +1000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-01":{"cardNumber":"EX13-01","name":"The CrossStarDragon Southern-Cross-Dragon","keywords":[],"abilities":[{"id":"EX13-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP."},"clauses":[{"rawText":"All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP.","cleanText":"All your \"Astral Dragon\"/\"Astral Soul\" family Spirits gain +2000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":2000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"EX13-01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 4000 BP or less Spirit."},"clauses":[{"rawText":"Destroy an opposing 4000 BP or less Spirit.","cleanText":"Destroy an opposing 4000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":4000}}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-02":{"cardNumber":"EX13-02","name":"The EvilArtifactMaster Caelum","keywords":[],"abilities":[{"id":"EX13-02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains."},"clauses":[{"rawText":"Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains.","cleanText":"Send cores from an opposing Cost 5 or less Spirit to their Reserve until only one core remains","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"EX13-02#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit with two or less cores on it."},"clauses":[{"rawText":"Destroy an opposing Spirit with two or less cores on it.","cleanText":"Destroy an opposing Spirit with two or less cores on it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-06":{"cardNumber":"EX13-06","name":"The GiantCentaurus Troydes","keywords":[{"name":"Crush","parameter":null,"wave":1,"hook":"crush","bracketed":true,"index":16}],"abilities":[{"id":"EX13-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Crush","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Discard a number of cards from the opposing decktop equal to this Spirit's level."},"clauses":[{"rawText":"Discard a number of cards from the opposing decktop equal to this Spirit's level.","cleanText":"Discard a number of cards from the opposing decktop equal to this Spirit's level","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]},{"id":"EX13-06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each level this Spirit has, destroy an opposing Cost 3 or less Spirit."},"clauses":[{"rawText":"For each level this Spirit has, destroy an opposing Cost 3 or less Spirit.","cleanText":"For each level this Spirit has, destroy an opposing Cost 3 or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":3}}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-09":{"cardNumber":"EX13-09","name":"The WaterDragon Shining-Dragon-Water","keywords":[{"name":"Crush","parameter":null,"wave":1,"hook":"crush","bracketed":true,"index":16},{"name":"Crush","parameter":null,"wave":1,"hook":"crush","bracketed":true,"index":169},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":249}],"abilities":[{"id":"EX13-09#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Crush","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Discard a number of cards equal to this Spirit's LV from the opposing decktop."},"clauses":[{"rawText":"Discard a number of cards equal to this Spirit's LV from the opposing decktop.","cleanText":"Discard a number of cards equal to this Spirit's LV from the opposing decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]},{"id":"EX13-09#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst."},"clauses":[{"rawText":"When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst.","cleanText":"When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_BURST","side":"opp"}}],"unsupported":[]},{"id":"EX13-09#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Your \"opposing-deck-discarding effects\" discard +1 card."},"clauses":[{"rawText":"Your \"opposing-deck-discarding effects\" discard +1 card.","cleanText":"Your \"opposing-deck-discarding effects\" discard +1 card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"EX13-08":{"cardNumber":"EX13-08","name":"The WindDragon Shining-Dragon-Hurricane","keywords":[{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":190}],"abilities":[{"id":"EX13-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit. When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost.","cleanText":"When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"EX13-08#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of bodies to be exhausted by your “opponent-targeting exhaustion effects“ by +1."},"clauses":[{"rawText":"Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1.","cleanText":"Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "EX13-07": {
+    "cardNumber": "EX13-07",
+    "name": "The BlazeDragon Shining-Dragon-Flame",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 133
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EX13-07#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 4000 BP or less Spirit. When this effect destroys any Spirit, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 4000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 4000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "When this effect destroys any Spirit, draw a card.",
+            "cleanText": "When this effect destroys any Spirit, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-07#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the limit of your \"BP Destruction effects\" by +1000."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the limit of your \"BP Destruction effects\" by +1000.",
+            "cleanText": "Increase the limit of your \"BP Destruction effects\" by +1000",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-09": {
+    "cardNumber": "EX13-09",
+    "name": "The WaterDragon Shining-Dragon-Water",
+    "keywords": [
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Crush",
+        "parameter": null,
+        "wave": 1,
+        "hook": "crush",
+        "bracketed": true,
+        "index": 169
+      },
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 249
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EX13-09#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Crush",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard a number of cards equal to this Spirit's LV from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard a number of cards equal to this Spirit's LV from the opposing decktop.",
+            "cleanText": "Discard a number of cards equal to this Spirit's LV from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-09#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst.",
+            "cleanText": "When this Spirit's [Crush] discards any card with Burst effects, discard an opposing Burst",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_BURST",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-09#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Your \"opposing-deck-discarding effects\" discard +1 card."
+        },
+        "clauses": [
+          {
+            "rawText": "Your \"opposing-deck-discarding effects\" discard +1 card.",
+            "cleanText": "Your \"opposing-deck-discarding effects\" discard +1 card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "EX13-08": {
+    "cardNumber": "EX13-08",
+    "name": "The WindDragon Shining-Dragon-Hurricane",
+    "keywords": [
+      {
+        "name": "Charge",
+        "parameter": null,
+        "wave": 2,
+        "hook": "charge",
+        "bracketed": true,
+        "index": 190
+      }
+    ],
+    "abilities": [
+      {
+        "id": "EX13-08#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust an opposing Spirit. When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust an opposing Spirit.",
+            "cleanText": "Exhaust an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost.",
+            "cleanText": "When this effect exhausts any Spirit, you can summon a Cost 3 or less Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "EX13-08#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of bodies to be exhausted by your “opponent-targeting exhaustion effects“ by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1.",
+            "cleanText": "Increase the number of bodies to be exhausted by your \"opponent-targeting exhaustion effects\" by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

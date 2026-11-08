@@ -1,1 +1,446 @@
-{"P16-10":{"cardNumber":"P16-10","name":"The Fall Means Autumn-Leaf Viewing","keywords":[],"abilities":[{"id":"P16-10#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Between September 1st and November 30th, increase the limit of your Red Spirits' \"BP Destruction effects\" by +3000."},"clauses":[{"rawText":"Between September 1st and November 30th, increase the limit of your Red Spirits' \"BP Destruction effects\" by +3000.","cleanText":"Between September 1st and November 30th, increase the limit of your Red Spirits' \"BP Destruction effects\" by +3000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":3000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"P16-10#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"DRAW_STEP","timingLabel":"Your Draw Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of cards you draw by +1. After you draw, discard a card from your Hand."},"clauses":[{"rawText":"Increase the number of cards you draw by +1.","cleanText":"Increase the number of cards you draw by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self"}},{"rawText":"After you draw, discard a card from your Hand.","cleanText":"After you draw, discard a card from your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","count":1,"upTo":false,"filter":null,"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-03":{"cardNumber":"P16-03","name":"The Spring Flower-Watching Weather","keywords":[],"abilities":[{"id":"P16-03#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"TURN_TRIGGER","timingLabel":"Your Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"From March 1 to May 31, when you're summoning a Green Spirit card, you can summon it in exhausted state. When you've done so, exhaust an opposing Spirit."},"clauses":[{"rawText":"From March 1 to May 31, when you're summoning a Green Spirit card, you can summon it in exhausted state.","cleanText":"From March 1 to May 31, when you're summoning a Green Spirit card, you can summon it in exhausted state","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"exhaust an opposing Spirit.","cleanText":"exhaust an opposing Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"P16-03#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Refresh a Green Spirit you control."},"clauses":[{"rawText":"Refresh a Green Spirit you control.","cleanText":"Refresh a Green Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"],"color":"Green"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-26":{"cardNumber":"P16-26","name":"BooBoo Man","keywords":[],"abilities":[{"id":"P16-26#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can put any amount of copies of [BooBoo Man] in your deck."},"clauses":[{"rawText":"You can put any amount of copies of [BooBoo Man] in your deck.","cleanText":"You can put any amount of copies of [BooBoo Man] in your deck","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DECK_BUILDING_RULE"}}],"unsupported":[]},{"id":"P16-26#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Meal: Cost 3","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal two cards from your decktop. Among them, you can summon one Cost 3 \"Drifting Spirit\" family Spirit card, without paying the cost. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal two cards from your decktop.","cleanText":"You can reveal two cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":2}},{"rawText":"Among them, you can summon one Cost 3 \"Drifting Spirit\" family Spirit card, without paying the cost.","cleanText":"Among them, you can summon one Cost 3 \"Drifting Spirit\" family Spirit card, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P16-13":{"cardNumber":"P16-13","name":"Exedra","keywords":[],"abilities":[{"id":"P16-13#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\""},"clauses":[{"rawText":"Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\"","cleanText":"Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"P16-01":{"cardNumber":"P16-01","name":"Jacall","keywords":[],"abilities":[{"id":"P16-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each “Emperor Beast” family Spirit you control, destroy an opposing 3000 BP or less Spirit."},"clauses":[{"rawText":"For each \"Emperor Beast\" family Spirit you control, destroy an opposing 3000 BP or less Spirit.","cleanText":"For each \"Emperor Beast\" family Spirit you control, destroy an opposing 3000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":3000}}}}],"unsupported":[]},{"id":"P16-01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Seal"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Also, draw a card."},"clauses":[{"rawText":"draw a card.","cleanText":"draw a card","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-05":{"cardNumber":"P16-05","name":"Knight Swallow","keywords":[{"name":"High Speed","parameter":null,"wave":2,"hook":"high_speed","bracketed":true,"index":85}],"abilities":[{"id":"P16-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Seal"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit card in your Hand is Cost 2."},"clauses":[{"rawText":"This Spirit card in your Hand is Cost 2.","cleanText":"This Spirit card in your Hand is Cost 2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"P16-05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"High Speed","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."},"clauses":[{"rawText":"This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.","cleanText":"This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}},{"rawText":"In this case, cores to be put on this Spirit must also be from the Reserve.","cleanText":"In this case, cores to be put on this Spirit must also be from the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}}],"unsupported":[]},{"id":"P16-05#a2","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to any of your Spirits."},"clauses":[{"rawText":"Put a core from the Void to any of your Spirits.","cleanText":"Put a core from the Void to any of your Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P16-07":{"cardNumber":"P16-07","name":"Mino Antelope","keywords":[],"abilities":[{"id":"P16-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. Then, discard a card from your Hand."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"discard a card from your Hand.","cleanText":"discard a card from your Hand","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","count":1,"upTo":false,"filter":null,"chooser":"self"}}],"unsupported":[]},{"id":"P16-07#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":["During Seal"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol becomes two Blue symbols."},"clauses":[{"rawText":"This Spirit's symbol becomes two Blue symbols.","cleanText":"This Spirit's symbol becomes two Blue symbols","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_SYMBOL","count":2,"symbolColor":"Blue","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-04":{"cardNumber":"P16-04","name":"The AzureSacredHorse Execeed-Blue","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":116}],"abilities":[{"id":"P16-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core](Soul Core) from this Spirit to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] from this Spirit to your Life.","cleanText":"You can send the [Soul Core] from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"P16-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can destroy an opposing 12000 BP or less Spirit/Ultimate. When this effect destroys any Spirit/Ultimate, once per turn, this Spirit refreshes."},"clauses":[{"rawText":"You can destroy an opposing 12000 BP or less Spirit/Ultimate.","cleanText":"You can destroy an opposing 12000 BP or less Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":12000}}}},{"rawText":"When this effect destroys any Spirit/Ultimate, once per turn, this Spirit refreshes.","cleanText":"When this effect destroys any Spirit/Ultimate, once per turn, this Spirit refreshes","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]},{"id":"P16-04#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains an extra Red symbol."},"clauses":[{"rawText":"This Spirit gains an extra Red symbol.","cleanText":"This Spirit gains an extra Red symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"P16-02":{"cardNumber":"P16-02","name":"The BlackDeathDragon Bloodbone","keywords":[],"abilities":[{"id":"P16-02#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send a core each from every opposing Cost 3 or less Spirit to their Reserve. If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve."},"clauses":[{"rawText":"Send a core each from every opposing Cost 3 or less Spirit to their Reserve.","cleanText":"Send a core each from every opposing Cost 3 or less Spirit to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"If [Soul Core] (Soul Core) is used to pay the summon cost, instead, send a core from the opposing Field to their Reserve.","cleanText":"send a core from the opposing Field to their Reserve","link":"instead","isOptional":false,"isCost":false,"condition":"If [Soul Core] (Soul Core) is used to pay the summon cost","duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"P16-02#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["When Braved"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Nexus without any core on it."},"clauses":[{"rawText":"Destroy an opposing Nexus without any core on it.","cleanText":"Destroy an opposing Nexus without any core on it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-11":{"cardNumber":"P16-11","name":"The CrimsonDragonKing Ourovorius-Scarlet","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":118}],"abilities":[{"id":"P16-11#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core](Soul Core) from your Reserve to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] from your Reserve to your Life.","cleanText":"You can send the [Soul Core] from your Reserve to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SEAL_MOVE","count":1,"isSoulCore":true}}],"unsupported":[]},{"id":"P16-11#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"TURN_TRIGGER","timingLabel":"Your Turn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the start of each of your steps, you can destroy an opposing 5000 BP or less Spirit."},"clauses":[{"rawText":"At the start of each of your steps, you can destroy an opposing 5000 BP or less Spirit.","cleanText":"At the start of each of your steps, you can destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}}],"unsupported":[]},{"id":"P16-11#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"God-King\"/\"Ten Crown\" family Spirit reduces the opposing Life, the cores, besides the Soul Core, are sent to the Void, not the Reserve."},"clauses":[{"rawText":"When your \"God-King\"/\"Ten Crown\" family Spirit reduces the opposing Life, the cores, besides the Soul Core, are sent to the Void, not the Reserve.","cleanText":"When your \"God-King\"/\"Ten Crown\" family Spirit reduces the opposing Life, the cores, besides the Soul Core, are sent to the Void, not the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANT_FAMILY"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-14":{"cardNumber":"P16-14","name":"The FakeGodKing Mikegami","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":164}],"abilities":[{"id":"P16-14#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core](Soul Core) from your Reserve to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] from your Reserve to your Life.","cleanText":"You can send the [Soul Core] from your Reserve to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SEAL_MOVE","count":1,"isSoulCore":true}}],"unsupported":[]},{"id":"P16-14#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P16-14#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed by the Opponent","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost."},"clauses":[{"rawText":"You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost.","cleanText":"You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-15":{"cardNumber":"P16-15","name":"The FlowerMonarch Tanpopo","keywords":[{"name":"Burst","parameter":"s","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"P16-15#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_ATTACK","isFlash":false,"isMain":false,"cleanBody":"During this turn, the BP of all opposing Spirits become 0. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"During this turn, the BP of all opposing Spirits become 0.","cleanText":"the BP of all opposing Spirits become 0","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"SET_BP"}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"P16-15#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you have a set Burst, this Spirit is unaffected by opposing effects, and your Burst can't be discarded."},"clauses":[{"rawText":"While you have a set Burst, this Spirit is unaffected by opposing effects, and your Burst can't be discarded.","cleanText":"this Spirit is unaffected by opposing effects, and your Burst can't be discarded","link":null,"isOptional":false,"isCost":false,"condition":"While you have a set Burst","duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-22":{"cardNumber":"P16-22","name":"The FumeDragon Steam Dragon","keywords":[],"abilities":[{"id":"P16-22#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, you can summon this Spirit card from the Hand, without paying the cost."},"clauses":[{"rawText":"When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, you can summon this Spirit card from the Hand, without paying the cost.","cleanText":"When your \"God-King\"/\"Ten Crown\" family Spirit is summoned, you can summon this Spirit card from the Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"P16-22#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-16":{"cardNumber":"P16-16","name":"The HeavenlyDemonKing God-Sechs -Type Lolo-","keywords":[{"name":"Six Heaven Rush","parameter":"6","wave":2,"hook":"rush","bracketed":true,"index":164}],"abilities":[{"id":"P16-16#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can't attack nor Brave. This effect can't be negated."},"clauses":[{"rawText":"This Spirit can't attack nor Brave.","cleanText":"This Spirit can't attack nor Brave","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SET_RESTRICTION","target":"self","restriction":"CANNOT_ATTACK"}},{"rawText":"This effect can't be negated.","cleanText":"This effect can't be negated","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]},{"id":"P16-16#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Besides this Spirit, destroy all your Spirits and Nexuses.\n[Six Heaven Rush: 6]\nIf you have six symbol colors, summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost."},"clauses":[{"rawText":"Besides this Spirit, destroy all your Spirits and Nexuses.","cleanText":"Besides this Spirit, destroy all your Spirits and Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"[Six Heaven Rush: 6]","cleanText":"[Six Heaven Rush: 6]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"If you have six symbol colors, summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost.","cleanText":"summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":"If you have six symbol colors","duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"P16-21":{"cardNumber":"P16-21","name":"The Hellflame Duke Bram-Zand-Noir","keywords":[{"name":"Soul Drive","parameter":null,"wave":3,"hook":"soul_drive","bracketed":true,"index":82}],"abilities":[{"id":"P16-21#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Summon Condition: Your Life is at three or less"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Summon Condition: Your Life is at three or less]","clauses":[],"unsupported":[]},{"id":"P16-21#a1","type":"ABILITY","header":{"levels":[3,4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Soul Drive","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you banish the [Soul Core](Soul Core) on this Ultimate from the game, send two cores each from every opposing Spirit/Nexus to their Trash. On the next (Opposing Refresh Step), the opponent can't return any cores from their Trash to their Reserve."},"clauses":[{"rawText":"If you banish the [Soul Core] on this Ultimate from the game, send two cores each from every opposing Spirit/Nexus to their Trash.","cleanText":"send two cores each from every opposing Spirit/Nexus to their Trash","link":null,"isOptional":false,"isCost":false,"condition":"If you banish the [Soul Core] on this Ultimate from the game","duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"On the next (Opposing Refresh Step), the opponent can't return any cores from their Trash to their Reserve.","cleanText":"On the next (Opposing Refresh Step), the opponent can't return any cores from their Trash to their Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"P16-21#a2","type":"ABILITY","header":{"levels":[4,5],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send cores from an opposing Spirit to the Trash until only one core remains on it."},"clauses":[{"rawText":"Send cores from an opposing Spirit to the Trash until only one core remains on it.","cleanText":"Send cores from an opposing Spirit to the Trash until only one core remains on it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-09R":{"cardNumber":"P16-09R","name":"The PhantomGodKing Zemrias","keywords":[{"name":"Seal","parameter":"Seal","wave":2,"hook":"seal","bracketed":true,"index":16},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":105},{"name":"Seal","parameter":"When Sealed","wave":2,"hook":"seal","bracketed":true,"index":198}],"abilities":[{"id":"P16-09R#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: Seal"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can send the [Soul Core] from this Spirit to your Life."},"clauses":[{"rawText":"You can send the [Soul Core] from this Spirit to your Life.","cleanText":"You can send the [Soul Core] from this Spirit to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_SOUL_CORE"}}],"unsupported":[]},{"id":"P16-09R#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to this Spirit."},"clauses":[{"rawText":"Put a core from the Void to this Spirit.","cleanText":"Put a core from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"P16-09R#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":["Seal: When Sealed"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains +10000 BP."},"clauses":[{"rawText":"This Spirit gains +10000 BP.","cleanText":"This Spirit gains +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-08":{"cardNumber":"P16-08","name":"The SeventhBeastEmperor Victory Griffin","keywords":[],"abilities":[{"id":"P16-08#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy every opposing 5000 BP or less Spirit. For each Spirit destroyed by this effect, put a core from the Void to this Spirit."},"clauses":[{"rawText":"Destroy every opposing 5000 BP or less Spirit.","cleanText":"Destroy every opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"For each Spirit destroyed by this effect, put a core from the Void to this Spirit.","cleanText":"For each Spirit destroyed by this effect, put a core from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"P16-08#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["During Seal"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains an extra Green symbol."},"clauses":[{"rawText":"This Spirit gains an extra Green symbol.","cleanText":"This Spirit gains an extra Green symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-24":{"cardNumber":"P16-24","name":"The Sixth's ExplosiveBeast Blueberus","keywords":[],"abilities":[{"id":"P16-24#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy opposing Cost 1/2/3 Spirits, one of each."},"clauses":[{"rawText":"Destroy opposing Cost 1/2/3 Spirits, one of each.","cleanText":"Destroy opposing Cost 1/2/3 Spirits, one of each","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]},{"id":"P16-24#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Seal"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each Spirit destroyed by this effect, discard two cards from the opposing decktop."},"clauses":[{"rawText":"For each Spirit destroyed by this effect, discard two cards from the opposing decktop.","cleanText":"For each Spirit destroyed by this effect, discard two cards from the opposing decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-06":{"cardNumber":"P16-06","name":"The Summer Means Swimming With Everyone","keywords":[],"abilities":[{"id":"P16-06#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted."},"clauses":[{"rawText":"Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted.","cleanText":"Between June 1st and August 31st, when your Blue Spirits are destroyed, discard a card from the opposing decktop, and when any Spirit card is discarded, those Spirits remain on the Field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]},{"id":"P16-06#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"The LV2 cost of all Blue Spirits you control becomes 2."},"clauses":[{"rawText":"The LV2 cost of all Blue Spirits you control becomes 2.","cleanText":"The LV2 cost of all Blue Spirits you control becomes 2","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-23":{"cardNumber":"P16-23","name":"The Tearful Graduation Ceremony","keywords":[],"abilities":[{"id":"P16-23#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card."},"clauses":[{"rawText":"Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.","cleanText":"Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"P16-23#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"START_STEP","timingLabel":"Your Start Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost."},"clauses":[{"rawText":"You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.","cleanText":"You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-12":{"cardNumber":"P16-12","name":"The Tenth's HoppingBeast Belgian","keywords":[],"abilities":[{"id":"P16-12#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to your Reserve. If you control another \"God-King\"/\"Ten Crown\" family Spirit, also, put a core from the Void to your Reserve."},"clauses":[{"rawText":"Put a core from the Void to your Reserve.","cleanText":"Put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}},{"rawText":"If you control another \"God-King\"/\"Ten Crown\" family Spirit, also, put a core from the Void to your Reserve.","cleanText":"also, put a core from the Void to your Reserve","link":null,"isOptional":false,"isCost":false,"condition":"If you control another \"God-King\"/\"Ten Crown\" family Spirit","duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"reserve","side":"self"}}}],"unsupported":[]},{"id":"P16-12#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return an opposing exhausted Spirit to the Hand."},"clauses":[{"rawText":"Return an opposing exhausted Spirit to the Hand.","cleanText":"Return an opposing exhausted Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-20":{"cardNumber":"P16-20","name":"The Third's AstralBeast Star-Campbell","keywords":[{"name":"Accel","parameter":"Cost 4 ([Yellow Core","wave":2,"hook":"accel","bracketed":true,"index":147}],"abilities":[{"id":"P16-20#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Life would be reduced by an opposing effect, by discarding this Spirit card from your Removed Zone, your Life won't be reduced."},"clauses":[{"rawText":"When your Life would be reduced by an opposing effect, by discarding this Spirit card from your Removed Zone, your Life won't be reduced.","cleanText":"When your Life would be reduced by an opposing effect, by discarding this Spirit card from your Removed Zone, your Life won't be reduced","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"PREVENT_LIFE_LOSS"}}],"unsupported":[]},{"id":"P16-20#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Yellow Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Besides [The Third's AstralBeast Star-Campbell], return three \"Drifting Spirit\"/\"Imaginary Beast\" family Spirit cards from your Trash to the Hand. After this effect resolves, put this card face-up onto the Removed Zone."},"clauses":[{"rawText":"Besides [The Third's AstralBeast Star-Campbell], return three \"Drifting Spirit\"/\"Imaginary Beast\" family Spirit cards from your Trash to the Hand.","cleanText":"Besides [The Third's AstralBeast Star-Campbell], return three \"Drifting Spirit\"/\"Imaginary Beast\" family Spirit cards from your Trash to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"put this card face-up onto the Removed Zone.","cleanText":"put this card face-up onto the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-27":{"cardNumber":"P16-27","name":"The W Heroes' Great Adventure!","keywords":[],"abilities":[{"id":"P16-27#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"You can summon a \"TwelveGodKing\"-named Spirit card from your Hand, without paying the cost. Also, when a \"TwelveGodKing Execeed\"-named Spirit is summoned via this effect, you can summon a \"TwelveGodKing Gale-Phoenix\"-named Spirit card from your Hand, without paying the cost."},"clauses":[{"rawText":"You can summon a \"TwelveGodKing\"-named Spirit card from your Hand, without paying the cost.","cleanText":"You can summon a \"TwelveGodKing\"-named Spirit card from your Hand, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"when a \"TwelveGodKing Execeed\"-named Spirit is summoned via this effect, you can summon a \"TwelveGodKing Gale-Phoenix\"-named Spirit card from your Hand, without paying the cost.","cleanText":"when a \"TwelveGodKing Execeed\"-named Spirit is summoned via this effect, you can summon a \"TwelveGodKing Gale-Phoenix\"-named Spirit card from your Hand, without paying the cost","link":"also","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"P16-27#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give a Spirit +3000 BP."},"clauses":[{"rawText":"During this turn, give a Spirit +3000 BP.","cleanText":"give a Spirit +3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":3000,"target":"target","duration":"DURING_THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-19":{"cardNumber":"P16-19","name":"The Winter Means Ski Tournament At A Snowy Mountain","keywords":[],"abilities":[{"id":"P16-19#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During December 1st to February 29th, refresh all your White spirits."},"clauses":[{"rawText":"During December 1st to February 29th, refresh all your White spirits.","cleanText":"During December 1st to February 29th, refresh all your White spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"P16-19#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opposing Hand increases via an opposing Spirit/Ultimate effect, for each card increased, you can draw one card."},"clauses":[{"rawText":"When the opposing Hand increases via an opposing Spirit/Ultimate effect, for each card increased, you can draw one card.","cleanText":"When the opposing Hand increases via an opposing Spirit/Ultimate effect, for each card increased, you can draw one card","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":"DISCARDED_COUNT"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"P16-25":{"cardNumber":"P16-25","name":"［Dream Water Flower］Sawael","keywords":[{"name":"Friend","parameter":null,"wave":5,"hook":"friend","bracketed":true,"index":42}],"abilities":[{"id":"P16-25#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit card is revealed by your [Friend], you can also treat it as Cost 3."},"clauses":[{"rawText":"When this Spirit card is revealed by your [Friend], you can also treat it as Cost 3.","cleanText":"When this Spirit card is revealed by your [Friend], you can also treat it as Cost 3","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"P16-25#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can return a Magic card from your Trash to the Hand. When you've done so, this Spirit refreshes."},"clauses":[{"rawText":"You can return a Magic card from your Trash to the Hand.","cleanText":"You can return a Magic card from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SALVAGE","cardType":"Magic","count":1}},{"rawText":"this Spirit refreshes.","cleanText":"this Spirit refreshes","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"P16-17":{"cardNumber":"P16-17","name":"［Sacred Swords］Jakomina Kit","keywords":[{"name":"Team","parameter":"Absolutes Sacred Swords","wave":5,"hook":"team","bracketed":true,"index":0}],"abilities":[{"id":"P16-17#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"P16-17#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Among them, add an [Absolutes] or [Sacred Swords] Spirit card to the Hand. Discard any remaining cards. If [Soul Core] was used to pay the summon cost, instead, return an opposing Spirit to the Hand."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Among them, add an [Absolutes] or [Sacred Swords] Spirit card to the Hand.","cleanText":"Among them, add an [Absolutes] or [Sacred Swords] Spirit card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"If [Soul Core] was used to pay the summon cost, instead, return an opposing Spirit to the Hand.","cleanText":"return an opposing Spirit to the Hand","link":"instead","isOptional":false,"isCost":false,"condition":"If [Soul Core] was used to pay the summon cost","duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"opp","types":["Spirit"]},"destination":"HAND"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "P16-13": {
+    "cardNumber": "P16-13",
+    "name": "Exedra",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P16-13#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\"",
+            "cleanText": "Give all your \"Dragon\"/\"Emperor Beast\" family Spirits: \"[SSoul: Red] When you're summoning an Ultimate card, this Spirit gains [Red Core] (an extra Red Symbol).\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADD_SYMBOL"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P16-14": {
+    "cardNumber": "P16-14",
+    "name": "The FakeGodKing Mikegami",
+    "keywords": [
+      {
+        "name": "Seal",
+        "parameter": "Seal",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Seal",
+        "parameter": "When Sealed",
+        "wave": 2,
+        "hook": "seal",
+        "bracketed": true,
+        "index": 164
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P16-14#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: Seal"
+          ],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can send the [Soul Core](Soul Core) from your Reserve to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send the [Soul Core] from your Reserve to your Life.",
+            "cleanText": "You can send the [Soul Core] from your Reserve to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SEAL_MOVE",
+              "count": 1,
+              "isSoulCore": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P16-14#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P16-14#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Seal: When Sealed"
+          ],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed by the Opponent",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost.",
+            "cleanText": "You can summon a \"Jade Emperor Dragon\"/\"God-King\"/\"Ten Crown\" family Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P16-15": {
+    "cardNumber": "P16-15",
+    "name": "The FlowerMonarch Tanpopo",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "s",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P16-15#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_ATTACK",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, the BP of all opposing Spirits become 0. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, the BP of all opposing Spirits become 0.",
+            "cleanText": "the BP of all opposing Spirits become 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "SET_BP"
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P16-15#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you have a set Burst, this Spirit is unaffected by opposing effects, and your Burst can't be discarded."
+        },
+        "clauses": [
+          {
+            "rawText": "While you have a set Burst, this Spirit is unaffected by opposing effects, and your Burst can't be discarded.",
+            "cleanText": "this Spirit is unaffected by opposing effects, and your Burst can't be discarded",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you have a set Burst",
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "P16-16": {
+    "cardNumber": "P16-16",
+    "name": "The HeavenlyDemonKing God-Sechs -Type Lolo-",
+    "keywords": [
+      {
+        "name": "Six Heaven Rush",
+        "parameter": "6",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 164
+      }
+    ],
+    "abilities": [
+      {
+        "id": "P16-16#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't attack nor Brave. This effect can't be negated."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't attack nor Brave.",
+            "cleanText": "This Spirit can't attack nor Brave",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "target": "self",
+              "restriction": "CANNOT_ATTACK"
+            }
+          },
+          {
+            "rawText": "This effect can't be negated.",
+            "cleanText": "This effect can't be negated",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P16-16#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Besides this Spirit, destroy all your Spirits and Nexuses.\n[Six Heaven Rush: 6]\nIf you have six symbol colors, summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Besides this Spirit, destroy all your Spirits and Nexuses.",
+            "cleanText": "Besides this Spirit, destroy all your Spirits and Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "[Six Heaven Rush: 6]",
+            "cleanText": "[Six Heaven Rush: 6]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "If you have six symbol colors, summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost.",
+            "cleanText": "summon any number of \"Heavenly Demon King\" family Spirit cards from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have six symbol colors",
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createGame } from '../engine/index.js';
 import { createCardInstance, createFieldStack, resetInstanceIdCounter } from '../engine/state.js';
 import { extractKeywords, KEYWORD_CATALOG } from '../compiler/keyword_compiler.js';
-import { computeEffectiveBP, canAttack, canBlock, isImmune } from '../engine/continuous.js';
+import { computeEffectiveBP, computeLevel, canAttack, canBlock, isImmune } from '../engine/continuous.js';
 
 test('Keyword Catalog - Comprehensive coverage and stacking extraction', () => {
   // 1. Coverage check of major Wave 4, 5, 6 keywords
@@ -352,4 +352,440 @@ test('Wave 6 - Rumble mills cards at battle end reduced by blocker cost', async 
 
   assert.equal(opp.deck.length, 8);
   assert.equal(opp.grave.length, 2);
+});
+
+test('Wave 1 - Supreme Clash forces block and exhausts opposing Spirit/Ultimate', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const supremeClashSpirit = createCardInstance({
+    cardNumber: 'BS28-X01',
+    name: 'The Ultimate Dragon Emperor',
+    effect: '[Supreme Clash]'
+  }, 'player');
+
+  const attacker = createFieldStack(supremeClashSpirit, { normal: 2, soul: 0 });
+  p.field.push(attacker);
+
+  const oppTarget = createFieldStack(createCardInstance({ name: 'Opp Spirit' }, 'opponent'), { normal: 1, soul: 0 });
+  oppTarget.state = 'REFRESHED';
+  opp.field.push(oppTarget);
+
+  await game.declareAttack(attacker.id, 'player');
+
+  assert.equal(game.state.combat.mustBlockIfAble, true);
+  assert.deepEqual(game.state.combat.blockerTypes, ['Spirit', 'Ultimate']);
+  assert.equal(oppTarget.state, 'EXHAUSTED', 'Opposing unit exhausted by Supreme Clash');
+});
+
+test('Wave 1 - Grand Assault exhausts a Nexus to refresh attacker and gates blocker symbols', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const grandAssaultSpirit = createCardInstance({
+    cardNumber: 'BS38-X01',
+    name: 'The Colossus God',
+    symbols: ['Blue', 'Blue'],
+    effect: '[Grand Assault: 1]'
+  }, 'player');
+
+  const attacker = createFieldStack(grandAssaultSpirit, { normal: 3, soul: 0 });
+  p.field.push(attacker);
+
+  const nexus = { id: 'nexus_1', name: 'Tower of Water', state: 'REFRESHED' };
+  p.nexus = [nexus];
+
+  await game.declareAttack(attacker.id, 'player');
+
+  assert.equal(nexus.state, 'EXHAUSTED', 'Nexus exhausted to trigger Grand Assault');
+  assert.equal(attacker.state, 'REFRESHED', 'Attacker refreshed by Grand Assault');
+  assert.equal(game.state.combat.blockerMinSymbols, 2, 'Blocker requires at least 2 symbols');
+
+  // Blocker with 1 symbol cannot block
+  const singleSymbolBlocker = createFieldStack(createCardInstance({ name: 'Soldier', symbols: ['Blue'] }, 'opponent'), { normal: 1, soul: 0 });
+  assert.equal(canBlock(game.state, singleSymbolBlocker), false, '1-symbol blocker cannot block against 2-symbol Grand Assault');
+});
+
+test('Wave 1 - Ultra Awaken refreshes on BP comparison if unit has 4 or more cores', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const ultraAwakenSpirit = createCardInstance({
+    cardNumber: 'BS10-X01',
+    name: 'The PhantomStarDragon Gai-Asura',
+    levels: { 1: { cost: 1, bp: 5000 } },
+    effect: '[Ultra Awaken]'
+  }, 'player');
+
+  // Give attacker 4 cores
+  const attacker = createFieldStack(ultraAwakenSpirit, { normal: 4, soul: 0 });
+  p.field.push(attacker);
+
+  const blocker = createFieldStack(createCardInstance({ name: 'Opp Blocker', bp: 3000 }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(blocker);
+
+  await game.declareAttack(attacker.id, 'player');
+  await game.declareBlock(blocker.id, 'opponent');
+
+  assert.equal(attacker.state, 'REFRESHED', 'Ultra Awaken refreshed unit with 4 cores during battle');
+});
+
+test('Wave 2 - Violent High Speed summons from hand when Trash has 5+ cores', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  p.trash.normal = 5; // 5 cores in trash
+  p.reserve.normal = 0;
+
+  const vhsCard = createCardInstance({
+    cardNumber: 'BS31-028',
+    name: 'Sonic Hurricane',
+    cost: 3,
+    effect: '[Violent High Speed]'
+  }, 'player');
+  p.hand.push(vhsCard);
+
+  const handler = game.keywords.get('Violent High Speed');
+  assert.ok(handler);
+
+  // When trash has 5 cores, summons for 0 cost; 1 core onto spirit, 4 cores into reserve, 0 in trash
+  const res = await handler.executeViolentHighSpeedSummon(game, vhsCard, 'player');
+  assert.equal(res.success, true);
+  assert.equal(p.field.length, 1);
+  assert.equal(p.field[0].top.name, 'Sonic Hurricane');
+  assert.equal(p.field[0].cores.normal, 1, '1 core placed on summoned Spirit');
+  assert.equal(p.trash.normal, 0, 'Trash emptied');
+  assert.equal(p.reserve.normal, 4, 'Remaining 4 cores moved to reserve');
+
+  // If trash has < 5 cores, summoning is rejected
+  p.trash.normal = 4;
+  const vhsCard2 = createCardInstance({ name: 'Sonic 2', cost: 2 }, 'player');
+  p.hand.push(vhsCard2);
+  const res2 = await handler.executeViolentHighSpeedSummon(game, vhsCard2, 'player');
+  assert.equal(res2.success, false);
+  assert.equal(res2.reason, 'REQUIRE_AT_LEAST_5_TRASH_CORES');
+});
+
+test('Wave 2 - Unleash moves Soul Core to Spirit and triggers ability', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+
+  const stack = createFieldStack(createCardInstance({ name: 'Crystal God' }, 'player'), { normal: 2, soul: 0 });
+  p.field.push(stack);
+
+  let effectExecuted = false;
+  const handler = game.keywords.get('Unleash');
+  assert.ok(handler);
+
+  const res = await handler.executeUnleash(game, stack, async () => {
+    effectExecuted = true;
+  });
+
+  assert.equal(res.success, true);
+  assert.equal(stack.cores.soul, 1, 'Soul Core moved to stack');
+  assert.equal(effectExecuted, true);
+});
+
+test('Wave 4 - Immortality validates condition and revives from Trash', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  p.reserve.normal = 2;
+
+  const immortalityCard = createCardInstance({
+    cardNumber: 'BS02-X08',
+    name: 'The NetherworldLord Cursed-Dragon',
+    cost: 8,
+    effect: '[LV1-3] [Immortality: Cost 4/5] (When Destroyed)'
+  }, 'player');
+  p.grave.push(immortalityCard);
+
+  const handler = game.keywords.get('Immortality');
+  assert.ok(handler);
+
+  // Destroyed card is Cost 4
+  const destroyedCost4 = createCardInstance({ cost: 4 }, 'player');
+  assert.equal(handler.canReviveOnDestruction(destroyedCost4, immortalityCard), true);
+
+  // Destroyed card is Cost 6 -> does not match Cost 4/5
+  const destroyedCost6 = createCardInstance({ cost: 6 }, 'player');
+  assert.equal(handler.canReviveOnDestruction(destroyedCost6, immortalityCard), false);
+
+  // Execute revival
+  const res = await handler.executeRevival(game, immortalityCard, 'player', 1);
+  assert.equal(res.success, true);
+  assert.equal(p.field.length, 1);
+  assert.equal(p.field[0].top.name, 'The NetherworldLord Cursed-Dragon');
+  assert.equal(p.grave.length, 0);
+});
+
+test('Wave 4 - Tribute, Unsheathe, Showdown, Spellbind, Spell Blight, and Kagemusha mechanics', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  // 1. Tribute
+  const tributeTarget = createFieldStack(createCardInstance({ name: 'Sacrifice Unit' }, 'player'), { normal: 2, soul: 0 });
+  p.field.push(tributeTarget);
+  const tributeHandler = game.keywords.get('Tribute');
+  const tRes = await tributeHandler.executeTribute(game, tributeTarget, 'player', 'grave');
+  assert.equal(tRes.success, true);
+  assert.equal(p.grave.length, 1);
+  assert.equal(p.field.length, 0);
+
+  // 2. Unsheathe attaches Sword Brave
+  const swordBrave = createCardInstance({ name: 'Dragon Sword', type: 'Brave' }, 'player');
+  p.hand.push(swordBrave);
+  const spiritStack = createFieldStack(createCardInstance({ name: 'Swordmaster' }, 'player'), { normal: 1, soul: 0 });
+  p.field.push(spiritStack);
+
+  const unsheatheHandler = game.keywords.get('Unsheathe');
+  const uRes = await unsheatheHandler.executeUnsheathe(game, swordBrave, spiritStack, 'player');
+  assert.equal(uRes.success, true);
+  assert.equal(spiritStack.braves.length, 1);
+  assert.equal(spiritStack.braves[0].name, 'Dragon Sword');
+
+  // 3. Showdown
+  const showdownHandler = game.keywords.get('Showdown');
+  game.state.combat = {};
+  await showdownHandler.hooks.onAttackDeclared({ state: game.state });
+  assert.equal(game.state.combat.mustBlockIfAble, true);
+  assert.equal(game.state.combat.showdownDuel, true);
+
+  // 4. Spellbind prevents refresh
+  const oppTarget = createFieldStack(createCardInstance({ name: 'Opp Unit' }, 'opponent'), { normal: 1, soul: 0 });
+  oppTarget.state = 'EXHAUSTED';
+  oppTarget.spellbound = true;
+  opp.field.push(oppTarget);
+
+  game.flow.state.activePlayer = 'opponent';
+  await game.flow.executeStepActions('REFRESH');
+  assert.equal(oppTarget.state, 'EXHAUSTED', 'Spellbound spirit stays exhausted during Refresh Step');
+
+  // 5. Spell Blight sends 1 core from opponent's Life to Trash, keeps Spirit refreshed on field
+  const spellBlightSpirit = createFieldStack(createCardInstance({ name: 'Belphegor' }, 'player'), { normal: 2, soul: 0 });
+  spellBlightSpirit.state = 'EXHAUSTED';
+  p.field.push(spellBlightSpirit);
+  opp.life = 5;
+  opp.trash.normal = 0;
+
+  const spellBlightHandler = game.keywords.get('Spell Blight');
+  const sbRes = await spellBlightHandler.executeSpellBlight(game, spellBlightSpirit, 'opponent');
+  assert.equal(sbRes.success, true);
+  assert.equal(sbRes.preventedDestruction, true);
+  assert.equal(opp.life, 4, '1 core removed from opponent life');
+  assert.equal(opp.trash.normal, 1, '1 core sent to opponent trash');
+  assert.equal(spellBlightSpirit.state, 'REFRESHED', 'Spirit remains refreshed on the field');
+
+  // 6. Kagemusha intercepts targeting
+  const kagemushaCard = createCardInstance({ name: 'Shadow Interceptor' }, 'player');
+  p.hand.push(kagemushaCard);
+  const kagemushaHandler = game.keywords.get('Kagemusha');
+  const kRes = await kagemushaHandler.executeKagemusha(game, kagemushaCard, spiritStack, 'player');
+  assert.equal(kRes.success, true);
+  assert.equal(p.field.some(st => st.top.name === 'Shadow Interceptor' && st.state === 'EXHAUSTED'), true);
+
+  // 7. Bombardment reveals decktop, damages opposing life if Emperor Beast, and adds to hand
+  const emperorBeastCard = createCardInstance({ name: 'Revol-Tiger', family: 'Emperor Beast' }, 'player');
+  p.deck.unshift(emperorBeastCard);
+  opp.life = 5;
+  opp.reserve.normal = 0;
+  const bombardmentHandler = game.keywords.get('Bombardment');
+  await bombardmentHandler.hooks.onAttackDeclared({
+    state: game.state,
+    attackerStack: spiritStack,
+    keyword: { name: 'Bombardment', parameter: '1' },
+    game
+  });
+  assert.equal(opp.life, 4, 'Bombardment dealt 1 life damage');
+  assert.equal(opp.reserve.normal, 1, 'Life moved to reserve');
+  assert.equal(p.hand.some(c => c.name === 'Revol-Tiger'), true, 'Revealed Emperor Beast added to hand');
+
+  // 8. Leap returns opposing exhausted unit to hand and burns 1 life
+  opp.field = [];
+  const exhaustedOppSpirit = createFieldStack(createCardInstance({ name: 'Opp Exhausted' }, 'opponent'), { normal: 1, soul: 0 });
+  exhaustedOppSpirit.state = 'EXHAUSTED';
+  opp.field.push(exhaustedOppSpirit);
+  const leapHandler = game.keywords.get('Leap');
+  await leapHandler.hooks.onAttackDeclared({
+    state: game.state,
+    attackerStack: spiritStack,
+    resolver: game.resolver,
+    game
+  });
+  assert.equal(opp.life, 3, 'Leap dealt 1 life damage');
+  assert.equal(opp.field.some(st => st.top.name === 'Opp Exhausted'), false, 'Exhausted spirit bounced from field');
+  assert.equal(opp.hand.some(c => c.name === 'Opp Exhausted'), true, 'Bounced spirit returned to opponent hand');
+
+  // 9. Zero Counter destroys free-summoned opposing unit and returns to hand
+  const zeroCounterCard = createCardInstance({ name: 'Zeros Barrier', type: 'Magic' }, 'player');
+  p.hand.push(zeroCounterCard);
+  p.reserve.normal = 2;
+  const freeSummonedOpp = createFieldStack(createCardInstance({ name: 'Free Beast', type: 'Spirit' }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(freeSummonedOpp);
+  const zeroCounterHandler = game.keywords.get('Zero Counter');
+  const zcRes = await zeroCounterHandler.executeZeroCounter(game, zeroCounterCard, freeSummonedOpp, 'player');
+  assert.equal(zcRes.success, true);
+  assert.equal(zcRes.returnedToHand, true, 'Zero counter returned to hand by paying 1 cost');
+  assert.equal(opp.field.some(st => st.top.name === 'Free Beast'), false, 'Free summoned enemy destroyed');
+  assert.equal(opp.grave.some(c => c.name === 'Free Beast'), true, 'Free summoned enemy in grave');
+
+  // 10. Enchain verifies color condition and skips step
+  const enchainHandler = game.keywords.get('Enchain');
+  const enchainRes = await enchainHandler.executeEnchainSkipStep(game, 'MAIN', 'opponent');
+  assert.equal(enchainRes.success, true);
+  assert.equal(game.state.skipStepOnce['opponent'].includes('MAIN'), true, 'Opponent main step flagged for skip');
+});
+
+test('Wave 5 - My Unit, Solo Part, Duet Part, and Funnel mechanics', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const divaAttacker = createFieldStack(createCardInstance({ name: 'Lead Diva', family: 'Diva' }, 'player'), { normal: 1, soul: 0 });
+  const divaBackup = createFieldStack(createCardInstance({ name: 'Chorus Diva', family: 'Diva' }, 'player'), { normal: 1, soul: 0 });
+  divaBackup.state = 'EXHAUSTED';
+  p.field.push(divaAttacker, divaBackup);
+
+  // My Unit
+  const myUnitHandler = game.keywords.get('My Unit');
+  const mRes = await myUnitHandler.executeMyUnit(game, divaAttacker, 1, 'player');
+  assert.equal(mRes.success, true);
+
+  // Solo Part & Duet Part
+  const soloHandler = game.keywords.get('Solo Part');
+  const duetHandler = game.keywords.get('Duet Part');
+  assert.equal(soloHandler.isActive(game.state, divaAttacker), true);
+  assert.equal(duetHandler.isActive(game.state, divaAttacker), true);
+
+  // Funnel destroys opposing unit
+  const oppEnemy = createFieldStack(createCardInstance({ name: 'Enemy Gundam' }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(oppEnemy);
+  const funnelHandler = game.keywords.get('Funnel');
+  const fRes = await funnelHandler.executeFunnel(game, divaAttacker, 2, oppEnemy);
+  assert.equal(fRes.success, true);
+  assert.equal(opp.field.length, 0);
+  assert.equal(opp.grave.length, 1);
+});
+
+test('Wave 6 - Flag Contract Advent, Soul Magic, Amplify, and Level Up', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+
+  // 1. Flag Contract Advent
+  const flagNexus = createFieldStack(createCardInstance({ name: 'Contract Flag Nexus', type: 'Contract Nexus' }, 'player'), { normal: 1, soul: 1 });
+  p.field.push(flagNexus);
+  const adventCard = createCardInstance({ name: 'Advent Emperor', type: 'Spirit' }, 'player');
+  p.hand.push(adventCard);
+
+  const flagHandler = game.keywords.get('Flag Contract Advent');
+  const fRes = await flagHandler.executeFlagContractAdvent(game, adventCard, flagNexus, 'player');
+  assert.equal(fRes.success, true);
+  assert.equal(flagNexus.top.name, 'Advent Emperor');
+  assert.equal(flagNexus.under.length, 1);
+
+  // 2. Soul Magic
+  p.reserve.soul = 1;
+  const magicCard = createCardInstance({ name: 'Cosmic Burst', type: 'Magic' }, 'player');
+  const soulMagicHandler = game.keywords.get('Soul Magic');
+  const sRes = await soulMagicHandler.executeSoulMagic(game, magicCard, 'player');
+  assert.equal(sRes.success, true);
+  assert.equal(p.reserve.soul, 0);
+  assert.equal(p.trash.soul, 1);
+
+  // 3. Amplify
+  const amplifySpirit = createFieldStack(createCardInstance({ name: 'Amplifier', effect: '[Amplify]' }, 'player'), { normal: 1, soul: 0 });
+  p.field.push(amplifySpirit);
+  p.deck = [createCardInstance({ name: 'Bonus Card' }, 'player')];
+  await game.events.emit({
+    type: 'MAGIC_USED',
+    player: 'player',
+    card: magicCard
+  });
+  assert.equal(p.hand.some(c => c.name === 'Bonus Card'), true, 'Amplify triggered bonus draw on Magic use');
+
+  // 4. Level Up
+  const levelUpUnit = createFieldStack(createCardInstance({
+    name: 'Trainee',
+    levels: { 1: { cost: 1, bp: 1000 }, 2: { cost: 3, bp: 3000 } }
+  }, 'player'), { normal: 1, soul: 0 });
+  p.field.push(levelUpUnit);
+
+  assert.equal(computeLevel(levelUpUnit), 1);
+  const levelUpHandler = game.keywords.get('Level Up');
+  await levelUpHandler.executeLevelUp(game, levelUpUnit, 1);
+  assert.equal(computeLevel(levelUpUnit), 2, 'Level Up incremented level to LV2 without extra cores');
+});
+
+test('Wave 4 - Plunder, Draw Lock, God-Army, God Strike, Mealtiply, and Barrier', async () => {
+  resetInstanceIdCounter();
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  // 1. Plunder: Discard magic card from opposing hand to opposing trash and cast
+  const oppMagic = createCardInstance({ name: 'Flash Vortex', type: 'Magic' }, 'opponent');
+  opp.hand = [oppMagic];
+  const plunderHandler = game.keywords.get('Plunder');
+  assert.ok(plunderHandler, 'Plunder keyword registered');
+  const plRes = await plunderHandler.executePlunder(game, 'player', oppMagic, 'FLASH');
+  assert.equal(plRes.success, true);
+  assert.equal(opp.hand.length, 0, 'Opponent magic card discarded from hand');
+  assert.equal(opp.trash.cards.some(c => c.name === 'Flash Vortex'), true, 'Opponent magic moved to trash');
+
+  // 2. Draw Lock: Reveals decktops face-up and caps effect draws at 1
+  p.deck = [createCardInstance({ name: 'P1' }, 'player'), createCardInstance({ name: 'P2' }, 'player'), createCardInstance({ name: 'P3' }, 'player')];
+  opp.deck = [createCardInstance({ name: 'O1' }, 'opponent'), createCardInstance({ name: 'O2' }, 'opponent'), createCardInstance({ name: 'O3' }, 'opponent')];
+  const drawLockHandler = game.keywords.get('Draw Lock');
+  assert.ok(drawLockHandler, 'Draw Lock keyword registered');
+  const dlRes = await drawLockHandler.executeDrawLock(game, 3);
+  assert.equal(dlRes.success, true);
+  assert.equal(game.state.drawCapPerEffect, 1);
+  assert.equal(p.faceUpDecktopCards.length, 3);
+  assert.equal(opp.faceUpDecktopCards.length, 3);
+
+  // 3. God-Army: Summons 1 God-King from hand and 1 from trash
+  const handGk = createCardInstance({ name: 'Hand God King', family: 'God-King', type: 'Spirit' }, 'player');
+  const trashGk = createCardInstance({ name: 'Trash God King', family: 'God-King', type: 'Spirit' }, 'player');
+  p.hand = [handGk];
+  p.trash.cards = [trashGk];
+  const godArmyHandler = game.keywords.get('God-Army');
+  assert.ok(godArmyHandler, 'God-Army keyword registered');
+  const gaRes = await godArmyHandler.executeGodArmy(game, 'player', handGk, trashGk);
+  assert.equal(gaRes.success, true);
+  assert.equal(p.field.some(st => st.top.name === 'Hand God King'), true);
+  assert.equal(p.field.some(st => st.top.name === 'Trash God King'), true);
+
+  // 4. God Strike: Forces blocker to pay 1 life core to Void
+  opp.life = 4;
+  const gkAttacker = createFieldStack(createCardInstance({ name: 'Attacking God King', family: 'God-King' }, 'player'), { normal: 2, soul: 0 });
+  const godStrikeHandler = game.keywords.get('God Strike');
+  assert.ok(godStrikeHandler, 'God Strike keyword registered');
+  assert.equal(godStrikeHandler.isGodStrikeActive(game.state, 'player', gkAttacker), true);
+  const gsRes = await godStrikeHandler.executeGodStrikeBlockCost(game, 'opponent');
+  assert.equal(gsRes.success, true);
+  assert.equal(opp.life, 3, '1 life subtracted from opponent');
+  assert.equal(game.state.void, 1, 'Core sent to Void');
+
+  // 5. Mealtiply: Reveals 2 cards, summons Drifting Spirit, discards rest to trash
+  p.deck = [
+    createCardInstance({ name: 'Drifting Sprout', family: 'Drifting Spirit', cost: 3, type: 'Spirit' }, 'player'),
+    createCardInstance({ name: 'Random Magic', type: 'Magic', cost: 5 }, 'player')
+  ];
+  const mealtiplyHandler = game.keywords.get('Mealtiply');
+  assert.ok(mealtiplyHandler, 'Mealtiply keyword registered');
+  const mealRes = await mealtiplyHandler.executeMealtiply(game, 'player', 6, 2);
+  assert.equal(mealRes.success, true);
+  assert.equal(p.field.some(st => st.top.name === 'Drifting Sprout'), true, 'Drifting Spirit summoned');
+  assert.equal(p.trash.cards.some(c => c.name === 'Random Magic'), true, 'Unsummoned card discarded to trash');
 });

@@ -59,6 +59,8 @@ function createMockLobbyContext(initialStorage = {}) {
       if (!elements[id]) elements[id] = createElement('div');
       return elements[id];
     },
+    querySelectorAll() { return []; },
+    querySelector(sel) { return null; },
     createElement,
     addEventListener() {}
   };
@@ -205,4 +207,41 @@ test('Arena Lobby - Enables Enter Battle button for standard decks selected by P
   const startBtn = elements['btnEnterColosseum'];
   assert.ok(!startBtn.innerHTML.includes('Incomplete'), 'Start button must not be blocked for standard deck');
   assert.ok(startBtn.innerHTML.includes('ENTER BATTLE'), 'Start button must display ENTER BATTLE');
+});
+
+test('Arena Lobby - Standard pre-made decks count all 40 cards when cards is an array of [name, count] tuples', async () => {
+  const { sandbox, elements } = createMockLobbyContext({});
+  const rawStdData = JSON.parse(fs.readFileSync(path.join(rootDir, 'standard_decks_data.json'), 'utf8'));
+
+  // Ensure DuelState.standardDecks has the actual API JSON objects where cards is an array of [name, count]
+  for (const deck of rawStdData.decks) {
+    if (deck && deck.color) {
+      sandbox.window.DuelState.standardDecks[deck.color.toLowerCase()] = deck;
+    }
+  }
+
+  let toastErrors = [];
+  sandbox.window.showToast = (msg, type) => {
+    if (type === 'error' || (msg && msg.includes('Cannot battle'))) {
+      toastErrors.push(msg);
+    }
+  };
+
+  const BA = sandbox.window.BattleArena;
+  // Test starting duel for each standard deck color
+  for (const color of ['red', 'purple', 'green', 'white', 'yellow', 'blue']) {
+    toastErrors = [];
+    elements['arenaPlayerDeckSelect'].value = color;
+    elements['arenaOpponentDeckSelect'].value = color === 'red' ? 'purple' : 'red';
+
+    // Call startDuel without firstPlayer (which launches coin flip or starts duel)
+    await BA.startDuel(color, color === 'red' ? 'purple' : 'red', 'player');
+
+    assert.equal(toastErrors.length, 0, `Starting duel with standard deck "${color}" must not trigger any error toasts: ${toastErrors.join('; ')}`);
+    assert.equal(sandbox.window.DuelState.inDuel, true, `Duel must be active for "${color}"`);
+    assert.ok(sandbox.window.DuelState.player.deck.length >= 35, `Player deck after opening hand draw must have >= 35 cards`);
+    assert.ok(sandbox.window.DuelState.opponent.deck.length >= 35, `Opponent deck after opening hand draw must have >= 35 cards`);
+    assert.equal(sandbox.window.DuelState.player.hand.length, 4, `Player must draw opening hand of 4 cards`);
+    assert.equal(sandbox.window.DuelState.opponent.hand.length, 4, `Opponent must draw opening hand of 4 cards`);
+  }
 });

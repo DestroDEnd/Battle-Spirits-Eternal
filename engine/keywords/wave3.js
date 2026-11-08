@@ -61,13 +61,41 @@ export const BrillianceKeyword = {
   name: 'Brilliance',
   wave: 3,
   hooks: {
+    async onBattleEnd({ state, game, attackerStack }) {
+      // Official Bandai ruling: At the end of battle, return all Magic cards you used during this battle to your Hand.
+      const combat = state.combat;
+      const ownerSide = attackerStack ? attackerStack.owner : (combat ? combat.attackerSide : 'player');
+      const p = state.players[ownerSide];
+      if (!p) return;
+
+      const usedMagics = (combat && combat.usedMagicCards) || [];
+      if (usedMagics.length > 0) {
+        for (const mCard of usedMagics) {
+          const gIdx = p.grave.findIndex(c => c.id === mCard.id || c.name === mCard.name);
+          if (gIdx !== -1) {
+            const cardToReturn = p.grave.splice(gIdx, 1)[0];
+            p.hand.push(cardToReturn);
+            await game.events.emit({
+              type: 'SALVAGE',
+              card: cardToReturn,
+              player: ownerSide,
+              cause: 'brilliance'
+            });
+          }
+        }
+      } else {
+        // Fallback: If magics weren't individually tagged in combat, return all Magic cards from grave used this turn
+        const magicInGrave = p.grave.filter(c => c.type === 'Magic');
+        for (const mCard of magicInGrave) {
+          await moveCard(state, mCard, 'hand', ownerSide, { cause: 'brilliance' }, game.events);
+        }
+      }
+    },
     async onEndStep({ state, game, playerSide }) {
       const p = state.players[playerSide];
-      // Returns 1 Magic card used this turn from grave to hand
       const magicInGrave = p.grave.filter(c => c.type === 'Magic');
-      if (magicInGrave.length > 0) {
-        const lastMagic = magicInGrave[magicInGrave.length - 1];
-        await moveCard(state, lastMagic, 'hand', playerSide, { cause: 'brilliance' }, game.events);
+      for (const mCard of magicInGrave) {
+        await moveCard(state, mCard, 'hand', playerSide, { cause: 'brilliance' }, game.events);
       }
     }
   }

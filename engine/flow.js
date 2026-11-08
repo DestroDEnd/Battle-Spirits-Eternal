@@ -48,6 +48,12 @@ export class FlowController {
 
       // Clear THIS_TURN modifiers
       this.state.modifiers = this.state.modifiers.filter(m => m.duration !== 'THIS_TURN' && m.duration !== 'THIS_BATTLE');
+
+      for (const s of ['player', 'opponent']) {
+        if (this.state.players[s]) {
+          this.state.players[s].combatDamageTakenThisTurn = 0;
+        }
+      }
     }
 
     this.state.step = nextStep;
@@ -118,6 +124,11 @@ export class FlowController {
         // Reset per-turn flags
         p.burstSetThisTurn = false;
         p.mirageSetThisTurn = false;
+        for (const s of ['player', 'opponent']) {
+          if (this.state.players[s]) {
+            this.state.players[s].combatDamageTakenThisTurn = 0;
+          }
+        }
         break;
       }
 
@@ -153,6 +164,10 @@ export class FlowController {
       case 'REFRESH': {
         // 1. Refresh cards (Heavy Exhausted -> Exhausted; Exhausted -> Refreshed)
         for (const stack of p.field || []) {
+          if (stack.cannotRefreshNextStep || stack.spellbound) {
+            stack.cannotRefreshNextStep = false;
+            continue;
+          }
           if (stack.state === 'HEAVY_EXHAUSTED') {
             stack.state = 'EXHAUSTED';
           } else if (stack.state === 'EXHAUSTED') {

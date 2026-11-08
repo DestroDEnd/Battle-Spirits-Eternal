@@ -11,6 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { compileCard } from '../compiler/index.js';
+import { getCardOverride } from '../compiler/overrides/index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -23,6 +24,20 @@ if (!fs.existsSync(IR_SHARDS_DIR)) {
 }
 if (!fs.existsSync(REPORTS_DIR)) {
   fs.mkdirSync(REPORTS_DIR, { recursive: true });
+}
+
+function safeWriteFileSync(filePath, content, options = 'utf8', retries = 10) {
+  for (let attempt = 0; attempt < retries; attempt++) {
+    try {
+      fs.writeFileSync(filePath, content, options);
+      return;
+    } catch (err) {
+      if (attempt === retries - 1) throw err;
+      const wait = Math.min(2000, 200 * Math.pow(1.5, attempt));
+      const start = Date.now();
+      while (Date.now() - start < wait) {}
+    }
+  }
 }
 
 export const PHASES = {
@@ -170,50 +185,81 @@ export function buildShardedIR() {
 
       for (const [cardId, card] of Object.entries(setData)) {
         phaseTotalCards++;
-        const isVanilla = !!card.is_vanilla || (!card.effect && !card.burstEffect);
+        const override = getCardOverride(cardId, card);
 
-        if (isVanilla) {
-          phaseVanillaCards++;
-          setVanillaCards++;
-          card.compiledIr = {
-            cardNumber: cardId,
-            name: card.name,
-            isFullySupported: true,
-            isVanilla: true,
-            compiledClausesCount: 0,
-            unsupportedClausesCount: 0,
-            abilities: [],
-            keywords: []
-          };
+        if (override) {
+          card.compiledIr = JSON.parse(JSON.stringify(override));
+          if (override.isVanilla) {
+            phaseVanillaCards++;
+            setVanillaCards++;
+          } else {
+            phaseEffectCards++;
+            setEffectCards++;
+            const cardClauses = override.compiledClausesCount + override.unsupportedClausesCount;
+            setTotalClauses += cardClauses;
+            setCompiledClauses += override.compiledClausesCount;
+            setUnsupportedClauses += override.unsupportedClausesCount;
+            phaseTotalClauses += cardClauses;
+            phaseCompiledClauses += override.compiledClausesCount;
+            phaseUnsupportedClauses += override.unsupportedClausesCount;
+
+            if (override.isFullySupported) {
+              setFullySupported++;
+              phaseFullySupportedCards++;
+            }
+          }
         } else {
-          phaseEffectCards++;
-          setEffectCards++;
-          const compiled = compileCard({ id: cardId, ...card });
-          card.compiledIr = compiled;
+          const isVanilla = !!card.is_vanilla || (!card.effect && !card.burstEffect);
 
-          const cardClauses = compiled.compiledClausesCount + compiled.unsupportedClausesCount;
-          setTotalClauses += cardClauses;
-          setCompiledClauses += compiled.compiledClausesCount;
-          setUnsupportedClauses += compiled.unsupportedClausesCount;
-          phaseTotalClauses += cardClauses;
-          phaseCompiledClauses += compiled.compiledClausesCount;
-          phaseUnsupportedClauses += compiled.unsupportedClausesCount;
+          if (isVanilla) {
+            phaseVanillaCards++;
+            setVanillaCards++;
+            card.compiledIr = {
+              cardNumber: cardId,
+              name: card.name,
+              isFullySupported: true,
+              isVanilla: true,
+              compiledClausesCount: 0,
+              unsupportedClausesCount: 0,
+              abilities: [],
+              keywords: []
+            };
+          } else {
+            phaseEffectCards++;
+            setEffectCards++;
+            const compiled = compileCard({ id: cardId, ...card });
+            card.compiledIr = compiled;
 
-          if (compiled.isFullySupported) {
-            setFullySupported++;
-            phaseFullySupportedCards++;
+            const cardClauses = compiled.compiledClausesCount + compiled.unsupportedClausesCount;
+            setTotalClauses += cardClauses;
+            setCompiledClauses += compiled.compiledClausesCount;
+            setUnsupportedClauses += compiled.unsupportedClausesCount;
+            phaseTotalClauses += cardClauses;
+            phaseCompiledClauses += compiled.compiledClausesCount;
+            phaseUnsupportedClauses += compiled.unsupportedClausesCount;
+
+            if (compiled.isFullySupported) {
+              setFullySupported++;
+              phaseFullySupportedCards++;
+            }
           }
         }
 
         irShardData[cardId] = card.compiledIr;
       }
 
-      // Write updated setData with explicit compiledIr
-      fs.writeFileSync(filePath, JSON.stringify(setData, null, 2), 'utf8');
+      // Write updated setData with explicit compiledIr if changed
+      const updatedSetJson = JSON.stringify(setData, null, 2);
+      if (raw !== updatedSetJson) {
+        safeWriteFileSync(filePath, updatedSetJson, 'utf8');
+      }
 
-      // Also sync to ir_shards
+      // Also sync to ir_shards if changed
       const shardPath = path.join(IR_SHARDS_DIR, `${setCode}.json`);
-      fs.writeFileSync(shardPath, JSON.stringify(irShardData, null, 2), 'utf8');
+      const updatedShardJson = JSON.stringify(irShardData, null, 2);
+      if (!fs.existsSync(shardPath) || fs.readFileSync(shardPath, 'utf8') !== updatedShardJson) {
+        safeWriteFileSync(shardPath, updatedShardJson, 'utf8');
+      }
 
       setStats[setCode] = {
         totalCards: setCardCount,
@@ -284,11 +330,11 @@ Generated on: ${new Date().toISOString()}
   }
 
   const reportPath = path.join(REPORTS_DIR, 'sharded_ir_coverage_all_phases.md');
-  fs.writeFileSync(reportPath, report, 'utf8');
-  fs.writeFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_20.md'), report, 'utf8');
-  fs.writeFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_15.md'), report, 'utf8');
-  fs.writeFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_10.md'), report, 'utf8');
-  fs.writeFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_5.md'), report, 'utf8');
+  safeWriteFileSync(reportPath, report, 'utf8');
+  safeWriteFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_20.md'), report, 'utf8');
+  safeWriteFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_15.md'), report, 'utf8');
+  safeWriteFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_10.md'), report, 'utf8');
+  safeWriteFileSync(path.join(REPORTS_DIR, 'sharded_ir_coverage_phases_0_5.md'), report, 'utf8');
   console.log(`\nReport written to ${reportPath}`);
 
   return { phaseResults, totalCardsAll, totalEffectCardsAll, totalClausesAll, totalUnsupportedAll };

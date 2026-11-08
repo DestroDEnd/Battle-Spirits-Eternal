@@ -12,7 +12,7 @@ import { FlowController } from './flow.js';
 import { AsyncResolver, DefaultPromptResolver } from './resolver.js';
 import { moveCard, moveCore } from './zones.js';
 import { calculateEffectiveCost, canAffordCost, payCost } from './payment.js';
-import { computeEffectiveBP, canAttack, canBlock } from './continuous.js';
+import { computeLevel, computeEffectiveBP, canAttack, canBlock } from './continuous.js';
 import { checkStateBasedActions } from './sba.js';
 import { createDefaultKeywordRegistry } from './keywords/index.js';
 import { TimingWindowManager } from './windows.js';
@@ -147,9 +147,12 @@ export function createGame(options = {}) {
 
         // Trigger (When Summoned) abilities if compiled IR exists
         if (card.compiledIr && card.compiledIr.abilities) {
+          const currentLevel = computeLevel(stack, state);
           for (const ab of card.compiledIr.abilities) {
             if (ab.header.timing === 'WHEN_SUMMONED' || ab.header.timing === 'WHEN_SUMMONED_OR_DESTROYED') {
-              await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card }, events);
+              if (!ab.header.levels || ab.header.levels.includes(currentLevel)) {
+                await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card }, events);
+              }
             }
           }
         }
@@ -240,9 +243,12 @@ export function createGame(options = {}) {
 
       // Trigger (When Attacks) abilities
       if (stack.top.compiledIr && stack.top.compiledIr.abilities) {
+        const currentLevel = computeLevel(stack, state);
         for (const ab of stack.top.compiledIr.abilities) {
-          if (ab.header.timing === 'WHEN_ATTACKS' || ab.header.timing === 'WHEN_ATTACKS_OR_BLOCKS') {
-            await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: stack.top }, events);
+          if (ab.header.timing === 'WHEN_ATTACKS' || ab.header.timing === 'WHEN_ATTACKS_OR_BLOCKS' || ab.header.timing === 'WHEN_BATTLES') {
+            if (!ab.header.levels || ab.header.levels.includes(currentLevel)) {
+              await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: stack.top }, events);
+            }
           }
         }
       }
@@ -267,22 +273,69 @@ export function createGame(options = {}) {
         player: blockerSide
       });
 
+      // Trigger (When Blocks) abilities
+      if (stack.top.compiledIr && stack.top.compiledIr.abilities) {
+        const blockerLevel = computeLevel(stack, state);
+        for (const ab of stack.top.compiledIr.abilities) {
+          if (ab.header.timing === 'WHEN_BLOCKS' || ab.header.timing === 'WHEN_ATTACKS_OR_BLOCKS' || ab.header.timing === 'WHEN_BATTLES') {
+            if (!ab.header.levels || ab.header.levels.includes(blockerLevel)) {
+              await resolver.resolveAbility(state, ab, { controller: blockerSide, sourceCard: stack.top }, events);
+            }
+          }
+        }
+      }
+
+      if (!state.combat) {
+        if (Array.isArray(state.modifiers)) {
+          state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+        }
+        await checkStateBasedActions(state, events);
+        return { success: true };
+      }
+
       // Resolve battle BP comparison
       const attackerSide = blockerSide === 'opponent' ? 'player' : 'opponent';
       const attackerStack = state.players[attackerSide].field.find(st => st.id === state.combat.attackerStackId);
+      const blockerStack = p.field.find(st => st.id === blockerStackId);
+      if (!attackerStack || !blockerStack) {
+        state.combat = null;
+        if (Array.isArray(state.modifiers)) {
+          state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+        }
+        await checkStateBasedActions(state, events);
+        return { success: true };
+      }
+
+      await events.emit({
+        type: 'BP_COMPARE',
+        attacker: attackerStack,
+        blocker: blockerStack
+      });
+
       const attackerBp = computeEffectiveBP(state, attackerStack);
-      const blockerBp = computeEffectiveBP(state, stack);
+      const blockerBp = computeEffectiveBP(state, blockerStack);
 
       if (attackerBp > blockerBp) {
         // Blocker destroyed
-        await moveCard(state, stack.top, 'grave', blockerSide, { cause: 'battle' }, events);
+        await moveCard(state, blockerStack.top, 'grave', blockerStack.owner || blockerSide, { cause: 'battle' }, events);
       } else if (blockerBp > attackerBp) {
         // Attacker destroyed
-        await moveCard(state, attackerStack.top, 'grave', attackerStack.owner, { cause: 'battle' }, events);
+        await moveCard(state, attackerStack.top, 'grave', attackerStack.owner || attackerSide, { cause: 'battle' }, events);
       } else {
         // Mutual destruction (tie)
-        await moveCard(state, stack.top, 'grave', blockerSide, { cause: 'battle' }, events);
-        await moveCard(state, attackerStack.top, 'grave', attackerStack.owner, { cause: 'battle' }, events);
+        await moveCard(state, blockerStack.top, 'grave', blockerStack.owner || blockerSide, { cause: 'battle' }, events);
+        await moveCard(state, attackerStack.top, 'grave', attackerStack.owner || attackerSide, { cause: 'battle' }, events);
+      }
+
+      // At End of Battle: Check Curse keyword on attacker
+      // [Curse] (When Attacks) At the end of battle, destroy 1 opposing Spirit that blocked this Spirit.
+      const attackerKeywords = attackerStack.top?.keywords || [];
+      const hasCurse = attackerKeywords.some(k => (typeof k === 'string' ? k === 'Curse' : k?.name === 'Curse'));
+      if (hasCurse && blockerStack && blockerStack.top) {
+        const blockerInField = p.field.some(st => st.id === blockerStackId);
+        if (blockerInField) {
+          await moveCard(state, blockerStack.top, 'grave', blockerStack.owner || blockerSide, { cause: 'curse' }, events);
+        }
       }
 
       state.combat = null;
@@ -310,15 +363,38 @@ export function createGame(options = {}) {
         return { success: true, defenderLife: defPlayer.life, prevented: true };
       }
 
-      // Remove 1 Life core -> Reserve (Standard Battle Spirits combat damage)
+      // Check DAMAGE_CAP modifier
+      defPlayer.combatDamageTakenThisTurn = (defPlayer.combatDamageTakenThisTurn || 0);
+      const matchingCaps = (state.modifiers || [])
+        .filter(m => m.type === 'DAMAGE_CAP' && (m.side === defenderSide || m.side === 'both' || !m.side))
+        .map(m => (typeof m.maxDamage === 'number' ? m.maxDamage : (typeof m.cap === 'number' ? m.cap : 1)));
+
+      let damage = 1;
+      if (matchingCaps.length > 0) {
+        const cap = Math.min(...matchingCaps);
+        const remainingAllowed = Math.max(0, cap - defPlayer.combatDamageTakenThisTurn);
+        damage = Math.min(damage, remainingAllowed);
+      }
+
+      if (damage === 0) {
+        state.combat = null;
+        if (Array.isArray(state.modifiers)) {
+          state.modifiers = state.modifiers.filter(m => m.duration !== 'THIS_BATTLE');
+        }
+        return { success: true, defenderLife: defPlayer.life, prevented: true, capped: true };
+      }
+
+      // Remove damage Life core -> Reserve (Standard Battle Spirits combat damage)
       if (defPlayer.life > 0) {
-        defPlayer.life -= 1;
-        defPlayer.reserve.normal += 1;
+        const actualLifeLoss = Math.min(defPlayer.life, damage);
+        defPlayer.life -= actualLifeLoss;
+        defPlayer.reserve.normal += actualLifeLoss;
+        defPlayer.combatDamageTakenThisTurn += actualLifeLoss;
 
         await events.emit({
           type: 'LIFE_REDUCED',
           player: defenderSide,
-          damage: 1,
+          damage: actualLifeLoss,
           currentLife: defPlayer.life,
           cause: 'combat_damage'
         });
@@ -344,6 +420,35 @@ export function createGame(options = {}) {
   });
   events.on('DESTROYED', async (ev) => {
     await windows.openBurstWindow(ev);
+  });
+  events.on('SUMMONED', async (ev) => {
+    const controller = ev.player;
+    const p = state.players[controller];
+    if (!p) return;
+    const allStacks = [...(p.field || []), ...(p.nexus || []).map(n => ({ top: n, cores: { normal: 1, soul: 0 } }))];
+    for (const st of allStacks) {
+      if (st.top && st.top.compiledIr) {
+        const lv = computeLevel(st, state);
+        for (const ab of st.top.compiledIr.abilities || []) {
+          if (ab.header && ab.header.timing === 'PASSIVE') {
+            if (!ab.header.levels || ab.header.levels.includes(lv)) {
+              for (const cl of ab.clauses || []) {
+                if (cl.op && cl.op.trigger === 'ON_SUMMON') {
+                  state.modifiers.push({
+                    id: `mod_${Date.now()}_summon_${Math.random().toString(36).substr(2, 5)}`,
+                    type: 'BP_BUFF',
+                    targetStackId: ev.stack ? ev.stack.id : null,
+                    amount: cl.op.amount || 1000,
+                    duration: 'THIS_TURN',
+                    sourceCardId: st.top.id
+                  });
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   });
 
   return game;

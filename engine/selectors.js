@@ -28,7 +28,8 @@ export function queryCandidates(state, selector = {}, context = {}) {
         if (!targetTypes.includes(top.type)) continue;
 
         // Armor / Heavy Armor immunity check
-        if (context.sourceCard && isImmune(state, stack, context.sourceCard)) {
+        const isOpposing = context.controller ? (s !== context.controller) : true;
+        if (isOpposing && context.sourceCard && isImmune(state, stack, context.sourceCard)) {
           continue;
         }
 

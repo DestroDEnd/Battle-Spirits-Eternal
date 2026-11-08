@@ -6,7 +6,7 @@
  * Digivolution, Trans-Am, Clock Up, Funnel, Barrage.
  */
 
-import { moveCard, moveCore } from '../zones.js';
+import { moveCard, moveCore, commitStackExit } from '../zones.js';
 
 export const ClockUpKeyword = {
   id: 'Clock Up',
@@ -123,21 +123,45 @@ export const MyUnitKeyword = {
   id: 'My Unit',
   name: 'My Unit',
   wave: 5,
-  hooks: {}
+  async executeMyUnit(game, attackerStack, requiredCount = 1, playerSide = 'player') {
+    const { events } = game;
+    const p = game.state.players[playerSide];
+    const exhaustedDivas = (p.field || []).filter(st => st.id !== attackerStack.id && st.state === 'EXHAUSTED' && (st.top?.family?.includes('Diva') || st.top?.family?.includes('Stage Style')));
+    if (exhaustedDivas.length < requiredCount) {
+      return { success: false, reason: 'INSUFFICIENT_EXHAUSTED_DIVAS' };
+    }
+    await events.emit({
+      type: 'MY_UNIT_ACTIVATED',
+      attacker: attackerStack,
+      divas: exhaustedDivas.slice(0, requiredCount),
+      player: playerSide
+    });
+    return { success: true, count: requiredCount };
+  }
 };
 
 export const SoloPartKeyword = {
   id: 'Solo Part',
   name: 'Solo Part',
   wave: 5,
-  hooks: {}
+  isActive(state, stack) {
+    if (!stack) return false;
+    const p = state.players[stack.owner];
+    const battlingCount = (p.field || []).filter(st => st.state === 'EXHAUSTED').length;
+    return battlingCount <= 1;
+  }
 };
 
 export const DuetPartKeyword = {
   id: 'Duet Part',
   name: 'Duet Part',
   wave: 5,
-  hooks: {}
+  isActive(state, stack) {
+    if (!stack) return false;
+    const p = state.players[stack.owner];
+    const divaCount = (p.field || []).filter(st => st.top?.family?.includes('Diva') || st.top?.family?.includes('Stage Style')).length;
+    return divaCount >= 2;
+  }
 };
 
 export const DigivolutionKeyword = {
@@ -182,19 +206,41 @@ export const FunnelKeyword = {
   id: 'Funnel',
   name: 'Funnel',
   wave: 5,
-  hooks: {}
+  async executeFunnel(game, attackerStack, count = 1, targetStack = null) {
+    const { state, events } = game;
+    if (targetStack) {
+      await commitStackExit(state, targetStack, 'grave', { cause: 'funnel', by: attackerStack.owner }, events);
+    }
+    await events.emit({
+      type: 'FUNNEL_FIRED',
+      attacker: attackerStack,
+      target: targetStack,
+      count
+    });
+    return { success: true };
+  }
 };
 
 export const BarrageKeyword = {
   id: 'Barrage',
   name: 'Barrage',
   wave: 5,
-  hooks: {}
+  hooks: {
+    async onAttackDeclared({ attackerStack }) {
+      if (attackerStack) {
+        attackerStack.barrageActive = true;
+      }
+    }
+  }
 };
 
 export function registerWave5Keywords(registry) {
   registry.register(ClockUpKeyword);
+  registry.register({ ...ClockUpKeyword, id: 'Hyper Cast Off' });
   registry.register(OnStageKeyword);
+  registry.register({ ...OnStageKeyword, id: 'Stage' });
+  registry.register({ ...OnStageKeyword, id: 'Solo Stage' });
+  registry.register({ ...OnStageKeyword, id: 'Aikatsu On Stage' });
   registry.register(ShowUpKeyword);
   registry.register(FriendKeyword);
   registry.register(AppealKeyword);
@@ -202,6 +248,8 @@ export function registerWave5Keywords(registry) {
   registry.register(SoloPartKeyword);
   registry.register(DuetPartKeyword);
   registry.register(DigivolutionKeyword);
+  registry.register({ ...DigivolutionKeyword, id: 'Digivolve' });
+  registry.register({ ...DigivolutionKeyword, id: 'Warp Digivolve' });
   registry.register(TransAmKeyword);
   registry.register(FunnelKeyword);
   registry.register(BarrageKeyword);

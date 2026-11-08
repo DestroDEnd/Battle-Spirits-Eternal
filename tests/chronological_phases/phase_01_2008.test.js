@@ -46,7 +46,7 @@ test('Phase 1 (2008) - 100% Zero-Unsupported Gate across All Sets', () => {
 
   assert.strictEqual(unsupportedClauses, 0, 'Phase 1 must have 0 unsupported clauses');
   assert.strictEqual(effectCards, 262, 'Phase 1 must cover exactly 262 effect cards');
-  assert.strictEqual(totalClauses, 449, 'Phase 1 must compile exactly 449 clauses');
+  assert.strictEqual(totalClauses, 448, 'Phase 1 must compile exactly 448 clauses');
 });
 
 test('Phase 1 (2008) - Mechanics: Siegfried (BS01-X01) Awaken + When Destroyed', () => {

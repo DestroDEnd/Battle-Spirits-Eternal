@@ -1,1 +1,1324 @@
-{"SD03-005":{"cardNumber":"SD03-005","name":"Big-Horn","keywords":[],"abilities":[],"compiledClausesCount":0,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-001":{"cardNumber":"SD03-001","name":"Bladra","keywords":[],"abilities":[],"compiledClausesCount":0,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-015":{"cardNumber":"SD03-015","name":"Brave Draw","keywords":[],"abilities":[{"id":"SD03-015#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"MAIN","timingLabel":"Main","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":true,"cleanBody":"Draw two cards. Then, reveal three cards from your decktop, and add a Brave card among them to the Hand. Return any remaining cards to the decktop in any order."},"clauses":[{"rawText":"Draw two cards.","cleanText":"Draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"reveal three cards from your decktop","cleanText":"reveal three cards from your decktop","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"add a Brave card among them to the Hand.","cleanText":"add a Brave card among them to the Hand","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"Return any remaining cards to the decktop in any order.","cleanText":"Return any remaining cards to the decktop in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SD03-015#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"During this turn, give a Spirit +2000 BP."},"clauses":[{"rawText":"During this turn, give a Spirit +2000 BP.","cleanText":"give a Spirit +2000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_BUFF","amount":2000,"target":"target","duration":"DURING_THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-017":{"cardNumber":"SD03-017","name":"Blue Splash","keywords":[],"abilities":[{"id":"SD03-017#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy an opposing Cost 3 or less Spirit. Or, return a Nexus card from your Trash to the Hand."},"clauses":[{"rawText":"Destroy an opposing Cost 3 or less Spirit.","cleanText":"Destroy an opposing Cost 3 or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":3}}}},{"rawText":"return a Nexus card from your Trash to the Hand.","cleanText":"return a Nexus card from your Trash to the Hand","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-003":{"cardNumber":"SD03-003","name":"Morgesaurus","keywords":[],"abilities":[{"id":"SD03-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit gains +2000 BP."},"clauses":[{"rawText":"This Spirit gains +2000 BP.","cleanText":"This Spirit gains +2000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":2000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-016":{"cardNumber":"SD03-016","name":"Sagitta Flame","keywords":[],"abilities":[{"id":"SD03-016#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits up to a total of 5000 BP. Or, destroy an opposing Nexus."},"clauses":[{"rawText":"Destroy any number of opposing Spirits up to a total of 5000 BP.","cleanText":"Destroy any number of opposing Spirits up to a total of 5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":5000,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"destroy an opposing Nexus.","cleanText":"destroy an opposing Nexus","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-007":{"cardNumber":"SD03-007","name":"The BattleDragon Elginius","keywords":[],"abilities":[{"id":"SD03-007#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol and color are also treated as Red."},"clauses":[{"rawText":"This Spirit's symbol and color are also treated as Red.","cleanText":"This Spirit's symbol and color are also treated as Red","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-010":{"cardNumber":"SD03-010","name":"The CannonDragon Bal-Gunner","keywords":[{"name":"Brave","parameter":"Cost 4 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SD03-010#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 4 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"SD03-010#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card, and destroy an opposing 4000 BP or less Spirit."},"clauses":[{"rawText":"Draw a card","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"destroy an opposing 4000 BP or less Spirit.","cleanText":"destroy an opposing 4000 BP or less Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":4000}}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-011":{"cardNumber":"SD03-011","name":"The CrustDragon Groun-Giras","keywords":[{"name":"Brave","parameter":"Cost 3 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SD03-011#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 3 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 3 or more]","clauses":[],"unsupported":[]},{"id":"SD03-011#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Nexus."},"clauses":[{"rawText":"Destroy an opposing Nexus.","cleanText":"Destroy an opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]},{"id":"SD03-011#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Nexus"},"clauses":[{"rawText":"Destroy an opposing Nexus","cleanText":"Destroy an opposing Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Nexus"]}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-012":{"cardNumber":"SD03-012","name":"The FangEmperor Cerbelord","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"SD03-012#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"SD03-012#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"by discarding five cards from your decktop, refresh this Spirit."},"clauses":[{"rawText":"By discarding five cards from your decktop","cleanText":"By discarding five cards from your decktop","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"refresh this Spirit.","cleanText":"refresh this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-013":{"cardNumber":"SD03-013","name":"The Fire Paradise","keywords":[],"abilities":[{"id":"SD03-013#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Give every Brave card in your Hand an extra [Red Core] reduction symbol."},"clauses":[{"rawText":"Give every Brave card in your Hand an extra [Red Core] reduction symbol.","cleanText":"Give every Brave card in your Hand an extra [Red Core] reduction symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"SD03-013#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"DRAW_STEP","timingLabel":"Your Draw Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Increase the number of cards you draw by +1."},"clauses":[{"rawText":"Increase the number of cards you draw by +1.","cleanText":"Increase the number of cards you draw by +1","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-004":{"cardNumber":"SD03-004","name":"The HornBeast Gulnearl","keywords":[],"abilities":[{"id":"SD03-004#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand. Return the remaining cards to the deckbottom in any order."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand.","cleanText":"Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"Return the remaining cards to the deckbottom in any order.","cleanText":"Return the remaining cards to the deckbottom in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-008":{"cardNumber":"SD03-008","name":"The MasterCarpenter Mccoy","keywords":[],"abilities":[{"id":"SD03-008#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control."},"clauses":[{"rawText":"Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control.","cleanText":"Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-014":{"cardNumber":"SD03-014","name":"The Olymspia Stadium","keywords":[],"abilities":[{"id":"SD03-014#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Either Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Spirits can't be summoned via Spirit/Nexus/Magic effects."},"clauses":[{"rawText":"Spirits can't be summoned via Spirit/Nexus/Magic effects.","cleanText":"Spirits can't be summoned via Spirit/Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COMBAT_RESTRICTION"}}],"unsupported":[]},{"id":"SD03-014#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack."},"clauses":[{"rawText":"When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack.","cleanText":"When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-009":{"cardNumber":"SD03-009","name":"The StarMonster Sea-Serpendar","keywords":[{"name":"Assault","parameter":"1","wave":1,"hook":"assault","bracketed":true,"index":82}],"abilities":[{"id":"SD03-009#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 4 or less Spirit."},"clauses":[{"rawText":"Destroy an opposing Cost 4 or less Spirit.","cleanText":"Destroy an opposing Cost 4 or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":4}}}}],"unsupported":[]},{"id":"SD03-009#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Assault: 1","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses."},"clauses":[{"rawText":"This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses.","cleanText":"This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH_BY_EXHAUSTING_NEXUS","target":"self"}}],"unsupported":[]},{"id":"SD03-009#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you control any Brave Spirit, Cost 4 or less Spirits can't attack."},"clauses":[{"rawText":"While you control any Brave Spirit, Cost 4 or less Spirits can't attack.","cleanText":"Cost 4 or less Spirits can't attack","link":null,"isOptional":false,"isCost":false,"condition":"While you control any Brave Spirit","duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-006":{"cardNumber":"SD03-006","name":"The SunDragon Sieg-Apollodragon","keywords":[],"abilities":[{"id":"SD03-006#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing refreshed Spirit."},"clauses":[{"rawText":"You can target and attack an opposing refreshed Spirit.","cleanText":"You can target and attack an opposing refreshed Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"CAN_ATTACK_REFRESHED"}}],"unsupported":[]},{"id":"SD03-006#a1","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 9000 BP or less Spirit."},"clauses":[{"rawText":"Destroy an opposing 9000 BP or less Spirit.","cleanText":"Destroy an opposing 9000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":9000}}}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD03-002":{"cardNumber":"SD03-002","name":"The SwordDinoman Stegorus","keywords":[],"abilities":[{"id":"SD03-002#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While you control two or fewer Spirits, treat this Spirit as being at LV3."},"clauses":[{"rawText":"While you control two or fewer Spirits, treat this Spirit as being at LV3.","cleanText":"treat this Spirit as being at LV3","link":null,"isOptional":false,"isCost":false,"condition":"While you control two or fewer Spirits","duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SD03-005": {
+    "cardNumber": "SD03-005",
+    "name": "Big-Horn",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD03-001": {
+    "cardNumber": "SD03-001",
+    "name": "Bladra",
+    "isFullySupported": true,
+    "isVanilla": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD03-015": {
+    "cardNumber": "SD03-015",
+    "name": "Brave Draw",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-015#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards. Then, reveal three cards from your decktop, and add a Brave card among them to the Hand. Return any remaining cards to the decktop in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "reveal three cards from your decktop",
+            "cleanText": "reveal three cards from your decktop",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "add a Brave card among them to the Hand.",
+            "cleanText": "add a Brave card among them to the Hand",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "Return any remaining cards to the decktop in any order.",
+            "cleanText": "Return any remaining cards to the decktop in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-015#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +2000 BP.",
+            "cleanText": "give a Spirit +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-017": {
+    "cardNumber": "SD03-017",
+    "name": "Blue Splash",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-017#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 3 or less Spirit. Or, return a Nexus card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 3 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3
+                }
+              }
+            }
+          },
+          {
+            "rawText": "return a Nexus card from your Trash to the Hand.",
+            "cleanText": "return a Nexus card from your Trash to the Hand",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-003": {
+    "cardNumber": "SD03-003",
+    "name": "Morgesaurus",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +2000 BP.",
+            "cleanText": "This Spirit gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-016": {
+    "cardNumber": "SD03-016",
+    "name": "Sagitta Flame",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-016#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy any number of opposing Spirits up to a total of 5000 BP. Or, destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy any number of opposing Spirits up to a total of 5000 BP.",
+            "cleanText": "Destroy any number of opposing Spirits up to a total of 5000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "mode": "TOTAL_BP_LTE",
+              "maxTotalBp": 5000,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "destroy an opposing Nexus.",
+            "cleanText": "destroy an opposing Nexus",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-007": {
+    "cardNumber": "SD03-007",
+    "name": "The BattleDragon Elginius",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit's symbol and color are also treated as Red."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit's symbol and color are also treated as Red.",
+            "cleanText": "This Spirit's symbol and color are also treated as Red",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-010": {
+    "cardNumber": "SD03-010",
+    "name": "The CannonDragon Bal-Gunner",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD03-010#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-010#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card, and destroy an opposing 4000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "destroy an opposing 4000 BP or less Spirit.",
+            "cleanText": "destroy an opposing 4000 BP or less Spirit",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 4000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-011": {
+    "cardNumber": "SD03-011",
+    "name": "The CrustDragon Groun-Giras",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 3 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD03-011#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 3 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 3 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-011#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Nexus.",
+            "cleanText": "Destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-011#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Nexus"
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Nexus",
+            "cleanText": "Destroy an opposing Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Nexus"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-012": {
+    "cardNumber": "SD03-012",
+    "name": "The FangEmperor Cerbelord",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 5 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD03-012#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 5 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 5 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-012#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by discarding five cards from your decktop, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By discarding five cards from your decktop",
+            "cleanText": "By discarding five cards from your decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "refresh this Spirit.",
+            "cleanText": "refresh this Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-013": {
+    "cardNumber": "SD03-013",
+    "name": "The Fire Paradise",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-013#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give every Brave card in your Hand an extra [Red Core] reduction symbol."
+        },
+        "clauses": [
+          {
+            "rawText": "Give every Brave card in your Hand an extra [Red Core] reduction symbol.",
+            "cleanText": "Give every Brave card in your Hand an extra [Red Core] reduction symbol",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-013#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "DRAW_STEP",
+          "timingLabel": "Your Draw Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Increase the number of cards you draw by +1."
+        },
+        "clauses": [
+          {
+            "rawText": "Increase the number of cards you draw by +1.",
+            "cleanText": "Increase the number of cards you draw by +1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-004": {
+    "cardNumber": "SD03-004",
+    "name": "The HornBeast Gulnearl",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal three cards from your decktop. Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand. Return the remaining cards to the deckbottom in any order."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal three cards from your decktop.",
+            "cleanText": "You can reveal three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 3
+            }
+          },
+          {
+            "rawText": "Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand.",
+            "cleanText": "Among them, add an \"Astral Dragon\" family Spirit card, or an \"Astral Dragon\" family Brave card to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "Return the remaining cards to the deckbottom in any order.",
+            "cleanText": "Return the remaining cards to the deckbottom in any order",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-008": {
+    "cardNumber": "SD03-008",
+    "name": "The MasterCarpenter Mccoy",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control.",
+            "cleanText": "Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-014": {
+    "cardNumber": "SD03-014",
+    "name": "The Olymspia Stadium",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-014#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Either Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Spirits can't be summoned via Spirit/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "Spirits can't be summoned via Spirit/Nexus/Magic effects.",
+            "cleanText": "Spirits can't be summoned via Spirit/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COMBAT_RESTRICTION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-014#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack.",
+            "cleanText": "When opposing non-braved Spirit would attack, unless the opponent sends a core from their Reserve to the Trash, it can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-009": {
+    "cardNumber": "SD03-009",
+    "name": "The StarMonster Sea-Serpendar",
+    "keywords": [
+      {
+        "name": "Assault",
+        "parameter": "1",
+        "wave": 1,
+        "hook": "assault",
+        "bracketed": true,
+        "index": 82
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD03-009#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 4 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 4 or less Spirit.",
+            "cleanText": "Destroy an opposing Cost 4 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-009#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Assault: 1",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses.",
+            "cleanText": "This Spirit can, up to once per turn, be refreshed by exhausting one of your Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH_BY_EXHAUSTING_NEXUS",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-009#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control any Brave Spirit, Cost 4 or less Spirits can't attack."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control any Brave Spirit, Cost 4 or less Spirits can't attack.",
+            "cleanText": "Cost 4 or less Spirits can't attack",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control any Brave Spirit",
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-006": {
+    "cardNumber": "SD03-006",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can target and attack an opposing refreshed Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can target and attack an opposing refreshed Spirit.",
+            "cleanText": "You can target and attack an opposing refreshed Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CAN_ATTACK_REFRESHED"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD03-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 9000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 9000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 9000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 9000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD03-002": {
+    "cardNumber": "SD03-002",
+    "name": "The SwordDinoman Stegorus",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD03-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control two or fewer Spirits, treat this Spirit as being at LV3."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control two or fewer Spirits, treat this Spirit as being at LV3.",
+            "cleanText": "treat this Spirit as being at LV3",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control two or fewer Spirits",
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

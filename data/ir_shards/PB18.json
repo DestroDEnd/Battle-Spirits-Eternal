@@ -1,1 +1,1035 @@
-{"PB18-U06":{"cardNumber":"PB18-U06","name":"Glitter Tiga","keywords":[{"name":"Advent","parameter":"Blue & Cost 6 or more","wave":2,"hook":"advent","bracketed":true,"index":8}],"abilities":[{"id":"PB18-U06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step)","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Advent: Blue & Cost 6 or more","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."},"clauses":[{"rawText":"By sending your [Soul Core] to the Trash","cleanText":"By sending your [Soul Core] to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}},{"rawText":"stack this from the Hand onto your target Spirit.","cleanText":"stack this from the Hand onto your target Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADVENT_STACK","from":"HAND","target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"PB18-U06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit is also treated as being exactly-named \"Ultraman\"."},"clauses":[{"rawText":"This card/Spirit is also treated as being exactly-named \"Ultraman\".","cleanText":"This card/Spirit is also treated as being exactly-named \"Ultraman\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PB18-U06#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ADVENTS","timingLabel":"When Advents/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit/Ultimate with the highest cost."},"clauses":[{"rawText":"Destroy an opposing Spirit/Ultimate with the highest cost.","cleanText":"Destroy an opposing Spirit/Ultimate with the highest cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"PB18-U06#a3","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it. While this Spirit is [During Advent], this effect sends +2 cores to Trash."},"clauses":[{"rawText":"When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it.","cleanText":"When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"While this Spirit is [During Advent], this effect sends +2 cores to Trash.","cleanText":"this effect sends +2 cores to Trash","link":null,"isOptional":false,"isCost":false,"condition":"While this Spirit is [During Advent]","duration":null,"op":{"op":"MODIFY_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-06":{"cardNumber":"PB18-06","name":"Kamen Rider Zi-O Ex-Aid Armor","keywords":[{"name":"Change","parameter":"Cost 4 ([White Core","wave":2,"hook":"change","bracketed":true,"index":57}],"abilities":[{"id":"PB18-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit also treated as \"Gamer\"-named."},"clauses":[{"rawText":"This card/Spirit also treated as \"Gamer\"-named.","cleanText":"This card/Spirit also treated as \"Gamer\"-named","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"PB18-06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Change: Cost ([White Core][White Core])"],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Put one core from the Void to your Trash. After this effect resolves, either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition. If the Spirit is currently battling, continue the battle."},"clauses":[{"rawText":"Put one core from the Void to your Trash.","cleanText":"Put one core from the Void to your Trash","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"trash","side":"self"}}},{"rawText":"either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition.","cleanText":"either discard this card or replace one of your Cost 6 or less \"Kamen\" family Spirits with this card in refreshed condition","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CHANGE","maxCost":6}},{"rawText":"If the Spirit is currently battling, continue the battle.","cleanText":"continue the battle","link":null,"isOptional":false,"isCost":false,"condition":"If the Spirit is currently battling","duration":null,"op":{"op":"CONTINUE_BATTLE"}}],"unsupported":[]},{"id":"PB18-06#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While there are five or more cores in your Trash, this Spirit can't be blocked."},"clauses":[{"rawText":"While there are five or more cores in your Trash, this Spirit can't be blocked.","cleanText":"this Spirit can't be blocked","link":null,"isOptional":false,"isCost":false,"condition":"While there are five or more cores in your Trash","duration":null,"op":{"op":"UNBLOCKABLE","target":"self"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-U07":{"cardNumber":"PB18-U07","name":"Nebula M78","keywords":[],"abilities":[{"id":"PB18-U07#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted."},"clauses":[{"rawText":"When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted.","cleanText":"When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":"self"}}],"unsupported":[]},{"id":"PB18-U07#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DESTROYED","timingLabel":"When Destroyed by the Opponent","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal four cards from your decktop. Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal four cards from your decktop.","cleanText":"You can reveal four cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":4}},{"rawText":"Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each.","cleanText":"Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-U04":{"cardNumber":"PB18-U04","name":"Ultraman Dyna","keywords":[],"abilities":[{"id":"PB18-U04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 2/4/6 Spirit. When this effect destroys, put two cores from the Void to this Spirit."},"clauses":[{"rawText":"Destroy an opposing Cost 2/4/6 Spirit.","cleanText":"Destroy an opposing Cost 2/4/6 Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"When this effect destroys, put two cores from the Void to this Spirit.","cleanText":"When this effect destroys, put two cores from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"PB18-U04#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost."},"clauses":[{"rawText":"All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost.","cleanText":"All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-U01":{"cardNumber":"PB18-U01","name":"Ultraman Gaia (V2)","keywords":[],"abilities":[{"id":"PB18-U01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned/Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card, then discard a card from your Hand. When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit."},"clauses":[{"rawText":"Draw a card, then discard a card from your Hand.","cleanText":"Draw a card, then discard a card from your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit.","cleanText":"When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":4}}}}],"unsupported":[]},{"id":"PB18-U01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols."},"clauses":[{"rawText":"When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols.","cleanText":"When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-U05":{"cardNumber":"PB18-U05","name":"Ultraman Tarou","keywords":[{"name":"Burst","parameter":"After your Life is reduced","wave":2,"hook":"burst","bracketed":true,"index":115}],"abilities":[{"id":"PB18-U05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand."},"clauses":[{"rawText":"During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.","cleanText":"During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"isSoulCore":true,"from":{"zone":"field_or_reserve","side":"self"},"to":{"zone":"trash","side":"self"}}}],"unsupported":[]},{"id":"PB18-U05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_LIFE_REDUCED","isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Cost 8 or less Spirit/Ultimate. When this effect destroys, draw a card. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"Destroy an opposing Cost 8 or less Spirit/Ultimate.","cleanText":"Destroy an opposing Cost 8 or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"costLte":8}}}},{"rawText":"When this effect destroys, draw a card.","cleanText":"When this effect destroys, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"PB18-U05#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By destroying this Spirit, destroy any number of opposing Spirits up to a total of Cost 8."},"clauses":[{"rawText":"By destroying this Spirit","cleanText":"By destroying this Spirit","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"destroy any number of opposing Spirits up to a total of Cost 8.","cleanText":"destroy any number of opposing Spirits up to a total of Cost 8","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]}],"compiledClausesCount":6,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-X02":{"cardNumber":"PB18-X02","name":"［School Festival Princess］Diana Fleur","keywords":[{"name":"Team","parameter":"Twilight Gothic","wave":5,"hook":"team","bracketed":true,"index":0}],"abilities":[{"id":"PB18-X02#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PB18-X02#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add every \"Diana Fleur\" and [Song] Magic card to the Hand. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add every \"Diana Fleur\" and [Song] Magic card to the Hand.","cleanText":"Among them, add every \"Diana Fleur\" and [Song] Magic card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]},{"id":"PB18-X02#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"by using a [Song] Magic card from your Hand without paying the cost, during this turn, a \"Diana Fleur\" you control can't be blocked."},"clauses":[{"rawText":"By using a [Song] Magic card from your Hand without paying the cost","cleanText":"By using a [Song] Magic card from your Hand without paying the cost","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}},{"rawText":"during this turn, a \"Diana Fleur\" you control can't be blocked.","cleanText":"a \"Diana Fleur\" you control can't be blocked","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"UNBLOCKABLE"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-X03":{"cardNumber":"PB18-X03","name":"［School Festival Princess］Fongneena","keywords":[{"name":"Team","parameter":"Absolutes","wave":5,"hook":"team","bracketed":true,"index":0}],"abilities":[{"id":"PB18-X03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PB18-X03#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, addd every \"Fongneena\" to the Hand. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, addd every \"Fongneena\" to the Hand.","cleanText":"Among them, addd every \"Fongneena\" to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]},{"id":"PB18-X03#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"by sending a core from this Spirit to the Trash, refresh a \"Fongneena\" you control."},"clauses":[{"rawText":"By sending a core from this Spirit to the Trash","cleanText":"By sending a core from this Spirit to the Trash","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"refresh a \"Fongneena\" you control.","cleanText":"refresh a \"Fongneena\" you control","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"PB18-X01":{"cardNumber":"PB18-X01","name":"［School Festival Princess］Rei-Ohba","keywords":[{"name":"Team","parameter":"Shiny Hearts","wave":5,"hook":"team","bracketed":true,"index":0}],"abilities":[{"id":"PB18-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"PB18-X01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Among them, add every \"Rei-Ohba\" and Brave card to the Hand. Discard any remaining cards."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Among them, add every \"Rei-Ohba\" and Brave card to the Hand.","cleanText":"Among them, add every \"Rei-Ohba\" and Brave card to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}}],"unsupported":[]},{"id":"PB18-X01#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return an opposing Spirit to the Hand. Also, if this Spirit is braved to a Brave, besides any \"［School Festival Princess］Rei-Ohba\", refresh every \"Rei-Ohba\" you control."},"clauses":[{"rawText":"Return an opposing Spirit to the Hand.","cleanText":"Return an opposing Spirit to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"opp","types":["Spirit"]},"destination":"HAND"}},{"rawText":"if this Spirit is braved to a Brave, besides any \"［School Festival Princess］Rei-Ohba\", refresh every \"Rei-Ohba\" you control.","cleanText":"besides any \"［School Festival Princess］Rei-Ohba\", refresh every \"Rei-Ohba\" you control","link":"also","isOptional":false,"isCost":false,"condition":"if this Spirit is braved to a Brave","duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "PB18-U06": {
+    "cardNumber": "PB18-U06",
+    "name": "Glitter Tiga",
+    "keywords": [
+      {
+        "name": "Advent",
+        "parameter": "Blue & Cost 6 or more",
+        "wave": 2,
+        "hook": "advent",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB18-U06#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step)",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Advent: Blue & Cost 6 or more",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By sending your [Soul Core] to the Trash, stack this from the Hand onto your target Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending your [Soul Core] to the Trash",
+            "cleanText": "By sending your [Soul Core] to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "stack this from the Hand onto your target Spirit.",
+            "cleanText": "stack this from the Hand onto your target Spirit",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "ADVENT_STACK",
+              "from": "HAND",
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U06#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This card/Spirit is also treated as being exactly-named \"Ultraman\"."
+        },
+        "clauses": [
+          {
+            "rawText": "This card/Spirit is also treated as being exactly-named \"Ultraman\".",
+            "cleanText": "This card/Spirit is also treated as being exactly-named \"Ultraman\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U06#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ADVENTS",
+          "timingLabel": "When Advents/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit/Ultimate with the highest cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit/Ultimate with the highest cost.",
+            "cleanText": "Destroy an opposing Spirit/Ultimate with the highest cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U06#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it. While this Spirit is [During Advent], this effect sends +2 cores to Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it.",
+            "cleanText": "When the opponent would use card from their Hand, unless they send two cores from their Reserve to the Trash, they can't use it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "While this Spirit is [During Advent], this effect sends +2 cores to Trash.",
+            "cleanText": "this effect sends +2 cores to Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While this Spirit is [During Advent]",
+            "duration": null,
+            "op": {
+              "op": "MODIFY_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB18-U07": {
+    "cardNumber": "PB18-U07",
+    "name": "Nebula M78",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB18-U07#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted.",
+            "cleanText": "When your \"Ultraman\"-named Spirits would leave the Field due to opposing effects, by exhausting this Nexus, all of them remain on the Field, exhausted",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U07#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed by the Opponent",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can reveal four cards from your decktop. Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each. Discard any remaining cards."
+        },
+        "clauses": [
+          {
+            "rawText": "You can reveal four cards from your decktop.",
+            "cleanText": "You can reveal four cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 4
+            }
+          },
+          {
+            "rawText": "Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each.",
+            "cleanText": "Summon any number of \"Ultraman\"-named Spirit cards among them, paying one cost for each",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_REVEALED"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A14086": {
+    "cardNumber": "BATTLE-SPIRITS-A14086",
+    "name": "Ultraman Blu Aqua",
+    "keywords": [
+      {
+        "name": "Change",
+        "parameter": "Cost 5 ([Blue Core",
+        "wave": 2,
+        "hook": "change",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A14086#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Change: Cost ([Blue Core][Blue Core][Blue Core])"
+          ],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 7 or more Spirit/Ultimate. After this effect resolves, either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 7 or more Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing Cost 7 or more Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition.",
+            "cleanText": "either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHANGE",
+              "maxCost": 7
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A14086#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Declare either Spirit card or Magic card. During this turn, the opponent can't activate Burst effects of the declared card type."
+        },
+        "clauses": [
+          {
+            "rawText": "Declare either Spirit card or Magic card.",
+            "cleanText": "Declare either Spirit card or Magic card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RULE_OR_TEXT_MODIFIER"
+            }
+          },
+          {
+            "rawText": "During this turn, the opponent can't activate Burst effects of the declared card type.",
+            "cleanText": "the opponent can't activate Burst effects of the declared card type",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB18-U04": {
+    "cardNumber": "PB18-U04",
+    "name": "Ultraman Dyna",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB18-U04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 2/4/6 Spirit. When this effect destroys, put two cores from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 2/4/6 Spirit.",
+            "cleanText": "Destroy an opposing Cost 2/4/6 Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When this effect destroys, put two cores from the Void to this Spirit.",
+            "cleanText": "When this effect destroys, put two cores from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost."
+        },
+        "clauses": [
+          {
+            "rawText": "All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost.",
+            "cleanText": "All your \"Ultraman\"-named Spirits gain +5000 BP and +2 Cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 5000,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB18-U01": {
+    "cardNumber": "PB18-U01",
+    "name": "Ultraman Gaia (V2)",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "PB18-U01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned/Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card, then discard a card from your Hand. When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card, then discard a card from your Hand.",
+            "cleanText": "Draw a card, then discard a card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit.",
+            "cleanText": "When this effect discards any \"Ultraman\", destroy an opposing Cost 4 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols.",
+            "cleanText": "When you're summoning an \"Ultraman\" Spirit card, this Spirit gains two extra Blue symbols",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A14109": {
+    "cardNumber": "BATTLE-SPIRITS-A14109",
+    "name": "Ultraman Rosso Flame",
+    "keywords": [
+      {
+        "name": "Change",
+        "parameter": "Cost 4 ([Blue Core",
+        "wave": 2,
+        "hook": "change",
+        "bracketed": true,
+        "index": 8
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A14109#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Change: Cost ([Blue Core][Blue Core])"
+          ],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 5 or less Spirit/Ultimate. Also, if you control any \"Blu\" Spirit, destroy an opposing Cost 6 or less Spirit/Ultimate. After this effect resolves, either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 5 or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing Cost 5 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 5
+                }
+              }
+            }
+          },
+          {
+            "rawText": "if you control any \"Blu\" Spirit, destroy an opposing Cost 6 or less Spirit/Ultimate.",
+            "cleanText": "destroy an opposing Cost 6 or less Spirit/Ultimate",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "if you control any \"Blu\" Spirit",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 6
+                }
+              }
+            }
+          },
+          {
+            "rawText": "either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition.",
+            "cleanText": "either discard this card or replace one of your Cost 7 or less \"Ultraman\" Spirits with this card in refreshed condition",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHANGE",
+              "maxCost": 7
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A14109#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing 6000 BP or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing 6000 BP or less Spirit.",
+            "cleanText": "Destroy an opposing 6000 BP or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 6000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "PB18-U05": {
+    "cardNumber": "PB18-U05",
+    "name": "Ultraman Tarou",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Life is reduced",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 115
+      }
+    ],
+    "abilities": [
+      {
+        "id": "PB18-U05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand.",
+            "cleanText": "During (Either End Step), by sending your [Soul Core] to the Trash, return this card from your Trash to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "isSoulCore": true,
+              "from": {
+                "zone": "field_or_reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "trash",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_LIFE_REDUCED",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Cost 8 or less Spirit/Ultimate. When this effect destroys, draw a card. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Cost 8 or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing Cost 8 or less Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 8
+                }
+              }
+            }
+          },
+          {
+            "rawText": "When this effect destroys, draw a card.",
+            "cleanText": "When this effect destroys, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "PB18-U05#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "By destroying this Spirit, destroy any number of opposing Spirits up to a total of Cost 8."
+        },
+        "clauses": [
+          {
+            "rawText": "By destroying this Spirit",
+            "cleanText": "By destroying this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "destroy any number of opposing Spirits up to a total of Cost 8.",
+            "cleanText": "destroy any number of opposing Spirits up to a total of Cost 8",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 6,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

@@ -365,3 +365,95 @@ export function extractKeywords(text) {
 
   return found;
 }
+
+/**
+ * Binds keywords to cards and their individual ability blocks,
+ * attaching level gating, timing windows, faces, and conditions.
+ */
+export function bindKeywordsToAbilities(card, rawEffect = '', abilities = []) {
+  const cardNumber = card.card_number || card.cardNumber || card.id || 'UNKNOWN';
+  const defaultFace = card.face || (cardNumber.includes('-A') ? 'B' : cardNumber.endsWith('B') ? 'B' : 'A');
+
+  const boundCardKeywords = [];
+
+  for (let idx = 0; idx < abilities.length; idx++) {
+    const ability = abilities[idx];
+    const header = ability.header || {};
+    const blockText = ability.rawText || header.cleanBody || '';
+
+    // Extract keywords in this ability block
+    const blockKeywords = extractKeywords(blockText);
+
+    // If header has a recognized keyword that was stripped during header parsing
+    if (header.keyword) {
+      const headerKwRaw = header.keyword.split(':')[0].trim();
+      const headerParam = header.keyword.includes(':') ? header.keyword.split(':').slice(1).join(':').trim() : null;
+      const alreadyCaptured = blockKeywords.some(bk => bk.name.toLowerCase() === headerKwRaw.toLowerCase());
+      if (!alreadyCaptured) {
+        const meta = KEYWORD_CATALOG[headerKwRaw] || { wave: 1, hook: headerKwRaw.toLowerCase().replace(/[\s\-]+/g, '_') };
+        blockKeywords.unshift({
+          name: headerKwRaw,
+          parameter: headerParam,
+          wave: meta.wave,
+          hook: meta.hook,
+          bracketed: true,
+          index: 0
+        });
+      }
+    }
+
+    // Also check prefixes for recognized keywords (e.g. Soul State, Contract Pre-Advent, etc.)
+    if (Array.isArray(header.prefixes)) {
+      for (const prefix of header.prefixes) {
+        const prefixKwRaw = prefix.split(':')[0].trim();
+        const prefixParam = prefix.includes(':') ? prefix.split(':').slice(1).join(':').trim() : null;
+        for (const kwName of SORTED_CATALOG_KEYS) {
+          if (prefixKwRaw.toLowerCase() === kwName.toLowerCase() || prefixKwRaw.toLowerCase().startsWith(kwName.toLowerCase())) {
+            const alreadyCaptured = blockKeywords.some(bk => bk.name.toLowerCase() === kwName.toLowerCase());
+            if (!alreadyCaptured) {
+              const meta = KEYWORD_CATALOG[kwName];
+              blockKeywords.unshift({
+                name: kwName,
+                parameter: prefixParam,
+                wave: meta.wave,
+                hook: meta.hook,
+                bracketed: true,
+                index: 0
+              });
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    const prefixes = header.prefixes || [];
+    const isRebornBlock = prefixes.some(p => /reborn|during rebirth/i.test(p)) || /when reborn|during rebirth/i.test(blockText);
+    const blockFace = isRebornBlock ? 'B' : defaultFace;
+
+    const abilityBoundKeywords = blockKeywords.map(kw => ({
+      ...kw,
+      abilityId: ability.id || `${cardNumber}#a${idx}`,
+      cardNumber,
+      levels: header.levels || [1, 2, 3],
+      levelExplicit: Boolean(header.levelExplicit),
+      timing: header.timing || 'PASSIVE',
+      timingLabel: header.timingLabel || '',
+      timingStep: header.timingStep || 'ANY',
+      face: blockFace,
+      prefixes,
+      isSoulState: prefixes.some(p => /soul state/i.test(p)) || /\[soul state\]/i.test(blockText),
+      duringAdvent: prefixes.some(p => /during advent/i.test(p)) || /\[during advent\]/i.test(blockText),
+      duringSeal: prefixes.some(p => /during seal|when sealed/i.test(p)) || /\[during seal\]/i.test(blockText),
+      burstCondition: header.burstCondition || null,
+      limit: header.limit || null,
+      isFlash: Boolean(header.isFlash),
+      isMain: Boolean(header.isMain)
+    }));
+
+    ability.keywords = abilityBoundKeywords;
+    boundCardKeywords.push(...abilityBoundKeywords);
+  }
+
+  return boundCardKeywords;
+}

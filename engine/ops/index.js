@@ -136,6 +136,57 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
       const toZone = op.to ? op.to.zone : 'reserve';
       const fromSide = op.from && op.from.side === 'opp' ? oppSide : controller;
       const toSide = op.to && op.to.side === 'opp' ? oppSide : controller;
+      const minRemaining = typeof op.minCoresRemaining === 'number' ? op.minCoresRemaining : null;
+
+      let totalMoved = 0;
+
+      if (fromZone === 'field' && minRemaining !== null) {
+        const p = state.players[fromSide];
+        for (let i = 0; i < count; i++) {
+          const eligibleStacks = p.field.filter(st => {
+            const cores = (st.cores.normal || 0) + (st.cores.soul ? 1 : 0);
+            return cores > minRemaining;
+          });
+          if (eligibleStacks.length === 0) break;
+
+          let fromStackId = null;
+          if (op.from.target === 'self' && sourceCard) {
+            const selfStack = eligibleStacks.find(st => st.top.id === sourceCard.id);
+            if (selfStack) fromStackId = selfStack.id;
+          } else {
+            const chosenStack = await promptResolver.choose({
+              type: 'SELECT_STACK',
+              title: 'Choose a spirit to remove core from',
+              candidates: eligibleStacks.map(st => ({ stack: st, card: st.top })),
+              count: 1,
+              chooser: op.chooser === 'opp' ? oppSide : controller
+            });
+            if (chosenStack && chosenStack[0]) {
+              fromStackId = chosenStack[0].stack ? chosenStack[0].stack.id : chosenStack[0].id;
+            }
+          }
+
+          if (!fromStackId) break;
+
+          let toStackId = null;
+          if (toZone === 'field') {
+            const toP = state.players[toSide];
+            toStackId = (toP.field[0] && toP.field[0].id) || null;
+          }
+
+          const res = await moveCore(
+            state,
+            1,
+            { zone: fromZone, side: fromSide, stackId: fromStackId },
+            { zone: toZone, side: toSide, stackId: toStackId },
+            { isSoulCore: isSoul, cause: 'effect', by: controller, sourceCard, minCoresRemaining },
+            events
+          );
+          if (res) totalMoved++;
+          else break;
+        }
+        return { success: totalMoved > 0, coresMoved: totalMoved };
+      }
 
       let fromStackId = null;
       let toStackId = null;
@@ -292,34 +343,75 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
 
     case 'BP_BUFF': {
       let targetStackId = null;
-      if (op.target === 'self') {
-        const p = state.players[controller];
-        const selfStack = p.field.find(st => st.top.id === sourceCard.id);
+      const p = state.players[controller];
+      const selfStack = (p.field || []).find(st => st.top && sourceCard && (st.top.id === sourceCard.id || st.top.cardNumber === sourceCard.cardNumber));
+
+      if (op.target === 'self' || op.target === 'this_spirit' || op.target === 'this_unit' || (!op.target && selfStack)) {
         if (selfStack) targetStackId = selfStack.id;
       } else {
         const candidates = queryCandidates(state, { side: 'self', types: ['Spirit', 'Ultimate'] }, context);
-        const chosen = await promptResolver.choose({
-          type: 'SELECT_BP_BUFF',
-          title: 'Select Spirit/Ultimate to grant BP buff',
-          candidates,
-          count: 1,
-          chooser: controller
-        });
-        if (chosen && chosen[0]) {
-          targetStackId = chosen[0].stack ? chosen[0].stack.id : chosen[0].id;
+        if (candidates.length > 0) {
+          const chosen = await promptResolver.choose({
+            type: 'SELECT_BP_BUFF',
+            title: 'Select Spirit/Ultimate to grant BP buff',
+            candidates,
+            count: 1,
+            chooser: controller
+          });
+          if (chosen && chosen[0]) {
+            targetStackId = chosen[0].stack ? chosen[0].stack.id : chosen[0].id;
+          } else if (selfStack) {
+            targetStackId = selfStack.id;
+          }
+        } else if (selfStack) {
+          targetStackId = selfStack.id;
         }
       }
+
+      let multiplier = 1;
+      if (op.forEach) {
+        const forEachType = String(op.forEach).toUpperCase();
+        if (forEachType === 'RESERVE_CORES' || forEachType === 'CORE_IN_RESERVE') {
+          const p = state.players[controller];
+          multiplier = (p.reserve.normal || 0) + (p.reserve.soul ? 1 : 0);
+        } else if (forEachType === 'OPPOSING_REFRESHED_SPIRITS' || forEachType === 'REFRESHED_SPIRIT_COUNT') {
+          const oppP = state.players[oppSide];
+          multiplier = (oppP.field || []).filter(st => st.state === 'REFRESHED' && (st.top.type || '').includes('Spirit')).length;
+        } else if (forEachType === 'DRAGON_FAMILY_SPIRITS' || forEachType === 'DRAGON_FAMILY_COUNT') {
+          const p = state.players[controller];
+          multiplier = (p.field || []).filter(st => {
+            const fams = (Array.isArray(st.top.families) ? st.top.families : (st.top.family ? [st.top.family] : []));
+            return fams.some(f => String(f).toLowerCase().includes('dragon'));
+          }).length;
+        } else if (forEachType === 'ALL_NEXUSES' || forEachType === 'NEXUS_COUNT') {
+          let nexCount = 0;
+          for (const s of ['player', 'opponent']) {
+            const pl = state.players[s];
+            if (pl) {
+              nexCount += (pl.field || []).filter(st => (st.top.type || '').includes('Nexus')).length;
+              nexCount += (pl.nexus || []).length;
+            }
+          }
+          multiplier = nexCount;
+        } else if (forEachType === 'EXHAUSTED_SPIRIT_COUNT' || forEachType === 'SELF_EXHAUSTED_SPIRITS') {
+          const p = state.players[controller];
+          multiplier = (p.field || []).filter(st => (st.state === 'EXHAUSTED' || st.state === 'HEAVY_EXHAUSTED') && (st.top.type || '').includes('Spirit')).length;
+        }
+      }
+
+      const buffAmount = (op.amount || 1000) * multiplier;
 
       state.modifiers.push({
         id: `mod_${Date.now()}_${Math.random()}`,
         type: 'BP_BUFF',
-        targetStackId,
-        amount: op.amount || 1000,
+        targetStackId: targetStackId || (selfStack ? selfStack.id : null),
+        side: controller,
+        amount: buffAmount,
         duration: op.duration || 'THIS_TURN',
         sourceCardId: sourceCard ? sourceCard.id : null
       });
 
-      return { success: true };
+      return { success: true, amount: buffAmount };
     }
 
     case 'BP_DEBUFF': {

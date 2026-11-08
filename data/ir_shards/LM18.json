@@ -1,1 +1,1885 @@
-{"LM18-G03":{"cardNumber":"LM18-G03","name":"Godzilla (1984)","keywords":[{"name":"Burst","parameter":"After an opposing Spirit/Ultimate attacks","wave":2,"hook":"burst","bracketed":true,"index":113}],"abilities":[{"id":"LM18-G03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While there is any \"Godzilla\"-named Spirit card in your Trash, this set card is unaffected by opposing effects."},"clauses":[{"rawText":"While there is any \"Godzilla\"-named Spirit card in your Trash, this set card is unaffected by opposing effects.","cleanText":"this set card is unaffected by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":"While there is any \"Godzilla\"-named Spirit card in your Trash","duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]},{"id":"LM18-G03#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_ATTACK","isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 10000 BP or less Spirit/Ultimate. For each \"Godzilla\"-named Spirit you control, increase the limit of this \"BP Destruction effect\" by +5000. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"Destroy an opposing 10000 BP or less Spirit/Ultimate.","cleanText":"Destroy an opposing 10000 BP or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":10000}}}},{"rawText":"For each \"Godzilla\"-named Spirit you control, increase the limit of this \"BP Destruction effect\" by +5000.","cleanText":"For each \"Godzilla\"-named Spirit you control, increase the limit of this \"BP Destruction effect\" by +5000","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":5000,"target":{"side":"either"}}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"LM18-G03#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit/Ultimate."},"clauses":[{"rawText":"You can target and attack an opposing Spirit/Ultimate.","cleanText":"You can target and attack an opposing Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G04":{"cardNumber":"LM18-G04","name":"Godzilla (vs Destoroyah)","keywords":[{"name":"Accel","parameter":"Cost 5 ([Red Core","wave":2,"hook":"accel","bracketed":true,"index":7}],"abilities":[{"id":"LM18-G04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Purple Core","burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Send two cores from an opposing Spirit/Ultimate to the Reserve. After this effect resolves, put this card face-up on the Removed Zone."},"clauses":[{"rawText":"Send two cores from an opposing Spirit/Ultimate to the Reserve.","cleanText":"Send two cores from an opposing Spirit/Ultimate to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"field","side":"opp","types":["Spirit","Ultimate"]},"to":{"zone":"reserve","side":"opp"},"chooser":"self"}},{"rawText":"put this card face-up on the Removed Zone.","cleanText":"put this card face-up on the Removed Zone","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"OPEN_ZONE"}}],"unsupported":[]},{"id":"LM18-G04#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can discard two cards from your decktop. For each \"Godzilla\"/\"Destoroyah\"-named Spirit card discarded, this Spirit gains an extra Red symbol."},"clauses":[{"rawText":"You can discard two cards from your decktop.","cleanText":"You can discard two cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"For each \"Godzilla\"/\"Destoroyah\"-named Spirit card discarded, this Spirit gains an extra Red symbol.","cleanText":"For each \"Godzilla\"/\"Destoroyah\"-named Spirit card discarded, this Spirit gains an extra Red symbol","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_SYMBOL"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-07":{"cardNumber":"LM18-07","name":"Garudos Randall (Card)","keywords":[{"name":"Core Charge","parameter":"(Ruin Dragon/Ancient Dragon/Dragon Warrior & Cost 3 or more) (Exalted Sword & Brave)","wave":3,"hook":"core_charge","bracketed":true,"index":284},{"name":"Grand Skill","parameter":"4","wave":3,"hook":"grand_skill","bracketed":true,"index":705},{"name":"Grand Field","parameter":null,"wave":3,"hook":"grand_field","bracketed":true,"index":907}],"abilities":[{"id":"LM18-07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Grandwalker Nexus"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."},"clauses":[{"rawText":"This Nexus can only be affected by effects that target Grandwalker Nexuses.","cleanText":"This Nexus can only be affected by effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_PROTECTION"}},{"rawText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.","cleanText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_CORE_RULE"}}],"unsupported":[]},{"id":"LM18-07#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (Ruin Dragon/Ancient Dragon/Dragon Warrior & Cost 3 or more) (Exalted Sword & Brave)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"LM18-07#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus.","cleanText":"When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"LM18-07#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, put a core from the Void onto this Nexus.","cleanText":"For each target card among them, put a core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"source":"VOID","destination":"THIS_NEXUS","forEach":"TARGET_CARDS_COUNT"}}],"unsupported":[]},{"id":"LM18-07#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":["Grand Skill: 4"],"timing":"MAIN_STEP","timingLabel":"Your Main Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone."},"clauses":[{"rawText":"(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone.","cleanText":"(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"LM18-07#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Field"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":true,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void."},"clauses":[{"rawText":"At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void.","cleanText":"At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":7,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G06":{"cardNumber":"LM18-G06","name":"Godzilla (2016) Fourth Form","keywords":[{"name":"Change","parameter":"Cost 7 ([Red Core","wave":2,"hook":"change","bracketed":true,"index":95}],"abilities":[{"id":"LM18-G06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Fourth Form)\"."},"clauses":[{"rawText":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Fourth Form)\".","cleanText":"This card/Spirit is also treated as being exactly-named \"Shin-Godzilla (Fourth Form)\"","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"LM18-G06#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Change: Cost ([Red Core][Red Core][Red Core][Red Core])"],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy an opposing 30000 BP or less Spirit/Ultimate. After this effect resolves, either discard this card or replace one of your Cost 6 or more \"Godzilla\" Spirit with this card in refreshed condition."},"clauses":[{"rawText":"Destroy an opposing 30000 BP or less Spirit/Ultimate.","cleanText":"Destroy an opposing 30000 BP or less Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":30000}}}},{"rawText":"either discard this card or replace one of your Cost 6 or more \"Godzilla\" Spirit with this card in refreshed condition.","cleanText":"either discard this card or replace one of your Cost 6 or more \"Godzilla\" Spirit with this card in refreshed condition","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"LM18-G06#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"By discarding a card from your Hand, destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's."},"clauses":[{"rawText":"By discarding a card from your Hand","cleanText":"By discarding a card from your Hand","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","count":1,"upTo":false,"filter":null,"chooser":"self"}},{"rawText":"destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's.","cleanText":"destroy an opposing Spirit/Ultimate with BP equal or inferior to this Spirit's","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G02":{"cardNumber":"LM18-G02","name":"Godzilla (vs King Ghidorah)","keywords":[],"abilities":[{"id":"LM18-G02#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card. Also, if you control another \"Godzilla\"/\"Ghidorah\"-named Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"if you control another \"Godzilla\"/\"Ghidorah\"-named Spirit, destroy an opposing 10000 BP or less Spirit/Ultimate.","cleanText":"destroy an opposing 10000 BP or less Spirit/Ultimate","link":"also","isOptional":false,"isCost":false,"condition":"if you control another \"Godzilla\"/\"Ghidorah\"-named Spirit","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":10000}}}}],"unsupported":[]},{"id":"LM18-G02#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Godzilla\"/\"Ghidorah\"-named Spirits can't be returned to the Hand/Deck by opposing effects."},"clauses":[{"rawText":"All your \"Godzilla\"/\"Ghidorah\"-named Spirits can't be returned to the Hand/Deck by opposing effects.","cleanText":"All your \"Godzilla\"/\"Ghidorah\"-named Spirits can't be returned to the Hand/Deck by opposing effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G01":{"cardNumber":"LM18-G01","name":"Godzilla (vs Mothra)","keywords":[],"abilities":[{"id":"LM18-G01#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put a core from the Void to this Spirit."},"clauses":[{"rawText":"Put a core from the Void to this Spirit.","cleanText":"Put a core from the Void to this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"LM18-G01#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit's symbol is also treated as Green."},"clauses":[{"rawText":"This Spirit's symbol is also treated as Green.","cleanText":"This Spirit's symbol is also treated as Green","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TREAT_RULE"}}],"unsupported":[]},{"id":"LM18-G01#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Godzilla\"/\"Mothra\" Spirit attacks, you can target and attack an opposing Spirit/Ultimate."},"clauses":[{"rawText":"When your \"Godzilla\"/\"Mothra\" Spirit attacks, you can target and attack an opposing Spirit/Ultimate.","cleanText":"When your \"Godzilla\"/\"Mothra\" Spirit attacks, you can target and attack an opposing Spirit/Ultimate","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G05":{"cardNumber":"LM18-G05","name":"Godzilla (✕ MechaGodzilla)","keywords":[],"abilities":[{"id":"LM18-G05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can reveal three cards from your decktop. Add a \"Godzilla\"/\"Type-3 Kiryu\" Spirit card among them to the Hand. Discard any remaining cards. When this effect adds any Spirit card to the Hand, discard an opposing Burst."},"clauses":[{"rawText":"You can reveal three cards from your decktop.","cleanText":"You can reveal three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Add a \"Godzilla\"/\"Type-3 Kiryu\" Spirit card among them to the Hand.","cleanText":"Add a \"Godzilla\"/\"Type-3 Kiryu\" Spirit card among them to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"ADD_TO_HAND"}},{"rawText":"Discard any remaining cards.","cleanText":"Discard any remaining cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_REVEALED"}},{"rawText":"When this effect adds any Spirit card to the Hand, discard an opposing Burst.","cleanText":"When this effect adds any Spirit card to the Hand, discard an opposing Burst","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_BURST","side":"opp"}}],"unsupported":[]},{"id":"LM18-G05#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your \"Godzilla\"/\"Type-3 Kiryu\" Spirits are unaffected by opposing Spirit/Ultimate effects."},"clauses":[{"rawText":"All your \"Godzilla\"/\"Type-3 Kiryu\" Spirits are unaffected by opposing Spirit/Ultimate effects.","cleanText":"All your \"Godzilla\"/\"Type-3 Kiryu\" Spirits are unaffected by opposing Spirit/Ultimate effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-08":{"cardNumber":"LM18-08","name":"Otherworld King (Card)","keywords":[{"name":"Core Charge","parameter":"(Astral Deity/Zombie/Machine Beast/Worldswalker/Avatar & Cost 3 or more)","wave":3,"hook":"core_charge","bracketed":true,"index":284},{"name":"Grand Skill","parameter":"5","wave":3,"hook":"grand_skill","bracketed":true,"index":887}],"abilities":[{"id":"LM18-08#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Grandwalker Nexus"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."},"clauses":[{"rawText":"This Nexus can only be affected by effects that target Grandwalker Nexuses.","cleanText":"This Nexus can only be affected by effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_PROTECTION"}},{"rawText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.","cleanText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_CORE_RULE"}}],"unsupported":[]},{"id":"LM18-08#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge: (Astral Deity/Zombie/Machine Beast/Worldswalker/Avatar & Cost 3 or more)","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"LM18-08#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit, put a core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit, put a core from the Void onto this Nexus.","cleanText":"When you summon/advent a target Spirit, put a core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"LM18-08#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE_TRIGGER","millCount":3}},{"rawText":"For each target card among them, put a core from the Void onto this Nexus.","cleanText":"For each target card among them, put a core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"source":"VOID","destination":"THIS_NEXUS","forEach":"TARGET_CARDS_COUNT"}}],"unsupported":[]},{"id":"LM18-08#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Life is reduced, put a core from the Void to this Nexus."},"clauses":[{"rawText":"When your Life is reduced, put a core from the Void to this Nexus.","cleanText":"When your Life is reduced, put a core from the Void to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"LM18-08#a5","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy two opposing 7000 BP or less Spirits. Also, put two cores from the Void to this Nexus."},"clauses":[{"rawText":"Destroy two opposing 7000 BP or less Spirits.","cleanText":"Destroy two opposing 7000 BP or less Spirits","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":2,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":7000}}}},{"rawText":"put two cores from the Void to this Nexus.","cleanText":"put two cores from the Void to this Nexus","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}}],"unsupported":[]},{"id":"LM18-08#a6","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 5"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects."},"clauses":[{"rawText":"(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects.","cleanText":"(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"IMMUNITY","immuneTo":"OPPOSING_EFFECTS"}}],"unsupported":[]}],"compiledClausesCount":9,"unsupportedClausesCount":0,"isFullySupported":true},"LM18-G07":{"cardNumber":"LM18-G07","name":"Unmanned Train Bomb","keywords":[],"abilities":[{"id":"LM18-G07#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits/Ultimates up to a total of 12000 BP. Or, heavy exhaust an opposing \"Shin-Godzilla\"-named Spirit. This heavy exhausting effect can't be prevented by any effect."},"clauses":[{"rawText":"Destroy any number of opposing Spirits/Ultimates up to a total of 12000 BP.","cleanText":"Destroy any number of opposing Spirits/Ultimates up to a total of 12000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":12000,"target":{"side":"opp","types":["Spirit","Ultimate"]}}},{"rawText":"heavy exhaust an opposing \"Shin-Godzilla\"-named Spirit.","cleanText":"heavy exhaust an opposing \"Shin-Godzilla\"-named Spirit","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}},{"rawText":"This heavy exhausting effect can't be prevented by any effect.","cleanText":"This heavy exhausting effect can't be prevented by any effect","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "BATTLE-SPIRITS-A1457": {
+    "cardNumber": "BATTLE-SPIRITS-A1457",
+    "name": "The HieroglyphSoldier Early-Jehuty",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 260
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A1457#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when your \"Armed Machine\" family Spirit is summoned, by sending a core from any of your exactly-named \"Grandwalker Thoth\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], changing the \"Ultimate\" text written in the effect into \"Spirit\" and treating core as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "when your \"Armed Machine\" family Spirit is summoned, by sending a core from any of your exactly-named \"Grandwalker Thoth\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], changing the \"Ultimate\" text written in the effect into \"Spirit\" and treating core as being sent to the Void.",
+            "cleanText": "when your \"Armed Machine\" family Spirit is summoned, by sending a core from any of your exactly-named \"Grandwalker Thoth\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], changing the \"Ultimate\" text written in the effect into \"Spirit\" and treating core as being sent to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A1457#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Nexus/Purple Spirit effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Nexus/Purple Spirit effects.",
+            "cleanText": "This Spirit is unaffected by opposing Nexus/Purple Spirit effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A3624": {
+    "cardNumber": "BATTLE-SPIRITS-A3624",
+    "name": "Dairokuten Maou (Card)",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(\"God-Sechs\"/Evil Shadow/Clever Machine & Cost 2 or more) (This Nexus can only hold up to 5 cores)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 709
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 878
+      },
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 1025
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A3624#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3624#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (\"God-Sechs\"/Evil Shadow/Clever Machine & Cost 2 or more) (This Nexus can only hold up to 5 cores)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3624#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you Summon/Advent a target Spirit, put a core from the Void to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you Summon/Advent a target Spirit, put a core from the Void to this Nexus.",
+            "cleanText": "When you Summon/Advent a target Spirit, put a core from the Void to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3624#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3624#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When you're summoning a \"God-Sechs\"-named card, by exhausting this Nexus, treat all the reductions of that card as fulfilled."
+        },
+        "clauses": [
+          {
+            "rawText": "When you're summoning a \"God-Sechs\"-named card, by exhausting this Nexus, treat all the reductions of that card as fulfilled.",
+            "cleanText": "When you're summoning a \"God-Sechs\"-named card, by exhausting this Nexus, treat all the reductions of that card as fulfilled",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A3624#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your \"God-Sechs\"-named Spirit with [Soul Core] on it is attacking, the opponent can't use Magic cards/[Accel] unless they send their [Soul Core] to their Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "While your \"God-Sechs\"-named Spirit with [Soul Core] on it is attacking, the opponent can't use Magic cards/[Accel] unless they send their [Soul Core] to their Trash.",
+            "cleanText": "the opponent can't use Magic cards/[Accel] unless they send their [Soul Core] to their Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your \"God-Sechs\"-named Spirit with [Soul Core] on it is attacking",
+            "duration": null,
+            "op": {
+              "op": "SET_RESTRICTION",
+              "restriction": "PREVENT_MAGIC",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM18-07": {
+    "cardNumber": "LM18-07",
+    "name": "Garudos Randall (Card)",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Ruin Dragon/Ancient Dragon/Dragon Warrior & Cost 3 or more) (Exalted Sword & Brave)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "4",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 705
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 907
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM18-07#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-07#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Ruin Dragon/Ancient Dragon/Dragon Warrior & Cost 3 or more) (Exalted Sword & Brave)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-07#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit/Brave, put one core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-07#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-07#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 4"
+          ],
+          "timing": "MAIN_STEP",
+          "timingLabel": "Your Main Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone."
+        },
+        "clauses": [
+          {
+            "rawText": "(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone.",
+            "cleanText": "(Once per turn, send four core from this Nexus to the void) Pay one cost to summon a \"Ruin Dragon\"/\"Exalted Sword\" family card from your Hand/Removed Zone",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-07#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Field"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": true,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void.",
+            "cleanText": "At the end of the battle of your Brave Spirits that are braved to any \"Exalted Sword\" family Brave, send an opposing Life to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 7,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM18-08": {
+    "cardNumber": "LM18-08",
+    "name": "Otherworld King (Card)",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Astral Deity/Zombie/Machine Beast/Worldswalker/Avatar & Cost 3 or more)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "5",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 887
+      }
+    ],
+    "abilities": [
+      {
+        "id": "LM18-08#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Astral Deity/Zombie/Machine Beast/Worldswalker/Avatar & Cost 3 or more)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, put a core from the Void onto this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Life is reduced, put a core from the Void to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Life is reduced, put a core from the Void to this Nexus.",
+            "cleanText": "When your Life is reduced, put a core from the Void to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 7000 BP or less Spirits. Also, put two cores from the Void to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 7000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 7000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 7000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "put two cores from the Void to this Nexus.",
+            "cleanText": "put two cores from the Void to this Nexus",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM18-08#a6",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 5"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects.",
+            "cleanText": "(Send five core from this Nexus to the void) During this turn, all your \"Phantom\"-named Spirits are unaffected by opposing Spirit/Ultimate/Nexus effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 9,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A8150": {
+    "cardNumber": "BATTLE-SPIRITS-A8150",
+    "name": "Taiga Kazuya",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": "(Emperor Beast & Cost 5 or more) (Evil God/Tri-Dragon Deity/Incarnate & Ultimate)",
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Soul Drive",
+        "parameter": null,
+        "wave": 3,
+        "hook": "soul_drive",
+        "bracketed": true,
+        "index": 953
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A8150#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8150#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge: (Emperor Beast & Cost 5 or more) (Evil God/Tri-Dragon Deity/Incarnate & Ultimate)",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8150#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit/Ultimate, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit/Ultimate, put a core from the Void onto this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit/Ultimate, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8150#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash. For each target card among them, put a core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you do not control a Grandwalker Nexus with the same card name, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE_TRIGGER",
+              "millCount": 3
+            }
+          },
+          {
+            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "source": "VOID",
+              "destination": "THIS_NEXUS",
+              "forEach": "TARGET_CARDS_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8150#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can pay one cost to summon an \"Evil God\" family Ultimate card from your Hand. Also, put two cores from the Void to this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "You can pay one cost to summon an \"Evil God\" family Ultimate card from your Hand.",
+            "cleanText": "You can pay one cost to summon an \"Evil God\" family Ultimate card from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "put two cores from the Void to this Nexus.",
+            "cleanText": "put two cores from the Void to this Nexus",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A8150#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Send every core on this Nexus to the Void) Activate one of the [Soul Drive] of your attacking \"Evil God\" family Ultimate you control, treating [Soul Core] as being banished."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send every core on this Nexus to the Void) Activate one of the [Soul Drive] of your attacking \"Evil God\" family Ultimate you control, treating [Soul Core] as being banished.",
+            "cleanText": "(Send every core on this Nexus to the Void) Activate one of the [Soul Drive] of your attacking \"Evil God\" family Ultimate you control, treating [Soul Core] as being banished",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 8,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10322": {
+    "cardNumber": "BATTLE-SPIRITS-A10322",
+    "name": "The GirlDoll †Jea-Lady†",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 41
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 240
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10322#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10322#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by sending a core from any of your exactly-named \"Grandwalker Hera\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from any of your exactly-named \"Grandwalker Hera\" to the Trash",
+            "cleanText": "By sending a core from any of your exactly-named \"Grandwalker Hera\" to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void.",
+            "cleanText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A10488": {
+    "cardNumber": "BATTLE-SPIRITS-A10488",
+    "name": "The GrandseaPrince Grow-Ocean",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 74
+      },
+      {
+        "name": "Grand Field",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_field",
+        "bracketed": true,
+        "index": 357
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A10488#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Discard a card from the opposing decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Discard a card from the opposing decktop.",
+            "cleanText": "Discard a card from the opposing decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A10488#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "when the opponent uses a card from their Hand, before its effect activates, by sending a core from any of your exactly-named \"Grandwalker Poseidon\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], treating cores as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "when the opponent uses a card from their Hand, before its effect activates, by sending a core from any of your exactly-named \"Grandwalker Poseidon\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], treating cores as being sent to the Void.",
+            "cleanText": "when the opponent uses a card from their Hand, before its effect activates, by sending a core from any of your exactly-named \"Grandwalker Poseidon\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Field], treating cores as being sent to the Void",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12487": {
+    "cardNumber": "BATTLE-SPIRITS-A12487",
+    "name": "The SkyYoungBird Har-Achte",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 69
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 269
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12487#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to this Spirit.",
+            "cleanText": "Put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A12487#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by sending a core from any of your exactly-named \"Grandwalker Horus\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from any of your exactly-named \"Grandwalker Horus\" to the Trash",
+            "cleanText": "By sending a core from any of your exactly-named \"Grandwalker Horus\" to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void.",
+            "cleanText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating cores as being sent to the Void",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A12879": {
+    "cardNumber": "BATTLE-SPIRITS-A12879",
+    "name": "The SunBeastPrincess Sekhme-Emira",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 212
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A12879#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "WHEN_ATTACKS_OR_DESTROYED",
+          "timingLabel": "When Attacks/Destroyed",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by sending a core from any of your exactly-named \"Grandwalker Ra\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating core as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from any of your exactly-named \"Grandwalker Ra\" to the Trash",
+            "cleanText": "By sending a core from any of your exactly-named \"Grandwalker Ra\" to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating core as being sent to the Void.",
+            "cleanText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating core as being sent to the Void",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "BATTLE-SPIRITS-A13745": {
+    "cardNumber": "BATTLE-SPIRITS-A13745",
+    "name": "Thunder-Z-Koleon",
+    "keywords": [
+      {
+        "name": "Unleash",
+        "parameter": "1, Minor",
+        "wave": 2,
+        "hook": "unleash",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": null,
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 204
+      }
+    ],
+    "abilities": [
+      {
+        "id": "BATTLE-SPIRITS-A13745#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Unleash: 1, Minor"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "by sending a core from any of your exactly-named \"Grandwalker Zeus\" to the Trash, immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating three cores as being sent to the Void."
+        },
+        "clauses": [
+          {
+            "rawText": "By sending a core from any of your exactly-named \"Grandwalker Zeus\" to the Trash",
+            "cleanText": "By sending a core from any of your exactly-named \"Grandwalker Zeus\" to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating three cores as being sent to the Void.",
+            "cleanText": "immediately activate that Grandwalker Nexus' [LV1][LV2] [Grand Skill], treating three cores as being sent to the Void",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "BATTLE-SPIRITS-A13745#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

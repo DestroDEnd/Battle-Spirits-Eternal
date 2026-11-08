@@ -1,0 +1,2061 @@
+export const SD01_OVERRIDES = {
+  "SD01-039": {
+    "cardNumber": "SD01-039",
+    "name": "Blizzard Wall",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-039#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, your Life can only be reduced by one by the attacks of opposing unblocked Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, your Life can only be reduced by one by the attacks of opposing unblocked Spirits.",
+            "cleanText": "your Life can only be reduced by one by the attacks of opposing unblocked Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "DAMAGE_CAP",
+              "maxDamage": 1
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-003": {
+    "cardNumber": "SD01-003",
+    "name": "Ankillersaurus",
+    "keywords": [
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 71
+      },
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 80
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While you control any Spirit with [Awaken]/[Clash], this Spirit gains +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While you control any Spirit with [Awaken]/[Clash], this Spirit gains +1000 BP.",
+            "cleanText": "this Spirit gains +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While you control any Spirit with [Awaken]/[Clash]",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-037": {
+    "cardNumber": "SD01-037",
+    "name": "Carry Cores",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-037#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve. During this turn, give a Spirit +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve.",
+            "cleanText": "Put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, give a Spirit +1000 BP.",
+            "cleanText": "give a Spirit +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-036": {
+    "cardNumber": "SD01-036",
+    "name": "Curse Enchant",
+    "keywords": [
+      {
+        "name": "Curse",
+        "parameter": null,
+        "wave": 1,
+        "hook": "curse",
+        "bracketed": true,
+        "index": 64
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-036#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "During this turn, give a Spirit you control the effect: \"[Curse] (When Attacks) This Spirit destroys an opposing Spirit that blocked at the end of battle.\""
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit you control the effect: \"[Curse] (When Attacks) This Spirit destroys an opposing Spirit that blocked at the end of battle.\"",
+            "cleanText": "give a Spirit you control the effect: \"[Curse] (When Attacks) This Spirit destroys an opposing Spirit that blocked at the end of battle.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "GRANT_ABILITY"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-036#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +2000 BP.",
+            "cleanText": "give a Spirit +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-038": {
+    "cardNumber": "SD01-038",
+    "name": "Emerald Boost",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-038#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, all your attacking Spirits gain +1000 BP for each reduction symbol that Spirit has."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, all your attacking Spirits gain +1000 BP for each reduction symbol that Spirit has.",
+            "cleanText": "all your attacking Spirits gain +1000 BP for each reduction symbol that Spirit has",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "targetGroup": "ATTACKING",
+              "family": null,
+              "target": "all_friendly",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-001": {
+    "cardNumber": "SD01-001",
+    "name": "Erimakilizard",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD01-034": {
+    "cardNumber": "SD01-034",
+    "name": "Extra Draw",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-034#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "MAIN",
+          "timingLabel": "Main",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": true,
+          "cleanBody": "Draw two cards. Then, reveal a card from your decktop. If that card is a Red Spirit card, add it to your Hand. Return any remaining card to the decktop."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "reveal a card from your decktop.",
+            "cleanText": "reveal a card from your decktop",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REVEAL_DECKTOP",
+              "count": 1
+            }
+          },
+          {
+            "rawText": "If that card is a Red Spirit card, add it to your Hand.",
+            "cleanText": "add it to your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If that card is a Red Spirit card",
+            "duration": null,
+            "op": {
+              "op": "ADD_TO_HAND"
+            }
+          },
+          {
+            "rawText": "Return any remaining card to the decktop.",
+            "cleanText": "Return any remaining card to the decktop",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RETURN_REMAINING_TO_DECK",
+              "position": "top"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-034#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "During this turn, give a Spirit +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give a Spirit +2000 BP.",
+            "cleanText": "give a Spirit +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-024": {
+    "cardNumber": "SD01-024",
+    "name": "The CentaurusSoldier Atrithr",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-024#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +3000 BP.",
+            "cleanText": "This Spirit gains +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-024#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit blocks an opposing 4000 BP or less Spirit, refresh this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit blocks an opposing 4000 BP or less Spirit, refresh this Spirit.",
+            "cleanText": "When this Spirit blocks an opposing 4000 BP or less Spirit, refresh this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-026": {
+    "cardNumber": "SD01-026",
+    "name": "The IronKnight Yggdrasill",
+    "keywords": [
+      {
+        "name": "Armor",
+        "parameter": "Red/White",
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 131
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-026#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return every 3000 BP or less Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return every 3000 BP or less Spirit to the Hand.",
+            "cleanText": "Return every 3000 BP or less Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "all": true,
+              "target": {
+                "side": "either",
+                "types": [
+                  "Spirit"
+                ],
+                "maxCost": null,
+                "maxBp": 3000
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-026#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give every White Spirit you control: \"[Armor: Red/White] - This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects.\""
+        },
+        "clauses": [
+          {
+            "rawText": "Give every White Spirit you control: \"[Armor: Red/White] - This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects.\"",
+            "cleanText": "Give every White Spirit you control: \"[Armor: Red/White] - This Spirit is unaffected by opposing Red/White Spirit/Nexus/Magic effects.\"",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "IMMUNITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-021": {
+    "cardNumber": "SD01-021",
+    "name": "The Sacred Gungnir",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-021#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Return every opposing Cost 1 or less Spirit to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "Return every opposing Cost 1 or less Spirit to the Hand.",
+            "cleanText": "Return every opposing Cost 1 or less Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "all": true,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "maxCost": 1,
+                "maxBp": null
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-008": {
+    "cardNumber": "SD01-008",
+    "name": "The ThunderEmperorDragon Siegwurm",
+    "keywords": [
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 16
+      },
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 125
+      },
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 147
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Clash",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent must block if possible."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent must block if possible.",
+            "cleanText": "The opponent must block if possible",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "FORCE_BLOCK",
+              "side": "opp"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-008#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Give every Spirit with [Awaken] you control: [Clash]."
+        },
+        "clauses": [
+          {
+            "rawText": "Give every Spirit with [Awaken] you control: [Clash].",
+            "cleanText": "Give every Spirit with [Awaken] you control: [Clash]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANT_ABILITY"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-022": {
+    "cardNumber": "SD01-022",
+    "name": "Glasscargot",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BATTLE-SPIRITS-A4739": {
+    "cardNumber": "BATTLE-SPIRITS-A4739",
+    "name": "Hacchidori",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD01-020": {
+    "cardNumber": "SD01-020",
+    "name": "Hitodem",
+    "keywords": [
+      {
+        "name": "Armor",
+        "parameter": "Red",
+        "wave": 1,
+        "hook": "armor",
+        "bracketed": true,
+        "index": 11
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-020#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Armor: Red",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color.",
+            "cleanText": "This Spirit is unaffected by opposing Spirit/Nexus/Magic effects of the stated color",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "IMMUNITY",
+              "immuneTo": "OPPOSING_EFFECTS"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-020#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BLOCKS",
+          "timingLabel": "When Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +2000 BP.",
+            "cleanText": "This Spirit gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "BATTLE-SPIRITS-A6123": {
+    "cardNumber": "BATTLE-SPIRITS-A6123",
+    "name": "Komoribrella",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD01-002": {
+    "cardNumber": "SD01-002",
+    "name": "Katanakasago",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "BATTLE-SPIRITS-A8034": {
+    "cardNumber": "BATTLE-SPIRITS-A8034",
+    "name": "Styrahorn",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD01-035": {
+    "cardNumber": "SD01-035",
+    "name": "Sudden Death Draw",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-035#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Draw a card. During this turn, give a Spirit +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "During this turn, give a Spirit +1000 BP.",
+            "cleanText": "give a Spirit +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": "target",
+              "duration": "DURING_THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-005": {
+    "cardNumber": "SD01-005",
+    "name": "Tartargar",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit can't be returned to the Hand from your Field by opposing Spirit/Nexus/Magic effects."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit can't be returned to the Hand from your Field by opposing Spirit/Nexus/Magic effects.",
+            "cleanText": "This Spirit can't be returned to the Hand from your Field by opposing Spirit/Nexus/Magic effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CANNOT_BE_BOUNCED",
+              "target": "SELF"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-025": {
+    "cardNumber": "SD01-025",
+    "name": "The ArmoredBeast Skoll",
+    "isVanilla": true,
+    "isFullySupported": true,
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "abilities": [],
+    "keywords": []
+  },
+  "SD01-023": {
+    "cardNumber": "SD01-023",
+    "name": "The Artifact Droiden",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-023#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your White Spirits gain +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your White Spirits gain +1000 BP.",
+            "cleanText": "All your White Spirits gain +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ],
+                "color": "White"
+              },
+              "all": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-027": {
+    "cardNumber": "SD01-027",
+    "name": "The Big Lavafalls",
+    "keywords": [
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 189
+      },
+      {
+        "name": "Clash",
+        "parameter": null,
+        "wave": 1,
+        "hook": "clash",
+        "bracketed": true,
+        "index": 198
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-027#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Every attacking Spirit you control gains +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "Every attacking Spirit you control gains +1000 BP.",
+            "cleanText": "Every attacking Spirit you control gains +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "self",
+                "state": "attacking"
+              },
+              "all": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-027#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by comparing BP with your Spirits with [Awaken]/[Clash], draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by comparing BP with your Spirits with [Awaken]/[Clash], draw a card.",
+            "cleanText": "When only the opposing Spirit is destroyed by comparing BP with your Spirits with [Awaken]/[Clash], draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-028": {
+    "cardNumber": "SD01-028",
+    "name": "The Cursed Shrine",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-028#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Purple Spirits gain +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Purple Spirits gain +1000 BP.",
+            "cleanText": "All your Purple Spirits gain +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "self",
+                "types": [
+                  "Spirit"
+                ],
+                "color": "Purple"
+              },
+              "all": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-028#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Opposing Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing Spirit is exhausted, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing Spirit is exhausted, draw a card.",
+            "cleanText": "When opposing Spirit is exhausted, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-012": {
+    "cardNumber": "SD01-012",
+    "name": "The DoubleHead Snake",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-012#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-012#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When only the opposing Spirit is destroyed by BP comparison, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When only the opposing Spirit is destroyed by BP comparison, draw a card.",
+            "cleanText": "When only the opposing Spirit is destroyed by BP comparison, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-030": {
+    "cardNumber": "SD01-030",
+    "name": "The Earth of Fertility",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-030#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each exhausted Spirit you control, your attacking and blocking Spirits gain +1000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "For each exhausted Spirit you control, your attacking and blocking Spirits gain +1000 BP.",
+            "cleanText": "For each exhausted Spirit you control, your attacking and blocking Spirits gain +1000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 1000,
+              "target": {
+                "side": "self",
+                "state": "attacking_or_blocking"
+              },
+              "forEach": "EXHAUSTED_SPIRIT_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-030#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "CORE_STEP",
+          "timingLabel": "Your Core Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You gain +1 core."
+        },
+        "clauses": [
+          {
+            "rawText": "You gain +1 core.",
+            "cleanText": "You gain +1 core",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-006": {
+    "cardNumber": "SD01-006",
+    "name": "The FineDragon Windrake",
+    "keywords": [
+      {
+        "name": "Awaken",
+        "parameter": null,
+        "wave": 1,
+        "hook": "awaken",
+        "bracketed": true,
+        "index": 24
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD01-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Awaken",
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "You can send any number of cores from Spirits you control to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "You can send any number of cores from Spirits you control to this Spirit.",
+            "cleanText": "You can send any number of cores from Spirits you control to this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "AWAKEN_CORE_MOVE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-017": {
+    "cardNumber": "SD01-017",
+    "name": "The HeavyArmoredBug Caterbarga",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-017#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Exhaust every Cost 1 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Exhaust every Cost 1 or less Spirit.",
+            "cleanText": "Exhaust every Cost 1 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "all": true,
+              "target": {
+                "types": [
+                  "Spirit"
+                ],
+                "maxCost": 1
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-013": {
+    "cardNumber": "SD01-013",
+    "name": "The HellFencer Berith",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-013#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "The opponent sends three cores from any Spirits they control to their Reserve. This effect can't bring the number of cores on opposing Spirits to 0."
+        },
+        "clauses": [
+          {
+            "rawText": "The opponent sends three cores from any Spirits they control to their Reserve.",
+            "cleanText": "The opponent sends three cores from any Spirits they control to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 3,
+              "minCoresRemaining": 1,
+              "from": {
+                "side": "opp",
+                "zone": "field",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "opp"
+            }
+          },
+          {
+            "rawText": "This effect can't bring the number of cores on opposing Spirits to 0.",
+            "cleanText": "This effect can't bring the number of cores on opposing Spirits to 0",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "RESTRICTION",
+              "restriction": "MIN_CORES_ONE",
+              "minCoresRemaining": 1
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-013#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send a core from any opposing Spirit to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Send a core from any opposing Spirit to their Reserve.",
+            "cleanText": "Send a core from any opposing Spirit to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "field",
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-011": {
+    "cardNumber": "SD01-011",
+    "name": "The HellFighter Balam",
+    "keywords": [
+      {
+        "name": "Curse",
+        "parameter": null,
+        "wave": 1,
+        "hook": "curse",
+        "bracketed": true,
+        "index": 16
+      }
+    ],
+    "abilities": [],
+    "compiledClausesCount": 0,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-018": {
+    "cardNumber": "SD01-018",
+    "name": "The Hunter Kingghepardo",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-018#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While your Life is three or less, this Spirit gains +3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While your Life is three or less, this Spirit gains +3000 BP.",
+            "cleanText": "this Spirit gains +3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While your Life is three or less",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 3000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD01-018#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_BATTLES",
+          "timingLabel": "When Battles",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put a core from the Void to your Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Put a core from the Void to your Reserve.",
+            "cleanText": "Put a core from the Void to your Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-004": {
+    "cardNumber": "SD01-004",
+    "name": "The Infantry Dragron",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit gains +2000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit gains +2000 BP.",
+            "cleanText": "This Spirit gains +2000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 2000,
+              "target": "self",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD01-033": {
+    "cardNumber": "SD01-033",
+    "name": "Victory Fire",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD01-033#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing 3000 BP or less Spirits. Or, destroy an opposing 3000 BP or less Spirit and an opposing Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing 3000 BP or less Spirits.",
+            "cleanText": "Destroy two opposing 3000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 2,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 3000
+                }
+              }
+            }
+          },
+          {
+            "rawText": "destroy an opposing 3000 BP or less Spirit and an opposing Nexus.",
+            "cleanText": "destroy an opposing 3000 BP or less Spirit and an opposing Nexus",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "bpLte": 3000
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  }
+};

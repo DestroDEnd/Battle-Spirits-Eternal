@@ -48,6 +48,10 @@ export function computeLevel(stack, state = null) {
     }
   }
 
+  if (stack.bonusLevel) {
+    currentLevel = Math.min(maxLevel, currentLevel + stack.bonusLevel);
+  }
+
   stack.lastActiveLevel = currentLevel;
   return currentLevel;
 }
@@ -69,6 +73,78 @@ export function computeEffectiveBP(state, stack) {
     const bLevels = brave.levels || {};
     const braveBp = (bLevels[lv] && bLevels[lv].bp) ? bLevels[lv].bp : (brave.bp || 0);
     bp += braveBp;
+  }
+
+  // Dynamic passive abilities on this stack (e.g. BS01-072, BS01-021, BS01-X04)
+  if (state && stack.top.compiledIr && Array.isArray(stack.top.compiledIr.abilities)) {
+    const currentLevel = computeLevel(stack, state);
+    for (const ab of stack.top.compiledIr.abilities) {
+      if (ab.header && ab.header.timing === 'PASSIVE') {
+        if (!ab.header.levels || ab.header.levels.includes(currentLevel)) {
+          for (const cl of ab.clauses || []) {
+            if (cl.op && cl.op.op === 'BP_BUFF') {
+              let mult = 1;
+              const fe = String(cl.op.forEach || '').toUpperCase();
+              if (fe === 'ALL_NEXUSES' || fe === 'NEXUS_COUNT') {
+                let nexCount = 0;
+                for (const s of ['player', 'opponent']) {
+                  const pl = (state.players && state.players[s]) ? state.players[s] : null;
+                  if (pl) {
+                    nexCount += (pl.field || []).filter(st => (st.top.type || '').includes('Nexus')).length;
+                    nexCount += (pl.nexus || []).length;
+                  }
+                }
+                mult = nexCount;
+              } else if (fe === 'CORE_IN_RESERVE' || fe === 'RESERVE_CORES') {
+                const owner = stack.owner || 'player';
+                const pl = (state.players && state.players[owner]) ? state.players[owner] : null;
+                mult = pl ? (pl.reserve.normal || 0) + (pl.reserve.soul ? 1 : 0) : 0;
+              } else if (fe === 'DRAGON_FAMILY_SPIRITS' || fe === 'DRAGON_FAMILY_COUNT') {
+                const owner = stack.owner || 'player';
+                const pl = (state.players && state.players[owner]) ? state.players[owner] : null;
+                mult = pl ? (pl.field || []).filter(st => {
+                  const fams = (Array.isArray(st.top.families) ? st.top.families : (st.top.family ? [st.top.family] : []));
+                  return fams.some(f => String(f).toLowerCase().includes('dragon'));
+                }).length : 0;
+              }
+              bp += (cl.op.amount || 1000) * mult;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Dynamic field continuous abilities from controller (e.g. SD01-030)
+  if (state && state.players) {
+    const controller = stack.owner || 'player';
+    const ctrlPlayer = state.players[controller];
+    if (ctrlPlayer) {
+      const allSources = [...(ctrlPlayer.field || []), ...(ctrlPlayer.nexus || []).map(n => ({ top: n, cores: { normal: 1, soul: 0 } }))];
+      for (const sourceSt of allSources) {
+        if (sourceSt && sourceSt.top && sourceSt.top.compiledIr) {
+          const lv = computeLevel(sourceSt, state);
+          for (const ab of sourceSt.top.compiledIr.abilities || []) {
+            if (ab.header && (ab.header.timing === 'ATTACK_STEP' || ab.header.timing === 'PASSIVE')) {
+              if (!ab.header.levels || ab.header.levels.includes(lv)) {
+                for (const cl of ab.clauses || []) {
+                  if (cl.op && cl.op.op === 'BP_BUFF' && cl.op.target && cl.op.target.state === 'attacking_or_blocking') {
+                    if (state.combat && (state.combat.attackerStackId === stack.id || state.combat.blockerStackId === stack.id)) {
+                      if (cl.op.forEach === 'EXHAUSTED_SPIRIT_COUNT') {
+                        const count = (ctrlPlayer.field || []).filter(st =>
+                          (st.state === 'EXHAUSTED' || st.state === 'HEAVY_EXHAUSTED') && (st.top.type || '').includes('Spirit')
+                        ).length;
+                        bp += (cl.op.amount || 1000) * count;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   // Apply active continuous modifiers in game state
@@ -243,8 +319,81 @@ export function computeFieldSymbols(state, playerSide) {
   return symbolTally;
 }
 
+export function getActiveStackKeywords(stack, state = null) {
+  if (!stack || !stack.top) return [];
+  const top = stack.top;
+  const keywords = Array.isArray(top.keywords) ? top.keywords : (top.compiledIr?.keywords || []);
+  if (!keywords || keywords.length === 0) return [];
+
+  const currentLevel = computeLevel(stack, state);
+  const isFlipped = Boolean(stack.isFlipped || stack.isReborn || stack.currentFace === 'B');
+
+  return keywords.filter(kw => {
+    // 1. Level check: If keyword has explicit levels, current level must match
+    if (kw.levelExplicit && Array.isArray(kw.levels) && kw.levels.length > 0) {
+      if (!kw.levels.includes(currentLevel)) {
+        return false;
+      }
+    }
+    // 2. Face check: If keyword is bound to Face B and stack is on Face A, or vice versa
+    if (kw.face) {
+      if (kw.face === 'B' && !isFlipped) return false;
+      if (kw.face === 'A' && isFlipped) return false;
+    }
+    return true;
+  });
+}
+
 export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   if (!stack || !sourceCard) return false;
+
+  // A card can never be immune to its own effect
+  if (stack.top && sourceCard && stack.top.id === sourceCard.id) {
+    return false;
+  }
+
+  // Determine controller/side of target stack and source card
+  let stackSide = stack.owner;
+  let sourceSide = sourceCard.owner;
+
+  if (state && state.players) {
+    if (state.players.player?.field?.some(st => st.id === stack.id)) {
+      stackSide = 'player';
+    } else if (state.players.opponent?.field?.some(st => st.id === stack.id)) {
+      stackSide = 'opponent';
+    }
+
+    if (state.players.player?.field?.some(st => st.top?.id === sourceCard.id) ||
+        state.players.player?.hand?.some(c => c.id === sourceCard.id) ||
+        state.players.player?.grave?.some(c => c.id === sourceCard.id)) {
+      sourceSide = 'player';
+    } else if (state.players.opponent?.field?.some(st => st.top?.id === sourceCard.id) ||
+               state.players.opponent?.hand?.some(c => c.id === sourceCard.id) ||
+               state.players.opponent?.grave?.some(c => c.id === sourceCard.id)) {
+      sourceSide = 'opponent';
+    }
+  }
+
+  // Immunity only protects against OPPOSING effects (Rule 8.3.1)
+  if (stackSide && sourceSide && stackSide === sourceSide) {
+    return false;
+  }
+
+  const activeKeywords = getActiveStackKeywords(stack, state);
+
+  // Official Bandai Fortress / True Fortress check:
+  // Refreshed Spirits are unaffected by opposing effects
+  if (stack.state === 'REFRESHED') {
+    const top = stack.top || {};
+    const eff = top.effect || '';
+    const hasActiveFortress = activeKeywords.length > 0
+      ? activeKeywords.some(k => k.name === 'True Fortress' || k.name === 'Fortress')
+      : (Boolean(top.keywords?.some(k => k.name === 'True Fortress' || k.name === 'Fortress')) || /\[True Fortress\]|\[Fortress\]/i.test(eff));
+
+    if (hasActiveFortress || stack.fortress || stack.trueFortress) {
+      return true;
+    }
+  }
 
   const sourceColors = computeColors(state, sourceCard).map(c => String(c).toLowerCase());
   const sourceType = String(sourceCard.type || 'Spirit').toLowerCase();
@@ -273,7 +422,25 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
     }
   }
 
-  // Check card text keywords (Armor, Heavy Armor, Ultra Armor, Silver Wheel, Barrage)
+  // Check Armor, Heavy Armor, Ultra Armor, Silver Wheel, Barrage
+  if (activeKeywords.length > 0) {
+    if (activeKeywords.some(k => (k.name === 'Armor' || k.name === 'Ultra Armor') && String(k.parameter || '').toLowerCase() === 'all')) {
+      return true;
+    }
+    for (const c of sourceColors) {
+      const low = c.toLowerCase();
+      const hasArmor = activeKeywords.some(k => {
+        const isArmorFamily = ['Armor', 'Heavy Armor', 'Ultra Armor', 'Silver Wheel', 'Barrage'].includes(k.name);
+        if (!isArmorFamily) return false;
+        const p = String(k.parameter || '').toLowerCase();
+        return p.includes(low) || p === 'all';
+      });
+      if (hasArmor) return true;
+    }
+    return false;
+  }
+
+  // Fallback to raw card text if keywords are not yet compiled on the card
   const effectText = stack.top?.effect || '';
   if (effectText.toLowerCase().includes('armor: all') || effectText.toLowerCase().includes('ultra armor: all')) {
     return true;
@@ -301,9 +468,10 @@ export function canAttack(state, stack) {
   // Pursuit: an EXHAUSTED spirit with Pursuit can attack (by heavy exhausting).
   // A HEAVY_EXHAUSTED spirit cannot attack.
   if (stack.state !== 'REFRESHED') {
-    const hasPursuit = (stack.top?.effect && stack.top.effect.toLowerCase().includes('pursuit')) ||
-      (stack.top?.compiledIr?.keywords?.some(k => k.name.toLowerCase() === 'pursuit'));
-    if (!hasPursuit || stack.state === 'HEAVY_EXHAUSTED') {
+    const activeKeywords = getActiveStackKeywords(stack, state);
+    const hasActivePursuit = activeKeywords.some(k => (typeof k === 'string' ? k : k?.name || '').toLowerCase() === 'pursuit');
+    const hasLegacyPursuit = (stack.top?.effect && stack.top.effect.toLowerCase().includes('pursuit') && activeKeywords.length === 0);
+    if ((!hasActivePursuit && !hasLegacyPursuit) || stack.state === 'HEAVY_EXHAUSTED') {
       return false;
     }
   }
@@ -338,6 +506,14 @@ export function canBlock(state, stack) {
     const hasKeyword = (stack.top?.effect && stack.top.effect.toLowerCase().includes(reqKeyword)) ||
       (stack.top?.compiledIr?.keywords?.some(k => k.name.toLowerCase() === reqKeyword));
     if (!hasKeyword) {
+      return false;
+    }
+  }
+
+  // Combat restriction: blocker must have at least N symbols (e.g. Grand Assault)
+  if (state.combat && state.combat.blockerMinSymbols) {
+    const symbols = computeSymbols(state, stack);
+    if (symbols.length < state.combat.blockerMinSymbols) {
       return false;
     }
   }

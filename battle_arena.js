@@ -336,10 +336,37 @@
   window.DuelState = DuelState;
 
   // Helper to parse levels
-  function parseLevels(levelsStr) {
-    if (!levelsStr || typeof levelsStr !== 'string') {
+  function parseLevels(levelsInput) {
+    if (!levelsInput) {
       return [{ level: 1, cores: 1, bp: 2000 }];
     }
+    if (Array.isArray(levelsInput)) {
+      if (!levelsInput.length) return [{ level: 1, cores: 1, bp: 2000 }];
+      return levelsInput.map(l => ({
+        level: Number(l.level) || 1,
+        cores: Number(l.cores !== undefined ? l.cores : (l.cost !== undefined ? l.cost : 1)),
+        bp: Number(l.bp) || 0
+      })).sort((a, b) => a.level - b.level);
+    }
+    if (typeof levelsInput === 'object') {
+      const entries = Object.entries(levelsInput);
+      if (!entries.length) return [{ level: 1, cores: 1, bp: 2000 }];
+      const parsed = entries.map(([k, v]) => {
+        let lvl = v && v.level !== undefined ? Number(v.level) : NaN;
+        if (isNaN(lvl)) {
+          const m = k.match(/\d+/);
+          lvl = m ? parseInt(m[0], 10) : 1;
+        }
+        const cores = Number(v && v.cost !== undefined ? v.cost : (v && v.cores !== undefined ? v.cores : 1));
+        const bp = Number(v && v.bp !== undefined ? v.bp : 0);
+        return { level: lvl, cores: isNaN(cores) ? 1 : cores, bp: isNaN(bp) ? 0 : bp };
+      }).sort((a, b) => a.level - b.level);
+      return parsed.length ? parsed : [{ level: 1, cores: 1, bp: 2000 }];
+    }
+    if (typeof levelsInput !== 'string') {
+      return [{ level: 1, cores: 1, bp: 2000 }];
+    }
+    const levelsStr = levelsInput;
     const results = [];
     const re = /Level\s*(\d+)[:\s]+(\d+)\s*cores?,\s*(\d+)\s*BP/gi;
     let m;
@@ -350,7 +377,7 @@
         bp: parseInt(m[3], 10)
       });
     }
-    if (results.length) return results;
+    if (results.length) return results.sort((a, b) => a.level - b.level);
 
     const reNoBp = /Level\s*(\d+)[:\s]+(\d+)\s*cores?/gi;
     while ((m = reNoBp.exec(levelsStr)) !== null) {
@@ -360,7 +387,29 @@
         bp: 0
       });
     }
-    return results.length ? results : [{ level: 1, cores: 0, bp: 0 }];
+    return results.length ? results.sort((a, b) => a.level - b.level) : [{ level: 1, cores: 0, bp: 0 }];
+  }
+
+  // ── ARENA API SERVICE PROVIDER FOR PER-CARD REGISTRY ──
+  function getArenaApi() {
+    return {
+      addLog: typeof addLog === 'function' ? addLog : console.log,
+      AudioFX: typeof AudioFX !== 'undefined' ? AudioFX : {},
+      renderDuelTable: typeof renderDuelTable === 'function' ? renderDuelTable : () => {},
+      renderPlayerHand: typeof renderPlayerHand === 'function' ? renderPlayerHand : () => {},
+      sendToTrash: typeof sendToTrash === 'function' ? sendToTrash : () => {},
+      handleDestroyedSpiritCores: typeof handleDestroyedSpiritCores === 'function' ? handleDestroyedSpiritCores : () => {},
+      recalculateSpiritBp: typeof recalculateSpiritBp === 'function' ? recalculateSpiritBp : () => {},
+      promptChoiceModal: typeof promptChoiceModal === 'function' ? promptChoiceModal : (opts, cb) => cb(0),
+      promptUniversalTargetModal: typeof promptUniversalTargetModal === 'function' ? promptUniversalTargetModal : (opts, cb) => cb([]),
+      promptScryRevealModal: typeof promptScryRevealModal === 'function' ? promptScryRevealModal : (opts, cb) => cb(null),
+      promptHandDiscardModal: typeof promptHandDiscardModal === 'function' ? promptHandDiscardModal : (c, s, max, f, u, cb) => cb([]),
+      askOptionalEffect: typeof askOptionalEffect === 'function' ? askOptionalEffect : (c, t, y, n) => { if (y) y(); },
+      showToast: typeof showToast === 'function' ? showToast : (m) => typeof addLog === 'function' && addLog(m, 'info'),
+      checkGameOver: typeof checkGameOver === 'function' ? checkGameOver : () => {},
+      executeWhenSummonedEffects: typeof executeWhenSummonedEffects === 'function' ? executeWhenSummonedEffects : () => {},
+      recycleSpiritCoresToReserve: typeof recycleSpiritCoresToReserve === 'function' ? recycleSpiritCoresToReserve : () => {}
+    };
   }
 
   // ── HEXAGONAL CORE RENDERING ENGINE (ANIME & GAME ACCURATE) ──
@@ -3164,16 +3213,87 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   // ── LOBBY RENDERER & CARD COUNTER HELPERS ──
+  function getCardEntries(cards) {
+    if (!cards) return [];
+    if (Array.isArray(cards)) {
+      return cards.map(c => {
+        if (Array.isArray(c)) return [c[0], typeof c[1] === 'number' ? c[1] : 1];
+        if (typeof c === 'object' && c !== null) return [c.name, typeof c.count === 'number' ? c.count : 1];
+        return [String(c), 1];
+      });
+    }
+    if (typeof cards === 'object') {
+      return Object.entries(cards).map(([k, v]) => [k, typeof v === 'number' ? v : (Array.isArray(v) ? (v[1] || 1) : 1)]);
+    }
+    return [];
+  }
+
+  function extractCardsListFromDeck(deck) {
+    if (!deck) return [];
+    const list = [];
+    if (Array.isArray(deck.validated_cards) && deck.validated_cards.length > 0) {
+      deck.validated_cards.forEach(c => {
+        const count = typeof c.count === 'number' ? c.count : 1;
+        for (let i = 0; i < count; i++) {
+          list.push({ ...c });
+        }
+      });
+      return list;
+    }
+    if (Array.isArray(deck.cards)) {
+      deck.cards.forEach(c => {
+        if (Array.isArray(c)) {
+          const name = c[0];
+          const count = typeof c[1] === 'number' ? c[1] : 1;
+          for (let i = 0; i < count; i++) {
+            list.push({ name, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+          }
+        } else if (typeof c === 'object' && c !== null) {
+          const count = typeof c.count === 'number' ? c.count : 1;
+          for (let i = 0; i < count; i++) {
+            list.push({ ...c, name: c.name || 'Unknown', cost: c.cost !== undefined ? c.cost : 2, type: c.type || 'Spirit', color: c.color || deck.color || 'Red', image_url: c.image_url || './assets/card_back.png' });
+          }
+        } else if (typeof c === 'string') {
+          list.push({ name: c, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+        }
+      });
+      return list;
+    }
+    if (deck.cards && typeof deck.cards === 'object') {
+      for (const [name, count] of Object.entries(deck.cards)) {
+        const num = typeof count === 'number' ? count : (Array.isArray(count) ? (count[1] || 1) : 1);
+        for (let i = 0; i < num; i++) {
+          list.push({ name, cost: 2, type: 'Spirit', color: deck.color || 'Red', image_url: './assets/card_back.png' });
+        }
+      }
+      return list;
+    }
+    return list;
+  }
+
   function getSafeDeckCardCount(d) {
     if (!d) return 0;
     if (Array.isArray(d.cards)) {
-      return d.cards.reduce((sum, c) => sum + (typeof c === 'object' && c ? (c.count || 1) : 1), 0);
+      return d.cards.reduce((sum, c) => {
+        if (Array.isArray(c)) return sum + (typeof c[1] === 'number' ? c[1] : 1);
+        if (typeof c === 'object' && c !== null) return sum + (typeof c.count === 'number' ? c.count : 1);
+        return sum + 1;
+      }, 0);
     }
     if (d.cards && typeof d.cards === 'object') {
-      return Object.values(d.cards).reduce((sum, c) => sum + (typeof c === 'number' ? c : (c?.count || 1)), 0);
+      return Object.values(d.cards).reduce((sum, c) => {
+        if (typeof c === 'number') return sum + c;
+        if (Array.isArray(c)) return sum + (typeof c[1] === 'number' ? c[1] : 1);
+        if (typeof c === 'object' && c !== null) return sum + (typeof c.count === 'number' ? c.count : 1);
+        return sum + 1;
+      }, 0);
     }
     if (Array.isArray(d.validated_cards)) {
-      return d.validated_cards.reduce((sum, c) => sum + (c.count || 1), 0);
+      return d.validated_cards.reduce((sum, c) => {
+        if (Array.isArray(c)) return sum + (typeof c[1] === 'number' ? c[1] : 1);
+        if (typeof c === 'object' && c !== null) return sum + (typeof c.count === 'number' ? c.count : 1);
+        return sum + 1;
+      }, 0);
     }
     return 0;
   }
@@ -3464,9 +3584,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     oDeckKey = oDeckKey || document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
 
     const userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
-    const pCount = userDeck ? Object.values(userDeck.cards || {}).reduce((a, b) => a + b, 0) : 0;
+    const stdDeck = DuelState.standardDecks[pDeckKey] || DuelState.standardDecks[pDeckKey?.replace(/^deck_std_|^std-/, '')];
+    let pCount = 0;
+    if (userDeck) {
+      pCount = getSafeDeckCardCount(userDeck);
+    } else if (stdDeck) {
+      pCount = getSafeDeckCardCount(stdDeck);
+    }
     if (pCount < 40) {
-      triggerToast(`⚠️ Cannot battle! "${userDeck ? userDeck.name : 'Deck'}" only has ${pCount}/40 cards. Battle Spirits requires at least 40 cards (no upper limit)!`, 'error');
+      triggerToast(`⚠️ Cannot battle! "${userDeck ? userDeck.name : (stdDeck ? stdDeck.name : 'Deck')}" only has ${pCount}/40 cards. Battle Spirits requires at least 40 cards (no upper limit)!`, 'error');
       return;
     }
 
@@ -3644,7 +3770,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       };
     }
 
-    const stdDeck = DuelState.standardDecks[pDeckKey];
+    const stdDeck = DuelState.standardDecks[pDeckKey] || DuelState.standardDecks[pDeckKey?.replace(/^deck_std_|^std-/, '')];
     let pCount = 0;
     if (userDeck) {
       pCount = getSafeDeckCardCount(userDeck);
@@ -3718,62 +3844,66 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       pColor = userDeck.color || 'Red';
 
       // If standard deck with no overrides, load standard deck cards
-      if (userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey] && (!userDeck.cards || Object.keys(userDeck.cards).length === 0)) {
+      if (userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey] && (!userDeck.cards || getSafeDeckCardCount(userDeck) === 0)) {
         const std = DuelState.standardDecks[userDeck.standardKey];
-        pName = std.name;
-        pColor = std.color;
-        (std.validated_cards || []).forEach(c => {
-          for (let i = 0; i < c.count; i++) {
-            pCards.push({ ...c });
+        pName = std.name || userDeck.name;
+        pColor = std.color || userDeck.color || 'Red';
+        pCards = extractCardsListFromDeck(std);
+      } else if (userDeck.cards) {
+        const entries = getCardEntries(userDeck.cards);
+        if (entries.length > 0) {
+          const names = entries.map(([name]) => name);
+          if (typeof window !== 'undefined' && window.location && window.location.origin) {
+            try {
+              const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
+              const batchData = await res.json();
+              for (const [name, count] of entries) {
+                let cInfo = batchData[name] || batchData[name.toLowerCase()];
+                if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+                  cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+                }
+                if (!cInfo && typeof window !== 'undefined' && window.WasmDB && window.WasmDB.getCardByName) {
+                  cInfo = window.WasmDB.getCardByName(name);
+                }
+                if (!cInfo) {
+                  cInfo = { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red', image_url: './assets/card_back.png' };
+                }
+                if (!cInfo.image_url) {
+                  cInfo.image_url = './assets/card_back.png';
+                }
+                for (let i = 0; i < count; i++) {
+                  pCards.push({ ...cInfo });
+                }
+              }
+            } catch (e) {
+              console.warn('Failed to load card batch for user deck:', e);
+            }
           }
-        });
-      } else if (userDeck.cards && Object.keys(userDeck.cards).length > 0) {
-        const names = Object.keys(userDeck.cards);
-        if (typeof window !== 'undefined' && window.location && window.location.origin) {
-          try {
-            const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
-            const batchData = await res.json();
-            for (const [name, count] of Object.entries(userDeck.cards)) {
-              let cInfo = batchData[name] || batchData[name.toLowerCase()];
-              if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
-                cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
-              }
-              if (!cInfo && typeof window !== 'undefined' && window.WasmDB && window.WasmDB.getCardByName) {
-                cInfo = window.WasmDB.getCardByName(name);
-              }
-              if (!cInfo) {
-                cInfo = { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red', image_url: './assets/card_back.png' };
-              }
-              if (!cInfo.image_url) {
-                cInfo.image_url = './assets/card_back.png';
-              }
+          if (!pCards.length) {
+            for (const [name, count] of entries) {
+              const cInfo = { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red', image_url: './assets/card_back.png' };
               for (let i = 0; i < count; i++) {
                 pCards.push({ ...cInfo });
               }
             }
-          } catch (e) {
-            console.warn('Failed to load card batch for user deck:', e);
           }
         }
-        if (!pCards.length) {
-          for (const [name, count] of Object.entries(userDeck.cards)) {
-            const cInfo = { name, cost: 2, type: 'Spirit', color: userDeck.color || 'Red' };
-            for (let i = 0; i < count; i++) {
-              pCards.push({ ...cInfo });
-            }
-          }
-        }
+      }
+
+      if (!pCards.length && userDeck) {
+        pCards = extractCardsListFromDeck(userDeck);
       }
     }
 
     if (!pCards.length && (pDeckKey === 'custom' || pDeckKey === 'deck_builder_active')) {
       try {
         const saved = JSON.parse(safeGetStorage('bs_deck', null) || safeGetStorage('battle_spirits_deck_v1', '{}') || '{}');
-        const names = Object.keys(saved);
-        if (names.length) {
+        const entries = getCardEntries(saved);
+        if (entries.length) {
+          const names = entries.map(([name]) => name);
           const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
           const batchData = await res.json();
-          for (const [name, count] of Object.entries(saved)) {
+          for (const [name, count] of entries) {
             let cInfo = batchData[name] || batchData[name.toLowerCase()];
             if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
               cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
@@ -3799,15 +3929,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     if (!pCards.length) {
-      const std = DuelState.standardDecks[pDeckKey] || DuelState.standardDecks['red'];
+      const std = DuelState.standardDecks[pDeckKey] || DuelState.standardDecks[pDeckKey?.replace(/^deck_std_|^std-/, '')] || DuelState.standardDecks['red'];
       if (std) {
         pName = std.name;
         pColor = std.color;
-        (std.validated_cards || []).forEach(c => {
-          for (let i = 0; i < c.count; i++) {
-            pCards.push({ ...c });
-          }
-        });
+        pCards = extractCardsListFromDeck(std);
       }
     }
 
@@ -3815,15 +3941,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let oCards = [];
     let oName = 'Seven Shoguns Control';
     let oColor = 'Purple';
-    const oStd = DuelState.standardDecks[oDeckKey] || DuelState.standardDecks['purple'];
+    const oStd = DuelState.standardDecks[oDeckKey] || DuelState.standardDecks[oDeckKey?.replace(/^deck_std_|^std-/, '')] || DuelState.standardDecks['purple'];
     if (oStd) {
       oName = oStd.name;
       oColor = oStd.color;
-      (oStd.validated_cards || []).forEach(c => {
-        for (let i = 0; i < c.count; i++) {
-          oCards.push({ ...c });
-        }
-      });
+      oCards = extractCardsListFromDeck(oStd);
     }
 
     // Prepare card instances with UIDs and parsed levels
@@ -3853,8 +3975,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           effect: c.effect || '',
           summary: c.summary || '',
           currentCores: 0,
-          currentLevel: 1,
-          currentBp: pLevels[0]?.bp || 2000,
+          currentLevel: (pLevels && pLevels[0] && pLevels[0].level) ? pLevels[0].level : 1,
+          currentBp: (pLevels && pLevels[0] && pLevels[0].bp !== undefined) ? pLevels[0].bp : 2000,
           isExhausted: false,
           hasAttacked: false,
           isContractPartner: false,
@@ -4215,8 +4337,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // Render Opponent Field Spirits (Clean battle line)
     const oFieldEl = document.getElementById('opponentField');
     if (oFieldEl) {
-      const oFieldHtml = DuelState.opponent.field.map(s => renderFieldSpirit(s, 'opponent')).join('');
-      if (!DuelState.opponent.field.length) {
+      const oFieldHtml = DuelState.opponent.field.filter(s => !s.isSoulState).map(s => renderFieldSpirit(s, 'opponent')).join('');
+      if (!DuelState.opponent.field.filter(s => !s.isSoulState).length) {
         oFieldEl.innerHTML = `<div class="field-empty-prompt">No Spirits on Opponent's Field</div>`;
       } else {
         oFieldEl.innerHTML = oFieldHtml;
@@ -4239,8 +4361,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // Render Player Field Spirits (Clean battle line)
     const pFieldEl = document.getElementById('playerField');
     if (pFieldEl) {
-      const pFieldHtml = DuelState.player.field.map(s => renderFieldSpirit(s, 'player')).join('');
-      if (!DuelState.player.field.length) {
+      const pFieldHtml = DuelState.player.field.filter(s => !s.isSoulState).map(s => renderFieldSpirit(s, 'player')).join('');
+      if (!DuelState.player.field.filter(s => !s.isSoulState).length) {
         pFieldEl.innerHTML = `<div class="field-empty-prompt">Your Battle Line is empty. Summon a Spirit from your hand below!</div>`;
       } else {
         pFieldEl.innerHTML = pFieldHtml;
@@ -7693,6 +7815,17 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function executeWhenSummonedEffects(spirit, side = 'player') {
+    if (!spirit) return;
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && spirit.card_number && pRegistry.has(spirit.card_number, 'WHEN_SUMMONED')) {
+      pRegistry.execute(spirit.card_number, 'WHEN_SUMMONED', {
+        card: spirit,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      return;
+    }
     // The Ruler of FourDemonLords Lord-Javad (SD65-003):
     if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
       const isLordJavad = (spirit.name || '').includes('Lord-Javad');
@@ -7885,6 +8018,17 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function executeWhenAttacksEffects(attacker, side = 'player') {
+    if (!attacker) return;
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && attacker.card_number && pRegistry.has(attacker.card_number, 'WHEN_ATTACKS')) {
+      pRegistry.execute(attacker.card_number, 'WHEN_ATTACKS', {
+        card: attacker,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      return;
+    }
     // The Four Towers of Limbo trigger on Evil God Ultimate attack:
     const attackingSideNexuses = (side === 'player' ? DuelState.player.nexus : DuelState.opponent.nexus) || [];
     const limbo = attackingSideNexuses.find(n => (n.name || '').includes('Four Towers of Limbo'));
@@ -8764,6 +8908,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       card.currentCores = 0;
       card.currentBp = 0;
       target.field = target.field.filter(s => s.uid !== card.uid);
+      target.hand = (target.hand || []).filter(h => h.uid !== card.uid);
       if (!target.soulStateCards.some(c => c.uid === card.uid)) {
         target.soulStateCards.push(card);
       }
@@ -9360,6 +9505,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeWhenAdventsEffects(spirit, side = 'player') {
     if (!spirit || !spirit.effect) return;
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && spirit.card_number && pRegistry.has(spirit.card_number, 'WHEN_ADVENTS')) {
+      pRegistry.execute(spirit.card_number, 'WHEN_ADVENTS', {
+        card: spirit,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      return;
+    }
     // The Ruler of FourDemonLords Lord-Javad (SD65-003):
     if (/Lord-Javad/i.test(spirit.name || '') || /By discarding a card from your Hand,\s*draw two cards/i.test(spirit.effect || '')) {
       const isLordJavad = (spirit.name || '').includes('Lord-Javad');
@@ -10279,6 +10434,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const isCombat = (currentPhase === 'ATTACK') || (DuelState.combatEvent !== null);
     const isFlashTiming = (forcedEffectType === 'flash') || (!forcedEffectType && isCombat);
     const activeEffectText = extractMagicTimingBlock(card.effect || '', currentPhase, 'hand', forcedEffectType);
+
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    const trig = isFlashTiming ? 'FLASH' : 'MAIN';
+    if (pRegistry && card && card.card_number && pRegistry.has(card.card_number, trig)) {
+      pRegistry.execute(card.card_number, trig, {
+        card,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi(),
+        contextAttacker,
+        targetSpiritUid,
+        forcedEffectType
+      });
+      return;
+    }
 
     if (name.includes('Evil Draw')) {
       if (isFlashTiming) {
@@ -11480,7 +11650,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       // First, resolve the Burst Effect itself!
       let burstEffectResolved = false;
 
-      if ((burstCard.name || '').includes('Renegada') || /summon up to two Cost 6 or less Purple Spirit cards from your Trash/i.test(burstCard.effect || '')) {
+      const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+      if (pRegistry && burstCard.card_number && pRegistry.has(burstCard.card_number, 'BURST')) {
+        pRegistry.execute(burstCard.card_number, 'BURST', {
+          card: burstCard,
+          side,
+          duelState: DuelState,
+          arenaApi: getArenaApi()
+        });
+        burstEffectResolved = true;
+      } else if ((burstCard.name || '').includes('Renegada') || /summon up to two Cost 6 or less Purple Spirit cards from your Trash/i.test(burstCard.effect || '')) {
         // Renegada Burst Effect:
         // "You can summon up to two Cost 6 or less Purple Spirit cards from your Trash, paying one cost each, and during this turn, treat their LV1 cost as 0. Every Spirit summoned by this effect is destroyed during this turn's End Step."
         const trash = targetState.trashCards || [];
@@ -11580,6 +11759,17 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       setTimeout(() => AudioFX.coreChime(), 180);
       const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
       const burstText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'burst');
+      const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+      if (pRegistry && burstCard.card_number && pRegistry.has(burstCard.card_number, 'BURST')) {
+        pRegistry.execute(burstCard.card_number, 'BURST', {
+          card: burstCard,
+          side,
+          duelState: DuelState,
+          arenaApi: getArenaApi()
+        });
+        sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);
+        return;
+      }
       executeAbilityActions(burstText, burstCard, side, 'BURST');
       executeUniversalCardEffect(burstCard, side, 'BURST');
       sendToTrash(burstCard, side, `${isPlayer ? 'Player' : 'Opponent'} Burst Magic Activated`);

@@ -351,6 +351,12 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
   } else if (fromZone === 'field') {
     const stack = fromPlayer.field.find(st => st.id === from.stackId);
     if (!stack) return false;
+    const currentTotalCores = (stack.cores.normal || 0) + (stack.cores.soul ? 1 : 0);
+    if (typeof options.minCoresRemaining === 'number') {
+      if (currentTotalCores - count < options.minCoresRemaining) {
+        return false;
+      }
+    }
     stack.lastActiveLevel = computeLevel(stack);
     if (isSoul) {
       if (stack.cores.soul < 1) return false;

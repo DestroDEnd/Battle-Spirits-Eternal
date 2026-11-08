@@ -1,1 +1,1821 @@
-{"SD59-001":{"cardNumber":"SD59-001","name":"Camelot Queen","keywords":[],"abilities":[{"id":"SD59-001#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost."},"clauses":[{"rawText":"When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost.","cleanText":"When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"SD59-001#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you have five counters or less, your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks."},"clauses":[{"rawText":"If you have five counters or less, your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks.","cleanText":"your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks","link":null,"isOptional":false,"isCost":false,"condition":"If you have five counters or less","duration":null,"op":{"op":"COUNT_OPERATION"}}],"unsupported":[]},{"id":"SD59-001#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"START_OF_ATTACK_STEP","timingLabel":"Start of Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"If you have a Mirage set, draw two cards."},"clauses":[{"rawText":"If you have a Mirage set, draw two cards.","cleanText":"draw two cards","link":null,"isOptional":false,"isCost":false,"condition":"If you have a Mirage set","duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-007":{"cardNumber":"SD59-007","name":"Dragoon Drive","keywords":[{"name":"Mirage","parameter":"Cost 2 ([Purple Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"SD59-007#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Purple Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"SD59-007#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand. When you've done so, draw a card."},"clauses":[{"rawText":"When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand.","cleanText":"When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","count":1,"upTo":false,"filter":null,"chooser":"self"}},{"rawText":"draw a card.","cleanText":"draw a card","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD59-007#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Send two cores from the opposing Field to the Reserve."},"clauses":[{"rawText":"Send two cores from the opposing Field to the Reserve.","cleanText":"Send two cores from the opposing Field to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"field","side":"opp"},"to":{"zone":"reserve","side":"opp"},"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-TX01":{"cardNumber":"SD59-TX01","name":"The DragonKnightKing Swordius-Dragoon-Koenig","keywords":[],"abilities":[{"id":"SD59-TX01#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[+1]","clauses":[],"unsupported":[]},{"id":"SD59-TX01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_REBORN","timingLabel":"When Reborn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can refresh this Spirit. Then, you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost."},"clauses":[{"rawText":"You can refresh this Spirit.","cleanText":"You can refresh this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}},{"rawText":"you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost.","cleanText":"you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"SD59-TX01#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing Spirit/Ultimate with three cores or less on it. If you have three counters or more, instead, destroy an opposing Spirit/Ultimate with five cores or less on it."},"clauses":[{"rawText":"Destroy an opposing Spirit/Ultimate with three cores or less on it.","cleanText":"Destroy an opposing Spirit/Ultimate with three cores or less on it","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"If you have three counters or more, instead, destroy an opposing Spirit/Ultimate with five cores or less on it.","cleanText":"destroy an opposing Spirit/Ultimate with five cores or less on it","link":"instead","isOptional":false,"isCost":false,"condition":"If you have three counters or more","duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-006":{"cardNumber":"SD59-006","name":"Camelot Alive","keywords":[{"name":"Mirage","parameter":"Cost 2","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"SD59-006#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost 2"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"SD59-006#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives."},"clauses":[{"rawText":"Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives.","cleanText":"Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"SD59-006#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost."},"clauses":[{"rawText":"Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost.","cleanText":"Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-004":{"cardNumber":"SD59-004","name":"DragonKnight's Designated Wyvern","keywords":[{"name":"Brave","parameter":"Cost 4 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Rebirth","parameter":null,"wave":2,"hook":"rebirth","bracketed":true,"index":188}],"abilities":[{"id":"SD59-004#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 4 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"SD59-004#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card."},"clauses":[{"rawText":"Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card.","cleanText":"Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD59-004#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Brave"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Rebirth3","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave."},"clauses":[{"rawText":"When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave.","cleanText":"When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-005":{"cardNumber":"SD59-005","name":"Kakumei Mirage","keywords":[{"name":"Mirage","parameter":"Cost 4 ([Purple Core","wave":2,"hook":"mirage","bracketed":true,"index":0}],"abilities":[{"id":"SD59-005#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Mirage: Cost ([Purple Core][Purple Core][Purple Core])"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"clauses":[],"unsupported":[]},{"id":"SD59-005#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["During Set"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control."},"clauses":[{"rawText":"When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control.","cleanText":"When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":{"side":"either"}}}],"unsupported":[]},{"id":"SD59-005#a2","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw a card."},"clauses":[{"rawText":"Draw a card.","cleanText":"Draw a card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}}],"unsupported":[]},{"id":"SD59-005#a3","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost."},"clauses":[{"rawText":"When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost.","cleanText":"When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-CP01":{"cardNumber":"SD59-CP01","name":"Mauve School Uniform Gallet Revolt","keywords":[{"name":"Core Charge","parameter":null,"wave":3,"hook":"core_charge","bracketed":true,"index":284},{"name":"Core Charge","parameter":null,"wave":3,"hook":"core_charge","bracketed":true,"index":872},{"name":"Grand Skill","parameter":"3","wave":3,"hook":"grand_skill","bracketed":true,"index":888}],"abilities":[{"id":"SD59-CP01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["Grandwalker Nexus"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."},"clauses":[{"rawText":"This Nexus can only be affected by effects that target Grandwalker Nexuses.","cleanText":"This Nexus can only be affected by effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_PROTECTION"}},{"rawText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.","cleanText":"Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"GRANDWALKER_CORE_RULE"}}],"unsupported":[]},{"id":"SD59-CP01#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Core Charge","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(Evil Shadow & Cost 3 or more, \"Bladra\")"},"clauses":[{"rawText":"(Evil Shadow & Cost 3 or more, \"Bladra\")","cleanText":"(Evil Shadow & Cost 3 or more, \"Bladra\")","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"COST_MODIFIER"}}],"unsupported":[]},{"id":"SD59-CP01#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.","cleanText":"When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"SD59-CP01#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus."},"clauses":[{"rawText":"◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.","cleanText":"When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","count":3,"source":"DECK_TOP","destination":"TRASH"}},{"rawText":"For each target card among them, place one core from the Void onto this Nexus.","cleanText":"For each target card among them, place one core from the Void onto this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CORE_CHARGE"}}],"unsupported":[]},{"id":"SD59-CP01#a4","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_DEPLOYED","timingLabel":"When Deployed","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Put two cores from the Void to this Nexus. Or, summon a Purple Cost 5 or less “Knight\"/“Camelot”-named card from your Trash, without paying the cost. This effect does not trigger [Core Charge]."},"clauses":[{"rawText":"Put two cores from the Void to this Nexus.","cleanText":"Put two cores from the Void to this Nexus","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"void"},"to":{"zone":"field","target":"self"}}},{"rawText":"summon a Purple Cost 5 or less \"Knight\"/\"Camelot\"-named card from your Trash, without paying the cost.","cleanText":"summon a Purple Cost 5 or less \"Knight\"/\"Camelot\"-named card from your Trash, without paying the cost","link":"or","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"This effect does not trigger [Core Charge].","cleanText":"This effect does not trigger [Core Charge]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"SD59-CP01#a5","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":["Grand Skill: 3"],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve."},"clauses":[{"rawText":"(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve.","cleanText":"(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":10,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-003":{"cardNumber":"SD59-003","name":"The DragonKnight Grothmad","keywords":[{"name":"Burst","parameter":"After an opposing Spirit/Brave's (When Summoned) effect resolves","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"SD59-003#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_OPPONENT_SUMMON_EFFECT","isFlash":false,"isMain":false,"cleanBody":"Send three cores from an opposing Spirit/Ultimate to the Trash. After this effect resolves, summon this card without paying the cost."},"clauses":[{"rawText":"Send three cores from an opposing Spirit/Ultimate to the Trash.","cleanText":"Send three cores from an opposing Spirit/Ultimate to the Trash","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":3,"from":{"zone":"field","side":"opp","types":["Spirit","Ultimate"]},"to":{"zone":"trash","side":"opp"},"chooser":"self"}},{"rawText":"summon this card without paying the cost.","cleanText":"summon this card without paying the cost","link":"afterResolves","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}}],"unsupported":[]},{"id":"SD59-003#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate."},"clauses":[{"rawText":"All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate.","cleanText":"All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"CAN_ATTACK_EXHAUSTED"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-002":{"cardNumber":"SD59-002","name":"The DragonKnight Halverdice","keywords":[{"name":"Rebirth","parameter":null,"wave":2,"hook":"rebirth","bracketed":true,"index":210}],"abilities":[{"id":"SD59-002#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"you can discard three cards from your decktop. Then, you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it."},"clauses":[{"rawText":"you can discard three cards from your decktop.","cleanText":"you can discard three cards from your decktop","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}},{"rawText":"you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it.","cleanText":"you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"SD59-002#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Rebirth3","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When this Spirit attacks, if you have a set card, you can flip this Spirit."},"clauses":[{"rawText":"When this Spirit attacks, if you have a set card, you can flip this Spirit.","cleanText":"When this Spirit attacks, if you have a set card, you can flip this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REBIRTH_FLIP"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-002-A9533":{"cardNumber":"SD59-002-A9533","name":"The DragonKnight Halverdice -Dragonized Crystal-","keywords":[],"abilities":[{"id":"SD59-002-A9533#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[+1]","clauses":[],"unsupported":[]},{"id":"SD59-002-A9533#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_REBORN","timingLabel":"When Reborn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can refresh this Spirit. Then, you can send cores from an opposing Spirit to the Reserve until only one core remains."},"clauses":[{"rawText":"You can refresh this Spirit.","cleanText":"You can refresh this Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}},{"rawText":"you can send cores from an opposing Spirit to the Reserve until only one core remains.","cleanText":"you can send cores from an opposing Spirit to the Reserve until only one core remains","link":"then","isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]},{"id":"SD59-002-A9533#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"you can send two cores from an opposing Spirit to the Reserve. When this effect depletes, send an opposing Life to the Reserve."},"clauses":[{"rawText":"you can send two cores from an opposing Spirit to the Reserve.","cleanText":"you can send two cores from an opposing Spirit to the Reserve","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"field","side":"opp","types":["Spirit"]},"to":{"zone":"reserve","side":"opp"},"chooser":"self"}},{"rawText":"When this effect depletes, send an opposing Life to the Reserve.","cleanText":"When this effect depletes, send an opposing Life to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-004-A9537":{"cardNumber":"SD59-004-A9537","name":"The DragonKnight Rivalzeed","keywords":[],"abilities":[{"id":"SD59-004-A9537#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[+1]","clauses":[],"unsupported":[]},{"id":"SD59-004-A9537#a1","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_REBORN","timingLabel":"When Reborn","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw two cards. Then, put a core, besides [Soul Core], from your Trash to this Spirit."},"clauses":[{"rawText":"Draw two cards.","cleanText":"Draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}},{"rawText":"put a core, besides [Soul Core], from your Trash to this Spirit.","cleanText":"put a core, besides [Soul Core], from your Trash to this Spirit","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE"}}],"unsupported":[]},{"id":"SD59-004-A9537#a2","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"you can send two cores from the opposing Field to the Reserve."},"clauses":[{"rawText":"you can send two cores from the opposing Field to the Reserve.","cleanText":"you can send two cores from the opposing Field to the Reserve","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":2,"from":{"zone":"field","side":"opp"},"to":{"zone":"reserve","side":"opp"},"chooser":"self"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"SD59-X01":{"cardNumber":"SD59-X01","name":"The HolyGrailDarkKnight Galahad","keywords":[],"abilities":[{"id":"SD59-X01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your Purple “Knight”/“Camelot”-named Spirit is blocked, send an opposing Life to the Reserve, and destroy the blocking Spirit/Ultimate with three cores or less on it."},"clauses":[{"rawText":"When your Purple \"Knight\"/\"Camelot\"-named Spirit is blocked, send an opposing Life to the Reserve","cleanText":"When your Purple \"Knight\"/\"Camelot\"-named Spirit is blocked, send an opposing Life to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"destroy the blocking Spirit/Ultimate with three cores or less on it.","cleanText":"destroy the blocking Spirit/Ultimate with three cores or less on it","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]},{"id":"SD59-X01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can return a Purple-only card with Mirage effect from your Trash to the Hand. When you've done so, send an opposing Life to the Reserve."},"clauses":[{"rawText":"You can return a Purple-only card with Mirage effect from your Trash to the Hand.","cleanText":"You can return a Purple-only card with Mirage effect from your Trash to the Hand","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"send an opposing Life to the Reserve.","cleanText":"send an opposing Life to the Reserve","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "SD59-001": {
+    "cardNumber": "SD59-001",
+    "name": "Camelot Queen",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD59-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost.",
+            "cleanText": "When your \"Swordius-Dragoon\"-named Spirit is summoned, you can summon this card from the Trash, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-001#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you have five counters or less, your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks."
+        },
+        "clauses": [
+          {
+            "rawText": "If you have five counters or less, your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks.",
+            "cleanText": "your exactly-named \"The DragonKnight Swordius-Dragoon\" can flip when it attacks",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have five counters or less",
+            "duration": null,
+            "op": {
+              "op": "COUNT_OPERATION"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-001#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_OF_ATTACK_STEP",
+          "timingLabel": "Start of Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you have a Mirage set, draw two cards."
+        },
+        "clauses": [
+          {
+            "rawText": "If you have a Mirage set, draw two cards.",
+            "cleanText": "draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have a Mirage set",
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-007": {
+    "cardNumber": "SD59-007",
+    "name": "Dragoon Drive",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 2 ([Purple Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-007#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Purple Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand. When you've done so, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand.",
+            "cleanText": "When your Purple \"Knight\"-named Spirit is summoned from Hand, you can discard a card from your Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "count": 1,
+              "upTo": false,
+              "filter": null,
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-007#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Send two cores from the opposing Field to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Send two cores from the opposing Field to the Reserve.",
+            "cleanText": "Send two cores from the opposing Field to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "field",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-TX01": {
+    "cardNumber": "SD59-TX01",
+    "name": "The DragonKnightKing Swordius-Dragoon-Koenig",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD59-TX01#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[+1]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-TX01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_REBORN",
+          "timingLabel": "When Reborn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can refresh this Spirit. Then, you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can refresh this Spirit.",
+            "cleanText": "You can refresh this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          },
+          {
+            "rawText": "you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost.",
+            "cleanText": "you can summon a Purple \"Knight\"-named non-Rebirth card from your Trash, without paying the cost",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-TX01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing Spirit/Ultimate with three cores or less on it. If you have three counters or more, instead, destroy an opposing Spirit/Ultimate with five cores or less on it."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing Spirit/Ultimate with three cores or less on it.",
+            "cleanText": "Destroy an opposing Spirit/Ultimate with three cores or less on it",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "If you have three counters or more, instead, destroy an opposing Spirit/Ultimate with five cores or less on it.",
+            "cleanText": "destroy an opposing Spirit/Ultimate with five cores or less on it",
+            "link": "instead",
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you have three counters or more",
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-006": {
+    "cardNumber": "SD59-006",
+    "name": "Camelot Alive",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 2",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost 2"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-006#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives."
+        },
+        "clauses": [
+          {
+            "rawText": "Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives.",
+            "cleanText": "Besides Grandwalker Nexuses and Grandstone Nexuses, while you have a total of 11 or less cores in your Life/Field/Reserve/Trash, neither player's deck can be discarded, nor can Cost 4 or more Spirits/Ultimates/Nexuses reduce the Lives",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-006#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost.",
+            "cleanText": "Summon a Purple Cost 4 or less \"Knight\"/\"Camelot\"-named Spirit card from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-004": {
+    "cardNumber": "SD59-004",
+    "name": "DragonKnight's Designated Wyvern",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      },
+      {
+        "name": "Rebirth",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rebirth",
+        "bracketed": true,
+        "index": 188
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-004#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-004#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card.",
+            "cleanText": "Send a core from the opposing Field to the Reserve, and when any Spirit/Ultimate is depleted, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-004#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Brave"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Rebirth3",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave.",
+            "cleanText": "When this Spirit would leave the Field due to the opponent, you can separate and flip this Brave",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-005": {
+    "cardNumber": "SD59-005",
+    "name": "Kakumei Mirage",
+    "keywords": [
+      {
+        "name": "Mirage",
+        "parameter": "Cost 4 ([Purple Core",
+        "wave": 2,
+        "hook": "mirage",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Mirage: Cost ([Purple Core][Purple Core][Purple Core])"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "During Set"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control."
+        },
+        "clauses": [
+          {
+            "rawText": "When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control.",
+            "cleanText": "When opposing cores are sent to the Reserve, you can refresh a Cost 6 or more \"DragonKnight\"/\"DarkKnight\"/\"DragonRideEmperor\"-named Spirit you control",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-005#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-005#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost.",
+            "cleanText": "When this Nexus would leave the Field due to opposing effects, by discarding one of your Mirage, set this without paying the cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-CP01": {
+    "cardNumber": "SD59-CP01",
+    "name": "Mauve School Uniform Gallet Revolt",
+    "keywords": [
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 284
+      },
+      {
+        "name": "Core Charge",
+        "parameter": null,
+        "wave": 3,
+        "hook": "core_charge",
+        "bracketed": true,
+        "index": 872
+      },
+      {
+        "name": "Grand Skill",
+        "parameter": "3",
+        "wave": 3,
+        "hook": "grand_skill",
+        "bracketed": true,
+        "index": 888
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-CP01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "Grandwalker Nexus"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Nexus can only be affected by effects that target Grandwalker Nexuses. Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses."
+        },
+        "clauses": [
+          {
+            "rawText": "This Nexus can only be affected by effects that target Grandwalker Nexuses.",
+            "cleanText": "This Nexus can only be affected by effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_PROTECTION"
+            }
+          },
+          {
+            "rawText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses.",
+            "cleanText": "Cores can only be placed on this Nexus via Core Charge or effects that target Grandwalker Nexuses, and cannot be moved from this Nexus except via effects that target Grandwalker Nexuses",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "GRANDWALKER_CORE_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-CP01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Core Charge",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(Evil Shadow & Cost 3 or more, \"Bladra\")"
+        },
+        "clauses": [
+          {
+            "rawText": "(Evil Shadow & Cost 3 or more, \"Bladra\")",
+            "cleanText": "(Evil Shadow & Cost 3 or more, \"Bladra\")",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "COST_MODIFIER"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-CP01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus.",
+            "cleanText": "When you summon/advent a target Spirit, you can put one core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-CP01#a3",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash. For each target card among them, place one core from the Void onto this Nexus."
+        },
+        "clauses": [
+          {
+            "rawText": "◆When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash.",
+            "cleanText": "When this Nexus is deployed, if you don't control a Nexus with the same card name as this card, you can send three cards from your decktop to the Trash",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "count": 3,
+              "source": "DECK_TOP",
+              "destination": "TRASH"
+            }
+          },
+          {
+            "rawText": "For each target card among them, place one core from the Void onto this Nexus.",
+            "cleanText": "For each target card among them, place one core from the Void onto this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CORE_CHARGE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-CP01#a4",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Put two cores from the Void to this Nexus. Or, summon a Purple Cost 5 or less “Knight\"/“Camelot”-named card from your Trash, without paying the cost. This effect does not trigger [Core Charge]."
+        },
+        "clauses": [
+          {
+            "rawText": "Put two cores from the Void to this Nexus.",
+            "cleanText": "Put two cores from the Void to this Nexus",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          },
+          {
+            "rawText": "summon a Purple Cost 5 or less \"Knight\"/\"Camelot\"-named card from your Trash, without paying the cost.",
+            "cleanText": "summon a Purple Cost 5 or less \"Knight\"/\"Camelot\"-named card from your Trash, without paying the cost",
+            "link": "or",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          },
+          {
+            "rawText": "This effect does not trigger [Core Charge].",
+            "cleanText": "This effect does not trigger [Core Charge]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-CP01#a5",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [
+            "Grand Skill: 3"
+          ],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve.",
+            "cleanText": "(Send three cores from this Nexus to the Void) Send two cores from an opposing Spirit to another Spirit/the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 10,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-003": {
+    "cardNumber": "SD59-003",
+    "name": "The DragonKnight Grothmad",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After an opposing Spirit/Brave's (When Summoned) effect resolves",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send three cores from an opposing Spirit/Ultimate to the Trash. After this effect resolves, summon this card without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "Send three cores from an opposing Spirit/Ultimate to the Trash.",
+            "cleanText": "Send three cores from an opposing Spirit/Ultimate to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 3,
+              "from": {
+                "zone": "field",
+                "side": "opp",
+                "types": [
+                  "Spirit",
+                  "Ultimate"
+                ]
+              },
+              "to": {
+                "zone": "trash",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "summon this card without paying the cost.",
+            "cleanText": "summon this card without paying the cost",
+            "link": "afterResolves",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-003#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate.",
+            "cleanText": "All your Purple \"Knight\"/\"Camelot\"-named Spirits can target and attack an opposing exhausted Spirit/Ultimate",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CONTINUOUS_RULE",
+              "rule": "CAN_ATTACK_EXHAUSTED"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-002": {
+    "cardNumber": "SD59-002",
+    "name": "The DragonKnight Halverdice",
+    "keywords": [
+      {
+        "name": "Rebirth",
+        "parameter": null,
+        "wave": 2,
+        "hook": "rebirth",
+        "bracketed": true,
+        "index": 210
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD59-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "you can discard three cards from your decktop. Then, you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it."
+        },
+        "clauses": [
+          {
+            "rawText": "you can discard three cards from your decktop.",
+            "cleanText": "you can discard three cards from your decktop",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MILL_DECK",
+              "side": "opp"
+            }
+          },
+          {
+            "rawText": "you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it.",
+            "cleanText": "you can return a Purple-only card with Burst/Mirage effect from your Trash to the Hand, or set it",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-002#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Rebirth3",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When this Spirit attacks, if you have a set card, you can flip this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "When this Spirit attacks, if you have a set card, you can flip this Spirit.",
+            "cleanText": "When this Spirit attacks, if you have a set card, you can flip this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REBIRTH_FLIP"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-002-A9533": {
+    "cardNumber": "SD59-002-A9533",
+    "name": "The DragonKnight Halverdice -Dragonized Crystal-",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD59-002-A9533#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[+1]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-002-A9533#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_REBORN",
+          "timingLabel": "When Reborn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can refresh this Spirit. Then, you can send cores from an opposing Spirit to the Reserve until only one core remains."
+        },
+        "clauses": [
+          {
+            "rawText": "You can refresh this Spirit.",
+            "cleanText": "You can refresh this Spirit",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": "self"
+            }
+          },
+          {
+            "rawText": "you can send cores from an opposing Spirit to the Reserve until only one core remains.",
+            "cleanText": "you can send cores from an opposing Spirit to the Reserve until only one core remains",
+            "link": "then",
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-002-A9533#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "you can send two cores from an opposing Spirit to the Reserve. When this effect depletes, send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "you can send two cores from an opposing Spirit to the Reserve.",
+            "cleanText": "you can send two cores from an opposing Spirit to the Reserve",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "field",
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "When this effect depletes, send an opposing Life to the Reserve.",
+            "cleanText": "When this effect depletes, send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-004-A9537": {
+    "cardNumber": "SD59-004-A9537",
+    "name": "The DragonKnight Rivalzeed",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD59-004-A9537#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[+1]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-004-A9537#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_REBORN",
+          "timingLabel": "When Reborn",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw two cards. Then, put a core, besides [Soul Core], from your Trash to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw two cards.",
+            "cleanText": "Draw two cards",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 2,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "put a core, besides [Soul Core], from your Trash to this Spirit.",
+            "cleanText": "put a core, besides [Soul Core], from your Trash to this Spirit",
+            "link": "then",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-004-A9537#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": "ONCE_PER_TURN",
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "you can send two cores from the opposing Field to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "you can send two cores from the opposing Field to the Reserve.",
+            "cleanText": "you can send two cores from the opposing Field to the Reserve",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 2,
+              "from": {
+                "zone": "field",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              },
+              "chooser": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "SD59-X01": {
+    "cardNumber": "SD59-X01",
+    "name": "The HolyGrailDarkKnight Galahad",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD59-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Purple “Knight”/“Camelot”-named Spirit is blocked, send an opposing Life to the Reserve, and destroy the blocking Spirit/Ultimate with three cores or less on it."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Purple \"Knight\"/\"Camelot\"-named Spirit is blocked, send an opposing Life to the Reserve",
+            "cleanText": "When your Purple \"Knight\"/\"Camelot\"-named Spirit is blocked, send an opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "destroy the blocking Spirit/Ultimate with three cores or less on it.",
+            "cleanText": "destroy the blocking Spirit/Ultimate with three cores or less on it",
+            "link": "also",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD59-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can return a Purple-only card with Mirage effect from your Trash to the Hand. When you've done so, send an opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "You can return a Purple-only card with Mirage effect from your Trash to the Hand.",
+            "cleanText": "You can return a Purple-only card with Mirage effect from your Trash to the Hand",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "send an opposing Life to the Reserve.",
+            "cleanText": "send an opposing Life to the Reserve",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

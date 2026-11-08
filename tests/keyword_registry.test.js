@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createGame } from '../engine/index.js';
 import { createCardInstance, createFieldStack } from '../engine/state.js';
-import { AccelKeyword, MirageKeyword, ChangeKeyword, HighSpeedKeyword, SealKeyword } from '../engine/keywords/wave2.js';
+import { AccelKeyword, MirageKeyword, ChangeKeyword, HighSpeedKeyword, SealKeyword, SoulDriveKeyword } from '../engine/keywords/wave2.js';
 import { UltimateTriggerKeyword } from '../engine/keywords/wave3.js';
 
 test('Keyword Wave 1 - Clash sets mustBlockIfAble on attack declaration', async () => {
@@ -206,4 +206,208 @@ test('Keyword Wave 3 - Ultimate Trigger reveals opposing decktop and detects Hit
   assert.equal(res.hitCount, 1);
   assert.equal(opp.deck.length, 0);
   assert.equal(opp.grave.length, 1); // Revealed card sent to trash
+});
+
+test('Upgraded Keyword - True-Clash forces Spirits and Ultimates to block', async () => {
+  const trueClashSpirit = {
+    name: 'Monster X',
+    type: 'Spirit',
+    effect: '[True-Clash]'
+  };
+
+  const game = createGame();
+  const p = game.state.players.player;
+  const stack = createFieldStack(createCardInstance(trueClashSpirit, 'player'), { normal: 1, soul: 0 });
+  p.field.push(stack);
+
+  await game.declareAttack(stack.id, 'player');
+
+  assert.ok(game.state.combat, 'Combat initiated');
+  assert.equal(game.state.combat.mustBlockIfAble, true, 'True-Clash forced block flag is set');
+  assert.deepEqual(game.state.combat.blockerTypes, ['Spirit', 'Ultimate'], 'True-Clash targets both Spirits and Ultimates');
+});
+
+test('Upgraded Keyword - Great Crush discards 5 cards per LV and destroys on Burst', async () => {
+  const greatCrushSpirit = {
+    name: 'Saigord-Golem-Origin',
+    type: 'Spirit',
+    levels: { 1: { cost: 1, bp: 5000 }, 2: { cost: 3, bp: 8000 } },
+    effect: '[Great Crush]'
+  };
+
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  // Give opponent 15 cards, with 1 Burst card at index 3
+  opp.deck = Array.from({ length: 15 }, (_, i) => {
+    return createCardInstance({ 
+      name: `Opp Card ${i}`,
+      effect: i === 3 ? '[Burst: When Opponent Attacks]' : ''
+    }, 'opponent');
+  });
+
+  // Opponent has a spirit to destroy
+  const oppTarget = createFieldStack(createCardInstance({ name: 'Opp Target Spirit', type: 'Spirit' }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field = [oppTarget];
+
+  // At LV2 (3 cores) -> 2 * 5 = 10 cards milled!
+  const stack = createFieldStack(createCardInstance(greatCrushSpirit, 'player'), { normal: 3, soul: 0 });
+  p.field.push(stack);
+
+  await game.declareAttack(stack.id, 'player');
+
+  assert.equal(opp.deck.length, 5, '10 cards milled from deck (5 remaining)');
+  assert.equal(opp.grave.length, 11, '10 milled cards + 1 destroyed target in grave');
+  assert.equal(opp.field.length, 0, 'Opposing spirit destroyed by Great Crush burst reaction');
+});
+
+test('Upgraded Keyword - Ultra Holy Life draws from bottom on block and adds life on direct hit', async () => {
+  const ultraHolySpirit = {
+    name: 'The ToolcraftSacredBeast Chilam-Balam',
+    type: 'Spirit',
+    effect: '[Ultra Holy Life]'
+  };
+
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  // Deck has 3 cards: top='Top', mid='Mid', bottom='Bottom'
+  const cardTop = createCardInstance({ name: 'Card Top' }, 'player');
+  const cardMid = createCardInstance({ name: 'Card Mid' }, 'player');
+  const cardBottom = createCardInstance({ name: 'Card Bottom' }, 'player');
+  p.deck = [cardTop, cardMid, cardBottom]; // array end is bottom
+
+  const stack = createFieldStack(createCardInstance(ultraHolySpirit, 'player'), { normal: 2, soul: 0 });
+  p.field.push(stack);
+
+  const blocker = createFieldStack(createCardInstance({ name: 'Blocker Spirit', type: 'Spirit', bp: 4000 }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(blocker);
+
+  await game.declareAttack(stack.id, 'player');
+  await game.declareBlock(blocker.id, 'opponent');
+
+  // Blocked branch: draws 1 card from deckbottom!
+  assert.equal(p.hand.length, 1, 'Drew 1 card on block');
+  assert.equal(p.hand[0].name, 'Card Bottom', 'Drew from deck bottom');
+  assert.equal(p.deck.length, 2, '2 cards remain in deck');
+});
+
+test('Upgraded Keyword - True-Curse destroys opposing Spirit/Ultimate when destroyed in battle', async () => {
+  const trueCurseSpirit = {
+    name: 'Cursed Phantom',
+    type: 'Spirit',
+    bp: 2000,
+    effect: '[True-Curse]'
+  };
+
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const stack = createFieldStack(createCardInstance(trueCurseSpirit, 'player'), { normal: 1, soul: 0 });
+  p.field.push(stack);
+
+  // Blocker has 5000 BP (higher than 2000 BP, so attacker is destroyed)
+  const blocker = createFieldStack(createCardInstance({ name: 'Opp Blocker', type: 'Spirit', bp: 5000 }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(blocker);
+
+  await game.declareAttack(stack.id, 'player');
+  await game.declareBlock(blocker.id, 'opponent');
+
+  // Attacker should be destroyed into player's grave
+  assert.equal(p.field.length, 0, 'Attacker destroyed');
+  assert.equal(p.grave.length, 1, 'Attacker in grave');
+
+  // True-Curse triggers on destruction and destroys an opposing Spirit/Ultimate!
+  assert.equal(opp.field.length, 0, 'Opponent blocker destroyed by True-Curse');
+  assert.equal(opp.grave.length, 1, 'Opponent blocker moved to grave');
+});
+
+test('Upgraded Keyword - Fierce Windstorm exhausts opposing Spirit/Ultimate and freezes refresh', async () => {
+  const fierceWindstormSpirit = {
+    name: 'Mach G',
+    type: 'Spirit',
+    effect: '[Fierce Windstorm: 1]'
+  };
+
+  const game = createGame();
+  const p = game.state.players.player;
+  const opp = game.state.players.opponent;
+
+  const attacker = createFieldStack(createCardInstance(fierceWindstormSpirit, 'player'), { normal: 1, soul: 0 });
+  p.field.push(attacker);
+
+  const blocker = createFieldStack(createCardInstance({ name: 'Blocker', type: 'Spirit', bp: 1000 }, 'opponent'), { normal: 1, soul: 0 });
+  const bystander = createFieldStack(createCardInstance({ name: 'Bystander Ultimate', type: 'Ultimate', bp: 10000 }, 'opponent'), { normal: 1, soul: 0 });
+  opp.field.push(blocker, bystander);
+
+  await game.declareAttack(attacker.id, 'player');
+  await game.declareBlock(blocker.id, 'opponent');
+
+  assert.equal(bystander.state, 'EXHAUSTED', 'Bystander exhausted by Fierce Windstorm');
+  assert.equal(bystander.cannotRefreshNextStep, true, 'Bystander cannot refresh next step');
+});
+
+test('Upgraded Keyword - Soul Drive consumes Soul Core to Void and allows only once per game', async () => {
+  const game = createGame();
+  const p = game.state.players.player;
+
+  const ultimateStack = createFieldStack(
+    createCardInstance({ name: 'Ultimate-Siegwurm-Nova', type: 'Ultimate' }, 'player'),
+    { normal: 2, soul: 1 }
+  );
+  p.field.push(ultimateStack);
+
+  let effectRan = false;
+
+  const res1 = await SoulDriveKeyword.executeSoulDrive(game, ultimateStack, async () => {
+    effectRan = true;
+  });
+
+  assert.equal(res1.success, true, 'Soul Drive executed successfully');
+  assert.equal(effectRan, true, 'Soul Drive effect executed');
+  assert.equal(ultimateStack.cores.soul, 0, 'Soul core removed from Ultimate');
+  assert.equal(p.soulDriveUsed, true, 'soulDriveUsed marked on player');
+
+  // Try activating Soul Drive a second time in same game
+  ultimateStack.cores.soul = 1;
+  const res2 = await SoulDriveKeyword.executeSoulDrive(game, ultimateStack, async () => {});
+  assert.equal(res2.success, false, 'Second Soul Drive rejected');
+  assert.equal(res2.reason, 'SOUL_DRIVE_ALREADY_USED', 'Second Soul Drive blocked per game rule');
+});
+
+test('Keyword Wave 3 - Brilliance returns all Magic cards used during battle to Hand at battle end', async () => {
+  const game = createGame();
+  const p = game.state.players.player;
+
+  const brillianceSpirit = createFieldStack(
+    createCardInstance({ name: 'The Magician-Maiden Fin', type: 'Spirit', effect: '[Brilliance]' }, 'player'),
+    { normal: 2, soul: 0 }
+  );
+  p.field.push(brillianceSpirit);
+
+  const magic1 = createCardInstance({ name: 'Sparkling Light', type: 'Magic' }, 'player');
+  const magic2 = createCardInstance({ name: 'Silver Dream', type: 'Magic' }, 'player');
+  p.grave.push(magic1, magic2);
+
+  game.state.combat = {
+    attacker: brillianceSpirit,
+    attackerStackId: brillianceSpirit.id,
+    attackerSide: 'player',
+    usedMagicCards: [magic1, magic2]
+  };
+
+  const brillianceHandler = game.keywords.get('Brilliance');
+  assert.ok(brillianceHandler);
+  await brillianceHandler.hooks.onBattleEnd({
+    state: game.state,
+    game,
+    attackerStack: brillianceSpirit
+  });
+
+  assert.equal(p.hand.some(c => c.name === 'Sparkling Light'), true, 'magic1 returned to hand');
+  assert.equal(p.hand.some(c => c.name === 'Silver Dream'), true, 'magic2 returned to hand');
+  assert.equal(p.grave.length, 0, 'Used magics removed from grave');
 });

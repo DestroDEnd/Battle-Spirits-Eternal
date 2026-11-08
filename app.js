@@ -59,10 +59,19 @@ const DeckManager = {
   getCardsCount(cards) {
     if (!cards) return 0;
     if (Array.isArray(cards)) {
-      return cards.reduce((a, b) => a + (typeof b === 'object' && b ? (b.count || 1) : 1), 0);
+      return cards.reduce((a, b) => {
+        if (Array.isArray(b)) return a + (typeof b[1] === 'number' ? b[1] : 1);
+        if (typeof b === 'object' && b !== null) return a + (typeof b.count === 'number' ? b.count : 1);
+        return a + 1;
+      }, 0);
     }
     if (typeof cards === 'object') {
-      return Object.values(cards).reduce((a, b) => a + (typeof b === 'number' ? b : (b?.count || 1)), 0);
+      return Object.values(cards).reduce((a, b) => {
+        if (typeof b === 'number') return a + b;
+        if (Array.isArray(b)) return a + (typeof b[1] === 'number' ? b[1] : 1);
+        if (typeof b === 'object' && b !== null) return a + (typeof b.count === 'number' ? b.count : 1);
+        return a + 1;
+      }, 0);
     }
     return 0;
   },

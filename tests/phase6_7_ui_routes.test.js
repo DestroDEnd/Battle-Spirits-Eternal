@@ -143,6 +143,8 @@ test('Phase 7 - Rarity filters and Contract X-Rare / NX-Rare support in browse.h
   assert.ok(wasmJs.includes('contract x-rare') && wasmJs.includes('cxr'), 'wasm_db.js must support Contract X-Rare and CXR');
   assert.ok(wasmJs.includes('nx-rare') && wasmJs.includes('nx'), 'wasm_db.js must support NX-Rare and NX');
   assert.ok(wasmJs.includes('families_json LIKE ? OR family LIKE ?'), 'wasm_db.js must support multi-family matching');
+  // Verify exact set filtering to prevent 26R substring bleed
+  assert.ok(wasmJs.includes('sets_json LIKE ? OR card_number LIKE ?'), 'wasm_db.js must guard against substring set bleed');
 });
 
 test('Phase 7 - Collaboration and small family catalog verification in filters_data.json', () => {

@@ -1,1 +1,737 @@
-{"X13-04":{"cardNumber":"X13-04","name":"The LionMachineArmorDeity Walhalance-Leo","keywords":[{"name":"Heavy Armor","parameter":"Purple/Green/White/Yellow","wave":1,"hook":"heavy_armor","bracketed":true,"index":16}],"abilities":[{"id":"X13-04#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Heavy Armor: Purple/Green/White/Yellow","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects."},"clauses":[{"rawText":"This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects.","cleanText":"This Spirit is unaffected by opposing Purple/Green/White/Yellow Spirit/Brave/Nexus/Magic effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"CONTINUOUS_RULE","rule":"IMMUNITY"}}],"unsupported":[]},{"id":"X13-04#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Opposing Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When an opposing Spirit attacks, refresh a Spirit you control."},"clauses":[{"rawText":"When an opposing Spirit attacks, refresh a Spirit you control.","cleanText":"When an opposing Spirit attacks, refresh a Spirit you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","count":1,"target":{"side":"self","types":["Spirit"]}}}],"unsupported":[]},{"id":"X13-04#a2","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_BATTLES","timingLabel":"When Battles","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By exhausting a White Spirit you control, this Spirit gains +(BP of the exhausted Spirit) BP."},"clauses":[{"rawText":"By exhausting a White Spirit you control","cleanText":"By exhausting a White Spirit you control","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}},{"rawText":"this Spirit gains +(BP of the exhausted Spirit) BP.","cleanText":"this Spirit gains +(BP of the exhausted Spirit) BP","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-09":{"cardNumber":"X13-09","name":"Beach Trickster","keywords":[],"abilities":[{"id":"X13-09#a0","type":"ABILITY","header":{"levels":[1,2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Return a Magic card from your Trash to the Hand."},"clauses":[{"rawText":"Return a Magic card from your Trash to the Hand.","cleanText":"Return a Magic card from your Trash to the Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SALVAGE","cardType":"Magic","count":1}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"X13-14":{"cardNumber":"X13-14","name":"Bomber Hammer","keywords":[{"name":"Brave","parameter":"Cost 4 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"X13-14#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 4 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"X13-14#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(When This Spirit Brave Attacks)\nBy destroying a Spirit you control, draw a card. However, you can't activate that Spirit's (When Destroyed) effects."},"clauses":[{"rawText":"(When This Spirit Brave Attacks)","cleanText":"(When This Spirit Brave Attacks)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"By destroying a Spirit you control","cleanText":"By destroying a Spirit you control","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}},{"rawText":"draw a card.","cleanText":"draw a card","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":null}},{"rawText":"you can't activate that Spirit's (When Destroyed) effects.","cleanText":"you can't activate that Spirit's (When Destroyed) effects","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"NEGATE_EFFECT"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-13":{"cardNumber":"X13-13","name":"Dark-Tyrannosaura-Overrex","keywords":[{"name":"Rush","parameter":"Green","wave":2,"hook":"rush","bracketed":true,"index":69}],"abilities":[{"id":"X13-13#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Target and attack an opposing Spirit.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve."},"clauses":[{"rawText":"Target and attack an opposing Spirit.","cleanText":"Target and attack an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}},{"rawText":"[Rush: Green]","cleanText":"[Rush: Green]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_ABILITY","keyword":"Rush","condition":{"colorSymbol":"Green"}}},{"rawText":"(While you have a Green symbol, the following effect activates next)","cleanText":"(While you have a Green symbol, the following effect activates next)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_ABILITY","keyword":"Rush","condition":{"colorSymbol":"Green"}}},{"rawText":"When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve.","cleanText":"When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"life","side":"opp"},"to":{"zone":"reserve","side":"opp"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-15":{"cardNumber":"X13-15","name":"Magical Hammer","keywords":[{"name":"Brave","parameter":"Cost 4 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"X13-15#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 4 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 4 or more]","clauses":[],"unsupported":[]},{"id":"X13-15#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"(When This Spirit Brave Attacks)\nThe opponent can send a core from their Reserve to their Life. When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life."},"clauses":[{"rawText":"(When This Spirit Brave Attacks)","cleanText":"(When This Spirit Brave Attacks)","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"The opponent can send a core from their Reserve to their Life.","cleanText":"The opponent can send a core from their Reserve to their Life","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","isCost":false}},{"rawText":"When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life.","cleanText":"When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"reserve","side":"self"},"to":{"zone":"life","side":"self"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"X13-11":{"cardNumber":"X13-11","name":"Sword Destiny","keywords":[],"abilities":[{"id":"X13-11#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"Increase the number of Braves a battling \"Fencer\" family Spirit you control can Brave with by one, and summon a Brave card from your Hand without paying the cost to directly brave it with that Spirit. However, the Brave can't activate its (When Summoned) effect. The Brave summoned by this effect will not remain on the Field, and is destroyed at the end of the battle."},"clauses":[{"rawText":"Increase the number of Braves a battling \"Fencer\" family Spirit you control can Brave with by one","cleanText":"Increase the number of Braves a battling \"Fencer\" family Spirit you control can Brave with by one","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"summon a Brave card from your Hand without paying the cost to directly brave it with that Spirit.","cleanText":"summon a Brave card from your Hand without paying the cost to directly brave it with that Spirit","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}},{"rawText":"the Brave can't activate its (When Summoned) effect.","cleanText":"the Brave can't activate its (When Summoned) effect","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"The Brave summoned by this effect will not remain on the Field, and is destroyed at the end of the battle.","cleanText":"The Brave summoned by this effect will not remain on the Field, and is destroyed at the end of the battle","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-10":{"cardNumber":"X13-10","name":"The BeachVirgo Vielje","keywords":[],"abilities":[{"id":"X13-10#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"When your \"Beach\"-named Spirit is destroyed by the opponent, if your Life is five or less, put a core from the Void to your Life."},"clauses":[{"rawText":"When your \"Beach\"-named Spirit is destroyed by the opponent, if your Life is five or less, put a core from the Void to your Life.","cleanText":"When your \"Beach\"-named Spirit is destroyed by the opponent, if your Life is five or less, put a core from the Void to your Life","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"RECOVER_LIFE","count":1}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true},"X13-08":{"cardNumber":"X13-08","name":"The GalaxyStarSword Galaxysword","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Rush","parameter":null,"wave":2,"hook":"rush","bracketed":true,"index":82},{"name":"Rush","parameter":null,"wave":2,"hook":"rush","bracketed":true,"index":159},{"name":"Assault","parameter":"1","wave":1,"hook":"assault","bracketed":true,"index":195}],"abilities":[{"id":"X13-08#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"X13-08#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits with [Rush] get +1000 BP."},"clauses":[{"rawText":"All your Spirits with [Rush] get +1000 BP.","cleanText":"All your Spirits with [Rush] get +1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"X13-08#a2","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits with [Rush] get +1000 BP."},"clauses":[{"rawText":"All your Spirits with [Rush] get +1000 BP.","cleanText":"All your Spirits with [Rush] get +1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"X13-08#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"WHEN_BRAVE_ATTACKS","timingLabel":"When Brave Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Assault: 1","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can, up to once per turn, be refreshed by exhausting a Nexus you control."},"clauses":[{"rawText":"This Spirit can, up to once per turn, be refreshed by exhausting a Nexus you control.","cleanText":"This Spirit can, up to once per turn, be refreshed by exhausting a Nexus you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"X13-03":{"cardNumber":"X13-03","name":"The GodEmperor Machhououga","keywords":[],"abilities":[{"id":"X13-03#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"FLASH","timingLabel":"Flash","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":true,"isMain":false,"cleanBody":"High Speed - This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve. In this case, cores to be put on this Spirit must also be from the Reserve."},"clauses":[{"rawText":"High Speed - This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve.","cleanText":"High Speed - This Spirit card in Hand can be summoned by paying the cost with cores in the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}},{"rawText":"In this case, cores to be put on this Spirit must also be from the Reserve.","cleanText":"In this case, cores to be put on this Spirit must also be from the Reserve","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_RESERVE_ONLY"}}],"unsupported":[]},{"id":"X13-03#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Exhaust an opposing Spirit."},"clauses":[{"rawText":"Exhaust an opposing Spirit.","cleanText":"Exhaust an opposing Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","isHeavy":false,"count":1,"target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]},{"id":"X13-03#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":"ONCE_PER_TURN","cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"by sending a core from your Reserve to the Void, refresh this Spirit."},"clauses":[{"rawText":"By sending a core from your Reserve to the Void","cleanText":"By sending a core from your Reserve to the Void","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"MOVE_CORE","count":1,"from":{"zone":"reserve","side":"self"},"to":{"zone":"void","side":"self"},"chooser":"self"}},{"rawText":"refresh this Spirit.","cleanText":"refresh this Spirit","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"X13-07":{"cardNumber":"X13-07","name":"The JusticeHolySword Justicesword","keywords":[{"name":"Brave","parameter":"Cost 5 or more","wave":3,"hook":"brave","bracketed":true,"index":0},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":213},{"name":"Charge","parameter":null,"wave":2,"hook":"charge","bracketed":true,"index":293}],"abilities":[{"id":"X13-07#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 5 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 5 or more]","clauses":[],"unsupported":[]},{"id":"X13-07#a1","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy any number of opposing Spirits up to a total of 5000 BP, and draw a card for each Spirit destroyed."},"clauses":[{"rawText":"Destroy any number of opposing Spirits up to a total of 5000 BP","cleanText":"Destroy any number of opposing Spirits up to a total of 5000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","mode":"TOTAL_BP_LTE","maxTotalBp":5000,"target":{"side":"opp","types":["Spirit"]}}},{"rawText":"draw a card for each Spirit destroyed.","cleanText":"draw a card for each Spirit destroyed","link":"also","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":1,"chooser":"self","forEach":"DISCARDED_COUNT"}}],"unsupported":[]},{"id":"X13-07#a2","type":"ABILITY","header":{"levels":[1],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits with [Charge] gain +1000 BP."},"clauses":[{"rawText":"All your Spirits with [Charge] gain +1000 BP.","cleanText":"All your Spirits with [Charge] gain +1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]},{"id":"X13-07#a3","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":["When Braved"],"timing":"ATTACK_STEP","timingLabel":"Your Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits with [Charge] gain +1000 BP."},"clauses":[{"rawText":"All your Spirits with [Charge] gain +1000 BP.","cleanText":"All your Spirits with [Charge] gain +1000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BP_BUFF","amount":1000,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-06":{"cardNumber":"X13-06","name":"The MobileEmperor Alex-Castle","keywords":[{"name":"Assault","parameter":"2","wave":1,"hook":"assault","bracketed":true,"index":16}],"abilities":[{"id":"X13-06#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Assault: 2","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can, up to twice per turn, be refreshed by exhausting a Nexus you control."},"clauses":[{"rawText":"This Spirit can, up to twice per turn, be refreshed by exhausting a Nexus you control.","cleanText":"This Spirit can, up to twice per turn, be refreshed by exhausting a Nexus you control","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"EXHAUST","target":{"side":"either"}}}],"unsupported":[]},{"id":"X13-06#a1","type":"ABILITY","header":{"levels":[2],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"For each of your Blue symbols, discard a card from the opposing decktop."},"clauses":[{"rawText":"For each of your Blue symbols, discard a card from the opposing decktop.","cleanText":"For each of your Blue symbols, discard a card from the opposing decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"MILL_DECK","side":"opp"}}],"unsupported":[]}],"compiledClausesCount":2,"unsupportedClausesCount":0,"isFullySupported":true},"X13-17":{"cardNumber":"X13-17","name":"The SixShieldEmperor Kei","keywords":[],"abilities":[{"id":"X13-17#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit card can't be summoned without paying at least one cost."},"clauses":[{"rawText":"This Spirit card can't be summoned without paying at least one cost.","cleanText":"This Spirit card can't be summoned without paying at least one cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON","free":true}}],"unsupported":[]},{"id":"X13-17#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"ATTACK_STEP","timingLabel":"Either Attack Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"All your Spirits are unaffected by opposing Burst effects."},"clauses":[{"rawText":"All your Spirits are unaffected by opposing Burst effects.","cleanText":"All your Spirits are unaffected by opposing Burst effects","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"X13-17#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"END_OF_TURN","timingLabel":"Your End Step","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"By returning one of your Spirits to the deckbottom, activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition."},"clauses":[{"rawText":"By returning one of your Spirits to the deckbottom","cleanText":"By returning one of your Spirits to the deckbottom","link":null,"isOptional":false,"isCost":true,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}},{"rawText":"activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition.","cleanText":"activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition","link":"byDoing","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":4,"unsupportedClausesCount":0,"isFullySupported":true},"X13-05":{"cardNumber":"X13-05","name":"The StarAngelia Mikarean","keywords":[],"abilities":[{"id":"X13-05#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_SUMMONED","timingLabel":"When Summoned","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"During this turn, give an opposing Spirit -3000 BP."},"clauses":[{"rawText":"During this turn, give an opposing Spirit -3000 BP.","cleanText":"give an opposing Spirit -3000 BP","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":"DURING_THIS_TURN","op":{"op":"BP_DEBUFF","amount":3000,"target":"PREVIOUS_TARGET","duration":"DURING_THIS_TURN"}}],"unsupported":[]},{"id":"X13-05#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Spirit can brave ignoring brave conditions."},"clauses":[{"rawText":"This Spirit can brave ignoring brave conditions.","cleanText":"This Spirit can brave ignoring brave conditions","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}}],"unsupported":[]},{"id":"X13-05#a2","type":"ABILITY","header":{"levels":[3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Reveal three cards from your decktop. Add a Magic card among them to your Hand. Return any remaining cards to the decktop in any order."},"clauses":[{"rawText":"Reveal three cards from your decktop.","cleanText":"Reveal three cards from your decktop","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REVEAL_DECKTOP","count":3}},{"rawText":"Add a Magic card among them to your Hand.","cleanText":"Add a Magic card among them to your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SALVAGE","cardType":"Magic"}},{"rawText":"Return any remaining cards to the decktop in any order.","cleanText":"Return any remaining cards to the decktop in any order","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true},"X13-01":{"cardNumber":"X13-01","name":"The SunDino Apollo-Gundinos","keywords":[],"abilities":[{"id":"X13-01#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing 5000 BP or less Spirit. When a Spirit is destroyed by this effect, once per turn, refresh this Spirit."},"clauses":[{"rawText":"Destroy an opposing 5000 BP or less Spirit.","cleanText":"Destroy an opposing 5000 BP or less Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"bpLte":5000}}}},{"rawText":"When a Spirit is destroyed by this effect, once per turn, refresh this Spirit.","cleanText":"When a Spirit is destroyed by this effect, once per turn, refresh this Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"REFRESH","target":"self"}}],"unsupported":[]},{"id":"X13-01#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"You can target and attack an opposing Spirit."},"clauses":[{"rawText":"You can target and attack an opposing Spirit.","cleanText":"You can target and attack an opposing Spirit","link":null,"isOptional":true,"isCost":false,"condition":null,"duration":null,"op":{"op":"TARGET_ATTACK","target":{"side":"opp","types":["Spirit"]}}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"X13-16":{"cardNumber":"X13-16","name":"The SupremeHero Manaka","keywords":[{"name":"Burst","parameter":"After your Spirit is destroyed by the opponent","wave":2,"hook":"burst","bracketed":true,"index":0}],"abilities":[{"id":"X13-16#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT","isFlash":false,"isMain":false,"cleanBody":"When the total color of Spirits you control is two or more, summon this Spirit card."},"clauses":[{"rawText":"When the total color of Spirits you control is two or more, summon this Spirit card.","cleanText":"When the total color of Spirits you control is two or more, summon this Spirit card","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_THIS_CARD","from":"HAND_OR_BURST"}}],"unsupported":[]},{"id":"X13-16#a1","type":"ABILITY","header":{"levels":[1,2,3,4],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Destroy an opposing \"Supreme Hero\" family Spirit."},"clauses":[{"rawText":"Destroy an opposing \"Supreme Hero\" family Spirit.","cleanText":"Destroy an opposing \"Supreme Hero\" family Spirit","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"either"},"isCost":false}}],"unsupported":[]},{"id":"X13-16#a2","type":"ABILITY","header":{"levels":[2,3,4],"levelExplicit":true,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"While the opponent has a Burst set/controls any Spirit with a Burst effect, this Spirit gains +10000 BP."},"clauses":[{"rawText":"While the opponent has a Burst set/controls any Spirit with a Burst effect, this Spirit gains +10000 BP.","cleanText":"this Spirit gains +10000 BP","link":null,"isOptional":false,"isCost":false,"condition":"While the opponent has a Burst set/controls any Spirit with a Burst effect","duration":null,"op":{"op":"BP_BUFF","amount":10000,"target":"target","duration":"THIS_TURN"}}],"unsupported":[]}],"compiledClausesCount":3,"unsupportedClausesCount":0,"isFullySupported":true},"X13-12":{"cardNumber":"X13-12","name":"The Sword of Judgment Re-Genesis","keywords":[{"name":"Brave","parameter":"Cost 8 or more","wave":3,"hook":"brave","bracketed":true,"index":0}],"abilities":[{"id":"X13-12#a0","type":"CONDITION","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":"Brave Condition: Cost 8 or more","burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":""},"rawText":"[Brave Condition: Cost 8 or more]","clauses":[],"unsupported":[]},{"id":"X13-12#a1","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"PASSIVE","timingLabel":"","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"This Brave card can't be summoned unless you discard a Spirit card from your Hand."},"clauses":[{"rawText":"This Brave card can't be summoned unless you discard a Spirit card from your Hand.","cleanText":"This Brave card can't be summoned unless you discard a Spirit card from your Hand","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DISCARD_HAND","chooser":"self","isCost":false}}],"unsupported":[]}],"compiledClausesCount":1,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "X13-14": {
+    "cardNumber": "X13-14",
+    "name": "Bomber Hammer",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "X13-14#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "X13-14#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(When This Spirit Brave Attacks)\nBy destroying a Spirit you control, draw a card. However, you can't activate that Spirit's (When Destroyed) effects."
+        },
+        "clauses": [
+          {
+            "rawText": "(When This Spirit Brave Attacks)",
+            "cleanText": "(When This Spirit Brave Attacks)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "By destroying a Spirit you control",
+            "cleanText": "By destroying a Spirit you control",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "draw a card.",
+            "cleanText": "draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "you can't activate that Spirit's (When Destroyed) effects.",
+            "cleanText": "you can't activate that Spirit's (When Destroyed) effects",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "NEGATE_EFFECT"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "X13-13": {
+    "cardNumber": "X13-13",
+    "name": "Dark-Tyrannosaura-Overrex",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Green",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 69
+      }
+    ],
+    "abilities": [
+      {
+        "id": "X13-13#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Target and attack an opposing Spirit.\n[Rush: Green]\n(While you have a Green symbol, the following effect activates next)\n[Green Core]: When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Target and attack an opposing Spirit.",
+            "cleanText": "Target and attack an opposing Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "TARGET_ATTACK",
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: Green]",
+            "cleanText": "[Rush: Green]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Green"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Green symbol, the following effect activates next)",
+            "cleanText": "(While you have a Green symbol, the following effect activates next)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Green"
+              }
+            }
+          },
+          {
+            "rawText": "When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve.",
+            "cleanText": "When only the opposing Spirit is destroyed by comparing BP, send a core from the opposing Life to the Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "life",
+                "side": "opp"
+              },
+              "to": {
+                "zone": "reserve",
+                "side": "opp"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "X13-15": {
+    "cardNumber": "X13-15",
+    "name": "Magical Hammer",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 4 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "X13-15#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 4 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 4 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "X13-15#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "(When This Spirit Brave Attacks)\nThe opponent can send a core from their Reserve to their Life. When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life."
+        },
+        "clauses": [
+          {
+            "rawText": "(When This Spirit Brave Attacks)",
+            "cleanText": "(When This Spirit Brave Attacks)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          },
+          {
+            "rawText": "The opponent can send a core from their Reserve to their Life.",
+            "cleanText": "The opponent can send a core from their Reserve to their Life",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          },
+          {
+            "rawText": "When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life.",
+            "cleanText": "When cores are sent to the opposing Life via this effect, you can send a core from your Reserve to your Life",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "reserve",
+                "side": "self"
+              },
+              "to": {
+                "zone": "life",
+                "side": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "X13-17": {
+    "cardNumber": "X13-17",
+    "name": "The SixShieldEmperor Kei",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "X13-17#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Spirit card can't be summoned without paying at least one cost."
+        },
+        "clauses": [
+          {
+            "rawText": "This Spirit card can't be summoned without paying at least one cost.",
+            "cleanText": "This Spirit card can't be summoned without paying at least one cost",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "X13-17#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Either Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your Spirits are unaffected by opposing Burst effects."
+        },
+        "clauses": [
+          {
+            "rawText": "All your Spirits are unaffected by opposing Burst effects.",
+            "cleanText": "All your Spirits are unaffected by opposing Burst effects",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "X13-17#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "END_OF_TURN",
+          "timingLabel": "Your End Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By returning one of your Spirits to the deckbottom, activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition."
+        },
+        "clauses": [
+          {
+            "rawText": "By returning one of your Spirits to the deckbottom",
+            "cleanText": "By returning one of your Spirits to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition.",
+            "cleanText": "activate your Burst of the same color and an equal or lower cost than that returned Spirit, ignoring the Burst condition",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "X13-16": {
+    "cardNumber": "X13-16",
+    "name": "The SupremeHero Manaka",
+    "keywords": [
+      {
+        "name": "Burst",
+        "parameter": "After your Spirit is destroyed by the opponent",
+        "wave": 2,
+        "hook": "burst",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "X13-16#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "BURST",
+          "timingLabel": "Burst",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": "AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT",
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When the total color of Spirits you control is two or more, summon this Spirit card."
+        },
+        "clauses": [
+          {
+            "rawText": "When the total color of Spirits you control is two or more, summon this Spirit card.",
+            "cleanText": "When the total color of Spirits you control is two or more, summon this Spirit card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "X13-16#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing \"Supreme Hero\" family Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing \"Supreme Hero\" family Spirit.",
+            "cleanText": "Destroy an opposing \"Supreme Hero\" family Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "X13-16#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3,
+            4
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "While the opponent has a Burst set/controls any Spirit with a Burst effect, this Spirit gains +10000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "While the opponent has a Burst set/controls any Spirit with a Burst effect, this Spirit gains +10000 BP.",
+            "cleanText": "this Spirit gains +10000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "While the opponent has a Burst set/controls any Spirit with a Burst effect",
+            "duration": null,
+            "op": {
+              "op": "BP_BUFF",
+              "amount": 10000,
+              "target": "target",
+              "duration": "THIS_TURN"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "X13-12": {
+    "cardNumber": "X13-12",
+    "name": "The Sword of Judgment Re-Genesis",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Cost 8 or more",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "X13-12#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Cost 8 or more",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Cost 8 or more]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "X13-12#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "This Brave card can't be summoned unless you discard a Spirit card from your Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "This Brave card can't be summoned unless you discard a Spirit card from your Hand.",
+            "cleanText": "This Brave card can't be summoned unless you discard a Spirit card from your Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DISCARD_HAND",
+              "chooser": "self",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

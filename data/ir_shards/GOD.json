@@ -1,1 +1,89 @@
-{"GOD-SECHS":{"cardNumber":"GOD-SECHS","name":"The HeavenlyDemonKing God-Sechs -Type Flame-","keywords":[{"name":"Burst","parameter":"After your Spirit is depleted/destroyed by the opponent","wave":2,"hook":"burst","bracketed":true,"index":0},{"name":"Six Heaven Rush","parameter":"3","wave":2,"hook":"rush","bracketed":true,"index":161}],"abilities":[{"id":"GOD-SECHS#a0","type":"ABILITY","header":{"levels":[1,2,3],"levelExplicit":false,"prefixes":[],"timing":"BURST","timingLabel":"Burst","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":"AFTER_YOUR_SPIRIT_DESTROYED_BY_OPPONENT","isFlash":false,"isMain":false,"cleanBody":"Summon this card without paying the cost. Then, destroy an opposing one-symbol Spirit/Ultimate.\n[Six Heaven Rush: 3]\nIf you have three or more symbol colors, return a \"HeavenlyDemon\"/\"Six Heaven\"-named card from your Trash to the Hand."},"clauses":[{"rawText":"Summon this card without paying the cost.","cleanText":"Summon this card without paying the cost","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"SUMMON_FREE","target":"this_card","from":"BURST"}},{"rawText":"destroy an opposing one-symbol Spirit/Ultimate.","cleanText":"destroy an opposing one-symbol Spirit/Ultimate","link":"then","isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DESTROY","count":1,"target":{"side":"opp","types":["Spirit"],"filters":{"symbolCount":1}}}},{"rawText":"[Six Heaven Rush: 3]","cleanText":"[Six Heaven Rush: 3]","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"KEYWORD_RULE"}},{"rawText":"If you have three or more symbol colors, return a \"HeavenlyDemon\"/\"Six Heaven\"-named card from your Trash to the Hand.","cleanText":"return a \"HeavenlyDemon\"/\"Six Heaven\"-named card from your Trash to the Hand","link":null,"isOptional":false,"isCost":false,"condition":"If you have three or more symbol colors","duration":null,"op":{"op":"BOUNCE","count":1,"target":{"side":"either"}}}],"unsupported":[]},{"id":"GOD-SECHS#a1","type":"ABILITY","header":{"levels":[2,3],"levelExplicit":true,"prefixes":[],"timing":"WHEN_ATTACKS","timingLabel":"When Attacks","timingStep":"ANY","limit":null,"cantStack":false,"keyword":null,"burstCondition":null,"isFlash":false,"isMain":false,"cleanBody":"Draw two cards."},"clauses":[{"rawText":"Draw two cards.","cleanText":"Draw two cards","link":null,"isOptional":false,"isCost":false,"condition":null,"duration":null,"op":{"op":"DRAW","count":2,"chooser":"self","forEach":null}}],"unsupported":[]}],"compiledClausesCount":5,"unsupportedClausesCount":0,"isFullySupported":true}}
+{
+  "P16-23": {
+    "cardNumber": "P16-23",
+    "name": "The Tearful Graduation Ceremony",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "P16-23#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DEPLOYED",
+          "timingLabel": "When Deployed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card.",
+            "cleanText": "Between February 1st and March 31st, by returning an opposing Cost 7 or more Spirit to the Hand, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "P16-23#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "START_STEP",
+          "timingLabel": "Your Start Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost.",
+            "cleanText": "You can summon a Cost 2 or less Spirit card from your Trash, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  }
+}

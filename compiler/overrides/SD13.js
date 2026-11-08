@@ -1,0 +1,973 @@
+/**
+ * compiler/overrides/SD13.js
+ * 
+ * Explicit deterministic IR definitions for SD13 cards.
+ */
+
+export const SD13_OVERRIDES = {
+  "SD13-001": {
+    "cardNumber": "SD13-001",
+    "name": "Amethystbat",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD13-001#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted Cost 3 or less Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted Cost 3 or less Spirit.",
+            "cleanText": "Destroy an opposing exhausted Cost 3 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 3,
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-003": {
+    "cardNumber": "SD13-003",
+    "name": "Bone-Bison",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Yellow",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 66
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-003#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_DESTROYED",
+          "timingLabel": "When Destroyed",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted Spirit.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next.)\n[Yellow Core]: Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted Spirit.",
+            "cleanText": "Destroy an opposing exhausted Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: Yellow]",
+            "cleanText": "[Rush: Yellow]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "cleanText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-002": {
+    "cardNumber": "SD13-002",
+    "name": "Bone-Cat",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD13-002#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your Purple Cost 3 or less Spirits are destroyed by opposing Spirit effects, send all the cores from the Spirit that activated the effect to the Trash."
+        },
+        "clauses": [
+          {
+            "rawText": "When your Purple Cost 3 or less Spirits are destroyed by opposing Spirit effects, send all the cores from the Spirit that activated the effect to the Trash.",
+            "cleanText": "When your Purple Cost 3 or less Spirits are destroyed by opposing Spirit effects, send all the cores from the Spirit that activated the effect to the Trash",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 1,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-007": {
+    "cardNumber": "SD13-007",
+    "name": "Shadow-Maiden",
+    "keywords": [
+      {
+        "name": "Brave",
+        "parameter": "Zombie",
+        "wave": 3,
+        "hook": "brave",
+        "bracketed": true,
+        "index": 0
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-007#a0",
+        "type": "CONDITION",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": "Brave Condition: Zombie",
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "rawText": "[Brave Condition: Zombie]",
+        "clauses": [],
+        "unsupported": []
+      },
+      {
+        "id": "SD13-007#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD13-007#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [
+            "When Braved"
+          ],
+          "timing": "WHEN_BRAVE_ATTACKS",
+          "timingLabel": "When Brave Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted non-braved Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted non-braved Spirit.",
+            "cleanText": "Destroy an opposing exhausted non-braved Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "either"
+              },
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-008": {
+    "cardNumber": "SD13-008",
+    "name": "Soul Reap",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Yellow",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 61
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-008#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "FLASH",
+          "timingLabel": "Flash",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": true,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted Cost 4 or less Spirit.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next.)\n[Yellow Core]: Choose a color among Red/Purple/Green/White/Blue/Yellow. During this turn, a Spirit you control is treated as the chosen color."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted Cost 4 or less Spirit.",
+            "cleanText": "Destroy an opposing exhausted Cost 4 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 4,
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: Yellow]",
+            "cleanText": "[Rush: Yellow]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "cleanText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "Choose a color among Red/Purple/Green/White/Blue/Yellow.",
+            "cleanText": "Choose a color among Red/Purple/Green/White/Blue/Yellow",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "CHOOSE_COLOR",
+              "chooser": "self"
+            }
+          },
+          {
+            "rawText": "During this turn, a Spirit you control is treated as the chosen color.",
+            "cleanText": "a Spirit you control is treated as the chosen color",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-005": {
+    "cardNumber": "SD13-005",
+    "name": "The CorpseDragonEarl Decoux-Lon",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Yellow",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 40
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-005#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next.)\n[Yellow Core]: Exhaust an opposing Spirit with the highest LV."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "[Rush: Yellow]",
+            "cleanText": "[Rush: Yellow]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "cleanText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "Exhaust an opposing Spirit with the highest LV.",
+            "cleanText": "Exhaust an opposing Spirit with the highest LV",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "EXHAUST",
+              "isHeavy": false,
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD13-005#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted Spirit.",
+            "cleanText": "Destroy an opposing exhausted Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-006": {
+    "cardNumber": "SD13-006",
+    "name": "The DeathBeastDuke Deathlion",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Yellow",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 79
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-006#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy an opposing exhausted Cost 6 or less Spirit.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next.)\n[Yellow Core]: This Spirit can't be blocked by opposing LV2/LV3 Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy an opposing exhausted Cost 6 or less Spirit.",
+            "cleanText": "Destroy an opposing exhausted Cost 6 or less Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "costLte": 6,
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          },
+          {
+            "rawText": "[Rush: Yellow]",
+            "cleanText": "[Rush: Yellow]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "cleanText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "This Spirit can't be blocked by opposing LV2/LV3 Spirits.",
+            "cleanText": "This Spirit can't be blocked by opposing LV2/LV3 Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "UNBLOCKABLE",
+              "target": "self"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-X01": {
+    "cardNumber": "SD13-X01",
+    "name": "The WickedDragonKing Cursedragon",
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "SD13-X01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Destroy two opposing exhausted Spirits. For each opposing Spirit destroyed by this effect, draw a card."
+        },
+        "clauses": [
+          {
+            "rawText": "Destroy two opposing exhausted Spirits.",
+            "cleanText": "Destroy two opposing exhausted Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DESTROY",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ],
+                "filters": {
+                  "state": "EXHAUSTED"
+                }
+              }
+            }
+          },
+          {
+            "rawText": "For each opposing Spirit destroyed by this effect, draw a card.",
+            "cleanText": "For each opposing Spirit destroyed by this effect, draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": "DISCARDED_COUNT"
+            }
+          }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "SD13-X01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Send one core each from two opposing Spirits to their Reserve."
+        },
+        "clauses": [
+          {
+            "rawText": "Send one core each from two opposing Spirits to their Reserve.",
+            "cleanText": "Send one core each from two opposing Spirits to their Reserve",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "isCost": false
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "SD13-004": {
+    "cardNumber": "SD13-004",
+    "name": "Zombie-Hawk",
+    "keywords": [
+      {
+        "name": "Rush",
+        "parameter": "Yellow",
+        "wave": 2,
+        "hook": "rush",
+        "bracketed": true,
+        "index": 40
+      }
+    ],
+    "abilities": [
+      {
+        "id": "SD13-004#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "Draw a card.\n[Rush: Yellow]\n(While you have a Yellow symbol, the following effect activates next.)\n[Yellow Core]: During this turn, an opposing Spirit is treated as being LV1."
+        },
+        "clauses": [
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          },
+          {
+            "rawText": "[Rush: Yellow]",
+            "cleanText": "[Rush: Yellow]",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "cleanText": "(While you have a Yellow symbol, the following effect activates next.)",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "KEYWORD_ABILITY",
+              "keyword": "Rush",
+              "condition": {
+                "colorSymbol": "Yellow"
+              }
+            }
+          },
+          {
+            "rawText": "During this turn, an opposing Spirit is treated as being LV1.",
+            "cleanText": "an opposing Spirit is treated as being LV1",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "TREAT_RULE"
+            }
+          }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 4,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  }
+};

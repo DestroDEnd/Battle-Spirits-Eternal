@@ -33,17 +33,22 @@ export function createCardInstance(cardData, owner = 'player') {
     symbols: cardData.symbols || [cardData.color || 'Red'],
     reduction: cardData.reduction || {},
     levels: cardData.levels || { 1: { cost: 1, bp: 1000 } },
-    effect: cardData.effect || '',
+    effect: cardData.effect || cardData.raw_effect || '',
+    keywords: cardData.keywords || null,
+    face: cardData.face || ((cardData.card_number || cardData.cardNumber || '').includes('-A') ? 'B' : (cardData.card_number || cardData.cardNumber || '').endsWith('B') ? 'B' : 'A'),
     compiledIr: cardData.compiledIr || null,
     owner,
     currentOwner: owner,
     isVanilla: Boolean(cardData.is_vanilla),
-    isContractPartner
+    isContractPartner,
+    burst: cardData.burst || null,
+    isBurst: Boolean(cardData.isBurst || cardData.burst)
   };
 }
 
 export function createFieldStack(topCard, initialCores = { normal: 1, soul: 0 }, initialBraves = []) {
   const stackId = `stack_${topCard.id}`;
+  const initialFace = topCard.face || 'A';
   return {
     id: stackId,
     top: topCard,
@@ -56,7 +61,9 @@ export function createFieldStack(topCard, initialCores = { normal: 1, soul: 0 },
     state: 'REFRESHED', // REFRESHED | EXHAUSTED | HEAVY_EXHAUSTED
     owner: topCard.owner,
     standby: null, // null or { type, previousLevel, by, cause, sourceCard }
-    isSoulState: false
+    isSoulState: false,
+    currentFace: initialFace,
+    isFlipped: initialFace === 'B'
   };
 }
 
@@ -83,7 +90,8 @@ export function createInitialPlayerState(playerId, deckCards = []) {
     removed: [], // Removed / Open Zone
     hasUsedMulligan: false,
     burstSetThisTurn: false,
-    mirageSetThisTurn: false
+    mirageSetThisTurn: false,
+    combatDamageTakenThisTurn: 0
   };
 }
 

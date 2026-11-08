@@ -440,8 +440,11 @@
       }
 
       if (setName && setName !== 'all') {
-        conditions.push("sets_json LIKE ?");
-        sqlParams.push(`%${setName}%`);
+        const cleanSet = setName.trim().replace(/"/g, '');
+        // Exact element match in JSON array or direct card_number prefix match
+        // Prevents substring bleed (e.g. 26RSD01 cards leaking into SD01 filter)
+        conditions.push("(sets_json LIKE ? OR card_number LIKE ?)");
+        sqlParams.push(`%"${cleanSet}"%`, `${cleanSet}-%`);
       }
 
       if (cost !== undefined && cost !== null && cost !== '' && cost !== 'all') {
