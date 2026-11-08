@@ -190,6 +190,16 @@
           <span class="pane-count-badge" id="listDeckCount">0 Cards</span>
         </div>
 
+        <!-- Quick Search & Instant Add to Deck -->
+        <div class="deck-quick-search-box" style="margin-bottom:0.75rem;position:relative;">
+          <div style="display:flex;align-items:center;background:rgba(15,23,42,0.85);border:1.5px solid rgba(245,158,11,0.35);border-radius:8px;padding:7px 12px;gap:8px;box-shadow:0 2px 8px rgba(0,0,0,0.4);">
+            <span style="font-size:0.9rem;">🔍</span>
+            <input type="text" id="deckCardQuickSearch" placeholder="Quick Search &amp; Add card… (e.g. Siegwurm, Golza, Ice Shield)" autocomplete="off" style="background:transparent;border:none;outline:none;color:#fff;font-size:0.85rem;width:100%;font-family:inherit;" oninput="handleDeckQuickSearch(this.value)" onfocus="handleDeckQuickSearch(this.value)" />
+            <button type="button" id="deckQuickSearchClear" style="display:none;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.85rem;" onclick="clearDeckQuickSearch()">✕</button>
+          </div>
+          <div id="deckQuickSearchResults" style="display:none;position:absolute;top:100%;left:0;right:0;background:#0f172a;border:1.5px solid #f59e0b;border-radius:8px;max-height:280px;overflow-y:auto;z-index:50;box-shadow:0 12px 30px rgba(0,0,0,0.85);margin-top:4px;"></div>
+        </div>
+
         <div id="deckRows" class="deck-rows-container"></div>
       </div>
 
@@ -1087,6 +1097,98 @@ function initStdDecksCollapseState() {
     if (chips) chips.style.display = 'none';
   }
 }
+
+let quickSearchDebounceTimer = null;
+
+async function handleDeckQuickSearch(val) {
+  const q = (val || '').trim();
+  const resEl = document.getElementById('deckQuickSearchResults');
+  const clearBtn = document.getElementById('deckQuickSearchClear');
+  if (clearBtn) clearBtn.style.display = q ? 'block' : 'none';
+
+  if (!q || q.length < 2) {
+    if (resEl) {
+      resEl.style.display = 'none';
+      resEl.innerHTML = '';
+    }
+    return;
+  }
+
+  clearTimeout(quickSearchDebounceTimer);
+  quickSearchDebounceTimer = setTimeout(async () => {
+    try {
+      const res = await fetch(`/api/cards?q=${encodeURIComponent(q)}&limit=8`);
+      if (!res.ok) return;
+      const data = await res.json();
+      const cards = data.cards || [];
+
+      if (!cards.length) {
+        resEl.innerHTML = '<div style="padding:12px;color:#94a3b8;font-size:0.8rem;text-align:center;">No cards found matching "' + esc(q) + '"</div>';
+        resEl.style.display = 'block';
+        return;
+      }
+
+      resEl.innerHTML = cards.map(c => {
+        const safeName = escapeJsStr(c.name);
+        const colLower = (c.color || 'red').toLowerCase();
+        const currentQty = (S.deck && S.deck[c.name]) || 0;
+        const isMaxed = currentQty >= 3;
+        const costStr = (c.cost !== null && c.cost !== undefined) ? `Cost ${c.cost}` : '';
+        const metaStr = [costStr, c.type, c.rarity].filter(Boolean).join(' • ');
+
+        return `
+          <div class="deck-qs-item" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.06);transition:background 0.15s;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;overflow:hidden;cursor:pointer;flex:1;" onclick="openCardDetail('${safeName}')" title="Click to view details">
+              <span class="type-dot dot-${colLower}"></span>
+              <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+                <div style="font-size:0.85rem;font-weight:700;color:#f8fafc;">${esc(c.name)}</div>
+                <div style="font-size:0.72rem;color:#94a3b8;">${esc(metaStr)}</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+              ${currentQty > 0 ? `<span style="font-size:0.72rem;font-weight:700;color:#60a5fa;">${currentQty}x</span>` : ''}
+              <button type="button" class="btn-qs-add" style="background:${isMaxed ? '#334155' : 'linear-gradient(135deg,#f59e0b,#d97706)'};color:${isMaxed ? '#94a3b8' : '#fff'};border:none;padding:3px 8px;border-radius:4px;font-size:0.75rem;font-weight:700;cursor:${isMaxed ? 'default' : 'pointer'};" ${isMaxed ? 'disabled' : ''} onclick="quickAddCardToDeck('${safeName}')">
+                ${isMaxed ? 'Max (3)' : '+ Add'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+      resEl.style.display = 'block';
+    } catch (e) {
+      console.warn('Quick search failed:', e);
+    }
+  }, 200);
+}
+
+function quickAddCardToDeck(cardName) {
+  addToDeck(cardName);
+  if (typeof AudioFX !== 'undefined' && AudioFX.buttonTick) AudioFX.buttonTick();
+  const input = document.getElementById('deckCardQuickSearch');
+  if (input && input.value) {
+    handleDeckQuickSearch(input.value);
+  }
+}
+
+function clearDeckQuickSearch() {
+  const input = document.getElementById('deckCardQuickSearch');
+  if (input) input.value = '';
+  const resEl = document.getElementById('deckQuickSearchResults');
+  if (resEl) {
+    resEl.style.display = 'none';
+    resEl.innerHTML = '';
+  }
+  const clearBtn = document.getElementById('deckQuickSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+}
+
+document.addEventListener('click', (e) => {
+  const box = document.querySelector('.deck-quick-search-box');
+  const resEl = document.getElementById('deckQuickSearchResults');
+  if (box && resEl && !box.contains(e.target)) {
+    resEl.style.display = 'none';
+  }
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
   if (typeof DeckManagerUI !== 'undefined') {
