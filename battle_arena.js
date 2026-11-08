@@ -4980,6 +4980,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         ${dragHandleHtml}
         ${braveFieldBadge}
         ${activeBuffsBadge}
+        ${(spirit.underlyingCards && spirit.underlyingCards.length > 0) ? `<div class="spirit-advent-badge" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);border:1px solid #c084fc;color:#fff;font-size:0.58rem;font-weight:900;padding:2px 5px;border-radius:4px;box-shadow:0 0 8px rgba(139,92,246,0.6);margin-bottom:2px;" title="Advent Stack: ${spirit.underlyingCards.length} Pre-Advent card(s) underneath (${spirit.underlyingCards.map(c => c.name).join(', ')})">🌟 ADVENT (${spirit.underlyingCards.length + 1})</div>` : ''}
         ${hasSC ? `<div class="spirit-soul-core-badge" title="Soul Core is placed on this Spirit!">${getHexCoreSvg('soul', 13)} SOUL CORE</div>` : ''}
         <button class="fsc-zoom-btn" onclick="event.stopPropagation(); BattleArena.openCardDetailContext('${safeSpName}', 'field', '${spirit.uid}')" title="Inspect Card Details">🔍</button>
         <div class="fsc-header-row">
