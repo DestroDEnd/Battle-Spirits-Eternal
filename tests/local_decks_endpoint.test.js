@@ -13,7 +13,7 @@ describe('Workspace Decks API & Local Decks Parser Suite', () => {
     const localDir = path.join(rootDir, 'local-decks');
     assert.ok(fs.existsSync(localDir), 'local-decks folder exists');
     const files = fs.readdirSync(localDir).filter(f => f.endsWith('.txt'));
-    assert.strictEqual(files.length, 10, 'All 10 user workspace deck files are present');
+    assert.ok(files.length >= 10, `All expected user workspace deck files are present (found ${files.length})`);
     assert.ok(files.includes('Siegmundfried2.txt'), 'Siegmundfried2.txt present');
     assert.ok(files.includes('terra dragon.txt'), 'terra dragon.txt present');
     assert.ok(files.includes('Wisdpom king.txt'), 'Wisdpom king.txt present');

@@ -23,6 +23,16 @@ describe('Saga / Generation Catalog & Resolver Suite', () => {
     const s1 = getSagaById('saga_01');
     assert.equal(s1?.name, '01 - Booster Set Saga');
 
+    // Unicode dot normalization support (UI pill text)
+    const s1Dot = getSagaById('01 · Booster Set');
+    assert.equal(s1Dot?.id, 'saga_01');
+
+    const s2Dot = getSagaById('02 · Constellation');
+    assert.equal(s2Dot?.id, 'saga_02');
+
+    const s3Dot = getSagaById('03 · Heroes');
+    assert.equal(s3Dot?.id, 'saga_03');
+
     const s3 = getSagaById('Heroes');
     assert.equal(s3?.id, 'saga_03');
 

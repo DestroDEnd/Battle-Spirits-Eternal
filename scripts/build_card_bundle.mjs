@@ -56,7 +56,14 @@ const setFiles = [
   'bs21_cards.js',
   'bs22_cards.js',
   'bs23_cards.js',
-  'sd12_sd17_swordblade_promos_cards.js'
+  'sd12_sd17_swordblade_promos_cards.js',
+  'bs24_cards.js',
+  'bs25_cards.js',
+  'bs26_cards.js',
+  'bs27_cards.js',
+  'bs28_cards.js',
+  'bs29_cards.js',
+  'sd18_sd27_ultimate_promos_cards.js'
 ];
 
 const setChunks = setFiles.map(file => {
