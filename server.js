@@ -276,6 +276,75 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // /api/keywords
+  if (pathname.toLowerCase() === '/api/keywords') {
+    if (!cachedKeywordsData) {
+      const keywordCatalog = [
+        // ── COMBAT & ATTACK ──
+        { id: 'clash', name: 'Clash', jp: '激突', category: 'Combat & Attack', icon: '⚔️', query: 'Clash', desc: 'Forces the opponent to block if possible when attacking.' },
+        { id: 'rush', name: 'Rush', jp: '連鎖', category: 'Combat & Attack', icon: '🔗', query: 'Rush', desc: 'Triggers additional effects if you control specific color symbols on your field.' },
+        { id: 'consecutive-blade', name: 'Consecutive Blade', jp: '連刃', category: 'Combat & Attack', icon: '🗡️', query: 'Consecutive Blade', desc: 'Can battle two opposing spirits simultaneously, dealing damage to both.' },
+        { id: 'assault', name: 'Assault', jp: '強襲', category: 'Combat & Attack', icon: '💥', query: 'Assault', desc: 'Can refresh itself by exhausting a Nexus you control after attacking.' },
+        { id: 'crush', name: 'Crush', jp: '粉砕', category: 'Combat & Attack', icon: '🔨', query: 'Crush', desc: 'Discards cards from the top of the opponent\'s deck equal to this Spirit\'s Level.' },
+        { id: 'great-crush', name: 'Great Crush', jp: '大粉砕', category: 'Combat & Attack', icon: '☄️', query: 'Great Crush', desc: 'Discards cards from the top of the opponent\'s deck equal to this Spirit\'s Level; burst cards discarded trigger heavy penalties.' },
+        { id: 'windstorm', name: 'Windstorm', jp: '旋風', category: 'Combat & Attack', icon: '🌪️', query: 'Windstorm', desc: 'Exhausts target opposing Spirits/Ultimates when attacking or battling.' },
+        { id: 'curse', name: 'Curse', jp: '呪撃', category: 'Combat & Attack', icon: '💀', query: 'Curse', desc: 'Destroys the opposing spirit at the end of battle if this spirit was blocked.' },
+        { id: 'holy-life', name: 'Holy Life', jp: '聖命', category: 'Combat & Attack', icon: '✨', query: 'Holy Life', desc: 'Recovers a Life from the Void when this Spirit successfully reduces the opponent\'s life.' },
+        { id: 'heavy-exhaust', name: 'Heavy Exhaust', jp: '重疲労', category: 'Combat & Attack', icon: '💤', query: 'Heavy Exhaust', desc: 'Puts opposing cards into upside-down Heavy Exhaustion; requires two refreshes to ready.' },
+
+        // ── SUMMON & EVOLUTION ──
+        { id: 'advent', name: 'Advent', jp: '煌臨', category: 'Summon & Evolution', icon: '🌟', query: 'Advent', desc: 'Stacks directly atop an eligible target Spirit on your field at Flash timing without paying cost.' },
+        { id: 'contract-advent', name: 'Contract Advent', jp: '契約煌臨', category: 'Summon & Evolution', icon: '📜', query: 'Contract Advent', desc: 'Modern contract evolution: stacks atop Contract cards or partners when Count requirement is met.' },
+        { id: 'manifest', name: 'Manifest', jp: '顕現', category: 'Summon & Evolution', icon: '💫', query: 'Manifest', desc: 'Summons Apparition and Contract Ultimates directly from hand by fulfilling count and condition.' },
+        { id: 'accel', name: 'Accel', jp: 'アクセル', category: 'Summon & Evolution', icon: '⚡', query: 'Accel', desc: 'Magic-like effect cast directly from hand, placing the card face-up in the Open Zone to be summoned later.' },
+        { id: 'rebirth', name: 'Rebirth', jp: '転醒', category: 'Summon & Evolution', icon: '🔄', query: 'Rebirth', desc: 'Flips a double-faced card to its awakened back face when specific battlefield conditions are triggered.' },
+        { id: 'change', name: 'Change', jp: 'チェンジ', category: 'Summon & Evolution', icon: '🔀', query: 'Change', desc: 'Swaps this card from hand with an attacking or battling Spirit on your field during Flash timing.' },
+        { id: 'awaken', name: 'Awaken', jp: '覚醒', category: 'Summon & Evolution', icon: '🔥', query: 'Awaken', desc: 'Moves cores from your other Spirits onto this Spirit at Flash timing.' },
+        { id: 'high-speed', name: 'High Speed', jp: '神速', category: 'Summon & Evolution', icon: '💨', query: 'High Speed', desc: 'Can be summoned from your hand during Flash timing by paying costs using cores from your Reserve.' },
+        { id: 'violent-high-speed', name: 'Violent High Speed', jp: '烈神速', category: 'Summon & Evolution', icon: '🌪️', query: 'Violent High Speed', desc: 'Flash timing summon using cores entirely from your Trash back to your field/reserve.' },
+
+        // ── DEFENSE & BURST ──
+        { id: 'burst', name: 'Burst', jp: 'バースト', category: 'Defense & Burst', icon: '🛡️', query: 'Burst', desc: 'Set face-down in the Burst slot; triggers freely when the opponent triggers the specified condition.' },
+        { id: 'soul-burst', name: 'Soul Burst', jp: 'ソウルバースト', category: 'Defense & Burst', icon: '🔥', query: 'Soul Burst', desc: 'Set in the Burst slot; triggers powerful additional abilities if your Soul Core is in your Trash.' },
+        { id: 'armor', name: 'Armor', jp: '装甲', category: 'Defense & Burst', icon: '🔰', query: 'Armor', desc: 'Immune to opposing Spirits, Nexuses, and Magic of specified colors.' },
+        { id: 'heavy-armor', name: 'Heavy Armor', jp: '重装甲', category: 'Defense & Burst', icon: '🛡️', query: 'Heavy Armor', desc: 'Immune to opposing Spirits, Braves, Nexuses, and Magic of specified colors.' },
+        { id: 'ultra-armor', name: 'Ultra Armor', jp: '超装甲', category: 'Defense & Burst', icon: '👑', query: 'Ultra Armor', desc: 'Ultimate immunity: unaffected by opposing Spirits, Ultimates, Braves, Nexuses, and Magic of specified colors.' },
+        { id: 'ice-wall', name: 'Ice Wall', jp: '氷壁', category: 'Defense & Burst', icon: '🧊', query: 'Ice Wall', desc: 'Exhausts this Spirit during opposing Flash timing to nullify opposing Magic of a specified color.' },
+        { id: 'kagemusha', name: 'Kagemusha', jp: '影武者', category: 'Defense & Burst', icon: '🥷', query: 'Kagemusha', desc: 'Summons from hand during Flash timing to intercept and redirect targeting effects away from friendly cards.' },
+
+        // ── TRIGGERS & RESOURCES ──
+        { id: 'soul-drive', name: 'Soul Drive', jp: 'ソウルドライブ', category: 'Triggers & Resources', icon: '💥', query: 'Soul Drive', desc: 'Ultimate game-defining ability activated once per game by banishing the Soul Core from the duel to the Void.' },
+        { id: 'u-trigger', name: 'Ultimate Trigger', jp: 'Uトリガー', category: 'Triggers & Resources', icon: '🎯', query: 'Ultimate Trigger', desc: 'Moves the top card of the opponent\'s deck to Trash; if its cost is lower than this Ultimate\'s, it Hits!' },
+        { id: 'mirage', name: 'Mirage', jp: 'ミラージュ', category: 'Triggers & Resources', icon: '🔮', query: 'Mirage', desc: 'Deploys this card face-up into your Set slot, providing continuous passive and triggerable battlefield effects.' },
+        { id: 'core-charge', name: 'Core Charge', jp: 'コアチャージ', category: 'Triggers & Resources', icon: '💠', query: 'Core Charge', desc: 'Places cores from the Void onto Grandstones or Nexuses when matching cards are summoned or deployed.' },
+        { id: 'count-break', name: 'Count Break', jp: 'カウントブレイク', category: 'Triggers & Resources', icon: '🔢', query: 'Count Break', desc: 'Consumes count or triggers when count reaches a designated milestone.' },
+        { id: 'grand-skill', name: 'Grand Skill', jp: '神技', category: 'Triggers & Resources', icon: '⚡', query: 'Grand Skill', desc: 'Spends cores accumulated on Grandstones to activate divine activated abilities.' },
+        { id: 'grand-field', name: 'Grand Field', jp: '神域', category: 'Triggers & Resources', icon: '🏛️', query: 'Grand Field', desc: 'Passive divine field aura granted by Grandstones while controlling sufficient cores.' }
+      ];
+
+      // Calculate counts from SQLite if available
+      if (serverDb) {
+        try {
+          const countStmt = serverDb.prepare(`
+            SELECT count(*) as total FROM cards 
+            WHERE effect LIKE ? OR effect LIKE ? OR name LIKE ?
+          `);
+          for (const item of keywordCatalog) {
+            const row = countStmt.get(`%[${item.query}%`, `%【${item.jp}%`, `%${item.name}%`);
+            item.cardCount = row ? row.total : 0;
+          }
+        } catch (e) {
+          console.warn('[Keywords API] Failed to count keywords:', e);
+        }
+      }
+      cachedKeywordsData = keywordCatalog;
+    }
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ keywords: cachedKeywordsData }));
+    return;
+  }
+
   // /api/card-effects-db
   if (pathname.toLowerCase() === '/api/card-effects-db') {
     const dbPath = path.join(__dirname, 'card_effects_db.json');
