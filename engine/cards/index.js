@@ -28,6 +28,12 @@ import './sets/bs27_cards.js';
 import './sets/bs28_cards.js';
 import './sets/bs29_cards.js';
 import './sets/sd18_sd27_ultimate_promos_cards.js';
+import './sets/bs30_cards.js';
+import './sets/bs31_cards.js';
+import './sets/bs32_cards.js';
+import './sets/bs33_cards.js';
+import './sets/bs34_cards.js';
+import './sets/sd28_sd32_soul_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;
