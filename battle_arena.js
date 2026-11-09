@@ -11527,8 +11527,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenAdventsEffects(spirit, side = 'player') {
     if (!spirit || !spirit.effect) return;
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-    if (pRegistry && spirit.card_number && pRegistry.has(spirit.card_number, 'WHEN_ADVENTS')) {
-      pRegistry.execute(spirit.card_number, 'WHEN_ADVENTS', {
+    const adNum = spirit.card_number || spirit.cardNumber || spirit.id;
+    if (pRegistry && adNum && pRegistry.has(adNum, 'WHEN_ADVENTS')) {
+      pRegistry.execute(adNum, 'WHEN_ADVENTS', {
         card: spirit,
         side,
         duelState: DuelState,
@@ -13697,8 +13698,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       let burstEffectResolved = false;
 
       const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-      if (pRegistry && burstCard.card_number && pRegistry.has(burstCard.card_number, 'BURST')) {
-        pRegistry.execute(burstCard.card_number, 'BURST', {
+      const brNum = burstCard.card_number || burstCard.cardNumber || burstCard.id;
+      if (pRegistry && brNum && pRegistry.has(brNum, 'BURST')) {
+        pRegistry.execute(brNum, 'BURST', {
           card: burstCard,
           side,
           duelState: DuelState,
@@ -13806,8 +13808,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const currentPhase = (DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
       const burstText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'burst');
       const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-      if (pRegistry && burstCard.card_number && pRegistry.has(burstCard.card_number, 'BURST')) {
-        pRegistry.execute(burstCard.card_number, 'BURST', {
+      const bNum = burstCard.card_number || burstCard.cardNumber || burstCard.id;
+      if (pRegistry && bNum && pRegistry.has(bNum, 'BURST')) {
+        pRegistry.execute(bNum, 'BURST', {
           card: burstCard,
           side,
           duelState: DuelState,
