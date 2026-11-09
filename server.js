@@ -394,6 +394,14 @@ const server = http.createServer((req, res) => {
             searchTerms = ['Summon Condition', 'Summon/Advent Condition', 'SuAdcon', '召喚条件', '召喚/煌臨条件'];
           } else if (ql === 'spellbind' || ql === 'spell blight' || ql === 'spellblight') {
             searchTerms = ['Spellbind', 'Spell Blight', '呪縛'];
+          } else if (ql === 'soul drive' || ql === 'souldrive' || ql === 'soul-drive' || ql === 'ソウルドライブ') {
+            searchTerms = ['Soul Drive', '[Soul Drive]', 'ソウルドライブ', '【ソウルドライブ】'];
+          } else if (ql === 'accel' || ql === 'accelerate' || ql === 'アクセル') {
+            searchTerms = ['Accel', '[Accel', 'アクセル', '【アクセル'];
+          } else if (ql === 'mirage' || ql === 'ミラージュ') {
+            searchTerms = ['Mirage', '[Mirage', 'ミラージュ'];
+          } else if (ql === 'contract' || ql === 'keiyaku') {
+            searchTerms = ['Contract', '[Contract', '契約'];
           }
 
           const orClauses = [];
@@ -555,6 +563,32 @@ const server = http.createServer((req, res) => {
       handleBatch(names);
       return;
     }
+  }
+
+  if (pathname.toLowerCase() === '/api/captcha') {
+    const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+    let code = '';
+    for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+    const token = 'srv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    const colors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#c084fc', '#38bdf8'];
+    let linesSvg = '';
+    for (let i = 0; i < 5; i++) {
+      const x1 = Math.floor(Math.random() * 180), y1 = Math.floor(Math.random() * 50);
+      const x2 = Math.floor(Math.random() * 180), y2 = Math.floor(Math.random() * 50);
+      linesSvg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${colors[i % colors.length]}" stroke-width="1.5" stroke-opacity="0.35"/>`;
+    }
+    let textSvg = '';
+    const xPos = [18, 44, 70, 96, 122, 148];
+    for (let i = 0; i < 6; i++) {
+      const rot = Math.floor(Math.random() * 26) - 13;
+      const y = 35 + Math.floor(Math.random() * 6) - 3;
+      textSvg += `<text x="${xPos[i]}" y="${y}" fill="${colors[i]}" font-family="JetBrains Mono, monospace" font-size="24" font-weight="bold" transform="rotate(${rot} ${xPos[i]} ${y})">${code[i]}</text>`;
+    }
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><rect width="180" height="50" fill="#0d1117" rx="6" stroke="#30363d" stroke-width="1"/>${linesSvg}${textSvg}</svg>`;
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ svg, token, code }));
+    return;
   }
 
   if (pathname.toLowerCase() === '/api/decks') {
