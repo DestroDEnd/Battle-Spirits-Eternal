@@ -3,7 +3,11 @@ const FALLBACK_CARD_ART = window.FALLBACK_CARD_ART = "data:image/svg+xml;utf8,<s
 
 window.cleanCardImageUrl = function(url) {
   if (!url || typeof url !== 'string') return url || FALLBACK_CARD_ART;
-  if (url.includes('static.wikia.nocookie.net') && url.includes('/revision/latest')) return url.split('/revision/latest')[0];
+  if (url.includes('static.wikia.nocookie.net')) {
+    if (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http')) {
+      return '/api/proxy-image?url=' + encodeURIComponent(url);
+    }
+  }
   return url;
 };
 

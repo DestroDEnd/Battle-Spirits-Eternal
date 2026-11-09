@@ -1233,6 +1233,20 @@ export const SagaConditionDSL = (() => {
       }
     }
 
+    const existing = PerCardRegistry.get(cardSpec.cardNumber);
+    if (existing && existing.triggers && Object.keys(existing.triggers).length > 0) {
+      // Preserve explicit hand-crafted deck/arena handlers, and backfill any missing triggers or metadata
+      for (const [k, fn] of Object.entries(triggers)) {
+        if (!existing.triggers[k]) {
+          existing.triggers[k] = fn;
+        }
+      }
+      if (!existing.sagaAbilities) {
+        existing.sagaAbilities = cardSpec.abilities || [];
+      }
+      return;
+    }
+
     PerCardRegistry.registerCard(cardSpec.aliases ? [cardSpec.cardNumber, ...cardSpec.aliases] : cardSpec.cardNumber, {
       name: cardSpec.name || cardSpec.cardNumber,
       cardType: cardSpec.cardType || 'Spirit',

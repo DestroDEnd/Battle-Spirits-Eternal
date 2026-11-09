@@ -9,6 +9,12 @@ import './bundle.js';
 import './sets/sd65_four_demon_lords.js';
 import './sets/standard_and_custom_decks.js';
 import './sets/soul_drive_cards.js';
+import './sets/bs14_cards.js';
+import './sets/bs15_cards.js';
+import './sets/bs16_cards.js';
+import './sets/bs17_cards.js';
+import './sets/bs18_cards.js';
+import './sets/sd06_sd11_heroes_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;

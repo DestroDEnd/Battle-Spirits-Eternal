@@ -64,6 +64,34 @@
         <button class="set-cat-btn" data-cat="4" onclick="selectSetCategory(4)">💎 Premium Bandai</button>
         <button class="set-cat-btn" data-cat="5" onclick="selectSetCategory(5)">🎁 Promotional</button>
       </div>
+
+      <!-- Generation / Saga Quick Filter Strip (17 Eras) -->
+      <div style="margin-top:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-size:0.75rem;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:0.5px;">🏛️ Generation / Saga Filter (17 Eras):</span>
+          <span id="activeSetSagaLabel" style="font-size:0.75rem;color:var(--muted);">All Sagas</span>
+        </div>
+        <div class="filter-pills" id="setSagaPills" style="display:flex;flex-wrap:wrap;gap:5px;">
+          <button class="filter-pill active" data-saga="all" onclick="selectSetSaga('all')">All Sagas</button>
+          <button class="filter-pill" data-saga="saga_01" onclick="selectSetSaga('saga_01')" title="BS01-BS09, SD01-SD02">01 · Booster Set</button>
+          <button class="filter-pill" data-saga="saga_02" onclick="selectSetSaga('saga_02')" title="BS10-BS13, SD03-SD05">02 · Constellation</button>
+          <button class="filter-pill" data-saga="saga_03" onclick="selectSetSaga('saga_03')" title="BS14-BS18, SD06-SD11">03 · Heroes</button>
+          <button class="filter-pill" data-saga="saga_04" onclick="selectSetSaga('saga_04')" title="BS19-BS23, SD12-SD17">04 · Sword Blade</button>
+          <button class="filter-pill" data-saga="saga_05" onclick="selectSetSaga('saga_05')" title="BS24-BS29, SD18-SD27">05 · Ultimate</button>
+          <button class="filter-pill" data-saga="saga_06" onclick="selectSetSaga('saga_06')" title="BS30-BS34, SD28-SD32">06 · Soul Saga</button>
+          <button class="filter-pill" data-saga="saga_07" onclick="selectSetSaga('saga_07')" title="BS35-BS39, SD33-SD36">07 · God King</button>
+          <button class="filter-pill" data-saga="saga_08" onclick="selectSetSaga('saga_08')" title="BS40-BS43, SD37-SD40">08 · Advent</button>
+          <button class="filter-pill" data-saga="saga_09" onclick="selectSetSaga('saga_09')" title="BS44-BS47, SD41-SD44">09 · God Advent</button>
+          <button class="filter-pill" data-saga="saga_10" onclick="selectSetSaga('saga_10')" title="BS48-BS51, SD45-SD50">10 · Ultra Advent</button>
+          <button class="filter-pill" data-saga="saga_11" onclick="selectSetSaga('saga_11')" title="BS52-BS55, SD51-SD57">11 · Rebirth</button>
+          <button class="filter-pill" data-saga="saga_12" onclick="selectSetSaga('saga_12')" title="BS56-BS59, SD58-SD63">12 · True Rebirth</button>
+          <button class="filter-pill" data-saga="saga_13" onclick="selectSetSaga('saga_13')" title="BS60-BS63, SD64-SD65">13 · Contract</button>
+          <button class="filter-pill" data-saga="saga_14" onclick="selectSetSaga('saga_14')" title="BS64-BS67, SD66-SD67">14 · Realm</button>
+          <button class="filter-pill" data-saga="saga_15" onclick="selectSetSaga('saga_15')" title="BS68-BS71">15 · Contract True</button>
+          <button class="filter-pill" data-saga="saga_16" onclick="selectSetSaga('saga_16')" title="CB01-CB30, PB">16 · Collab</button>
+          <button class="filter-pill" data-saga="saga_17" onclick="selectSetSaga('saga_17')" title="Promo, CP, PX">17 · Promo</button>
+        </div>
+      </div>
     </section>
 
     <!-- Set Categories Container -->
@@ -245,12 +273,46 @@
 <script>
 let allCategorizedSets = [];
 let activeSetCategory = 'all';
+let activeSetSaga = 'all';
+
+const SAGA_PREFIX_MAP = {
+  saga_01: ['BS01', 'BS02', 'BS03', 'BS04', 'BS05', 'BS06', 'BS07', 'BS08', 'BS09', 'SD01', 'SD02'],
+  saga_02: ['BS10', 'BS11', 'BS12', 'BS13', 'SD03', 'SD04', 'SD05', 'BSC05'],
+  saga_03: ['BS14', 'BS15', 'BS16', 'BS17', 'BS18', 'SD06', 'SD07', 'SD08', 'SD09', 'SD10', 'SD11', 'BSC06', 'BSC07', 'BSC08', 'BSC09', 'BSC10', 'BSC11', 'BSC12'],
+  saga_04: ['BS19', 'BS20', 'BS21', 'BS22', 'BS23', 'SD12', 'SD13', 'SD14', 'SD15', 'SD16', 'SD17', 'BSC13', 'BSC14', 'BSC15', 'BSC16'],
+  saga_05: ['BS24', 'BS25', 'BS26', 'BS27', 'BS28', 'BS29', 'SD18', 'SD19', 'SD20', 'SD21', 'SD22', 'SD23', 'SD24', 'SD25', 'SD26', 'SD27', 'BSC17', 'BSC18', 'BSC19'],
+  saga_06: ['BS30', 'BS31', 'BS32', 'BS33', 'BS34', 'SD28', 'SD29', 'SD30', 'SD31', 'SD32', 'BSC20', 'BSC21', 'BSC22'],
+  saga_07: ['BS35', 'BS36', 'BS37', 'BS38', 'BS39', 'SD33', 'SD34', 'SD35', 'SD36', 'BSC23', 'BSC24', 'BSC25', 'BSC26', 'BSC27'],
+  saga_08: ['BS40', 'BS41', 'BS42', 'BS43', 'SD37', 'SD38', 'SD39', 'SD40', 'BSC28', 'BSC29', 'BSC30'],
+  saga_09: ['BS44', 'BS45', 'BS46', 'BS47', 'SD41', 'SD42', 'SD43', 'SD44', 'BSC31', 'BSC32', 'BSC33'],
+  saga_10: ['BS48', 'BS49', 'BS50', 'BS51', 'SD45', 'SD46', 'SD47', 'SD48', 'SD49', 'SD50', 'BSC34', 'BSC35'],
+  saga_11: ['BS52', 'BS53', 'BS54', 'BS55', 'SD51', 'SD52', 'SD53', 'SD54', 'SD55', 'SD56', 'SD57', 'BSC36', 'BSC37'],
+  saga_12: ['BS56', 'BS57', 'BS58', 'BS59', 'SD58', 'SD59', 'SD60', 'SD61', 'SD62', 'SD63', 'BSC38', 'BSC39'],
+  saga_13: ['BS60', 'BS61', 'BS62', 'BS63', 'SD64', 'SD65', 'BSC40', 'BSC41'],
+  saga_14: ['BS64', 'BS65', 'BS66', 'BS67', 'SD66', 'SD67', 'BSC42', 'BSC43'],
+  saga_15: ['BS68', 'BS69', 'BS70', 'BS71', 'SD68', 'SD69', 'SD70'],
+  saga_16: ['CB01', 'CB02', 'CB03', 'CB04', 'CB05', 'CB06', 'CB07', 'CB08', 'CB09', 'CB10', 'CB11', 'CB12', 'CB13', 'CB14', 'CB15', 'CB16', 'CB17', 'CB18', 'CB19', 'CB20', 'CB21', 'CB22', 'CB23', 'CB24', 'CB25', 'CB26', 'CB27', 'CB28', 'CB29', 'CB30', 'PB'],
+  saga_17: ['CP', 'P', 'LM', 'EX', 'PX', 'SJ', 'PR']
+};
 
 function selectSetCategory(cat) {
   activeSetCategory = cat;
   document.querySelectorAll('#setCategoryTabs .set-cat-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-cat') === String(cat));
   });
+  filterSetTags();
+}
+
+function selectSetSaga(sagaId) {
+  activeSetSaga = sagaId;
+  document.querySelectorAll('#setSagaPills .filter-pill').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-saga') === sagaId);
+  });
+  const label = document.getElementById('activeSetSagaLabel');
+  if (label) {
+    const actBtn = document.querySelector(`#setSagaPills .filter-pill[data-saga="${sagaId}"]`);
+    label.textContent = (actBtn && sagaId !== 'all') ? `Filtered: ${actBtn.textContent.trim()}` : 'All Sagas';
+  }
   filterSetTags();
 }
 
@@ -341,6 +403,7 @@ function renderSetDirectory(categories) {
 function filterSetTags() {
   const query = document.getElementById('setSearchInput').value.toLowerCase().trim();
   const sections = document.querySelectorAll('#setSectionsContainer .dir-section');
+  const sagaPrefixes = (activeSetSaga !== 'all' && SAGA_PREFIX_MAP[activeSetSaga]) || null;
 
   sections.forEach((sec, idx) => {
     const isCatMatch = (activeSetCategory === 'all') || (String(activeSetCategory) === String(idx));
@@ -353,7 +416,12 @@ function filterSetTags() {
     let visibleCount = 0;
     tags.forEach(t => {
       const name = t.getAttribute('data-name').toLowerCase();
-      const match = !query || name.includes(query);
+      const matchQuery = !query || name.includes(query);
+      let matchSaga = true;
+      if (sagaPrefixes) {
+        matchSaga = sagaPrefixes.some(p => name.includes(p.toLowerCase()));
+      }
+      const match = matchQuery && matchSaga;
       t.classList.toggle('hidden', !match);
       if (match) visibleCount++;
     });

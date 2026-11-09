@@ -103,6 +103,34 @@
       <!-- Filter Groups (Keyword Scope, Color, Cost, Type, Rarity, Family) -->
       <div class="filters-grid">
         
+        <!-- Generation / Saga Filter (17 Eras) -->
+        <div class="filter-group" style="grid-column: 1 / -1;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span class="filter-label" style="margin-bottom:0;">🏛️ Generation / Saga</span>
+            <span id="activeSagaLabel" style="font-size:0.75rem;color:#38bdf8;font-weight:600;">All Generations</span>
+          </div>
+          <div class="filter-pills" id="browseGenerationPills" style="display:flex;flex-wrap:wrap;gap:5px;">
+            <span class="filter-pill active" data-val="all" onclick="setBrowseFilter('generation','all')">All Sagas</span>
+            <span class="filter-pill" data-val="saga_01" onclick="setBrowseFilter('generation','saga_01')" title="BS01-BS09, SD01-SD02">01 · Booster Set</span>
+            <span class="filter-pill" data-val="saga_02" onclick="setBrowseFilter('generation','saga_02')" title="BS10-BS13, SD03-SD05, BSC05">02 · Constellation</span>
+            <span class="filter-pill" data-val="saga_03" onclick="setBrowseFilter('generation','saga_03')" title="BS14-BS18, SD06-SD11, BSC06-BSC12">03 · Heroes</span>
+            <span class="filter-pill" data-val="saga_04" onclick="setBrowseFilter('generation','saga_04')" title="BS19-BS23, SD12-SD17">04 · Sword Blade</span>
+            <span class="filter-pill" data-val="saga_05" onclick="setBrowseFilter('generation','saga_05')" title="BS24-BS29, SD18-SD27">05 · Ultimate</span>
+            <span class="filter-pill" data-val="saga_06" onclick="setBrowseFilter('generation','saga_06')" title="BS30-BS34, SD28-SD32">06 · Soul Saga</span>
+            <span class="filter-pill" data-val="saga_07" onclick="setBrowseFilter('generation','saga_07')" title="BS35-BS39, SD33-SD36">07 · God King</span>
+            <span class="filter-pill" data-val="saga_08" onclick="setBrowseFilter('generation','saga_08')" title="BS40-BS43, SD37-SD40">08 · Advent</span>
+            <span class="filter-pill" data-val="saga_09" onclick="setBrowseFilter('generation','saga_09')" title="BS44-BS47, SD41-SD44">09 · God Advent</span>
+            <span class="filter-pill" data-val="saga_10" onclick="setBrowseFilter('generation','saga_10')" title="BS48-BS51, SD45-SD50">10 · Ultra Advent</span>
+            <span class="filter-pill" data-val="saga_11" onclick="setBrowseFilter('generation','saga_11')" title="BS52-BS55, SD51-SD57">11 · Rebirth</span>
+            <span class="filter-pill" data-val="saga_12" onclick="setBrowseFilter('generation','saga_12')" title="BS56-BS59, SD58-SD63">12 · True Rebirth</span>
+            <span class="filter-pill" data-val="saga_13" onclick="setBrowseFilter('generation','saga_13')" title="BS60-BS63, SD64-SD65">13 · Contract</span>
+            <span class="filter-pill" data-val="saga_14" onclick="setBrowseFilter('generation','saga_14')" title="BS64-BS67, SD66-SD67">14 · Realm</span>
+            <span class="filter-pill" data-val="saga_15" onclick="setBrowseFilter('generation','saga_15')" title="BS68-BS71">15 · Contract True</span>
+            <span class="filter-pill" data-val="saga_16" onclick="setBrowseFilter('generation','saga_16')" title="CB01-CB30, PB">16 · Collab</span>
+            <span class="filter-pill" data-val="saga_17" onclick="setBrowseFilter('generation','saga_17')" title="Promo, CP, PX, LM">17 · Promo</span>
+          </div>
+        </div>
+
         <!-- Keyword Match Scope Filter -->
         <div class="filter-group">
           <span class="filter-label">Keyword Match In</span>
@@ -398,6 +426,7 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
 const browseState = {
   q: '',
   scope: 'all',
+  generation: 'all',
   color: 'all',
   cost: 'all',
   type: 'all',
@@ -417,6 +446,8 @@ function parseUrlParams() {
   const params = new URLSearchParams(window.location.search);
   if (params.has('q')) browseState.q = params.get('q');
   if (params.has('scope')) browseState.scope = params.get('scope');
+  if (params.has('generation')) browseState.generation = params.get('generation');
+  else if (params.has('saga')) browseState.generation = params.get('saga');
   if (params.has('color')) browseState.color = params.get('color');
   if (params.has('cost')) browseState.cost = params.get('cost');
   if (params.has('type')) browseState.type = params.get('type');
@@ -448,7 +479,7 @@ function parseUrlParams() {
 }
 
 function syncPillsFromState() {
-  ['scope', 'color', 'cost', 'type', 'rarity'].forEach(key => {
+  ['scope', 'generation', 'color', 'cost', 'type', 'rarity'].forEach(key => {
     const containerId = 'browse' + key.charAt(0).toUpperCase() + key.slice(1) + 'Pills';
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -463,6 +494,13 @@ function syncPillsFromState() {
       pill.classList.toggle('active', isActive);
     });
   });
+
+  const sagaLabel = document.getElementById('activeSagaLabel');
+  if (sagaLabel) {
+    const curGen = (browseState.generation || 'all').toLowerCase();
+    const activePill = document.querySelector(`#browseGenerationPills .filter-pill[data-val="${curGen}"]`);
+    sagaLabel.textContent = (activePill && curGen !== 'all') ? `Filtered: ${activePill.textContent.trim()}` : 'All Generations';
+  }
 
   const kwContainer = document.getElementById('browseKeywordPills');
   if (kwContainer) {
@@ -568,6 +606,7 @@ function clearTargetFilter() {
 function resetAllBrowseFilters() {
   browseState.q = '';
   browseState.scope = 'all';
+  browseState.generation = 'all';
   browseState.color = 'all';
   browseState.cost = 'all';
   browseState.type = 'all';
@@ -591,6 +630,7 @@ function updateUrlHistory() {
   const params = new URLSearchParams();
   if (browseState.q) params.set('q', browseState.q);
   if (browseState.scope && browseState.scope !== 'all') params.set('scope', browseState.scope);
+  if (browseState.generation && browseState.generation !== 'all') params.set('generation', browseState.generation);
   if (browseState.color !== 'all') params.set('color', browseState.color);
   if (browseState.cost !== 'all') params.set('cost', browseState.cost);
   if (browseState.type !== 'all') params.set('type', browseState.type);
@@ -865,6 +905,7 @@ async function loadBrowseCards() {
   });
   if (browseState.q) p.set('q', browseState.q);
   if (browseState.scope && browseState.scope !== 'all') p.set('scope', browseState.scope);
+  if (browseState.generation && browseState.generation !== 'all') p.set('generation', browseState.generation);
   if (browseState.color !== 'all') p.set('color', browseState.color);
   if (browseState.cost !== 'all') p.set('cost', browseState.cost);
   if (browseState.type !== 'all') p.set('type', browseState.type);
@@ -960,6 +1001,7 @@ function buildCardTile(card) {
           <span>${esc(card.type || '—')}</span>
           ${codeBadge}
           <span>${esc(card.rarity || '')}</span>
+          ${card.generation_name ? `<span class="tile-saga" style="color:#38bdf8;font-size:0.7rem;font-weight:600;">🏛️ ${esc(card.generation_name)}</span>` : ''}
         </div>
         ${families.length ? `<div class="tile-family">${esc(families.slice(0,2).join(' · '))}</div>` : ''}
       </div>

@@ -220,9 +220,6 @@ const server = http.createServer((req, res) => {
             if (row.levels && typeof row.levels === 'string') {
               try { row.levels = JSON.parse(row.levels); } catch(e) {}
             }
-            if (row.image_url && row.image_url.includes('static.wikia.nocookie.net') && row.image_url.includes('/revision/latest')) {
-              row.image_url = row.image_url.split('/revision/latest')[0];
-            }
             cards.push(row);
           }
         }
