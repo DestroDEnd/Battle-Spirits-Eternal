@@ -12432,7 +12432,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         // Check if card also has a Draw effect (e.g. Sudden Death Draw: "Draw a card. During this turn, give a Spirit +1000 BP.")
         let drewCount = 0;
         const effectString = String(activeEffectText || card.effect || '');
-        const hasDraw = /draw\s+(?:a|1|one|two|2)\s+cards?|デッキから\s*(?:[12１２]|一|二)?\s*枚ドロー/i.test(effectString);
+        const hasDraw = name.includes('Sudden Death Draw') || /draw\s+(?:a|1|one|two|2)\s+cards?|デッキから\s*(?:[12１２]|一|二)?\s*枚ドロー/i.test(effectString);
         if (hasDraw) {
           const isDraw2 = /draw\s+(?:two|2)\s+cards?|2枚ドロー/i.test(effectString);
           const count = isDraw2 ? 2 : 1;

@@ -51,7 +51,19 @@
         <svg class="directory-search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
-        <input type="text" id="familySearchInput" class="directory-search-input" placeholder="Filter 271 families… (e.g. Astroblazer, Ancient Dragon, Divine Spirit, Makai, Gundam)" oninput="filterFamilyTags()" autocomplete="off"/>
+        <input type="text" id="familySearchInput" class="directory-search-input" placeholder="Filter families… (e.g. Astroblazer, Ancient Dragon, Divine Spirit, Makai, Gundam)" oninput="filterFamilyTags()" autocomplete="off"/>
+      </div>
+      <!-- Category & Color Quick Filter Tabs -->
+      <div class="set-category-tabs" id="familyCategoryTabs">
+        <button class="set-cat-btn active" data-cat="all" onclick="selectFamilyCategory('all')">✨ All Families</button>
+        <button class="set-cat-btn" data-cat="1" onclick="selectFamilyCategory(1)"><span class="color-dot dot-red"></span> Red</button>
+        <button class="set-cat-btn" data-cat="2" onclick="selectFamilyCategory(2)"><span class="color-dot dot-purple"></span> Purple</button>
+        <button class="set-cat-btn" data-cat="3" onclick="selectFamilyCategory(3)"><span class="color-dot dot-green"></span> Green</button>
+        <button class="set-cat-btn" data-cat="4" onclick="selectFamilyCategory(4)"><span class="color-dot dot-white"></span> White</button>
+        <button class="set-cat-btn" data-cat="5" onclick="selectFamilyCategory(5)"><span class="color-dot dot-yellow"></span> Yellow</button>
+        <button class="set-cat-btn" data-cat="6" onclick="selectFamilyCategory(6)"><span class="color-dot dot-blue"></span> Blue</button>
+        <button class="set-cat-btn" data-cat="11" onclick="selectFamilyCategory(11)">🤖 Collaboration</button>
+        <button class="set-cat-btn" data-cat="0" onclick="selectFamilyCategory(0)">🌐 Multi-Color</button>
       </div>
     </section>
 
@@ -208,6 +220,15 @@
   <script src="/app.js?v=5.4"></script>
 <script>
 let allCategorizedFamilies = [];
+let activeFamilyCategory = 'all';
+
+function selectFamilyCategory(cat) {
+  activeFamilyCategory = cat;
+  document.querySelectorAll('#familyCategoryTabs .set-cat-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-cat') === String(cat));
+  });
+  filterFamilyTags();
+}
 
 async function loadFamilyDirectory() {
   try {
@@ -298,7 +319,13 @@ function filterFamilyTags() {
   const query = document.getElementById('familySearchInput').value.toLowerCase().trim();
   const sections = document.querySelectorAll('#familySectionsContainer .dir-section');
 
-  sections.forEach(sec => {
+  sections.forEach((sec, idx) => {
+    const isCatMatch = (activeFamilyCategory === 'all') || (String(activeFamilyCategory) === String(idx));
+    if (!isCatMatch) {
+      sec.style.display = 'none';
+      return;
+    }
+
     const tags = sec.querySelectorAll('.dir-tag');
     let visibleCount = 0;
     tags.forEach(t => {
