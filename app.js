@@ -694,39 +694,42 @@ function formatEffectKeywordsInModal(text) {
   // 11. Ultimate Triggers
   safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
-  // 12. Highlight all Official Battle Spirits Wiki Keywords
-  const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+  // 12. Highlight all Official Battle Spirits Wiki Keywords (English and Japanese)
+  const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Burst S|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush(?::[^\]]+)?|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Burst(?::[^\]]+)?|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]|【(連鎖(?::[^】]+)?|激突|呪撃|粉砕|大粉砕|装甲(?::[^】]+)?|重装甲(?::[^】]+)?|超装甲(?::[^】]+)?|神速|烈神速|抜刀|覚醒|超覚醒|不老不死|ソウルドライブ|バースト(?::[^】]+)?|ソウルバースト|アクセル(?::[^】]+)?|煌臨(?::[^】]+)?|契約煌臨(?::[^】]+)?|顕現|ミラージュ(?::[^】]+)?|転醒|影武者|六天連鎖(?::[^】]+)?|連刃|強襲(?::[^】]+)?|旋風(?::[^】]+)?|聖命|氷壁(?::[^】]+)?)】/gi;
 
   safe = safe.replace(allKwPattern, (match) => {
     let cls = 'kw-generic';
     const low = match.toLowerCase();
-    if (low.includes('soul burst')) cls = 'kw-soul-burst';
-    else if (low.includes('manifest') || low.includes('mani')) cls = 'kw-manifest';
-    else if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
-    else if (low.includes('clash')) cls = 'kw-clash';
-    else if (low.includes('curse')) cls = 'kw-curse';
-    else if (low.includes('crush')) cls = 'kw-crush';
-    else if (low.includes('holy life') || low.includes('heavenly light')) cls = 'kw-holylife';
-    else if (low.includes('windstorm') || low.includes('whirlwind')) cls = 'kw-windstorm';
-    else if (low.includes('assault')) cls = 'kw-assault';
-    else if (low.includes('high speed') || low.includes('swift') || low.includes('sound speed')) cls = 'kw-highspeed';
-    else if (low.includes('awaken')) cls = 'kw-awaken';
-    else if (low.includes('immortality') || low.includes('revive')) cls = 'kw-immortality';
-    else if (low.includes('soul drive')) cls = 'kw-souldrive';
-    else if (low.includes('soul core')) cls = 'kw-soul-core';
-    else if (low.includes('ice wall')) cls = 'kw-icewall';
-    else if (low.includes('armor') || low.includes('field')) cls = 'kw-armor';
-    else if (low.includes('burst')) cls = 'kw-burst';
+    if (low.includes('soul burst') || low.includes('burst s') || low.includes('ソウルバースト')) cls = 'kw-soul-burst';
+    else if (low.includes('manifest') || low.includes('mani') || low.includes('顕現')) cls = 'kw-manifest';
+    else if (low.includes('contract advent') || low.includes('契約煌臨')) cls = 'kw-advent';
+    else if (low.includes('advent') || low.includes('twinkle') || low.includes('煌臨')) cls = 'kw-advent';
+    else if (low.includes('clash') || low.includes('激突')) cls = 'kw-clash';
+    else if (low.includes('curse') || low.includes('呪撃')) cls = 'kw-curse';
+    else if (low.includes('crush') || low.includes('粉砕')) cls = 'kw-crush';
+    else if (low.includes('holy life') || low.includes('heavenly light') || low.includes('聖命')) cls = 'kw-holylife';
+    else if (low.includes('windstorm') || low.includes('whirlwind') || low.includes('旋風')) cls = 'kw-windstorm';
+    else if (low.includes('assault') || low.includes('強襲')) cls = 'kw-assault';
+    else if (low.includes('high speed') || low.includes('swift') || low.includes('sound speed') || low.includes('神速')) cls = 'kw-highspeed';
+    else if (low.includes('awaken') || low.includes('覚醒')) cls = 'kw-awaken';
+    else if (low.includes('immortality') || low.includes('revive') || low.includes('不老不死')) cls = 'kw-immortality';
+    else if (low.includes('soul drive') || low.includes('ソウルドライブ')) cls = 'kw-souldrive';
+    else if (low.includes('soul core') || low.includes('ソウルコア')) cls = 'kw-soul-core';
+    else if (low.includes('ice wall') || low.includes('氷壁')) cls = 'kw-icewall';
+    else if (low.includes('armor') || low.includes('field') || low.includes('装甲')) cls = 'kw-armor';
+    else if (low.includes('burst') || low.includes('バースト')) cls = 'kw-burst';
     else if (low.includes('flash')) cls = 'kw-flash';
     else if (low.includes('tribute')) cls = 'kw-tribute';
-    else if (low.includes('consecutive blade')) cls = 'kw-consecutive';
-    else if (low.includes('mirage')) cls = 'kw-mirage';
+    else if (low.includes('consecutive blade') || low.includes('連刃')) cls = 'kw-consecutive';
+    else if (low.includes('mirage') || low.includes('ミラージュ')) cls = 'kw-mirage';
     else if (low.includes('spellbind') || low.includes('spell blight')) cls = 'kw-spellbind';
-    else if (low.includes('accel')) cls = 'kw-accel';
-    else if (low.includes('change')) cls = 'kw-change';
+    else if (low.includes('accel') || low.includes('アクセル')) cls = 'kw-accel';
+    else if (low.includes('change') || low.includes('チェンジ')) cls = 'kw-change';
     else if (low.includes('charge')) cls = 'kw-charge';
-    else if (low.includes('rush')) cls = 'kw-rush';
-    else if (low.includes('rebirth')) cls = 'kw-rebirth';
+    else if (low.includes('rush') || low.includes('連鎖')) cls = 'kw-rush';
+    else if (low.includes('rebirth') || low.includes('転醒')) cls = 'kw-rebirth';
+    else if (low.includes('kagemusha') || low.includes('影武者')) cls = 'kw-kagemusha';
+    else if (low.includes('unsheathe') || low.includes('抜刀')) cls = 'kw-unsheathe';
     else if (low.includes('unleash')) cls = 'kw-unleash';
     else if (low.includes('grand')) cls = 'kw-grand';
     return `<span class="effect-keyword-pill ${cls}">${match}</span>`;

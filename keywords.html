@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>Keywords & Mechanics | Battle Spirits Eternal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=5.4">
+  <style>
+    .keyword-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .keyword-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .keyword-card:hover {
+      border-color: #f59e0b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.15);
+    }
+    .keyword-card.active {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.35);
+    }
+    .keyword-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .keyword-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .keyword-icon {
+      font-size: 1.35rem;
+    }
+    .keyword-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    .keyword-jp {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .keyword-count-badge {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .keyword-card.active .keyword-count-badge {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border-color: #f59e0b;
+    }
+    .keyword-cat-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #38bdf8;
+    }
+    .keyword-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted, #94a3b8);
+      line-height: 1.45;
+      flex: 1;
+    }
+    .keyword-cards-section {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+    .keyword-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .keyword-section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .keyword-section-stats {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+<header class="navbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">⚔️</span>
+    <span class="brand-title">Battle Spirits Eternal</span>
+  </a>
+  <nav class="nav-tabs">
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
+    <a class="tab-btn active" id="tabKeywords" href="/keywords">⚡ Keywords</a>
+    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <div class="nav-auth-slot" id="navAuthSlot">
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="main">
+
+  <div class="directory-view" id="keywordsView">
+
+    <section class="directory-header">
+      <div class="directory-title-row">
+        <h1 class="directory-title">
+          <span>⚡ Keywords & Battle Mechanics</span>
+        </h1>
+        <span class="directory-stats-badge" id="kwStatsBadge">35 Core Keywords</span>
+      </div>
+      <p class="directory-subtitle">
+        Explore and separate cards based on signature Battle Spirits keywords and rules. Select any keyword to inspect its mechanics and view all matching cards.
+      </p>
+      <div class="directory-search-wrap">
+        <svg class="directory-search-icon" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="kwSearchInput" class="directory-search-input" placeholder="Search keywords… (e.g. Rush, Clash, Advent, Burst, Accel, Soul Drive)" oninput="filterKeywords()" autocomplete="off"/>
+      </div>
+      <!-- Category Filter Tabs -->
+      <div class="set-category-tabs" id="kwCategoryTabs">
+        <button class="set-cat-btn active" data-cat="all" onclick="selectKwCategory('all', this)">✨ All Keywords</button>
+        <button class="set-cat-btn" data-cat="Combat & Attack" onclick="selectKwCategory('Combat & Attack', this)">⚔️ Combat & Attack</button>
+        <button class="set-cat-btn" data-cat="Summon & Evolution" onclick="selectKwCategory('Summon & Evolution', this)">🌟 Summon & Evolution</button>
+        <button class="set-cat-btn" data-cat="Defense & Burst" onclick="selectKwCategory('Defense & Burst', this)">🛡️ Defense & Burst</button>
+        <button class="set-cat-btn" data-cat="Triggers & Resources" onclick="selectKwCategory('Triggers & Resources', this)">💠 Triggers & Resources</button>
+      </div>
+    </section>
+
+    <!-- Keywords Cards Directory -->
+    <div class="keyword-categories-grid" id="keywordsGrid">
+      <div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">
+        <span style="font-size:1.5rem;">⚡</span><br>Loading Battle Spirits keyword database…
+      </div>
+    </div>
+
+    <!-- Active Keyword Cards Section -->
+    <section class="keyword-cards-section" id="keywordCardsSection">
+      <div class="keyword-section-header">
+        <div class="keyword-section-title">
+          <span id="selectedKwIcon">⚡</span>
+          <span id="selectedKwTitle">Cards with Keyword</span>
+        </div>
+        <div class="keyword-section-stats" id="selectedKwStats">Loading matching cards…</div>
+      </div>
+
+      <div class="card-grid" id="keywordCardsGrid">
+        <div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">
+          Select a keyword to view its matching cards.
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<!-- ════════════════ CARD DETAIL MODAL ════════════════ -->
+<div class="modal-overlay" id="cardModal" onclick="closeModalBg(event)">
+  <button class="modal-nav-arrow modal-nav-prev" id="modalPrevBtn" onclick="event.stopPropagation(); navigateCardModal(-1)" title="Previous Card (← Left Arrow)" style="display:none;">
+    <span>‹</span>
+  </button>
+
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
+    <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
+      <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
+        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+      <div class="modal-actions">
+        <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
+        <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubPrevBtn" onclick="navigateCardModal(-1)" title="Previous Card" style="display:none;">‹ Prev</button>
+        <button class="btn-modal-outline btn-modal-nav-btn" id="modalSubNextBtn" onclick="navigateCardModal(1)" title="Next Card" style="display:none;">Next ›</button>
+        <a class="btn-modal-outline" id="modalDownload" href="#" target="_blank">⬇️ Save Art</a>
+        <a class="btn-modal-outline" id="modalWikiLink" href="#" target="_blank">Wiki ↗</a>
+      </div>
+    </div>
+    <div class="modal-info">
+      <div>
+        <div class="modal-jpname" id="modalJpName"></div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+      </div>
+      <div class="badges" id="modalBadges"></div>
+      <div class="info-box">
+        <div class="info-box-label">Levels & Battle Points</div>
+        <div class="info-box-content" id="modalLevels" style="font-family:var(--mono);font-size:0.85rem;"></div>
+      </div>
+      <div class="info-box">
+        <div class="info-box-label">Card Effect / Ability</div>
+        <div class="info-box-content" id="modalEffect"></div>
+      </div>
+      <div class="flavor-text" id="modalFlavor" style="display:none;"></div>
+      <div>
+        <div class="info-box-label" style="margin-bottom:0.4rem;">Sets / Printings</div>
+        <div class="modal-sets-row" id="modalSets"></div>
+      </div>
+      <a class="wiki-link" id="modalWikiLinkBottom" href="#" target="_blank">View on Battle Spirits Fandom Wiki ↗</a>
+    </div>
+  </div>
+</div>
+
+<nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+  <a href="/arena" class="mobile-nav-item">
+    <span class="mobile-nav-icon">⚔️</span>
+    <span>Arena</span>
+  </a>
+  <a href="/browse" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🎴</span>
+    <span>Browse</span>
+  </a>
+  <a href="/keywords" class="mobile-nav-item active">
+    <span class="mobile-nav-icon">⚡</span>
+    <span>Keywords</span>
+  </a>
+  <a href="/deck" class="mobile-nav-item">
+    <span class="mobile-nav-icon">🗃️</span>
+    <span>Deck</span>
+    <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
+  </a>
+  <a href="/sets" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📦</span>
+    <span>Sets</span>
+  </a>
+  <a href="/family" class="mobile-nav-item">
+    <span class="mobile-nav-icon">📜</span>
+    <span>Family</span>
+  </a>
+</nav>
+
+<script src="/app.js?v=5.4"></script>
+<script src="/battle_arena.js?v=5.4"></script>
+<script>
+let allKeywords = [];
+let currentCategory = 'all';
+let selectedKeyword = null;
+
+async function initKeywordsPage() {
+  try {
+    const res = await fetch('/api/keywords');
+    if (res.ok) {
+      const data = await res.json();
+      allKeywords = data.keywords || [];
+    }
+  } catch (e) {
+    console.warn('Failed to load keywords API:', e);
+  }
+
+  // Fallback defaults if API not ready
+  if (!allKeywords.length) {
+    allKeywords = [
+      { id: 'rush', name: 'Rush', jp: '連鎖', category: 'Combat & Attack', icon: '🔗', query: 'Rush', desc: 'Triggers additional effects if you control specific color symbols on your field.' },
+      { id: 'clash', name: 'Clash', jp: '激突', category: 'Combat & Attack', icon: '⚔️', query: 'Clash', desc: 'Forces the opponent to block if possible when attacking.' },
+      { id: 'advent', name: 'Advent', jp: '煌臨', category: 'Summon & Evolution', icon: '🌟', query: 'Advent', desc: 'Stacks atop an eligible Spirit at Flash timing without paying cost.' },
+      { id: 'burst', name: 'Burst', jp: 'バースト', category: 'Defense & Burst', icon: '🛡️', query: 'Burst', desc: 'Triggers from the Burst slot when enemy actions trigger its condition.' },
+      { id: 'soul-drive', name: 'Soul Drive', jp: 'ソウルドライブ', category: 'Triggers & Resources', icon: '💥', query: 'Soul Drive', desc: 'Once per game ability banishing Soul Core to Void.' }
+    ];
+  }
+
+  renderKeywordsGrid();
+
+  // Check URL param or default to Rush
+  const params = new URLSearchParams(window.location.search);
+  const kwParam = params.get('kw') || params.get('keyword') || 'Rush';
+  const match = allKeywords.find(k => k.name.toLowerCase() === kwParam.toLowerCase() || k.id === kwParam.toLowerCase());
+  selectKeyword(match || allKeywords[0]);
+}
+
+function renderKeywordsGrid() {
+  const container = document.getElementById('keywordsGrid');
+  if (!container) return;
+
+  const search = (document.getElementById('kwSearchInput')?.value || '').toLowerCase().trim();
+
+  const filtered = allKeywords.filter(k => {
+    const matchesCat = currentCategory === 'all' || k.category === currentCategory;
+    const matchesSearch = !search || 
+      k.name.toLowerCase().includes(search) || 
+      (k.jp && k.jp.toLowerCase().includes(search)) || 
+      k.desc.toLowerCase().includes(search) ||
+      k.category.toLowerCase().includes(search);
+    return matchesCat && matchesSearch;
+  });
+
+  const badge = document.getElementById('kwStatsBadge');
+  if (badge) badge.textContent = `${filtered.length} Keywords`;
+
+  if (!filtered.length) {
+    container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">No keywords match your search.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(k => {
+    const isActive = selectedKeyword && selectedKeyword.id === k.id;
+    const countDisplay = (k.cardCount !== undefined && k.cardCount !== null) ? `${k.cardCount} cards` : 'Browse cards';
+    return `
+      <div class="keyword-card ${isActive ? 'active' : ''}" onclick="selectKeywordById('${k.id}')">
+        <div class="keyword-card-top">
+          <div class="keyword-title-wrap">
+            <span class="keyword-icon">${k.icon || '⚡'}</span>
+            <div class="keyword-name">${k.name} <span class="keyword-jp">【${k.jp || ''}】</span></div>
+          </div>
+          <span class="keyword-count-badge">${countDisplay}</span>
+        </div>
+        <div class="keyword-cat-pill">${k.category}</div>
+        <div class="keyword-desc">${k.desc}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectKwCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll('#kwCategoryTabs .set-cat-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderKeywordsGrid();
+}
+
+function filterKeywords() {
+  renderKeywordsGrid();
+}
+
+function selectKeywordById(id) {
+  const kw = allKeywords.find(k => k.id === id);
+  if (kw) selectKeyword(kw);
+}
+
+async function selectKeyword(kw) {
+  selectedKeyword = kw;
+  renderKeywordsGrid();
+
+  const iconEl = document.getElementById('selectedKwIcon');
+  const titleEl = document.getElementById('selectedKwTitle');
+  const statsEl = document.getElementById('selectedKwStats');
+  const gridEl = document.getElementById('keywordCardsGrid');
+
+  if (iconEl) iconEl.textContent = kw.icon || '⚡';
+  if (titleEl) titleEl.textContent = `Cards with [${kw.name}] 【${kw.jp || ''}】`;
+  if (statsEl) statsEl.textContent = 'Searching database…';
+  if (gridEl) gridEl.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">Summoning cards…</div>';
+
+  try {
+    const res = await fetch(`/api/cards?q=${encodeURIComponent(kw.query || kw.name)}&limit=36`);
+    if (res.ok) {
+      const data = await res.json();
+      const cards = data.cards || [];
+      if (statsEl) statsEl.textContent = `${data.total || cards.length} Cards Found`;
+
+      if (!cards.length) {
+        gridEl.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">No cards found for this keyword.</div>';
+        return;
+      }
+
+      gridEl.innerHTML = cards.map(c => {
+        const color = (c.color || 'white').toLowerCase();
+        const safeName = esc(c.name);
+        const artUrl = c.image_url || '/placeholder.png';
+        const costStr = (c.cost !== null && c.cost !== undefined) ? `Cost ${c.cost}` : '';
+        const typeStr = c.type || 'Card';
+        const metaStr = [costStr, typeStr, c.rarity].filter(Boolean).join(' • ');
+
+        let effectHtml = '';
+        if (c.effect) {
+          effectHtml = formatEffectKeywordsInModal(c.effect.slice(0, 160) + (c.effect.length > 160 ? '…' : ''));
+        }
+
+        return `
+          <div class="card-item card-theme-${color}" onclick="openCardDetail('${safeName.replace(/'/g, "\\'")}')" style="cursor:pointer;">
+            <div class="card-art-wrap">
+              <img src="${artUrl}" alt="${safeName}" loading="lazy" class="card-art-img" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';"/>
+            </div>
+            <div class="card-meta">
+              <span class="card-color-badge color-${color}">${c.color || 'White'}</span>
+              <span class="card-sub-info">${metaStr}</span>
+            </div>
+            <div class="card-name">${safeName}</div>
+            ${effectHtml ? `<div class="card-effect-preview" style="font-size:0.78rem;color:#94a3b8;line-height:1.4;margin-top:0.4rem;max-height:3.2rem;overflow:hidden;">${effectHtml}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+  } catch (err) {
+    console.error('Failed to fetch cards for keyword:', err);
+    if (statsEl) statsEl.textContent = 'Error loading cards';
+    if (gridEl) gridEl.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--muted);grid-column:1/-1;">Failed to load cards. Please try again.</div>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initKeywordsPage);
+</script>
+</body>
+</html>

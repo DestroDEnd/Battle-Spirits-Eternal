@@ -2169,12 +2169,9 @@
         return { allowed: false, reason: 'Requires Soul Core in Reserve or on this Ultimate' };
       }
     } else {
-      if (card.hasSoulCore === false) {
-        return { allowed: false, reason: 'Soul Core must be placed on this Ultimate' };
-      }
       const scOnCard = (card.hasSoulCore === true) ||
-        (card.cores && card.cores.soul > 0) ||
-        (friendlyState.soulCoreSpiritUid === card.uid && friendlyState.soulCoreLocation === 'field');
+        (card.hasSoulCore !== false && card.cores && card.cores.soul > 0) ||
+        (card.hasSoulCore !== false && friendlyState.soulCoreSpiritUid === card.uid && friendlyState.soulCoreLocation === 'field');
       if (!scOnCard) {
         return { allowed: false, reason: 'Soul Core must be placed on this Ultimate' };
       }
@@ -6237,6 +6234,30 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             const cls = getPlayerStepActionClass(p);
             setStepButtonContent(btnEl, label, cls, false);
           }
+          if (p === 'END') {
+            const friendlyField = DuelState.player.field || [];
+            const hasTerraDragon = friendlyField.some(s => {
+              const fam = s.family || '';
+              return /terra\s*dragon|地竜/i.test(fam) || (Array.isArray(s.families) && s.families.some(f => /terra\s*dragon|地竜/i.test(f)));
+            });
+            const trash = DuelState.player.trashCards || [];
+            const dynaInTrash = trash.some(c => (c.card_number === 'BS40-078' || c.cardNumber === 'BS40-078' || (c.name && c.name.toLowerCase().includes('dyna power'))));
+            let dynaBtn = document.getElementById('btnDynaPowerRetrieve');
+            if (hasTerraDragon && dynaInTrash && !DuelState.dynaPowerTrashRetrievedThisTurn) {
+              if (!dynaBtn && cardEl && btnEl) {
+                dynaBtn = document.createElement('button');
+                dynaBtn.id = 'btnDynaPowerRetrieve';
+                dynaBtn.className = 'btn-step-action';
+                dynaBtn.style.cssText = 'margin-bottom:8px;background:linear-gradient(135deg,#ea580c,#c2410c);border:1px solid #f97316;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 0 10px rgba(234,88,12,0.4);cursor:pointer;width:100%;';
+                dynaBtn.innerHTML = '<span>🔥</span> Retrieve Dyna Power from Trash';
+                dynaBtn.onclick = retrieveDynaPowerFromTrash;
+                cardEl.insertBefore(dynaBtn, btnEl);
+              }
+            } else if (dynaBtn) {
+              if (typeof dynaBtn.remove === 'function') dynaBtn.remove();
+              else if (dynaBtn.parentNode) dynaBtn.parentNode.removeChild(dynaBtn);
+            }
+          }
         } else {
           // Future / Pending step in player's turn (Reset cleanly from any previous turn)
           cardEl.className = 'step-card is-locked-step';
@@ -6564,39 +6585,42 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // 11. Ultimate Triggers
     safe = safe.replace(/(?<!<[^>]*)(?:\[(?:Ultimate Trigger|U-Trigger|Cross Ultimate Trigger|XU-Trigger|Hit|Critical Hit)\]|【(?:Uトリガー|XUトリガー|ヒット|クリティカルヒット)】)/gi, '<span class="effect-keyword-pill kw-utrigger">$&</span>');
 
-    // 12. Highlight all Official Battle Spirits Wiki Keywords + bracketed effects
-    const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flag Contract Advent|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]/gi;
+    // 12. Highlight all Official Battle Spirits Wiki Keywords + bracketed effects (English & Japanese)
+    const allKwPattern = /\[(A\.T\.\s*Field|Accel(?::[^\]]+)?|Advent(?::[^\]]+)?|Amplify|Appeal|Armed Intervention|Armor(?::[^\]]+)?|Assault(?::\s*\d+)?|Assemble|Awaken|Barrage|Bombardment|Brilliance|Buddy|Bunshin(?::\s*\d+)?|Burst(?::[^\]]+)?|Burst S|Bushido|Cast Off|Catalyze|Change|Charge|Clash|Clock Up|Consecutive Blade|Contract Armor|Contract Awaken|Contract Unleash|Core Charge|Count Break|Crush|Curse|Digivolution(?::[^\]]+)?|Digivolve(?::[^\]]+)?|Dispersion|Diva Rush|Double Drive|Draw Lock|Emperor Road|Fast Draw|Fierce Windstorm|Flag Contract Advent|Flashing Swift|Fortress|Friend|Funnel|God Strike|Grand Assault|Grand Field|Grand Ice Wall|Grand Skill|Grandphosis|Great Assault|Great Crush|Heavenly Light|Heavy Armor(?::[^\]]+)?|Heavy Exhaust(?::[^\]]+)?|High Speed|Holy Life|Ice Wall(?::[^\]]+)?|Immortality(?::[^\]]+)?|Infinite Blade|Infinite Flame|Kagemusha|Leap|Level Up|Load(?::\s*\d+)?|Manifest(?::[^\]]+)?|Mani(?::[^\]]+)?|Mirage(?::[^\]]+)?|My Unit|NT-D|On Stage|Plunder|Poison Blade|PS Armor|Pursuit|Rebirth|Reload|Resonance|Revive|Rumble(?::\s*\d+)?|Rush(?::[^\]]+)?|Seal|Shamanism|Show Up|Six Heaven Rush|Soar|Solo Part|Soul Awaken|Soul Burst(?::[^\]]+)?|Soul Drive|Soul Magic|Sound Speed|Spellbind|Spell Blight|Spirit Soul(?::[^\]]+)?|Stampede|Super Boost|Super Unleash|Supreme Clash|Trans-Am(?::[^\]]+)?|Tribute(?::[^\]]+)?|Trigger Counter|True-Awaken|True-Clash|True-Curse|Twinkle(?::[^\]]+)?|Ultra Armor(?::[^\]]+)?|Ultra Holy Life|Unleash|Unsheathe|Windstorm(?::\s*\d+)?|Zero Counter|Flash|Twinkle Necromancy)\]|【(連鎖(?::[^】]+)?|激突|呪撃|粉砕|大粉砕|装甲(?::[^】]+)?|重装甲(?::[^】]+)?|超装甲(?::[^】]+)?|神速|烈神速|抜刀|覚醒|超覚醒|不老不死|ソウルドライブ|バースト(?::[^】]+)?|ソウルバースト|アクセル(?::[^】]+)?|煌臨(?::[^】]+)?|契約煌臨(?::[^】]+)?|顕現|ミラージュ(?::[^】]+)?|転醒|影武者|六天連鎖(?::[^】]+)?|連刃|強襲(?::[^】]+)?|旋風(?::[^】]+)?|聖命|氷壁(?::[^】]+)?)】/gi;
 
     safe = safe.replace(allKwPattern, (match) => {
       let cls = 'kw-generic';
       const low = match.toLowerCase();
-      if (low.includes('soul burst')) cls = 'kw-soul-burst';
-      else if (low.includes('manifest') || low.includes('mani')) cls = 'kw-manifest';
-      else if (low.includes('advent') || low.includes('twinkle')) cls = 'kw-advent';
-      else if (low.includes('clash')) cls = 'kw-clash';
-      else if (low.includes('curse')) cls = 'kw-curse';
-      else if (low.includes('crush')) cls = 'kw-crush';
-      else if (low.includes('holy life') || low.includes('heavenly light')) cls = 'kw-holylife';
-      else if (low.includes('windstorm') || low.includes('whirlwind')) cls = 'kw-windstorm';
-      else if (low.includes('assault')) cls = 'kw-assault';
-      else if (low.includes('high speed') || low.includes('swift') || low.includes('sound speed')) cls = 'kw-highspeed';
-      else if (low.includes('awaken')) cls = 'kw-awaken';
-      else if (low.includes('immortality') || low.includes('revive')) cls = 'kw-immortality';
-      else if (low.includes('soul drive')) cls = 'kw-souldrive';
-      else if (low.includes('soul core')) cls = 'kw-soul-core';
-      else if (low.includes('ice wall')) cls = 'kw-icewall';
-      else if (low.includes('armor') || low.includes('field')) cls = 'kw-armor';
-      else if (low.includes('burst')) cls = 'kw-burst';
+      if (low.includes('soul burst') || low.includes('burst s') || low.includes('ソウルバースト')) cls = 'kw-soul-burst';
+      else if (low.includes('manifest') || low.includes('mani') || low.includes('顕現')) cls = 'kw-manifest';
+      else if (low.includes('contract advent') || low.includes('契約煌臨')) cls = 'kw-advent';
+      else if (low.includes('advent') || low.includes('twinkle') || low.includes('煌臨')) cls = 'kw-advent';
+      else if (low.includes('clash') || low.includes('激突')) cls = 'kw-clash';
+      else if (low.includes('curse') || low.includes('呪撃')) cls = 'kw-curse';
+      else if (low.includes('crush') || low.includes('粉砕')) cls = 'kw-crush';
+      else if (low.includes('holy life') || low.includes('heavenly light') || low.includes('聖命')) cls = 'kw-holylife';
+      else if (low.includes('windstorm') || low.includes('whirlwind') || low.includes('旋風')) cls = 'kw-windstorm';
+      else if (low.includes('assault') || low.includes('強襲')) cls = 'kw-assault';
+      else if (low.includes('high speed') || low.includes('swift') || low.includes('sound speed') || low.includes('神速')) cls = 'kw-highspeed';
+      else if (low.includes('awaken') || low.includes('覚醒')) cls = 'kw-awaken';
+      else if (low.includes('immortality') || low.includes('revive') || low.includes('不老不死')) cls = 'kw-immortality';
+      else if (low.includes('soul drive') || low.includes('ソウルドライブ')) cls = 'kw-souldrive';
+      else if (low.includes('soul core') || low.includes('ソウルコア')) cls = 'kw-soul-core';
+      else if (low.includes('ice wall') || low.includes('氷壁')) cls = 'kw-icewall';
+      else if (low.includes('armor') || low.includes('field') || low.includes('装甲')) cls = 'kw-armor';
+      else if (low.includes('burst') || low.includes('バースト')) cls = 'kw-burst';
       else if (low.includes('flash')) cls = 'kw-flash';
       else if (low.includes('tribute')) cls = 'kw-tribute';
-      else if (low.includes('consecutive blade')) cls = 'kw-consecutive';
-      else if (low.includes('mirage')) cls = 'kw-mirage';
+      else if (low.includes('consecutive blade') || low.includes('連刃')) cls = 'kw-consecutive';
+      else if (low.includes('mirage') || low.includes('ミラージュ')) cls = 'kw-mirage';
       else if (low.includes('spellbind') || low.includes('spell blight')) cls = 'kw-spellbind';
-      else if (low.includes('accel')) cls = 'kw-accel';
-      else if (low.includes('change')) cls = 'kw-change';
+      else if (low.includes('accel') || low.includes('アクセル')) cls = 'kw-accel';
+      else if (low.includes('change') || low.includes('チェンジ')) cls = 'kw-change';
       else if (low.includes('charge')) cls = 'kw-charge';
-      else if (low.includes('rush')) cls = 'kw-rush';
-      else if (low.includes('rebirth')) cls = 'kw-rebirth';
+      else if (low.includes('rush') || low.includes('連鎖')) cls = 'kw-rush';
+      else if (low.includes('rebirth') || low.includes('転醒')) cls = 'kw-rebirth';
+      else if (low.includes('kagemusha') || low.includes('影武者')) cls = 'kw-kagemusha';
+      else if (low.includes('unsheathe') || low.includes('抜刀')) cls = 'kw-unsheathe';
       else if (low.includes('unleash')) cls = 'kw-unleash';
       else if (low.includes('grand')) cls = 'kw-grand';
       return `<span class="effect-keyword-pill ${cls}">${match}</span>`;
@@ -14322,6 +14346,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     // Reset Hard Once Per Turn tracking and soft once per turn usage for new turn
     DuelState.usedHardOncePerTurn = new Set();
+    DuelState.dynaPowerTrashRetrievedThisTurn = false;
+    const lingeringDynaBtn = document.getElementById('btnDynaPowerRetrieve');
+    if (lingeringDynaBtn) {
+      if (typeof lingeringDynaBtn.remove === 'function') lingeringDynaBtn.remove();
+      else if (lingeringDynaBtn.parentNode) lingeringDynaBtn.parentNode.removeChild(lingeringDynaBtn);
+    }
     const allEntities = [
       ...(DuelState.player.field || []),
       ...(DuelState.opponent.field || []),
@@ -15301,6 +15331,25 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
   }
 
+
+  // ── DYNA POWER END STEP TRASH RETRIEVAL ──
+  function retrieveDynaPowerFromTrash() {
+    const trash = DuelState.player.trashCards || [];
+    const idx = trash.findIndex(c => (c.card_number === 'BS40-078' || c.cardNumber === 'BS40-078' || (c.name && c.name.toLowerCase().includes('dyna power'))));
+    if (idx !== -1) {
+      const [card] = trash.splice(idx, 1);
+      DuelState.player.trash = Math.max(0, (DuelState.player.trash || 1) - 1);
+      if (!DuelState.player.hand) DuelState.player.hand = [];
+      DuelState.player.hand.push(card);
+      DuelState.dynaPowerTrashRetrievedThisTurn = true;
+      AudioFX.drawCard();
+      addLog(`🔥 **[DYNA POWER (End Step)]**: Controlled a Terra Dragon spirit! Returned "${card.name || 'Dyna Power'}" from Trash to Hand!`, 'magic');
+      if (typeof showToast === 'function') showToast('Returned Dyna Power from Trash to Hand!', 'success');
+      renderDuelTable();
+      renderStepNavigator();
+      if (DuelState.currentZoneTab) renderZoneModal();
+    }
+  }
 
   // ── ZONE VIEWER MODAL CONTROLLERS (TRASH & VOID) ──
   function openZoneModal(tab = 'player-trash') {
@@ -16624,6 +16673,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     canPlayCardInCurrentPhase,
     checkCardFreeSummonEligibility,
     executeFreeSummon,
+    retrieveDynaPowerFromTrash,
     checkHandReactionsOnDestruction,
     checkHandReactionsOnAdvent,
     checkHandReactionsOnMirageSet,

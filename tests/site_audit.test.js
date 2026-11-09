@@ -15,6 +15,7 @@ const HTML_FILES = [
   'deck_view.html',
   'family.html',
   'sets.html',
+  'keywords.html',
   'login.html',
   'register.html',
   '404.html'
@@ -66,7 +67,7 @@ describe('Site-Wide UI & Resource Integrity Audit', () => {
   it('4. Navigation links map to valid pages in ROUTE_MAP or files', () => {
     const VALID_ROUTES = new Set([
       '/', '/arena', '/battle', '/duel', '/browse', '/deck',
-      '/deck-view', '/deck_view', '/family', '/sets', '/login', '/register',
+      '/deck-view', '/deck_view', '/family', '/sets', '/keywords', '/login', '/register',
       '#', 'javascript:void(0)', 'javascript:void(0);'
     ]);
     const linkRegex = /<a[^>]+href=["']([^"']+)["']/gi;

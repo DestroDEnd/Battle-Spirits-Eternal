@@ -16,6 +16,7 @@ const rootDir = path.resolve(__dirname, '..');
 const registrySrc = fs.readFileSync(path.join(rootDir, 'engine/cards/registry.js'), 'utf8');
 const sd65Src = fs.readFileSync(path.join(rootDir, 'engine/cards/sets/sd65_four_demon_lords.js'), 'utf8');
 const stdSrc = fs.readFileSync(path.join(rootDir, 'engine/cards/sets/standard_and_custom_decks.js'), 'utf8');
+const soulDriveSrc = fs.readFileSync(path.join(rootDir, 'engine/cards/sets/soul_drive_cards.js'), 'utf8');
 
 // Strip import/export statements for standalone browser evaluation
 const cleanRegistry = registrySrc
@@ -27,6 +28,9 @@ const cleanSd65 = sd65Src
   .replace(/import\s*\{[^}]*\}\s*from\s*['"][^'"]*['"];?/g, '');
 
 const cleanStd = stdSrc
+  .replace(/import\s*\{[^}]*\}\s*from\s*['"][^'"]*['"];?/g, '');
+
+const cleanSoulDrive = soulDriveSrc
   .replace(/import\s*\{[^}]*\}\s*from\s*['"][^'"]*['"];?/g, '');
 
 const bundleContent = `/**
@@ -51,6 +55,9 @@ const bundleContent = `/**
 
   // --- SET: STANDARD AND CUSTOM DECKS ---
   ${cleanStd}
+
+  // --- SET: SOUL DRIVE SUITE ---
+  ${cleanSoulDrive}
 
   console.log('[PerCardRegistry Bundle] Successfully loaded ' + PerCardRegistry.getAll().length + ' explicit card definitions into arena.');
 })(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this));

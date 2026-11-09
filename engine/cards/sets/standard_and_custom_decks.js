@@ -74,6 +74,14 @@ import { PerCardRegistry } from '../registry.js';
     }
   }
 
+  function isTerraDragon(card) {
+    if (!card) return false;
+    const fam = (card.family || '');
+    if (/terra\s*dragon|地竜/i.test(fam)) return true;
+    if (Array.isArray(card.families) && card.families.some(f => /terra\s*dragon|地竜/i.test(f))) return true;
+    return false;
+  }
+
   // ────────────────────────────────────────────────────────────
   // 1. BS14-096: Curse of Hades
   // ────────────────────────────────────────────────────────────
@@ -1760,6 +1768,178 @@ import { PerCardRegistry } from '../registry.js';
           audio(ctx, 'bounce');
           log(ctx, `⚔️ **[ULTIMATE-GRAND-WODEN: Ultimate Trigger]**: Bounced opposing spirits to deckbottom!`, 'skill');
           render(ctx);
+        }
+      }
+    }
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // TERRA DRAGON SUITE (BS22-X01, BS40-078, BS22-005, SD29-CP01)
+  // ────────────────────────────────────────────────────────────
+
+  // BS22-X01: The PrimitiveKing Gigano-Rex
+  PerCardRegistry.registerCard('BS22-X01', {
+    name: 'The PrimitiveKing Gigano-Rex',
+    cardType: 'Spirit',
+    triggers: {
+      WHEN_ATTACKS: function(ctx) {
+        const { card, side, duelState } = ctx;
+        const friendly = getFriendlyState(ctx);
+
+        // 1. Clash: The opponent must block if possible
+        card.hasClash = true;
+
+        // 2. [Rush: Green] (While you have a Green symbol, the following effect activates next)
+        // [Green Core]: Once per turn, refresh all "Terra Dragon" family Spirits you control.
+        const symbols = (ctx.arenaApi && typeof ctx.arenaApi.getFriendlySymbols === 'function')
+          ? ctx.arenaApi.getFriendlySymbols(side)
+          : null;
+        const hasGreenSymbol = (symbols && ((symbols.byColor && symbols.byColor.green > 0) || (symbols.rainbow > 0))) ||
+          (friendly.field || []).some(s => (s.color || '').toLowerCase() === 'green' || (s.symbols && s.symbols.green > 0)) ||
+          (friendly.nexus || []).some(n => (n.color || '').toLowerCase() === 'green' || (n.symbols && n.symbols.green > 0));
+
+        if (hasGreenSymbol && !card._rushUsedThisTurn) {
+          card._rushUsedThisTurn = true;
+          const tdSpirits = (friendly.field || []).filter(s => isTerraDragon(s));
+          for (const s of tdSpirits) {
+            s.isExhausted = false;
+          }
+          audio(ctx, 'refresh');
+          log(ctx, `🌲 **[GIGANO-REX: Rush (Green)]**: Verified Green symbol! Refreshed all ${tdSpirits.length} friendly Terra Dragon Spirit(s)!`, 'skill');
+        }
+
+        // 3. [Lv2] (When Attacks) For each "Terra Dragon" family Spirit you control, this Spirit gains +5000 BP.
+        const curLvl = card.currentLevel || 1;
+        if (curLvl >= 2) {
+          const tdCount = (friendly.field || []).filter(s => isTerraDragon(s)).length;
+          const bpBoost = tdCount * 5000;
+          card.turnBpBoost = (card.turnBpBoost || 0) + bpBoost;
+          recalcBp(ctx, card);
+          audio(ctx, 'bpBoost');
+          log(ctx, `🔥 **[GIGANO-REX: Lv2 When Attacks]**: Gained +${bpBoost} BP (+5000 per Terra Dragon, count: ${tdCount})!`, 'skill');
+        }
+        render(ctx);
+      }
+    }
+  });
+
+  // BS40-078: Dyna Power
+  PerCardRegistry.registerCard('BS40-078', {
+    name: 'Dyna Power',
+    cardType: 'Magic',
+    triggers: {
+      MAIN: function(ctx) {
+        // [Main] During this turn, all your "Terra Dragon" family Spirits gain +3000 BP, and can target and attack an opposing Spirit/Ultimate when they attack.
+        const friendly = getFriendlyState(ctx);
+        const tdSpirits = (friendly.field || []).filter(s => isTerraDragon(s));
+        for (const s of tdSpirits) {
+          s.turnBpBoost = (s.turnBpBoost || 0) + 3000;
+          s.canTargetAttack = true;
+          s.targetAttack = true;
+          recalcBp(ctx, s);
+        }
+        audio(ctx, 'bpBoost');
+        log(ctx, `🔥 **[DYNA POWER: Main]**: Granted +3000 BP and Target Attack to all ${tdSpirits.length} friendly Terra Dragon Spirit(s) this turn!`, 'magic');
+        render(ctx);
+      },
+      FLASH: function(ctx) {
+        // [Flash] During this turn, give a Spirit +3000 BP.
+        const friendly = getFriendlyState(ctx);
+        if (friendly.field && friendly.field.length > 0) {
+          const target = friendly.field[0];
+          target.turnBpBoost = (target.turnBpBoost || 0) + 3000;
+          recalcBp(ctx, target);
+          audio(ctx, 'bpBoost');
+          log(ctx, `🔥 **[DYNA POWER: Flash]**: Granted +3000 BP to "${target.name}" this turn!`, 'magic');
+          render(ctx);
+        }
+      },
+      END_STEP: function(ctx) {
+        // During (Your End Step), if you control any "Terra Dragon" family Spirit, return a [Dyna Power] from your Trash to the Hand.
+        const friendly = getFriendlyState(ctx);
+        const tdSpirits = (friendly.field || []).filter(s => isTerraDragon(s));
+        if (tdSpirits.length > 0) {
+          const trashCards = friendly.trashCards || [];
+          const dynaIdx = trashCards.findIndex(c => (c.card_number === 'BS40-078' || c.cardNumber === 'BS40-078' || (c.name && c.name.toLowerCase().includes('dyna power'))));
+          if (dynaIdx !== -1) {
+            const [ret] = trashCards.splice(dynaIdx, 1);
+            friendly.trash = Math.max(0, (friendly.trash || 1) - 1);
+            if (!friendly.hand) friendly.hand = [];
+            friendly.hand.push(ret);
+            audio(ctx, 'drawCard');
+            log(ctx, `🔥 **[DYNA POWER: End Step]**: Controlled Terra Dragon spirit! Returned [Dyna Power] from Trash to Hand!`, 'magic');
+            render(ctx);
+          }
+        }
+      }
+    }
+  });
+
+  // BS22-005 / BATTLE-SPIRITS-A7121: Ovirapt
+  PerCardRegistry.registerCard(['BS22-005', 'BATTLE-SPIRITS-A7121'], {
+    name: 'Ovirapt',
+    cardType: 'Spirit',
+    triggers: {
+      WHEN_SUMMONED: function(ctx) {
+        // [Lv1-Lv2] (When Summoned) During this turn, all "Terra Dragon" family Spirits you control gain +1000 BP.
+        const friendly = getFriendlyState(ctx);
+        const tdSpirits = (friendly.field || []).filter(s => isTerraDragon(s));
+        for (const s of tdSpirits) {
+          s.turnBpBoost = (s.turnBpBoost || 0) + 1000;
+          recalcBp(ctx, s);
+        }
+        audio(ctx, 'bpBoost');
+        log(ctx, `🦖 **[OVIRAPT: When Summoned]**: Granted +1000 BP to all ${tdSpirits.length} friendly Terra Dragon Spirit(s) this turn!`, 'skill');
+        render(ctx);
+      },
+      WHEN_ATTACKS: function(ctx) {
+        // [Lv1-Lv2] (When Attacks) When you have a Green symbol, this Spirit gains +2000 BP.
+        const { card, side } = ctx;
+        const friendly = getFriendlyState(ctx);
+        const symbols = (ctx.arenaApi && typeof ctx.arenaApi.getFriendlySymbols === 'function')
+          ? ctx.arenaApi.getFriendlySymbols(side)
+          : null;
+        const hasGreenSymbol = (symbols && ((symbols.byColor && symbols.byColor.green > 0) || (symbols.rainbow > 0))) ||
+          (friendly.field || []).some(s => (s.color || '').toLowerCase() === 'green' || (s.symbols && s.symbols.green > 0)) ||
+          (friendly.nexus || []).some(n => (n.color || '').toLowerCase() === 'green' || (n.symbols && n.symbols.green > 0));
+
+        if (hasGreenSymbol) {
+          card.turnBpBoost = (card.turnBpBoost || 0) + 2000;
+          recalcBp(ctx, card);
+          audio(ctx, 'bpBoost');
+          log(ctx, `🦖 **[OVIRAPT: When Attacks]**: Green symbol verified! Gained +2000 BP (now ${card.currentBp || card.bp} BP)!`, 'skill');
+          render(ctx);
+        }
+      }
+    }
+  });
+
+  // SD29-CP01: Ashigaru Raptor
+  PerCardRegistry.registerCard('SD29-CP01', {
+    name: 'Ashigaru Raptor',
+    cardType: 'Spirit',
+    triggers: {
+      WHEN_ATTACKS: function(ctx) {
+        const { card, side } = ctx;
+        const friendly = getFriendlyState(ctx);
+
+        // [Lv1-Lv2] (When Attacks) [Soul Core]: Draw 1 card from your deck.
+        // Rule: Only triggers if the Soul Core is currently placed on this Spirit!
+        const hasSoulCore = card.hasSoulCore === true ||
+          (card.cores && card.cores.soul > 0) ||
+          (friendly.soulCoreSpiritUid === card.uid && friendly.soulCoreLocation === 'field');
+
+        if (hasSoulCore) {
+          if (friendly.deck && friendly.deck.length > 0) {
+            const drawn = friendly.deck.shift();
+            if (!friendly.hand) friendly.hand = [];
+            friendly.hand.push(drawn);
+            audio(ctx, 'drawCard');
+            log(ctx, `🦅 **[ASHIGARU RAPTOR: When Attacks]**: Soul Core verified! Drew "${drawn.name || 'card'}" from deck to hand.`, 'draw');
+            render(ctx);
+          }
+        } else {
+          log(ctx, `ℹ️ **[ASHIGARU RAPTOR: When Attacks]**: Soul Core is not placed on this Spirit. Draw ability requires Soul Core.`, 'info');
         }
       }
     }

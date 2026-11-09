@@ -54,6 +54,7 @@ let cachedCardsIndex = null;
 let cachedCardsByName = null;
 let cachedCardsByNumber = null;
 let cachedFilters = null;
+let cachedKeywordsData = null;
 let cachedFeaturedXRares = null;
 let cachedAiWeights = null;
 let serverDb = null;
@@ -737,14 +738,36 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    res.writeHead(200, {
-      'Content-Type': contentType,
-      'Content-Length': stats.size,
-      'Cache-Control': 'no-cache, no-store, must-revalidate'
-    });
+    // Set high-performance caching headers
+    let cacheControl = 'no-cache';
+    if (['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp', '.ico', '.woff', '.woff2', '.ttf'].includes(ext)) {
+      cacheControl = 'public, max-age=86400, stale-while-revalidate=604800';
+    } else if (['.css', '.js', '.mjs'].includes(ext)) {
+      cacheControl = 'public, max-age=3600, must-revalidate';
+    }
 
-    const stream = fs.createReadStream(filePath);
-    stream.pipe(res);
+    // Check gzip support for text-based resources
+    const acceptEncoding = req.headers['accept-encoding'] || '';
+    const compressible = ['.html', '.css', '.js', '.mjs', '.json', '.svg', '.txt'].includes(ext);
+
+    if (compressible && acceptEncoding.includes('gzip')) {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Encoding': 'gzip',
+        'Cache-Control': cacheControl,
+        'Vary': 'Accept-Encoding'
+      });
+      const stream = fs.createReadStream(filePath);
+      stream.pipe(zlib.createGzip()).pipe(res);
+    } else {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Length': stats.size,
+        'Cache-Control': cacheControl
+      });
+      const stream = fs.createReadStream(filePath);
+      stream.pipe(res);
+    }
   });
 });
 
