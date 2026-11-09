@@ -2627,6 +2627,31 @@ if (typeof globalThis !== 'undefined') {
     }
   });
 
+  // 32B. Petit Bat Purple Blood Crystal Contract Partner (BS67-CX01)
+  PerCardRegistry.registerCard('BS67-CX01', {
+    name: 'Petit Bat',
+    cardType: 'Contract Spirit',
+    triggers: {
+      WHEN_ATTACKS: function(ctx) {
+        const friendly = getFriendlyState(ctx);
+        if (friendly) {
+          const current = friendly.counters || friendly.counter || 0;
+          if (current < 10) {
+            friendly.counters = Math.min(10, current + 2);
+            friendly.counter = friendly.counters;
+          }
+          if (friendly.deck && friendly.deck.length > 0) {
+            if (!friendly.hand) friendly.hand = [];
+            friendly.hand.push(friendly.deck.shift());
+          }
+          audio(ctx, 'draw');
+          log(ctx, `🦇 **[PETIT BAT: When Attacks]**: Counter +2 (now ${friendly.counters || 2}) and drew 1 card!`, 'skill');
+          render(ctx);
+        }
+      }
+    }
+  });
+
   PerCardRegistry.registerCard('BS67-X11', {
     name: 'The DawnLightContractGun Celestoul',
     cardType: 'Brave',
