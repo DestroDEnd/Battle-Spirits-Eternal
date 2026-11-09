@@ -6584,6 +6584,38 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
+    // 7. Bahamunt [LV2-LV3] lock: "During your Attack Step, the opponent can't use Magic effects of the same color as the Magic cards in their Trash."
+    const isMagic = card.type === 'Magic' || (card.type || '').includes('Magic');
+    if (isMagic && phase === 'ATTACK') {
+      const opposingSide = side === 'player' ? 'opponent' : 'player';
+      const opposingState = DuelState[opposingSide];
+      if (opposingState && opposingState.field && DuelState.activePlayer === opposingSide) {
+        const bahamunt = opposingState.field.find(s => {
+          const num = s.card_number || s.cardNumber || s.id;
+          const isBahamunt = num === 'SD02-011' || num === 'BS06-031' || (s.name && s.name.includes('Bahamunt'));
+          return isBahamunt && (s.currentLevel || 1) >= 2;
+        });
+        if (bahamunt) {
+          const myTrash = (DuelState[side] && (DuelState[side].trashCards || [])) || [];
+          const cardColor = (card.color || '').toLowerCase();
+          const cardColors = Array.isArray(card.colors) ? card.colors.map(c => c.toLowerCase()) : [cardColor];
+          const hasMatchingTrashMagic = myTrash.some(tc => {
+            const isTcMagic = tc.type === 'Magic' || (tc.type || '').includes('Magic');
+            if (!isTcMagic) return false;
+            const tcColor = (tc.color || '').toLowerCase();
+            const tcColors = Array.isArray(tc.colors) ? tc.colors.map(c => c.toLowerCase()) : [tcColor];
+            return cardColors.some(c => tcColors.includes(c));
+          });
+          if (hasMatchingTrashMagic) {
+            return {
+              allowed: false,
+              reason: `Cannot cast "${card.name}": Opponent's Bahamunt [LV2-LV3] prevents using Magic matching the color of Magic cards in your Trash!`
+            };
+          }
+        }
+      }
+    }
+
     return { allowed: true };
   }
 

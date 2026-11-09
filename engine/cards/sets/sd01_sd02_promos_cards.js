@@ -2174,8 +2174,8 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DISCARD_OPPOSING_MAGIC",
+            "count": 1
           }
         ]
       },
@@ -2187,7 +2187,7 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
             3
           ]
         },
-        "keyword": "Passive"
+        "keyword": "Magic Lock: Trash Color"
       }
     ]
   },

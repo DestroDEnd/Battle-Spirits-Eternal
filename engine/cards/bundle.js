@@ -4643,6 +4643,151 @@ if (typeof globalThis !== 'undefined') {
     }
   });
 
+  // SD02-008: The RhinoMousquetair Grhinos
+  PerCardRegistry.registerCard('SD02-008', {
+    name: 'The RhinoMousquetair Grhinos',
+    cardType: 'Spirit',
+    triggers: {
+      WHEN_ATTACKS: function(ctx) {
+        const { card, side, duelState, arenaApi } = ctx;
+        const enemySide = side === 'player' ? 'opponent' : 'player';
+        const enemyState = enemySide === 'player' ? duelState.player : duelState.opponent;
+        const friendlyState = side === 'player' ? duelState.player : duelState.opponent;
+        const curLv = card.currentLevel || 1;
+
+        // 1. [LV1-LV2] Destroy an opposing Cost 1 or less Spirit.
+        const oppSpirits = (enemyState.field || []).filter(s =>
+          (s.cost || 0) <= 1 &&
+          (s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit')))
+        );
+
+        const destroyTarget = (target) => {
+          const idx = enemyState.field.findIndex(s => s.uid === target.uid);
+          if (idx !== -1) {
+            enemyState.field.splice(idx, 1);
+            handleDestroyedCores(ctx, target, enemySide);
+            sendToTrash(ctx, target, enemySide, `Destroyed by ${card.name}`);
+            audio(ctx, 'destroy');
+            log(ctx, `💀 **[${card.name}: When Attacks]**: Destroyed opposing Cost ${target.cost || 0} Spirit "${target.name}"!`, 'kill');
+          }
+        };
+
+        if (oppSpirits.length === 1) {
+          destroyTarget(oppSpirits[0]);
+        } else if (oppSpirits.length > 1) {
+          if (side === 'player' && arenaApi && typeof arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+            arenaApi.promptUniversalTargetModal({
+              title: `${card.name}: Destroy Opposing Spirit (Cost ≤ 1)`,
+              targets: oppSpirits.map(s => ({
+                id: s.uid,
+                title: `${s.name} (Cost ${s.cost || 0} • ${s.currentBp || s.bp || 0} BP)`,
+                subtitle: `LV${s.currentLevel || 1} • ${s.currentCores || 0} Cores`
+              }))
+            }, (selectedIds) => {
+              const sel = oppSpirits.find(s => selectedIds && selectedIds.includes(s.uid)) || oppSpirits[0];
+              destroyTarget(sel);
+              render(ctx);
+            });
+          } else {
+            // AI/headless: pick highest BP target
+            const best = [...oppSpirits].sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0))[0];
+            destroyTarget(best);
+          }
+        } else {
+          log(ctx, `ℹ️ **[${card.name}: When Attacks]**: Opponent controls no Cost 1 or less Spirits to destroy.`, 'step');
+        }
+
+        // 2. [LV2] [Assault: 1] (When Attacks): Refresh by exhausting 1 of your Nexuses (once per turn)
+        if (curLv >= 2) {
+          const activeNexuses = (friendlyState.nexus || []).filter(n => !n.isExhausted);
+          if (activeNexuses.length > 0 && !card.assaultUsedThisTurn) {
+            const doAssault = (chosenNexus) => {
+              chosenNexus.isExhausted = true;
+              card.isExhausted = false;
+              card.assaultUsedThisTurn = true;
+              audio(ctx, 'ready');
+              log(ctx, `🌀 **[ASSAULT: 1]**: Exhausted Nexus "${chosenNexus.name}" to refresh "${card.name}"!`, 'skill');
+              render(ctx);
+            };
+
+            if (side === 'player' && arenaApi && typeof arenaApi.askOptionalEffect === 'function' && typeof document !== 'undefined' && document.body) {
+              arenaApi.askOptionalEffect(
+                card,
+                `Activate [Assault: 1]? Exhaust an active Nexus to refresh "${card.name}".`,
+                () => doAssault(activeNexuses[0]),
+                () => { log(ctx, `ℹ️ **[${card.name}]**: Skipped [Assault: 1].`, 'info'); }
+              );
+            } else {
+              doAssault(activeNexuses[0]);
+            }
+          }
+        }
+
+        render(ctx);
+      }
+    }
+  });
+
+  // SD02-011: The BeastPrince Bahamunt
+  PerCardRegistry.registerCard('SD02-011', {
+    name: 'The BeastPrince Bahamunt',
+    cardType: 'Spirit',
+    triggers: {
+      WHEN_SUMMONED: function(ctx) {
+        const { card, side, duelState, arenaApi } = ctx;
+        const enemySide = side === 'player' ? 'opponent' : 'player';
+        const enemyState = enemySide === 'player' ? duelState.player : duelState.opponent;
+        const oppHand = enemyState.hand || [];
+
+        if (oppHand.length === 0) {
+          log(ctx, `👁️ **[${card.name}]**: Opponent's Hand is empty; no cards to inspect.`, 'step');
+          return;
+        }
+
+        const handNames = oppHand.map(c => `"${c.name}"`).join(', ');
+        log(ctx, `👁️ **[${card.name}: When Summoned]**: Revealed entire opposing Hand (${oppHand.length} cards): ${handNames}.`, 'magic');
+
+        const magicCards = oppHand.filter(c => c.type === 'Magic' || (c.type || '').includes('Magic'));
+
+        if (side === 'player' && arenaApi && typeof arenaApi.promptScryRevealModal === 'function' && typeof document !== 'undefined' && document.body) {
+          arenaApi.promptScryRevealModal({
+            sourceCard: card,
+            side: 'player',
+            title: `${card.name}: Opposing Hand (${oppHand.length} Cards)`,
+            description: magicCards.length > 0 
+              ? 'Select 1 opposing Magic card to discard to their Trash.' 
+              : 'Opponent has no Magic cards in Hand to discard.',
+            cards: oppHand,
+            filterFn: (c) => c.type === 'Magic' || (c.type || '').includes('Magic')
+          }, (chosenMagic) => {
+            if (chosenMagic) {
+              const idx = enemyState.hand.findIndex(c => (c.uid && chosenMagic.uid && c.uid === chosenMagic.uid) || c === chosenMagic);
+              if (idx !== -1) enemyState.hand.splice(idx, 1);
+              sendToTrash(ctx, chosenMagic, enemySide, `Discarded from Hand by ${card.name}`);
+              audio(ctx, 'destroy');
+              log(ctx, `🗑️ **[${card.name}]**: Discarded opposing Magic "${chosenMagic.name}" to Trash!`, 'kill');
+              render(ctx);
+            }
+          });
+          return;
+        }
+
+        // Headless / AI turn resolution:
+        if (magicCards.length > 0) {
+          const chosenMagic = magicCards[0];
+          const idx = enemyState.hand.findIndex(c => (c.uid && chosenMagic.uid && c.uid === chosenMagic.uid) || c === chosenMagic);
+          if (idx !== -1) enemyState.hand.splice(idx, 1);
+          sendToTrash(ctx, chosenMagic, enemySide, `Discarded from Hand by ${card.name}`);
+          audio(ctx, 'destroy');
+          log(ctx, `🗑️ **[${card.name}]**: Discarded opposing Magic "${chosenMagic.name}" to Trash!`, 'kill');
+          render(ctx);
+        } else {
+          log(ctx, `ℹ️ **[${card.name}]**: Opponent controls no Magic cards in Hand to discard.`, 'step');
+        }
+      }
+    }
+  });
+
   console.log(`[standard_and_custom_decks] Registered ${PerCardRegistry.getAll().length} deterministic card handlers.`);
 
 
@@ -33220,8 +33365,8 @@ const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DISCARD_OPPOSING_MAGIC",
+            "count": 1
           }
         ]
       },
@@ -33233,7 +33378,7 @@ const SD01_SD02_PROMOS_SAGA_CARDS = [
             3
           ]
         },
-        "keyword": "Passive"
+        "keyword": "Magic Lock: Trash Color"
       }
     ]
   },
