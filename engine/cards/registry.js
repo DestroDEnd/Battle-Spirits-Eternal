@@ -43,6 +43,8 @@ export class CardRegistry {
       if (definition.name) existing.name = definition.name;
       if (definition.cardType || definition.type) existing.cardType = definition.cardType || definition.type;
       if (definition.rawEffect || definition.effect) existing.effect = definition.rawEffect || definition.effect;
+      if (definition.isVanilla !== undefined) existing.isVanilla = definition.isVanilla;
+      if (definition.sagaAbilities) existing.sagaAbilities = definition.sagaAbilities;
 
       this.registry.set(canon, existing);
     }
@@ -105,6 +107,61 @@ export class CardRegistry {
         context.arenaApi.addLog(`⚠️ [Error in ${entry.name || canon}]: ${err.message}`, 'warning');
       }
       return null;
+    }
+  }
+
+  /**
+   * Computes continuous AURA_BP bonuses granted to `targetSpirit` by all active Spirits and Nexuses on `side`.
+   */
+  computeFieldAuraBp(targetSpirit, side, duelState, arenaApi = null) {
+    if (!targetSpirit || !duelState || !duelState[side]) return 0;
+    const st = duelState[side];
+    const sources = [...(st.field || []), ...(st.nexus || [])];
+    let totalBonus = 0;
+    for (const src of sources) {
+      if (!src) continue;
+      const cNum = src.card_number || src.cardNumber || src.id;
+      if (cNum && this.has(cNum, 'AURA_BP')) {
+        const res = this.execute(cNum, 'AURA_BP', {
+          card: src,
+          sourceCard: src,
+          targetSpirit,
+          side,
+          duelState,
+          arenaApi
+        });
+        if (typeof res === 'number' && !isNaN(res)) {
+          totalBonus += res;
+        }
+      }
+    }
+    return totalBonus;
+  }
+
+  /**
+   * Dispatches a phase/step trigger (e.g. START_STEP, CORE_STEP, DRAW_STEP, REFRESH_STEP,
+   * MAIN_STEP, ATTACK_STEP, END_STEP) across all active Spirits and Nexuses on both fields.
+   */
+  dispatchStepEffects(stepTrigger, duelState, arenaApi = null) {
+    if (!stepTrigger || !duelState) return;
+    const trig = String(stepTrigger).trim().toUpperCase();
+    for (const side of ['player', 'opponent']) {
+      const st = duelState[side];
+      if (!st) continue;
+      const units = [...(st.field || []), ...(st.nexus || [])];
+      for (const u of units) {
+        if (!u) continue;
+        const cNum = u.card_number || u.cardNumber || u.id;
+        if (cNum && this.has(cNum, trig)) {
+          this.execute(cNum, trig, {
+            card: u,
+            sourceCard: u,
+            side,
+            duelState,
+            arenaApi
+          });
+        }
+      }
     }
   }
 

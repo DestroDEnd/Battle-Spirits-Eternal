@@ -352,9 +352,8 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BOUNCE_TO_HAND",
-            "count": 1,
-            "allMatching": false
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
           }
         ]
       },
@@ -1152,8 +1151,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 3
           }
         ]
       },
@@ -1168,8 +1168,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -1192,8 +1193,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -1248,7 +1250,7 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
             2
           ]
         },
-        "keyword": "Armor"
+        "keyword": "Armor: Red"
       },
       {
         "overall": "WHEN_BLOCKS",
@@ -1416,8 +1418,7 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 1000
       },
@@ -1467,20 +1468,13 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         "amount": 1000
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "DRAW_CARDS",
-            "count": 1,
-            "thenDiscard": 0
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -1549,8 +1543,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -1790,8 +1785,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DAMAGE_WALL",
+            "maxLifeLoss": 1,
+            "preventAllLifeLoss": false
           }
         ]
       }
@@ -1832,8 +1828,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -1890,7 +1887,7 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
       {
         "overall": "AURA_KEYWORDS",
         "subConditions": {},
-        "keyword": "Tribute"
+        "keyword": "Tribute: Cost 3 or more → Trash"
       },
       {
         "overall": "WHEN_SUMMONED",
@@ -1911,21 +1908,14 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2,
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "REFRESH_SPIRITS",
-            "scope": "TARGET",
-            "count": 1
-          }
-        ]
+        "keyword": "Tribute"
       }
     ]
   },
@@ -1947,26 +1937,20 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2,
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Brilliance"
       },
       {
         "overall": "WHEN_ATTACKS",
@@ -2015,20 +1999,14 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -2128,8 +2106,9 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
           }
         ]
       },
@@ -2181,7 +2160,7 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
       {
         "overall": "AURA_KEYWORDS",
         "subConditions": {},
-        "keyword": "Tribute"
+        "keyword": "Tribute: Cost 3 or more → Trash"
       },
       {
         "overall": "WHEN_SUMMONED",
@@ -2201,20 +2180,14 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2,
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -2225,35 +2198,23 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Tribute"
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_UNBLOCKABLE",
-            "scope": "SELF"
-          }
-        ]
+        "keyword": "Tribute"
       }
     ]
   },
@@ -2347,8 +2308,8 @@ export const SD01_SD02_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
           }
         ]
       }

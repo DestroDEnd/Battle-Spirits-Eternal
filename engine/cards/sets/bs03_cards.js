@@ -25,8 +25,7 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
         "targetFilter": {
           "color": "White"
@@ -73,8 +72,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -98,8 +98,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_NEXUS",
+            "count": 1
           }
         ]
       },
@@ -113,8 +113,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -137,8 +138,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       },
@@ -237,21 +239,15 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2,
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       },
       {
         "overall": "WHEN_ATTACKS",
@@ -373,19 +369,13 @@ export const BS03_SAGA_CARDS = [
         "keyword": "Passive"
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -401,25 +391,18 @@ export const BS03_SAGA_CARDS = [
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 2000
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -430,19 +413,13 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -568,12 +545,20 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -586,13 +571,28 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
-            "op": "BP_BUFF_ALLIES",
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
             "amount": 3000,
-            "filter": {}
+            "count": 1
           }
         ]
       }
@@ -659,9 +659,14 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "AURA_KEYWORDS",
+        "overall": "FLASH",
         "subConditions": {},
-        "keyword": "Passive"
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
       }
     ]
   },
@@ -704,8 +709,23 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
             "op": "BP_BUFF_TARGET",
@@ -777,19 +797,30 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
+        "overall": "MAIN_STEP",
         "subConditions": {
           "levels": [
             1
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_ALLIES",
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
             "amount": 2000,
-            "filter": {
-              "family": "Artificial Soldier"
-            }
+            "count": 1
           }
         ]
       }
@@ -842,8 +873,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -893,8 +925,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "TARGET_SPIRIT",
+            "count": 1
           }
         ]
       }
@@ -932,16 +965,27 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
-            "op": "BP_BUFF_ALLIES",
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
             "amount": 1000,
-            "filter": {
-              "family": "Magician",
-              "color": "yellow"
-            }
+            "count": 1
           }
         ]
       }
@@ -961,8 +1005,27 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_DECK",
+            "position": "BOTTOM",
+            "count": 1
+          },
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
             "op": "BP_BUFF_TARGET",
@@ -980,9 +1043,15 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "AURA_KEYWORDS",
+        "overall": "FLASH",
         "subConditions": {},
-        "keyword": "Passive"
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
       }
     ]
   },
@@ -1018,9 +1087,14 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "AURA_KEYWORDS",
+        "overall": "FLASH",
         "subConditions": {},
-        "keyword": "Passive"
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
       }
     ]
   },
@@ -1286,8 +1360,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "TARGET_SPIRIT",
+            "count": 1
           }
         ]
       }
@@ -1323,8 +1398,27 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
-        "subConditions": {},
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          },
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
         "subEffects": [
           {
             "op": "BP_BUFF_TARGET",
@@ -1350,8 +1444,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "REANIMATE_TRASH",
+            "count": 1
           }
         ]
       }
@@ -1414,9 +1508,28 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "AURA_BP",
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
         "subConditions": {},
-        "amount": 4000
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 4000,
+            "count": 1
+          }
+        ]
       }
     ]
   },
@@ -1437,8 +1550,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -1509,8 +1623,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -1556,8 +1671,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -1611,35 +1727,23 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -1657,19 +1761,13 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -1686,8 +1784,7 @@ export const BS03_SAGA_CARDS = [
             1,
             2,
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 2000
       },
@@ -1696,8 +1793,7 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 2000
       }
@@ -1720,8 +1816,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
           }
         ]
       },
@@ -1787,8 +1884,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -1842,11 +1940,12 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
+        "overall": "WHEN_ATTACKS",
         "subConditions": {
           "levels": [
             1
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
@@ -1856,11 +1955,12 @@ export const BS03_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "FLASH",
+        "overall": "WHEN_ATTACKS",
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
@@ -1918,8 +2018,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
           }
         ]
       }
@@ -1954,8 +2055,7 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 2000
       }
@@ -1979,8 +2079,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
           }
         ]
       },
@@ -1994,9 +2095,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BOUNCE_TO_HAND",
-            "count": 1,
-            "allMatching": false
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       }
@@ -2016,19 +2116,13 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       },
       {
         "overall": "WHEN_ATTACKS",
@@ -2104,8 +2198,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
           }
         ]
       }
@@ -2141,8 +2236,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -2274,8 +2370,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -2420,8 +2517,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       }
@@ -2468,8 +2565,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       },
@@ -2478,8 +2575,7 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             3
-          ],
-          "turn": "YOUR"
+          ]
         },
         "amount": 2000
       }
@@ -2599,8 +2695,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -2618,8 +2715,7 @@ export const BS03_SAGA_CARDS = [
           "levels": [
             1,
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
         "targetFilter": {
           "keyword": "Brilliance"
@@ -2650,35 +2746,23 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "OPPONENT"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -2716,20 +2800,14 @@ export const BS03_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       },
       {
         "overall": "AURA_KEYWORDS",
@@ -2802,24 +2880,20 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
           }
         ]
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
           ]
         },
-        "subEffects": [
-          {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
-          }
-        ]
+        "keyword": "Passive"
       }
     ]
   },
@@ -2884,8 +2958,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DRAW_CARDS",
+            "count": 1
           }
         ]
       },
@@ -2918,8 +2992,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "DESTROY_NEXUS",
+            "count": 1
           }
         ]
       },
@@ -2947,8 +3021,9 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "ADD_EXTRA_SYMBOL",
+            "scope": "SELF",
+            "count": 1
           }
         ]
       }
@@ -2968,8 +3043,7 @@ export const BS03_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "BOUNCE_TO_HAND",
-            "count": 1,
-            "allMatching": false
+            "count": 1
           }
         ]
       },
@@ -3018,8 +3092,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -3066,8 +3141,8 @@ export const BS03_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
           }
         ]
       }
@@ -3123,8 +3198,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
           }
         ]
       },
@@ -3149,13 +3224,12 @@ export const BS03_SAGA_CARDS = [
     "abilities": [
       {
         "overall": "FLASH",
-        "subConditions": {
-          "oncePerTurn": "opt_1"
-        },
+        "subConditions": {},
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -3174,8 +3248,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
           }
         ]
       },
@@ -3237,9 +3311,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BOUNCE_TO_HAND",
-            "count": 1,
-            "allMatching": false
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       },
@@ -3425,18 +3498,19 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "REANIMATE_TRASH",
+            "count": 1
           }
         ]
       },
       {
-        "overall": "FLASH",
+        "overall": "WHEN_SUMMONED",
         "subConditions": {
           "levels": [
             1,
             2
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
@@ -3513,8 +3587,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
           }
         ]
       },
@@ -3529,8 +3603,8 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "SALVAGE_TRASH",
+            "count": 1
           }
         ]
       }
@@ -3553,8 +3627,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
           }
         ]
       },
@@ -3568,8 +3643,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
           }
         ]
       }
@@ -3695,8 +3771,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
           }
         ]
       }
@@ -3736,8 +3813,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -3751,8 +3829,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       }
@@ -3776,8 +3855,9 @@ export const BS03_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_SELF",
-            "amount": 1000
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
           }
         ]
       },
