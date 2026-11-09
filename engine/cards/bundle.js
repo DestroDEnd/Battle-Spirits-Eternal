@@ -2938,6 +2938,42 @@ if (typeof globalThis !== 'undefined') {
     }
   });
 
+  // BSC48-CX03: The BlueSeasContractor Gunjou Souun (Wisdom King Contract Nexus)
+  PerCardRegistry.registerCard('BSC48-CX03', {
+    name: 'The BlueSeasContractor Gunjou Souun',
+    cardType: 'Contract Nexus',
+    triggers: {
+      WHEN_DEPLOYED: function(ctx) {
+        const { card } = ctx;
+        const friendly = getFriendlyState(ctx);
+        if (friendly && friendly.deck && friendly.deck.length > 0) {
+          const countToMill = Math.min(3, friendly.deck.length);
+          const milled = friendly.deck.splice(0, countToMill);
+          if (!friendly.trashCards) friendly.trashCards = [];
+          friendly.trashCards.push(...milled);
+          friendly.trash = (friendly.trash || 0) + countToMill;
+
+          let charged = 0;
+          for (const c of milled) {
+            const fam = Array.isArray(c.family) ? c.family.join(' ') : (c.family || '');
+            const isTarget = /fighting spirit|vassal|lord|闘神|家臣|主君/i.test(fam) ||
+                             (c.type || '').includes('Nexus') ||
+                             /soul burst|バースト/i.test(c.effect || '');
+            if (isTarget) charged++;
+          }
+          if (charged > 0) {
+            card.currentCores = (card.currentCores || 0) + charged;
+            audio(ctx, 'coreChime');
+            log(ctx, `🌊 **[GUNJOU SOUUN: Neo-Core Charge]**: Milled 3 cards, charged +${charged} cores onto Gunjou Souun! (Total: ${card.currentCores})`, 'magic');
+          } else {
+            log(ctx, `🌊 **[GUNJOU SOUUN: Neo-Core Charge]**: Milled 3 cards to Trash.`, 'skill');
+          }
+          render(ctx);
+        }
+      }
+    }
+  });
+
   PerCardRegistry.registerCard('BATTLE-SPIRITS-A12405', {
     name: 'The Silver Guardian Blade',
     cardType: 'Brave',
