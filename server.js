@@ -2,6 +2,7 @@ import http from 'node:http';
 import https from 'node:https';
 import fs from 'node:fs';
 import path from 'node:path';
+import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -43,6 +44,7 @@ const ROUTE_MAP = {
   '/deck_view': '/deck_view.html',
   '/family': '/family.html',
   '/sets': '/sets.html',
+  '/keywords': '/keywords.html',
   '/login': '/login.html',
   '/register': '/register.html'
 };
@@ -402,6 +404,38 @@ const server = http.createServer((req, res) => {
             searchTerms = ['Mirage', '[Mirage', 'ミラージュ'];
           } else if (ql === 'contract' || ql === 'keiyaku') {
             searchTerms = ['Contract', '[Contract', '契約'];
+          } else if (ql === 'rush' || ql === 'chain' || ql === '連鎖') {
+            searchTerms = ['Rush', '[Rush', '連鎖', '【連鎖'];
+          } else if (ql === 'clash' || ql === '激突') {
+            searchTerms = ['Clash', '[Clash', '激突', '【激突'];
+          } else if (ql === 'curse' || ql === '呪撃') {
+            searchTerms = ['Curse', '[Curse', '呪撃', '【呪撃'];
+          } else if (ql === 'crush' || ql === '粉砕') {
+            searchTerms = ['Crush', '[Crush', '粉砕', '【粉砕'];
+          } else if (ql === 'great crush' || ql === '大粉砕') {
+            searchTerms = ['Great Crush', '[Great Crush', '大粉砕', '【大粉砕'];
+          } else if (ql === 'assault' || ql === '強襲') {
+            searchTerms = ['Assault', '[Assault', '強襲', '【強襲'];
+          } else if (ql === 'windstorm' || ql === '旋風') {
+            searchTerms = ['Windstorm', '[Windstorm', '旋風', '【旋風'];
+          } else if (ql === 'holy life' || ql === '聖命') {
+            searchTerms = ['Holy Life', '[Holy Life', '聖命', '【聖命'];
+          } else if (ql === 'ultra armor' || ql === '超装甲') {
+            searchTerms = ['Ultra Armor', '[Ultra Armor', '超装甲', '【超装甲'];
+          } else if (ql === 'heavy armor' || ql === '重装甲') {
+            searchTerms = ['Heavy Armor', '[Heavy Armor', '重装甲', '【重装甲'];
+          } else if (ql === 'armor' || ql === '装甲') {
+            searchTerms = ['Armor', '[Armor', '装甲', '【装甲'];
+          } else if (ql === 'ice wall' || ql === '氷壁') {
+            searchTerms = ['Ice Wall', '[Ice Wall', '氷壁', '【氷壁'];
+          } else if (ql === 'consecutive blade' || ql === '連刃') {
+            searchTerms = ['Consecutive Blade', '[Consecutive Blade', '連刃', '【連刃'];
+          } else if (ql === 'awaken' || ql === '覚醒') {
+            searchTerms = ['Awaken', '[Awaken', '覚醒', '【覚醒'];
+          } else if (ql === 'rebirth' || ql === 'tensei' || ql === '転醒') {
+            searchTerms = ['Rebirth', '[Rebirth', '転醒', '【転醒'];
+          } else if (ql === 'kagemusha' || ql === '影武者') {
+            searchTerms = ['Kagemusha', '影武者', '【影武者'];
           }
 
           const orClauses = [];

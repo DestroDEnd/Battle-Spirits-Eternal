@@ -17,6 +17,9 @@ export class KeywordRegistry {
     if (!keywordDef || !keywordDef.id) {
       throw new Error('Keyword definition must have an id');
     }
+    if (!keywordDef.name) {
+      keywordDef.name = keywordDef.id;
+    }
     this.keywords.set(keywordDef.id.toLowerCase(), keywordDef);
   }
 
