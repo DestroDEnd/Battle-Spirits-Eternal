@@ -2155,8 +2155,19 @@
   // SOUL DRIVE ENGINE (RULE 8.4)
   // ══════════════════════════════════════════════════════════════════════════
 
+  const SOUL_DRIVE_KNOWN_CARD_NUMBERS = new Set([
+    'BS33-X02', 'BS74-AX01', 'SD36-X01', 'BRAM-ZAND', 'P16-21',
+    'BS33-X04', 'P15-21', 'BS33-029', 'BS33-049', 'BS34-CP07',
+    'BS74-X12', 'BATTLE-SPIRITS-A12187', 'SD36-X04', 'IL-IMARJO',
+    'SD36-X02', 'BATTLE-SPIRITS-A10766', 'BATTLE-SPIRITS-A12227',
+    'BS46-10THX03', 'BS38-051', 'BATTLE-SPIRITS-A9226', 'P15-15'
+  ]);
+
   function hasSoulDriveKeyword(card) {
-    if (!card || !card.effect) return false;
+    if (!card) return false;
+    const cNum = card.card_number || card.cardNumber || card.id;
+    if (cNum && SOUL_DRIVE_KNOWN_CARD_NUMBERS.has(cNum)) return true;
+    if (!card.effect) return false;
     const isUlt = card.type === 'Ultimate' || (typeof card.type === 'string' && card.type.includes('Ultimate'));
     if (!isUlt) return false;
     return /(?:\[\s*)?soul\s*drive(?:\])?|【ソウルドライブ】/i.test(card.effect);
@@ -2242,6 +2253,18 @@
       executeAbilityActions(sdText, attacker, side, 'SOUL_DRIVE');
     }
 
+    // 3. Check for "The Messenger Genet" (BS33-021) or similar triggers:
+    const friendlyUnits = friendlyState.field || [];
+    for (const u of friendlyUnits) {
+      const isGenet = (u.card_number === 'BS33-021') || (u.name || '').includes('Genet');
+      const lvl = u.currentLevel || 1;
+      if (isGenet && lvl >= 2) {
+        friendlyState.reserve = (friendlyState.reserve || 0) + 3;
+        AudioFX.coreChime();
+        addLog(`🌿 **[The Messenger Genet (LV2)]**: Put 3 cores from Void to Reserve after Soul Drive resolved!`, 'magic');
+      }
+    }
+
     renderDuelTable();
   }
 
@@ -2271,8 +2294,8 @@
       title: '🔥 [SOUL DRIVE] Activation Confirmation',
       description: `"${unit.name}" is ready to unleash [Soul Drive]!\n\n⚠️ Official Rule: Activating Soul Drive will BANISH your Soul Core from the game to the Void. It cannot be refreshed or retrieved for the remainder of this duel! Soul Drive can only be activated ONCE PER GAME!\n\n${desc}`,
       choices: [
-        { text: '🔥 Banish Soul Core & Unleash Soul Drive', value: 'activate' },
-        { text: 'Cancel', value: 'cancel' }
+        { label: '🔥 Banish Soul Core & Unleash Soul Drive', text: '🔥 Banish Soul Core & Unleash Soul Drive', value: 'activate', icon: '🔥', desc: 'Banishes Soul Core to Void permanently to trigger Soul Drive' },
+        { label: 'Cancel', text: 'Cancel', value: 'cancel', icon: '❌', desc: 'Cancel and keep Soul Core' }
       ]
     }, (choiceIdx) => {
       if (choiceIdx === 0) {
@@ -2285,13 +2308,13 @@
 
   function checkSoulDriveActivation(attacker, side = 'player', onDone) {
     if (!hasSoulDrive(attacker, side)) {
-      if (typeof onDone === 'function') onDone();
+      if (typeof onDone === 'function') onDone(false);
       return;
     }
 
     if (side !== 'player') {
       executeSoulDriveAction(attacker, 'opponent');
-      if (typeof onDone === 'function') onDone();
+      if (typeof onDone === 'function') onDone(false);
       return;
     }
 
@@ -2302,16 +2325,20 @@
       title: '🔥 [SOUL DRIVE] Activation Prompt',
       description: `"${attacker.name}" possesses the Soul Core!\n\nDo you want to activate [Soul Drive]?\n\n⚠️ Official Rule: Activating Soul Drive will BANISH your Soul Core from the game to the Void. It cannot be refreshed or used for the rest of the duel, and Soul Drive can only be activated ONCE PER GAME!\n\n${desc}`,
       choices: [
-        { text: '🔥 Banish Soul Core & Activate Soul Drive', value: 'activate' },
-        { text: 'Skip (Attack Normally)', value: 'skip' }
+        { label: '🔥 Banish Soul Core & Unleash Soul Drive', text: '🔥 Banish Soul Core & Unleash Soul Drive', value: 'activate', icon: '🔥', desc: 'Banishes Soul Core to Void permanently to trigger Soul Drive' },
+        { label: '⚔️ Attack Normally (Keep Soul Core)', text: '⚔️ Attack Normally (Keep Soul Core)', value: 'skip', icon: '⚔️', desc: 'Proceed with normal attack without banishing Soul Core' },
+        { label: 'Cancel Attack', text: 'Cancel Attack', value: 'cancel', icon: '❌', desc: 'Cancel attack declaration and keep unit ready' }
       ]
     }, (choiceIdx) => {
       if (choiceIdx === 0) {
         executeSoulDriveAction(attacker, 'player');
+        if (typeof onDone === 'function') onDone(false);
+      } else if (choiceIdx === 1) {
+        addLog(`ℹ️ [Soul Drive]: Skipped Soul Drive activation. Attacking normally with "${attacker.name}".`, 'info');
+        if (typeof onDone === 'function') onDone(false);
       } else {
-        addLog(`ℹ️ [Soul Drive]: Skipped Soul Drive activation. Attacking normally.`, 'info');
+        if (typeof onDone === 'function') onDone(true);
       }
-      if (typeof onDone === 'function') onDone();
     });
   }
 const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY ARMOR', 'DAMAGE_CAP', 'GRANT_SYMBOL', 'HAND_DISCARD_DRAW', 'HAND_DISCARD']);
@@ -8462,6 +8489,29 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeWhenSummonedEffects(spirit, side = 'player') {
     if (!spirit) return;
+
+    // Soul Drive on Summon (e.g. BS38-051 The HellsoilSorcerer Denial)
+    if (hasSoulDriveKeyword(spirit) && canActivateSoulDrive(spirit, side).allowed && /when summoned|召喚時/i.test(spirit.effect || '')) {
+      if (side === 'player') {
+        promptChoiceModal({
+          card: spirit,
+          side: 'player',
+          title: `🔥 [SOUL DRIVE] ${spirit.name} (When Summoned)`,
+          description: `"${spirit.name}" was summoned! Do you want to activate [Soul Drive]?\n\n⚠️ Official Rule: Activating Soul Drive will BANISH your Soul Core from the game to the Void. Once per game!`,
+          choices: [
+            { label: '🔥 Banish Soul Core & Unleash Soul Drive', text: '🔥 Banish Soul Core & Unleash Soul Drive', value: 'activate', icon: '🔥', desc: 'Banish Soul Core to Void to activate Soul Drive' },
+            { label: 'Skip', text: 'Skip', value: 'skip', icon: '⏩', desc: 'Keep Soul Core' }
+          ]
+        }, (choiceIdx) => {
+          if (choiceIdx === 0) {
+            executeSoulDriveAction(spirit, 'player');
+          }
+        });
+      } else {
+        executeSoulDriveAction(spirit, 'opponent');
+      }
+    }
+
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     if (pRegistry && spirit.card_number && pRegistry.has(spirit.card_number, 'WHEN_SUMMONED')) {
       pRegistry.execute(spirit.card_number, 'WHEN_SUMMONED', {
@@ -13769,6 +13819,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       if (typeof showToast === 'function') showToast(`Official Rule 7.2: "${attacker.name}" cannot attack!`, 'warning');
       return;
     }
+
+    if (hasSoulDrive(attacker, 'player')) {
+      checkSoulDriveActivation(attacker, 'player', (cancelled) => {
+        if (cancelled) return;
+        proceedWithPlayerAttack(attacker);
+      });
+      return;
+    }
+
+    proceedWithPlayerAttack(attacker);
+  }
+
+  function proceedWithPlayerAttack(attacker) {
     attacker.isExhausted = true;
     attacker.hasAttacked = true;
     DuelState.combatAttacker = attacker;
@@ -14419,6 +14482,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!att) return -999;
     if (!profile) profile = getActiveAiProfile('opponent');
 
+    // If attacker has unactivated Soul Drive available, it takes highest tactical priority
+    if (hasSoulDrive(att, 'opponent')) {
+      return 10.0;
+    }
+
     const attBp = att.battleBp || att.currentBp || 2000;
     const readyBlockers = (playerField || []).filter(s => canUnitBlock(s));
     const wLife = profile.w_life !== undefined ? profile.w_life : 2.5;
@@ -14642,6 +14710,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const attacker = bestAttacker;
+    if (hasSoulDrive(attacker, 'opponent')) {
+      executeSoulDriveAction(attacker, 'opponent');
+    }
     attacker.isExhausted = true;
     attacker.hasAttacked = true;
 
@@ -15532,6 +15603,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function placeSoulCoreOnSpirit(spiritUid) {
     if (DuelState.activePlayer !== 'player') {
       if (typeof showToast === 'function') showToast("Can only move Soul Core on your turn!", 'warning');
+      return;
+    }
+    if (DuelState.player.soulCoreLocation === 'void') {
+      if (typeof showToast === 'function') showToast("Soul Core was banished to the Void by [Soul Drive] and cannot be used!", 'warning');
+      return;
+    }
+    if (DuelState.player.soulCoreLocation === 'trash') {
+      if (typeof showToast === 'function') showToast("Soul Core is in Trash! It will return on your Refresh Step.", 'warning');
       return;
     }
     const phase = DuelState.phases[DuelState.phaseIndex];

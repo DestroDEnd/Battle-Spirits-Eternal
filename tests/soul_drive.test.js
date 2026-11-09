@@ -341,4 +341,198 @@ describe('Soul Drive Rules & Mechanics Suite', () => {
     assert.ok(state.phaseIndex === 6 || state.activePlayer === 'player', 'Transitioned through END step to player turn');
   });
 
+  it('8. User Report: Declaring attack with Mudou holding Soul Core must prompt/trigger Soul Drive activation, banish Soul Core to Void, and execute Mudou effect', () => {
+    const { arena } = createArenaTestEnvironment();
+    const mudouCard = Object.values(cardsDetailed).find(c => c.name === 'The SengokuSixGeneral Mudou');
+    assert.ok(mudouCard, 'Mudou found');
+
+    const mudouInstance = Object.assign({}, mudouCard, {
+      uid: 'mudou-battle-01',
+      hasSoulCore: true,
+      currentLevel: 3,
+      currentCores: 2,
+      isExhausted: false,
+      hasAttacked: false
+    });
+
+    const state = arena.getState();
+    state.inDuel = true;
+    state.turn = 7;
+    state.activePlayer = 'player';
+    state.phaseIndex = 5; // ATTACK step
+    state.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+    state.player.field = [mudouInstance];
+    state.player.soulDriveUsed = false;
+    state.player.soulCoreLocation = 'field';
+    state.player.soulCoreSpiritUid = 'mudou-battle-01';
+
+    // Opponent has 8 cores in trash (matching user screenshot!)
+    state.opponent.field = [];
+    state.opponent.trash = 8;
+    state.opponent.life = 4;
+
+    // Declaring attack with Mudou
+    arena.executePlayerAttack(mudouInstance);
+
+    // 1. Soul Drive was activated!
+    assert.equal(state.player.soulDriveUsed, true, 'soulDriveUsed must be true');
+    assert.equal(state.player.soulCoreLocation, 'void', 'Soul Core must be permanently in Void');
+    assert.equal(mudouInstance.hasSoulCore, false, 'Mudou no longer has Soul Core');
+
+    // 2. Lv3 Mudou stripped 6 cores (3 * 2) from Opponent trash to Void!
+    assert.equal(state.opponent.trash, 2, '8 - 6 = 2 cores remaining in opponent trash');
+
+    // 3. Mudou is now exhausted and declared attack
+    assert.equal(mudouInstance.isExhausted, true, 'Mudou is exhausted from attacking');
+  });
+
+  it('9. Opponent AI: Declaring attack with Soul Drive Ultimate activates Soul Drive, banishing Soul Core to Void', () => {
+    const { arena } = createArenaTestEnvironment();
+    const bramCard = Object.values(cardsDetailed).find(c => c.name === 'The Hellflame FourDemonLord Bram-Zand');
+    const bramInstance = Object.assign({}, bramCard, {
+      uid: 'ai-bram-01',
+      hasSoulCore: true,
+      currentLevel: 3,
+      currentCores: 2,
+      isExhausted: false,
+      hasAttacked: false
+    });
+
+    const state = arena.getState();
+    state.inDuel = true;
+    state.turn = 6;
+    state.activePlayer = 'opponent';
+    state.firstPlayer = 'player';
+    state.phaseIndex = 5; // ATTACK step
+    state.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+    state.opponent.field = [bramInstance];
+    state.opponent.soulDriveUsed = false;
+    state.opponent.soulCoreLocation = 'field';
+    state.opponent.soulCoreSpiritUid = 'ai-bram-01';
+
+    state.player.field = [
+      { uid: 'p-spirit-01', name: 'Defender', currentBp: 5000, currentCores: 2 }
+    ];
+    state.player.life = 4;
+
+    arena.runAiAttackStep();
+
+    // AI Soul Drive was activated!
+    assert.equal(state.opponent.soulDriveUsed, true, 'Opponent soulDriveUsed must be true');
+    assert.equal(state.opponent.soulCoreLocation, 'void', 'Opponent Soul Core in Void');
+    assert.equal(bramInstance.hasSoulCore, false);
+
+    // Player unit destroyed, 2 Life burned to Void by Soul Drive, and 1 unblocked combat damage dealt (4 - 2 - 1 = 1)
+    assert.equal(state.player.field.length, 0, 'Defender destroyed by Bram-Zand');
+    assert.equal(state.player.life, 1, 'Player life reduced from 4 to 1 (2 via Soul Drive burn + 1 via unblocked attack)');
+  });
+
+  it('10. Messenger Genet (BS33-021): Resolving Soul Drive with Genet Lv2 on field puts 3 cores from Void to Reserve', () => {
+    const { arena } = createArenaTestEnvironment();
+    const mudouCard = Object.values(cardsDetailed).find(c => c.name === 'The SengokuSixGeneral Mudou');
+    const genetCard = Object.values(cardsDetailed).find(c => c.card_number === 'BS33-021' || c.name === 'The Messenger Genet');
+    assert.ok(genetCard, 'Genet found');
+
+    const mudouInstance = Object.assign({}, mudouCard, {
+      uid: 'mudou-01',
+      hasSoulCore: true,
+      currentLevel: 3,
+      currentCores: 2
+    });
+    const genetInstance = Object.assign({}, genetCard, {
+      uid: 'genet-01',
+      currentLevel: 2,
+      currentCores: 3
+    });
+
+    const state = arena.getState();
+    state.inDuel = true;
+    state.player.field = [mudouInstance, genetInstance];
+    state.player.reserve = 1;
+    state.player.soulDriveUsed = false;
+    state.player.soulCoreLocation = 'field';
+    state.player.soulCoreSpiritUid = 'mudou-01';
+    state.opponent.trash = 8;
+
+    arena.executeSoulDriveAction(mudouInstance, 'player');
+
+    // 1. Soul Drive banished Soul Core to Void
+    assert.equal(state.player.soulDriveUsed, true);
+    assert.equal(state.player.soulCoreLocation, 'void');
+
+    // 2. Genet triggered and added 3 cores from Void to Reserve (1 + 3 = 4)
+    assert.equal(state.player.reserve, 4, 'Reserve gained 3 cores from Genet');
+  });
+
+  it('11. When Summoned Soul Drive (Denial BS38-051): Summoning Denial activates Soul Drive using Soul Core from Reserve', () => {
+    const { arena } = createArenaTestEnvironment();
+    const denialCard = Object.values(cardsDetailed).find(c => c.card_number === 'BS38-051' || c.name === 'The HellsoilSorcerer Denial');
+    assert.ok(denialCard, 'Denial found');
+
+    const denialInstance = Object.assign({}, denialCard, {
+      uid: 'denial-01',
+      hasSoulCore: false,
+      currentLevel: 3,
+      currentCores: 1
+    });
+
+    const state = arena.getState();
+    state.inDuel = true;
+    state.player.reserve = 3;
+    state.player.soulDriveUsed = false;
+    state.player.soulCoreLocation = 'reserve';
+
+    state.opponent.field = [
+      { uid: 'opp-t-01', name: 'Opp Target', currentCores: 3, currentBp: 5000 }
+    ];
+    state.opponent.reserve = 0;
+
+    arena.executeWhenSummonedEffects(denialInstance, 'player');
+
+    // Denial Soul Drive banished Soul Core from Reserve to Void
+    assert.equal(state.player.soulDriveUsed, true);
+    assert.equal(state.player.soulCoreLocation, 'void');
+
+    // Cores moved from opponent field to opponent reserve
+    assert.equal(state.opponent.field.length, 0);
+    assert.equal(state.opponent.reserve, 3);
+  });
+
+  it('12. Void Banishing Enforcement: Cannot place or move Soul Core from Void, and Refresh never restores it', () => {
+    const { arena } = createArenaTestEnvironment();
+    const state = arena.getState();
+    state.inDuel = true;
+    state.player.soulDriveUsed = true;
+    state.player.soulCoreLocation = 'void';
+    state.player.reserve = 2;
+    state.player.trash = 4;
+
+    const testSpirit = {
+      uid: 'test-sp-01',
+      name: 'Test Spirit',
+      currentCores: 2,
+      currentLevel: 1,
+      currentBp: 3000,
+      hasSoulCore: false,
+      levels: [{ level: 1, cores: 1, bp: 3000 }, { level: 2, cores: 3, bp: 6000 }]
+    };
+    state.player.field = [testSpirit];
+
+    // Attempt to place Soul Core onto spirit when in Void
+    arena.placeSoulCoreOnSpirit('test-sp-01');
+    assert.equal(testSpirit.hasSoulCore, false, 'Cannot place Soul Core when in Void');
+    assert.equal(state.player.soulCoreLocation, 'void');
+
+    // Step to Refresh Step
+    state.phaseIndex = 3; // REFRESH
+    state.phases = ['START', 'CORE', 'DRAW', 'REFRESH', 'MAIN', 'ATTACK', 'END'];
+    state.activePlayer = 'player';
+    arena.manualStep();
+
+    // Normal cores refreshed from trash to reserve (2 + 4 = 6)
+    assert.equal(state.player.reserve, 6);
+    // Soul Core remains strictly in Void!
+    assert.equal(state.player.soulCoreLocation, 'void', 'Soul Core strictly remains in Void');
+  });
+
 });

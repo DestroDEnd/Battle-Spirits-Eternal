@@ -1856,18 +1856,58 @@ async function openCardDetail(name, contextList, cardUid = null) {
               BattleArena.openBraveCombineModal(fieldSpirit.uid, 'field');
             };
           } else {
+            const canSd = (typeof BattleArena !== 'undefined' && BattleArena.canActivateSoulDrive)
+              ? BattleArena.canActivateSoulDrive(fieldSpirit, 'player')
+              : { allowed: false };
+            if (canSd.allowed) {
+              duelBtn.textContent = '🔥 Unleash Soul Drive';
+              duelBtn.disabled = false;
+              duelBtn.style.opacity = '1';
+              duelBtn.style.background = 'linear-gradient(135deg, #ef4444, #991b1b)';
+              duelBtn.onclick = () => {
+                closeModal();
+                BattleArena.activateSoulDrive(fieldSpirit.uid, 'player');
+              };
+            } else if (typeof BattleArena !== 'undefined' && BattleArena.hasSoulDriveKeyword && BattleArena.hasSoulDriveKeyword(fieldSpirit)) {
+              duelBtn.textContent = `🔒 Soul Drive (${canSd.reason || 'Unavailable'})`;
+              duelBtn.disabled = true;
+              duelBtn.style.opacity = '0.5';
+              duelBtn.style.background = '#475569';
+              duelBtn.onclick = null;
+            } else {
+              duelBtn.textContent = '⚔️ Active on Battlefield';
+              duelBtn.disabled = true;
+              duelBtn.style.opacity = '0.6';
+              duelBtn.style.background = '#3b82f6';
+              duelBtn.onclick = null;
+            }
+          }
+        } else {
+          const canSd = (typeof BattleArena !== 'undefined' && BattleArena.canActivateSoulDrive && fieldSpirit)
+            ? BattleArena.canActivateSoulDrive(fieldSpirit, 'player')
+            : { allowed: false };
+          if (canSd.allowed) {
+            duelBtn.textContent = '🔥 Unleash Soul Drive';
+            duelBtn.disabled = false;
+            duelBtn.style.opacity = '1';
+            duelBtn.style.background = 'linear-gradient(135deg, #ef4444, #991b1b)';
+            duelBtn.onclick = () => {
+              closeModal();
+              BattleArena.activateSoulDrive(fieldSpirit.uid, 'player');
+            };
+          } else if (fieldSpirit && typeof BattleArena !== 'undefined' && BattleArena.hasSoulDriveKeyword && BattleArena.hasSoulDriveKeyword(fieldSpirit)) {
+            duelBtn.textContent = `🔒 Soul Drive (${canSd.reason || 'Unavailable'})`;
+            duelBtn.disabled = true;
+            duelBtn.style.opacity = '0.5';
+            duelBtn.style.background = '#475569';
+            duelBtn.onclick = null;
+          } else {
             duelBtn.textContent = '⚔️ Active on Battlefield';
             duelBtn.disabled = true;
             duelBtn.style.opacity = '0.6';
             duelBtn.style.background = '#3b82f6';
             duelBtn.onclick = null;
           }
-        } else {
-          duelBtn.textContent = '⚔️ Active on Battlefield';
-          duelBtn.disabled = true;
-          duelBtn.style.opacity = '0.6';
-          duelBtn.style.background = '#3b82f6';
-          duelBtn.onclick = null;
         }
       }
     }
@@ -2770,6 +2810,243 @@ const DuelistSocial = {
   }
 };
 
+// ═════════════════════════════════════════════════════════════════
+// VISUAL DECK SHEET CONTROLLER
+// ═════════════════════════════════════════════════════════════════
+const VisualDeckSheet = {
+  _deckData: null,
+  _overlay: null,
+
+  ensureDom() {
+    if (this._overlay) return;
+    let el = document.getElementById('visualDeckSheetOverlay');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'visualDeckSheetOverlay';
+      el.className = 'deck-sheet-overlay';
+      el.onclick = (e) => {
+        if (e.target === el) this.close();
+      };
+      el.innerHTML = `
+        <div class="deck-sheet-box" role="dialog" aria-modal="true">
+          <div class="deck-sheet-header">
+            <div class="deck-sheet-title-group">
+              <span style="font-size:1.8rem;">🖼️</span>
+              <div>
+                <h2 class="deck-sheet-title" id="deckSheetTitle">Visual Deck Sheet</h2>
+                <div style="font-size:0.82rem;color:#94a3b8;" id="deckSheetSubtitle">Battle Spirits Eternal Format</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <button class="btn-modal-outline" onclick="window.print()" style="font-size:0.8rem;padding:0.4rem 0.8rem;" title="Print or save as PDF">🖨️ Print / Save PDF</button>
+              <button class="modal-close" onclick="VisualDeckSheet.close()" style="position:static;">&times;</button>
+            </div>
+          </div>
+
+          <div class="deck-sheet-meta-bar" id="deckSheetMetaBar"></div>
+
+          <div id="deckSheetGroupsContainer" style="display:flex;flex-direction:column;gap:1rem;"></div>
+
+          <div class="deck-sheet-actions">
+            <button class="btn-page" onclick="VisualDeckSheet.copyCode()" style="font-size:0.82rem;">📋 Copy Decklist Code</button>
+            <button class="btn-page" onclick="VisualDeckSheet.exportJson()" style="font-size:0.82rem;">💾 Export JSON</button>
+            <button class="btn-start-duel" onclick="VisualDeckSheet.close()" style="padding:0.45rem 1.25rem;font-size:0.85rem;width:auto;">Done</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(el);
+    }
+    this._overlay = el;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this._overlay && this._overlay.classList.contains('open')) {
+        this.close();
+      }
+    });
+  },
+
+  open(customDeck) {
+    this.ensureDom();
+    this.loadDeck(customDeck);
+    this.render();
+    this._overlay.classList.add('open');
+    if (document.body) document.body.style.overflow = 'hidden';
+  },
+
+  close() {
+    if (this._overlay) {
+      this._overlay.classList.remove('open');
+    }
+    if (document.body) document.body.style.overflow = '';
+  },
+
+  loadDeck(customDeck) {
+    if (customDeck && typeof customDeck === 'object') {
+      this._deckData = customDeck;
+      return;
+    }
+
+    try {
+      const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('battle_spirits_deck') : null;
+      this._deckData = stored ? JSON.parse(stored) : {};
+    } catch (e) {
+      this._deckData = {};
+    }
+  },
+
+  render() {
+    const titleEl = document.getElementById('deckSheetTitle');
+    const subEl = document.getElementById('deckSheetSubtitle');
+    const metaBar = document.getElementById('deckSheetMetaBar');
+    const container = document.getElementById('deckSheetGroupsContainer');
+    if (!container) return;
+
+    const cardsMap = (this._deckData && this._deckData.cards) ? this._deckData.cards : (this._deckData || {});
+    const deckName = (this._deckData && this._deckData.name) || 'My Battle Spirits Deck';
+    if (titleEl) titleEl.textContent = deckName;
+
+    // Collect list of cards with counts
+    const entries = [];
+    let totalCards = 0;
+    const typeCounts = { Spirit: 0, Ultimate: 0, Brave: 0, Magic: 0, Nexus: 0 };
+    const colorCounts = {};
+
+    for (const [name, rawInfo] of Object.entries(cardsMap)) {
+      if (!name || name === 'name' || name === 'id' || name === 'format' || name === 'author') continue;
+      const count = typeof rawInfo === 'number' ? rawInfo : (rawInfo.count || 1);
+      const info = typeof rawInfo === 'object' ? rawInfo : {};
+      const cardType = info.type || 'Spirit';
+      const color = info.color || 'Red';
+
+      entries.push({
+        name,
+        count,
+        cost: info.cost !== undefined ? info.cost : null,
+        type: cardType,
+        color,
+        card_number: info.card_number || info.cardNumber || '',
+        image_url: info.image_url || ''
+      });
+
+      totalCards += count;
+      if (typeCounts[cardType] !== undefined) typeCounts[cardType] += count;
+      else typeCounts.Spirit += count;
+
+      colorCounts[color] = (colorCounts[color] || 0) + count;
+    }
+
+    if (subEl) subEl.textContent = `Eternal Format • ${totalCards} Total Cards`;
+
+    // Render Meta Bar
+    if (metaBar) {
+      const colorsPills = Object.entries(colorCounts).map(([col, cnt]) => `
+        <span class="deck-sheet-meta-pill" style="border-left:3px solid var(--accent, #6366f1);">${col}: <strong>${cnt}</strong></span>
+      `).join('');
+
+      metaBar.innerHTML = `
+        <span class="deck-sheet-meta-pill" style="background:rgba(56,189,248,0.15);color:#38bdf8;">Total: <strong>${totalCards} Cards</strong></span>
+        ${typeCounts.Spirit ? `<span class="deck-sheet-meta-pill">⚔️ Spirits: <strong>${typeCounts.Spirit}</strong></span>` : ''}
+        ${typeCounts.Ultimate ? `<span class="deck-sheet-meta-pill">⚡ Ultimates: <strong>${typeCounts.Ultimate}</strong></span>` : ''}
+        ${typeCounts.Brave ? `<span class="deck-sheet-meta-pill">🔗 Braves: <strong>${typeCounts.Brave}</strong></span>` : ''}
+        ${typeCounts.Magic ? `<span class="deck-sheet-meta-pill">🔮 Magic: <strong>${typeCounts.Magic}</strong></span>` : ''}
+        ${typeCounts.Nexus ? `<span class="deck-sheet-meta-pill">🏛️ Nexuses: <strong>${typeCounts.Nexus}</strong></span>` : ''}
+        ${colorsPills}
+      `;
+    }
+
+    if (!entries.length) {
+      container.innerHTML = '<div style="text-align:center;padding:3rem;color:#94a3b8;">This deck is empty! Add cards in the Deck Builder to view your visual deck sheet.</div>';
+      return;
+    }
+
+    // Group cards by type
+    const groups = [
+      { key: 'Spirit', title: '⚔️ Spirits' },
+      { key: 'Ultimate', title: '⚡ Ultimates' },
+      { key: 'Brave', title: '🔗 Braves' },
+      { key: 'Magic', title: '🔮 Magic' },
+      { key: 'Nexus', title: '🏛️ Nexuses' }
+    ];
+
+    container.innerHTML = groups.map(grp => {
+      const groupCards = entries.filter(c => {
+        if (grp.key === 'Spirit') return (c.type === 'Spirit' || (!c.type.includes('Ultimate') && !c.type.includes('Brave') && !c.type.includes('Magic') && !c.type.includes('Nexus')));
+        return (c.type || '').includes(grp.key);
+      }).sort((a, b) => (a.cost || 0) - (b.cost || 0));
+
+      if (!groupCards.length) return '';
+      const grpTotal = groupCards.reduce((acc, c) => acc + c.count, 0);
+
+      const cardsHtml = groupCards.map(c => {
+        const safeName = (c.name || '').replace(/"/g, '&quot;');
+        const safeJs = (c.name || '').replace(/'/g, "\\'");
+        let art = c.image_url || 'https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';
+        if (art.includes('static.wikia.nocookie.net') && art.includes('/revision/latest')) {
+          art = art.split('/revision/latest')[0];
+        }
+
+        return `
+          <div class="deck-sheet-card" onclick="openCardDetail('${safeJs}')" title="Click to inspect ${safeName}">
+            <div class="deck-sheet-art-wrap">
+              <span class="deck-sheet-qty">x${c.count}</span>
+              ${c.cost !== null && c.cost !== undefined ? `<span class="deck-sheet-cost">${c.cost}</span>` : ''}
+              <img class="deck-sheet-art" src="${art}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='https://battle-spirits.fandom.com/wiki/Special:FilePath/Card_Back.jpg';" />
+            </div>
+            <div class="deck-sheet-card-info">
+              <div class="deck-sheet-card-name">${safeName}</div>
+              ${c.card_number ? `<div class="deck-sheet-card-num">#${c.card_number}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="deck-sheet-group">
+          <div class="deck-sheet-group-title">
+            <span>${grp.title}</span>
+            <span class="deck-sheet-group-count">${grpTotal}</span>
+          </div>
+          <div class="deck-sheet-grid">
+            ${cardsHtml}
+          </div>
+        </div>
+      `;
+    }).join('');
+  },
+
+  copyCode() {
+    const cardsMap = (this._deckData && this._deckData.cards) ? this._deckData.cards : (this._deckData || {});
+    const lines = [];
+    for (const [name, rawInfo] of Object.entries(cardsMap)) {
+      if (!name || name === 'name' || name === 'id' || name === 'format' || name === 'author') continue;
+      const count = typeof rawInfo === 'number' ? rawInfo : (rawInfo.count || 1);
+      lines.push(`${count}x ${name}`);
+    }
+    const code = lines.join('\n');
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(() => {
+        if (typeof showToast === 'function') showToast('📋 Decklist copied to clipboard!', 'success');
+      });
+    } else if (typeof prompt === 'function') {
+      prompt('Copy deck list:', code);
+    }
+  },
+
+  exportJson() {
+    if (typeof exportDeckJson === 'function') {
+      exportDeckJson();
+    } else if (typeof document !== 'undefined') {
+      const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this._deckData, null, 2));
+      const a = document.createElement('a');
+      a.setAttribute('href', dataStr);
+      a.setAttribute('download', `${(this._deckData.name || 'deck').replace(/\s+/g, '_')}.json`);
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+  }
+};
+
 if (typeof window !== 'undefined') {
   window.DuelistSocial = DuelistSocial;
   document.addEventListener('click', (e) => {
@@ -3283,6 +3560,8 @@ const SampleHandSimulator = {
 if (typeof window !== 'undefined') {
   window.SampleHandSimulator = SampleHandSimulator;
   window.openSampleHandModal = (customDeck) => SampleHandSimulator.open(customDeck);
+  window.VisualDeckSheet = VisualDeckSheet;
+  window.openVisualDeckSheetModal = (customDeck) => VisualDeckSheet.open(customDeck);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -68,10 +68,16 @@ function ensureCardsIndexLoaded() {
   if (!cachedCardsIndex) {
     try {
       const idxRaw = fs.readFileSync(path.join(__dirname, 'data', 'cards_index.json'), 'utf8');
+      let detailed = null;
+      const detailedPath = path.join(__dirname, 'data', 'cards_detailed.json');
+      if (fs.existsSync(detailedPath)) {
+        detailed = JSON.parse(fs.readFileSync(detailedPath, 'utf8'));
+      }
       cachedCardsIndex = JSON.parse(idxRaw);
       cachedCardsByName = {};
       cachedCardsByNumber = {};
-      for (const [cNum, entry] of Object.entries(cachedCardsIndex)) {
+      const sourceDict = detailed || cachedCardsIndex;
+      for (const [cNum, entry] of Object.entries(sourceDict)) {
         if (entry && entry.name) {
           cachedCardsByName[entry.name.toLowerCase()] = entry;
         }
