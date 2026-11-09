@@ -2112,20 +2112,29 @@ function switchImportTab(tab) {
   const isFile = (tab === 'file');
   const isPaste = (tab === 'paste');
   const isStd = (tab === 'std');
+  const isLocal = (tab === 'local');
 
   const tabFile = document.getElementById('importTabFile');
   const tabPaste = document.getElementById('importTabPaste');
   const tabStd = document.getElementById('importTabStd');
+  const tabLocal = document.getElementById('importTabLocal');
   if (tabFile) tabFile.classList.toggle('active', isFile);
   if (tabPaste) tabPaste.classList.toggle('active', isPaste);
   if (tabStd) tabStd.classList.toggle('active', isStd);
+  if (tabLocal) tabLocal.classList.toggle('active', isLocal);
 
   const panelFile = document.getElementById('importPanelFile');
   const panelPaste = document.getElementById('importPanelPaste');
   const panelStd = document.getElementById('importPanelStd');
+  const panelLocal = document.getElementById('importPanelLocal');
   if (panelFile) panelFile.style.display = isFile ? 'block' : 'none';
   if (panelPaste) panelPaste.style.display = isPaste ? 'block' : 'none';
   if (panelStd) panelStd.style.display = isStd ? 'block' : 'none';
+  if (panelLocal) panelLocal.style.display = isLocal ? 'block' : 'none';
+
+  if (isLocal) {
+    loadLocalDecksForImport();
+  }
 }
 
 function handleImportDragOver(e) {
@@ -2539,6 +2548,46 @@ async function previewStandardDeck(colorKey) {
     console.error('Failed to preview deck:', err);
     showToast('Failed to preview deck.', 'error');
   }
+}
+
+async function loadLocalDecksForImport() {
+  const container = document.getElementById('importLocalDecksList');
+  if (!container) return;
+  try {
+    const res = await fetch('/api/local-decks');
+    if (!res.ok) throw new Error('Failed to fetch local decks');
+    const data = await res.json();
+    const decks = data.decks || [];
+    if (!decks.length) {
+      container.innerHTML = '<div style="color:#94a3b8;font-size:0.85rem;grid-column:1/-1;">No decks found in local-decks/.</div>';
+      return;
+    }
+    window._localDecksImportCache = decks;
+    container.innerHTML = decks.map(d => {
+      const count = d.totalCards || 0;
+      return `
+        <button type="button" class="btn-page" style="text-align:left;display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0.8rem;border-color:rgba(59,130,246,0.3);background:rgba(30,41,59,0.7);color:#f1f5f9;cursor:pointer;" onclick="previewLocalDeck('${esc(d.id)}')">
+          <span style="font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:0.5rem;">🗂️ ${esc(d.name)}</span>
+          <span style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:rgba(59,130,246,0.2);color:#60a5fa;white-space:nowrap;">${count} cards</span>
+        </button>
+      `;
+    }).join('');
+  } catch (err) {
+    container.innerHTML = '<div style="color:#f87171;font-size:0.85rem;grid-column:1/-1;">Failed to load workspace decks.</div>';
+  }
+}
+
+function previewLocalDeck(deckId) {
+  const deck = (window._localDecksImportCache || []).find(d => d.id === deckId);
+  if (!deck) return;
+  const parsed = {
+    name: deck.name,
+    cards: { ...deck.cards },
+    total: deck.totalCards,
+    errors: []
+  };
+  document.getElementById('importDeckName').value = deck.name;
+  updateImportPreview(parsed);
 }
 
 // ═══════════════════ INITIALIZATION ═══════════════════

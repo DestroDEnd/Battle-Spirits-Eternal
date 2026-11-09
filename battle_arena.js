@@ -3829,7 +3829,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const oSelect = document.getElementById('arenaOpponentDeckSelect');
     if (!pSelect || !oSelect) return;
 
-    // 1. CHALLENGER (PLAYER 1): USER'S REGISTERED DECKS + ACTIVE BUILDER DECK + STANDARD DECKS
+    // Fetch local workspace decks from /api/local-decks if not cached
+    if (typeof window !== 'undefined' && typeof fetch === 'function' && !window._fetchingLocalDecks && !window.LocalDecksCache) {
+      window._fetchingLocalDecks = true;
+      fetch('/api/local-decks')
+        .then(res => res.json())
+        .then(data => {
+          window._fetchingLocalDecks = false;
+          if (data && Array.isArray(data.decks)) {
+            window.LocalDecksCache = {};
+            for (const d of data.decks) {
+              window.LocalDecksCache[d.id] = d;
+            }
+            renderArenaLobby();
+          }
+        })
+        .catch(err => {
+          window._fetchingLocalDecks = false;
+          console.warn('Failed to fetch /api/local-decks:', err);
+        });
+    }
+
+    // 1. CHALLENGER (PLAYER 1): USER'S REGISTERED DECKS + ACTIVE BUILDER DECK + STANDARD DECKS + WORKSPACE DECKS
     try {
       const decksData = window.DeckManager ? window.DeckManager.getAllData() : { decks: [] };
       let registeredDecks = (decksData.decks || []).filter(d => d && typeof d === 'object');
@@ -3878,6 +3899,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         pOptions += `</optgroup>`;
       }
 
+      // Workspace decks from local-decks/
+      if (window.LocalDecksCache && Object.keys(window.LocalDecksCache).length > 0) {
+        const localList = Object.values(window.LocalDecksCache);
+        pOptions += `<optgroup label="Workspace Decks (local-decks/)">`;
+        pOptions += localList.map(d => {
+          const count = d.totalCards || getSafeDeckCardCount(d);
+          const icon = '🗂️';
+          if (count < 40) {
+            return `<option value="${d.id}" data-count="${count}">⚠️ ${d.name} (${count}/40 min Cards - Incomplete)</option>`;
+          }
+          return `<option value="${d.id}" data-count="${count}">${icon} ${d.name} (${count} Cards)</option>`;
+        }).join('');
+        pOptions += `</optgroup>`;
+      }
+
       // Append Colosseum Standard Starter Decks so the player is never blocked from battling
       pOptions += `
         <optgroup label="Colosseum Standard Decks">
@@ -3892,7 +3928,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       pSelect.innerHTML = pOptions;
 
       // Set cursor on previously chosen deck or valid complete deck!
-      if (savedP1DeckId && (registeredDecks.some(d => d.id === savedP1DeckId) || ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedP1DeckId))) {
+      if (savedP1DeckId && (registeredDecks.some(d => d.id === savedP1DeckId) || ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedP1DeckId) || (window.LocalDecksCache && window.LocalDecksCache[savedP1DeckId]))) {
         pSelect.value = savedP1DeckId;
       } else {
         const completeDeck = registeredDecks.find(d => getSafeDeckCardCount(d) >= 40);
@@ -3916,21 +3952,35 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       console.warn('Error populating player deck select:', errP1);
     }
 
-    // 2. OPPONENT (AI CHAMPION): ALL COLOSSEUM REALMS AVAILABLE
+    // 2. OPPONENT (AI CHAMPION): ALL COLOSSEUM REALMS & WORKSPACE DECKS AVAILABLE
     try {
       const savedOppDeckId = safeGetStorage('colosseum_opponent_deck_id', 'purple');
       let oOptions = `
-        <option value="purple">🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
-        <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
-        <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
-        <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
-        <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
-        <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
+        <optgroup label="Colosseum Standard Decks">
+          <option value="purple">🟣 Purple: Netherworld Curse &amp; Seven Shoguns (40 Cards)</option>
+          <option value="red">🔴 Red: Hero Dragon's Blazing Soul (40 Cards)</option>
+          <option value="green">🟢 Green: Emerald Gale of Insect Sovereigns (40 Cards)</option>
+          <option value="white">⚪ White: Armed Fortress &amp; Mobile Machine Deity (40 Cards)</option>
+          <option value="yellow">🟡 Yellow: Celestial Symphony of Seraphs (40 Cards)</option>
+          <option value="blue">🔵 Blue: Colosseum Titans &amp; Golem Mill (40 Cards)</option>
+        </optgroup>
       `;
+
+      if (window.LocalDecksCache && Object.keys(window.LocalDecksCache).length > 0) {
+        const localList = Object.values(window.LocalDecksCache);
+        oOptions += `<optgroup label="Workspace Decks (local-decks/)">`;
+        oOptions += localList.map(d => {
+          const count = d.totalCards || getSafeDeckCardCount(d);
+          const icon = '🗂️';
+          return `<option value="${d.id}" data-count="${count}">${icon} ${d.name} (${count} Cards)</option>`;
+        }).join('');
+        oOptions += `</optgroup>`;
+      }
+
       oSelect.innerHTML = oOptions;
 
       // Set cursor on previously chosen opponent realm!
-      if (savedOppDeckId && ['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedOppDeckId)) {
+      if (savedOppDeckId && (['purple', 'red', 'green', 'white', 'yellow', 'blue'].includes(savedOppDeckId) || (window.LocalDecksCache && window.LocalDecksCache[savedOppDeckId]))) {
         oSelect.value = savedOppDeckId;
       } else {
         oSelect.value = 'purple';
@@ -3956,7 +4006,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const oCardEl = document.getElementById('lobbyOpponentDeckCard');
 
       if (pCardEl) {
-        let userDeck = window.DeckManager ? window.DeckManager.getDeck(pKey) : null;
+        let userDeck = (window.DeckManager ? window.DeckManager.getDeck(pKey) : null) || (window.LocalDecksCache ? window.LocalDecksCache[pKey] : null);
         if (!userDeck && pKey === 'deck_builder_active') {
           let activeBuilderCards = {};
           try {
@@ -3977,7 +4027,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
           let desc = userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]
             ? DuelState.standardDecks[userDeck.standardKey].desc
-            : `Custom registered deck configured in Deck Builder with ${totalCount} cards.`;
+            : (userDeck.filename
+              ? `Workspace deck loaded directly from local-decks/${userDeck.filename} with ${totalCount} cards.`
+              : `Custom registered deck configured in Deck Builder with ${totalCount} cards.`);
 
           let aces = [];
           if (userDeck.isStandard && userDeck.standardKey && DuelState.standardDecks[userDeck.standardKey]) {
@@ -4041,8 +4093,20 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
 
       if (oCardEl) {
-        const oDeck = DuelState.standardDecks[oKey] || DuelState.standardDecks['purple'];
-        if (oDeck) {
+        let oDeck = DuelState.standardDecks[oKey];
+        let oLocal = window.LocalDecksCache && window.LocalDecksCache[oKey];
+        if (oLocal) {
+          const oCount = oLocal.totalCards || getSafeDeckCardCount(oLocal);
+          const aces = Object.keys(oLocal.cards || {}).slice(0, 3);
+          oCardEl.innerHTML = `
+            <div class="deck-preview-badge color-badge-purple">WORKSPACE DECK • ${oCount} CARDS</div>
+            <div class="deck-preview-name">${oLocal.name}</div>
+            <div class="deck-preview-desc">Workspace deck loaded directly from local-decks/${oLocal.filename} (${oCount} cards).</div>
+            <div class="deck-preview-aces">
+              ${aces.map(name => `<span class="preview-ace-pill">${name}</span>`).join('')}
+            </div>
+          `;
+        } else if (oDeck) {
           const oColor = (oDeck.color || 'purple').toLowerCase();
           oCardEl.innerHTML = `
             <div class="deck-preview-badge color-badge-${oColor}">${oDeck.badge || (oDeck.color.toUpperCase() + ' REALM')}</div>
@@ -4095,7 +4159,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     pDeckKey = pDeckKey || document.getElementById('arenaPlayerDeckSelect')?.value || 'red';
     oDeckKey = oDeckKey || document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
 
-    const userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
+    const userDeck = (window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null) || (window.LocalDecksCache ? window.LocalDecksCache[pDeckKey] : null);
     const stdDeck = DuelState.standardDecks[pDeckKey] || DuelState.standardDecks[pDeckKey?.replace(/^deck_std_|^std-/, '')];
     let pCount = 0;
     if (userDeck) {
@@ -4268,7 +4332,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     pDeckKey = pDeckKey || document.getElementById('arenaPlayerDeckSelect')?.value || (window.DeckManager ? window.DeckManager.getBattleDeckId() : null) || 'deck_std_red';
     oDeckKey = oDeckKey || document.getElementById('arenaOpponentDeckSelect')?.value || 'purple';
 
-    let userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
+    let userDeck = (window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null) || (window.LocalDecksCache ? window.LocalDecksCache[pDeckKey] : null);
     if (!userDeck && pDeckKey === 'deck_builder_active') {
       let activeBuilderCards = {};
       try {
@@ -4344,8 +4408,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let pName = 'Hero Dragon Aggro';
     let pColor = 'Red';
 
-    // 1. Check DeckManager registered decks
-    let userDeck = window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null;
+    // 1. Check DeckManager registered decks or LocalDecksCache
+    let userDeck = (window.DeckManager ? window.DeckManager.getDeck(pDeckKey) : null) || (window.LocalDecksCache ? window.LocalDecksCache[pDeckKey] : null);
     if (userDeck) {
       const userDeckCount = getSafeDeckCardCount(userDeck);
       if (userDeckCount < 40) {
@@ -4453,11 +4517,56 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     let oCards = [];
     let oName = 'Seven Shoguns Control';
     let oColor = 'Purple';
-    const oStd = DuelState.standardDecks[oDeckKey] || DuelState.standardDecks[oDeckKey?.replace(/^deck_std_|^std-/, '')] || DuelState.standardDecks['purple'];
-    if (oStd) {
-      oName = oStd.name;
-      oColor = oStd.color;
-      oCards = extractCardsListFromDeck(oStd);
+    const oLocal = window.LocalDecksCache ? window.LocalDecksCache[oDeckKey] : null;
+    if (oLocal && oLocal.cards) {
+      oName = oLocal.name;
+      oColor = 'Purple';
+      const entries = getCardEntries(oLocal.cards);
+      if (entries.length > 0) {
+        const names = entries.map(([name]) => name);
+        if (typeof window !== 'undefined' && window.location && window.location.origin) {
+          try {
+            const res = await fetch('/api/cards-batch?names=' + encodeURIComponent(names.join('|')));
+            const batchData = await res.json();
+            for (const [name, count] of entries) {
+              let cInfo = batchData[name] || batchData[name.toLowerCase()];
+              if (!cInfo && batchData.cards && Array.isArray(batchData.cards)) {
+                cInfo = batchData.cards.find(c => (c.name || '').toLowerCase() === name.toLowerCase());
+              }
+              if (!cInfo && typeof window !== 'undefined' && window.WasmDB && window.WasmDB.getCardByName) {
+                cInfo = window.WasmDB.getCardByName(name);
+              }
+              if (!cInfo) {
+                cInfo = { name, cost: 2, type: 'Spirit', color: oColor, image_url: './assets/card_back.png' };
+              }
+              if (!cInfo.image_url) {
+                cInfo.image_url = './assets/card_back.png';
+              }
+              for (let i = 0; i < count; i++) {
+                oCards.push({ ...cInfo });
+              }
+            }
+          } catch (e) {
+            console.warn('Failed to load opponent local deck cards:', e);
+          }
+        }
+        if (!oCards.length) {
+          for (const [name, count] of entries) {
+            const cInfo = { name, cost: 2, type: 'Spirit', color: oColor, image_url: './assets/card_back.png' };
+            for (let i = 0; i < count; i++) {
+              oCards.push({ ...cInfo });
+            }
+          }
+        }
+      }
+    }
+    if (!oCards.length) {
+      const oStd = DuelState.standardDecks[oDeckKey] || DuelState.standardDecks[oDeckKey?.replace(/^deck_std_|^std-/, '')] || DuelState.standardDecks['purple'];
+      if (oStd) {
+        oName = oStd.name;
+        oColor = oStd.color;
+        oCards = extractCardsListFromDeck(oStd);
+      }
     }
 
     // Pre-load compiled IR shards for cards across both decks (AGENTS.md Rule 1)

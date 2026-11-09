@@ -97,13 +97,14 @@ describe('Site-Wide UI & Resource Integrity Audit', () => {
     }
   });
 
-  it('6. Server API endpoints verification (/api/captcha, /api/filters, /api/cards, /api/ai-weights)', async () => {
+  it('6. Server API endpoints verification (/api/captcha, /api/filters, /api/cards, /api/ai-weights, /api/local-decks)', async () => {
     const serverPath = path.join(rootDir, 'server.js');
     const serverContent = fs.readFileSync(serverPath, 'utf8');
     assert.match(serverContent, /\/api\/captcha/, 'server.js has /api/captcha endpoint');
     assert.match(serverContent, /\/api\/filters/, 'server.js has /api/filters endpoint');
     assert.match(serverContent, /\/api\/cards/, 'server.js has /api/cards endpoint');
     assert.match(serverContent, /\/api\/featured-x-rares/, 'server.js has /api/featured-x-rares endpoint');
+    assert.match(serverContent, /\/api\/local-decks/, 'server.js has /api/local-decks endpoint');
   });
 
   it('7. Global keyboard shortcuts (/ for quick search, Escape/Arrows/A/+ for card modal) configured in app.js', () => {

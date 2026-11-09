@@ -388,6 +388,53 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // /api/local-decks
+  if (pathname.toLowerCase() === '/api/local-decks') {
+    try {
+      const localDir = path.join(__dirname, 'local-decks');
+      if (fs.existsSync(localDir)) {
+        const files = fs.readdirSync(localDir).filter(f => f.endsWith('.txt'));
+        const decks = files.map(file => {
+          const content = fs.readFileSync(path.join(localDir, file), 'utf8');
+          const lines = content.split('\n');
+          const cards = {};
+          let totalCards = 0;
+          lines.forEach(l => {
+            l = l.trim();
+            if (!l || l.startsWith('#')) return;
+            const match = l.match(/^(\d+)x?\s+(.+)$/i);
+            if (match) {
+              const qty = parseInt(match[1], 10);
+              const name = match[2].trim();
+              cards[name] = (cards[name] || 0) + qty;
+              totalCards += qty;
+            }
+          });
+          const baseName = file.replace(/\.txt$/i, '');
+          const cleanTitle = baseName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          return {
+            id: 'local_' + baseName.toLowerCase().replace(/[^a-z0-9]+/g, '_'),
+            filename: file,
+            name: cleanTitle,
+            totalCards,
+            cards
+          };
+        });
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ decks }));
+        return;
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ decks: [] }));
+      return;
+    } catch (err) {
+      console.error('[API /api/local-decks Error]:', err);
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: err.message, decks: [] }));
+      return;
+    }
+  }
+
   // /api/autocomplete
   if (pathname.toLowerCase() === '/api/autocomplete') {
     ensureCardsIndexLoaded();
