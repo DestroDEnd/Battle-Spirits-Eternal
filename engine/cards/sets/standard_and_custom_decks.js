@@ -1440,6 +1440,42 @@ import { PerCardRegistry } from '../registry.js';
     }
   });
 
+  // 32C. The PartnerWingedDragon Terad Red Sky Contract Partner (BS62-CX01)
+  PerCardRegistry.registerCard('BS62-CX01', {
+    name: 'The PartnerWingedDragon Terad',
+    cardType: 'Contract Spirit',
+    triggers: {
+      WHEN_SUMMONED: function(ctx) {
+        const { card } = ctx;
+        const friendly = getFriendlyState(ctx);
+        if (friendly && (friendly.trash || 0) > 0) {
+          friendly.trash = Math.max(0, friendly.trash - 1);
+          card.currentCores = (card.currentCores || 0) + 1;
+          const current = friendly.counters || friendly.counter || 0;
+          friendly.counters = current + 1;
+          friendly.counter = friendly.counters;
+          audio(ctx, 'coreChime');
+          log(ctx, `🔥 **[TERAD: When Summoned]**: Sent 1 core from Trash to Terad! Counter +1 (now ${friendly.counters}).`, 'skill');
+          render(ctx);
+        }
+      },
+      WHEN_ATTACKS: function(ctx) {
+        const { card } = ctx;
+        const friendly = getFriendlyState(ctx);
+        if (friendly && (friendly.trash || 0) > 0) {
+          friendly.trash = Math.max(0, friendly.trash - 1);
+          card.currentCores = (card.currentCores || 0) + 1;
+          const current = friendly.counters || friendly.counter || 0;
+          friendly.counters = current + 1;
+          friendly.counter = friendly.counters;
+          audio(ctx, 'coreChime');
+          log(ctx, `🔥 **[TERAD: When Attacks]**: Sent 1 core from Trash to Terad! Counter +1 (now ${friendly.counters}).`, 'skill');
+          render(ctx);
+        }
+      }
+    }
+  });
+
   PerCardRegistry.registerCard('BS67-X11', {
     name: 'The DawnLightContractGun Celestoul',
     cardType: 'Brave',
