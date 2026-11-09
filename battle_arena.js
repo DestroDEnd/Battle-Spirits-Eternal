@@ -604,6 +604,14 @@
       spirit.currentBp += bBonus;
     }
     const side = (DuelState && DuelState.player && DuelState.player.field && DuelState.player.field.some(s => s.uid === spirit.uid)) ? 'player' : 'opponent';
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && typeof pRegistry.computeFieldAuraBp === 'function' && DuelState && DuelState.inDuel) {
+      const auraBonus = pRegistry.computeFieldAuraBp(spirit, side, DuelState);
+      spirit.auraBpBoost = auraBonus;
+      if (auraBonus > 0) {
+        spirit.currentBp += auraBonus;
+      }
+    }
     const curCount = (DuelState && DuelState[side] && (DuelState[side].count !== undefined ? DuelState[side].count : (DuelState[side].counters || 0))) || 0;
     const ocBp = getOverCountBpBonus(spirit, curCount);
     if (ocBp > 0) {
@@ -8958,6 +8966,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenBlocksEffects(blocker, defSide = 'player', attacker = null) {
     if (!blocker || !blocker.effect) return;
 
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && blocker.card_number && pRegistry.has(blocker.card_number, 'WHEN_BLOCKS')) {
+      pRegistry.execute(blocker.card_number, 'WHEN_BLOCKS', {
+        card: blocker,
+        side: defSide,
+        attacker,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      renderDuelTable();
+      return;
+    }
+
     const blocks = getCardAbilityBlocks(blocker.effect);
     const eligibleBlocks = blocks.filter(b => /\(When Blocks(?:[^)]*)\)|\(When Attacks\/Blocks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)/i.test(b));
     for (const b of eligibleBlocks) {
@@ -8973,6 +8994,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function executeWhenDestroyedEffects(destroyedSpirit, side = 'player') {
     if (!destroyedSpirit || !destroyedSpirit.effect) return;
+
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && destroyedSpirit.card_number && pRegistry.has(destroyedSpirit.card_number, 'WHEN_DESTROYED')) {
+      pRegistry.execute(destroyedSpirit.card_number, 'WHEN_DESTROYED', {
+        card: destroyedSpirit,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      checkHandReactionsOnDestruction(destroyedSpirit, side);
+      renderDuelTable();
+      return;
+    }
 
     const blocks = getCardAbilityBlocks(destroyedSpirit.effect);
     const eligibleBlocks = blocks.filter(b => /\(When (?:(?:Depleted\/)?Destroyed(?:[^)]*)|[^)]*\/Destroyed(?:[^)]*))\)/i.test(b));
@@ -10626,6 +10660,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenDeployedEffects(nexusCard, side = 'player') {
     if (!nexusCard || !nexusCard.effect) return;
     executeCoreCharge(nexusCard, side, 'DEPLOY');
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistry && nexusCard.card_number && pRegistry.has(nexusCard.card_number, 'WHEN_DEPLOYED')) {
+      pRegistry.execute(nexusCard.card_number, 'WHEN_DEPLOYED', {
+        card: nexusCard,
+        side,
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+      return;
+    }
     if (typeof executeUniversalCardEffect === 'function') {
       executeUniversalCardEffect(nexusCard, side, 'WHEN_DEPLOYED');
     }
@@ -14195,6 +14239,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const step = currentPhase;
+    const pRegistryStep = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistryStep && typeof pRegistryStep.dispatchStepEffects === 'function') {
+      pRegistryStep.dispatchStepEffects(`${step}_STEP`, DuelState, getArenaApi());
+    }
     if (step === 'START') {
       AudioFX.init();
       AudioFX.playTone(330, 'triangle', 0.15, 0.08);
@@ -14416,6 +14464,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function advanceOpponentStep() {
     if (DuelState.activePlayer !== 'opponent') return;
     const currentPhase = DuelState.phases[DuelState.phaseIndex];
+    const pRegistryStep = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    if (pRegistryStep && typeof pRegistryStep.dispatchStepEffects === 'function') {
+      pRegistryStep.dispatchStepEffects(`${currentPhase}_STEP`, DuelState, getArenaApi());
+    }
 
     if (currentPhase === 'START') {
       AudioFX.playTone(280, 'sine', 0.15, 0.08);
