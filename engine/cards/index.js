@@ -45,6 +45,11 @@ import './sets/bs41_cards.js';
 import './sets/bs42_cards.js';
 import './sets/bs43_cards.js';
 import './sets/sd37_sd40_bsc28_bsc30_advent_promos_cards.js';
+import './sets/bs44_cards.js';
+import './sets/bs45_cards.js';
+import './sets/bs46_cards.js';
+import './sets/bs47_cards.js';
+import './sets/sd41_sd44_bsc31_bsc33_godadvent_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;
