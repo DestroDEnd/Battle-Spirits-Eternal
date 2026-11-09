@@ -293,7 +293,7 @@ function renderFamilyDirectory(categories) {
     const bannerClass = bannerClassMap[cat.color_class] || 'banner-general';
 
     const tagsHtml = (cat.families || []).map(f => `
-      <a class="dir-tag" href="./browse.html?family=${encodeURIComponent(f.name)}" data-name="${esc(f.name)}">
+      <a class="dir-tag" href="/browse?family=${encodeURIComponent(f.name)}" data-name="${esc(f.name)}">
         <span>${esc(f.name)}</span>
         <span class="dir-tag-count">${f.count || f.wiki_count || 0}</span>
       </a>

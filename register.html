@@ -169,6 +169,10 @@ async function handleRegisterSubmit(event) {
   event.preventDefault();
   clearAlert();
 
+  if (!verifyCaptchaLocal()) {
+    return;
+  }
+
   const rawUsername = document.getElementById('regUsername').value;
   const email = document.getElementById('regEmail').value.trim();
   const password = document.getElementById('regPassword').value;
@@ -229,7 +233,7 @@ async function handleRegisterSubmit(event) {
       const duelistId = window.FirebaseService.getFormattedDuelistId();
       showAlert(`🎉 Account created! Welcome, Duelist ${username} (ID: #${duelistId})`, 'success');
       setTimeout(() => {
-        window.location.href = './arena.html';
+        window.location.href = '/arena';
       }, 800);
     } else {
       throw new Error('Firebase Authentication is initializing.');

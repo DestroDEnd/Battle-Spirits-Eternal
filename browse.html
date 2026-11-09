@@ -82,6 +82,7 @@
         <span style="font-size:0.75rem;font-weight:700;color:#fbbf24;text-transform:uppercase;letter-spacing:0.5px;margin-right:4px;">⚡ Popular Keywords:</span>
         <div class="filter-pills" id="browseKeywordPills" style="display:flex;flex-wrap:wrap;gap:5px;">
           <button class="filter-pill kw-pill" data-kw="Soul Burst" onclick="toggleKeywordFilter('Soul Burst')">💥 Soul Burst</button>
+          <button class="filter-pill kw-pill" data-kw="Soul Drive" onclick="toggleKeywordFilter('Soul Drive')">🔥 Soul Drive</button>
           <button class="filter-pill kw-pill" data-kw="Accel" onclick="toggleKeywordFilter('Accel')">⚡ Accel</button>
           <button class="filter-pill kw-pill" data-kw="Contract Advent" onclick="toggleKeywordFilter('Contract Advent')">🌟 Contract Advent</button>
           <button class="filter-pill kw-pill" data-kw="Advent" onclick="toggleKeywordFilter('Advent')">✨ Advent</button>
@@ -502,14 +503,14 @@ function updateTargetHeader() {
 
   if (browseState.family && browseState.family.toLowerCase() !== 'all') {
     backBtn.style.display = 'inline-flex';
-    backBtn.href = './family.html';
+    backBtn.href = '/family';
     document.getElementById('btnBackText').textContent = 'Back to Family Directory';
     clearBtn.style.display = 'inline-block';
     titleEl.textContent = `Family: ${browseState.family}`;
     badgeEl.textContent = 'Filtered by Family';
   } else if (browseState.set) {
     backBtn.style.display = 'inline-flex';
-    backBtn.href = './sets.html';
+    backBtn.href = '/sets';
     document.getElementById('btnBackText').textContent = 'Back to Card Sets';
     clearBtn.style.display = 'inline-block';
     titleEl.textContent = `Set: ${browseState.set}`;

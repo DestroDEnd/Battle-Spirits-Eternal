@@ -2158,9 +2158,9 @@
   const SOUL_DRIVE_KNOWN_CARD_NUMBERS = new Set([
     'BS33-X02', 'BS74-AX01', 'SD36-X01', 'BRAM-ZAND', 'P16-21',
     'BS33-X04', 'P15-21', 'BS33-029', 'BS33-049', 'BS34-CP07',
-    'BS74-X12', 'BATTLE-SPIRITS-A12187', 'SD36-X04', 'IL-IMARJO',
-    'SD36-X02', 'BATTLE-SPIRITS-A10766', 'BATTLE-SPIRITS-A12227',
-    'BS46-10THX03', 'BS38-051', 'BATTLE-SPIRITS-A9226', 'P15-15'
+    'BS74-X12', 'BS33-X06', 'BATTLE-SPIRITS-A12187', 'SD36-X04', 'IL-IMARJO',
+    'SD36-X02', 'BATTLE-SPIRITS-A10766', 'BS34-XX01', 'BATTLE-SPIRITS-A12227',
+    'BS46-10THX03', 'BS38-051', 'BS33-066', 'BS33-018', 'BATTLE-SPIRITS-A9226', 'P15-15'
   ]);
 
   function hasSoulDriveKeyword(card) {
@@ -2180,6 +2180,15 @@
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     if (friendlyState.soulDriveUsed) {
       return { allowed: false, reason: 'Already activated Soul Drive this game (Once per Game)' };
+    }
+
+    // Check Taiga Kazuya (BATTLE-SPIRITS-A8150) LV2 ability:
+    // (Send every core on this Nexus to the Void) Activate Soul Drive of attacking "Evil God" Ultimate treating Soul Core as banished.
+    const isEvilGod = card.family && /Evil God/i.test(Array.isArray(card.family) ? card.family.join(' ') : card.family);
+    const nexuses = friendlyState.nexus || [];
+    const taiga = nexuses.find(n => (n.card_number === 'BATTLE-SPIRITS-A8150' || (n.name || '').includes('Taiga Kazuya')) && (n.currentLevel || 1) >= 2 && (n.currentCores || 0) > 0);
+    if (isEvilGod && taiga) {
+      return { allowed: true, viaTaigaKazuya: true, taigaUid: taiga.uid };
     }
 
     // Denial can use Soul Core from Reserve
@@ -2219,29 +2228,50 @@
   function executeSoulDriveAction(attacker, side = 'player') {
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
 
-    // 1. Permanently banish Soul Core to Void!
-    friendlyState.soulDriveUsed = true;
-    friendlyState.soulCoreLocation = 'void';
-    friendlyState.soulCoreSpiritUid = null;
-    attacker.hasSoulCore = false;
-    if (attacker.cores) attacker.cores.soul = 0;
-    recalculateSpiritBp(attacker);
+    // 1. Permanently banish Soul Core to Void! (or send Taiga Kazuya cores to Void)
+    const nexuses = friendlyState.nexus || [];
+    const taiga = nexuses.find(n => (n.card_number === 'BATTLE-SPIRITS-A8150' || (n.name || '').includes('Taiga Kazuya')) && (n.currentLevel || 1) >= 2 && (n.currentCores || 0) > 0);
+    const isEvilGod = attacker.family && /Evil God/i.test(Array.isArray(attacker.family) ? attacker.family.join(' ') : attacker.family);
 
-    AudioFX.soulCoreIgnite();
-    addLog(`🔥 **[SOUL DRIVE ACTIVATED]**: "${attacker.name}" banished the Soul Core from the game to the Void! (Once per Game)`, 'warning');
-    if (typeof showToast === 'function') showToast(`🔥 [SOUL DRIVE] Soul Core banished to Void!`, 'warning');
+    if (isEvilGod && taiga && !attacker.hasSoulCore && friendlyState.soulCoreLocation !== 'field') {
+      const sentCores = taiga.currentCores || 0;
+      taiga.currentCores = 0;
+      AudioFX.soulCoreIgnite();
+      addLog(`🏛️ **[TAIGA KAZUYA (LV2)]**: Sent all ${sentCores} core(s) on Taiga Kazuya to the Void to activate Soul Drive without banishing Soul Core!`, 'warning');
+      if (typeof showToast === 'function') showToast(`🏛️ Taiga Kazuya activated Soul Drive!`, 'warning');
+    } else {
+      friendlyState.soulDriveUsed = true;
+      friendlyState.soulCoreLocation = 'void';
+      friendlyState.soulCoreSpiritUid = null;
+      attacker.hasSoulCore = false;
+      if (attacker.cores) attacker.cores.soul = 0;
+      recalculateSpiritBp(attacker);
+
+      AudioFX.soulCoreIgnite();
+      addLog(`🔥 **[SOUL DRIVE ACTIVATED]**: "${attacker.name}" banished the Soul Core from the game to the Void! (Once per Game)`, 'warning');
+      if (typeof showToast === 'function') showToast(`🔥 [SOUL DRIVE] Soul Core banished to Void!`, 'warning');
+    }
 
     // 2. Resolve specific Soul Drive effect via PerCardRegistry or fallback
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-    const cNum = attacker.card_number || attacker.cardNumber || attacker.id;
+    let keyToUse = null;
+    if (pRegistry) {
+      if (attacker.card_number && pRegistry.has(attacker.card_number, 'SOUL_DRIVE')) {
+        keyToUse = attacker.card_number;
+      } else if (attacker.id && pRegistry.has(attacker.id, 'SOUL_DRIVE')) {
+        keyToUse = attacker.id;
+      } else if (attacker.cardNumber && pRegistry.has(attacker.cardNumber, 'SOUL_DRIVE')) {
+        keyToUse = attacker.cardNumber;
+      }
+    }
     let handled = false;
-    if (pRegistry && cNum && pRegistry.has(cNum, 'SOUL_DRIVE')) {
-      pRegistry.execute(cNum, 'SOUL_DRIVE', {
+    if (keyToUse) {
+      pRegistry.execute(keyToUse, 'SOUL_DRIVE', {
         card: attacker,
         sourceCard: attacker,
         side,
         duelState: DuelState,
-        arenaApi: window.BattleArena
+        arenaApi: window.BattleArena || (typeof getArenaApi === 'function' ? getArenaApi() : null)
       });
       handled = true;
     }
@@ -14230,7 +14260,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.player.hand.push(card);
       AudioFX.playTone(440, 'sine', 0.15, 0.1);
       addLog(`🎴 **DRAW STEP**: You drew "${card.name}" from your deck into your hand.`, 'step');
-      DuelState.phaseIndex = 3; // to REFRESH
+      if (DuelState.player.skipNextRefreshAndMain) {
+        DuelState.player.skipNextRefreshAndMain = false;
+        DuelState.phaseIndex = 5; // skip REFRESH (3) and MAIN (4), advance directly to ATTACK (5)
+        AudioFX.playTone(300, 'sawtooth', 0.2, 0.1);
+        addLog(`🌊 **[TIDAL-BLUE SOUL DRIVE]**: Opponent's Tidal-Blue skipped your Refresh Step and Main Step! Advancing directly to Attack Step.`, 'warning');
+      } else {
+        DuelState.phaseIndex = 3; // to REFRESH
+      }
       renderDuelTable();
     } else if (step === 'REFRESH') {
       let count = 0;
@@ -14240,16 +14277,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         s.hasAttacked = false;
       });
       let coresReturned = 0;
-      if (DuelState.player.trash > 0) {
-        coresReturned = DuelState.player.trash;
-        DuelState.player.reserve += coresReturned;
-        DuelState.player.trash = 0;
-      }
       let scReturned = false;
-      if (DuelState.player.soulCoreLocation === 'trash') {
-        DuelState.player.soulCoreLocation = 'reserve';
-        DuelState.player.soulCoreSpiritUid = null;
-        scReturned = true;
+      if (DuelState.player.preventRefreshTrashCores) {
+        DuelState.player.preventRefreshTrashCores = false;
+        addLog(`🔥 **[BRAM-ZAND-NOIR SOUL DRIVE]**: You cannot return cores from Trash to Reserve during this Refresh Step!`, 'warning');
+      } else {
+        if (DuelState.player.trash > 0) {
+          coresReturned = DuelState.player.trash;
+          DuelState.player.reserve += coresReturned;
+          DuelState.player.trash = 0;
+        }
+        if (DuelState.player.soulCoreLocation === 'trash') {
+          DuelState.player.soulCoreLocation = 'reserve';
+          DuelState.player.soulCoreSpiritUid = null;
+          scReturned = true;
+        }
       }
 
       AudioFX.coreChime();
@@ -14427,23 +14469,37 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       DuelState.opponent.hand.push(card);
       AudioFX.playTone(390, 'sine', 0.15, 0.08);
       addLog(`🎴 **DRAW STEP**: Opponent drew 1 card into hand.`, 'step');
-      DuelState.phaseIndex = 3; // to REFRESH
-      renderDuelTable();
-      safeTimeout(advanceOpponentStep, 800);
+      if (DuelState.opponent.skipNextRefreshAndMain) {
+        DuelState.opponent.skipNextRefreshAndMain = false;
+        DuelState.phaseIndex = 5; // skip REFRESH (3) and MAIN (4), advance directly to ATTACK (5)
+        AudioFX.playTone(300, 'sawtooth', 0.2, 0.1);
+        addLog(`🌊 **[TIDAL-BLUE SOUL DRIVE]**: Player's Tidal-Blue skipped Opponent's Refresh Step and Main Step! Advancing directly to Attack Step.`, 'warning');
+        renderDuelTable();
+        safeTimeout(advanceOpponentStep, 1000);
+      } else {
+        DuelState.phaseIndex = 3; // to REFRESH
+        renderDuelTable();
+        safeTimeout(advanceOpponentStep, 800);
+      }
     } else if (currentPhase === 'REFRESH') {
       DuelState.opponent.field.forEach(s => {
         s.isExhausted = false;
         s.hasAttacked = false;
       });
       let coresReturned = 0;
-      if (DuelState.opponent.trash > 0) {
-        coresReturned = DuelState.opponent.trash;
-        DuelState.opponent.reserve += coresReturned;
-        DuelState.opponent.trash = 0;
-      }
-      if (DuelState.opponent.soulCoreLocation === 'trash') {
-        DuelState.opponent.soulCoreLocation = 'reserve';
-        DuelState.opponent.soulCoreSpiritUid = null;
+      if (DuelState.opponent.preventRefreshTrashCores) {
+        DuelState.opponent.preventRefreshTrashCores = false;
+        addLog(`🔥 **[BRAM-ZAND-NOIR SOUL DRIVE]**: Opponent cannot return cores from Trash to Reserve during this Refresh Step!`, 'warning');
+      } else {
+        if (DuelState.opponent.trash > 0) {
+          coresReturned = DuelState.opponent.trash;
+          DuelState.opponent.reserve += coresReturned;
+          DuelState.opponent.trash = 0;
+        }
+        if (DuelState.opponent.soulCoreLocation === 'trash') {
+          DuelState.opponent.soulCoreLocation = 'reserve';
+          DuelState.opponent.soulCoreSpiritUid = null;
+        }
       }
       AudioFX.shield();
       addLog(`🔄 **REFRESH STEP**: Opponent refreshed all Spirits to Ready${coresReturned > 0 ? ` and returned ${coresReturned} Core(s) from Trash to Reserve` : ''}.`, 'step');

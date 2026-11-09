@@ -257,7 +257,7 @@ async function handleGoogleSignIn() {
     const duelistId = window.FirebaseService.getFormattedDuelistId();
     showAlert(`Welcome, ${user.displayName || user.email}! Duelist ID: #${duelistId}`, 'success');
     setTimeout(() => {
-      window.location.href = './arena.html';
+      window.location.href = '/arena';
     }, 800);
   } catch (err) {
     console.error('Google Auth Error:', err);
@@ -275,6 +275,10 @@ async function handleGoogleSignIn() {
 async function handleUserSignIn(event) {
   event.preventDefault();
   clearAlert();
+
+  if (!verifyCaptchaLocal()) {
+    return;
+  }
 
   const username = document.getElementById('loginInput').value.trim();
   const password = document.getElementById('passwordInput').value;
@@ -295,7 +299,7 @@ async function handleUserSignIn(event) {
       const duelistId = window.FirebaseService.getFormattedDuelistId();
       showAlert(`Welcome back, Duelist ${user.displayName || username}! (ID: #${duelistId})`, 'success');
       setTimeout(() => {
-        window.location.href = './arena.html';
+        window.location.href = '/arena';
       }, 700);
     } else {
       throw new Error('Authentication service not connected.');

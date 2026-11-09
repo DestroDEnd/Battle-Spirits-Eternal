@@ -290,7 +290,7 @@ function renderSetDirectory(categories) {
     const bannerClass = bannerClassMap[cat.color_class] || 'banner-general';
 
     const tagsHtml = (cat.sets || []).map(s => `
-      <a class="dir-tag" href="./browse.html?set=${encodeURIComponent(s.name)}" data-name="${esc(s.name)}">
+      <a class="dir-tag" href="/browse?set=${encodeURIComponent(s.name)}" data-name="${esc(s.name)}">
         <span>${esc(s.name)}</span>
         <span class="dir-tag-count">${s.count || s.wiki_count || 0}</span>
       </a>
