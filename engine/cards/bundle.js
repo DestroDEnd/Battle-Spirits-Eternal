@@ -421,7 +421,7 @@ const SagaConditionDSL = (() => {
 
     isBraved(ctx) {
       const card = ctx.card || ctx.sourceCard;
-      return Boolean(card && (card.brave || card.isBraved || card.braveCard));
+      return Boolean(ctx.isBraved || (card && (card.brave || card.isBraved || card.braveCard)));
     },
 
     countUnits(ctx, sideScope, filter) {
@@ -466,6 +466,7 @@ const SagaConditionDSL = (() => {
       if (subConditions.requireSoulCore && !cond.hasSoulCore(ctx)) return false;
       if (subConditions.minCores && !cond.minCores(ctx, subConditions.minCores)) return false;
       if (subConditions.requireBraved && !cond.isBraved(ctx)) return false;
+      if (subConditions.requireNotBraved && cond.isBraved(ctx)) return false;
       if (subConditions.requireLifeLte !== undefined && !cond.lifeLte(ctx, subConditions.requireLifeLte)) return false;
       if (subConditions.requireFamilyOnField) {
         const req = subConditions.requireFamilyOnField;
@@ -781,6 +782,86 @@ const SagaConditionDSL = (() => {
       log(ctx, `🔥 **[AWAKEN: ${card.name}]**: Transferred ${moved} core(s) to "${card.name}" (Now Lv${card.currentLevel}, ${card.currentBp} BP)!`, 'magic');
       render(ctx);
       return { applied: moved > 0, count: moved, targets: [card] };
+    },
+
+    ultraAwaken(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !card) return { applied: false, count: 0 };
+      const maxMove = params.maxCores || 3;
+      let moved = 0;
+
+      for (const ally of (st.field || [])) {
+        if (ally.uid === card.uid) continue;
+        while ((ally.currentCores || 0) > 1 && moved < maxMove) {
+          ally.currentCores -= 1;
+          card.currentCores = (card.currentCores || 0) + 1;
+          moved++;
+          recalcBp(ctx, ally);
+        }
+      }
+      if (moved === 0 && (st.reserve || 0) > 0) {
+        const fromRes = Math.min(maxMove, st.reserve);
+        st.reserve -= fromRes;
+        card.currentCores = (card.currentCores || 0) + fromRes;
+        moved += fromRes;
+      }
+      card.isExhausted = false;
+      recalcBp(ctx, card);
+      audio(ctx, 'coreChime');
+      log(ctx, `🔥✨ **[ULTRA AWAKEN: ${card.name}]**: Transferred ${moved} core(s) and refreshed "${card.name}" (Now Lv${card.currentLevel}, ${card.currentBp} BP)!`, 'magic');
+      render(ctx);
+      return { applied: true, count: moved, targets: [card] };
+    },
+
+    grantHeavyArmor(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !st.field) return { applied: false, count: 0 };
+      const colors = params.colors || ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+      const targets = params.scope === 'ALL_MATCHING'
+        ? st.field.filter(u => matchesUnitFilter(u, params.filter, card))
+        : (card ? [card] : []);
+
+      for (const t of targets) {
+        if (!Array.isArray(t.heavyArmorColors)) t.heavyArmorColors = [];
+        for (const col of colors) {
+          if (!t.heavyArmorColors.includes(col)) t.heavyArmorColors.push(col);
+        }
+        if (!Array.isArray(t.grantedKeywords)) t.grantedKeywords = [];
+        t.grantedKeywords.push({ name: `Heavy Armor: ${colors.join('/')}`, expires: params.expires || 'permanent' });
+      }
+      if (targets.length > 0) {
+        log(ctx, `🛡️ **[Heavy Armor]**: Granted [Heavy Armor: ${colors.join('/')}] to ${targets.map(t => `"${t.name}"`).join(', ')}!`, 'magic');
+        render(ctx);
+      }
+      return { applied: targets.length > 0, count: targets.length, targets };
+    },
+
+    destroyOpposingBrave(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const enemySide = getEnemySide(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState) return { applied: false, count: 0 };
+      let destroyed = 0;
+
+      for (const sp of (enemyState.field || [])) {
+        if (sp && sp.brave) {
+          const br = sp.brave;
+          sp.brave = null;
+          sp.isBraved = false;
+          sendToTrash(ctx, br, enemySide, `Brave destroyed by ${card?.name || 'effect'}`);
+          recalcBp(ctx, sp);
+          destroyed++;
+          log(ctx, `⚔️💥 **[Brave Destruction]**: Destroyed opposing Brave "${br.name}" on "${sp.name}"!`, 'kill');
+          if (destroyed >= (params.count || 1)) break;
+        }
+      }
+      if (destroyed > 0) {
+        audio(ctx, 'destroy');
+        render(ctx);
+      }
+      return { applied: destroyed > 0, count: destroyed };
     },
 
     destroyByBp(ctx, params = {}) {
@@ -1256,6 +1337,9 @@ const SagaConditionDSL = (() => {
         case 'CORE_FROM_VOID': return fx.coreFromVoid(ctx, stepDef);
         case 'CORE_DRAIN': return fx.drainCores(ctx, stepDef);
         case 'AWAKEN': return fx.awaken(ctx, stepDef);
+        case 'ULTRA_AWAKEN': return fx.ultraAwaken(ctx, stepDef);
+        case 'GRANT_HEAVY_ARMOR': return fx.grantHeavyArmor(ctx, stepDef);
+        case 'DESTROY_BRAVE': return fx.destroyOpposingBrave(ctx, stepDef);
         case 'DESTROY_BY_BP': return fx.destroyByBp(ctx, stepDef);
         case 'DESTROY_BY_COST': return fx.destroyByCost(ctx, stepDef);
         case 'DESTROY_EXHAUSTED': return fx.destroyExhausted(ctx, stepDef);
@@ -33324,6 +33408,15661 @@ const SD01_SD02_PROMOS_SAGA_CARDS = [
 ];
 
 for (const spec of SD01_SD02_PROMOS_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS10_CARDS.JS ---
+/**
+ * engine/cards/sets/bs10_cards.js
+ *
+ * Constellation Saga — Deterministic Two-Tier Per-Card Handlers for BS10
+ * Total Cards: 114 (98 Effect, 16 Vanilla)
+ *
+ * Tier 1: Overall Condition (WHEN_SUMMONED, WHEN_DEPLOYED, WHEN_BRAVED, WHEN_ATTACKS,
+ *         WHEN_BLOCKS, WHEN_BATTLES, WHEN_DESTROYED, START_STEP, CORE_STEP, DRAW_STEP,
+ *         REFRESH_STEP, MAIN_STEP, ATTACK_STEP, END_STEP, MAIN, FLASH, BURST, AURA_BP, AURA_KEYWORDS)
+ * Tier 2A: Sub-Internal-Conditions (levels, turn, requireBraved, family/color/symbol/nexus guards, subCosts)
+ * Tier 2B: Sub-Internal-Effects (atomic effect primitives executed in sequence)
+ */
+
+
+
+const BS10_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS",
+    "name": "Angedoll",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1026",
+    "name": "Anteater",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1059",
+    "name": "Onigumon",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11284",
+    "name": "The Lumberjack Gobri-Gobri",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11847",
+    "name": "The RedHoodFairy Rouge",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A220",
+    "name": "Duald",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3804",
+    "name": "Djungaree",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4494",
+    "name": "Glaakie",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A565",
+    "name": "The BigDipperDragon Sieg-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6641",
+    "name": "Mothpede",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6710",
+    "name": "Mushazemi",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8659",
+    "name": "The BattleBeast Raygallop",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8994",
+    "name": "The CancerBushin Cancerd",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9423",
+    "name": "The DiploDinoman Bracchio",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-001",
+    "name": "Shamcaesar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-003",
+    "name": "Shurikeraptor",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-004",
+    "name": "Eusthedea",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-005",
+    "name": "Dilophoza",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-006",
+    "name": "Yashium",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-008",
+    "name": "The MarsDragonDeity Ares-Dragoon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "ALL_MATCHING",
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-009",
+    "name": "Tornadra",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-013",
+    "name": "The MagicFencer Dragonaga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-014",
+    "name": "The DarkKnight Maris",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 4"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-015",
+    "name": "Rogan",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-016",
+    "name": "Jaw-Scythe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-017",
+    "name": "The HellMousquetaire Gaim",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-018",
+    "name": "El-Kraken",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-019",
+    "name": "The SaturnDragonDeity Krono-Bolos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 3,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          },
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-020",
+    "name": "The WaterSnake Hydrogen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-023",
+    "name": "Luckiwi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-025",
+    "name": "Herajigusa",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-026",
+    "name": "The Veteran Nogan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-027",
+    "name": "The Rookie Unpyoru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-028",
+    "name": "Matangol",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-029",
+    "name": "The JupiterDragonDeity Nobunagard-Zeuses",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-030",
+    "name": "The General Antman",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Shellman"
+        },
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-032",
+    "name": "Gadphant",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Armor: Blue"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-033",
+    "name": "Northernbeard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-034",
+    "name": "The ArmoredBeast Chimairon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-035",
+    "name": "The DoctorGoddess Eir",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-036",
+    "name": "The CrystalFish Crysteel",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-037",
+    "name": "Emperordol",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-038",
+    "name": "The BlackSpear Bolvelgr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-039",
+    "name": "Bianco-Tiger",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-040",
+    "name": "The CarrierWhale Hogale",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "targetFilter": {
+          "family": "Flying Fish"
+        },
+        "amount": 1000
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "targetFilter": {
+          "family": "Flying Fish"
+        },
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-041",
+    "name": "Tin-Soldier",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-042",
+    "name": "Charadrius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-043",
+    "name": "Kikasaal",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-044",
+    "name": "The ForestElf Pentan",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-046",
+    "name": "The DragoonDuchess",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-048",
+    "name": "The Angelia Power",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-049",
+    "name": "The FairyPriest Andromeda",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-050",
+    "name": "The ThunderSacredBeast Nue",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-053",
+    "name": "The Guardian Bertram",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-054",
+    "name": "Locomo-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-056",
+    "name": "The ApeDeity Mongoku",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "The ApeMan Mongoku"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-057",
+    "name": "The Stagman Deard",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS10-058",
+    "name": "The MercuryDragonDeity Mercurius-Serpent",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-059",
+    "name": "Fort-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-060",
+    "name": "The GiantJaeger Orion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-062",
+    "name": "The GunDragon Phoenix-Cannon",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-063",
+    "name": "The JavelinBeast Balli-Star",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-064",
+    "name": "The SkullTank Geparberd",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: No printed effects"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_EXHAUSTED",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-065",
+    "name": "Hedgebolg",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-066",
+    "name": "The KnightSnake Pendragon",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "CORE_DRAIN",
+            "count": 2,
+            "to": "RESERVE",
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-067",
+    "name": "The KarakuriDog Shiba",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: No printed effects"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-068",
+    "name": "Beam-Beetle",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-069",
+    "name": "The SwordBird Kacrane",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 2,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-070",
+    "name": "The ArmoredHorse Alfothr",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: No printed effect"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-072",
+    "name": "Sabershark",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-074",
+    "name": "The Kigurumi Kumattar",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-075",
+    "name": "Oniyurin",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-076",
+    "name": "Bazooka-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: No printed effects"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-077",
+    "name": "Gyokuryuun",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-078",
+    "name": "The SacredArmoredBeast Ammead",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-079",
+    "name": "The Table Mountain Range",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "amount": 1000
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-080",
+    "name": "The Flame Crystal",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Red Core"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-082",
+    "name": "The Sextant Observatory",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-083",
+    "name": "The Historic Battlefield of Evil Star",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-084",
+    "name": "The Mouth of False",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-086",
+    "name": "The Tree overlooking the Huge Star",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "amount": 2000
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-087",
+    "name": "The New Life on the Battlefield",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "CORE_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-088",
+    "name": "The Tower Castle soaring to Heaven",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-089",
+    "name": "The Freezing Lake with the Moonlight",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "START_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-090",
+    "name": "The Coral Reef in the Sky",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "amount": 1000
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-091",
+    "name": "The Lakeside with Soap bubbles",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-092",
+    "name": "The Flower Garden with the Daystar",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-093",
+    "name": "The Ticking Flower Clock",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-094",
+    "name": "The Unfinished Ancient Battleship:Keel",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-095",
+    "name": "The Colosseum with the Speed Star",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-096",
+    "name": "The Final Championship Flag",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          },
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-097",
+    "name": "Brave Aura",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_ALLIES",
+            "amount": 1000,
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-098",
+    "name": "Revive Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 2,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-099",
+    "name": "Southan Cross Flame",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-100",
+    "name": "Brave Cemetery",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 1000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-101",
+    "aliases": [
+      "CB33-059"
+    ],
+    "name": "Hangedman",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-102",
+    "name": "Core Steal",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 2,
+            "to": "RESERVE",
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-103",
+    "name": "Grawing Sword",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-104",
+    "name": "Triangle Trap",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-105",
+    "name": "Life Charge",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 3
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-106",
+    "name": "Protect Aura",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_ALLIES",
+            "amount": 2000,
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-107",
+    "name": "Silent Lock",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "END_ATTACK_STEP",
+            "timing": "IMMEDIATE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-108",
+    "name": "Lunatic Seal",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          },
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-109",
+    "name": "Shining Arrow",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-110",
+    "name": "Knockout",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-111",
+    "name": "Hand Typhoon",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 4,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-112",
+    "name": "Nexus Extension",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1,
+            "filter": {
+              "type": "Spirit"
+            }
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-113",
+    "name": "Orion Power",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-114",
+    "name": "Eridanus Flood",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 4000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-X01",
+    "name": "The PhantomStarDragon Gai-Asura",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "ULTRA_AWAKEN",
+            "maxCores": 3
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            4
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-X05",
+    "name": "The FallenDragonDeity Venu-Lucifer",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-X06",
+    "name": "The ScorpioKnight Scor-Spear",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "STRIKE-SIEGWURM",
+    "name": "The MoonlightDragon Strike-Siegwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": true
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "TYPE-B",
+    "name": "Fenrircannon Type-B",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  }
+];
+
+for (const spec of BS10_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS11_CARDS.JS ---
+/**
+ * engine/cards/sets/bs11_cards.js
+ *
+ * Constellation Saga — Deterministic Two-Tier Per-Card Handlers for BS11
+ * Total Cards: 89 (84 Effect, 5 Vanilla)
+ *
+ * Tier 1: Overall Condition (WHEN_SUMMONED, WHEN_DEPLOYED, WHEN_BRAVED, WHEN_ATTACKS,
+ *         WHEN_BLOCKS, WHEN_BATTLES, WHEN_DESTROYED, START_STEP, CORE_STEP, DRAW_STEP,
+ *         REFRESH_STEP, MAIN_STEP, ATTACK_STEP, END_STEP, MAIN, FLASH, BURST, AURA_BP, AURA_KEYWORDS)
+ * Tier 2A: Sub-Internal-Conditions (levels, turn, requireBraved, family/color/symbol/nexus guards, subCosts)
+ * Tier 2B: Sub-Internal-Effects (atomic effect primitives executed in sequence)
+ */
+
+
+
+const BS11_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10696",
+    "name": "The HellArmor Zepar",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11041",
+    "name": "The IronHeadDinoman Pachycephalon",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13836",
+    "name": "Totemowl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14461",
+    "name": "Wolvy",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1625",
+    "name": "The WaterCarrierDeity Aqua-Elysion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "REFRESH_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "REFRESH_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6129",
+    "name": "Karugamode",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7999",
+    "name": "Streamotter",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS11-001",
+    "name": "Volgames",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-002",
+    "name": "Cometwyarm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Astral Dragon"
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-003",
+    "name": "Aquilam",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 2000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-004",
+    "name": "Prominencewyvern",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "AWAKEN",
+            "maxCores": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-006",
+    "name": "The LeoDragonPrince Leogulus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-007",
+    "name": "The ShiningEmperor Heliosdragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-008",
+    "name": "The BurstDragon Dragonicbeard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-009",
+    "name": "Smokeloco",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-010",
+    "name": "The DarkKnight Gaheris",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 3"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-011",
+    "name": "Flyskull",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-013",
+    "name": "Glasyahound",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 5/6"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Immortality"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-014",
+    "name": "The RipperPrincess Azalea",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-015",
+    "name": "The PlutoSacredBeast Inferd-Hades",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 4/5"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-016",
+    "name": "The EvilEyeEmperor Zenas",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Immortality"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-017",
+    "name": "Mushatsubame",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-018",
+    "name": "Yakuyanagi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-019",
+    "name": "Danderabbit",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-020",
+    "name": "Onmyoyamasemi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-021",
+    "name": "Gokurakucho",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-024",
+    "name": "The BushinBird Birdy-Kenshin",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Winged Beast"
+        },
+        "amount": 3000
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-026",
+    "name": "Thousandneedle",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Armor: Purple/Blue"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-027",
+    "name": "The SeaCarrier Njord",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-028",
+    "name": "The ArtifactBird Hresvelgr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor: White"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-030",
+    "name": "Dolphing",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-031",
+    "name": "The Valkyrie-Mist",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-032",
+    "name": "The UranusSacredBeast Slei-Uranus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor: Green/White/Yellow"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-033",
+    "name": "Nijinoko",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-034",
+    "name": "The StarHorse Colutte",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-036",
+    "name": "The NetherWitch Helen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-037",
+    "name": "Hipogrifee",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-038",
+    "name": "The HeavenStarHorse Pegaseeda",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          },
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 3,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-039",
+    "name": "The Angelia Tiael",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-040",
+    "name": "The SacredBeast Hikyu",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-041",
+    "name": "Clay-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-042",
+    "name": "The Pirate Raccorsair",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-043",
+    "name": "Tower-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-044",
+    "name": "Shell-Golem",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS11-045",
+    "name": "MC Gingar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "oncePerTurn": "opt_1"
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-046",
+    "name": "The RoaringArm Todon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "ALL_MATCHING",
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-047",
+    "name": "The NeptuneSacredBeast Tri-Poseidos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-048",
+    "name": "Centaurus-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-049",
+    "name": "Jambi-Olepis",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "AWAKEN",
+            "maxCores": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-050",
+    "name": "The ClawDragon Powered-Tusker",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-051",
+    "name": "Evil-Fisher",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-052",
+    "name": "The EvilGun Vesper",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-053",
+    "name": "Karmula One",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-054",
+    "name": "The SpearBird Spineed-Hayato",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-055",
+    "name": "Janome-Shielder",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-056",
+    "name": "The StarSwordShuttle Polar-Caliber",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-057",
+    "name": "Butterhorn",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brilliance"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-058",
+    "name": "The DivineBowBird Perytorn",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-059",
+    "name": "Reticle-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-060",
+    "name": "The ThunderSacredArtillery Cannon-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-061",
+    "name": "The Star Altar",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Astral Soul"
+        },
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-062",
+    "name": "The Oort Dragon's Nest",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-063",
+    "name": "The Doomsday Drawn Canvas",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-064",
+    "name": "The Dark Sacred Sword",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-065",
+    "name": "The Starry Sky Pasture",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-066",
+    "name": "The Discovered World Tree",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-067",
+    "name": "The Great Wall of the White Shield",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "START_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-068",
+    "name": "The Pure Milky Way",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-069",
+    "name": "The Golden Belfry",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-070",
+    "name": "The Drifting Zero Gravity Island",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-071",
+    "name": "The PillarRocks' Aquapolis",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-072",
+    "name": "The Unfinished Ancient Battleship:Stern",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-073",
+    "name": "Buster Hammer",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-074",
+    "name": "Solar Breaker",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          },
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 6000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-075",
+    "name": "Totentanz",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-076",
+    "name": "Sharing Pain",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-077",
+    "name": "Star Cradle",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-078",
+    "name": "Brave Flash",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-079",
+    "name": "Reboot Code",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "ALL_MATCHING",
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-080",
+    "name": "Delta Barrier",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-081",
+    "name": "Lightning Delivery",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          },
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "BP_BUFF_ALLIES",
+            "amount": 1000,
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-082",
+    "name": "Wig Bind",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-083",
+    "name": "Lead Voice",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-084",
+    "name": "Solid Body",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X01",
+    "name": "The SunDragonDeity Rising-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X02",
+    "name": "The StarSlayerDragon Darkwurm-Nova",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 10000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X03",
+    "name": "The StarKnight Hercules Ω",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X05",
+    "name": "The MagicalTwinsDeity Geminize",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X06",
+    "name": "The BalanceDeity Libra-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "scaleByLevel": true,
+            "perLevel": 1
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS11_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS12_CARDS.JS ---
+/**
+ * engine/cards/sets/bs12_cards.js
+ *
+ * Constellation Saga — Deterministic Two-Tier Per-Card Handlers for BS12
+ * Total Cards: 90 (84 Effect, 6 Vanilla)
+ *
+ * Tier 1: Overall Condition (WHEN_SUMMONED, WHEN_DEPLOYED, WHEN_BRAVED, WHEN_ATTACKS,
+ *         WHEN_BLOCKS, WHEN_BATTLES, WHEN_DESTROYED, START_STEP, CORE_STEP, DRAW_STEP,
+ *         REFRESH_STEP, MAIN_STEP, ATTACK_STEP, END_STEP, MAIN, FLASH, BURST, AURA_BP, AURA_KEYWORDS)
+ * Tier 2A: Sub-Internal-Conditions (levels, turn, requireBraved, family/color/symbol/nexus guards, subCosts)
+ * Tier 2B: Sub-Internal-Effects (atomic effect primitives executed in sequence)
+ */
+
+
+
+const BS12_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1030",
+    "name": "Gagamoth",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10364",
+    "name": "The GodStarEmperor Strike-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11745",
+    "name": "The PirateDeity Piscegalleon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12308",
+    "name": "The ShinobiMaster Udou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14207",
+    "name": "Uriborg",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1504",
+    "name": "The MoonlightDragonDeity Lunatech-Strikewurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Heavy Armor: Variable"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A5215",
+    "name": "Jakonezu",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7847",
+    "name": "Shumongo",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7948",
+    "name": "Stagger",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8503",
+    "name": "The ArmoredDinoman Gaston",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8543",
+    "name": "The Artifact Forseti",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT",
+          "requireBraved": true
+        },
+        "targetFilter": {
+          "color": "White"
+        },
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-001",
+    "name": "Veloci-Harpe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-004",
+    "name": "Dragon-Pheasant",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 2000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-005",
+    "name": "The StarHornBeast Unigaunt",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-006",
+    "name": "The DragonBrawler Ardi-Baron",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "amount": 10000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-007",
+    "name": "The FlameDragonDeity Mars-Dragoon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Astral Soul → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-008",
+    "name": "Grand-Dragcastle",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000,
+            "scaleBy": {
+              "type": "FAMILY",
+              "family": "Ancient Dragon"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-009",
+    "name": "Swordoll",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-011",
+    "name": "Mummybird",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-012",
+    "name": "The ChariotEmperor Dirgan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-013",
+    "name": "The DarkKnight Kay",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 5/6"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-014",
+    "name": "The CorpseKnight Verium",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-015",
+    "name": "The PlutoDragonDeity Krono-Hades",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Astral Soul → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          },
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-016",
+    "name": "The CorpseGiant Gi-Gasha",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-019",
+    "name": "Kunoichijorou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-020",
+    "name": "The Spearhead Siberza",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-021",
+    "name": "Kojuu-Kamakirou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "targetFilter": {
+          "family": "Shellman"
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-022",
+    "name": "The SunlightMusha Genji-Bolta",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Shellman"
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-024",
+    "name": "The EvilJupiterDragon Nobunagard-Sechst",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Astral Soul → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-025",
+    "name": "Zaneegun",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Heavy Armor: Red"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-027",
+    "name": "The ArtifactGuards Chrysanthe MK-VIII",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Heavy Armor: Purple"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-028",
+    "name": "Sailfish",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Heavy Armor: White"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-029",
+    "name": "The IceLady Snotra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Armor: Purple/White"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-031",
+    "name": "Mechaniffon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Armor: Green"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Armor"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-032",
+    "name": "The HeavyBootsEmperor Vidar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Ice Wall"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-033",
+    "name": "Kogumaru",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS12-034",
+    "name": "The Astronomer Pentan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "START_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-035",
+    "name": "The Angelia of Olimpics Phul",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-036",
+    "name": "The StarDog Pomeran",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-037",
+    "name": "The Angelia of Olimpics Bethor",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-038",
+    "name": "The Angelia of Olimpics Phaleg",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-039",
+    "name": "The ClownPrincess Trickster",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-040",
+    "name": "The UranusDragonDeity Slei-Caelus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Astral Soul → Void"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-042",
+    "name": "Hinoki-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-043",
+    "name": "The Hunter Condrad",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-045",
+    "name": "The BlackBeastKing Cepheus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-046",
+    "name": "Nata-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-047",
+    "name": "The NeptuneDragonDeity Tri-Mercurius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Astral Soul → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-048",
+    "name": "Captain-Orcard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-049",
+    "name": "Amphisbaenar",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/Galaxian/Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 6000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-050",
+    "name": "The ChargingMachineDragon Archaelancer",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-051",
+    "name": "The Exoskeleton Bone-Loader",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/Galaxian/Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-052",
+    "name": "Death-Haze",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {},
+        "subCost": {
+          "type": "DISCARD_HAND",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-053",
+    "name": "Oodsutsunanafushi",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-054",
+    "name": "Manekicat",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/ Galaxian / Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-055",
+    "name": "Gecko-Glider",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/ Galaxian / Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Heavy Armor: Purple/Yellow"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-056",
+    "name": "Jet-Ray",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 2,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-057",
+    "name": "Hydrandea",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 2 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-058",
+    "name": "The DivineBird Thunder-Bird",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/Galaxian/Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-059",
+    "name": "Shoggoleth",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-060",
+    "name": "Vulcan-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Astral Deity/Galaxian/Astral Soul"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 3,
+            "thenDiscard": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-061",
+    "name": "The Birthplace of the Sword",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-062",
+    "name": "The Steam-Breathing Mountains",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "requireFamilyOnField": {
+            "family": "Ancient Dragon",
+            "min": 1
+          }
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-063",
+    "name": "The Brigade's Skyscraper",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-064",
+    "name": "The House of the Idol",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-065",
+    "name": "The Wooded Castle Tower",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-066",
+    "name": "The Gate of the Giant Trees",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-067",
+    "name": "The Moonlight Gathering Tower",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Armor"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-068",
+    "name": "The Light Sacred Sword",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subCost": {
+          "type": "EXHAUST_SELF"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-069",
+    "name": "The Ruler Mountains",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-070",
+    "name": "The Heaven's Stairway",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "requireFamilyOnField": {
+            "family": "Divine Spirit",
+            "min": 1
+          }
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-071",
+    "name": "The Unfinished Ancient Battleship:Sail",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-072",
+    "name": "The Pirate King's Treasure Island",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-073",
+    "name": "Nexus Collapse",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-074",
+    "name": "Starry Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-075",
+    "name": "Bootes Call",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-076",
+    "name": "Brave Break",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-077",
+    "name": "Insect Aura",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-078",
+    "name": "Cassiopeia Seal",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-079",
+    "name": "Absolute Strike",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-080",
+    "name": "Vacuum Symbol",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "ADD_EXTRA_SYMBOL",
+            "scope": "SELF",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-081",
+    "name": "Melodious Harp",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-082",
+    "name": "Seventh Heaven",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-083",
+    "name": "Magic Lamp",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-084",
+    "name": "Mercury Goblet",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-X01",
+    "name": "The BullDragonDeity Dragonic-Taurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "ADD_EXTRA_SYMBOL",
+            "scope": "SELF",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-X02",
+    "name": "The EvilCapricornusDeity Stein-Bolg",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-X03",
+    "name": "The MonoeyeBushin Mantics-Masamune",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-X05",
+    "name": "The ValkyrieVirgoDeity Vielje",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-X06",
+    "name": "The PirateKing Leviadan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subCost": {
+          "type": "SACRIFICE_SPIRIT",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  }
+];
+
+for (const spec of BS12_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS13_CARDS.JS ---
+/**
+ * engine/cards/sets/bs13_cards.js
+ *
+ * Constellation Saga — Deterministic Two-Tier Per-Card Handlers for BS13
+ * Total Cards: 90 (85 Effect, 5 Vanilla)
+ *
+ * Tier 1: Overall Condition (WHEN_SUMMONED, WHEN_DEPLOYED, WHEN_BRAVED, WHEN_ATTACKS,
+ *         WHEN_BLOCKS, WHEN_BATTLES, WHEN_DESTROYED, START_STEP, CORE_STEP, DRAW_STEP,
+ *         REFRESH_STEP, MAIN_STEP, ATTACK_STEP, END_STEP, MAIN, FLASH, BURST, AURA_BP, AURA_KEYWORDS)
+ * Tier 2A: Sub-Internal-Conditions (levels, turn, requireBraved, family/color/symbol/nexus guards, subCosts)
+ * Tier 2B: Sub-Internal-Effects (atomic effect primitives executed in sequence)
+ */
+
+
+
+const BS13_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12208",
+    "name": "The SephirothicSheepDeity Sephiro-Aries",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Tribute"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13330",
+    "name": "The UltimateSunDragon Seventh-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2054",
+    "name": "The GalacticDragonRider Zodiacapollocrimson",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2631",
+    "name": "Ammoknights",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3321",
+    "name": "Bushbabe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3394",
+    "name": "Chootah",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3995",
+    "name": "Dream Seal",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6027",
+    "name": "Kemurisu",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6167",
+    "name": "Knocknmole",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6629",
+    "name": "Modzu",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7862",
+    "name": "Skullion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7864",
+    "name": "Skullzard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8501",
+    "name": "The ArmoredDinoman Ankylong",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "START_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8566",
+    "name": "The Assassin Dragonaga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-003",
+    "name": "Chamaeleopus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-004",
+    "name": "Phobos-Dragoon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-005",
+    "name": "The RudeSaurus Dirano-Rex",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "ULTRA_AWAKEN",
+            "maxCores": 3
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "ULTRA_AWAKEN",
+            "maxCores": 3
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-006",
+    "name": "The FlameBeast Fioryx",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "ADD_EXTRA_SYMBOL",
+            "scope": "SELF",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-007",
+    "name": "The PantherDragon Pandolancer",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-008",
+    "name": "The DinomanKing Megalo-Saur",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-012",
+    "name": "Jainagant",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Cost 7/8"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-014",
+    "name": "The DarkKnight Agravain",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Immortality: Dark Snake"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-015",
+    "name": "The HellGovernor Hagen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-016",
+    "name": "The CurseKing Dragonaga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1,
+            "filter": {
+              "type": "Spirit"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-017",
+    "name": "Anaguma-Kosuke",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000,
+            "scaleBy": {
+              "type": "FAMILY",
+              "family": "Imp"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-019",
+    "name": "Corocorn",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-021",
+    "name": "Saizorong",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-022",
+    "name": "Yang-Ogre",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-023",
+    "name": "Mountain-Seikai",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "ALL_MATCHING",
+            "filter": {}
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-024",
+    "name": "The BushinBeast Deerl-Yukimura",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 1000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-026",
+    "name": "Kigna-Swan Mk-II",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "targetFilter": {
+          "family": "Astral Soul"
+        },
+        "amount": 3000
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-027",
+    "name": "Moonshouuo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-028",
+    "name": "The OathGoddess Var",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Ice Wall"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-029",
+    "name": "The SwordHorse Granim",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-030",
+    "name": "Lethalweapondragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Heavy Armor: Purple/Blue"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-031",
+    "name": "The RainbowDragon Auroria",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 2000,
+            "scaleBy": {
+              "type": "FAMILY",
+              "family": "Armored Dragon"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-032",
+    "name": "The LightSpeedKnight Hermod",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Armed Machine → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": true
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-034",
+    "name": "Minogamen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-035",
+    "name": "The Angelia of Olimpics Och",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Yellow Core"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-036",
+    "name": "The StarBird Kuhja",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-037",
+    "name": "Princepentan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-038",
+    "name": "The Witch Tarangda",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "SALVAGE_TRASH",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-039",
+    "name": "The SacredBeast Barrong",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Yellow Core"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-040",
+    "name": "The VenusDragonDeity Venu-Feather",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "MILL_DECK",
+            "side": "OPPONENT",
+            "count": 2
+          },
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-042",
+    "name": "Night-Gaun",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 3,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-043",
+    "name": "The Birdman Ikarosh",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-044",
+    "name": "The Minstrel Orphe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subCost": {
+          "type": "DISCARD_HAND",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-045",
+    "name": "The GiantCaptain Iason",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-046",
+    "name": "Shantarg",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 3,
+            "count": 2
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-047",
+    "name": "The GreatDeepSea Norg-Dens",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute: Fusion Beast → Void"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-048",
+    "name": "The AncientBattleship Argo-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-049",
+    "name": "Irritaban",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-050",
+    "name": "The ShineDragon Shine-Blazer",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-051",
+    "name": "Zuganake",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-052",
+    "name": "Evilglider",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-053",
+    "name": "Mokubaoh",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-054",
+    "name": "Hyo-Katchu",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 2,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-055",
+    "name": "The HeavyArmoredBrave Shield-Dragon Mk-II",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Heavy Armor: Green/White/Yellow"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-056",
+    "name": "Hawk-Breaker",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "keyword": "Heavy Armor"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-057",
+    "name": "Poppor",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-058",
+    "name": "Chihyu",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          },
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-059",
+    "name": "Forbbid-Vulture",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-060",
+    "name": "Tres-Beluga",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Galaxian"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {},
+        "targetFilter": {
+          "family": "Galaxian"
+        },
+        "amount": 6000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-061",
+    "name": "The Coronation Volcano",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-062",
+    "name": "The Shining Galaxy",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "targetFilter": {
+          "family": "Galaxian"
+        },
+        "amount": 6000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-063",
+    "name": "The Bloody Artifact",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "DRAW_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Curse"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-064",
+    "name": "The Palace of Snake Believers",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-065",
+    "name": "The Octant Small Shrine",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-068",
+    "name": "The Faraway Satellite Cannon",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-069",
+    "name": "The Starry Sky Concert Hall",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-070",
+    "name": "The Constellation Barrier",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-071",
+    "name": "The Port of Giants",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-072",
+    "name": "The Unfinished Ancient Battleship:Compass",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-073",
+    "name": "Burning Sun",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-074",
+    "name": "Zodiac Conduct",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-075",
+    "name": "Snake Slave",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-076",
+    "name": "Assassinate",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          },
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 3,
+            "count": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-077",
+    "name": "Breeze Ride",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-078",
+    "name": "Never Give Up",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-079",
+    "name": "Vanishing Day",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-080",
+    "name": "Crescent Howling",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-082",
+    "name": "Pegasus Flap",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-083",
+    "name": "Galaxy Eternal Requiem",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-084",
+    "name": "Argo Attack",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 4000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-X01",
+    "name": "The ShineCentaurusDeity Sagitto-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 10000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-X02",
+    "name": "The SnakeMasterDeity Asklepiooze",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 3,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-X04",
+    "name": "The MachineLionDeity Strikewurm-Leo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Heavy Armor: Purple/Green/White/Yellow"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-X05",
+    "name": "The KylinStarBeast Rean",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-X06",
+    "name": "The GiantBraver Perseus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 4,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "THE-GREAT-A10545",
+    "name": "The Great Tree of Life",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS13_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: SD03_BSC05_CONSTELLATION_PROMOS_CARDS.JS ---
+/**
+ * engine/cards/sets/sd03_bsc05_constellation_promos_cards.js
+ *
+ * Constellation Saga — Deterministic Two-Tier Per-Card Handlers for SD03_BSC05_CONSTELLATION_PROMOS
+ * Total Cards: 124 (120 Effect, 4 Vanilla)
+ *
+ * Tier 1: Overall Condition (WHEN_SUMMONED, WHEN_DEPLOYED, WHEN_BRAVED, WHEN_ATTACKS,
+ *         WHEN_BLOCKS, WHEN_BATTLES, WHEN_DESTROYED, START_STEP, CORE_STEP, DRAW_STEP,
+ *         REFRESH_STEP, MAIN_STEP, ATTACK_STEP, END_STEP, MAIN, FLASH, BURST, AURA_BP, AURA_KEYWORDS)
+ * Tier 2A: Sub-Internal-Conditions (levels, turn, requireBraved, family/color/symbol/nexus guards, subCosts)
+ * Tier 2B: Sub-Internal-Effects (atomic effect primitives executed in sequence)
+ */
+
+
+
+const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10361",
+    "name": "The GorgeousMoonDragon Strikewurm-Procyon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subCost": {
+          "type": "DISCARD_HAND",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10667",
+    "name": "The HeavenStarDragon Apollodragon-Spica",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10731",
+    "name": "The HellLionKnight Marbalion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10742",
+    "name": "The HellWheel Buer",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10879",
+    "name": "The HornetKing Fong-Need",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 3
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11192",
+    "name": "The LegendaryDragon Ancientwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11333",
+    "name": "The MagicalPrincessDeity Geraldy",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11454",
+    "name": "The MoonFangDragon Strikewurm-Sirius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11467",
+    "name": "The MoonlightFairy Gekka",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11472",
+    "name": "The MoonlightMusha Heike-Boruta",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11571",
+    "name": "The NetherworldDeity Obsidion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_KEYWORD",
+            "scope": "SELF",
+            "keyword": "Clash"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11686",
+    "name": "The PhantomLeoDragon Apollodragon-Denebola",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11722",
+    "name": "The PhoenixDragon Phoenix-Sword",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": true
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11834",
+    "name": "The RaptorDeity Galoud",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12238",
+    "name": "The SevenShogun Beliot",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REANIMATE_TRASH",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12353",
+    "name": "The SilverBrave Shield-Dragon",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12656",
+    "name": "The StarArmoredDragon Sieg-Brave",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12808",
+    "name": "The SunWyvern Flaredragoon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000,
+            "scaleBy": {
+              "type": "FAMILY",
+              "family": "Sun"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12858",
+    "name": "The SuperDragonEmperor UltimateDragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "START_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12867",
+    "name": "The SuperEmperor Siegpentan-Nova",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12891",
+    "name": "The SunCount Rubicante",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BRAVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12911",
+    "name": "The SunGiantSoldier Solar-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13225",
+    "name": "The TwinAxeEmperor Gordias",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 4,
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13311",
+    "name": "The UltimateDragonEmperor Sieg-Sol-Fried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "AWAKEN",
+            "maxCores": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13313",
+    "name": "The UltimateDragonRider Sieg-Crimson",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14261",
+    "name": "Victory-White-Dragon",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1501",
+    "name": "The MoonlightArtifactDragon Crescenthor",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1584",
+    "name": "The ShadowMoonDragon Strikewurm-Betelgeuse",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "OPPONENT",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2714",
+    "name": "Arch-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 3,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3331",
+    "name": "Centrodriller",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3865",
+    "name": "ElectricFairy Birit",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7434",
+    "name": "Revol-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7809",
+    "name": "Shieldybug",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8498",
+    "name": "The ArmoredBushin Girafa-Rando",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subCost": {
+          "type": "EXHAUST_SELF"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8923",
+    "name": "The CannonBeast Glypdon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A902",
+    "name": "The StationeryRobot Stationer",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9158",
+    "name": "The CretaceousMarshal Lay-Saurer",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9297",
+    "name": "The Deity Sieg-Catastrophedragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9393",
+    "name": "The DinoDeity Gundinos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9774",
+    "name": "The FallenStarDragon Apollodragon-Arcturus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9966",
+    "name": "The FlyingBeetle Ittoukabuto",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-014",
+    "name": "The Shaman Dragno",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-025",
+    "name": "The DragonicFortress Giga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 6000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-058",
+    "name": "Hercules-Geo",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BS01-X02",
+    "aliases": [
+      "26RBS03-X06"
+    ],
+    "name": "The SevenShogun Desperado",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-X03",
+    "name": "The Duke Kingtaurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS02-082",
+    "name": "The Artifact Plant",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS02-103",
+    "name": "Reload Cores",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS02-X07",
+    "name": "The Gigantic Thor",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS03-119",
+    "name": "Buster Lance",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 3000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS04-006",
+    "name": "The ZombieDragon Zom-Sauru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "targetFilter": {
+          "color": "Purple"
+        },
+        "amount": 1000
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_EXHAUSTED",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS05-074",
+    "name": "Branch Lock",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "EXHAUST_SPIRITS",
+            "count": 2,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS05-X19",
+    "name": "The SacredEmperor Siegfrieden",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS05-X20",
+    "name": "The GreatArmoredLord Deathtaurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "SELF",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-016",
+    "name": "Bronzemaiden",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-023",
+    "name": "The DarkBishop Baculus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-029",
+    "name": "Maparrot",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-046",
+    "name": "The KeyMaul Valgrind",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-073",
+    "name": "The Burning Canyon",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "DRAW_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-076",
+    "name": "The Digged Tombstone",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "oncePerTurn": "opt_1"
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-100",
+    "name": "Thorn Prison",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-X24",
+    "name": "The ArmoredSacred Walhalance",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS07-005",
+    "name": "The HalberdBraver Arc",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 2000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS07-014",
+    "name": "The ScytheBraver Zanba",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS07-021",
+    "name": "The BladeBraver Volza",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS07-031",
+    "name": "The BowBraver Ullr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS07-034",
+    "name": "Durackdahl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-004",
+    "name": "The Dinoman Tyrannoid",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-006",
+    "name": "The ThunderDragonRider Rayblitz",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-029",
+    "name": "The Narwhal Monokerock",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-030",
+    "name": "The Artifact Fjalar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-034",
+    "name": "The SkyDragonRider Platinam",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-035",
+    "name": "The ArtifactBeast Sai-Drigan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-055",
+    "name": "The ImperialDragoon's Round Table",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subCost": {
+          "type": "DISCARD_HAND",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-062",
+    "name": "The Gravity Dimension Engine",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-X32",
+    "name": "The WingDeity Grand-Woden",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subCost": {
+          "type": "EXHAUST_SELF"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS09-036",
+    "name": "The BlizzardEmperor Ullr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Tribute"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ]
+        },
+        "keyword": "Armor"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-001",
+    "name": "Soulhorse",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-002",
+    "name": "The Magician Dragonaga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-004",
+    "name": "The ForestBird Sekkohkiji",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-005",
+    "name": "Hinawazaru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-006",
+    "name": "The BushinBeast Tigerd-Shingen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-007",
+    "name": "Igua-Buggy",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-009",
+    "name": "The ArtifactDragon Swordrander",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-012",
+    "name": "The ThunderBeast Raijoule",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "LIFE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-013",
+    "name": "The BlackWingDragon Burn-Crow",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-014",
+    "name": "The BladeWolf Beo-Wulf",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR",
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-015",
+    "name": "The BeastArmor Megabison",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "During Brave"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-016",
+    "name": "The HeavenHornBeast Bicorn",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-017",
+    "name": "The Old Devil's Castle",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-018",
+    "name": "The Immovable Headquarters",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "overall": "END_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "ALL_MATCHING",
+            "filter": {}
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-019",
+    "name": "The Impregnable Fortress",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Armor"
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-020",
+    "name": "The Crown of the Starlit Sky",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "ATTACK_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "OPPONENT"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-021",
+    "name": "Grim Reaper",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_EXHAUSTED",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-022",
+    "name": "Greedy Cores",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-023",
+    "name": "Grass Trap",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-024",
+    "name": "Rapid Wind",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-025",
+    "name": "Magic Boost",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "TARGET",
+            "count": 1
+          },
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-026",
+    "name": "Mirage Coat",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "GRANT_UNBLOCKABLE",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-027",
+    "name": "Elec Trick",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC05-028",
+    "name": "Thunder Branch",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {
+          "levels": [
+            1
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "GAI-ASURA",
+    "name": "The EarthDragonDeity Gai-Asura",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "requireBraved": true
+        },
+        "keyword": "When Braved"
+      }
+    ]
+  },
+  {
+    "cardNumber": "GODSLAYER-DRAGON",
+    "name": "The WarEmperor Godslayer-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          },
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BATTLES",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD01-001",
+    "name": "Erimakilizard",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "SD01-012",
+    "name": "The DoubleHead Snake",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD01-013",
+    "name": "The HellFencer Berith",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD01-034",
+    "name": "Extra Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 2,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-001",
+    "name": "Bladra",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "SD03-002",
+    "name": "The SwordDinoman Stegorus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-003",
+    "name": "Morgesaurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 2000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-004",
+    "name": "The HornBeast Gulnearl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BOUNCE_TO_HAND",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-005",
+    "name": "Big-Horn",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "SD03-006",
+    "name": "The SunDragon Sieg-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            3
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-007",
+    "name": "The BattleDragon Elginius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-008",
+    "name": "The MasterCarpenter Mccoy",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "CORE_FROM_VOID",
+            "to": "RESERVE",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-009",
+    "name": "The StarMonster Sea-Serpendar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 4,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
+        },
+        "subCost": {
+          "type": "EXHAUST_NEXUS",
+          "count": 1
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-010",
+    "name": "The CannonDragon Bal-Gunner",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 4 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1,
+            "thenDiscard": 0
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-011",
+    "name": "The CrustDragon Groun-Giras",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 3 or more"
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-012",
+    "name": "The FangEmperor Cerbelord",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {},
+        "keyword": "Brave Condition: Cost 5 or more"
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SPIRITS",
+            "scope": "SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-013",
+    "name": "The Fire Paradise",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "keyword": "Red Core"
+      },
+      {
+        "overall": "DRAW_STEP",
+        "subConditions": {
+          "levels": [
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-014",
+    "name": "The Olymspia Stadium",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN_STEP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      },
+      {
+        "overall": "AURA_KEYWORDS",
+        "subConditions": {
+          "levels": [
+            2
+          ]
+        },
+        "keyword": "Passive"
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-015",
+    "name": "Brave Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW_CARDS",
+            "count": 2,
+            "thenDiscard": 0
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_TARGET",
+            "amount": 2000,
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-016",
+    "name": "Sagitta Flame",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 5000,
+            "count": 1,
+            "allMatching": true
+          },
+          {
+            "op": "DESTROY_NEXUS",
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD03-017",
+    "name": "Blue Splash",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DESTROY_BY_COST",
+            "maxCost": 3,
+            "count": 1,
+            "allMatching": false
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS) {
   SagaConditionDSL.registerSagaCard(spec);
 }
 
