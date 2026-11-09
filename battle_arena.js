@@ -1992,7 +1992,7 @@
         sourceCard: card,
         side,
         duelState: DuelState,
-        arenaApi: window.BattleArena
+        arenaApi: getArenaApi()
       });
       handledByRegistry = true;
     }
@@ -2235,7 +2235,7 @@
         sourceCard: attacker,
         side,
         duelState: DuelState,
-        arenaApi: window.BattleArena || (typeof getArenaApi === 'function' ? getArenaApi() : null)
+        arenaApi: getArenaApi()
       });
       handled = true;
     }
@@ -16843,7 +16843,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     renderLobbyDeckPreview: updateLobbyPreviews,
     triggerScreenShake,
     spawnFloatingCombatText,
-    updateLobbyPreviews
+    updateLobbyPreviews,
+    addLog,
+    recalculateSpiritBp,
+    getArenaApi
 };
 
   // Auto initialize on DOM ready
