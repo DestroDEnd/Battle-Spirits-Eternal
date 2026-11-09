@@ -984,73 +984,40 @@
   async function loadCardEffectsDB() {
     if (typeof fetch === 'function' && typeof window !== 'undefined' && window.location && window.location.origin) {
       try {
-        let data = null;
+        // High-performance optimization: In the browser, do NOT fetch the 126MB monolithic card_effects_db.json!
+        // Loading and parsing 126MB on the main thread causes severe browser lag and memory thrashing.
+        // Modern engine dynamically loads modular ~20KB IR shards on demand via loadCardIrShard / loadSetIrShard.
+        let idxData = null;
         try {
-          const sRes = await fetch('./card_effects_db.json');
-          if (sRes.ok) data = await sRes.json();
+          const idxRes = await fetch('./data/cards_index.json');
+          if (idxRes.ok) idxData = await idxRes.json();
         } catch (e) {}
-        if (!data) {
+        if (!idxData) {
           try {
-            const sRes = await fetch('/card_effects_db.json');
-            if (sRes.ok) data = await sRes.json();
+            const idxRes = await fetch('/data/cards_index.json');
+            if (idxRes.ok) idxData = await idxRes.json();
           } catch (e) {}
         }
-        if (!data) {
-          try {
-            const res = await fetch(window.location.origin + '/api/card-effects-db');
-            if (res.ok) {
-              const text = await res.text();
-              if (text.trim().startsWith('{')) data = JSON.parse(text);
-            }
-          } catch (e) {}
-        }
-        if (data && typeof data === 'object') {
-          CardEffectsDB = data;
-          for (const [k, v] of Object.entries(CardEffectsDB)) {
-            if (v && (v.card_number || v.cardNumber)) {
-              CardEffectsDBByNumber[String(v.card_number || v.cardNumber)] = v;
-            }
-            if (/^[A-Za-z0-9]+-[A-Za-z0-9]+/.test(k)) {
-              CardEffectsDBByNumber[k] = v;
-            }
-          }
-          try {
-            let idxData = null;
-            try {
-              const idxRes = await fetch('./data/cards_index.json');
-              if (idxRes.ok) idxData = await idxRes.json();
-            } catch (e) {}
-            if (!idxData) {
-              try {
-                const idxRes = await fetch('/data/cards_index.json');
-                if (idxRes.ok) idxData = await idxRes.json();
-              } catch (e) {}
-            }
-            if (!idxData && window.location.origin) {
-              try {
-                const idxRes = await fetch(window.location.origin + '/data/cards_index.json');
-                if (idxRes.ok) idxData = await idxRes.json();
-              } catch (e) {}
-            }
-            if (idxData) {
-              for (const [cNum, entry] of Object.entries(idxData)) {
-                if (entry && entry.name && CardEffectsDB[entry.name]) {
-                  CardEffectsDBByNumber[cNum] = CardEffectsDB[entry.name];
-                  if (entry.id != null) {
-                    CardEffectsDBByNumber[String(entry.id)] = CardEffectsDB[entry.name];
-                  }
-                }
+        if (idxData) {
+          for (const [cNum, entry] of Object.entries(idxData)) {
+            if (entry) {
+              CardEffectsDBByNumber[cNum] = entry;
+              if (entry.id != null) {
+                CardEffectsDBByNumber[String(entry.id)] = entry;
+              }
+              if (entry.name) {
+                CardEffectsDB[entry.name] = entry;
               }
             }
-          } catch (e) {}
-          if (typeof window !== 'undefined' && window.BattleArena) {
-            window.BattleArena.CardEffectsDB = CardEffectsDB;
-            window.BattleArena.CardEffectsDBByNumber = CardEffectsDBByNumber;
           }
-          console.log(`[NLP Effects Engine] Loaded operational database for ${Object.keys(CardEffectsDB).length} cards.`);
         }
+        if (typeof window !== 'undefined' && window.BattleArena) {
+          window.BattleArena.CardEffectsDB = CardEffectsDB;
+          window.BattleArena.CardEffectsDBByNumber = CardEffectsDBByNumber;
+        }
+        console.log(`[Fast Engine] Modern shard architecture initialized. Shards load on demand.`);
       } catch (e) {
-        console.warn('[NLP Effects Engine] Failed to load card effects db:', e);
+        console.warn('[Fast Engine] Failed to load cards index:', e);
       }
     } else if (typeof require === 'function') {
       try {
