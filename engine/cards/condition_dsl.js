@@ -212,7 +212,7 @@ export const SagaConditionDSL = (() => {
 
     isBraved(ctx) {
       const card = ctx.card || ctx.sourceCard;
-      return Boolean(card && (card.brave || card.isBraved || card.braveCard));
+      return Boolean(ctx.isBraved || (card && (card.brave || card.isBraved || card.braveCard)));
     },
 
     countUnits(ctx, sideScope, filter) {
@@ -257,6 +257,7 @@ export const SagaConditionDSL = (() => {
       if (subConditions.requireSoulCore && !cond.hasSoulCore(ctx)) return false;
       if (subConditions.minCores && !cond.minCores(ctx, subConditions.minCores)) return false;
       if (subConditions.requireBraved && !cond.isBraved(ctx)) return false;
+      if (subConditions.requireNotBraved && cond.isBraved(ctx)) return false;
       if (subConditions.requireLifeLte !== undefined && !cond.lifeLte(ctx, subConditions.requireLifeLte)) return false;
       if (subConditions.requireFamilyOnField) {
         const req = subConditions.requireFamilyOnField;
@@ -572,6 +573,86 @@ export const SagaConditionDSL = (() => {
       log(ctx, `🔥 **[AWAKEN: ${card.name}]**: Transferred ${moved} core(s) to "${card.name}" (Now Lv${card.currentLevel}, ${card.currentBp} BP)!`, 'magic');
       render(ctx);
       return { applied: moved > 0, count: moved, targets: [card] };
+    },
+
+    ultraAwaken(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !card) return { applied: false, count: 0 };
+      const maxMove = params.maxCores || 3;
+      let moved = 0;
+
+      for (const ally of (st.field || [])) {
+        if (ally.uid === card.uid) continue;
+        while ((ally.currentCores || 0) > 1 && moved < maxMove) {
+          ally.currentCores -= 1;
+          card.currentCores = (card.currentCores || 0) + 1;
+          moved++;
+          recalcBp(ctx, ally);
+        }
+      }
+      if (moved === 0 && (st.reserve || 0) > 0) {
+        const fromRes = Math.min(maxMove, st.reserve);
+        st.reserve -= fromRes;
+        card.currentCores = (card.currentCores || 0) + fromRes;
+        moved += fromRes;
+      }
+      card.isExhausted = false;
+      recalcBp(ctx, card);
+      audio(ctx, 'coreChime');
+      log(ctx, `🔥✨ **[ULTRA AWAKEN: ${card.name}]**: Transferred ${moved} core(s) and refreshed "${card.name}" (Now Lv${card.currentLevel}, ${card.currentBp} BP)!`, 'magic');
+      render(ctx);
+      return { applied: true, count: moved, targets: [card] };
+    },
+
+    grantHeavyArmor(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !st.field) return { applied: false, count: 0 };
+      const colors = params.colors || ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+      const targets = params.scope === 'ALL_MATCHING'
+        ? st.field.filter(u => matchesUnitFilter(u, params.filter, card))
+        : (card ? [card] : []);
+
+      for (const t of targets) {
+        if (!Array.isArray(t.heavyArmorColors)) t.heavyArmorColors = [];
+        for (const col of colors) {
+          if (!t.heavyArmorColors.includes(col)) t.heavyArmorColors.push(col);
+        }
+        if (!Array.isArray(t.grantedKeywords)) t.grantedKeywords = [];
+        t.grantedKeywords.push({ name: `Heavy Armor: ${colors.join('/')}`, expires: params.expires || 'permanent' });
+      }
+      if (targets.length > 0) {
+        log(ctx, `🛡️ **[Heavy Armor]**: Granted [Heavy Armor: ${colors.join('/')}] to ${targets.map(t => `"${t.name}"`).join(', ')}!`, 'magic');
+        render(ctx);
+      }
+      return { applied: targets.length > 0, count: targets.length, targets };
+    },
+
+    destroyOpposingBrave(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const enemySide = getEnemySide(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState) return { applied: false, count: 0 };
+      let destroyed = 0;
+
+      for (const sp of (enemyState.field || [])) {
+        if (sp && sp.brave) {
+          const br = sp.brave;
+          sp.brave = null;
+          sp.isBraved = false;
+          sendToTrash(ctx, br, enemySide, `Brave destroyed by ${card?.name || 'effect'}`);
+          recalcBp(ctx, sp);
+          destroyed++;
+          log(ctx, `⚔️💥 **[Brave Destruction]**: Destroyed opposing Brave "${br.name}" on "${sp.name}"!`, 'kill');
+          if (destroyed >= (params.count || 1)) break;
+        }
+      }
+      if (destroyed > 0) {
+        audio(ctx, 'destroy');
+        render(ctx);
+      }
+      return { applied: destroyed > 0, count: destroyed };
     },
 
     destroyByBp(ctx, params = {}) {
@@ -1047,6 +1128,9 @@ export const SagaConditionDSL = (() => {
         case 'CORE_FROM_VOID': return fx.coreFromVoid(ctx, stepDef);
         case 'CORE_DRAIN': return fx.drainCores(ctx, stepDef);
         case 'AWAKEN': return fx.awaken(ctx, stepDef);
+        case 'ULTRA_AWAKEN': return fx.ultraAwaken(ctx, stepDef);
+        case 'GRANT_HEAVY_ARMOR': return fx.grantHeavyArmor(ctx, stepDef);
+        case 'DESTROY_BRAVE': return fx.destroyOpposingBrave(ctx, stepDef);
         case 'DESTROY_BY_BP': return fx.destroyByBp(ctx, stepDef);
         case 'DESTROY_BY_COST': return fx.destroyByCost(ctx, stepDef);
         case 'DESTROY_EXHAUSTED': return fx.destroyExhausted(ctx, stepDef);
