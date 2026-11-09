@@ -34,6 +34,12 @@ import './sets/bs32_cards.js';
 import './sets/bs33_cards.js';
 import './sets/bs34_cards.js';
 import './sets/sd28_sd32_soul_promos_cards.js';
+import './sets/bs35_cards.js';
+import './sets/bs36_cards.js';
+import './sets/bs37_cards.js';
+import './sets/bs38_cards.js';
+import './sets/bs39_cards.js';
+import './sets/sd33_sd36_bsc23_bsc27_godking_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;
