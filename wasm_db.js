@@ -94,11 +94,10 @@
       let dbBuffer = await getCachedDbBuffer();
       let needsFreshFetch = !dbBuffer;
 
-      // Self-healing check: Verify cached buffer contains the latest cards (e.g. Javad SD65-CX01)
       if (dbBuffer) {
         try {
-          const testDb = new SQL.Database(new Uint8Array(dbBuffer));
-          const testStmt = testDb.prepare("SELECT COUNT(*) as cnt FROM cards WHERE name = 'The PartnerDemonLord Javad'");
+          dbInstance = new SQL.Database(new Uint8Array(dbBuffer));
+          const testStmt = dbInstance.prepare("SELECT COUNT(*) as cnt FROM cards WHERE name = 'The PartnerDemonLord Javad'");
           if (testStmt.step()) {
             const count = testStmt.getAsObject().cnt;
             if (!count || count < 1) {
@@ -109,7 +108,6 @@
             needsFreshFetch = true;
           }
           testStmt.free();
-          testDb.close();
         } catch (e) {
           console.warn('[WasmDB] Cache validation error, re-fetching:', e);
           needsFreshFetch = true;
@@ -117,6 +115,10 @@
       }
 
       if (needsFreshFetch) {
+        if (dbInstance) {
+          try { dbInstance.close(); } catch (e) {}
+          dbInstance = null;
+        }
         showLoadingBanner("Updating Battle Spirits Card Database (23 MB)...");
         let res = null;
         const candidateUrls = [
@@ -142,9 +144,9 @@
         dbBuffer = await res.arrayBuffer();
         await setCachedDbBuffer(dbBuffer);
         hideLoadingBanner();
+        dbInstance = new SQL.Database(new Uint8Array(dbBuffer));
       }
 
-      dbInstance = new SQL.Database(new Uint8Array(dbBuffer));
       isReady = true;
 
       const dur = Math.round(performance.now() - startTime);

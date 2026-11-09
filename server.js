@@ -791,11 +791,13 @@ const server = http.createServer((req, res) => {
       cacheControl = 'public, max-age=86400, stale-while-revalidate=604800';
     } else if (['.css', '.js', '.mjs'].includes(ext)) {
       cacheControl = 'public, max-age=3600, must-revalidate';
+    } else if (ext === '.db') {
+      cacheControl = 'public, max-age=604800, stale-while-revalidate=86400';
     }
 
-    // Check gzip support for text-based resources
+    // Check gzip support for text-based and compressible binary resources
     const acceptEncoding = req.headers['accept-encoding'] || '';
-    const compressible = ['.html', '.css', '.js', '.mjs', '.json', '.svg', '.txt'].includes(ext);
+    const compressible = ['.html', '.css', '.js', '.mjs', '.json', '.svg', '.txt', '.db'].includes(ext);
 
     if (compressible && acceptEncoding.includes('gzip')) {
       res.writeHead(200, {
