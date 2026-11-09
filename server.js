@@ -5,6 +5,7 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
+import { SAGA_DEFINITIONS, getSagaById, resolveCardSaga } from './engine/rules/saga_catalog.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -478,6 +479,7 @@ const server = http.createServer((req, res) => {
         const rarity = (parsedUrl.searchParams.get('rarity') || '').trim();
         const family = (parsedUrl.searchParams.get('family') || '').trim();
         const setName = (parsedUrl.searchParams.get('set') || parsedUrl.searchParams.get('set_name') || '').trim();
+        const generation = (parsedUrl.searchParams.get('generation') || parsedUrl.searchParams.get('saga') || '').trim();
         const cost = (parsedUrl.searchParams.get('cost') || '').trim();
         const sortBy = parsedUrl.searchParams.get('sort_by') || parsedUrl.searchParams.get('sort') || 'cost_asc';
         const limit = Math.min(100, Math.max(1, parseInt(parsedUrl.searchParams.get('limit') || '24', 10)));
@@ -606,6 +608,18 @@ const server = http.createServer((req, res) => {
           sqlParams.push(`%"${setName}"%`);
         }
 
+        if (generation && generation.toLowerCase() !== 'all') {
+          const matchedSaga = getSagaById(generation);
+          if (matchedSaga && matchedSaga.prefixes && matchedSaga.prefixes.length > 0) {
+            const sagaClauses = [];
+            for (const p of matchedSaga.prefixes) {
+              sagaClauses.push('card_number LIKE ? OR sets_json LIKE ?');
+              sqlParams.push(`${p}-%`, `%"${p}"%`);
+            }
+            conditions.push(`(${sagaClauses.join(' OR ')})`);
+          }
+        }
+
         if (cost && cost.toLowerCase() !== 'all') {
           if (cost === '8+') {
             conditions.push('cost >= 8');
@@ -644,6 +658,11 @@ const server = http.createServer((req, res) => {
           if (card.levels && typeof card.levels === 'string' && (card.levels.startsWith('{') || card.levels.startsWith('['))) {
             try { card.levels = JSON.parse(card.levels); } catch(e) {}
           }
+          const sagaInfo = resolveCardSaga(card);
+          if (sagaInfo) {
+            card.generation = sagaInfo.id;
+            card.generation_name = sagaInfo.shortName;
+          }
           return card;
         });
 
@@ -657,6 +676,13 @@ const server = http.createServer((req, res) => {
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ cards: [], total: 0, page: 1, pages: 1 }));
+    return;
+  }
+
+  // /api/sagas (The 17 canonical Battle Spirits Sagas / Generations)
+  if (pathname.toLowerCase() === '/api/sagas' || pathname.toLowerCase() === '/api/generations') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ sagas: SAGA_DEFINITIONS }));
     return;
   }
 
