@@ -10837,8 +10837,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!nexusCard || !nexusCard.effect) return;
     executeCoreCharge(nexusCard, side, 'DEPLOY');
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-    if (pRegistry && nexusCard.card_number && pRegistry.has(nexusCard.card_number, 'WHEN_DEPLOYED')) {
-      pRegistry.execute(nexusCard.card_number, 'WHEN_DEPLOYED', {
+    const nNum = nexusCard.card_number || nexusCard.cardNumber || nexusCard.id;
+    if (pRegistry && nNum && pRegistry.has(nNum, 'WHEN_DEPLOYED')) {
+      pRegistry.execute(nNum, 'WHEN_DEPLOYED', {
         card: nexusCard,
         side,
         duelState: DuelState,
