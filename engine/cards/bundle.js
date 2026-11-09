@@ -1091,11 +1091,24 @@ const SagaConditionDSL = (() => {
       }
       if (params.thenDiscard && params.thenDiscard > 0 && st.hand && st.hand.length > 0) {
         const discCount = Math.min(params.thenDiscard, st.hand.length);
-        for (let j = 0; j < discCount; j++) {
-          const disc = st.hand.pop();
-          if (disc) sendToTrash(ctx, disc, ctx.side, `Discarded after draw by ${card?.name || 'effect'}`);
+        if (ctx.side === 'player' && ctx.arenaApi && typeof ctx.arenaApi.promptHandDiscardModal === 'function' && typeof document !== 'undefined' && document.body) {
+          ctx.arenaApi.promptHandDiscardModal(card || { name: 'Draw & Discard' }, ctx.side, discCount, null, false, (chosen) => {
+            const discarded = (chosen && chosen.length > 0) ? chosen : st.hand.slice(-discCount);
+            discarded.forEach(disc => {
+              const idx = st.hand.findIndex(h => (h.uid && disc.uid && h.uid === disc.uid) || h === disc);
+              if (idx !== -1) st.hand.splice(idx, 1);
+              sendToTrash(ctx, disc, ctx.side, `Discarded after draw by ${card?.name || 'effect'}`);
+            });
+            log(ctx, `🗑️ **[${card?.name || 'Draw & Discard'}]**: Discarded ${discarded.length} card(s) from Hand.`, 'step');
+            render(ctx);
+          });
+        } else {
+          for (let j = 0; j < discCount; j++) {
+            const disc = st.hand.pop();
+            if (disc) sendToTrash(ctx, disc, ctx.side, `Discarded after draw by ${card?.name || 'effect'}`);
+          }
+          log(ctx, `🗑️ **[${card?.name || 'Draw & Discard'}]**: Discarded ${discCount} card(s) from Hand.`, 'step');
         }
-        log(ctx, `🗑️ **[${card?.name || 'Draw & Discard'}]**: Discarded ${discCount} card(s) from Hand.`, 'step');
       }
       render(ctx);
       return { applied: drawn > 0, count: drawn };
