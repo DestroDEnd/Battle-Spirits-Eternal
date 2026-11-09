@@ -1415,6 +1415,41 @@ import { PerCardRegistry } from '../registry.js';
     }
   });
 
+  // 32C. The PartnerMachine Stark (BS60-CX04)
+  PerCardRegistry.registerCard('BS60-CX04', {
+    name: 'The PartnerMachine Stark',
+    cardType: 'Contract Spirit',
+    triggers: {
+      MAIN: function(ctx) {
+        const { card, side } = ctx;
+        const friendly = getFriendlyState(ctx);
+        if (friendly && !card._starkMainUsedThisTurn) {
+          card._starkMainUsedThisTurn = true;
+          friendly.counters = (friendly.counters || 0) + 1;
+          friendly.counter = friendly.counters;
+          friendly.trash = (friendly.trash || 0) + 1;
+          audio(ctx, 'coreChime');
+          log(ctx, `⚙️ **[PARTNER MACHINE STARK: Main]**: Counter +1 (now ${friendly.counters}) and gained 1 Core from Void to Trash!`, 'skill');
+          render(ctx);
+        }
+      },
+      WHEN_ATTACKS: function(ctx) {
+        const { card, side } = ctx;
+        const friendly = getFriendlyState(ctx);
+        if (friendly && !card._starkBurstActivatedOncePerGame) {
+          const burst = friendly.burst;
+          if (burst && ((burst.family && /silver\s*zero|銀零/i.test(burst.family)) || (burst.card_number === 'BS60-092') || (burst.name && burst.name.toLowerCase().includes('clear wall')))) {
+            card._starkBurstActivatedOncePerGame = true;
+            log(ctx, `⚙️💥 **[PARTNER MACHINE STARK: When Attacks]**: Once per Game! Activated set "Silver Zero" Burst "${burst.name}"!`, 'burst');
+            if (ctx.arenaApi && typeof ctx.arenaApi.activateBurst === 'function') {
+              ctx.arenaApi.activateBurst(side);
+            }
+          }
+        }
+      }
+    }
+  });
+
   // 32B. Petit Bat Purple Blood Crystal Contract Partner (BS67-CX01)
   PerCardRegistry.registerCard('BS67-CX01', {
     name: 'Petit Bat',
