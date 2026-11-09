@@ -105,4 +105,14 @@ describe('Site-Wide UI & Resource Integrity Audit', () => {
     assert.match(serverContent, /\/api\/featured-x-rares/, 'server.js has /api/featured-x-rares endpoint');
   });
 
+  it('7. Global keyboard shortcuts (/ for quick search, Escape/Arrows/A/+ for card modal) configured in app.js', () => {
+    const appPath = path.join(rootDir, 'app.js');
+    const appContent = fs.readFileSync(appPath, 'utf8');
+    assert.match(appContent, /e\.key === '\/'/, 'app.js handles / quick search focus');
+    assert.match(appContent, /e\.key === 'Escape'/, 'app.js handles Escape modal close');
+    assert.match(appContent, /e\.key === 'ArrowLeft'/, 'app.js handles ArrowLeft modal prev');
+    assert.match(appContent, /e\.key === 'ArrowRight'/, 'app.js handles ArrowRight modal next');
+    assert.match(appContent, /addModalCardToDeck/, 'app.js handles quick add card shortcut');
+  });
+
 });

@@ -1266,19 +1266,37 @@ function navigateCardModal(direction) {
 
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
   window.addEventListener('keydown', (e) => {
-    const modal = document.getElementById('cardModal');
-    if (!modal || !modal.classList.contains('open')) return;
     const targetTag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
     if (targetTag === 'INPUT' || targetTag === 'TEXTAREA' || targetTag === 'SELECT') return;
 
-    if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      navigateCardModal(-1);
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      navigateCardModal(1);
-    } else if (e.key === 'Escape') {
-      closeModal();
+    const modal = document.getElementById('cardModal');
+    const modalIsOpen = modal && modal.classList.contains('open');
+
+    if (modalIsOpen) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateCardModal(-1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateCardModal(1);
+      } else if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === '+' || e.key === '=' || e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        if (typeof addModalCardToDeck === 'function') addModalCardToDeck();
+      } else if (e.key === '-' || e.key === '_' || e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        if (typeof removeModalCardFromDeck === 'function') removeModalCardFromDeck();
+      }
+    } else {
+      if (e.key === '/') {
+        const searchInput = document.getElementById('browseSearchInput') || document.getElementById('deckCardQuickSearch') || document.getElementById('familySearchInput') || document.getElementById('setsSearchInput');
+        if (searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+          if (typeof searchInput.select === 'function') searchInput.select();
+        }
+      }
     }
   });
 }
