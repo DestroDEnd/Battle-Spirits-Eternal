@@ -4885,7 +4885,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               <span class="bnz-nexus-name">${n.name}</span>
               <div class="bnz-nexus-stats">
                 <span>LV${n.currentLevel || 1}</span>
-                <span>🔮 ${n.currentCores || 0}c</span>
+                <span class="bnz-core-badge">🔮 ${n.currentCores || 0}c</span>
+                <div class="bnz-core-controls">
+                  <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-</button>
+                  <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+</button>
+                </div>
                 ${(() => {
                   const check = canActivateGrandSkill(n, 'player');
                   if (check.allowed && check.gs) {
@@ -15856,15 +15860,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                     <span>Cost ${n.cost ?? 0}</span>
                     <span style="color:#bae6fd;">🔮 ${n.currentCores || 0} Core${n.currentCores === 1 ? '' : 's'}</span>
                   </div>
-                  <div style="font-size:0.75rem; color:#cbd5e1; margin-top:0.35rem; line-height:1.3;">
+                  <div style="display:flex; justify-content:center; gap:0.4rem; margin:0.45rem 0;">
+                    <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(239,68,68,0.25); border-color:#f87171;" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-1 Core</button>
+                    <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(56,189,248,0.25); border-color:#38bdf8;" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+1 Core</button>
+                  </div>
+                  <div style="font-size:0.75rem; color:#cbd5e1; margin-top:0.35rem; line-height:1.3; max-height:110px; overflow-y:auto;">
                     ${formatEffectKeywords(n.effect || n.summary || '')}
                   </div>
-                  ${isMain ? `
-                    <div style="display:flex; gap:0.4rem; margin-top:0.5rem;">
-                      <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')">+1 Core</button>
-                      <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.7rem;" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')">-1 Core</button>
-                    </div>
-                  ` : ''}
                 </div>
               </div>
             `).join('')}

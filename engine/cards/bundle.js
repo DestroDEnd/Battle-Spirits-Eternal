@@ -199385,5 +199385,21068 @@ for (const spec of SD41_SD44_BSC31_BSC33_GODADVENT_PROMOS_SAGA_CARDS) {
 }
 
 
+  // --- SET: BS48_CARDS.JS ---
+/**
+ * engine/cards/sets/bs48_cards.js
+ *
+ * Ultra Advent Saga (超煌臨編 / Grandwalker Era Part 2) — Deterministic Two-Tier Per-Card Handlers for Booster 48 (Ultra Advent Chapter 1)
+ * Total Cards: 99
+ */
+
+
+
+const BS48_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10411",
+    "name": "The GrandflowerFairyQueen Marigold",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10413",
+    "name": "The GrandflowerFairy Azalea",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10414",
+    "name": "The GrandflowerFairy Belladonna",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10415",
+    "name": "The GrandflowerFairy Clover",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10417",
+    "name": "The GrandflowerFairy Gerbera",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10419",
+    "name": "The GrandflowerFairy Iris",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10420",
+    "name": "The GrandflowerFairy Licorice",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10439",
+    "name": "The GrandseaBullKing Asterion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10452",
+    "name": "The GrandseaPiratePrince Triton",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10454",
+    "name": "The GrandseaPirateShip Charybdis -Goddess Incarnate-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10492",
+    "name": "The GrandseaTrident Triaina-Giga",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10791",
+    "name": "The HeroBeast Bear-Cadmus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10817",
+    "name": "The HieroglyphDivineGun Jehut-Glyph",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10849",
+    "name": "The HolyLanceSteelKnight Leontius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10903",
+    "name": "The HypocenterDragon Ma-On -Dragon Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11266",
+    "name": "The LotusDivineBlade Rigveda",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11588",
+    "name": "The OceanStardragon Delphinios",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11666",
+    "name": "The PeerlessDragon Ma-Bu -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11747",
+    "name": "The PirateDeity Piscegalleon X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11829",
+    "name": "The PrimordialSnakeEmperor Amun-Kematera",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12078",
+    "name": "The SandseaPiratePriest Dromed",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12080",
+    "name": "The SandseaPirate Aibeksheed",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12335",
+    "name": "The ShurikenDragon Saighania",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12421",
+    "name": "The ShellwingKnight Crusader Treehopper",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12457",
+    "name": "The SkyLionheart Senecio-Hawk",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12467",
+    "name": "The SkyTwinBlades Har-Edge",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12531",
+    "name": "The SkyEmeraldPhoenix Phara-Nix",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12554",
+    "name": "The SkyLionheart Blue Heron",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12556",
+    "name": "The SkyLionheart Harshiens",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12772",
+    "name": "The SteelKnight Evangelos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12819",
+    "name": "The SteelMaiden003 Cressa",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13157",
+    "name": "The TreasureSagaBlade Grand-Daeva",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13212",
+    "name": "The TrishooterGrandseaPirate Diamante",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13434",
+    "name": "The ValkyrieVirgoDeity Vielje X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13529",
+    "name": "The WerewolfDragon Bhakti",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13727",
+    "name": "The ZodiacGoddess Grand-Lilia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13755",
+    "name": "Thunder-Z-Byakko",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13936",
+    "name": "Turbulence Ribbon",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1443",
+    "name": "The HieroglyphCavalry Ace-Hejeul",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14438",
+    "name": "Yamashino",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1453",
+    "name": "The HieroglyphPrincess Quin-Seshat",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1463",
+    "name": "The HieroglyphSoldier Sleeper-Uahb",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1466",
+    "name": "The HieroglyphWarMachine Rebellion-Nehejet",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1581",
+    "name": "The SevenSisters Taygete",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A20",
+    "name": "Avatar Dragon Blue",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2060",
+    "name": "The GrandflowerHolySpirit Aphro-Urania",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A22",
+    "name": "Avatar Dragon Red",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2292",
+    "name": "The MakaiKnight Beldegaun",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A230",
+    "name": "Godseeker PrayerDragon Abinaya",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2667",
+    "name": "Aphrodite's Grandflower Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2686",
+    "name": "Amahydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2830",
+    "name": "Aliegon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2989",
+    "name": "Baby Aliegon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3109",
+    "name": "Brahma's Creation Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3111",
+    "name": "Brahma Flame",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A314",
+    "name": "The BalanceDeity Libra-Golem X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A330",
+    "name": "The CreatorDragonDeity Generator Dragon-Zero",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A335",
+    "name": "The DestroyerDragonDeity Valdrum",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4348",
+    "name": "Galafin Snake",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4562",
+    "name": "Godseeker DancingDragon Nataraja",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4573",
+    "name": "Godseeker GrandflowerFairy Primula",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4599",
+    "name": "Grandwalker Lilia",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4602",
+    "name": "Grandwalker Aphrodite",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4665",
+    "name": "Grandwalker of Creation Brahma",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4666",
+    "name": "Grandwalker of Destruction Shiva",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4731",
+    "name": "Guineafowlrus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6166",
+    "name": "Kathakali Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6712",
+    "name": "Navarasa Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6779",
+    "name": "Mother Aliegon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6987",
+    "name": "Nix Spark",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7237",
+    "name": "Primrose Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7803",
+    "name": "Shiva's Destruction Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7806",
+    "name": "Shiva Catastrophe",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7934",
+    "name": "Splashing Horn",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8575",
+    "name": "The AstralBeastDragon Kyparissos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8884",
+    "name": "The BraveWarHorse Pedasos-Z",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9041",
+    "name": "The CharisSpiritWand Butterfly-Effect",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9344",
+    "name": "The DestroyerEvilDragon Maheshvara",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9365",
+    "name": "The DestroyerDragonSpear Trishula",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9463",
+    "name": "The DivineEvilTalon Godnail",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9466",
+    "name": "The DivineFangblade Godfang",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9478",
+    "name": "The DivineMagicSword Godblade",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9480",
+    "name": "The DivineMightySpear Godlance",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9491",
+    "name": "The DivineStarStaff Godstaff",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9601",
+    "name": "The EgytianAngelia Medjel",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9611",
+    "name": "The EgytianGreatAngelia Sopdiel",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-005",
+    "name": "The PalaceDragon Taj Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-018",
+    "name": "The MaidDoll †Sonora†",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-019",
+    "name": "Muthu Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-025",
+    "name": "Mridangam Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-026",
+    "name": "The IdatenDragon Skandarg",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-030",
+    "name": "The QueenDoll †Bloody Mary†",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-043",
+    "name": "The HieroglyphSoldier Paratrooper-Mehat",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-061",
+    "name": "The GrandseaPirateCaptain Narwilliam",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-093",
+    "name": "Clover Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-094",
+    "name": "Iris Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS48-095",
+    "name": "Belladonna Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD43-CP01",
+    "name": "Bashin Dan",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD43-CP02",
+    "name": "The Moonlight Barone",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS48_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS49_CARDS.JS ---
+/**
+ * engine/cards/sets/bs49_cards.js
+ *
+ * Ultra Advent Saga (超煌臨編 / Grandwalker Era Part 2) — Deterministic Two-Tier Per-Card Handlers for Booster 49 (Ultra Advent Chapter 2)
+ * Total Cards: 107
+ */
+
+
+
+const BS49_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10423",
+    "name": "The GrandflowerFairy Rim-Gold",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10424",
+    "name": "The GrandflowerFairy Sunflower",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10425",
+    "name": "The GrandflowerFairy Tiger-Lily",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10427",
+    "name": "The GrandflowerWitchFairy Gardenia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10448",
+    "name": "The GrandseaMachine Poseider-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10540",
+    "name": "The GreenMoonDragon Strike-Siegwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10660",
+    "name": "The HeavenKnight Harmonia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10681",
+    "name": "The HeavyShellKnight Ganweev",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10728",
+    "name": "The HellKanabou Gokusotsu",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11119",
+    "name": "The JumpKnight Cruhopper",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11438",
+    "name": "The MisfortuneDino Giga-no-Magatsukami",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11589",
+    "name": "The OceanclawDragon Tsubasa-no-Jou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11603",
+    "name": "The OgreBladeSwordsman Dil-Sireger",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11635",
+    "name": "The OceanGeneral Isaribi-no-Tsukasa",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11665",
+    "name": "The PeerlessDragon Ma-Bu -Dragon Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11782",
+    "name": "The ProtectorDragon Oonamuchi-Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11825",
+    "name": "The PurpleMoonDragon Strike-Siegwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11958",
+    "name": "The RishiDragon Ma-Richi -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11960",
+    "name": "The RitualSpiritBlade Darkris",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12003",
+    "name": "The SacredDragonFlute Bhagavad-Gita",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12020",
+    "name": "The SacredSwordDragon Gou-Guren",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12073",
+    "name": "The SandseaMerchant Chincheap",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12089",
+    "name": "The SandseaSwordsman Aktehuty",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            3,
+            4,
+            5
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12491",
+    "name": "The SlashKnight Ragmantis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12546",
+    "name": "The Snakemancer Hem-Nesel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12551",
+    "name": "The SkyLionheart Blade-Pheasant",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12562",
+    "name": "The SouthWindBeast Shehbui",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13037",
+    "name": "The TerraclawDragon Erlikoshou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13381",
+    "name": "The VeteranSkyLionheart Aku-Vulture",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13512",
+    "name": "The WavespearGrandseaPirate Carmille",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13517",
+    "name": "The WhitePrincessDoll †Aldila†",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13550",
+    "name": "The WestWindBeast Hutchai",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13564",
+    "name": "The WildWaveSpiritBlade Aranami",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13701",
+    "name": "The YellowMoonDragon Strike-Siegwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1445",
+    "name": "The HieroglyphCavalry Commander-Deshret",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1576",
+    "name": "The SevenSisters Alcyone",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1626",
+    "name": "The WaterCarrierDeity Aqua-Elysion X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A24",
+    "name": "Avatar Dragon Yellow",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2761",
+    "name": "Ares' Shell Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2776",
+    "name": "Amenborg X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3046",
+    "name": "BlackMachG X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A317",
+    "name": "The BlueMoonDragon Strike-Siegwurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A319",
+    "name": "The BullDragonDeity Dragonic-Taurus X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A320",
+    "name": "The CancerBushin Cancerd X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3209",
+    "name": "Bugs Reverse",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3814",
+    "name": "Dimorpho-no-Suke",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3923",
+    "name": "Dream Beam",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4342",
+    "name": "Gardenia Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4584",
+    "name": "Godseeker HeavenKnight Aureich",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4587",
+    "name": "Godseeker Kamimusubi-Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4590",
+    "name": "Godseeker Kol-Hapur",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4613",
+    "name": "Godseeker Parasa-no-Kannagi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4646",
+    "name": "Grandwalker Guren",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A5174",
+    "name": "Ishvara Shoot",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6158",
+    "name": "Kathak Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6174",
+    "name": "Krishna's Mooncrown Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6176",
+    "name": "Krishnaga-Artalis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6178",
+    "name": "Krishnaga-Artis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6180",
+    "name": "Krishnaga-Bavan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6182",
+    "name": "Krishnaga-Bis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6188",
+    "name": "Krishnaga-Iksath",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6190",
+    "name": "Krishnaga-Pacaas",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6192",
+    "name": "Krishnaga-Rig-Ganna",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6194",
+    "name": "Krishnaga-Sathr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6280",
+    "name": "Lilium Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7281",
+    "name": "Protector's Authority",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7484",
+    "name": "Roaring Flame of Kusanagi",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7654",
+    "name": "Seaflame Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8085",
+    "name": "Susanoo's Roaring Heavens Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8508",
+    "name": "The ArgoHeroBeast Atalante",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8553",
+    "name": "The ArmoredFortress Barosauru-no-Nushi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8623",
+    "name": "The BarrierGrandflowerFairy Coleus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8625",
+    "name": "The BarrierHermitDragon Tillana",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8628",
+    "name": "The BarrierKrishnaga-Sattar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8630",
+    "name": "The BarrierSoldierKnights Bighead Ant",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8632",
+    "name": "The BatteringHalberd Rampart-Breaker",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8666",
+    "name": "The BarrierDancingDragon Natya-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8827",
+    "name": "The BladehornDragon Stilakuroudo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8990",
+    "name": "The CelestialPriestessPrincess Trickster",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8997",
+    "name": "The CancerSacredSword Kanikiri",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9111",
+    "name": "The ConcaveKnight Kuwagadara",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9122",
+    "name": "The ConvexKnight Kabudrum",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9155",
+    "name": "The CreepyPlushie Odoll",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9367",
+    "name": "The DestroyerEvilDragon Bhairava",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9489",
+    "name": "The DivineSpiritQueenStaff Was-Scepter",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9495",
+    "name": "The DivineTwinSword God Edge",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9604",
+    "name": "The EgytianAngelia Netjerel",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9606",
+    "name": "The EgytianAngelia Shamael",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9648",
+    "name": "The EvilChanceller Ganesh",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9877",
+    "name": "The FireAntHeadKnight Invicta",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS03-130",
+    "name": "Möbius Loop",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-008",
+    "name": "The StarbowDragon Argyros Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-024",
+    "name": "The MakaiKnight Beliochs",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-033",
+    "name": "The HeroBeastBrothers Dioscuri",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-049",
+    "name": "The SteelKnight Argos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-062",
+    "name": "The BarrierFourHeadedDragon Namitsuhime-no-Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-064",
+    "name": "The CannonGrandseaPirate Stripper",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X01",
+    "name": "The DinosaurBushin Murakumo Rex",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X02",
+    "name": "The SpacetimeDestroyerEvilDragon Rakta-Bija",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X03",
+    "name": "The ShellGodKnight Knight-of-Gladius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X04",
+    "name": "The GrandblowArmoredDragon Jagannath",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X05",
+    "name": "The GrandflowerSpiritPrincess Dahlia-Moonwaltz",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X06",
+    "name": "The RagingOceanSupremeDeity Yamatahydra-no-Kami",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X07",
+    "name": "The GalaxyStarblade Grand Chariot",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X08",
+    "name": "Grandwalker Ares",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X09",
+    "name": "Grandwalker Krishna",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X10",
+    "name": "Grandwalker Susanoo",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS49_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS50_CARDS.JS ---
+/**
+ * engine/cards/sets/bs50_cards.js
+ *
+ * Ultra Advent Saga (超煌臨編 / Grandwalker Era Part 2) — Deterministic Two-Tier Per-Card Handlers for Booster 40 (Ultra Advent Chapter 3)
+ * Total Cards: 145
+ */
+
+
+
+const BS50_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10137",
+    "name": "The GalaxianDeity Zodiac-Piooze",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10394",
+    "name": "The GrandHammer Meteorforge",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10406",
+    "name": "The GrandTransformer Axe-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10408",
+    "name": "The GrandTransformer Lance-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10410",
+    "name": "The GrandflowerFairyKnight Zephyranthes",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10473",
+    "name": "The GrandseaPirate MagicGunner Pseudolph",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10480",
+    "name": "The GrandseaPirate Porpoise",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10502",
+    "name": "The GrandtreeMachineDragon Vedanga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10772",
+    "name": "The Hellsoil FourDemonLord Magnamiser",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11221",
+    "name": "The LionDeityEvilGun Leo-Blaster",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11278",
+    "name": "The LightspeedKnight Waspeeder",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11301",
+    "name": "The MachineLionDeity Strikewurm-Leo X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11443",
+    "name": "The MobileFortress Castle-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11477",
+    "name": "The MoonspiritOgreDeity Sumeraginga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11566",
+    "name": "The NorthWindBeast Qebui",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11667",
+    "name": "The PeerlessKnight Centibuild",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11742",
+    "name": "The PistolDoll †Bourbonella†",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11799",
+    "name": "The PreserverDeityDragon Trivi-Krama",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11853",
+    "name": "The RedRockKing Boanefel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11954",
+    "name": "The RishiDragon Ma-Daksha -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12299",
+    "name": "The ShineCentaurusDeity Sagitto-Apollodragon X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12315",
+    "name": "The SixBladesKnight Chrysis-Ace",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12432",
+    "name": "The ShieldKnight Geotrupid",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12455",
+    "name": "The SkyLionheart Phara-Fisher",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12638",
+    "name": "The SpearKnight Grantbeet",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12827",
+    "name": "The SteelMaiden006 Clytie",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12834",
+    "name": "The Super-TwelveGodKing Execeed Formula",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12943",
+    "name": "The TenJudges Henjou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12947",
+    "name": "The TenJudges Shokou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12950",
+    "name": "The TenShikiWarOgres Danzou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12958",
+    "name": "The TenShikiWarOgres Shiki Wakamaru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13038",
+    "name": "The ThreeHeadedDinosaur Rhomaleo-no-Aragami",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13039",
+    "name": "The SwordanceDragonEmperor Ma-Zain -Dragon Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13064",
+    "name": "The ThreeTreasureDragonSwords Absolutecalibur",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13068",
+    "name": "The ThreeTreasureDragonSwords Necrocalibur",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13124",
+    "name": "The TigerTwelveGodKing Revol-Tiger",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13157",
+    "name": "The TreasureSagaBlade Grand-Daeva",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13340",
+    "name": "The UnderworldDinoman Psita",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13341",
+    "name": "The UnderworldDinoman Velokick",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13342",
+    "name": "The UnderworldDinosaurGeneral Acrocantho",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13343",
+    "name": "The UnderworldExecutioner Carno",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13344",
+    "name": "The UnderworldGiantDinoman Diplo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13345",
+    "name": "The UnderworldHornDinoman Chasmo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13347",
+    "name": "The UnderworldMushaDinoman Cryolo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13379",
+    "name": "The VeteranKnight Dorcu-Evidence",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13714",
+    "name": "The YoukaiEmperor En'ou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13910",
+    "name": "Tsukuyomi's Onmyou Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14249",
+    "name": "Vishnaga-Chandas",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14282",
+    "name": "Vishnaga-Shiksha",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14287",
+    "name": "Vishnaga-Vatara",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14290",
+    "name": "Vishnaga-Vyakarana",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14312",
+    "name": "Vishnu's Preservation Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14456",
+    "name": "Whiterock Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1450",
+    "name": "The HieroglyphHunter Jet-Beik",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1451",
+    "name": "The HieroglyphHunter Raider-Iahf",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1504",
+    "name": "The MoonlightDragonDeity Lunatech-Strikewurm",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A21",
+    "name": "Avatar Dragon Green",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2290",
+    "name": "The MakaiKnight Beelzeheart",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2300",
+    "name": "The MakaiThane Death Musca",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2589",
+    "name": "Advent Star",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2662",
+    "name": "Anubis' Underworld Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A270",
+    "name": "The DarkStones DarkfearSlashDeity Dinovenge",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2740",
+    "name": "Amazonite-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2952",
+    "name": "Azuki Bean Washer",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A311",
+    "name": "The AbsoluteDragonDeity Grand-Lolo-Dragoleon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3113",
+    "name": "Blizzard Girl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A313",
+    "name": "The AzureForgeDeity Vulcan-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3308",
+    "name": "Celestite-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A339",
+    "name": "The EvilCapricornusDeity Stein-Bolg X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3406",
+    "name": "Chrysocolla-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4551",
+    "name": "Godseeker Aura Quartz Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4600",
+    "name": "Grandwalker Anubis",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4609",
+    "name": "Godseeker Onmyou Fuurin",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4610",
+    "name": "Godseeker Onmyou Shiki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4637",
+    "name": "Grandwalker Dan",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4639",
+    "name": "Godseeker UnderworldPriest Ovira",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4642",
+    "name": "Godseeker Vamana",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4649",
+    "name": "Grandwalker Hephaestus",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4654",
+    "name": "Grandwalker Poseidon",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4662",
+    "name": "Grandwalker Tsukuyomi",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4663",
+    "name": "Grandwalker Zeus",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4664",
+    "name": "Grandwalker Zeus-Lolo",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4667",
+    "name": "Grandwalker of Preservation Vishnu",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4922",
+    "name": "Hephaestus's Forge Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6052",
+    "name": "Kamunabi-no-Mikoto",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6122",
+    "name": "Kunai Rain Shower",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6184",
+    "name": "Krishnaga-Gyarh",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6196",
+    "name": "Krishnaga-Unhattar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6226",
+    "name": "Lantern Ghost",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6399",
+    "name": "Magma Power",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6545",
+    "name": "Mirage Curtain",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6817",
+    "name": "Nerine Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7010",
+    "name": "Onmyou Talisman",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7138",
+    "name": "Pentagram Barrier",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7450",
+    "name": "Rider Shiki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7494",
+    "name": "Rokuro Neck Girl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7497",
+    "name": "Rock Shoot",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7608",
+    "name": "Saphir-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7739",
+    "name": "Shastra Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7820",
+    "name": "Sitar Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7897",
+    "name": "Soaring Grandwalker Alex",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8514",
+    "name": "The ArgoHeroBeast Meleagros",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8734",
+    "name": "The BlackDragonDeity Geo-Duram",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8830",
+    "name": "The BlackBeast Zegroad",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9022",
+    "name": "The ClearSkyKaiken Phoedec-Dagger",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9348",
+    "name": "The DestroyerEvilDragon Mukhalinga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9555",
+    "name": "The DragonRiderEvilBow Sagittobow",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9561",
+    "name": "The DragonTwelveGodKing Ourovorius",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9594",
+    "name": "The EgytianAngeliaPrincess Ameriel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-X01",
+    "name": "The DragonEmperor Siegfried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS04-006",
+    "name": "The ZombieDragon Zom-Sauru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS08-X32",
+    "name": "The WingDeity Grand-Woden",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS10-X01",
+    "name": "The PhantomStarDragon Gai-Asura",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS11-X01",
+    "name": "The SunDragonDeity Rising-Apollodragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS14-X01",
+    "name": "The DragonHero Sieg-Yamato-Fried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS16-X01",
+    "name": "The ExplosionHero Lord-Dragon-Bazzel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS18-X01",
+    "name": "The SuperHero Lord-Dragon-Saviour",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS19-X01",
+    "name": "The TenSwordMasters Starblade-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS20-X01",
+    "name": "The RuinDragonEmperor TheEnd-Dragonis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS21-X08",
+    "name": "The AbyssGiantSword Abyss-Apocalypse",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS22-X04",
+    "name": "The DarkKingMachineBeast Darkness-Griffon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS23-X01",
+    "name": "The DragonShineDeity Shining-Dragon-Overray",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS24-X01",
+    "name": "The ConvictionDownfallDragon﻿ Judgment-Dragonis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS25-X06",
+    "name": "Ultimate-Grand-Woden",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS26-X03",
+    "name": "Ultimate-Siegwurm-Nova",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS27-X03",
+    "name": "The HolyDragonEmperor Ultimate-Saviour",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS28-X03",
+    "name": "Ultimate-Mugendragon",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS29-X03",
+    "name": "The UltimateShineDeity Ultimate-Overray",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS30-X04",
+    "name": "Ryuuman-the-Formula",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS31-X01",
+    "name": "The SengokuDragon Souldragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS33-X02",
+    "name": "The SengokuSixGeneral Mudou",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS34-X01",
+    "name": "The SengokuDragonEmperor Burning-Souldragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS35-X01",
+    "name": "The SoulMaster Bugeisha-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS40-X01",
+    "name": "The TwinkleDragonEmperor New-Siegfried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS42-X04",
+    "name": "The NobleFinalArms La-Illusion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS43-X04",
+    "name": "The DarkStones MachineBeastDeity Fenrig",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS44-X06",
+    "name": "The DarkStones SandseaPirateDeity Pharaom",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS45-X01",
+    "name": "The ShootingStardragonArcher Lykeios",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS49-X07",
+    "name": "The GalaxyStarblade Grand Chariot",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-010",
+    "name": "The StarEmperorDragon Meteorwurm X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-040",
+    "name": "Dark-Dober X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-086",
+    "name": "Cosmic Return",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-089",
+    "name": "Raging Ride",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-093",
+    "name": "Zephyranthes Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS50-X07",
+    "name": "The ThreeTreasureDragonSwords Ancientcalibur",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS50_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: BS51_CARDS.JS ---
+/**
+ * engine/cards/sets/bs51_cards.js
+ *
+ * Ultra Advent Saga (超煌臨編 / Grandwalker Era Part 2) — Deterministic Two-Tier Per-Card Handlers for Booster 51 (Ultra Advent Chapter 4)
+ * Total Cards: 100
+ */
+
+
+
+const BS51_SAGA_CARDS = [
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10395",
+    "name": "The GrandInstrument Savitr-Veena",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10407",
+    "name": "The GrandTransformer Hammer-Arms",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10412",
+    "name": "The GrandflowerFairy Apricot",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10422",
+    "name": "The GrandflowerFairy Nerine",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10615",
+    "name": "The HeadKnight Darwin",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10649",
+    "name": "The HeavenlyHazeDragon Mikagura-Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10878",
+    "name": "The HornetBowKnight Digger-Wasp-Ace",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10973",
+    "name": "The ImperialGuard Corpse Soldier",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11057",
+    "name": "The KabukiDragon Keiji-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11341",
+    "name": "The MagicalTwinsDeity Geminize X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11511",
+    "name": "The NetherBirdman Segur",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11540",
+    "name": "The NetherGrandblade Dios-Flugel",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11554",
+    "name": "The NetherNoble Duchess Musigny",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11556",
+    "name": "The NetherNoble General Baron de Lestac",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11560",
+    "name": "The NetherStoneStatue Bone-Gargoyle",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11881",
+    "name": "The QuarterToneSoundBeast Notesgiraffe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11980",
+    "name": "The RishiDragon Ma-Bhrigu -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11983",
+    "name": "The RoaringGeneralDragon Gorgo-no-Obito",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12130",
+    "name": "The ScorpioSpear Scorlance",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12197",
+    "name": "The Secret Nether Art Nemesis Reap",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12559",
+    "name": "The SoundBeast Eightone Rabbit",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12561",
+    "name": "The SoundBeast Notespariah",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12683",
+    "name": "The StaveBeast Deerscore",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12776",
+    "name": "The SteelKnight Hecateus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12824",
+    "name": "The SteelMaiden004 Zenaida",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12925",
+    "name": "The SuperstarApostle Sagittowurm-Nix",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13163",
+    "name": "The TrebleSoundBeast G Clef Cat",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13165",
+    "name": "The TrebleSoundBeast Langur Clef",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13184",
+    "name": "The TrueHeavenSpear Dawning Sky",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13365",
+    "name": "The VenomKnight Blister",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13773",
+    "name": "Tigereye-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14250",
+    "name": "Vishnaga-Kalki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14275",
+    "name": "Vishnaga-Narasimha",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14284",
+    "name": "Vishnaga-Varaha",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A23",
+    "name": "Avatar Dragon Violet",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2724",
+    "name": "Amaterasu's Sun Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2832",
+    "name": "AllRounder ShiningHeavenCleverMachine Soldier",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2915",
+    "name": "Berga Sheperd",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3065",
+    "name": "Blackonyx-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3124",
+    "name": "Bone-Gevaudan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3573",
+    "name": "Dark-Squalo X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3628",
+    "name": "Dal Segno",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3691",
+    "name": "Defender ShiningHeavenCleverMachine Futodama",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3735",
+    "name": "Diamant-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3738",
+    "name": "Diamant Charge",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3834",
+    "name": "Dionysus' Wine Cellar Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4553",
+    "name": "Godseeker BreatherSoundBeast Chinchillast",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4559",
+    "name": "Godseeker CleverMachineMiko Sarume",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4585",
+    "name": "Grandwalker Alex-Lolo",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A5121",
+    "name": "Impregnable Shield",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6162",
+    "name": "Koto Furunushi",
+    "cardType": "Spirit",
+    "isVanilla": true,
+    "abilities": []
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6186",
+    "name": "Krishnaga-Hazaar",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6760",
+    "name": "Myoujin-Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7240",
+    "name": "Princess Kawahime",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7336",
+    "name": "Raiden Hydra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7443",
+    "name": "Rhodonite-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7610",
+    "name": "Saraswati's Music Temple",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7683",
+    "name": "Shami Chourou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7689",
+    "name": "Shiki Spear Musha",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7715",
+    "name": "ShiningHeavenCleverMachine EighthPlace Amenokoyane",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7783",
+    "name": "Shield of Aegis",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8516",
+    "name": "The ArgoHeroBeast Peleus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8825",
+    "name": "The BladearmorDragon Yaiba-no-Scelido",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8891",
+    "name": "The BreatherSoundBeast Pigrest",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9137",
+    "name": "The CorpseHorseman Rothschild",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9363",
+    "name": "The DestroyerBullDragon Nandin",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9692",
+    "name": "The EvilStarDeity Zodiac-Desperia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9869",
+    "name": "The FiftyFirstSengokuDragon Souldragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS03-123",
+    "name": "Necromancy",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-078",
+    "name": "Never Give Up",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-002",
+    "name": "Godseeker DragonMiko Uzume",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-010",
+    "name": "The BlackBeast Zeruchtiger",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-018",
+    "name": "Godseeker NetherWriter Las Cases",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-022",
+    "name": "The TenShikiWarOgres Kage Kojirou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-029",
+    "name": "The NetherCorpseGuru Haut-Brion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-030",
+    "name": "The NetherGiant d'Estournel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-038",
+    "name": "The StaveBeast Buffaloscore",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-040",
+    "name": "The SpearKnight Weinreich",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-046",
+    "name": "The OctaveSoundBeast Noteselephant",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-049",
+    "name": "Vishnaga-Matsya",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-058",
+    "name": "ShiningHeavenCleverMachine FirstPlace Nikkahime",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-065",
+    "name": "The TenJudges Shinkou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-077",
+    "name": "The HeavenlyBlade Crimson Dawn",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-087",
+    "name": "Chained Stratagem",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-091",
+    "name": "Youkai Melody",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-092",
+    "name": "Licorice Field",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-10THX01",
+    "name": "The SephirothicSheepDeity Sephiro-Aries X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-10THX03",
+    "name": "The ScorpioKnight Scor-Spear X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-10THX04",
+    "name": "The SuperCentaurusDeity Grand-Sagitto-Nova",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X01",
+    "name": "The ShiningHeavenDragonDeity Grand-Terasu",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X02",
+    "name": "The NetherDeityKing Cavaliere-Bacchus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X03",
+    "name": "The SacredHeavenBeast Gayatri-Fox",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X04",
+    "name": "The ShiningHeavenMachineDeity Ohirume",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X05",
+    "name": "The TransmigrationTenJudges Godou",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X06",
+    "name": "The PaleArtificialSoldier Azeztulite-Golem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X07",
+    "name": "The Spear and Shield of Genesis",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X08",
+    "name": "Grandwalker Amaterasu",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X09",
+    "name": "Grandwalker Dionysus",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-X10",
+    "name": "Grandwalker Saraswati",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS51-XX02",
+    "name": "The GenesisSacredDragon Unite-Lolo-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of BS51_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
+  // --- SET: SD45_SD50_BSC34_BSC35_ULTRAADVENT_PROMOS_CARDS.JS ---
+/**
+ * engine/cards/sets/sd45_sd50_bsc34_bsc35_ultraadvent_promos_cards.js
+ *
+ * Ultra Advent Saga (超煌臨編 / Grandwalker Era Part 2) — Deterministic Two-Tier Per-Card Handlers for Ultra Advent Starter Decks & BSC Promos (SD45-SD50, BSC34-BSC35)
+ * Total Cards: 264
+ */
+
+
+
+const SD45_SD50_BSC34_BSC35_ULTRAADVENT_PROMOS_SAGA_CARDS = [
+  {
+    "cardNumber": "ALPINE-BIT",
+    "name": "The Second's WhiteKnight Alpine-Bit",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10290",
+    "name": "The GiantPrince Lakshmana",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A103",
+    "name": "Forward! The PirateShip Siegfried",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10421",
+    "name": "The GrandflowerFairy Nadeshiko",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10496",
+    "name": "The GrandsnakeKing Snefel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10500",
+    "name": "The GrandsunDragon Saga Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A107",
+    "name": "The GrandflowerDragonEmperor Siegfried-Aphrodite",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A10786",
+    "name": "The HermitDragon Shloka",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11207",
+    "name": "The LifeAmulet Ankh",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11223",
+    "name": "The LightStarDeity Zodiac-Lemuria",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11460",
+    "name": "The MoonWingblade Crescent Boomerang",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11543",
+    "name": "The NinthBeast Acceledge",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11611",
+    "name": "The OldKingDragon Ma-Dura -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11885",
+    "name": "The RebornStarTwelveZodiac DemonStar Stein-Goyle",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11888",
+    "name": "The RebornStarTwelveZodiac EarthStarSoldier Libraiva",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11898",
+    "name": "The RebornStarTwelveZodiac IceStarBeast Leozard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11903",
+    "name": "The RebornStarTwelveZodiac LightStarPrincess Virginia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11905",
+    "name": "The RebornStarTwelveZodiac SephirothStarBeast Sephiro-Sheep",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A11906",
+    "name": "The RebornStarTwelveZodiac ThunderStarBeast Drag-Taurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12253",
+    "name": "The Seventh's CrystalDragon Amethyst-Dragon-Sonic",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12412",
+    "name": "The Sixth's Mechanic ShieldPolarBear",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12442",
+    "name": "The SixthArtifactBeastman Solid-Falco",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12445",
+    "name": "The SixthArtifactMecha Mammo-Aegis",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12448",
+    "name": "The SixthArtifact Sheperdoll",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12453",
+    "name": "The SkyLionheart Northree",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12454",
+    "name": "The SkyLionheart Peaphoenix",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12456",
+    "name": "The SkyLionheart Saqr-Hawk",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12526",
+    "name": "The SkyBravePrincess Nefals",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12654",
+    "name": "The StarTravelerDragon Chronic Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12708",
+    "name": "The StarFest Wristband",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A12912",
+    "name": "The SunGrandbow Sunburst",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13204",
+    "name": "The TwelveZodiacSpear Zodiac Lancer",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13278",
+    "name": "The TwinkleStarFirstApostle Asgardia",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13483",
+    "name": "The WarOgre Murciela",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13528",
+    "name": "The WaterCarrierDragon Aquaelyjar Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13741",
+    "name": "Thunder-Z-Hippogriff",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A13799",
+    "name": "Thunder-Z-Gibbon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14358",
+    "name": "Wadjet Pigeon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1446",
+    "name": "The HieroglyphCavalry Proto-Iahf",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A1456",
+    "name": "The HieroglyphSoldier Defender-Gelef",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14563",
+    "name": "Zodiacwalker Apollon",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14704",
+    "name": "［Academy Uniform］Aquael Shion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14710",
+    "name": "［Academy Uniform］Aschetalia Inbolfied Lagrangzelmi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14713",
+    "name": "［Academy Uniform］Gemina & Nizel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14731",
+    "name": "［Academy Uniform］Beelzalia Beat",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14755",
+    "name": "［Academy Uniform］Speania Squall",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14759",
+    "name": "［Academy Uniform］Dragomonica-Taurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14773",
+    "name": "［Academy Uniform］Pistina Galeon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14820",
+    "name": "［Aquarius Dancer］Aquael Shion",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14824",
+    "name": "［Armeria Prism Coord］Oozora Akari",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14929",
+    "name": "［Heavenly Ruby Coord］Tenshou Hibiki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14970",
+    "name": "［Lilac Marching Coord］Kasumi Mahiru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14972",
+    "name": "［Lilac Prism Coord］Hikami Sumire",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A14974",
+    "name": "［Lime Marching Coord］Saotome Ako",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15001",
+    "name": "［Marguerite Prism Coord］Shinjou Hinaki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15091",
+    "name": "［Peony Marching Coord］Nanakura Koharu",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15146",
+    "name": "［One Winged Pisces］Pistina Galeon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15161",
+    "name": "［Rainbow Étoile Coord］Nijino Yume",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15249",
+    "name": "［Star Fest's Witch Quartet］Flamme Sandria",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15253",
+    "name": "［Star Fest］Banri-Sora",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15254",
+    "name": "［Star Fest］Candy-Cerd",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15255",
+    "name": "［Star Fest］Dragomonica-Taurus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15257",
+    "name": "［Star Fest］Formulia Execeeda",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15258",
+    "name": "［Star Fest］Gail Fenique",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15259",
+    "name": "［Star Fest］Jeanne Doraniece",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15260",
+    "name": "［Star Fest］Leona Rikeboom",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15261",
+    "name": "［Star Fest］Negasbokko",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15262",
+    "name": "［Star Fest］Nei-Lanetail",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15263",
+    "name": "［Star Fest］Pollon Sageeta",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15264",
+    "name": "［Star Fest］Rabbey Darling",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15265",
+    "name": "［Star Fest］Rei-Ohba",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15266",
+    "name": "［Star Fest］Rias Urovorun",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15269",
+    "name": "［Star Fest］Rose Berry",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15271",
+    "name": "［Star Fest］Saclaire Metum",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15272",
+    "name": "［Star Fest］Sandy-Z-Leonora",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15274",
+    "name": "［Star Fest］Sephi Aries",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15275",
+    "name": "［Star Fest］Vielje",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15346",
+    "name": "［Summer Night Miracle Coord］Natsuki Mikuru",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15348",
+    "name": "［Summer Night Moon Coord］Kanzaki Mizuki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A15353",
+    "name": "［Twin Stars Divas］Gemina & Nizel",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2500",
+    "name": "ChickenKnight",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A27",
+    "name": "Birgoyle",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A2707",
+    "name": "Aikatsu! System",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A332",
+    "name": "The CrimsonMoonDragon Strike-Siegwurm-Sagitta",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3552",
+    "name": "Concert Lights",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A3764",
+    "name": "Diamond Wall",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A4928",
+    "name": "Hyllus Beetle",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6449",
+    "name": "Masquerade",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BLOCKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 4000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A6988",
+    "name": "Omnimon Merciful Mode",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A70",
+    "name": "The SkyDragonEmperor Siegfried-Horus",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7251",
+    "name": "Producer Artemis",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7253",
+    "name": "Producer Hera",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A7297",
+    "name": "Racing Pentan",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A77",
+    "name": "The DestroyerDragonEmperor Siegfried-Rudra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8057",
+    "name": "Super-Flame Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8297",
+    "name": "The AccelTenthBird AirEraser",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A8612",
+    "name": "The AzureHornetEmperor Cuckoo-Ace",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A90",
+    "name": "The HieroglyphDragonEmperor Jehutic-Siegfried",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9232",
+    "name": "The CursedSpiritSword Longhorn Blade",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9257",
+    "name": "The DarkSnakeGrandstaff Ogdoad",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9624",
+    "name": "The EighthMachBraver Sonicwasp-Ace",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A9657",
+    "name": "The EastWindBeast Henkhisesui",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BATTLE-SPIRITS-A99",
+    "name": "The CreationDragonEmperor Generator-Siegfried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS01-061",
+    "name": "Apewhip",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS06-092",
+    "name": "Excavation",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-053",
+    "name": "Oodsutsunanafushi",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS12-063",
+    "name": "The Brigade's Skyscraper",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS13-034",
+    "name": "Minogamen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS19-088",
+    "name": "The Beast's Ice Cavern",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS30-025",
+    "name": "The ArmoredSwordsman Blizzard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS30-083",
+    "name": "Greed Thunder",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS31-088",
+    "name": "No. 3 Rock Hand",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS31-100",
+    "name": "Shikigami of the Dead",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS32-063",
+    "name": "No. 32 Island Root",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS32-072",
+    "name": "Flame Slash",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS32-078",
+    "name": "Limited Barrier",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS33-036",
+    "name": "Menoudragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS35-015",
+    "name": "The ChaosMagician Amaldi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS35-078",
+    "name": "The Trees of Heavenly Wings Flourishing in the White Clouds",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS35-084",
+    "name": "Forest of the Giant Faced Stones",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS35-093",
+    "name": "Gale Lord Finish",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS37-013",
+    "name": "Crusader Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS37-042",
+    "name": "The SixthArtifactBeastman Blockade-Tiger",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS37-074",
+    "name": "Kabuto Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS38-031",
+    "name": "The RedFlameWarPrincess Brynhildr",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS38-CP02",
+    "name": "Super-Wind Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS38-CP05",
+    "name": "The Hellwind Searcher Kagerou-Seeker",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS38-CP08",
+    "name": "Ocean Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS38-X01",
+    "name": "The WhiteSeventhEmperor Expard",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS39-058",
+    "name": "Roaring Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS39-063",
+    "name": "No. 24 Triple Heavy",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS40-004",
+    "name": "The RedSearcher Edwick",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS40-088",
+    "name": "Extinction Wall",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS40-X01",
+    "name": "The TwinkleDragonEmperor New-Siegfried",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS40-X03-A13609",
+    "name": "The WindRabbitGodKing Anima-Bit",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS41-029",
+    "name": "The TwinkleHornedShellEmperor Gertrudae",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS41-070",
+    "name": "The DragonEmperor'sPirateCrew Captain Whitejack",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS41-092",
+    "name": "After Image",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS41-X06",
+    "name": "The PirateDragonEmperor Siegfried-Abyss",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS42-003",
+    "name": "The TwinkleStarDragon Chondrite Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS42-040",
+    "name": "The NobleGunEmperorQueen Sieglinde",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS42-051",
+    "name": "The Wonderland Alice",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS42-077",
+    "name": "The Pirate'sSpeargun Zeroy-Shooter",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BS43-071",
+    "name": "The ChosenSearcher Alex",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC25-X04",
+    "name": "Flame Demon-God",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC30-023",
+    "name": "The PrincessGun -Miyabi-",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC30-X01",
+    "name": "The SengokuCommander Siegfried-Kai",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC34-015",
+    "name": "The LionLightEmperor Radiant-Leo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC34-016",
+    "name": "The SkyLionheart Hoopoeheader",
+    "cardType": "Ultimate",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            3,
+            4
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-003",
+    "name": "［Star Fest］Fongneena",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-004",
+    "name": "［Star Fest］Ryune Mato",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-010",
+    "name": "［Star Fest］Riolu Tida",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-031",
+    "name": "［Scorpio Diva］Speania Squall",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-032",
+    "name": "［Academy Uniform］Livie-La-Fohrem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-035",
+    "name": "The Star Festival Venue",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-038",
+    "name": "Pizza Shoot",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-039",
+    "name": "High Five",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A008",
+    "name": "［Sunrise Coord］Kiriya Aoi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A009",
+    "name": "［Sunshine Coord］Hoshimiya Ichigo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A010",
+    "name": "［Sunset Coord］Shibuki Ran",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A014",
+    "name": "［Glorious Emerald Coord］Alicia Charlotte",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A015",
+    "name": "［Love Destiny Coord］Kamishiro Karen",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A016",
+    "name": "［Soul Destiny Coord］Asuka Mirai",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A017",
+    "name": "The Christmas Axe",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-A019",
+    "name": "Idol Activity! On Parade! version",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-X02",
+    "name": "［Star Fest］Rize Chromwell",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-X03",
+    "name": "［Star Fest's Witch Quartet］Magnolilia Meiser",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-X04",
+    "name": "［Libra Queen］Livie-La-Fohrem",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-XA01",
+    "name": "［Pastel Purple Line Coord］Kiseki Raki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-XA02",
+    "name": "［Melody Diamond Coord］Yuuki Aine",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "BSC35-XA03",
+    "name": "［Material Sapphire Coord］Minato Mio",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "CANCER-DRAGON",
+    "name": "The CrabShellDragon Cancer-Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "EX13-03",
+    "name": "Compass-Mingo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "LM16-01",
+    "name": "The FiftyFirstBeast Revol-Koleon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "LM16-03",
+    "name": "The FiftyEighthBird Gale-ChickenKnight",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "P16-15",
+    "name": "The FlowerMonarch Tanpopo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "PX16-03",
+    "name": "The AncientGodKing GodBird Gardarla",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD02-017",
+    "name": "Strong Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD06-016",
+    "name": "Burst Wall",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD27-006",
+    "name": "The ZodiacStarblade Zodiacsword",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD31-012",
+    "name": "Teppounanafushi",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD33-001",
+    "name": "Koleon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD39-005",
+    "name": "The WhiteSearcher WG-7",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD39-012",
+    "name": "Das Rheingold",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD43-X01",
+    "name": "The SunDragon Sieg-Apollodragon X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD43-X02",
+    "name": "The MoonlightDragon Strike-Siegwurm X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-001",
+    "name": "Agumon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-002",
+    "name": "Greymon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-003",
+    "name": "MetalGreymon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-004",
+    "name": "Leomon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-005",
+    "name": "WarGreymon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-006",
+    "name": "Omnimon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-007",
+    "name": "Gabumon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-008",
+    "name": "Garurumon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-009",
+    "name": "WereGarurumon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-010",
+    "name": "MetalGarurumon［2］",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-011",
+    "name": "The Crest of Courage",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-012",
+    "name": "The Crest of Friendship",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-013",
+    "name": "Evolution Draw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-014",
+    "name": "Evolution Shoot",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP01",
+    "name": "Phoenixmon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP02",
+    "name": "HerculesKabuterimon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP03",
+    "name": "Rosemon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP04",
+    "name": "Seraphimon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP05",
+    "name": "Magnadramon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD45-CP06",
+    "name": "Vikemon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-001",
+    "name": "Thunder-Z-Puma",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-003",
+    "name": "Thunder-Z-Grizzly",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-005",
+    "name": "The NinthThunderclap ThreeSacredHorses Byerley-Dark-Z",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-006",
+    "name": "The SteelThunderKnight Licospiros",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_DESTROYED",
+        "subConditions": {
+          "levels": [
+            1,
+            2,
+            3
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-007",
+    "name": "The SteelThunderKnight Tigrigoreus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-CP01",
+    "name": "Mogami Shunta",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-X01",
+    "name": "The BlueThunderGodKing Blitz-Tiger-Z",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-X02",
+    "name": "The RedThunderGodKing Revol-Tiger-Z",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD46-X03",
+    "name": "The SteelThunderKing Igridios-Z",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-002",
+    "name": "Medjeowl",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-004",
+    "name": "Tamarix Hoopoe",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-CP01",
+    "name": "Yoku Albatrosa (Card)",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-X01",
+    "name": "The SkyGodKing Budgie-Pesed",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-X02",
+    "name": "The SkyWarship Pyramid Wing",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD47-X03",
+    "name": "The SkyGodKing Gale-Phoenix-Horus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-001",
+    "name": "The SmallAncientDragon Scharla-Chrot",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-003",
+    "name": "The IronclawDragon Narti-Yadarni",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-004",
+    "name": "The FirelanceDragon Teel-Maanam",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-005",
+    "name": "The FourFistDragon Mudra",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-006",
+    "name": "The LavashotDragon Jatis-Waram",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-007",
+    "name": "The AncientDragophant Mammo-Raga",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-008",
+    "name": "The AncientDragonCaptain Solkattu",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-009",
+    "name": "The RoaringDragon Ma-Sheed -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "AURA_BP",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ],
+          "turn": "YOUR"
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 1000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-010",
+    "name": "The SwordanceDragonEmperor Ma-Zain -Humanoid Form-",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-011",
+    "name": "The DivineGlove Gaundret",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-012",
+    "name": "The DivineRingStaff Riga-Shakti",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-013",
+    "name": "Grandraw",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          },
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-014",
+    "name": "Igneet Flame",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-X01",
+    "name": "The CreatorDragon Generator Dragon",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-X02",
+    "name": "The GrandDeitySword Aramandi",
+    "cardType": "Brave",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_BRAVED",
+        "subConditions": {
+          "requireBraved": true
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD48-X03",
+    "name": "Grandwalker Brahma",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-002",
+    "name": "The ArmoredPisces Pisce-Osteus",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-004",
+    "name": "The SteelTwins Geminicos",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-006",
+    "name": "Sagittonova Arrow",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-007",
+    "name": "Cancer Shell",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-CP01",
+    "name": "Morgesaurus X",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD49-X02",
+    "name": "The ScorpioMobile Scorbium",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-001",
+    "name": "［Starlight Academy Uniform］Kiriya Aoi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-002",
+    "name": "［Milky Way Cosmic Coord］Kiriya Aoi",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-004",
+    "name": "［Tropical Basket Coord］Arisugawa Otome",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-005",
+    "name": "［Starlight Academy Uniform］Kitaouji Sakura",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-006",
+    "name": "［Blooming Coord］Kitaouji Sakura",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-007",
+    "name": "［Starlight Academy Uniform］Ichinose Kaede",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-008",
+    "name": "［Pierrot Carnival Coord］Ichinose Kaede",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          },
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-009",
+    "name": "［Starlight Academy Uniform］Shibuki Ran",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-010",
+    "name": "［Rose Bonbon Coord］Shibuki Ran",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-011",
+    "name": "［Starlight Academy Uniform］Hoshimiya Ichigo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "REFRESH_SELF"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-012",
+    "name": "［Starlight Academy Uniform］Toudou Yurika",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-013",
+    "name": "［Goth Magic Coord］Toudou Yurika",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "BURST",
+        "subConditions": {
+          "burstTiming": "AFTER_LIFE_REDUCED"
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-014",
+    "name": "［Starlight Academy Uniform］Kanzaki Mizuki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxCost": 5
+            }
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DESTROY_OPPOSING_SPIRIT",
+            "filter": {
+              "maxBp": 6000
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-CP01",
+    "name": "Johnny Bepp",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-CP02",
+    "name": "Mitsuishi Orihime",
+    "cardType": "Nexus",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 1
+          },
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 5000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-CP03",
+    "name": "Idol Activity!",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "MAIN",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "DRAW",
+            "amount": 2
+          }
+        ]
+      },
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-CP04",
+    "name": "Signalize!",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-CP05",
+    "name": "Calendar Girl",
+    "cardType": "Magic",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "FLASH",
+        "subConditions": {},
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-X01",
+    "name": "［Aurora Kiss Coord］Hoshimiya Ichigo",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SD50-X02",
+    "name": "［Royal Moon Coord］Kanzaki Mizuki",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_SUMMONED",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "CHARGE_CORE_VOID_TO_RESERVE",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "cardNumber": "SSD50-003",
+    "name": "［Starlight Academy Uniform］Arisugawa Otome",
+    "cardType": "Spirit",
+    "isVanilla": false,
+    "abilities": [
+      {
+        "overall": "WHEN_ATTACKS",
+        "subConditions": {
+          "levels": [
+            1,
+            2
+          ]
+        },
+        "subEffects": [
+          {
+            "op": "BP_BUFF_SELF",
+            "amount": 3000
+          }
+        ]
+      }
+    ]
+  }
+];
+
+for (const spec of SD45_SD50_BSC34_BSC35_ULTRAADVENT_PROMOS_SAGA_CARDS) {
+  SagaConditionDSL.registerSagaCard(spec);
+}
+
+
   console.log('[PerCardRegistry Bundle] Successfully loaded ' + PerCardRegistry.getAll().length + ' explicit card definitions into arena.');
 })(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this));
