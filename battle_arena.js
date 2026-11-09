@@ -9171,8 +9171,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!destroyedSpirit || !destroyedSpirit.effect) return;
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-    if (pRegistry && destroyedSpirit.card_number && pRegistry.has(destroyedSpirit.card_number, 'WHEN_DESTROYED')) {
-      pRegistry.execute(destroyedSpirit.card_number, 'WHEN_DESTROYED', {
+    const dNum = destroyedSpirit.card_number || destroyedSpirit.cardNumber || destroyedSpirit.id;
+    if (pRegistry && dNum && pRegistry.has(dNum, 'WHEN_DESTROYED')) {
+      pRegistry.execute(dNum, 'WHEN_DESTROYED', {
         card: destroyedSpirit,
         side,
         duelState: DuelState,
