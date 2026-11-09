@@ -8673,8 +8673,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
-    if (pRegistry && spirit.card_number && pRegistry.has(spirit.card_number, 'WHEN_SUMMONED')) {
-      pRegistry.execute(spirit.card_number, 'WHEN_SUMMONED', {
+    const sNum = spirit.card_number || spirit.cardNumber || spirit.id;
+    if (pRegistry && sNum && pRegistry.has(sNum, 'WHEN_SUMMONED')) {
+      pRegistry.execute(sNum, 'WHEN_SUMMONED', {
         card: spirit,
         side,
         duelState: DuelState,
@@ -8877,8 +8878,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!attacker) return;
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     let handledByRegistry = false;
-    if (pRegistry && attacker.card_number && pRegistry.has(attacker.card_number, 'WHEN_ATTACKS')) {
-      pRegistry.execute(attacker.card_number, 'WHEN_ATTACKS', {
+    const aNum = attacker.card_number || attacker.cardNumber || attacker.id;
+    if (pRegistry && aNum && pRegistry.has(aNum, 'WHEN_ATTACKS')) {
+      pRegistry.execute(aNum, 'WHEN_ATTACKS', {
         card: attacker,
         side,
         duelState: DuelState,
@@ -9119,8 +9121,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     let handledByRegistry = false;
-    if (pRegistry && blocker.card_number && pRegistry.has(blocker.card_number, 'WHEN_BLOCKS')) {
-      pRegistry.execute(blocker.card_number, 'WHEN_BLOCKS', {
+    const blNum = blocker.card_number || blocker.cardNumber || blocker.id;
+    if (pRegistry && blNum && pRegistry.has(blNum, 'WHEN_BLOCKS')) {
+      pRegistry.execute(blNum, 'WHEN_BLOCKS', {
         card: blocker,
         side: defSide,
         attacker,
