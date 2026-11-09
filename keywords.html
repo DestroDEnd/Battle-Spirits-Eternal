@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=5.4">
+  <link rel="stylesheet" href="/styles.css?v=5.5">
   <style>
     .keyword-categories-grid {
       display: grid;
@@ -278,8 +278,9 @@
   </a>
 </nav>
 
-<script src="/app.js?v=5.4"></script>
-<script src="/battle_arena.js?v=5.4"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
+  <script src="/wasm_db.js?v=3.2"></script>
+  <script src="/app.js?v=5.4"></script>
 <script>
 let allKeywords = [];
 let currentCategory = 'all';
@@ -402,29 +403,44 @@ async function selectKeyword(kw) {
       }
 
       gridEl.innerHTML = cards.map(c => {
-        const color = (c.color || 'white').toLowerCase();
         const safeName = esc(c.name);
-        const artUrl = c.image_url || '/placeholder.png';
-        const costStr = (c.cost !== null && c.cost !== undefined) ? `Cost ${c.cost}` : '';
+        const artUrl = (typeof window.cleanCardImageUrl === 'function') 
+          ? window.cleanCardImageUrl(c.image_url) 
+          : (c.image_url || '/placeholder.png');
+        const costStr = (c.cost !== null && c.cost !== undefined) ? `💎 ${c.cost}` : '—';
         const typeStr = c.type || 'Card';
-        const metaStr = [costStr, typeStr, c.rarity].filter(Boolean).join(' • ');
+        const codeBadge = c.card_number ? `<span class="tile-number">${esc(c.card_number)}</span>` : '';
+        const rarityBadge = c.rarity ? `<span>${esc(c.rarity)}</span>` : '';
+        const inDeck = (typeof getCardInDeckCount === 'function') ? getCardInDeckCount(c.name) : 0;
+        const deckPill = inDeck > 0
+          ? `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}">${inDeck}x in Deck</span>`
+          : `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}" style="display:none;"></span>`;
 
         let effectHtml = '';
         if (c.effect) {
-          effectHtml = formatEffectKeywordsInModal(c.effect.slice(0, 160) + (c.effect.length > 160 ? '…' : ''));
+          effectHtml = (typeof formatEffectKeywordsInModal === 'function')
+            ? formatEffectKeywordsInModal(c.effect.slice(0, 140) + (c.effect.length > 140 ? '…' : ''))
+            : esc(c.effect.slice(0, 140));
         }
 
         return `
-          <div class="card-item card-theme-${color}" onclick="openCardDetail('${safeName.replace(/'/g, "\\'")}')" style="cursor:pointer;">
-            <div class="card-art-wrap">
-              <img src="${artUrl}" alt="${safeName}" loading="lazy" class="card-art-img" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';"/>
+          <div class="card-tile" data-name="${safeName}" onclick="openCardDetail('${safeName.replace(/'/g, "\\'")}')">
+            <div class="tile-art">
+              <span class="tile-cost">${costStr}</span>
+              ${deckPill}
+              <img src="${esc(artUrl)}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='/placeholder.png';" />
             </div>
-            <div class="card-meta">
-              <span class="card-color-badge color-${color}">${c.color || 'White'}</span>
-              <span class="card-sub-info">${metaStr}</span>
+            <div class="tile-info">
+              <div>
+                <div class="tile-name">${safeName}</div>
+                <div class="tile-meta">
+                  <span>${esc(typeStr)}</span>
+                  ${codeBadge}
+                  ${rarityBadge}
+                </div>
+              </div>
+              ${effectHtml ? `<div class="tile-effect-preview" style="font-size:0.75rem;color:#94a3b8;line-height:1.4;margin-top:0.4rem;max-height:3rem;overflow:hidden;">${effectHtml}</div>` : ''}
             </div>
-            <div class="card-name">${safeName}</div>
-            ${effectHtml ? `<div class="card-effect-preview" style="font-size:0.78rem;color:#94a3b8;line-height:1.4;margin-top:0.4rem;max-height:3.2rem;overflow:hidden;">${effectHtml}</div>` : ''}
           </div>
         `;
       }).join('');
