@@ -147,15 +147,25 @@ export const SAGA_DEFINITIONS = [
  */
 export function getSagaById(idOrName) {
   if (!idOrName) return null;
-  const target = String(idOrName).trim().toLowerCase();
+  const raw = String(idOrName).trim();
+  const target = raw.toLowerCase();
   if (target === 'all') return null;
 
+  const norm = target.replace(/[·_]/g, '-').replace(/\s+/g, ' ');
+
   return SAGA_DEFINITIONS.find(s => {
+    const sNameNorm = s.name.toLowerCase().replace(/[·_]/g, '-').replace(/\s+/g, ' ');
+    const sShortNorm = s.shortName.toLowerCase().replace(/[·_]/g, '-').replace(/\s+/g, ' ');
+    const num = s.id.replace('saga_', '');
+    const numInt = parseInt(num, 10);
     return s.id === target ||
-      s.shortName.toLowerCase() === target ||
-      s.name.toLowerCase() === target ||
-      s.id.replace('saga_', '') === target ||
-      s.name.toLowerCase().includes(target);
+      num === target ||
+      String(numInt) === target ||
+      sShortNorm === norm ||
+      sNameNorm === norm ||
+      sNameNorm.includes(norm) ||
+      norm.includes(sShortNorm) ||
+      s.id === `saga_${target.padStart(2, '0')}`;
   }) || null;
 }
 

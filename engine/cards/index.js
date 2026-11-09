@@ -15,6 +15,12 @@ import './sets/bs16_cards.js';
 import './sets/bs17_cards.js';
 import './sets/bs18_cards.js';
 import './sets/sd06_sd11_heroes_promos_cards.js';
+import './sets/bs19_cards.js';
+import './sets/bs20_cards.js';
+import './sets/bs21_cards.js';
+import './sets/bs22_cards.js';
+import './sets/bs23_cards.js';
+import './sets/sd12_sd17_swordblade_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;

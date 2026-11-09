@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
-const HOST = '127.0.0.1';
+const HOST = '0.0.0.0';
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -99,6 +99,7 @@ function ensureCardsIndexLoaded() {
 }
 
 const server = http.createServer((req, res) => {
+  console.log(`[REQ] ${req.method} ${req.url}`);
   // CORS & caching headers for local development
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, HEAD, OPTIONS');
