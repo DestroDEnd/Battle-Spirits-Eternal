@@ -602,6 +602,24 @@
     if (spirit.brave) {
       const bBonus = spirit.brave.bpBonus || parseBraveBonus(spirit.brave.raw_levels || spirit.brave.levels, spirit.brave.effect, spirit.brave);
       spirit.currentBp += bBonus;
+      // Also apply attached Brave's AURA_BP modifier from PerCardRegistry (for [During Brave] BP bonuses)
+      const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+      const bNum = spirit.brave.card_number || spirit.brave.cardNumber || spirit.brave.id;
+      if (pRegistry && bNum && pRegistry.has(bNum, 'AURA_BP')) {
+        const braveAura = pRegistry.execute(bNum, 'AURA_BP', {
+          card: spirit,
+          sourceCard: spirit.brave,
+          braveCard: spirit.brave,
+          isBraved: true,
+          targetSpirit: spirit,
+          side: (DuelState && DuelState.player && DuelState.player.field && DuelState.player.field.some(s => s.uid === spirit.uid)) ? 'player' : 'opponent',
+          duelState: DuelState,
+          arenaApi: getArenaApi()
+        });
+        if (typeof braveAura === 'number' && !isNaN(braveAura)) {
+          spirit.currentBp += braveAura;
+        }
+      }
     }
     const side = (DuelState && DuelState.player && DuelState.player.field && DuelState.player.field.some(s => s.uid === spirit.uid)) ? 'player' : 'opponent';
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
@@ -8854,6 +8872,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeWhenAttacksEffects(attacker, side = 'player') {
     if (!attacker) return;
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    let handledByRegistry = false;
     if (pRegistry && attacker.card_number && pRegistry.has(attacker.card_number, 'WHEN_ATTACKS')) {
       pRegistry.execute(attacker.card_number, 'WHEN_ATTACKS', {
         card: attacker,
@@ -8861,6 +8880,25 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         duelState: DuelState,
         arenaApi: getArenaApi()
       });
+      handledByRegistry = true;
+    }
+    // Also trigger attached Brave's WHEN_ATTACKS / [During Brave] effect from PerCardRegistry!
+    if (pRegistry && attacker.brave) {
+      const bNum = attacker.brave.card_number || attacker.brave.cardNumber || attacker.brave.id;
+      if (bNum && pRegistry.has(bNum, 'WHEN_ATTACKS')) {
+        pRegistry.execute(bNum, 'WHEN_ATTACKS', {
+          card: attacker,
+          sourceCard: attacker.brave,
+          braveCard: attacker.brave,
+          isBraved: true,
+          side,
+          duelState: DuelState,
+          arenaApi: getArenaApi()
+        });
+        handledByRegistry = true;
+      }
+    }
+    if (handledByRegistry) {
       return;
     }
     // The Four Towers of Limbo trigger on Evil God Ultimate attack:
@@ -9076,6 +9114,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!blocker || !blocker.effect) return;
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    let handledByRegistry = false;
     if (pRegistry && blocker.card_number && pRegistry.has(blocker.card_number, 'WHEN_BLOCKS')) {
       pRegistry.execute(blocker.card_number, 'WHEN_BLOCKS', {
         card: blocker,
@@ -9084,6 +9123,26 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         duelState: DuelState,
         arenaApi: getArenaApi()
       });
+      handledByRegistry = true;
+    }
+    // Also trigger attached Brave's WHEN_BLOCKS effect from PerCardRegistry!
+    if (pRegistry && blocker.brave) {
+      const bNum = blocker.brave.card_number || blocker.brave.cardNumber || blocker.brave.id;
+      if (bNum && pRegistry.has(bNum, 'WHEN_BLOCKS')) {
+        pRegistry.execute(bNum, 'WHEN_BLOCKS', {
+          card: blocker,
+          sourceCard: blocker.brave,
+          braveCard: blocker.brave,
+          isBraved: true,
+          side: defSide,
+          attacker,
+          duelState: DuelState,
+          arenaApi: getArenaApi()
+        });
+        handledByRegistry = true;
+      }
+    }
+    if (handledByRegistry) {
       renderDuelTable();
       return;
     }
@@ -15606,7 +15665,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       } else {
         bodyEl.innerHTML = `
           <div class="zone-cards-grid">
-            ${pTrash.map(c => `
+            ${pTrash.map(c => {
+              const isDyna = (c.card_number === 'BS40-078' || c.cardNumber === 'BS40-078' || (c.name && c.name.toLowerCase().includes('dyna power')));
+              const isEndStep = DuelState.phases && DuelState.phases[DuelState.phaseIndex] === 'END';
+              const friendlyField = DuelState.player.field || [];
+              const hasTerraDragon = friendlyField.some(s => {
+                const fam = s.family || '';
+                return /terra\s*dragon|地竜/i.test(fam) || (Array.isArray(s.families) && s.families.some(f => /terra\s*dragon|地竜/i.test(f)));
+              });
+              const canRetrieveDyna = isDyna && isEndStep && hasTerraDragon && !DuelState.dynaPowerTrashRetrievedThisTurn;
+              const actionBtn = canRetrieveDyna ? `
+                <button type="button" class="btn-zone-action" onclick="event.stopPropagation(); BattleArena.retrieveDynaPowerFromTrash();" style="margin-top:6px;width:100%;padding:4px 6px;font-size:0.75rem;background:linear-gradient(135deg,#ea580c,#c2410c);border:1px solid #f97316;color:#fff;border-radius:4px;font-weight:700;cursor:pointer;">
+                  🔥 Return to Hand
+                </button>
+              ` : '';
+              return `
               <div class="zone-card-item" onclick="BattleArena.inspectZoneCard('${encodeURIComponent(c.name)}')" title="Click to inspect full details of ${c.name}">
                 <img src="${c.image_url || '/placeholder.png'}" class="zone-card-thumb" alt="${c.name}" referrerpolicy="no-referrer" onerror="this.src='/placeholder.png';">
                 <div class="zone-card-info">
@@ -15616,9 +15689,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                     <span>Cost ${c.cost ?? 0}</span>
                   </div>
                   ${c.graveyardReason ? `<div class="zone-card-reason" title="${c.graveyardReason}">🪦 ${c.graveyardReason}</div>` : ''}
+                  ${actionBtn}
                 </div>
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
         `;
       }
@@ -17007,7 +17082,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     updateLobbyPreviews,
     addLog,
     recalculateSpiritBp,
-    getArenaApi
+    getArenaApi,
+    retrieveDynaPowerFromTrash
 };
 
   // Auto initialize on DOM ready
