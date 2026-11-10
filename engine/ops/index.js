@@ -8,7 +8,7 @@
 import { moveCard, moveCore } from '../zones.js';
 import { createFieldStack } from '../state.js';
 import { queryCandidates } from '../selectors.js';
-import { computeLevel } from '../continuous.js';
+import { computeColors, computeLevel } from '../continuous.js';
 
 export function matchesCardFilter(card, filter = {}, op = {}) {
   if (!card || typeof card !== 'object') return false;
@@ -1534,9 +1534,23 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     }
 
     case 'CHOOSE_COLOR': {
-      const availableColors = Array.isArray(op.colors) && op.colors.length > 0
+      let availableColors = Array.isArray(op.colors) && op.colors.length > 0
         ? op.colors.map(c => String(c))
         : ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'];
+
+      if (op.colorsFromField) {
+        const fieldColors = [];
+        for (const side of ['player', 'opponent']) {
+          for (const stack of state.players[side].field || []) {
+            if (stack.top?.type !== 'Spirit') continue;
+            for (const color of computeColors(state, stack)) {
+              if (!fieldColors.some(c => c.toLowerCase() === String(color).toLowerCase())) fieldColors.push(color);
+            }
+          }
+        }
+        availableColors = fieldColors;
+        if (availableColors.length === 0) return { success: false, reason: 'NO_ELIGIBLE_COLOR' };
+      }
 
       let chosenColor = op.color ? String(op.color) : availableColors[0];
       if (!op.color && promptResolver) {
@@ -1573,15 +1587,106 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
       return { success: true, chosenColor, modifier: mod };
     }
 
+    case 'TREAT_AS_MAX_LEVEL': {
+      const color = op.color || ctx.chosenColor;
+      if (!color) return { success: false, reason: 'COLOR_NOT_CHOSEN' };
+      const modifier = {
+        id: `mod_${Date.now()}_max_level_${Math.random().toString(36).slice(2, 7)}`,
+        type: 'TREAT_RULE',
+        side: op.side || 'both',
+        targetFilter: { ...(op.filter || {}), type: 'Spirit', color },
+        treatAs: 'MAX_LEVEL',
+        treatAsMaxLevel: true,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(modifier);
+      return { success: true, modifier };
+    }
+
+    case 'ADD_COLOR': {
+      if (op.color) {
+        let targetStack = sourceStack;
+        if (!targetStack && sourceCard) {
+          for (const side of ['player', 'opponent']) {
+            targetStack = (state.players[side].field || []).find(stack => stack.top?.id === sourceCard.id) || null;
+            if (targetStack) break;
+          }
+        }
+        if (!targetStack) return { success: false, reason: 'SOURCE_NOT_ON_FIELD' };
+
+        const modifier = {
+          id: `mod_${Date.now()}_add_color_${Math.random().toString(36).slice(2, 7)}`,
+          type: 'TREAT_COLOR_SYMBOL',
+          targetStackId: targetStack.id || targetStack.stackId,
+          color: String(op.color),
+          duration: op.duration || 'PERMANENT',
+          sourceCardId: sourceCard ? sourceCard.id : null
+        };
+        state.modifiers.push(modifier);
+        return { success: true, color: modifier.color, targetStackId: modifier.targetStackId, modifier };
+      }
+
+      const candidates = queryCandidates(
+        state,
+        { zone: 'field', side: 'self', types: op.types || ['Spirit'], filters: op.filter || {} },
+        context
+      );
+      if (candidates.length === 0) return { success: false, reason: 'NO_ELIGIBLE_TARGET' };
+
+      const chosenTargets = await promptResolver.choose({
+        type: 'SELECT_STACK',
+        title: 'Choose a Spirit to gain an additional color',
+        candidates,
+        count: 1,
+        chooser: controller
+      });
+      const selected = chosenTargets && chosenTargets[0];
+      const targetStack = selected && (selected.stack || candidates.find(c => c.stack?.id === selected.id)?.stack);
+      if (!targetStack) return { success: false, reason: 'TARGET_NOT_SELECTED' };
+
+      const originalColors = Array.isArray(targetStack.top.colors)
+        ? targetStack.top.colors
+        : [targetStack.top.color || 'Red'];
+      const availableColors = (op.colors || ['Red', 'Purple', 'Green', 'White', 'Yellow', 'Blue'])
+        .filter(color => !originalColors.some(original => String(original).toLowerCase() === String(color).toLowerCase()));
+      if (availableColors.length === 0) return { success: false, reason: 'NO_ADDITIONAL_COLOR_AVAILABLE' };
+
+      const colorChoice = await promptResolver.choose({
+        type: 'CHOOSE_COLOR',
+        title: 'Choose an additional color',
+        candidates: availableColors.map(color => ({ id: color, color, label: String(color).toUpperCase() })),
+        count: 1,
+        chooser: controller
+      });
+      const choice = colorChoice && colorChoice[0];
+      const color = choice && String(choice.color || choice.id || choice);
+      if (!color || !availableColors.some(c => c.toLowerCase() === color.toLowerCase())) {
+        return { success: false, reason: 'COLOR_NOT_SELECTED' };
+      }
+
+      const modifier = {
+        id: `mod_${Date.now()}_add_color_${Math.random().toString(36).slice(2, 7)}`,
+        type: 'TREAT_COLOR_SYMBOL',
+        targetStackId: targetStack.id || targetStack.stackId,
+        color,
+        duration: op.duration || 'THIS_TURN',
+        sourceCardId: sourceCard ? sourceCard.id : null
+      };
+      state.modifiers.push(modifier);
+      return { success: true, color, targetStackId: modifier.targetStackId, modifier };
+    }
+
+    case 'SET_HAND_COST':
     case 'COST_MODIFIER': {
-      const targetSide = op.side === 'opp' ? oppSide : controller;
+      const targetSide = op.side === 'opp' || op.side === 'opponent' ? oppSide : controller;
       const mod = {
-        id: `mod_${Date.now()}_cost_mod_${Math.random().toString(36).substr(2, 5)}`,
+        id: `mod_${Date.now()}_cost_mod_${Math.random().toString(36).slice(2, 7)}`,
         type: 'COST_MODIFIER',
         side: targetSide,
         targetCardId: op.targetCardId || (op.target === 'SELF' && sourceCard ? sourceCard.id : null),
         targetStackId: op.targetStackId || (op.target === 'SELF' && sourceStack ? (sourceStack.id || sourceStack.stackId) : null),
-        targetFilter: op.filter || null,
+        targetFilter: op.filter || (op.family ? { family: op.family } : null),
         setCost: typeof op.setCost === 'number' ? op.setCost : (typeof op.cost === 'number' ? op.cost : null),
         amount: typeof op.amount === 'number' ? op.amount : null,
         delta: typeof op.delta === 'number' ? op.delta : null,
@@ -1589,6 +1694,9 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
         duration: op.duration || 'THIS_TURN',
         sourceCardId: sourceCard ? sourceCard.id : null
       };
+      if (mod.setCost === null && mod.amount === null && mod.delta === null) {
+        return { success: false, reason: 'COST_MODIFIER_VALUE_MISSING' };
+      }
       state.modifiers.push(mod);
       return { success: true, modifier: mod };
     }
@@ -2377,6 +2485,6 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     }
 
     default:
-      return { success: true, unhandledOp: op.op };
+      return { success: false, reason: 'UNHANDLED_OPERATION', unhandledOp: op.op };
   }
 }

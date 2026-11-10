@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Battle Spirits Eternal | Arena V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./arena_v2.css">
+</head>
+<body class="arena-v2-body">
+
+  <!-- Top Header Bar -->
+  <header class="v2-top-header">
+    <div class="v2-top-title">
+      <span>⚔️</span>
+      <span>BATTLE SPIRITS ETERNAL — ARENA V2</span>
+    </div>
+    <div class="v2-top-controls">
+      <button class="v2-btn-toggle-ui" id="v2BtnTogglePassMode" onclick="BattleArenaV2.toggleManualPassMode()" title="Toggle between automatic AI responses and manual opponent pass confirmation for testing">
+        Priority Mode: Auto AI
+      </button>
+      <button class="v2-btn-toggle-ui" onclick="BattleArenaV2.backToLobby()" title="Select different decks and restart match">
+        🔄 Switch Decks
+      </button>
+      <a class="v2-btn-toggle-ui" href="/arena" title="Return to the classic layout with right-column step navigator">
+        🏛️ Switch to Classic Arena
+      </a>
+    </div>
+  </header>
+
+  <!-- Battlefield Container -->
+  <main class="v2-arena-container">
+    <div class="v2-playmat" id="v2Playmat">
+      
+      <!-- Ornate Carved Corners & Border Overlay -->
+      <div class="v2-mat-frame-overlay"></div>
+      <div class="v2-corner-bracket v2-corner-tl"></div>
+      <div class="v2-corner-bracket v2-corner-tr"></div>
+      <div class="v2-corner-bracket v2-corner-bl"></div>
+      <div class="v2-corner-bracket v2-corner-br"></div>
+
+      <!-- ════════ TOP HALF: OPPONENT ZONE ════════ -->
+      <section class="v2-half-zone v2-opponent-zone">
+        
+        <!-- Opponent Top HUD Row -->
+        <div class="v2-hud-row">
+          
+          <!-- Top Left: Trash, Cores & Hand -->
+          <div style="display:flex; align-items:flex-start; gap:1.25rem;">
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">TRASH</span>
+              <div class="v2-card-slot" title="Opponent's Trash (Graveyard)">
+                <span class="v2-slot-count" id="v2OppTrashCount">0</span>
+              </div>
+              <div class="v2-gems-row" id="v2OppTrashGems">
+                <!-- 5 cyan diamond gems -->
+              </div>
+            </div>
+
+            <!-- Opponent Hand Backs -->
+            <div class="v2-hand-track" id="v2OppHandTrack" style="margin-top: 10px;">
+              <!-- Hand cards face down with BS back -->
+            </div>
+          </div>
+
+          <!-- Top Right: Reserve & Life -->
+          <div style="display:flex; align-items:flex-start; gap:1.75rem;">
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">RESERVE (<span id="v2OppReserveVal">5</span>)</span>
+              <div class="v2-gems-row" id="v2OppReserveGems">
+                <!-- 5 cyan diamond gems -->
+              </div>
+            </div>
+
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">LIFE</span>
+              <div class="v2-life-cluster" id="v2OppLifeCluster">
+                <!-- 5 diamond gems (4 top row, 1 bottom) -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Opponent Field Spirits -->
+        <div class="v2-field-spirits-row" id="v2OppFieldSpirits">
+          <!-- Injected opponent field spirits -->
+        </div>
+
+      </section>
+
+
+      <!-- ════════ CENTER DIVIDER & CONTROLS ════════ -->
+      <div class="v2-center-divider-wrap">
+        <div class="v2-center-line"></div>
+
+        <!-- Circular Moving Phase Track -->
+        <nav class="v2-phase-track" id="v2PhaseTrack" aria-label="Battle Steps">
+          <!-- 8 circular phase nodes moving along track -->
+        </nav>
+
+        <!-- Center Control Bar (Matches the photo) -->
+        <div class="v2-center-pill" id="v2CenterPill">
+          <div class="v2-pill-phase-badge" id="v2CenterPhaseBadge">
+            <span>MAIN</span>
+            <span class="v2-pill-turn-tag">turn 1</span>
+          </div>
+          <div class="v2-pill-divider"></div>
+          <div class="v2-pill-status-text" id="v2CenterStatus">
+            Player's Turn
+          </div>
+          <div class="v2-pill-divider"></div>
+          <button class="v2-btn-center v2-btn-priority-pass" id="v2BtnPassPriority" title="Pass priority to opponent">
+            Pass Priority ➔
+          </button>
+          <button class="v2-btn-center" id="v2BtnOpponentPass" style="display:none;background:#dc2626;color:#fff;" title="Simulate manual opponent pass in test mode">
+            Opponent Pass ➔
+          </button>
+          <button class="v2-btn-center" onclick="BattleArenaV2.backToLobby()" title="Return to lobby">
+            Back to lobby
+          </button>
+        </div>
+      </div>
+
+
+      <!-- ════════ BOTTOM HALF: PLAYER ZONE ════════ -->
+      <section class="v2-half-zone v2-player-zone">
+        
+        <!-- Player Field Spirits -->
+        <div class="v2-field-spirits-row" id="v2PlayerFieldSpirits">
+          <!-- Injected player field spirits -->
+        </div>
+
+        <!-- Player Bottom HUD Row -->
+        <div class="v2-hud-row" style="align-items:flex-end;">
+          
+          <!-- Bottom Left: Life & Reserve -->
+          <div style="display:flex; align-items:flex-end; gap:1.75rem;">
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">LIFE</span>
+              <div class="v2-life-cluster" id="v2PlayerLifeCluster">
+                <!-- 5 diamond gems -->
+              </div>
+            </div>
+
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">RESERVE (<span id="v2PlayerReserveVal">4</span>)</span>
+              <div class="v2-gems-row" id="v2PlayerReserveGems">
+                <!-- 5 cyan diamond gems -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Right: Deck, Trash, & Hand -->
+          <div style="display:flex; align-items:flex-end; gap:1.25rem;">
+            
+            <!-- Player Hand Track -->
+            <div class="v2-hand-track" id="v2PlayerHandTrack">
+              <!-- Hand cards face up with cost badge -->
+            </div>
+
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">DECK</span>
+              <div class="v2-card-slot with-card-back" title="Player's Deck">
+                <span class="v2-slot-count" id="v2PlayerDeckCount">36</span>
+              </div>
+            </div>
+
+            <div class="v2-hud-box">
+              <span class="v2-hud-label">TRASH</span>
+              <div class="v2-card-slot" title="Player's Trash (Graveyard)">
+                <span class="v2-slot-count" id="v2PlayerTrashCount">0</span>
+              </div>
+              <div class="v2-gems-row" id="v2PlayerTrashGems">
+                <!-- 5 cyan diamond gems -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ── Hidden Duel Table Stubs for full BattleArena compatibility ── -->
+      <div id="battleDuelTable" style="display:none;"></div>
+      <div id="playerLifeContainer" style="display:none;"></div>
+      <div id="opponentLifeContainer" style="display:none;"></div>
+      <div id="battleLogList" style="display:none;"></div>
+      <div id="duelTurnLabel" style="display:none;"></div>
+
+      <!-- ── Lobby / Deck Selector Modal ── -->
+      <div class="v2-lobby-overlay" id="v2LobbyOverlay">
+        <div class="v2-lobby-box">
+          <div class="v2-lobby-title">⚔️ BATTLE SPIRITS ARENA V2</div>
+          <p style="font-size:0.85rem;color:#94a3b8;">
+            Select your tournament deck and challenger to launch the cinematic battle simulator.
+          </p>
+
+          <div class="v2-lobby-grid">
+            <div>
+              <label style="font-size:0.75rem;font-weight:700;color:var(--v2-gold-light);display:block;margin-bottom:4px;">
+                YOUR DECK (PLAYER)
+              </label>
+              <select class="v2-deck-selector" id="v2PlayerDeckSelect">
+                <!-- Injected standard decks -->
+              </select>
+            </div>
+
+            <div>
+              <label style="font-size:0.75rem;font-weight:700;color:#fca5a5;display:block;margin-bottom:4px;">
+                OPPONENT DECK (CHALLENGER)
+              </label>
+              <select class="v2-deck-selector" id="v2OpponentDeckSelect">
+                <!-- Injected standard decks -->
+              </select>
+            </div>
+          </div>
+
+          <button class="v2-btn-start-duel" onclick="BattleArenaV2.startMatch()">
+            🔥 ENTER DUEL ARENA
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
+  <script src="./wasm_db.js?v=3.1"></script>
+  <script src="./app.js?v=5.4"></script>
+  <script src="./engine/cards/bundle.js?v=1.0"></script>
+  <script type="module" src="./engine_adapter.js?v=1.0"></script>
+  <script src="./battle_arena.js?v=5.4"></script>
+  <script src="./battle_arena_v2.js?v=1.0"></script>
+
+  <script>
+    window.addEventListener('load', () => {
+      // Auto launch match with default standard decks if requested
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('start') === '1' || params.get('quick') === '1') {
+        setTimeout(() => BattleArenaV2.startMatch('deck_std_red', 'deck_std_purple'), 200);
+      }
+    });
+  </script>
+
+</body>
+</html>

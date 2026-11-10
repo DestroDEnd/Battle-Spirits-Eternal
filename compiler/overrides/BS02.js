@@ -2912,7 +2912,8 @@ export const BS02_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "CHOOSE_COLOR",
-              "chooser": "self"
+              "chooser": "both",
+              "colorsFromField": true
             }
           },
           {

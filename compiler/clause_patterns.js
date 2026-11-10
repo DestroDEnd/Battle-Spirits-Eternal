@@ -957,6 +957,9 @@ export function compileClauseToOp(clause) {
     const side = /you control/i.test(text) && !/or the opponent/i.test(text) ? 'self' : 'either';
     return { op: 'TARGET_SELECT', target: { side, types: ['Spirit'] } };
   }
+  if (/^Choose a color among the colors of either player/i.test(text)) {
+    return { op: 'CHOOSE_COLOR', chooser: 'both', colorsFromField: true };
+  }
   if (/^Select \d+ color\b/i.test(text) || /^Choose a color\b/i.test(text)) {
     return { op: 'CHOOSE_COLOR', chooser: 'self' };
   }

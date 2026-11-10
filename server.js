@@ -11,7 +11,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
-const HOST = '0.0.0.0';
+// The development instance is intended for this computer only.
+const HOST = '127.0.0.1';
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -37,6 +38,8 @@ const MIME_TYPES = {
 const ROUTE_MAP = {
   '/': '/index.html',
   '/arena': '/arena.html',
+  '/arena-v2': '/arena_v2.html',
+  '/arena2': '/arena_v2.html',
   '/battle': '/arena.html',
   '/duel': '/arena.html',
   '/browse': '/browse.html',

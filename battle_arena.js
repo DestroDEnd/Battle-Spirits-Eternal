@@ -2774,6 +2774,42 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function executeUniversalCardEffect(card, side, trigger, context = {}) {
     if (!card) return;
     const cardData = getCardEffectsData(card);
+    // Compiled IR is the authoritative card effect path. Never fall through to
+    // the legacy text interpreter for a card that has structured abilities.
+    if (cardData && Array.isArray(cardData.abilities)) {
+      const aliases = {
+        SUMMON: ['SUMMON', 'WHEN_SUMMONED'], ATTACK: ['ATTACK', 'WHEN_ATTACKS'],
+        BLOCK: ['BLOCK', 'WHEN_BLOCKS'], DESTROYED: ['DESTROYED', 'WHEN_DESTROYED'],
+        ADVENT: ['ADVENT', 'WHEN_ADVENT'], MAGIC: ['MAGIC', 'FLASH', 'MAIN'],
+        BURST: ['BURST'], FLASH: ['FLASH']
+      };
+      const accepted = new Set(aliases[trigger] || [trigger]);
+      const abilities = cardData.abilities.filter(ab => ab && ab.header && accepted.has(ab.header.timing));
+      const adapter = typeof window !== 'undefined' && window.BSEngineAdapter;
+      if (!adapter || typeof adapter.resolveLegacyAbility !== 'function') {
+        console.error('[Structured effects] Engine adapter is unavailable; refusing legacy text fallback.', card.card_number || card.cardNumber);
+        return;
+      }
+      const promptResolver = {
+        choose(prompt) {
+          return new Promise(resolve => {
+            const candidates = (prompt.candidates || []).map(item => item.card || item.stack?.top || item);
+            if (!candidates.length || side !== 'player' || typeof document === 'undefined') return resolve([]);
+            promptUniversalTargetModal({
+              card, side, targetSide: prompt.controller === 'opponent' ? 'player' : 'opponent',
+              targetKind: prompt.targetType === 'NEXUS' ? 'nexus' : (prompt.targetType === 'ULTIMATE' ? 'ultimate' : 'spirit'),
+              customPool: candidates, title: prompt.title || 'Choose target',
+              description: prompt.description || '', minCount: prompt.min || 1,
+              maxCount: prompt.max || 1, allowSkip: Boolean(prompt.optional)
+            }, resolve);
+          });
+        }
+      };
+      return abilities.reduce((chain, ability) => chain.then(async () => {
+        await adapter.resolveLegacyAbility(DuelState, card, ability, side, { promptResolver, context });
+        renderDuelTable();
+      }), Promise.resolve());
+    }
     if (!cardData || !cardData.triggers) return;
     const actions = cardData.triggers[trigger];
     if (!actions || !Array.isArray(actions) || !actions.length) return;
@@ -7527,6 +7563,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // Resolves core abilities across all 14,500+ cards for all triggers: SUMMON, ATTACK, BLOCK, DESTROYED, ADVENT, MAGIC
   function executeAbilityActions(bodyText, card, side = 'player', triggerName = 'SUMMON', context = {}) {
     if (!bodyText || !card) return;
+    const structuredData = getCardEffectsData(card);
+    if (structuredData && Array.isArray(structuredData.abilities)) {
+      // Legacy callers still announce timing here. Redirect those announcements
+      // into IR, then stop before any raw-text interpretation can mutate state.
+      return executeUniversalCardEffect(card, side, triggerName, context);
+    }
     const bodyLower = bodyText.toLowerCase();
 
     // STRICT LEVEL CHECK: If ability block explicitly requires a level higher than current, DO NOT execute!

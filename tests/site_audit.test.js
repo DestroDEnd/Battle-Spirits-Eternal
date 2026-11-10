@@ -66,7 +66,7 @@ describe('Site-Wide UI & Resource Integrity Audit', () => {
 
   it('4. Navigation links map to valid pages in ROUTE_MAP or files', () => {
     const VALID_ROUTES = new Set([
-      '/', '/arena', '/battle', '/duel', '/browse', '/deck',
+      '/', '/arena', '/arena-v2', '/arena2', '/battle', '/duel', '/browse', '/deck',
       '/deck-view', '/deck_view', '/family', '/sets', '/keywords', '/login', '/register',
       '#', 'javascript:void(0)', 'javascript:void(0);'
     ]);

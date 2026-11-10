@@ -21,6 +21,7 @@ import { PromptManager } from './engine/prompt_manager.js';
 import { AIDecider } from './engine/ai.js';
 import { setupOpeningHands } from './engine/mulligan.js';
 import { createGame } from './engine/index.js';
+import { resolveLegacyAbility } from './engine/legacy_bridge.js';
 
 export const BSEngineAdapter = {
   ETERNAL_RULES,
@@ -46,6 +47,7 @@ export const BSEngineAdapter = {
   PromptManager,
   AIDecider,
   setupOpeningHands,
+  resolveLegacyAbility,
 
   /**
    * Helper to initialize a duel session linking the engine and the UI
