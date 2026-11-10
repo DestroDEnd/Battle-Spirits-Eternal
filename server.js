@@ -282,19 +282,28 @@ const server = http.createServer((req, res) => {
       const keywordCatalog = [
         // ── COMBAT & ATTACK ──
         { id: 'clash', name: 'Clash', jp: '激突', category: 'Combat & Attack', icon: '⚔️', query: 'Clash', desc: 'Forces the opponent to block if possible when attacking.' },
+        { id: 'true-clash', name: 'True-Clash', jp: '真・激突', category: 'Combat & Attack', icon: '⚔️', query: 'True-Clash', desc: 'Enhanced clash forcing block and bypassing specific defensive abilities.' },
         { id: 'rush', name: 'Rush', jp: '連鎖', category: 'Combat & Attack', icon: '🔗', query: 'Rush', desc: 'Triggers additional effects if you control specific color symbols on your field.' },
         { id: 'consecutive-blade', name: 'Consecutive Blade', jp: '連刃', category: 'Combat & Attack', icon: '🗡️', query: 'Consecutive Blade', desc: 'Can battle two opposing spirits simultaneously, dealing damage to both.' },
         { id: 'assault', name: 'Assault', jp: '強襲', category: 'Combat & Attack', icon: '💥', query: 'Assault', desc: 'Can refresh itself by exhausting a Nexus you control after attacking.' },
         { id: 'crush', name: 'Crush', jp: '粉砕', category: 'Combat & Attack', icon: '🔨', query: 'Crush', desc: 'Discards cards from the top of the opponent\'s deck equal to this Spirit\'s Level.' },
         { id: 'great-crush', name: 'Great Crush', jp: '大粉砕', category: 'Combat & Attack', icon: '☄️', query: 'Great Crush', desc: 'Discards cards from the top of the opponent\'s deck equal to this Spirit\'s Level; burst cards discarded trigger heavy penalties.' },
         { id: 'windstorm', name: 'Windstorm', jp: '旋風', category: 'Combat & Attack', icon: '🌪️', query: 'Windstorm', desc: 'Exhausts target opposing Spirits/Ultimates when attacking or battling.' },
+        { id: 'whirlwind', name: 'Whirlwind', jp: '大旋風', category: 'Combat & Attack', icon: '🌪️', query: 'Whirlwind', desc: 'Exhausts multiple opposing units and prevents them from refreshing on the next turn.' },
         { id: 'curse', name: 'Curse', jp: '呪撃', category: 'Combat & Attack', icon: '💀', query: 'Curse', desc: 'Destroys the opposing spirit at the end of battle if this spirit was blocked.' },
+        { id: 'true-curse', name: 'True-Curse', jp: '真・呪撃', category: 'Combat & Attack', icon: '☠️', query: 'True-Curse', desc: 'Destroys blocking spirit and drains an opponent life core to Trash.' },
         { id: 'holy-life', name: 'Holy Life', jp: '聖命', category: 'Combat & Attack', icon: '✨', query: 'Holy Life', desc: 'Recovers a Life from the Void when this Spirit successfully reduces the opponent\'s life.' },
         { id: 'heavy-exhaust', name: 'Heavy Exhaust', jp: '重疲労', category: 'Combat & Attack', icon: '💤', query: 'Heavy Exhaust', desc: 'Puts opposing cards into upside-down Heavy Exhaustion; requires two refreshes to ready.' },
+        { id: 'poison-blade', name: 'Poison Blade', jp: '毒刃', category: 'Combat & Attack', icon: '🧪', query: 'Poison Blade', desc: 'Places face-down cards beneath targeted spirits as poison tokens that weaken or destroy them.' },
+        { id: 'showdown', name: 'Showdown', jp: '一騎打', category: 'Combat & Attack', icon: '🥋', query: 'Showdown', desc: 'Locks both spirits in honorable 1v1 combat where outside card effects cannot intervene.' },
+        { id: 'soar', name: 'Soar', jp: '飛翔', category: 'Combat & Attack', icon: '🦅', query: 'Soar', desc: 'Cannot be blocked by opposing spirits without flying or matching aerial traits.' },
+        { id: 'stampede', name: 'Stampede', jp: '突進', category: 'Combat & Attack', icon: '🦏', query: 'Stampede', desc: 'Tramples through blockers, dealing excess battle damage directly to opposing Life.' },
+        { id: 'dispersion', name: 'Dispersion', jp: '分散', category: 'Combat & Attack', icon: '✨', query: 'Dispersion', desc: 'Splits incoming single-target combat damage and redistributes it across opposing units.' },
 
         // ── SUMMON & EVOLUTION ──
         { id: 'advent', name: 'Advent', jp: '煌臨', category: 'Summon & Evolution', icon: '🌟', query: 'Advent', desc: 'Stacks directly atop an eligible target Spirit on your field at Flash timing without paying cost.' },
         { id: 'contract-advent', name: 'Contract Advent', jp: '契約煌臨', category: 'Summon & Evolution', icon: '📜', query: 'Contract Advent', desc: 'Modern contract evolution: stacks atop Contract cards or partners when Count requirement is met.' },
+        { id: 'grand-advent', name: 'Grand Advent', jp: '神煌臨', category: 'Summon & Evolution', icon: '👑', query: 'Grand Advent', desc: 'Divine Advent atop Grandstones or Divine Spirits, channeling Grandwalker core power.' },
         { id: 'manifest', name: 'Manifest', jp: '顕現', category: 'Summon & Evolution', icon: '💫', query: 'Manifest', desc: 'Summons Apparition and Contract Ultimates directly from hand by fulfilling count and condition.' },
         { id: 'accel', name: 'Accel', jp: 'アクセル', category: 'Summon & Evolution', icon: '⚡', query: 'Accel', desc: 'Magic-like effect cast directly from hand, placing the card face-up in the Open Zone to be summoned later.' },
         { id: 'rebirth', name: 'Rebirth', jp: '転醒', category: 'Summon & Evolution', icon: '🔄', query: 'Rebirth', desc: 'Flips a double-faced card to its awakened back face when specific battlefield conditions are triggered.' },
@@ -302,15 +311,27 @@ const server = http.createServer((req, res) => {
         { id: 'awaken', name: 'Awaken', jp: '覚醒', category: 'Summon & Evolution', icon: '🔥', query: 'Awaken', desc: 'Moves cores from your other Spirits onto this Spirit at Flash timing.' },
         { id: 'high-speed', name: 'High Speed', jp: '神速', category: 'Summon & Evolution', icon: '💨', query: 'High Speed', desc: 'Can be summoned from your hand during Flash timing by paying costs using cores from your Reserve.' },
         { id: 'violent-high-speed', name: 'Violent High Speed', jp: '烈神速', category: 'Summon & Evolution', icon: '🌪️', query: 'Violent High Speed', desc: 'Flash timing summon using cores entirely from your Trash back to your field/reserve.' },
+        { id: 'sound-speed', name: 'Sound Speed', jp: '音速', category: 'Summon & Evolution', icon: '🚀', query: 'Sound Speed', desc: 'Accelerated flash summon directly during battle steps at sound barrier speeds.' },
+        { id: 'tribute', name: 'Tribute', jp: '転召', category: 'Summon & Evolution', icon: '👑', query: 'Tribute', desc: 'Sends all cores from a friendly Spirit of specified cost or higher to Void/Trash to complete summon.' },
+        { id: 'unsheathe', name: 'Unsheathe', jp: '抜刀', category: 'Summon & Evolution', icon: '⚔️', query: 'Unsheathe', desc: 'Immediately summons a Brave from your hand without paying its cost upon summoning.' },
+        { id: 'bunshin', name: 'Bunshin', jp: '分身', category: 'Summon & Evolution', icon: '👥', query: 'Bunshin', desc: 'Places decktop cards face-down onto the field as 0-cost green spirit duplicates.' },
+        { id: 'summon-bolt', name: 'Summon Bolt', jp: '召雷', category: 'Summon & Evolution', icon: '⚡', query: 'Summon Bolt', desc: 'Discards this spirit at end of battle to summon higher-cost spirits from your deck or hand.' },
 
         // ── DEFENSE & BURST ──
         { id: 'burst', name: 'Burst', jp: 'バースト', category: 'Defense & Burst', icon: '🛡️', query: 'Burst', desc: 'Set face-down in the Burst slot; triggers freely when the opponent triggers the specified condition.' },
         { id: 'soul-burst', name: 'Soul Burst', jp: 'ソウルバースト', category: 'Defense & Burst', icon: '🔥', query: 'Soul Burst', desc: 'Set in the Burst slot; triggers powerful additional abilities if your Soul Core is in your Trash.' },
+        { id: 'burst-seal', name: 'Burst Seal', jp: 'バースト封印', category: 'Defense & Burst', icon: '🔒', query: 'Burst Seal', desc: 'Seals an opposing Burst card face-up or prevents Bursts from triggering during this step.' },
         { id: 'armor', name: 'Armor', jp: '装甲', category: 'Defense & Burst', icon: '🔰', query: 'Armor', desc: 'Immune to opposing Spirits, Nexuses, and Magic of specified colors.' },
         { id: 'heavy-armor', name: 'Heavy Armor', jp: '重装甲', category: 'Defense & Burst', icon: '🛡️', query: 'Heavy Armor', desc: 'Immune to opposing Spirits, Braves, Nexuses, and Magic of specified colors.' },
         { id: 'ultra-armor', name: 'Ultra Armor', jp: '超装甲', category: 'Defense & Burst', icon: '👑', query: 'Ultra Armor', desc: 'Ultimate immunity: unaffected by opposing Spirits, Ultimates, Braves, Nexuses, and Magic of specified colors.' },
+        { id: 'ultra-heavy-armor', name: 'Ultra Heavy Armor', jp: '超重装甲', category: 'Defense & Burst', icon: '💎', query: 'Ultra Heavy Armor', desc: 'Top tier absolute immunity unaffected by opposing Spirits, Braves, Nexuses, Magics, and Grandwalkers.' },
         { id: 'ice-wall', name: 'Ice Wall', jp: '氷壁', category: 'Defense & Burst', icon: '🧊', query: 'Ice Wall', desc: 'Exhausts this Spirit during opposing Flash timing to nullify opposing Magic of a specified color.' },
         { id: 'kagemusha', name: 'Kagemusha', jp: '影武者', category: 'Defense & Burst', icon: '🥷', query: 'Kagemusha', desc: 'Summons from hand during Flash timing to intercept and redirect targeting effects away from friendly cards.' },
+        { id: 'barrier', name: 'Barrier', jp: '障壁', category: 'Defense & Burst', icon: '🚧', query: 'Barrier', desc: 'Negates effect damage or direct destruction by exhausting or discarding a card.' },
+        { id: 'fortress', name: 'Fortress', jp: '城塞', category: 'Defense & Burst', icon: '🏰', query: 'Fortress', desc: 'Fortifies Nexuses and core fields, preventing opposing spirits from reducing life while active.' },
+        { id: 'zero-counter', name: 'Zero Counter', jp: 'ゼロカウンター', category: 'Defense & Burst', icon: '⛔', query: 'Zero Counter', desc: 'Interrupt cast for 0 cost from hand whenever the opponent summons units without paying full cost.' },
+        { id: 'at-field', name: 'A.T. Field', jp: 'A.T.フィールド', category: 'Defense & Burst', icon: '🔶', query: 'A.T. Field', desc: 'Evangelion absolute defense barrier: unaffected by opposing Spirits/Braves/Magic effects without designated breach abilities.' },
+        { id: 'ps-armor', name: 'PS Armor', jp: 'PS装甲', category: 'Defense & Burst', icon: '🤖', query: 'PS Armor', desc: 'Phase Shift Armor: immune to damage and effects from opposing cards of specified costs.' },
 
         // ── TRIGGERS & RESOURCES ──
         { id: 'soul-drive', name: 'Soul Drive', jp: 'ソウルドライブ', category: 'Triggers & Resources', icon: '💥', query: 'Soul Drive', desc: 'Ultimate game-defining ability activated once per game by banishing the Soul Core from the duel to the Void.' },
@@ -319,18 +340,62 @@ const server = http.createServer((req, res) => {
         { id: 'core-charge', name: 'Core Charge', jp: 'コアチャージ', category: 'Triggers & Resources', icon: '💠', query: 'Core Charge', desc: 'Places cores from the Void onto Grandstones or Nexuses when matching cards are summoned or deployed.' },
         { id: 'count-break', name: 'Count Break', jp: 'カウントブレイク', category: 'Triggers & Resources', icon: '🔢', query: 'Count Break', desc: 'Consumes count or triggers when count reaches a designated milestone.' },
         { id: 'grand-skill', name: 'Grand Skill', jp: '神技', category: 'Triggers & Resources', icon: '⚡', query: 'Grand Skill', desc: 'Spends cores accumulated on Grandstones to activate divine activated abilities.' },
-        { id: 'grand-field', name: 'Grand Field', jp: '神域', category: 'Triggers & Resources', icon: '🏛️', query: 'Grand Field', desc: 'Passive divine field aura granted by Grandstones while controlling sufficient cores.' }
+        { id: 'grand-field', name: 'Grand Field', jp: '神域', category: 'Triggers & Resources', icon: '🏛️', query: 'Grand Field', desc: 'Passive divine field aura granted by Grandstones while controlling sufficient cores.' },
+        { id: 'grandphosis', name: 'Grandphosis', jp: '神変登極', category: 'Triggers & Resources', icon: '🌌', query: 'Grandphosis', desc: 'Awakens a Grandstone Nexus directly into a colossal Divine Spirit entity.' },
+        { id: 'contract-skill', name: 'Contract Skill', jp: '契約神技', category: 'Triggers & Resources', icon: '📜', query: 'Contract Skill', desc: 'Divine activated ability powered by Contract Grandwalker Nexus cores and Count milestones.' },
+        { id: 'contract-field', name: 'Contract Field', jp: '契約神域', category: 'Triggers & Resources', icon: '⛩️', query: 'Contract Field', desc: 'Continuous divine domain of Contract Grandwalkers, scaling in power with field Count.' },
+        { id: 'unleash', name: 'Unleash', jp: '界放', category: 'Triggers & Resources', icon: '🔓', query: 'Unleash', desc: 'Moves cores from your Grandstones onto this Spirit to unlock superior hidden effects.' },
+        { id: 'contract-unleash', name: 'Contract Unleash', jp: '契約界放', category: 'Triggers & Resources', icon: '🌟', query: 'Contract Unleash', desc: 'Channels cores from Contract Grandstone Nexuses directly onto the battlefield.' },
+        { id: 'seal', name: 'Seal', jp: '封印', category: 'Triggers & Resources', icon: '🔒', query: 'Seal', desc: 'Sends the Soul Core to your Life area as a sacred Seal core to awaken God-King powers.' },
+        { id: 'spirit-soul', name: 'Spirit Soul', jp: 'スピリットソウル', category: 'Triggers & Resources', icon: '💎', query: 'Spirit Soul', desc: 'Grants extra symbols strictly used for paying the summoning cost of Ultimates.' },
+        { id: 'double-drive', name: 'Double Drive', jp: 'ダブルドライブ', category: 'Triggers & Resources', icon: '⚡', query: 'Double Drive', desc: 'Combines two God-Kings with Sword Braves to unleash double game-ending finishers.' },
+        { id: 'reload', name: 'Reload', jp: '装弾', category: 'Triggers & Resources', icon: '🔋', query: 'Reload', desc: 'Recharges brave and nexus cards beneath spirits to replenish resources mid-battle.' },
+
+        // ── SPECIAL & TACTICS ──
+        { id: 'spellbind', name: 'Spellbind', jp: '呪縛', category: 'Special & Tactics', icon: '🕸️', query: 'Spellbind', desc: 'Hexes opposing spirits and nexuses, preventing their cores from moving to Reserve or Trash.' },
+        { id: 'spell-blight', name: 'Spell Blight', jp: '呪滅撃', category: 'Special & Tactics', icon: '☣️', query: 'Spell Blight', desc: 'When this spirit is destroyed, takes down opposing spirits and returns itself to hand or field.' },
+        { id: 'immortality', name: 'Immortality', jp: '不死', category: 'Special & Tactics', icon: '🪦', query: 'Immortality', desc: 'Summons this Spirit from your Trash whenever a friendly Spirit of matching cost is destroyed.' },
+        { id: 'draw-lock', name: 'Draw Lock', jp: 'ドローロック', category: 'Special & Tactics', icon: '🔏', query: 'Draw Lock', desc: 'Deprives the opponent of their standard Start/Draw Step draw on their next turn.' },
+        { id: 'plunder', name: 'Plunder', jp: '強奪', category: 'Special & Tactics', icon: '💰', query: 'Plunder', desc: 'Steals cores or resources from opposing targets and claims them into your reserve.' },
+        { id: 'enchain', name: 'Enchain', jp: '拘束', category: 'Special & Tactics', icon: '⛓️', query: 'Enchain', desc: 'Binds opposing targets, preventing attack declaration, blocking, or activation.' },
+        { id: 'fast-draw', name: 'Fast Draw', jp: '早撃ち', category: 'Special & Tactics', icon: '🎯', query: 'Fast Draw', desc: 'Triggers instantaneous destruction or damage before the opponent\'s flash step opens.' },
+        { id: 'god-strike', name: 'God Strike', jp: '神撃', category: 'Special & Tactics', icon: '🔱', query: 'God Strike', desc: 'Delivers unblockable holy damage scaling with active Grandstone divine cores.' },
+        { id: 'god-army', name: 'God-Army', jp: '神軍', category: 'Special & Tactics', icon: '🛡️', query: 'God-Army', desc: 'Swarms the battlefield with holy army vanguard units from your deck or open zone.' },
+        { id: 'legacy', name: 'Legacy', jp: '遺産', category: 'Special & Tactics', icon: '🏺', query: 'Legacy', desc: 'Passes down residual BP, symbols, and abilities to successor spirits when destroyed.' },
+        { id: 'soul-magic', name: 'Soul Magic', jp: 'ソウルマジック', category: 'Special & Tactics', icon: '🔮', query: 'Soul Magic', desc: 'Specialized magic spells empowered when cast using Soul Cores.' },
+        { id: 'amplify', name: 'Amplify', jp: '増幅', category: 'Special & Tactics', icon: '📢', query: 'Amplify', desc: 'Multiplies effect damage, BP boosts, or symbol gains by the number of matching allies.' },
+
+        // ── COLLAB & DIVA ──
+        { id: 'on-stage', name: 'On Stage', jp: 'オンステージ', category: 'Collab & Diva', icon: '🎤', query: 'On Stage', desc: 'Diva ability: returns this costume Spirit to hand/deck bottom to summon a stage-ready Diva Spirit without paying cost.' },
+        { id: 'show-up', name: 'Show Up', jp: 'ショーアップ', category: 'Collab & Diva', icon: '💃', query: 'Show Up', desc: 'Diva costume change: swaps into a higher rarity dress from hand at Flash timing.' },
+        { id: 'friend', name: 'Friend', jp: 'フレンド', category: 'Collab & Diva', icon: '👭', query: 'Friend', desc: 'Reveals top deck cards; if an idol card is found, summons it directly onto the stage for free.' },
+        { id: 'appeal', name: 'Appeal', jp: 'アピール', category: 'Collab & Diva', icon: '💖', query: 'Appeal', desc: 'Stage performance: captivates audience to negate battle damage or recover life.' },
+        { id: 'my-unit', name: 'My Unit', jp: 'マイユニット', category: 'Collab & Diva', icon: '🎶', query: 'My Unit', desc: 'Forms an idol unit by exhausting adjacent Diva spirits to trigger unique ensemble abilities.' },
+        { id: 'solo-part', name: 'Solo Part', jp: 'ソロパート', category: 'Collab & Diva', icon: '🎙️', query: 'Solo Part', desc: 'Spotlight focus: triggers devastating single-unit performance when no other spirits attack.' },
+        { id: 'duet-part', name: 'Duet Part', jp: 'デュエットパート', category: 'Collab & Diva', icon: '👯', query: 'Duet Part', desc: 'Harmonized two-idol melody combining stats and battle effects together.' },
+        { id: 'diva-rush', name: 'Diva Rush', jp: 'ディーバ連鎖', category: 'Collab & Diva', icon: '🎀', query: 'Diva Rush', desc: 'Triggers encore performances if specific idol teams or costumes are assembled.' },
+        { id: 'spellsong', name: 'Spellsong', jp: '歌声', category: 'Collab & Diva', icon: '🎵', query: 'Spellsong', desc: 'Chants melodic spells from hand without consuming core costs.' },
+        { id: 'digivolution', name: 'Digivolution', jp: '進化', category: 'Collab & Diva', icon: '🦖', query: 'Digivolution', desc: 'Digimon collaboration: stacks higher-level forms atop Rookie/Champion digimon on the field.' },
+        { id: 'card-slash', name: 'Card Slash', jp: 'スラッシュ', category: 'Collab & Diva', icon: '💳', query: 'Card Slash', desc: 'Digimon Tamers card modification granting rapid stat buffs and keyword skills.' },
+        { id: 'trans-am', name: 'Trans-Am', jp: 'トランザム', category: 'Collab & Diva', icon: '🚀', query: 'Trans-Am', desc: 'Gundam 00 GN particle surge: multiplies BP, adds extra symbols, and exhausts opposing field.' },
+        { id: 'clock-up', name: 'Clock Up', jp: 'クロックアップ', category: 'Collab & Diva', icon: '⏱️', query: 'Clock Up', desc: 'Kamen Rider Kabuto tachyon acceleration: acts at lightspeed before opponent can react.' },
+        { id: 'cast-off', name: 'Cast Off', jp: 'キャストオフ', category: 'Collab & Diva', icon: '🛡️', query: 'Cast Off', desc: 'Kamen Rider mask shedding: purges heavy armor to reveal agile high-BP rider form.' },
+        { id: 'chou-henshin', name: 'Chou Henshin', jp: '超変身', category: 'Collab & Diva', icon: '⚡', query: 'Chou Henshin', desc: 'Kamen Rider Kuuga form transition: transforms between Mighty, Dragon, Pegasus, and Titan forms.' },
+        { id: 'funnel', name: 'Funnel', jp: 'ファネル', category: 'Collab & Diva', icon: '🛰️', query: 'Funnel', desc: 'Gundam remote all-range weapons: strikes multiple opposing targets simultaneously.' },
+        { id: 'top-gun', name: 'Top Gun', jp: 'トップガン', category: 'Collab & Diva', icon: '✈️', query: 'Top Gun', desc: 'Elite ace pilot coordination: grants unblockable strikes and aerial dominance.' }
       ];
 
-      // Calculate counts from SQLite if available
+      // Calculate counts from SQLite matching /api/cards query logic exactly!
       if (serverDb) {
         try {
           const countStmt = serverDb.prepare(`
             SELECT count(*) as total FROM cards 
-            WHERE effect LIKE ? OR effect LIKE ? OR name LIKE ?
+            WHERE name LIKE ? OR effect LIKE ? OR kanji LIKE ?
           `);
           for (const item of keywordCatalog) {
-            const row = countStmt.get(`%[${item.query}%`, `%【${item.jp}%`, `%${item.name}%`);
+            const kwQuery = item.query || item.name;
+            const term = `%${kwQuery}%`;
+            const row = countStmt.get(term, term, term);
             item.cardCount = row ? row.total : 0;
           }
         } catch (e) {

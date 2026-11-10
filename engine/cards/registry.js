@@ -42,7 +42,10 @@ export class CardRegistry {
 
       if (definition.name) existing.name = definition.name;
       if (definition.cardType || definition.type) existing.cardType = definition.cardType || definition.type;
-      if (definition.rawEffect || definition.effect) existing.effect = definition.rawEffect || definition.effect;
+      if (definition.rawEffect || definition.effect) {
+        existing.effect = definition.rawEffect || definition.effect;
+        existing.rawEffect = definition.rawEffect || definition.effect;
+      }
       if (definition.isVanilla !== undefined) existing.isVanilla = definition.isVanilla;
       if (definition.sagaAbilities) existing.sagaAbilities = definition.sagaAbilities;
 

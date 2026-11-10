@@ -1,5 +1,0 @@
-with open('index.html', 'r', encoding='utf-8') as f:
-    text = f.read()
-
-idx = text.find('battlefield-row')
-print(text[idx-100:idx+2500])

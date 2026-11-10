@@ -5,10 +5,24 @@
  */
 
 import { CardRegistry, PerCardRegistry } from './registry.js';
-import './bundle.js';
 import './sets/sd65_four_demon_lords.js';
 import './sets/standard_and_custom_decks.js';
 import './sets/soul_drive_cards.js';
+import './sets/bs01_cards.js';
+import './sets/bs02_cards.js';
+import './sets/bs03_cards.js';
+import './sets/bs04_cards.js';
+import './sets/bs05_cards.js';
+import './sets/bs06_cards.js';
+import './sets/bs07_cards.js';
+import './sets/bs08_cards.js';
+import './sets/bs09_cards.js';
+import './sets/sd01_sd02_promos_cards.js';
+import './sets/bs10_cards.js';
+import './sets/bs11_cards.js';
+import './sets/bs12_cards.js';
+import './sets/bs13_cards.js';
+import './sets/sd03_bsc05_constellation_promos_cards.js';
 import './sets/bs14_cards.js';
 import './sets/bs15_cards.js';
 import './sets/bs16_cards.js';
@@ -55,6 +69,11 @@ import './sets/bs49_cards.js';
 import './sets/bs50_cards.js';
 import './sets/bs51_cards.js';
 import './sets/sd45_sd50_bsc34_bsc35_ultraadvent_promos_cards.js';
+import './sets/bs52_cards.js';
+import './sets/bs53_cards.js';
+import './sets/bs54_cards.js';
+import './sets/bs55_cards.js';
+import './sets/sd51_sd57_bsc36_rebirth_promos_cards.js';
 
 export { CardRegistry, PerCardRegistry };
 export default PerCardRegistry;

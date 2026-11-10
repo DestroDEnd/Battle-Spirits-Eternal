@@ -9762,18 +9762,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function canUnitBlock(unit) {
     if (!unit || unit.isSoulState) return false;
-    const currentAttacker = DuelState.combatAttacker;
+    const currentAttacker = DuelState.combatAttacker || DuelState.selectedAttacker;
+    const eff = (unit.effect || '').toLowerCase();
+    if (/this\s+spirit\s+can't\s+block\s+opposing\s+spirits/i.test(eff)) return false;
+    if (currentAttacker && /this\s+spirit\s+can't\s+block\s+spirits\s+with\s+bp\s+inferior\s+to\s+this\s+spirit's/i.test(eff)) {
+      if ((currentAttacker.battleBp || currentAttacker.currentBp || 0) < (unit.battleBp || unit.currentBp || 0)) {
+        return false;
+      }
+    }
     const attackerHasSoar = currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('soar');
     if (unit.isExhausted && !attackerHasSoar) {
-      const eff = (unit.effect || '').toLowerCase();
-      if (!eff.includes('can block while exhausted')) return false;
+      const canBlockExhMatch = eff.match(/can\s+block\s+(?:opposing\s+cost\s+(\d+)\s+or\s+less\s+spirits?\s+)?while\s+exhausted/i);
+      if (!canBlockExhMatch && !unit.canBlockWhileExhausted) return false;
+      if (canBlockExhMatch && canBlockExhMatch[1] && currentAttacker) {
+        const maxAttCost = parseInt(canBlockExhMatch[1], 10);
+        if ((currentAttacker.cost || 0) > maxAttCost) return false;
+      }
     }
     if (currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('clock up')) {
-      if (!(unit.effect || '').toLowerCase().includes('clock up')) return false;
+      if (!eff.includes('clock up')) return false;
     }
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
-      const eff = (unit.effect || '').toLowerCase();
       if (!eff.includes('can block') && !eff.includes('can also block')) {
         return false;
       }
@@ -10561,7 +10571,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     DuelState.player.reserve -= 1;
     card.currentCores = (card.currentCores || 0) + 1;
-    const lv2req = (card.levels && card.levels[1] && card.levels[1].cores !== undefined) ? card.levels[1].cores : 999;
+    const parsedLv = Array.isArray(card.levels) ? card.levels : parseLevels(card.levels);
+    const lv2req = (parsedLv && parsedLv[1] && parsedLv[1].cores !== undefined) ? parsedLv[1].cores : 999;
     card.currentLevel = (card.currentCores >= lv2req) ? 2 : 1;
     AudioFX.coreChime();
     addLog(`🔮 **CORE ALLOCATED**: Moved 1 Core from Reserve to Nexus "${card.name}" (Now Lv${card.currentLevel}, ${card.currentCores} cores).`, 'step');
@@ -10587,7 +10598,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     card.currentCores = Math.max(0, card.currentCores - 1);
     DuelState.player.reserve += 1;
-    const lv2req = (card.levels && card.levels[1] && card.levels[1].cores !== undefined) ? card.levels[1].cores : 999;
+    const parsedLv = Array.isArray(card.levels) ? card.levels : parseLevels(card.levels);
+    const lv2req = (parsedLv && parsedLv[1] && parsedLv[1].cores !== undefined) ? parsedLv[1].cores : 999;
     card.currentLevel = (card.currentCores >= lv2req) ? 2 : 1;
     AudioFX.coreChime();
     addLog(`🔮 **CORE RETRIEVED**: Returned 1 Core from Nexus "${card.name}" to Reserve (Now Lv${card.currentLevel}, ${card.currentCores} cores).`, 'step');
@@ -11842,12 +11854,28 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }
     }
 
-    // Remove tributed spirit from field & send card to Trash
+    // Fire WHEN_TRIBUTED triggers (e.g., SD02-009 Kuyultha, SD02-018 Dragron, SD02-019 Schwart, SD02-020 Jewelg, SD02-021 Sai-Drill)
+    const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
+    const tNum = tributedSpirit.card_number || tributedSpirit.cardNumber;
+    if (pRegistry && tNum && pRegistry.has(tNum, 'WHEN_TRIBUTED')) {
+      pRegistry.execute(tNum, 'WHEN_TRIBUTED', {
+        card: tributedSpirit,
+        side: 'player',
+        duelState: DuelState,
+        arenaApi: getArenaApi()
+      });
+    }
+
+    // Remove tributed spirit from field & send card to Trash (unless returned to Hand by WHEN_TRIBUTED effect)
     const spIdx = DuelState.player.field.findIndex(s => s.uid === tributedSpirit.uid);
     if (spIdx !== -1) {
       DuelState.player.field.splice(spIdx, 1);
     }
-    sendToTrash(tributedSpirit, 'player', `Tributed for ${card.name} (${tributeReq.condText} -> ${tributeReq.destLabel})`);
+    if (!tributedSpirit._returnedToHandForTribute) {
+      sendToTrash(tributedSpirit, 'player', `Tributed for ${card.name} (${tributeReq.condText} -> ${tributeReq.destLabel})`);
+    } else {
+      delete tributedSpirit._returnedToHandForTribute;
+    }
 
     // Place summoned spirit on field
     const { level, bp } = calculateBpAndLevel(card.levels, coresToPlace);
@@ -12488,7 +12516,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const trig = isFlashTiming ? 'FLASH' : 'MAIN';
     const cNum = card.card_number || card.cardNumber;
-    if (pRegistry && card && cNum && (pRegistry.has(cNum, trig) || pRegistry.has(cNum, 'FLASH'))) {
+    const hasMainText = /\[Main\]|^Main\s*[-:]/im.test(card.effect || '');
+    const canFallbackToFlash = !hasMainText;
+    if (pRegistry && card && cNum && (pRegistry.has(cNum, trig) || (canFallbackToFlash && pRegistry.has(cNum, 'FLASH')))) {
       const activeTrig = pRegistry.has(cNum, trig) ? trig : 'FLASH';
       const execResult = pRegistry.execute(cNum, activeTrig, {
         card,
@@ -13373,72 +13403,6 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       total += braveSymbols;
     }
 
-    const eff = spirit.effect || '';
-    const level = spirit.currentLevel || 1;
-
-    // 2. Self-granted additional symbols from spirit.effect
-    if (eff) {
-      const blocks = getCardAbilityBlocks(eff);
-      for (const b of blocks) {
-        const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
-        if (lvlMatch && !isEffectLevelMet(lvlMatch[1], level)) {
-          continue;
-        }
-        // Check Soul Core condition
-        if (/while this spirit has (?:\[soul core\]|soul core)/i.test(b) && !spirit.hasSoulCore) {
-          continue;
-        }
-
-        // Check additions: gains / gets +N symbols
-        if (/this spirit (?:gains|gets)\s+(?:an?|one|\+?1)\s+(?:extra|additional)?\s*(?:[a-zA-Z]+\s+)?symbols?/i.test(b) ||
-            /シンボル(?:1つ|\+1|を\+1)を追加/i.test(b)) {
-          total += 1;
-        } else if (/this spirit (?:gains|gets)\s+(?:two|\+?2)\s+(?:extra|additional)?\s*(?:[a-zA-Z]+\s+)?symbols?/i.test(b) ||
-                   /シンボル2つを追加/i.test(b)) {
-          total += 2;
-        } else if (/this spirit (?:gains|gets)\s+(?:three|\+?3)\s+(?:extra|additional)?\s*(?:[a-zA-Z]+\s+)?symbols?/i.test(b)) {
-          total += 3;
-        }
-
-        // Check direct symbol overrides: "this spirit has two symbols"
-        if (/(?:has|becomes)\s+two\s+(?:[a-zA-Z]+\s+)?symbols/i.test(b)) {
-          total = Math.max(total, 2);
-        } else if (/(?:has|becomes)\s+three\s+(?:[a-zA-Z]+\s+)?symbols/i.test(b)) {
-          total = Math.max(total, 3);
-        } else if (/(?:has|becomes)\s+four\s+(?:[a-zA-Z]+\s+)?symbols/i.test(b)) {
-          total = Math.max(total, 4);
-        }
-      }
-    }
-
-    // 3. Team / allied field auras granting additional symbols
-    if (attackingSide && DuelState[attackingSide]) {
-      const field = DuelState[attackingSide].field || [];
-      for (const ally of field) {
-        if (ally.uid === spirit.uid || !ally.effect) continue;
-        const allyBlocks = getCardAbilityBlocks(ally.effect);
-        for (const ab of allyBlocks) {
-          const lvlMatch = ab.match(/^((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)/i);
-          if (lvlMatch && !isEffectLevelMet(lvlMatch[1], ally.currentLevel || 1)) {
-            continue;
-          }
-          // Match: all your "Ancient Dragon" family Spirits gain an extra Red symbol
-          const mFam = ab.match(/all your\s+((?:["'][^"']+["']\/?)+)\s+family spirits (?:gain|get)\s+(?:an?|one|\+?1)\s+(?:extra|additional)?\s*(?:[a-zA-Z]+\s+)?symbols?/i);
-          if (mFam) {
-            const fams = mFam[1].replace(/["']/g, '').split('/').map(f => f.trim().toLowerCase());
-            const spiritFam = ((spirit.family || '') + ' ' + (spirit.families ? spirit.families.join(' ') : '') + ' ' + spirit.name).toLowerCase();
-            if (fams.some(f => spiritFam.includes(f))) {
-              total += 1;
-            }
-          }
-          // Match: all your spirits gain an extra symbol
-          if (/all your spirits (?:gain|get)\s+(?:an?|one|\+?1)\s+(?:extra|additional)?\s*(?:[a-zA-Z]+\s+)?symbols?/i.test(ab)) {
-            total += 1;
-          }
-        }
-      }
-    }
-
     return Math.max(1, total);
   }
 
@@ -14236,17 +14200,20 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       }, 1000);
     } else {
       // Direct Life Attack!
+      const playerAttackSymbols = getAttackSymbols(attacker, 'player');
       DuelState.combatEvent = {
         attacker,
         targetType: 'life',
         blocker: null,
-        result: 'DIRECT HIT! Opponent Life -1'
+        result: playerAttackSymbols > 1
+          ? `DIRECT HIT! Opponent Life -${playerAttackSymbols} (${playerAttackSymbols} Symbols)`
+          : 'DIRECT HIT! Opponent Life -1'
       };
       renderDuelTable();
 
       setTimeout(() => {
         AudioFX.lifeDamage();
-        const symbols = getAttackSymbols(attacker, 'player');
+        const symbols = playerAttackSymbols;
         const damageToDeal = Math.min(symbols, DuelState.opponent.life);
         for (let s = 0; s < damageToDeal; s++) {
           DuelState.opponent.life = Math.max(0, DuelState.opponent.life - 1);
@@ -15066,18 +15033,21 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         showBlockPrompt(attacker, playerBlockers);
       } else {
         // Unblocked direct hit to Player Life!
-      DuelState.combatEvent = {
-        attacker,
-        targetType: 'life',
-        blocker: null,
-        result: 'DIRECT HIT TO PLAYER LIFE!'
-      };
-      renderDuelTable();
+        const oppAttackSymbols = getAttackSymbols(attacker, 'opponent');
+        DuelState.combatEvent = {
+          attacker,
+          targetType: 'life',
+          blocker: null,
+          result: oppAttackSymbols > 1
+            ? `DIRECT HIT! Player Life -${oppAttackSymbols} (${oppAttackSymbols} Symbols)`
+            : 'DIRECT HIT TO PLAYER LIFE!'
+        };
+        renderDuelTable();
 
-      setTimeout(() => {
-        AudioFX.lifeDamage();
-        const symbols = getAttackSymbols(attacker, 'opponent');
-        const damageToDeal = Math.min(symbols, DuelState.player.life);
+        setTimeout(() => {
+          AudioFX.lifeDamage();
+          const symbols = oppAttackSymbols;
+          const damageToDeal = Math.min(symbols, DuelState.player.life);
         for (let s = 0; s < damageToDeal; s++) {
           DuelState.player.life = Math.max(0, DuelState.player.life - 1);
           DuelState.player.reserve += 1;

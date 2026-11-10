@@ -162,9 +162,11 @@ export const SagaConditionDSL = (() => {
       if (!queries.some(q => n.includes(String(q).toLowerCase()))) return false;
     }
     if (filter.keyword && !matchesKeyword(unit, filter.keyword)) return false;
+    if (filter.withoutKeyword && matchesKeyword(unit, filter.withoutKeyword)) return false;
     if (filter.minCost !== undefined && (unit.cost || 0) < filter.minCost) return false;
     if (filter.maxCost !== undefined && (unit.cost || 0) > filter.maxCost) return false;
     if (filter.exactCost !== undefined && (unit.cost || 0) !== filter.exactCost) return false;
+    if (Array.isArray(filter.costIn) && !filter.costIn.includes(unit.cost || 0)) return false;
     const bp = unit.battleBp || unit.currentBp || unit.baseBp || 0;
     if (filter.minBp !== undefined && bp < filter.minBp) return false;
     if (filter.maxBp !== undefined && bp > filter.maxBp) return false;
@@ -374,7 +376,7 @@ export const SagaConditionDSL = (() => {
     if (scaleBy.type === 'COLOR') {
       return cond.countUnits(ctx, scaleBy.side || 'SELF', { color: scaleBy.color });
     }
-    if (scaleBy.type === 'SYMBOL') {
+    if (scaleBy.type === 'SYMBOL' || scaleBy.type === 'SYMBOLS') {
       return cond.countSymbols(ctx, scaleBy.side || 'SELF', scaleBy.color);
     }
     if (scaleBy.type === 'NEXUS') {
@@ -670,15 +672,27 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, destroyedUnits: [] };
 
       eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
-      const victims = params.allMatching ? eligible : eligible.slice(0, count);
-      for (const v of victims) {
-        recycleSpiritCores(ctx, v, enemySide);
-        sendToTrash(ctx, v, enemySide, `Destroyed by ${card?.name || 'BP destruction'}`);
-        audio(ctx, 'destroy');
-        log(ctx, `💀 **[${card?.name || 'Destroy'}]**: Destroyed opposing "${v.name}" (${v.currentBp || 0} BP ≤ ${maxBp} BP)!`, 'kill');
+      const doDestroy = (victims) => {
+        for (const v of victims) {
+          recycleSpiritCores(ctx, v, enemySide);
+          sendToTrash(ctx, v, enemySide, `Destroyed by ${card?.name || 'BP destruction'}`);
+          audio(ctx, 'destroy');
+          log(ctx, `💀 **[${card?.name || 'Destroy'}]**: Destroyed opposing "${v.name}" (${v.currentBp || 0} BP ≤ ${maxBp} BP)!`, 'kill');
+        }
+        render(ctx);
+        return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Destroy by BP'}`,
+          subtitle: `Choose ${count} opposing Spirit(s) with ${maxBp} BP or less to destroy:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doDestroy(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      const victims = params.allMatching ? eligible : eligible.slice(0, count);
+      return doDestroy(victims);
     },
 
     destroyByCost(ctx, params = {}) {
@@ -698,15 +712,27 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, destroyedUnits: [] };
 
       eligible.sort((a, b) => (b.cost || 0) - (a.cost || 0));
-      const victims = params.allMatching ? eligible : eligible.slice(0, count);
-      for (const v of victims) {
-        recycleSpiritCores(ctx, v, enemySide);
-        sendToTrash(ctx, v, enemySide, `Destroyed by ${card?.name || 'Cost destruction'}`);
-        audio(ctx, 'destroy');
-        log(ctx, `💀 **[${card?.name || 'Demolition'}]**: Destroyed opposing "${v.name}" (Cost ${v.cost || 0} ≤ ${maxCost})!`, 'kill');
+      const doDestroy = (victims) => {
+        for (const v of victims) {
+          recycleSpiritCores(ctx, v, enemySide);
+          sendToTrash(ctx, v, enemySide, `Destroyed by ${card?.name || 'Cost destruction'}`);
+          audio(ctx, 'destroy');
+          log(ctx, `💀 **[${card?.name || 'Demolition'}]**: Destroyed opposing "${v.name}" (Cost ${v.cost || 0} ≤ ${maxCost})!`, 'kill');
+        }
+        render(ctx);
+        return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Destroy by Cost'}`,
+          subtitle: `Choose ${count} opposing Spirit(s) of Cost ${maxCost} or less to destroy:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doDestroy(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      const victims = params.allMatching ? eligible : eligible.slice(0, count);
+      return doDestroy(victims);
     },
 
     destroyExhausted(ctx, params = {}) {
@@ -724,15 +750,27 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, destroyedUnits: [] };
 
       eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
-      const victims = params.allMatching ? eligible : eligible.slice(0, count);
-      for (const v of victims) {
-        recycleSpiritCores(ctx, v, enemySide);
-        sendToTrash(ctx, v, enemySide, `Destroyed exhausted by ${card?.name || 'effect'}`);
-        audio(ctx, 'destroy');
-        log(ctx, `💀 **[${card?.name || 'Destroy Exhausted'}]**: Destroyed opposing exhausted "${v.name}"!`, 'kill');
+      const doDestroy = (victims) => {
+        for (const v of victims) {
+          recycleSpiritCores(ctx, v, enemySide);
+          sendToTrash(ctx, v, enemySide, `Destroyed exhausted by ${card?.name || 'effect'}`);
+          audio(ctx, 'destroy');
+          log(ctx, `💀 **[${card?.name || 'Destroy Exhausted'}]**: Destroyed opposing exhausted "${v.name}"!`, 'kill');
+        }
+        render(ctx);
+        return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Destroy Exhausted'}`,
+          subtitle: `Choose ${count} exhausted opposing Spirit(s) to destroy:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doDestroy(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      const victims = params.allMatching ? eligible : eligible.slice(0, count);
+      return doDestroy(victims);
     },
 
     destroyNexus(ctx, params = {}) {
@@ -743,15 +781,28 @@ export const SagaConditionDSL = (() => {
         return { applied: false, count: 0, destroyedUnits: [] };
       }
       const count = params.count || 1;
-      const victims = params.allMatching ? [...enemyState.nexus] : enemyState.nexus.slice(0, count);
-      for (const nx of victims) {
-        recycleSpiritCores(ctx, nx, enemySide);
-        sendToTrash(ctx, nx, enemySide, `Nexus destroyed by ${card?.name || 'effect'}`);
-        audio(ctx, 'destroy');
-        log(ctx, `🏛️💥 **[${card?.name || 'Nexus Destruction'}]**: Destroyed opposing Nexus "${nx.name}"!`, 'kill');
+      const eligible = [...enemyState.nexus];
+      const doDestroy = (victims) => {
+        for (const nx of victims) {
+          recycleSpiritCores(ctx, nx, enemySide);
+          sendToTrash(ctx, nx, enemySide, `Nexus destroyed by ${card?.name || 'effect'}`);
+          audio(ctx, 'destroy');
+          log(ctx, `🏛️💥 **[${card?.name || 'Nexus Destruction'}]**: Destroyed opposing Nexus "${nx.name}"!`, 'kill');
+        }
+        render(ctx);
+        return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Destroy Nexus'}`,
+          subtitle: `Choose ${count} opposing Nexus(es) to destroy:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doDestroy(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: victims.length > 0, count: victims.length, destroyedUnits: victims };
+      const victims = params.allMatching ? eligible : eligible.slice(0, count);
+      return doDestroy(victims);
     },
 
     bounceToHand(ctx, params = {}) {
@@ -768,17 +819,36 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, targets: [] };
 
       eligible.sort((a, b) => (b.cost || 0) - (a.cost || 0));
-      const bounced = params.allMatching ? eligible : eligible.slice(0, count);
-      for (const b of bounced) {
-        recycleSpiritCores(ctx, b, targetSide);
-        const idx = st.field.indexOf(b);
-        if (idx !== -1) st.field.splice(idx, 1);
-        if (!st.hand) st.hand = [];
-        st.hand.push(b);
-        log(ctx, `🌪️ **[${card?.name || 'Bounce'}]**: Returned "${b.name}" to ${targetSide === 'player' ? 'Player' : 'Opponent'}'s Hand!`, 'magic');
+      const doBounce = (bounced) => {
+        for (const b of bounced) {
+          recycleSpiritCores(ctx, b, targetSide);
+          const idx = st.field.indexOf(b);
+          if (idx !== -1) st.field.splice(idx, 1);
+          if (!st.hand) st.hand = [];
+          st.hand.push(b);
+          log(ctx, `🌪️ **[${card?.name || 'Bounce'}]**: Returned "${b.name}" to ${targetSide === 'player' ? 'Player' : 'Opponent'}'s Hand!`, 'magic');
+          if (st.returnDrawActiveThisTurn && st.deck && st.deck.length > 0) {
+            const drawn = st.deck.shift();
+            if (drawn) {
+              st.hand.push(drawn);
+              log(ctx, `🎴 **[Return Draw]**: Spirit returned to Hand — drew 1 card!`, 'step');
+            }
+          }
+        }
+        render(ctx);
+        return { applied: bounced.length > 0, count: bounced.length, targets: bounced };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Return to Hand'}`,
+          subtitle: `Choose ${count} Spirit(s) to return to Hand:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doBounce(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: bounced.length > 0, count: bounced.length, targets: bounced };
+      const bounced = params.allMatching ? eligible : eligible.slice(0, count);
+      return doBounce(bounced);
     },
 
     bounceToDeck(ctx, params = {}) {
@@ -796,18 +866,30 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, targets: [] };
 
       eligible.sort((a, b) => (b.cost || 0) - (a.cost || 0));
-      const bounced = eligible.slice(0, count);
-      for (const b of bounced) {
-        recycleSpiritCores(ctx, b, enemySide);
-        const idx = enemyState.field.indexOf(b);
-        if (idx !== -1) enemyState.field.splice(idx, 1);
-        if (!enemyState.deck) enemyState.deck = [];
-        if (pos === 'TOP') enemyState.deck.unshift(b);
-        else enemyState.deck.push(b);
-        log(ctx, `🌪️ **[${card?.name || 'Deck Bounce'}]**: Returned opposing "${b.name}" to the ${pos.toLowerCase()} of their Deck!`, 'magic');
+      const doBounce = (bounced) => {
+        for (const b of bounced) {
+          recycleSpiritCores(ctx, b, enemySide);
+          const idx = enemyState.field.indexOf(b);
+          if (idx !== -1) enemyState.field.splice(idx, 1);
+          if (!enemyState.deck) enemyState.deck = [];
+          if (pos === 'TOP') enemyState.deck.unshift(b);
+          else enemyState.deck.push(b);
+          log(ctx, `🌪️ **[${card?.name || 'Deck Bounce'}]**: Returned opposing "${b.name}" to the ${pos.toLowerCase()} of their Deck!`, 'magic');
+        }
+        render(ctx);
+        return { applied: bounced.length > 0, count: bounced.length, targets: bounced };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Return to Deck'}`,
+          subtitle: `Choose ${count} opposing Spirit(s) to return to the ${pos.toLowerCase()} of their Deck:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doBounce(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      render(ctx);
-      return { applied: bounced.length > 0, count: bounced.length, targets: bounced };
+      const bounced = eligible.slice(0, count);
+      return doBounce(bounced);
     },
 
     refreshSpirits(ctx, params = {}) {
@@ -851,13 +933,25 @@ export const SagaConditionDSL = (() => {
       if (eligible.length === 0) return { applied: false, count: 0, targets: [] };
 
       eligible.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
-      const targets = params.allMatching ? eligible : eligible.slice(0, count);
-      for (const t of targets) {
-        t.isExhausted = true;
+      const doExhaust = (targets) => {
+        for (const t of targets) {
+          t.isExhausted = true;
+        }
+        log(ctx, `🍃 **[${card?.name || 'Exhaust'}]**: Exhausted opposing ${targets.map(t => `"${t.name}"`).join(', ')}!`, 'magic');
+        render(ctx);
+        return { applied: targets.length > 0, count: targets.length, targets };
+      };
+      if (ctx.side === 'player' && !params.allMatching && eligible.length > count && ctx.arenaApi && typeof ctx.arenaApi.promptUniversalTargetModal === 'function' && typeof document !== 'undefined' && document.body) {
+        return ctx.arenaApi.promptUniversalTargetModal({
+          title: `${card?.name || 'Exhaust Spirit'}`,
+          subtitle: `Choose ${count} opposing Spirit(s) to exhaust:`,
+          candidates: eligible,
+          minPick: Math.min(count, eligible.length),
+          maxPick: Math.min(count, eligible.length),
+        }).then(picked => doExhaust(Array.isArray(picked) && picked.length > 0 ? picked : eligible.slice(0, count)));
       }
-      log(ctx, `🍃 **[${card?.name || 'Exhaust'}]**: Exhausted opposing ${targets.map(t => `"${t.name}"`).join(', ')}!`, 'magic');
-      render(ctx);
-      return { applied: targets.length > 0, count: targets.length, targets };
+      const targets = params.allMatching ? eligible : eligible.slice(0, count);
+      return doExhaust(targets);
     },
 
     drawCards(ctx, params = {}) {
@@ -1121,6 +1215,387 @@ export const SagaConditionDSL = (() => {
       return { applied: true, count: actual };
     },
 
+    chooseFamilyDraw(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !st.deck) return { applied: false, count: 0 };
+      const families = Array.isArray(params.families) && params.families.length > 0
+        ? params.families
+        : ['Imaginary Beast', 'Beast Head'];
+
+      const countForFam = (fam) => (st.field || []).filter(u => matchesFamily(u, fam)).length;
+
+      const doDrawForFamily = (chosenFam) => {
+        const cnt = countForFam(chosenFam);
+        let drawn = 0;
+        for (let i = 0; i < cnt; i++) {
+          if (st.deck.length === 0) break;
+          const c = st.deck.shift();
+          if (c) {
+            if (!st.hand) st.hand = [];
+            st.hand.push(c);
+            drawn++;
+          }
+        }
+        log(ctx, `🎴 **[${card?.name || 'Family Draw'}]**: Chose "${chosenFam}" (${cnt} Spirit(s)) — drew ${drawn} card(s)!`, 'step');
+        render(ctx);
+        return { applied: drawn > 0, count: drawn };
+      };
+
+      if (ctx.side === 'player' && ctx.arenaApi && typeof ctx.arenaApi.promptChoiceModal === 'function' && typeof document !== 'undefined' && document.body) {
+        ctx.arenaApi.promptChoiceModal({
+          card,
+          side: 'player',
+          title: `${card?.name || 'Effect'}: Choose Family`,
+          description: 'Select a family to draw 1 card for each Spirit you control in that family:',
+          choices: families.map(f => ({
+            icon: '🐾',
+            label: `"${f}" Family (${countForFam(f)} on Field)`,
+            desc: `Draw ${countForFam(f)} card(s)`
+          }))
+        }, (choiceIdx) => {
+          const picked = families[choiceIdx] || families[0];
+          doDrawForFamily(picked);
+        });
+        return { applied: true, count: 1 };
+      }
+
+      // Deterministic AI / headless choice: pick family with most controlled units
+      let bestFam = families[0];
+      let bestCnt = -1;
+      for (const f of families) {
+        const c = countForFam(f);
+        if (c > bestCnt) {
+          bestCnt = c;
+          bestFam = f;
+        }
+      }
+      return doDrawForFamily(bestFam);
+    },
+
+    revealDecktopAdd(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !st.deck || st.deck.length === 0) return { applied: false, count: 0 };
+
+      const scaleSpec = params.scaleBy || (params.scaleBySymbolColor ? { type: 'SYMBOLS', color: params.scaleBySymbolColor } : null);
+      const mult = scaleSpec ? computeScaleFactor(ctx, scaleSpec) : 1;
+      const revealCount = Math.min(st.deck.length, (params.count || 1) * mult);
+      if (revealCount <= 0) return { applied: false, count: 0 };
+
+      const revealed = st.deck.splice(0, revealCount);
+      const filter = params.filter || { type: 'Magic' };
+      const remDest = (params.remainingTo || 'BOTTOM').toUpperCase();
+      const maxAdd = params.maxAdd || 1;
+
+      const returnRemaining = (remCards) => {
+        for (const rem of remCards) {
+          if (remDest === 'TRASH') {
+            sendToTrash(ctx, rem, ctx.side, `Discarded after reveal by ${card?.name || 'effect'}`);
+          } else if (remDest === 'TOP') {
+            st.deck.unshift(rem);
+          } else {
+            st.deck.push(rem);
+          }
+        }
+      };
+
+      if (ctx.side === 'player' && ctx.arenaApi && typeof ctx.arenaApi.promptScryRevealModal === 'function' && typeof document !== 'undefined' && document.body && maxAdd === 1) {
+        ctx.arenaApi.promptScryRevealModal({
+          sourceCard: card,
+          side: 'player',
+          title: `${card?.name || 'Reveal'}: Revealed ${revealed.length} Card(s)`,
+          description: `Select a matching card to add to your Hand. Remaining cards go to ${remDest.toLowerCase()}:`,
+          cards: revealed,
+          filterFn: (c) => matchesUnitFilter(c, filter, card)
+        }, (chosen) => {
+          if (chosen) {
+            const idx = revealed.findIndex(c => (c.uid && chosen.uid && c.uid === chosen.uid) || c === chosen);
+            if (idx !== -1) revealed.splice(idx, 1);
+            if (!st.hand) st.hand = [];
+            st.hand.push(chosen);
+            log(ctx, `✨ **[${card?.name || 'Reveal'}]**: Added "${chosen.name}" to Hand!`, 'step');
+          }
+          returnRemaining(revealed);
+          render(ctx);
+        });
+        return { applied: true, count: 1 };
+      }
+
+      const added = [];
+      const leftovers = [];
+      for (const c of revealed) {
+        if ((maxAdd === 'ALL' || added.length < maxAdd) && matchesUnitFilter(c, filter, card)) {
+          if (!st.hand) st.hand = [];
+          st.hand.push(c);
+          added.push(c);
+        } else {
+          leftovers.push(c);
+        }
+      }
+      returnRemaining(leftovers);
+      log(ctx, `🎴 **[${card?.name || 'Reveal'}]**: Revealed ${revealed.length} card(s), added ${added.length} to Hand!`, 'step');
+      render(ctx);
+      return { applied: added.length > 0, count: added.length, targets: added };
+    },
+
+    deployNexusFromTrash(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !st.trashCards || st.trashCards.length === 0) return { applied: false, count: 0 };
+
+      const eligible = st.trashCards.filter(c =>
+        ((c.type || '').toLowerCase().includes('nexus')) &&
+        matchesUnitFilter(c, params.filter, card)
+      );
+      if (eligible.length === 0) return { applied: false, count: 0 };
+
+      const chosen = eligible[0];
+      const idx = st.trashCards.indexOf(chosen);
+      if (idx !== -1) st.trashCards.splice(idx, 1);
+      chosen.currentCores = chosen.currentCores || 0;
+      chosen.currentLevel = 1;
+      chosen.isExhausted = false;
+      if (!st.nexus) st.nexus = [];
+      st.nexus.push(chosen);
+      audio(ctx, 'summon');
+      log(ctx, `🏛️ **[${card?.name || 'Deploy Nexus'}]**: Deployed Nexus "${chosen.name}" from Trash without paying cost!`, 'step');
+      render(ctx);
+      return { applied: true, count: 1, targets: [chosen] };
+    },
+
+    destroyOneOfEachCost(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const enemySide = getEnemySide(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState || !enemyState.field) return { applied: false, count: 0, destroyedUnits: [] };
+
+      const costs = Array.isArray(params.costs) ? params.costs : [0, 1, 2, 3, 4];
+      const destroyedUnits = [];
+      for (const targetCost of costs) {
+        const candidates = enemyState.field.filter(u =>
+          (u.cost !== undefined ? u.cost : 0) === targetCost &&
+          !hasArmorAgainst(u, card?.color) &&
+          matchesUnitFilter(u, params.filter, card)
+        );
+        if (candidates.length > 0) {
+          candidates.sort((a, b) => (b.currentBp || 0) - (a.currentBp || 0));
+          const victim = candidates[0];
+          recycleSpiritCores(ctx, victim, enemySide);
+          sendToTrash(ctx, victim, enemySide, `Destroyed (Cost ${targetCost}) by ${card?.name || 'effect'}`);
+          destroyedUnits.push(victim);
+        }
+      }
+      if (destroyedUnits.length > 0) {
+        audio(ctx, 'destroy');
+        log(ctx, `💀 **[${card?.name || 'Multi-Cost Destroy'}]**: Destroyed ${destroyedUnits.map(u => `"${u.name}" (Cost ${u.cost || 0})`).join(', ')}!`, 'kill');
+        render(ctx);
+      }
+      return { applied: destroyedUnits.length > 0, count: destroyedUnits.length, destroyedUnits };
+    },
+
+    lookOpponentHandDiscard(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const enemySide = getEnemySide(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState || !enemyState.hand || enemyState.hand.length === 0) return { applied: false, count: 0 };
+
+      const filter = params.filter || { type: 'Magic' };
+      const count = params.count || 1;
+      const matching = enemyState.hand.filter(c => matchesUnitFilter(c, filter, card));
+
+      if (ctx.side === 'player' && ctx.arenaApi && typeof ctx.arenaApi.promptScryRevealModal === 'function' && typeof document !== 'undefined' && document.body) {
+        ctx.arenaApi.promptScryRevealModal({
+          sourceCard: card,
+          side: 'player',
+          title: `${card?.name || 'Hand Inspection'}: Opposing Hand (${enemyState.hand.length} Cards)`,
+          description: matching.length > 0 ? 'Select an opposing card to discard to their Trash:' : 'No matching cards in opposing Hand.',
+          cards: enemyState.hand,
+          filterFn: (c) => matchesUnitFilter(c, filter, card)
+        }, (chosen) => {
+          if (chosen) {
+            const idx = enemyState.hand.indexOf(chosen);
+            if (idx !== -1) enemyState.hand.splice(idx, 1);
+            sendToTrash(ctx, chosen, enemySide, `Discarded from Hand by ${card?.name || 'effect'}`);
+            log(ctx, `🗑️ **[${card?.name || 'Hand Discard'}]**: Discarded opposing "${chosen.name}"!`, 'kill');
+            render(ctx);
+          }
+        });
+        return { applied: true, count: 1 };
+      }
+
+      const discarded = matching.slice(0, count);
+      for (const d of discarded) {
+        const idx = enemyState.hand.indexOf(d);
+        if (idx !== -1) enemyState.hand.splice(idx, 1);
+        sendToTrash(ctx, d, enemySide, `Discarded from Hand by ${card?.name || 'effect'}`);
+      }
+      if (discarded.length > 0) {
+        log(ctx, `🗑️ **[${card?.name || 'Hand Discard'}]**: Looked at opposing Hand and discarded ${discarded.map(c => `"${c.name}"`).join(', ')}!`, 'kill');
+        render(ctx);
+      }
+      return { applied: discarded.length > 0, count: discarded.length, targets: discarded };
+    },
+
+    exhaustByAttackerCost(ctx) {
+      const st = getFriendlyState(ctx);
+      const enemyState = getEnemyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      const attacker = ctx.attacker || (ctx.duelState && ctx.duelState.combatEvent && ctx.duelState.combatEvent.attacker);
+      if (!attacker) return { applied: false, count: 0 };
+      const targetCost = attacker.cost || 0;
+      const allUnits = [...((st && st.field) || []), ...((enemyState && enemyState.field) || [])];
+      const targets = allUnits.filter(u => !u.isExhausted && (u.cost || 0) === targetCost);
+      for (const t of targets) {
+        t.isExhausted = true;
+      }
+      if (targets.length > 0) {
+        log(ctx, `🍃 **[${card?.name || 'Exhaust'}]**: Exhausted ${targets.length} Spirit(s) with Cost ${targetCost}!`, 'magic');
+        render(ctx);
+      }
+      return { applied: targets.length > 0, count: targets.length, targets };
+    },
+
+    setFloatingReturnDraw(ctx) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st) return { applied: false, count: 0 };
+      st.returnDrawActiveThisTurn = true;
+      if (ctx.duelState) {
+        if (!Array.isArray(ctx.duelState.modifiers)) ctx.duelState.modifiers = [];
+        ctx.duelState.modifiers.push({
+          type: 'RETURN_DRAW_THIS_TURN',
+          side: ctx.side,
+          sourceCard: card?.name || 'Return Draw'
+        });
+      }
+      log(ctx, `✨ **[${card?.name || 'Return Draw'}]**: During this turn, whenever a Spirit you control returns to your Hand, draw 1 card!`, 'magic');
+      render(ctx);
+      return { applied: true, count: 1 };
+    },
+
+    returnSelfForTribute(ctx) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !card) return { applied: false, count: 0 };
+      card._returnedToHandForTribute = true;
+      if (st.trashCards) {
+        const tIdx = st.trashCards.indexOf(card);
+        if (tIdx !== -1) st.trashCards.splice(tIdx, 1);
+      }
+      if (!st.hand) st.hand = [];
+      if (!st.hand.includes(card)) st.hand.push(card);
+      log(ctx, `🌪️ **[${card.name}]**: Returned to Hand as Tribute substitute!`, 'magic');
+      render(ctx);
+      return { applied: true, count: 1 };
+    },
+
+    opponentSendCoresMinOne(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState || !enemyState.field) return { applied: false, count: 0 };
+      const needed = params.count || 3;
+      const toZone = (params.to || 'RESERVE').toUpperCase();
+      let moved = 0;
+      const eligible = enemyState.field.filter(u => (u.currentCores || 0) > 1 && !hasArmorAgainst(u, card?.color));
+      for (const sp of eligible) {
+        while ((sp.currentCores || 0) > 1 && moved < needed) {
+          sp.currentCores -= 1;
+          moved++;
+          if (toZone === 'TRASH') enemyState.trash = (enemyState.trash || 0) + 1;
+          else enemyState.reserve = (enemyState.reserve || 0) + 1;
+          recalcBp(ctx, sp);
+        }
+      }
+      if (moved > 0) {
+        audio(ctx, 'coreChime');
+        log(ctx, `🔮 **[${card?.name || 'Core Drain'}]**: Opponent sent ${moved} core(s) from their Spirits to ${toZone} (minimum 1 core remaining)!`, 'magic');
+        render(ctx);
+      }
+      return { applied: moved > 0, count: moved };
+    },
+
+    assaultRefresh(ctx, params = {}) {
+      const st = getFriendlyState(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!st || !card) return { applied: false, count: 0 };
+      const maxPerTurn = params.maxPerTurn || 1;
+      const turnNum = (ctx.duelState && ctx.duelState.turn) || 1;
+      if (card._assaultTurn !== turnNum) {
+        card._assaultTurn = turnNum;
+        card._assaultUsedCount = 0;
+      }
+      if (card._assaultUsedCount >= maxPerTurn) return { applied: false, count: 0 };
+      const activeNexuses = (st.nexus || []).filter(n => !n.isExhausted);
+      if (activeNexuses.length === 0) return { applied: false, count: 0 };
+
+      const doRefresh = (nx) => {
+        nx.isExhausted = true;
+        card.isExhausted = false;
+        card._assaultUsedCount = (card._assaultUsedCount || 0) + 1;
+        audio(ctx, 'shield');
+        log(ctx, `🌀 **[Assault: ${maxPerTurn}]**: Exhausted Nexus "${nx.name}" to refresh "${card.name}"!`, 'step');
+        render(ctx);
+      };
+
+      if (ctx.side === 'player' && ctx.arenaApi && typeof ctx.arenaApi.askOptionalEffect === 'function' && typeof document !== 'undefined' && document.body) {
+        ctx.arenaApi.askOptionalEffect(
+          card,
+          `Activate [Assault: ${maxPerTurn}]? Exhaust your Nexus "${activeNexuses[0].name}" to refresh "${card.name}"?`,
+          () => doRefresh(activeNexuses[0]),
+          () => {}
+        );
+        return { applied: true, count: 1 };
+      }
+
+      doRefresh(activeNexuses[0]);
+      return { applied: true, count: 1 };
+    },
+
+    bpDebuff(ctx, params = {}) {
+      const enemyState = getEnemyState(ctx);
+      const enemySide = getEnemySide(ctx);
+      const card = ctx.card || ctx.sourceCard;
+      if (!enemyState || !enemyState.field || enemyState.field.length === 0) return { applied: false, count: 0 };
+
+      const amount = params.amount || 2000;
+      const count = params.count || 1;
+      const eligible = enemyState.field.filter(u => !hasArmorAgainst(u, card?.color) && matchesUnitFilter(u, params.filter, card));
+      if (eligible.length === 0) return { applied: false, count: 0 };
+
+      const targets = params.allMatching ? eligible : eligible.slice(0, count);
+      for (const t of targets) {
+        t.turnBpBoost = (t.turnBpBoost || 0) - amount;
+        recalcBp(ctx, t);
+        if ((t.currentBp || 0) <= 0) {
+          recycleSpiritCores(ctx, t, enemySide);
+          sendToTrash(ctx, t, enemySide, `Reduced to 0 BP by ${card?.name || 'effect'}`);
+          log(ctx, `💀 **[0 BP Destruction]**: "${t.name}" was reduced to 0 BP and destroyed!`, 'kill');
+        }
+      }
+      render(ctx);
+      return { applied: targets.length > 0, count: targets.length, targets };
+    },
+
+    passiveRule(ctx, params = {}) {
+      const card = ctx.card || ctx.sourceCard;
+      if (!card) return { applied: false, count: 0 };
+      if (!Array.isArray(card.activePassiveRules)) card.activePassiveRules = [];
+      card.activePassiveRules.push(params.rule || params);
+      if (params.rule === 'CAN_BLOCK_WHILE_EXHAUSTED') {
+        card.canBlockWhileExhausted = true;
+        if (params.maxAttackerCost !== undefined) card.exhaustedBlockMaxCost = params.maxAttackerCost;
+      }
+      if (params.rule === 'TREAT_AS_COLOR' && params.color) {
+        if (!Array.isArray(card.colors)) card.colors = card.color ? [card.color] : [];
+        if (!card.colors.includes(params.color)) card.colors.push(params.color);
+      }
+      if (params.rule === 'BRILLIANCE') {
+        card.hasBrilliance = true;
+      }
+      return { applied: true, count: 1 };
+    },
+
     executeSubEffect(ctx, stepDef, prevResult = null) {
       if (!stepDef) return { applied: false, count: 0 };
       if (stepDef.ifPreviousApplied && (!prevResult || !prevResult.applied)) {
@@ -1138,21 +1613,41 @@ export const SagaConditionDSL = (() => {
         case 'BP_BUFF_SELF': return fx.buffBpSelf(ctx, stepDef);
         case 'BP_BUFF_ALLIES': return fx.buffBpAllies(ctx, stepDef);
         case 'BP_BUFF_TARGET': return fx.buffBpTarget(ctx, stepDef);
+        case 'BP_DEBUFF': return fx.bpDebuff(ctx, stepDef);
         case 'CORE_FROM_VOID': return fx.coreFromVoid(ctx, stepDef);
+        case 'CHARGE_CORE_VOID_TO_RESERVE': return fx.coreFromVoid(ctx, { target: 'RESERVE', count: stepDef.amount || stepDef.count || 1, ...stepDef });
         case 'CORE_DRAIN': return fx.drainCores(ctx, stepDef);
+        case 'OPPONENT_SEND_CORES_MIN_ONE': return fx.opponentSendCoresMinOne(ctx, stepDef);
         case 'AWAKEN': return fx.awaken(ctx, stepDef);
         case 'ULTRA_AWAKEN': return fx.ultraAwaken(ctx, stepDef);
         case 'GRANT_HEAVY_ARMOR': return fx.grantHeavyArmor(ctx, stepDef);
         case 'DESTROY_BRAVE': return fx.destroyOpposingBrave(ctx, stepDef);
         case 'DESTROY_BY_BP': return fx.destroyByBp(ctx, stepDef);
         case 'DESTROY_BY_COST': return fx.destroyByCost(ctx, stepDef);
+        case 'DESTROY_ONE_OF_EACH_COST': return fx.destroyOneOfEachCost(ctx, stepDef);
+        case 'DESTROY_OPPOSING_SPIRIT':
+          if (stepDef.filter && stepDef.filter.maxBp !== undefined) {
+            return fx.destroyByBp(ctx, { maxBp: stepDef.filter.maxBp, ...stepDef });
+          }
+          return fx.destroyByCost(ctx, { maxCost: (stepDef.filter && stepDef.filter.maxCost !== undefined) ? stepDef.filter.maxCost : 6, ...stepDef });
         case 'DESTROY_EXHAUSTED': return fx.destroyExhausted(ctx, stepDef);
         case 'DESTROY_NEXUS': return fx.destroyNexus(ctx, stepDef);
         case 'BOUNCE_TO_HAND': return fx.bounceToHand(ctx, stepDef);
         case 'BOUNCE_TO_DECK': return fx.bounceToDeck(ctx, stepDef);
         case 'REFRESH_SPIRITS': return fx.refreshSpirits(ctx, stepDef);
+        case 'REFRESH_SELF': return fx.refreshSpirits(ctx, { scope: 'SELF', ...stepDef });
+        case 'ASSAULT_REFRESH': return fx.assaultRefresh(ctx, stepDef);
         case 'EXHAUST_SPIRITS': return fx.exhaustOpposing(ctx, stepDef);
-        case 'DRAW_CARDS': return fx.drawCards(ctx, stepDef);
+        case 'EXHAUST_BY_ATTACKER_COST': return fx.exhaustByAttackerCost(ctx, stepDef);
+        case 'DRAW':
+        case 'DRAW_CARDS': return fx.drawCards(ctx, { count: stepDef.amount || stepDef.count || 1, ...stepDef });
+        case 'CHOOSE_FAMILY_DRAW': return fx.chooseFamilyDraw(ctx, stepDef);
+        case 'REVEAL_DECKTOP_ADD': return fx.revealDecktopAdd(ctx, stepDef);
+        case 'DEPLOY_NEXUS_FROM_TRASH': return fx.deployNexusFromTrash(ctx, stepDef);
+        case 'LOOK_OPPONENT_HAND_DISCARD': return fx.lookOpponentHandDiscard(ctx, stepDef);
+        case 'SET_FLOATING_RETURN_DRAW': return fx.setFloatingReturnDraw(ctx, stepDef);
+        case 'RETURN_SELF_FOR_TRIBUTE': return fx.returnSelfForTribute(ctx, stepDef);
+        case 'PASSIVE_RULE': return fx.passiveRule(ctx, stepDef);
         case 'MILL_DECK': return fx.millDeck(ctx, stepDef);
         case 'SALVAGE_TRASH': return fx.salvageTrash(ctx, stepDef);
         case 'REANIMATE_TRASH': return fx.reanimateTrash(ctx, stepDef);
@@ -1186,7 +1681,10 @@ export const SagaConditionDSL = (() => {
     // Group ability definitions by Tier 1 Overall Condition
     const grouped = {};
     for (const ab of (cardSpec.abilities || [])) {
-      const overallKey = String(ab.overall || ab.trigger || 'PASSIVE').toUpperCase();
+      let overallKey = String(ab.overall || ab.trigger || 'PASSIVE').toUpperCase();
+      if (cardSpec.cardType === 'Magic' && overallKey === 'MAIN_STEP') {
+        overallKey = 'MAIN';
+      }
       if (!grouped[overallKey]) grouped[overallKey] = [];
       grouped[overallKey].push(ab);
     }
@@ -1257,13 +1755,20 @@ export const SagaConditionDSL = (() => {
       if (!existing.sagaAbilities) {
         existing.sagaAbilities = cardSpec.abilities || [];
       }
+      const rawEff = cardSpec.effect || cardSpec.rawEffect || '';
+      if (!existing.effect && rawEff) {
+        existing.effect = rawEff;
+        existing.rawEffect = rawEff;
+      }
       return;
     }
 
+    const rawEff = cardSpec.effect || cardSpec.rawEffect || '';
     PerCardRegistry.registerCard(cardSpec.aliases ? [cardSpec.cardNumber, ...cardSpec.aliases] : cardSpec.cardNumber, {
       name: cardSpec.name || cardSpec.cardNumber,
       cardType: cardSpec.cardType || 'Spirit',
-      rawEffect: cardSpec.rawEffect || '',
+      effect: rawEff,
+      rawEffect: rawEff,
       isVanilla: Boolean(cardSpec.isVanilla),
       sagaAbilities: cardSpec.abilities || [],
       triggers
