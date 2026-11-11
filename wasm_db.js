@@ -22,6 +22,12 @@
   const STORE_NAME = 'db_binary';
   const DB_KEY = 'battle_spirits.db_v3';
 
+  const isServerBackend = typeof window !== 'undefined' && window.location && (
+    window.location.hostname === 'localhost' ||
+    window.location.hostname === '127.0.0.1' ||
+    window.location.port === '3000'
+  );
+
   function getBaseDir() {
     if (typeof window === 'undefined' || !window.location) return './';
     const loc = window.location;
@@ -926,7 +932,12 @@
   window.fetch = async function(resource, init) {
     const urlStr = typeof resource === 'string' ? resource : (resource && resource.url ? resource.url : '');
     
-    // Only intercept /api/ requests if WasmDB is active
+    // When running with live backend (e.g. Node server on localhost:3000), let the server handle all API routes natively!
+    if (isServerBackend) {
+      return window._originalFetch.apply(this, arguments);
+    }
+
+    // Only intercept /api/ requests if WasmDB is active on static hosting
     if (urlStr.startsWith('/api/') || urlStr.includes('/api/')) {
       const url = new URL(urlStr, window.location.origin);
       const path = url.pathname;
@@ -1092,6 +1103,13 @@
   window.WasmDB = WasmDB;
 
   function startInit() {
+    // If running on local Node dev server, the server is already active with native SQLite!
+    if (isServerBackend) {
+      isReady = true;
+      readyCallbacks.forEach(cb => { try { cb(); } catch(e) {} });
+      readyCallbacks = [];
+      return Promise.resolve(true);
+    }
     if (!jsonFallbackPromise) {
       jsonFallbackPromise = loadJsonFallback();
     }

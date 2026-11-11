@@ -88,7 +88,7 @@ test('Browse & Keywords: Back and search links use relative paths', () => {
   assert.ok(Array.isArray(kwData.keywords) && kwData.keywords.length > 50, "keywords_data.json must contain catalog");
 });
 
-test('Card Art: cleanCardImageUrl does not route to /api/proxy-image on GitHub Pages', () => {
+test('Card Art: cleanCardImageUrl does not route to /api/proxy-image', () => {
   const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
-  assert.ok(appJs.includes("window.location.hostname.includes('github.io')"), "cleanCardImageUrl must check for github.io");
+  assert.ok(!appJs.includes("return '/api/proxy-image?url='"), "cleanCardImageUrl must not route images through /api/proxy-image");
 });

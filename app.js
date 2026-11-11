@@ -3,23 +3,10 @@ const FALLBACK_CARD_ART = window.FALLBACK_CARD_ART = "data:image/svg+xml;utf8,<s
 
 window.cleanCardImageUrl = function(url) {
   if (!url || typeof url !== 'string') return url || FALLBACK_CARD_ART;
-  // On GitHub Pages or static host, NEVER use /api/proxy-image!
-  // Fandom images load directly in the browser when referrerpolicy="no-referrer" is used.
-  // Using /api/proxy-image on GitHub Pages causes 404s for every card,
-  // floods the browser network queue, and causes extreme lag and broken card art.
-  const isStatic = typeof window !== 'undefined' && window.location && (
-    window.location.hostname.includes('github.io') ||
-    window.location.protocol === 'file:' ||
-    (!window.location.port && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
-  );
-  if (isStatic) {
-    return url;
-  }
-  if (url.includes('static.wikia.nocookie.net')) {
-    if (typeof window !== 'undefined' && window.location && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-      return '/api/proxy-image?url=' + encodeURIComponent(url);
-    }
-  }
+  // Direct Fandom/Wikia images load with 200 OK via browser CDN caching because
+  // <meta name="referrer" content="no-referrer"> is present on every page.
+  // Proxying images through local Node.js clogs the single-threaded event loop,
+  // exhausts the browser's 6-connection HTTP pool, and causes severe site lag.
   return url;
 };
 
