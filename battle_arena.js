@@ -4380,7 +4380,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!isArenaPage()) {
       const p = pDeckKey || 'deck_std_red';
       const o = oDeckKey || 'purple';
-      window.location.href = `/arena?start=1&deck=${encodeURIComponent(p)}&opp=${encodeURIComponent(o)}`;
+      window.location.href = `./arena.html?start=1&deck=${encodeURIComponent(p)}&opp=${encodeURIComponent(o)}`;
       return false;
     }
     pDeckKey = pDeckKey || document.getElementById('arenaPlayerDeckSelect')?.value || (window.DeckManager ? window.DeckManager.getBattleDeckId() : null) || 'deck_std_red';
@@ -16764,7 +16764,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function copyRoomLink() {
     const codeEl = document.getElementById('pvpWaitingRoomCode');
     const code = codeEl ? codeEl.textContent : '';
-    const link = `${window.location.origin}/arena?room=${encodeURIComponent(code)}`;
+    const link = `${window.location.origin}${window.location.pathname.replace(/\/[^\/]*$/, "")}/arena.html?room=${encodeURIComponent(code)}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(link).then(() => {
         if (typeof showToast === 'function') showToast('📋 Copied direct room link to clipboard!', 'success');

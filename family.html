@@ -17,19 +17,19 @@
 
 <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
-  <a class="brand" href="/">
+  <a class="brand" href="./index.html">
     <span class="brand-icon">⚔️</span>
     <span class="brand-title">Battle Spirits Eternal</span>
   </a>
   <nav class="nav-tabs">
-    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
-    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
-    <a class="tab-btn active" id="tabFamily" href="/family">📖 Family</a>
-    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
-    <a class="tab-btn" id="tabKeywords" href="/keywords">⚡ Keywords</a>
-    <a class="tab-btn" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="./arena.html">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="./browse.html">🎴 Browse Cards</a>
+    <a class="tab-btn active" id="tabFamily" href="./family.html">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="./sets.html">📦 Card Sets</a>
+    <a class="tab-btn" id="tabKeywords" href="./keywords.html">⚡ Keywords</a>
+    <a class="tab-btn" id="tabDeck" href="./deck.html">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
     <div class="nav-auth-slot" id="navAuthSlot">
-      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="./login.html">👤 Login</a>
     </div>
   </nav>
 </header>
@@ -294,7 +294,7 @@ function renderFamilyDirectory(categories) {
     const bannerClass = bannerClassMap[cat.color_class] || 'banner-general';
 
     const tagsHtml = (cat.families || []).map(f => `
-      <a class="dir-tag" href="/browse?family=${encodeURIComponent(f.name)}" data-name="${esc(f.name)}">
+      <a class="dir-tag" href="./browse.html?family=${encodeURIComponent(f.name)}" data-name="${esc(f.name)}">
         <span>${esc(f.name)}</span>
         <span class="dir-tag-count">${f.count || f.wiki_count || 0}</span>
       </a>
@@ -343,28 +343,28 @@ document.addEventListener('DOMContentLoaded', loadFamilyDirectory);
 </script>
 
 <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
-  <a href="/arena" class="mobile-nav-item">
+  <a href="./arena.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">⚔️</span>
     <span>Arena</span>
   </a>
-  <a href="/browse" class="mobile-nav-item">
+  <a href="./browse.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">🎴</span>
     <span>Browse</span>
   </a>
-  <a href="/keywords" class="mobile-nav-item">
+  <a href="./keywords.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">⚡</span>
     <span>Keywords</span>
   </a>
-  <a href="/deck" class="mobile-nav-item">
+  <a href="./deck.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">🗃️</span>
     <span>Deck</span>
     <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
   </a>
-  <a href="/sets" class="mobile-nav-item">
+  <a href="./sets.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">📦</span>
     <span>Sets</span>
   </a>
-  <a href="/family" class="mobile-nav-item active">
+  <a href="./family.html" class="mobile-nav-item active">
     <span class="mobile-nav-icon">📜</span>
     <span>Family</span>
   </a>

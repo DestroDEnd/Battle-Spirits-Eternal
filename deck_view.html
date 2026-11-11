@@ -355,19 +355,19 @@
 
 <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
 <header class="navbar">
-  <a class="brand" href="/">
+  <a class="brand" href="./index.html">
     <span class="brand-icon">⚔️</span>
     <span class="brand-title">Battle Spirits Eternal</span>
   </a>
   <nav class="nav-tabs">
-    <a class="tab-btn tab-btn-battle" id="tabBattle" href="/arena">⚔️ Battle Arena</a>
-    <a class="tab-btn" id="tabBrowse" href="/browse">🎴 Browse Cards</a>
-    <a class="tab-btn" id="tabFamily" href="/family">📖 Family</a>
-    <a class="tab-btn" id="tabSets" href="/sets">📦 Card Sets</a>
-    <a class="tab-btn" id="tabKeywords" href="/keywords">⚡ Keywords</a>
-    <a class="tab-btn active" id="tabDeck" href="/deck">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
+    <a class="tab-btn tab-btn-battle" id="tabBattle" href="./arena.html">⚔️ Battle Arena</a>
+    <a class="tab-btn" id="tabBrowse" href="./browse.html">🎴 Browse Cards</a>
+    <a class="tab-btn" id="tabFamily" href="./family.html">📖 Family</a>
+    <a class="tab-btn" id="tabSets" href="./sets.html">📦 Card Sets</a>
+    <a class="tab-btn" id="tabKeywords" href="./keywords.html">⚡ Keywords</a>
+    <a class="tab-btn active" id="tabDeck" href="./deck.html">🃏 Deck Builder <span class="deck-badge" id="deckBadge">0</span></a>
     <div class="nav-auth-slot" id="navAuthSlot">
-      <a class="tab-btn tab-btn-auth" id="tabAuth" href="/login">👤 Login</a>
+      <a class="tab-btn tab-btn-auth" id="tabAuth" href="./login.html">👤 Login</a>
     </div>
   </nav>
 </header>
@@ -375,7 +375,7 @@
 <main class="deckview-page">
   <!-- Top Breadcrumb -->
   <div style="margin-bottom: 1.25rem;">
-    <a href="/deck" style="color: #94a3b8; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+    <a href="./deck.html" style="color: #94a3b8; text-decoration: none; font-size: 0.82rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
       ← Back to Deck Builder
     </a>
   </div>
@@ -862,7 +862,7 @@
       <div style="text-align:center; padding:2rem 1rem;">
         <h2 style="color:#ef4444;margin-bottom:0.75rem;">⚠️ Deck Not Found</h2>
         <p style="color:#94a3b8;margin-bottom:1.5rem;">${msg}</p>
-        <a href="/deck" class="deckview-btn deckview-btn-primary">← Go to Deck Builder</a>
+        <a href="./deck.html" class="deckview-btn deckview-btn-primary">← Go to Deck Builder</a>
       </div>
     `;
     document.querySelector('.deckview-stats-row').style.display = 'none';
@@ -871,7 +871,7 @@
   // ── USER ACTIONS ──
   function editThisDeck() {
     if (!currentDeck) return;
-    window.location.href = `/deck?edit=${encodeURIComponent(currentDeck.id)}`;
+    window.location.href = `./deck.html?edit=${encodeURIComponent(currentDeck.id)}`;
   }
 
   function toggleBattleDeck() {
@@ -980,24 +980,24 @@
 </script>
 
 <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
-  <a href="/arena" class="mobile-nav-item">
+  <a href="./arena.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">⚔️</span>
     <span>Arena</span>
   </a>
-  <a href="/browse" class="mobile-nav-item">
+  <a href="./browse.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">🎴</span>
     <span>Browse</span>
   </a>
-  <a href="/deck" class="mobile-nav-item active">
+  <a href="./deck.html" class="mobile-nav-item active">
     <span class="mobile-nav-icon">🗃️</span>
     <span>Deck</span>
     <span class="mobile-nav-badge" id="mobileDeckBadge">0</span>
   </a>
-  <a href="/sets" class="mobile-nav-item">
+  <a href="./sets.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">📦</span>
     <span>Sets</span>
   </a>
-  <a href="/family" class="mobile-nav-item">
+  <a href="./family.html" class="mobile-nav-item">
     <span class="mobile-nav-icon">📜</span>
     <span>Family</span>
   </a>
