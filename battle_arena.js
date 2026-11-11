@@ -3574,6 +3574,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
       window.addEventListener('bse_auth_state_change', () => {
         initPvpLobbyView();
+        renderArenaLobby();
+      });
+      window.addEventListener('bse:decks-synced', () => {
+        renderArenaLobby();
       });
       initPvpLobbyView();
     }

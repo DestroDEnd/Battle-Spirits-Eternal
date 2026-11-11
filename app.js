@@ -190,7 +190,25 @@ const DeckManager = {
     return initialData;
   },
 
-  saveAllData(data) {
+  _isSyncingCloud: false,
+  _cloudSyncTimeout: null,
+
+  _scheduleCloudSyncDebounced() {
+    if (this._cloudSyncTimeout) clearTimeout(this._cloudSyncTimeout);
+    this._cloudSyncTimeout = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.FirebaseService && typeof window.FirebaseService.syncDeck === 'function') {
+        const user = window.FirebaseService.getUser();
+        if (user && !user.isAnonymous) {
+          const active = this.getActiveDeck();
+          if (active && !active.isStandard) {
+            window.FirebaseService.syncDeck(active).catch(e => console.warn('[DeckManager] Debounced cloud sync error:', e));
+          }
+        }
+      }
+    }, 150);
+  },
+
+  saveAllData(data, skipCloudSync = false) {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
       const active = this.getActiveDeck(data);
@@ -201,10 +219,18 @@ const DeckManager = {
     } catch (e) {
       console.warn('Failed to save bs_user_decks_v2:', e);
     }
+
+    if (!skipCloudSync) {
+      this._scheduleCloudSyncDebounced();
+    }
   },
 
   getDecks() {
     return this.getAllData().decks;
+  },
+
+  getRegisteredDecks() {
+    return this.getDecks();
   },
 
   getDeck(id) {
@@ -300,6 +326,15 @@ const DeckManager = {
     data.activeDeckId = id;
     localStorage.setItem(this.ACTIVE_KEY, id);
     this.saveAllData(data);
+
+    // Direct cloud sync
+    if (typeof window !== 'undefined' && window.FirebaseService && typeof window.FirebaseService.syncDeck === 'function') {
+      const user = window.FirebaseService.getUser();
+      if (user && !user.isAnonymous) {
+        window.FirebaseService.syncDeck(newDeck).catch(e => console.warn('[DeckManager] Cloud sync on createDeck error:', e));
+      }
+    }
+
     return newDeck;
   },
 
@@ -310,11 +345,26 @@ const DeckManager = {
     deck.name = newName.trim() || deck.name;
     deck.updatedAt = Date.now();
     this.saveAllData(data);
+
+    if (typeof window !== 'undefined' && window.FirebaseService && typeof window.FirebaseService.syncDeck === 'function') {
+      const user = window.FirebaseService.getUser();
+      if (user && !user.isAnonymous) {
+        window.FirebaseService.syncDeck(deck).catch(e => console.warn('[DeckManager] Cloud sync on renameDeck error:', e));
+      }
+    }
     return true;
   },
 
   deleteDeck(id) {
     const data = this.getAllData();
+    // Delete from cloud if authenticated
+    if (typeof window !== 'undefined' && window.FirebaseService && typeof window.FirebaseService.deleteDeck === 'function') {
+      const user = window.FirebaseService.getUser();
+      if (user && !user.isAnonymous) {
+        window.FirebaseService.deleteDeck(id).catch(e => console.warn('[DeckManager] Cloud delete error:', e));
+      }
+    }
+
     if (data.decks.length <= 1) {
       data.decks = [{
         id: 'deck_' + Date.now(),
@@ -354,6 +404,148 @@ const DeckManager = {
     active.cards = { ...cardsMap };
     active.updatedAt = Date.now();
     this.saveAllData(data);
+
+    if (typeof window !== 'undefined' && window.FirebaseService && typeof window.FirebaseService.syncDeck === 'function') {
+      const user = window.FirebaseService.getUser();
+      if (user && !user.isAnonymous) {
+        window.FirebaseService.syncDeck(active).catch(e => console.warn('[DeckManager] Cloud sync on saveActiveDeckCards error:', e));
+      }
+    }
+  },
+
+  async syncWithCloud() {
+    if (this._isSyncingCloud) return;
+    if (typeof window === 'undefined' || !window.FirebaseService || typeof window.FirebaseService.loadDecks !== 'function') {
+      return;
+    }
+    const user = window.FirebaseService.getUser();
+    if (!user || user.isAnonymous) {
+      return;
+    }
+
+    this._isSyncingCloud = true;
+    try {
+      const cloudDecks = await window.FirebaseService.loadDecks();
+      const data = this.getAllData();
+      const localDecks = data.decks || [];
+
+      // Check if local decks are only the blank default deck ("My Custom Deck" or "My Deck" with 0 cards)
+      const hasOnlyDefaultEmpty = localDecks.length === 1 && 
+        (localDecks[0].name === 'My Custom Deck' || localDecks[0].name === 'My Deck') && 
+        this.getCardsCount(localDecks[0].cards) === 0;
+
+      let modified = false;
+
+      // 1. Process cloud decks: merge or add to local
+      if (Array.isArray(cloudDecks) && cloudDecks.length > 0) {
+        if (hasOnlyDefaultEmpty) {
+          data.decks = [];
+        }
+
+        for (const cd of cloudDecks) {
+          if (!cd || !cd.id) continue;
+          const idx = data.decks.findIndex(d => d.id === cd.id);
+          const cloudTime = (cd.updatedAt && typeof cd.updatedAt.toMillis === 'function')
+            ? cd.updatedAt.toMillis()
+            : (cd.updatedAt && cd.updatedAt.seconds ? cd.updatedAt.seconds * 1000 : (Number(cd.updatedAt) || 0));
+
+          if (idx !== -1) {
+            const local = data.decks[idx];
+            const localTime = Number(local.updatedAt) || 0;
+            const localCount = this.getCardsCount(local.cards);
+            const cloudCount = this.getCardsCount(cd.cards);
+
+            if (cloudTime > localTime || (localCount === 0 && cloudCount > 0)) {
+              data.decks[idx] = {
+                id: cd.id,
+                name: cd.name || local.name,
+                color: cd.color || local.color || 'Red',
+                isStandard: !!cd.isStandard,
+                standardKey: cd.standardKey || local.standardKey || null,
+                cards: { ...(cd.cards || {}) },
+                updatedAt: cloudTime || Date.now()
+              };
+              modified = true;
+            } else if (localTime > cloudTime && localCount > 0) {
+              window.FirebaseService.syncDeck(local).catch(e => console.warn(e));
+            }
+          } else {
+            data.decks.push({
+              id: cd.id,
+              name: cd.name || 'Cloud Deck',
+              color: cd.color || 'Red',
+              isStandard: !!cd.isStandard,
+              standardKey: cd.standardKey || null,
+              cards: { ...(cd.cards || {}) },
+              updatedAt: cloudTime || Date.now()
+            });
+            modified = true;
+          }
+        }
+      }
+
+      // 2. Upload any local custom decks that do not exist in cloud
+      for (const ld of localDecks) {
+        if (ld && !ld.isStandard) {
+          const count = this.getCardsCount(ld.cards);
+          const isPlaceholder = (ld.name === 'My Custom Deck' || ld.name === 'My Deck') && count === 0;
+          if (!isPlaceholder) {
+            const inCloud = cloudDecks && cloudDecks.some(cd => cd && cd.id === ld.id);
+            if (!inCloud) {
+              await window.FirebaseService.syncDeck(ld);
+            }
+          }
+        }
+      }
+
+      // Ensure valid activeDeckId and battleDeckId
+      if (data.decks.length > 0) {
+        if (!data.decks.some(d => d.id === data.activeDeckId)) {
+          data.activeDeckId = data.decks[0].id;
+          localStorage.setItem(this.ACTIVE_KEY, data.decks[0].id);
+          modified = true;
+        }
+        if (!data.decks.some(d => d.id === data.battleDeckId)) {
+          const battleCand = data.decks.find(d => this.getCardsCount(d.cards) >= 40) || data.decks[0];
+          data.battleDeckId = battleCand.id;
+          localStorage.setItem(this.BATTLE_KEY, battleCand.id);
+          modified = true;
+        }
+      }
+
+      if (modified || hasOnlyDefaultEmpty) {
+        this.saveAllData(data, /* skipCloudSync = */ true);
+      }
+
+      // Update in-memory active deck S.deck
+      const active = this.getActiveDeck(data);
+      if (active && typeof S !== 'undefined') {
+        S.deck = { ...(active.cards || {}) };
+      }
+
+      // Dispatch event and update UI components
+      if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
+        window.dispatchEvent(new CustomEvent('bse:decks-synced', {
+          detail: { decks: data.decks, activeDeckId: data.activeDeckId }
+        }));
+      }
+
+      if (typeof updateDeckBadge === 'function') {
+        updateDeckBadge();
+      }
+      if (typeof DeckManagerUI !== 'undefined') {
+        if (typeof DeckManagerUI.syncActiveDeck === 'function') DeckManagerUI.syncActiveDeck();
+        if (typeof DeckManagerUI.renderDeckSelector === 'function') DeckManagerUI.renderDeckSelector();
+        if (typeof DeckManagerUI.renderSavedDecksList === 'function') DeckManagerUI.renderSavedDecksList();
+      }
+      if (typeof renderDeckView === 'function') {
+        renderDeckView();
+      }
+    } catch (err) {
+      console.warn('[DeckManager] syncWithCloud encountered error:', err);
+    } finally {
+      this._isSyncingCloud = false;
+    }
   },
 
   async registerStandardDeck(colorKey, stdData = null) {
@@ -840,7 +1032,9 @@ const DeckQuickView = {
       </button>
     `;
 
-    document.body.appendChild(wrap);
+    if (document.body) {
+      document.body.appendChild(wrap);
+    }
   },
 
   toggle(forceState) {
@@ -3147,6 +3341,9 @@ const AuthManager = {
       localStorage.removeItem(this.STORAGE_KEY);
     } else {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+      if (!user.isAnonymous && typeof window !== 'undefined' && window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+        window.DeckManager.syncWithCloud().catch(e => console.warn('[DeckManager] syncWithCloud on setUser error:', e));
+      }
     }
     this.renderNavbar();
   },
@@ -3185,6 +3382,11 @@ const AuthManager = {
   },
 
   async logout() {
+    if (typeof window !== 'undefined' && window.DeckManager && typeof window.DeckManager._scheduleCloudSyncDebounced === 'function') {
+      if (window.DeckManager._cloudSyncTimeout) {
+        clearTimeout(window.DeckManager._cloudSyncTimeout);
+      }
+    }
     this.clearBrowserUserData();
     if (window.FirebaseService) {
       try { await window.FirebaseService.logout(); } catch(e) {}
@@ -3193,13 +3395,15 @@ const AuthManager = {
     if (typeof showToast === 'function') {
       showToast('Signed out. Local decks and user session data have been cleared.', 'info');
     }
-    if (window.location.pathname.endsWith('login.html') || 
-        window.location.pathname.endsWith('register.html') || 
-        window.location.pathname.endsWith('deck.html') || 
-        window.location.pathname.endsWith('arena.html')) {
-      setTimeout(() => {
-        window.location.reload();
-      }, 350);
+    if (typeof window !== 'undefined' && window.location && window.location.pathname) {
+      if (window.location.pathname.endsWith('login.html') || 
+          window.location.pathname.endsWith('register.html') || 
+          window.location.pathname.endsWith('deck.html') || 
+          window.location.pathname.endsWith('arena.html')) {
+        setTimeout(() => {
+          window.location.reload();
+        }, 350);
+      }
     }
   },
 
@@ -3281,12 +3485,20 @@ const AuthManager = {
   init() {
     this.renderNavbar();
     if (typeof window !== 'undefined') {
-      window.addEventListener('bse_auth_state_change', () => {
+      window.addEventListener('bse_auth_state_change', async (e) => {
         this.renderNavbar();
+        if (e && e.detail && e.detail.event === 'signed_in' && e.detail.user && !e.detail.user.isAnonymous) {
+          if (window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+            await window.DeckManager.syncWithCloud();
+          }
+        }
       });
     }
   }
 };
+if (typeof window !== 'undefined') {
+  window.AuthManager = AuthManager;
+}
 
 function initCleanRouting() {
   if (typeof window === 'undefined' || !window.history || !window.location) return;

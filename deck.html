@@ -389,6 +389,22 @@ const DeckManagerUI = {
   init() {
     this.syncActiveDeck();
     this.renderDeckSelector();
+    this.renderSavedDecksList();
+
+    if (window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+      window.DeckManager.syncWithCloud().then(() => {
+        this.syncActiveDeck();
+        this.renderDeckSelector();
+        this.renderSavedDecksList();
+      }).catch(e => console.warn('[DeckManagerUI] Cloud sync on init error:', e));
+    }
+
+    window.addEventListener('bse:decks-synced', () => {
+      this.syncActiveDeck();
+      this.renderDeckSelector();
+      this.renderSavedDecksList();
+      if (typeof renderDeckView === 'function') renderDeckView();
+    });
   },
 
   renderDeckSelector() {
@@ -761,17 +777,24 @@ const DeckManagerUI = {
         }
       }
     }
-    const allDecks = window.DeckManager ? window.DeckManager.getRegisteredDecks() : [];
+    const allDecks = window.DeckManager ? window.DeckManager.getDecks() : [];
     if (!allDecks || allDecks.length === 0) {
       showToast('No saved decks found to sync yet. Build or save a deck first!', 'warning');
       return;
     }
     let synced = 0;
     for (const d of allDecks) {
-      const ok = await window.FirebaseService.syncDeck(d);
-      if (ok) synced++;
+      if (d && !d.isStandard) {
+        const ok = await window.FirebaseService.syncDeck(d);
+        if (ok) synced++;
+      }
     }
-    showToast(`☁️ Successfully backed up ${synced} deck(s) to Firebase Cloud!`, 'success');
+    if (window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+      await window.DeckManager.syncWithCloud();
+    }
+    this.renderDeckSelector();
+    this.renderSavedDecksList();
+    showToast(`☁️ Successfully backed up and synced ${synced} deck(s) with Firebase Cloud!`, 'success');
   }
 };
 

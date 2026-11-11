@@ -256,6 +256,13 @@ async function handleGoogleSignIn() {
     await window.FirebaseService.loginWithGoogle();
     const user = window.FirebaseService.getUser();
     const duelistId = window.FirebaseService.getFormattedDuelistId();
+    if (window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+      try {
+        await window.DeckManager.syncWithCloud();
+      } catch (syncErr) {
+        console.warn('Pre-redirect deck sync failed:', syncErr);
+      }
+    }
     showAlert(`Welcome, ${user.displayName || user.email}! Duelist ID: #${duelistId}`, 'success');
     setTimeout(() => {
       window.location.href = './arena.html';
@@ -298,6 +305,13 @@ async function handleUserSignIn(event) {
       await window.FirebaseService.login(username, password);
       const user = window.FirebaseService.getUser();
       const duelistId = window.FirebaseService.getFormattedDuelistId();
+      if (window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+        try {
+          await window.DeckManager.syncWithCloud();
+        } catch (syncErr) {
+          console.warn('Pre-redirect deck sync failed:', syncErr);
+        }
+      }
       showAlert(`Welcome back, Duelist ${user.displayName || username}! (ID: #${duelistId})`, 'success');
       setTimeout(() => {
         window.location.href = './arena.html';

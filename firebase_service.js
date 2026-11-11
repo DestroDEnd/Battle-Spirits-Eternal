@@ -59,6 +59,10 @@
             console.log(`[Firebase] Signed in as ${user.displayName || user.email || 'Duelist'} (Duelist ID: ${formatDuelistId(currentDuelistId)})`);
             // Trigger UI sync
             dispatchAuthEvent('signed_in', { user, duelistId: currentDuelistId });
+            // Automatic cloud deck restoration
+            if (!user.isAnonymous && window.DeckManager && typeof window.DeckManager.syncWithCloud === 'function') {
+              window.DeckManager.syncWithCloud().catch(e => console.warn('[Firebase] Auto-sync decks on auth change error:', e));
+            }
           } else {
             currentUser = null;
             currentDuelistId = null;
@@ -207,17 +211,20 @@
 
   // ── 4. CLOUD DECK STORAGE (FIRESTORE) ──
   async function syncDeckToCloud(deck) {
-    if (!currentUser || !db) return false;
+    if (!currentUser || !db || !deck || !deck.id) return false;
     try {
+      const cardCount = deck.cardCount || (deck.cards ? Object.values(deck.cards).reduce((a, b) => a + (typeof b === 'number' ? b : 1), 0) : 0);
       const deckRef = db.collection('users').doc(currentUser.uid).collection('decks').doc(deck.id);
       await deckRef.set({
         id: deck.id,
-        name: deck.name,
-        cards: deck.cards,
-        color: deck.color || 'neutral',
-        cardCount: deck.cardCount || 40,
+        name: deck.name || 'Custom Deck',
+        cards: deck.cards || {},
+        color: deck.color || 'Red',
+        cardCount: cardCount,
+        isStandard: !!deck.isStandard,
+        standardKey: deck.standardKey || null,
         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
+      }, { merge: true });
       return true;
     } catch (e) {
       console.warn('[Firebase] Failed to save deck to cloud:', e);
@@ -230,7 +237,12 @@
     try {
       const snapshot = await db.collection('users').doc(currentUser.uid).collection('decks').get();
       const cloudDecks = [];
-      snapshot.forEach(doc => cloudDecks.push(doc.data()));
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        if (d && d.id) {
+          cloudDecks.push(d);
+        }
+      });
       return cloudDecks;
     } catch (e) {
       console.warn('[Firebase] Failed to load decks from cloud:', e);
@@ -239,11 +251,12 @@
   }
 
   async function deleteCloudDeck(deckId) {
-    if (!currentUser || !db) return false;
+    if (!currentUser || !db || !deckId) return false;
     try {
       await db.collection('users').doc(currentUser.uid).collection('decks').doc(deckId).delete();
       return true;
     } catch (e) {
+      console.warn('[Firebase] Failed to delete deck from cloud:', e);
       return false;
     }
   }
