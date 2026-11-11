@@ -38,8 +38,6 @@ const MIME_TYPES = {
 const ROUTE_MAP = {
   '/': '/index.html',
   '/arena': '/arena.html',
-  '/arena-v2': '/arena_v2.html',
-  '/arena2': '/arena_v2.html',
   '/battle': '/arena.html',
   '/duel': '/arena.html',
   '/browse': '/browse.html',
