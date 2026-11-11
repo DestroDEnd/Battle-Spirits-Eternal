@@ -3292,12 +3292,27 @@ const AuthManager = {
 function initCleanRouting() {
   if (typeof window === 'undefined' || !window.history || !window.location) return;
   const loc = window.location;
+
+  // On GitHub Pages, normalize links to stay inside the repository subfolder
+  if (loc.hostname && loc.hostname.includes('github.io')) {
+    const repoPrefix = '/Battle-Spirits-Eternal';
+    document.querySelectorAll('a[href]').forEach(a => {
+      const h = a.getAttribute('href');
+      if (h === '/') {
+        a.setAttribute('href', repoPrefix + '/');
+      } else if (h && h.startsWith('/') && !h.startsWith(repoPrefix) && !h.startsWith('//')) {
+        a.setAttribute('href', repoPrefix + h);
+      }
+    });
+    return;
+  }
+
   if (loc.pathname && loc.pathname.endsWith('.html')) {
     let cleanPath = loc.pathname;
     if (cleanPath.endsWith('/index.html') || cleanPath === 'index.html') {
       cleanPath = cleanPath.replace(/\/index\.html$/, '/') || '/';
     } else {
-      cleanPath = cleanPath.replace(/\.html$/, '/');
+      cleanPath = cleanPath.replace(/\.html$/, '');
     }
     const newUrl = cleanPath + loc.search + loc.hash;
     try {

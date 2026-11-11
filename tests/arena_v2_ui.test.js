@@ -29,7 +29,7 @@ test('Arena V2: arena_v2.html markup integrity', () => {
   assert.ok(html.includes('id="v2PlayerLifeCluster"'), 'Must have Player Life diamond gem cluster');
   assert.ok(html.includes('id="v2OppFieldSpirits"'), 'Must have Opponent field spirits zone');
   assert.ok(html.includes('id="v2PlayerFieldSpirits"'), 'Must have Player field spirits zone');
-  assert.ok(html.includes('href="/arena"'), 'Must link back to classic arena');
+  assert.ok(html.includes('href="./arena.html"') || html.includes('href="/arena"'), 'Must link back to classic arena');
 });
 
 test('Arena V2: server.js routes mapping', () => {

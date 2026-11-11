@@ -13,16 +13,20 @@
       const hash = loc.hash || '';
 
       let targetPage = 'index.html';
-      if (path.includes('browse')) {
+      if (path.includes('arena-v2') || path.includes('arena_v2') || path.includes('arena2')) {
+        targetPage = 'arena_v2.html';
+      } else if (path.includes('arena') || path.includes('duel') || path.includes('battle')) {
+        targetPage = 'arena.html';
+      } else if (path.includes('browse')) {
         targetPage = 'browse.html';
       } else if (path.includes('deck-view') || path.includes('deck_view')) {
         targetPage = 'deck_view.html';
       } else if (path.includes('deck')) {
         targetPage = 'deck.html';
-      } else if (path.includes('arena') || path.includes('duel') || path.includes('battle')) {
-        targetPage = 'arena.html';
       } else if (path.includes('family')) {
         targetPage = 'family.html';
+      } else if (path.includes('keyword')) {
+        targetPage = 'keywords.html';
       } else if (path.includes('set')) {
         targetPage = 'sets.html';
       } else if (path.includes('register')) {

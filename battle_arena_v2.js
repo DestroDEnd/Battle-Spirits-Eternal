@@ -381,7 +381,7 @@
           return `
             <div class="v2-hand-card-player ${isPlayable ? 'playable' : ''}" onclick="BattleArenaV2.playPlayerCard(${idx})" title="${card.name} (Cost: ${cost})">
               <span class="v2-hand-card-cost">${cost}</span>
-              <img src="${card.image_url || '/assets/card_back.png'}" alt="${card.name}" onerror="this.src='/assets/card_back.png';">
+              <img src="${card.image_url || './assets/card_back.png'}" alt="${card.name}" onerror="this.src='./assets/card_back.png';">
             </div>
           `;
         }).join('');
@@ -416,7 +416,7 @@
             ${auraHtml}
             ${hasSoulCore ? getSoulCoreGemSvg(16) : ''}
             <div class="v2-card-cores-overlay">${coresOnCardHtml}</div>
-            <img src="${spirit.image_url || '/assets/card_back.png'}" alt="${spirit.name}" onerror="this.src='/assets/card_back.png';">
+            <img src="${spirit.image_url || './assets/card_back.png'}" alt="${spirit.name}" onerror="this.src='./assets/card_back.png';">
           </div>
           <div class="v2-spirit-stats-label">
             <span>Lv${level}</span>
