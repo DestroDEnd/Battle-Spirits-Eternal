@@ -71,3 +71,24 @@ test('Battle Arena: Relative paths used for duel redirects and room sharing', ()
     "battle_arena.js must NOT use root path /arena for match redirects"
   );
 });
+
+test('Browse & Keywords: Back and search links use relative paths', () => {
+  const browseHtml = fs.readFileSync(path.join(rootDir, 'browse.html'), 'utf8');
+  assert.ok(browseHtml.includes("backBtn.href = './family.html'"), "browse.html back button must use ./family.html");
+  assert.ok(browseHtml.includes("backBtn.href = './sets.html'"), "browse.html back button must use ./sets.html");
+  assert.ok(!browseHtml.includes("backBtn.href = '/family'"), "browse.html back button must not use /family");
+  assert.ok(!browseHtml.includes("backBtn.href = '/sets'"), "browse.html back button must not use /sets");
+
+  const keywordsHtml = fs.readFileSync(path.join(rootDir, 'keywords.html'), 'utf8');
+  assert.ok(keywordsHtml.includes("openBrowseLink.href = `./browse.html?"), "keywords.html openBrowseLink must use ./browse.html?");
+  assert.ok(!keywordsHtml.includes("openBrowseLink.href = `/browse?"), "keywords.html openBrowseLink must not use /browse?");
+
+  assert.ok(fs.existsSync(path.join(rootDir, 'keywords_data.json')), "keywords_data.json must exist for static hosting");
+  const kwData = JSON.parse(fs.readFileSync(path.join(rootDir, 'keywords_data.json'), 'utf8'));
+  assert.ok(Array.isArray(kwData.keywords) && kwData.keywords.length > 50, "keywords_data.json must contain catalog");
+});
+
+test('Card Art: cleanCardImageUrl does not route to /api/proxy-image on GitHub Pages', () => {
+  const appJs = fs.readFileSync(path.join(rootDir, 'app.js'), 'utf8');
+  assert.ok(appJs.includes("window.location.hostname.includes('github.io')"), "cleanCardImageUrl must check for github.io");
+});

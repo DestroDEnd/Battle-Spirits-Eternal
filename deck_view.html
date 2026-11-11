@@ -957,7 +957,11 @@
     const mImg = document.getElementById('modalImg');
     mImg.onerror = function() {
       this.onerror = null;
-      this.src = '/api/proxy-image?url=' + encodeURIComponent(modalArt);
+      if (typeof window !== 'undefined' && !window.location.hostname.includes('github.io')) {
+        this.src = '/api/proxy-image?url=' + encodeURIComponent(modalArt);
+      } else {
+        this.src = './assets/card_back.png';
+      }
     };
     mImg.src = modalArt;
     document.getElementById('modalEffect').innerHTML = typeof formatEffectKeywordsInModal === 'function'

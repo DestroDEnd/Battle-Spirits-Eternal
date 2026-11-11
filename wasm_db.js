@@ -11,6 +11,11 @@
   let dbInstance = null;
   let isReady = false;
   let initPromise = null;
+  let jsonFallbackPromise = null;
+  let isJsonReady = false;
+  let jsonCardsDetailed = null;
+  let jsonCardsByName = null;
+  let jsonCardsByNumber = null;
   let readyCallbacks = [];
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
@@ -27,6 +32,132 @@
 
   function getDbUrl() {
     return getBaseDir() + 'battle_spirits.db';
+  }
+
+  // ── 0. FAST JSON METADATA FALLBACK (INSTANT 100ms CACHE) ──
+  async function loadJsonFallback() {
+    if (isJsonReady) return true;
+    try {
+      const candidates = [
+        getBaseDir() + 'data/cards_detailed.json',
+        './data/cards_detailed.json',
+        'data/cards_detailed.json',
+        '/data/cards_detailed.json'
+      ];
+      let res = null;
+      for (const u of candidates) {
+        try {
+          const testRes = await (window._originalFetch || window.fetch)(u);
+          if (testRes.ok) {
+            res = testRes;
+            break;
+          }
+        } catch(e) {}
+      }
+      if (res) {
+        const raw = await res.json();
+        jsonCardsDetailed = raw;
+        jsonCardsByName = {};
+        jsonCardsByNumber = {};
+        for (const [cNum, entry] of Object.entries(raw)) {
+          if (!entry) continue;
+          if (entry.name) {
+            const low = entry.name.toLowerCase().trim();
+            jsonCardsByName[low] = entry;
+            const norm = low.replace(/［/g, '[').replace(/］/g, ']');
+            if (norm !== low) jsonCardsByName[norm] = entry;
+          }
+          const num = entry.card_number || cNum;
+          if (num) {
+            jsonCardsByNumber[String(num).toLowerCase().trim()] = entry;
+          }
+        }
+        isJsonReady = true;
+        // Trigger callbacks to unblock UI immediately
+        if (!isReady) {
+          readyCallbacks.forEach(cb => { try { cb(); } catch(e) {} });
+          readyCallbacks = [];
+        }
+        return true;
+      }
+    } catch(err) {
+      console.warn('[WasmDB] Fast JSON fallback load failed:', err);
+    }
+    return false;
+  }
+
+  function searchCardsFromJson(params = {}) {
+    if (!jsonCardsDetailed) return { cards: [], total: 0, page: 1, pages: 1 };
+    const allCards = Object.values(jsonCardsDetailed);
+    const q = (params.q || '').toLowerCase().trim();
+    const color = (params.color || 'all').toLowerCase().trim();
+    const cardType = (params.type || 'all').toLowerCase().trim();
+    const rarity = (params.rarity || 'all').toLowerCase().trim();
+    const family = (params.family || 'all').toLowerCase().trim();
+    const setFilter = (params.set || '').toLowerCase().trim();
+    const sort = params.sort || 'cost_asc';
+    const page = parseInt(params.page || 1, 10);
+    const limit = parseInt(params.limit || 18, 10);
+    const offset = parseInt(params.offset || (page - 1) * limit, 10);
+
+    let filtered = allCards.filter(c => {
+      if (!c) return false;
+
+      if (q) {
+        const qNorm = q.replace(/［/g, '[').replace(/］/g, ']');
+        const name = (c.name || '').toLowerCase();
+        const nameNorm = name.replace(/［/g, '[').replace(/］/g, ']');
+        const effect = (c.effect || '').toLowerCase();
+        const num = (c.card_number || '').toLowerCase();
+        const fam = (c.family || '').toLowerCase();
+        const match = name.includes(q) || nameNorm.includes(qNorm) || effect.includes(q) || num.includes(q) || fam.includes(q);
+        if (!match) return false;
+      }
+
+      if (color && color !== 'all') {
+        const colors = (c.colors || [c.color || '']).map(x => (x || '').toLowerCase());
+        if (!colors.some(col => col.includes(color))) return false;
+      }
+
+      if (cardType && cardType !== 'all') {
+        const t = (c.type || '').toLowerCase();
+        if (!t.includes(cardType)) return false;
+      }
+
+      if (rarity && rarity !== 'all') {
+        const r = (c.rarity || '').toLowerCase();
+        if (rarity === 'cxr' || rarity.includes('contract x')) {
+          if (!r.includes('contract') && !r.includes('cx')) return false;
+        } else if (!r.includes(rarity)) {
+          return false;
+        }
+      }
+
+      if (family && family !== 'all') {
+        const fams = (c.families || [c.family || '']).map(f => (f || '').toLowerCase());
+        if (!fams.some(f => f.includes(family))) return false;
+      }
+
+      if (setFilter) {
+        const sets = (c.sets || []).map(s => (s || '').toLowerCase());
+        if (!sets.some(s => s.includes(setFilter))) return false;
+      }
+
+      return true;
+    });
+
+    if (sort === 'cost_asc') {
+      filtered.sort((a, b) => (Number(a.cost) || 0) - (Number(b.cost) || 0));
+    } else if (sort === 'cost_desc') {
+      filtered.sort((a, b) => (Number(b.cost) || 0) - (Number(a.cost) || 0));
+    } else if (sort === 'name_asc') {
+      filtered.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    }
+
+    const total = filtered.length;
+    const cards = filtered.slice(offset, offset + limit);
+    const pages = Math.max(1, Math.ceil(total / limit));
+    return { cards, total, page, pages };
   }
 
   // ── 1. INDEXED_DB PERSISTENT CACHE ──
@@ -392,61 +523,106 @@
     },
 
     getCardByName(name) {
-      if (!dbInstance || !name) return null;
-      try {
-        const stmt = dbInstance.prepare("SELECT * FROM cards WHERE LOWER(name) = LOWER(?) LIMIT 1");
-        stmt.bind([name.trim()]);
-        if (stmt.step()) {
-          const row = stmt.getAsObject();
+      if (!name) return null;
+      const cleanName = String(name).trim();
+      const lower = cleanName.toLowerCase();
+      const norm = lower.replace(/［/g, '[').replace(/］/g, ']');
+
+      if (dbInstance) {
+        try {
+          const stmt = dbInstance.prepare("SELECT * FROM cards WHERE LOWER(name) = LOWER(?) OR LOWER(REPLACE(REPLACE(name, '［', '['), '］', ']')) = LOWER(?) LIMIT 1");
+          stmt.bind([cleanName, norm]);
+          if (stmt.step()) {
+            const row = stmt.getAsObject();
+            stmt.free();
+            if (row.image_url) {
+              row.image_url = cleanFandomImageUrl(row.image_url);
+            }
+            if (row.colors_json) {
+              try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+            }
+            if (row.families_json) {
+              try { row.families = JSON.parse(row.families_json); } catch(e) {}
+            }
+            if (row.sets_json) {
+              try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
+            }
+            if (row.levels && typeof row.levels === 'string') {
+              try { row.levels = JSON.parse(row.levels); } catch(e) {}
+            }
+            return row;
+          }
           stmt.free();
-          if (row.image_url) {
-            row.image_url = cleanFandomImageUrl(row.image_url);
-          }
-          if (row.colors_json) {
-            try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
-          }
-          if (row.families_json) {
-            try { row.families = JSON.parse(row.families_json); } catch(e) {}
-          }
-          if (row.sets_json) {
-            try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
-          }
-          return row;
+        } catch (e) {
+          console.error('[WasmDB] getCardByName SQL error:', e);
         }
-        stmt.free();
-        return null;
-      } catch (e) {
-        console.error('[WasmDB] getCardByName error:', e);
-        return null;
       }
+
+      // Fast JSON fallback
+      if (jsonCardsByName) {
+        const found = jsonCardsByName[lower] || jsonCardsByName[norm] || (jsonCardsByNumber ? jsonCardsByNumber[lower] : null);
+        if (found) return found;
+      }
+
+      return null;
     },
 
     getCardsBatch(names) {
-      if (!dbInstance || !names || !names.length) return [];
-      try {
-        const cleanNames = names.map(n => String(n).trim()).filter(Boolean);
-        if (!cleanNames.length) return [];
-        const placeholders = cleanNames.map(() => 'LOWER(?)').join(',');
-        const stmt = dbInstance.prepare(`SELECT * FROM cards WHERE LOWER(name) IN (${placeholders})`);
-        stmt.bind(cleanNames.map(n => n.toLowerCase()));
-        const results = [];
-        while (stmt.step()) {
-          const row = stmt.getAsObject();
-          if (row.image_url) {
-            row.image_url = cleanFandomImageUrl(row.image_url);
+      if (!names || !names.length) return [];
+      const cleanNames = names.map(n => String(n).trim()).filter(Boolean);
+      if (!cleanNames.length) return [];
+
+      const results = [];
+      const foundSet = new Set();
+
+      if (dbInstance) {
+        try {
+          const placeholders = cleanNames.map(() => 'LOWER(?)').join(',');
+          const stmt = dbInstance.prepare(`SELECT * FROM cards WHERE LOWER(name) IN (${placeholders})`);
+          stmt.bind(cleanNames.map(n => n.toLowerCase()));
+          while (stmt.step()) {
+            const row = stmt.getAsObject();
+            if (row.image_url) {
+              row.image_url = cleanFandomImageUrl(row.image_url);
+            }
+            if (row.colors_json) {
+              try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+            }
+            if (row.families_json) {
+              try { row.families = JSON.parse(row.families_json); } catch(e) {}
+            }
+            if (row.sets_json) {
+              try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
+            }
+            if (row.levels && typeof row.levels === 'string') {
+              try { row.levels = JSON.parse(row.levels); } catch(e) {}
+            }
+            results.push(row);
+            if (row.name) foundSet.add(row.name.toLowerCase());
           }
-          if (row.colors_json) {
-            try { row.colors = JSON.parse(row.colors_json); } catch(e) {}
+          stmt.free();
+        } catch (e) {
+          console.error('[WasmDB] getCardsBatch SQL error:', e);
+        }
+      }
+
+      // Fill missing from fast JSON fallback
+      if (jsonCardsByName && results.length < cleanNames.length) {
+        for (const n of cleanNames) {
+          const low = n.toLowerCase();
+          const norm = low.replace(/［/g, '[').replace(/］/g, ']');
+          if (!foundSet.has(low) && !foundSet.has(norm)) {
+            const c = jsonCardsByName[low] || jsonCardsByName[norm] || (jsonCardsByNumber ? jsonCardsByNumber[low] : null);
+            if (c) {
+              results.push(c);
+              foundSet.add(low);
+            }
           }
-          if (row.families_json) {
-            try { row.families = JSON.parse(row.families_json); } catch(e) {}
-          }
-          if (row.sets_json) {
-            try { row.sets = JSON.parse(row.sets_json); } catch(e) {}
-          }
-          if (row.levels && typeof row.levels === 'string') {
-            try { row.levels = JSON.parse(row.levels); } catch(e) {}
-          }
+        }
+      }
+
+      return results;
+    },
           results.push(row);
         }
         stmt.free();
@@ -515,7 +691,12 @@
     },
 
     searchCards(params = {}) {
-      if (!dbInstance) return { cards: [], total: 0, page: 1, pages: 1 };
+      if (!dbInstance) {
+        if (jsonCardsDetailed) {
+          return searchCardsFromJson(params);
+        }
+        return { cards: [], total: 0, page: 1, pages: 1 };
+      }
 
       const conditions = [];
       const sqlParams = [];
@@ -773,14 +954,23 @@
         });
       }
 
-      // If database is currently initializing, wait for it!
-      if (!isReady && initPromise) {
+      if (path.endsWith('/api/keywords')) {
         try {
-          await initPromise;
-        } catch(e) {}
+          const rawRes = await window._originalFetch(getBaseDir() + 'keywords_data.json');
+          if (rawRes.ok) return rawRes;
+        } catch (e) {}
       }
 
-      if (isReady) {
+      // If database is currently initializing, wait for fast JSON fallback or WASM!
+      if (!isReady && initPromise) {
+        if (!isJsonReady && jsonFallbackPromise) {
+          try {
+            await jsonFallbackPromise;
+          } catch(e) {}
+        }
+      }
+
+      if (isReady || isJsonReady) {
         if (path.endsWith('/api/cards')) {
           const data = WasmDB.searchCards(params);
           return new Response(JSON.stringify(data), {
@@ -902,6 +1092,9 @@
   window.WasmDB = WasmDB;
 
   function startInit() {
+    if (!jsonFallbackPromise) {
+      jsonFallbackPromise = loadJsonFallback();
+    }
     if (!initPromise) {
       initPromise = initWasmDatabase();
     }

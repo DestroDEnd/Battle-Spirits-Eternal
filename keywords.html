@@ -325,7 +325,8 @@ let totalKwCards = 0;
 
 async function initKeywordsPage() {
   try {
-    const res = await fetch('/api/keywords');
+    let res = await fetch('./keywords_data.json');
+    if (!res.ok) res = await fetch('/api/keywords');
     if (res.ok) {
       const data = await res.json();
       allKeywords = data.keywords || [];
@@ -526,7 +527,7 @@ async function loadKeywordCards() {
     if (openBrowseLink) {
       const browseParams = new URLSearchParams({ q: query });
       if (currentKwSaga && currentKwSaga !== 'all') browseParams.set('generation', currentKwSaga);
-      openBrowseLink.href = `/browse?${browseParams.toString()}`;
+      openBrowseLink.href = `./browse.html?${browseParams.toString()}`;
       openBrowseLink.style.display = 'inline-flex';
     }
 
