@@ -45,7 +45,7 @@ describe('Database-Wide Vanilla Cards Integrity Suite', () => {
       verifiedCount++;
     }
 
-    assert.equal(verifiedCount, 373, 'Exactly 373 canonical vanilla cards must have verified base stats');
+    assert.equal(verifiedCount, 368, 'All canonical database vanilla cards with artwork must have verified base stats');
   });
 
 });

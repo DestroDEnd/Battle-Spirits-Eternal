@@ -1446,8 +1446,8 @@ const ModalCardNavigator = {
 
     if (prevBtn) prevBtn.style.display = hasMultiple ? 'flex' : 'none';
     if (nextBtn) nextBtn.style.display = hasMultiple ? 'flex' : 'none';
-    if (subPrev) subPrev.style.display = hasMultiple ? 'inline-flex' : 'none';
-    if (subNext) subNext.style.display = hasMultiple ? 'inline-flex' : 'none';
+    if (subPrev) subPrev.style.display = 'none';
+    if (subNext) subNext.style.display = 'none';
 
     if (counterEl) {
       if (hasMultiple && this.currentIndex >= 0) {
@@ -1509,10 +1509,11 @@ const ModalCardArtworkManager = {
     try {
       const q = encodeURIComponent(card.name || card.card_number || '');
       const numQ = encodeURIComponent(card.card_number || '');
+      const imgQ = encodeURIComponent(cleanPrimaryArt || '');
       let data = null;
 
       try {
-        const res = await fetch(`./api/card-artworks?name=${q}&card_number=${numQ}`);
+        const res = await fetch(`./api/card-artworks?name=${q}&card_number=${numQ}&image_url=${imgQ}`);
         if (res.ok) data = await res.json();
       } catch (e) {}
 
@@ -1545,9 +1546,11 @@ const ModalCardArtworkManager = {
       if (data && Array.isArray(data.artworks) && data.artworks.length > 0) {
         const activeName = (S.currentCard ? S.currentCard.name : '') || (ModalCardNavigator ? ModalCardNavigator.currentCardName : '');
         if (!activeName || activeName.toLowerCase() === (card.name || '').toLowerCase()) {
-          this.currentArtworks = data.artworks.map(a => ({
+          this.currentArtworks = data.artworks.map((a, idx) => ({
             ...a,
-            image_url: (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(a.image_url) : a.image_url
+            image_url: (idx === 0 && (!a.image_url || !a.image_url.trim()))
+              ? cleanPrimaryArt
+              : ((typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(a.image_url) : a.image_url)
           }));
           this.currentIndex = 0;
           this.updateUI();
@@ -1565,21 +1568,32 @@ const ModalCardArtworkManager = {
     const parseRes = await (await fetch(parseUrl)).json();
     if (!parseRes.parse || !parseRes.parse.wikitext) return null;
 
-    const wikitext = parseRes.parse.wikitext['*'];
-    const galleryMatches = [...wikitext.matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)];
-    if (galleryMatches.length === 0) return null;
+    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
+    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
+    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
 
+    const wikitext = parseRes.parse.wikitext['*'];
+    const sections = wikitext.split(/(?===+[^=]+==+)/);
     const altFiles = [];
-    for (const g of galleryMatches) {
-      const lines = g[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('<!--'));
-      for (const line of lines) {
-        const parts = line.split('|');
-        const file = parts[0].trim();
-        let caption = parts.slice(1).join('|').trim();
-        caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
-        if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
-        if (/\.(png|jpe?g|webp)$/i.test(file)) {
-          altFiles.push({ file, caption: caption || 'Alternate Art' });
+
+    for (const section of sections) {
+      const headingMatch = section.match(/^==+([^=]+)==+/);
+      const heading = headingMatch ? headingMatch[1].trim() : '';
+      if (NON_CARD_REGEX.test(heading)) continue;
+
+      const galleryMatches = [...section.matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)];
+      for (const g of galleryMatches) {
+        const lines = g[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('<!--'));
+        for (const line of lines) {
+          const parts = line.split('|');
+          const file = parts[0].trim();
+          let caption = parts.slice(1).join('|').trim();
+          caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
+          if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
+          if (NON_CARD_REGEX.test(caption) || NON_CARD_FILE_REGEX.test(file) || SCENE_WORDS_REGEX.test(caption)) continue;
+          if (/\.(png|jpe?g|webp)$/i.test(file)) {
+            altFiles.push({ file, caption: caption || 'Alternate Art' });
+          }
         }
       }
     }

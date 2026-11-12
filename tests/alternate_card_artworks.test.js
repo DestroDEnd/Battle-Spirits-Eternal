@@ -222,4 +222,48 @@ describe('Alternate Card Artworks Suite', () => {
       assert.ok(res[i].image_url.startsWith('https://static.wikia.nocookie.net/'));
     }
   });
+
+  it('8. Concept art, sketches, anime screencaps, and full illustrations are strictly excluded from card artworks', () => {
+    const raw = fs.readFileSync(path.join(BSP_DIR, 'data', 'card_artworks.json'), 'utf8');
+    const artworksMap = JSON.parse(raw);
+    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
+    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
+    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
+
+    for (const [key, arts] of Object.entries(artworksMap)) {
+      for (let i = 1; i < arts.length; i++) {
+        const a = arts[i];
+        const filename = (a.image_url || '').split('/').pop().split('?')[0];
+        assert.ok(!NON_CARD_REGEX.test(a.name), `Card ${key} artwork "${a.name}" matches NON_CARD_REGEX`);
+        assert.ok(!NON_CARD_FILE_REGEX.test(filename), `Card ${key} file "${filename}" matches NON_CARD_FILE_REGEX`);
+        assert.ok(!SCENE_WORDS_REGEX.test(a.name), `Card ${key} artwork "${a.name}" matches SCENE_WORDS_REGEX`);
+      }
+    }
+  });
+
+  it('9. Cards without artwork do not exist in cards_index.json or cards_detailed.json and database has verified artworks', () => {
+    const detailed = JSON.parse(fs.readFileSync(path.join(BSP_DIR, 'data', 'cards_detailed.json'), 'utf8'));
+    const index = JSON.parse(fs.readFileSync(path.join(BSP_DIR, 'data', 'cards_index.json'), 'utf8'));
+
+    for (const [num, c] of Object.entries(index)) {
+      assert.ok(c.image_url && String(c.image_url).trim().length > 0, `Card ${num} in index must have valid artwork URL`);
+    }
+
+    for (const [num, c] of Object.entries(detailed)) {
+      assert.ok(c.image_url && String(c.image_url).trim().length > 0, `Card ${num} in detailed must have valid artwork URL`);
+    }
+  });
+
+  it('10. Standard card art is preserved and never overwritten by blank URL during artwork resolution (e.g. SJ14-02)', async () => {
+    const detailed = JSON.parse(fs.readFileSync(path.join(BSP_DIR, 'data', 'cards_detailed.json'), 'utf8'));
+    const neo = detailed['SJ14-02'];
+    assert.ok(neo, 'Ultimate-Siegfried-Neo (SJ14-02) must exist in catalog');
+    assert.ok(neo.image_url.includes('SJ14-02'), 'SJ14-02 must have valid image URL');
+
+    const res = await resolveCardArtworks(neo.name, neo.card_number, neo.image_url);
+    assert.ok(Array.isArray(res) && res.length >= 1);
+    assert.equal(res[0].name, 'Standard');
+    assert.ok(res[0].image_url && res[0].image_url.length > 0, 'Standard image URL must never be empty');
+    assert.equal(res[0].image_url, neo.image_url);
+  });
 });

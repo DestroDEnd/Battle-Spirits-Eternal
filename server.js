@@ -534,7 +534,7 @@ const server = http.createServer((req, res) => {
   if (pathname.toLowerCase() === '/api/cards') {
     if (serverDb) {
       try {
-        const conditions = [];
+        const conditions = ["image_url IS NOT NULL AND TRIM(image_url) != ''"];
         const sqlParams = [];
 
         const query = (parsedUrl.searchParams.get('q') || parsedUrl.searchParams.get('query') || '').trim();
@@ -762,7 +762,16 @@ const server = http.createServer((req, res) => {
 
     const cardName = found ? found.name : name;
     const cardNum = found ? (found.card_number || num) : num;
-    const defaultImg = found ? (found.image_url || '') : '';
+    let defaultImg = found ? (found.image_url || '') : '';
+    if (!defaultImg) {
+      defaultImg = (parsedUrl.searchParams.get('image_url') || '').trim();
+    }
+    if (!defaultImg && serverDb) {
+      try {
+        const row = serverDb.prepare("SELECT image_url FROM cards WHERE LOWER(name) = LOWER(?) OR LOWER(card_number) = LOWER(?) LIMIT 1").get(name || cardName, num || cardNum);
+        if (row && row.image_url) defaultImg = row.image_url;
+      } catch (e) {}
+    }
 
     resolveCardArtworks(cardName, cardNum, defaultImg).then(artworks => {
       res.writeHead(200, { 'Content-Type': 'application/json' });

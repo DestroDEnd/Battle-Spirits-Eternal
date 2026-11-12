@@ -111,6 +111,7 @@
 
     let filtered = allCards.filter(c => {
       if (!c) return false;
+      if (!c.image_url || !String(c.image_url).trim()) return false;
 
       if (q) {
         const qNorm = q.replace(/［/g, '[').replace(/］/g, ']');
@@ -576,6 +577,35 @@
       return null;
     },
 
+    getCardByNumber(num) {
+      if (!num) return null;
+      const cleanNum = String(num).trim();
+      const lower = cleanNum.toLowerCase();
+
+      if (dbInstance) {
+        try {
+          const stmt = dbInstance.prepare("SELECT * FROM cards WHERE LOWER(card_number) = LOWER(?) LIMIT 1");
+          stmt.bind([cleanNum]);
+          if (stmt.step()) {
+            const row = stmt.getAsObject();
+            stmt.free();
+            if (row.image_url) {
+              row.image_url = cleanFandomImageUrl(row.image_url);
+            }
+            return row;
+          }
+          stmt.free();
+        } catch (e) {
+          console.error('[WasmDB] getCardByNumber SQL error:', e);
+        }
+      }
+
+      if (jsonCardsByNumber && jsonCardsByNumber[lower]) {
+        return jsonCardsByNumber[lower];
+      }
+      return null;
+    },
+
     getCardsBatch(names) {
       if (!names || !names.length) return [];
       const cleanNames = names.map(n => String(n).trim()).filter(Boolean);
@@ -698,7 +728,7 @@
         return { cards: [], total: 0, page: 1, pages: 1 };
       }
 
-      const conditions = [];
+      const conditions = ["image_url IS NOT NULL AND TRIM(image_url) != ''"];
       const sqlParams = [];
 
       const query = params.q || params.query || '';
@@ -1079,12 +1109,22 @@
             }
           } catch (e) {}
 
+          let primaryUrl = params.image_url || '';
+          if (!primaryUrl) {
+            const matched = WasmDB.getCardByName(params.name) || (params.card_number ? WasmDB.getCardByNumber(params.card_number) : null);
+            if (matched && matched.image_url) {
+              primaryUrl = matched.image_url;
+            }
+          }
+
           if (!artworks || !artworks.length) {
             artworks = [{
               name: 'Standard',
-              image_url: params.image_url || '',
+              image_url: primaryUrl || '',
               is_alternate: false
             }];
+          } else if (primaryUrl && (!artworks[0].image_url || !artworks[0].image_url.trim())) {
+            artworks[0].image_url = primaryUrl;
           }
 
           return new Response(JSON.stringify({
@@ -1146,12 +1186,22 @@
             }
           } catch (e) {}
 
+          let primaryUrl = params.image_url || '';
+          if (!primaryUrl) {
+            const matched = WasmDB.getCardByName(params.name) || (params.card_number ? WasmDB.getCardByNumber(params.card_number) : null);
+            if (matched && matched.image_url) {
+              primaryUrl = matched.image_url;
+            }
+          }
+
           if (!artworks || !artworks.length) {
             artworks = [{
               name: 'Standard',
-              image_url: params.image_url || '',
+              image_url: primaryUrl || '',
               is_alternate: false
             }];
+          } else if (primaryUrl && (!artworks[0].image_url || !artworks[0].image_url.trim())) {
+            artworks[0].image_url = primaryUrl;
           }
 
           return new Response(JSON.stringify({
@@ -1255,12 +1305,22 @@
             }
           } catch (e) {}
 
+          let primaryUrl = params.image_url || '';
+          if (!primaryUrl) {
+            const matched = WasmDB.getCardByName(params.name) || (params.card_number ? WasmDB.getCardByNumber(params.card_number) : null);
+            if (matched && matched.image_url) {
+              primaryUrl = matched.image_url;
+            }
+          }
+
           if (!artworks || !artworks.length) {
             artworks = [{
               name: 'Standard',
-              image_url: params.image_url || '',
+              image_url: primaryUrl || '',
               is_alternate: false
             }];
+          } else if (primaryUrl && (!artworks[0].image_url || !artworks[0].image_url.trim())) {
+            artworks[0].image_url = primaryUrl;
           }
 
           return new Response(JSON.stringify({

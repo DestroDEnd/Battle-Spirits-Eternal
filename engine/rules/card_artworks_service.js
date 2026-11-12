@@ -9,6 +9,17 @@ const ARTWORKS_FILE = path.join(BSP_DIR, 'data', 'card_artworks.json');
 
 let cachedArtworksMap = null;
 
+const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
+const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
+const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
+
+function isActualCard(caption, file) {
+  if (NON_CARD_REGEX.test(caption)) return false;
+  if (NON_CARD_FILE_REGEX.test(file)) return false;
+  if (SCENE_WORDS_REGEX.test(caption)) return false;
+  return true;
+}
+
 export function loadArtworksCache() {
   if (cachedArtworksMap) return cachedArtworksMap;
   try {
@@ -82,20 +93,31 @@ export async function resolveCardArtworks(cardName, cardNumber, defaultImageUrl 
     }
 
     const wikitext = parseRes.parse.wikitext['*'];
-    const galleryMatches = [...wikitext.matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)];
-
+    
+    // Only parse galleries that are not in Concept Art / Full Art sections
+    const sections = wikitext.split(/(?===+[^=]+==+)/);
     const altFiles = [];
-    for (const g of galleryMatches) {
-      const lines = g[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('<!--'));
-      for (const line of lines) {
-        const parts = line.split('|');
-        const file = parts[0].trim();
-        let caption = parts.slice(1).join('|').trim();
-        caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
-        // Ignore wiki core and UI markers
-        if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
-        if (/\.(png|jpe?g|webp)$/i.test(file)) {
-          altFiles.push({ file, caption: caption || 'Alternate Art' });
+
+    for (const section of sections) {
+      const headingMatch = section.match(/^==+([^=]+)==+/);
+      const heading = headingMatch ? headingMatch[1].trim() : '';
+      if (/full\s*art|concept|illustration|anime|sketch|character|setting|draft/i.test(heading)) {
+        continue; // Skip non-card galleries completely
+      }
+
+      const galleryMatches = [...section.matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)];
+      for (const g of galleryMatches) {
+        const lines = g[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('<!--'));
+        for (const line of lines) {
+          const parts = line.split('|');
+          const file = parts[0].trim();
+          let caption = parts.slice(1).join('|').trim();
+          caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
+          if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
+          if (!isActualCard(caption, file)) continue; // Filter out concept art and illustrations
+          if (/\.(png|jpe?g|webp)$/i.test(file)) {
+            altFiles.push({ file, caption: caption || 'Alternate Art' });
+          }
         }
       }
     }
