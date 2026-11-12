@@ -3476,8 +3476,10 @@ const AuthManager = {
       const isLoginPage = window.location.pathname.endsWith('login.html') || window.location.pathname.endsWith('/login');
       const isRegPage = window.location.pathname.endsWith('register.html') || window.location.pathname.endsWith('/register');
       const activeClass = (isLoginPage || isRegPage) ? ' active' : '';
+      const currentFile = window.location.pathname.split('/').pop() || 'arena.html';
+      const redirectQuery = (!isLoginPage && !isRegPage && currentFile && currentFile !== 'index.html') ? ('?redirect=' + encodeURIComponent(currentFile)) : '';
       slot.innerHTML = `
-        <a class="tab-btn tab-btn-auth${activeClass}" id="tabAuth" href="./login.html">👤 Login</a>
+        <a class="tab-btn tab-btn-auth${activeClass}" id="tabAuth" href="./login.html${redirectQuery}">👤 Login</a>
       `;
     }
   },
