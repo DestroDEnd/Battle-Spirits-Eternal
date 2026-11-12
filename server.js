@@ -6,6 +6,7 @@ import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
 import { SAGA_DEFINITIONS, getSagaById, resolveCardSaga } from './engine/rules/saga_catalog.js';
+import { resolveCardArtworks, getCachedArtworks } from './engine/rules/card_artworks_service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -750,6 +751,37 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // /api/card-artworks
+  if (pathname.toLowerCase() === '/api/card-artworks') {
+    ensureCardsIndexLoaded();
+    const name = (parsedUrl.searchParams.get('name') || '').trim();
+    const num = (parsedUrl.searchParams.get('card_number') || parsedUrl.searchParams.get('id') || '').trim();
+    let found = null;
+    if (name) found = cachedCardsByName[name.toLowerCase()];
+    if (!found && num) found = cachedCardsByNumber[num.toLowerCase()] || cachedCardsIndex[num];
+
+    const cardName = found ? found.name : name;
+    const cardNum = found ? (found.card_number || num) : num;
+    const defaultImg = found ? (found.image_url || '') : '';
+
+    resolveCardArtworks(cardName, cardNum, defaultImg).then(artworks => {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        name: cardName,
+        card_number: cardNum,
+        artworks
+      }));
+    }).catch(err => {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        name: cardName,
+        card_number: cardNum,
+        artworks: [{ name: 'Standard', image_url: defaultImg, is_alternate: false }]
+      }));
+    });
+    return;
+  }
+
   // /api/card
   if (pathname.toLowerCase() === '/api/card') {
     ensureCardsIndexLoaded();
@@ -759,8 +791,10 @@ const server = http.createServer((req, res) => {
     if (name) found = cachedCardsByName[name];
     if (!found && num) found = cachedCardsByNumber[num.toLowerCase()] || cachedCardsIndex[num];
     if (found) {
+      const cachedArts = getCachedArtworks(found.name, found.card_number);
+      const payload = cachedArts ? { ...found, artworks: cachedArts } : found;
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(found));
+      res.end(JSON.stringify(payload));
       return;
     }
     res.writeHead(404, { 'Content-Type': 'application/json' });

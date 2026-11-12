@@ -1464,6 +1464,250 @@ function navigateCardModal(direction) {
   ModalCardNavigator.navigate(direction);
 }
 
+// ═══════════════════ MODAL CARD ALTERNATE ARTWORK MANAGER ═══════════════════
+const ModalCardArtworkManager = {
+  currentArtworks: [],
+  currentIndex: 0,
+  cardName: '',
+
+  reset() {
+    this.currentArtworks = [];
+    this.currentIndex = 0;
+    this.cardName = '';
+    this.updateUI();
+  },
+
+  async loadArtworksForCard(card) {
+    if (!card) return;
+    this.cardName = card.name || '';
+    this.currentIndex = 0;
+
+    const cleanPrimaryArt = (typeof window.cleanCardImageUrl === 'function')
+      ? window.cleanCardImageUrl(card.image_url || FALLBACK_CARD_ART)
+      : (card.image_url || FALLBACK_CARD_ART);
+
+    const fallbackStandard = {
+      name: 'Standard',
+      image_url: cleanPrimaryArt,
+      is_alternate: false
+    };
+
+    if (card.artworks && Array.isArray(card.artworks) && card.artworks.length > 0) {
+      this.currentArtworks = card.artworks.map(a => ({
+        ...a,
+        image_url: (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(a.image_url) : a.image_url
+      }));
+      this.currentIndex = 0;
+      this.updateUI();
+      return;
+    }
+
+    // Immediately display standard art while fetching
+    this.currentArtworks = [fallbackStandard];
+    this.updateUI();
+
+    try {
+      const q = encodeURIComponent(card.name || card.card_number || '');
+      const numQ = encodeURIComponent(card.card_number || '');
+      let data = null;
+
+      try {
+        const res = await fetch(`./api/card-artworks?name=${q}&card_number=${numQ}`);
+        if (res.ok) data = await res.json();
+      } catch (e) {}
+
+      // Fallback directly to static data/card_artworks.json for GitHub Pages
+      if (!data || !data.artworks || data.artworks.length <= 1) {
+        try {
+          const staticRes = await fetch('./data/card_artworks.json');
+          if (staticRes.ok) {
+            const staticMap = await staticRes.json();
+            const targetName = (card.name || '').toLowerCase().trim();
+            const targetNum = (card.card_number || '').toLowerCase().trim();
+            const foundArts = staticMap[targetName] || (targetNum ? staticMap[targetNum] : null);
+            if (foundArts && Array.isArray(foundArts) && foundArts.length > 1) {
+              data = { artworks: foundArts };
+            }
+          }
+        } catch (e) {}
+      }
+
+      // Dynamic client-side fallback via Fandom API with origin=* for uncached cards on GitHub Pages
+      if (!data || !data.artworks || data.artworks.length <= 1) {
+        try {
+          const wikiArts = await this.fetchWikiArtworksClientSide(card.name || card.card_number, cleanPrimaryArt);
+          if (wikiArts && wikiArts.length > 1) {
+            data = { artworks: wikiArts };
+          }
+        } catch (e) {}
+      }
+
+      if (data && Array.isArray(data.artworks) && data.artworks.length > 0) {
+        const activeName = (S.currentCard ? S.currentCard.name : '') || (ModalCardNavigator ? ModalCardNavigator.currentCardName : '');
+        if (!activeName || activeName.toLowerCase() === (card.name || '').toLowerCase()) {
+          this.currentArtworks = data.artworks.map(a => ({
+            ...a,
+            image_url: (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(a.image_url) : a.image_url
+          }));
+          this.currentIndex = 0;
+          this.updateUI();
+        }
+      }
+    } catch (e) {
+      // Keep single standard entry
+    }
+  },
+
+  async fetchWikiArtworksClientSide(cardName, defaultImg) {
+    if (!cardName) return null;
+    const pageTitle = cardName.trim().replace(/ /g, '_');
+    const parseUrl = 'https://battle-spirits.fandom.com/api.php?action=parse&page=' + encodeURIComponent(pageTitle) + '&prop=wikitext&format=json&origin=*';
+    const parseRes = await (await fetch(parseUrl)).json();
+    if (!parseRes.parse || !parseRes.parse.wikitext) return null;
+
+    const wikitext = parseRes.parse.wikitext['*'];
+    const galleryMatches = [...wikitext.matchAll(/<gallery[^>]*>([\s\S]*?)<\/gallery>/gi)];
+    if (galleryMatches.length === 0) return null;
+
+    const altFiles = [];
+    for (const g of galleryMatches) {
+      const lines = g[1].split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('<!--'));
+      for (const line of lines) {
+        const parts = line.split('|');
+        const file = parts[0].trim();
+        let caption = parts.slice(1).join('|').trim();
+        caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
+        if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
+        if (/\.(png|jpe?g|webp)$/i.test(file)) {
+          altFiles.push({ file, caption: caption || 'Alternate Art' });
+        }
+      }
+    }
+    if (altFiles.length === 0) return null;
+
+    const titles = altFiles.slice(0, 50).map(f => 'File:' + f.file).join('|');
+    const infoUrl = 'https://battle-spirits.fandom.com/api.php?action=query&titles=' + encodeURIComponent(titles) + '&prop=imageinfo&iiprop=url&format=json&origin=*';
+    const infoRes = await (await fetch(infoUrl)).json();
+
+    const urlMap = {};
+    if (infoRes.query && infoRes.query.pages) {
+      for (const p of Object.values(infoRes.query.pages)) {
+        if (p.imageinfo && p.imageinfo[0] && p.imageinfo[0].url) {
+          const rawTitle = p.title.replace(/^File:/i, '').trim().toLowerCase();
+          urlMap[rawTitle] = p.imageinfo[0].url;
+        }
+      }
+    }
+
+    const artworks = [{ name: 'Standard', image_url: defaultImg, is_alternate: false }];
+    for (const af of altFiles) {
+      const u = urlMap[af.file.toLowerCase()];
+      if (u) {
+        artworks.push({
+          name: af.caption,
+          image_url: u,
+          is_alternate: true
+        });
+      }
+    }
+    return artworks.length > 1 ? artworks : null;
+  },
+
+  navigateArtwork(direction) {
+    if (!this.currentArtworks || this.currentArtworks.length <= 1) return;
+    let nextIdx = this.currentIndex + direction;
+    if (nextIdx < 0) nextIdx = this.currentArtworks.length - 1;
+    if (nextIdx >= this.currentArtworks.length) nextIdx = 0;
+    this.currentIndex = nextIdx;
+    this.updateUI();
+  },
+
+  updateUI() {
+    if (typeof document === 'undefined') return;
+    const artImg = document.getElementById('modalArt');
+    const prevBtn = document.getElementById('modalArtPrevBtn');
+    const nextBtn = document.getElementById('modalArtNextBtn');
+    const indicator = document.getElementById('modalArtIndicator');
+    const downloadBtn = document.getElementById('modalDownload');
+    const deckBtn = document.getElementById('modalDeckBtn');
+    const removeBtn = document.getElementById('modalRemoveDeckBtn');
+
+    const total = this.currentArtworks.length;
+    const hasMultiple = total > 1;
+
+    if (prevBtn) prevBtn.style.display = hasMultiple ? 'flex' : 'none';
+    if (nextBtn) nextBtn.style.display = hasMultiple ? 'flex' : 'none';
+
+    const current = this.currentArtworks[this.currentIndex] || {
+      name: 'Standard',
+      image_url: FALLBACK_CARD_ART,
+      is_alternate: false
+    };
+
+    if (artImg && current.image_url) {
+      artImg.src = (typeof window.cleanCardImageUrl === 'function')
+        ? window.cleanCardImageUrl(current.image_url)
+        : current.image_url;
+    }
+
+    if (downloadBtn && current.image_url) {
+      downloadBtn.href = current.image_url;
+    }
+
+    if (indicator) {
+      if (hasMultiple) {
+        indicator.style.display = 'block';
+        if (current.is_alternate) {
+          indicator.className = 'modal-art-indicator is-alt';
+          indicator.textContent = `活動異圖 · ${current.name} (${this.currentIndex + 1}/${total})`;
+        } else {
+          indicator.className = 'modal-art-indicator';
+          indicator.textContent = `Standard Art (${this.currentIndex + 1}/${total})`;
+        }
+      } else {
+        indicator.style.display = 'none';
+      }
+    }
+
+    // Add to Deck vs Locked Button Handling
+    const isInDuel = typeof DuelState !== 'undefined' && DuelState.inDuel;
+    if (isInDuel) {
+      if (deckBtn) deckBtn.style.display = 'none';
+      if (removeBtn) removeBtn.style.display = 'none';
+      return;
+    }
+
+    if (current.is_alternate) {
+      // Alternate Art: Locked state! Only normal cards can be added to decks
+      if (deckBtn) {
+        deckBtn.style.display = 'inline-flex';
+        deckBtn.disabled = true;
+        deckBtn.className = 'btn-modal-locked';
+        deckBtn.innerHTML = '🔒 Locked';
+        deckBtn.title = 'Only the original artwork card can be added to decks';
+      }
+      if (removeBtn) {
+        removeBtn.style.display = 'none';
+      }
+    } else {
+      // Standard / Normal card: regular deck button!
+      if (deckBtn) {
+        deckBtn.className = 'btn-modal-primary';
+        deckBtn.title = '';
+      }
+      updateModalDeckButtons(this.cardName);
+    }
+  }
+};
+
+function changeCardArtwork(direction) {
+  ModalCardArtworkManager.navigateArtwork(direction);
+}
+if (typeof window !== 'undefined') {
+  window.changeCardArtwork = changeCardArtwork;
+  window.ModalCardArtworkManager = ModalCardArtworkManager;
+}
+
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
   window.addEventListener('keydown', (e) => {
     const targetTag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
@@ -1479,6 +1723,12 @@ if (typeof window !== 'undefined' && typeof window.addEventListener === 'functio
       } else if (e.key === 'ArrowRight') {
         e.preventDefault();
         navigateCardModal(1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (typeof changeCardArtwork === 'function') changeCardArtwork(-1);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (typeof changeCardArtwork === 'function') changeCardArtwork(1);
       } else if (e.key === 'Escape') {
         closeModal();
       } else if (e.key === '+' || e.key === '=' || e.key === 'a' || e.key === 'A') {
@@ -1711,6 +1961,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
   const modal = document.getElementById('cardModal');
   if (!modal) return;
   modal.classList.add('open');
+  ModalCardArtworkManager.reset();
   ModalCardNavigator.setList(contextList, name);
   document.getElementById('modalTitle').textContent = name;
   document.getElementById('modalJpName').textContent = '';
@@ -2171,6 +2422,7 @@ async function openCardDetail(name, contextList, cardUid = null) {
       return;
     }
     S.currentCard = card;
+    ModalCardArtworkManager.loadArtworksForCard(card);
     updateModalDeckButtons(card.name || name);
 
     document.getElementById('modalTitle').textContent = card.name || name;
@@ -2227,6 +2479,23 @@ function updateModalDeckButtons(cardName) {
     if (removeBtn) removeBtn.style.display = 'none';
     return;
   }
+
+  // If viewing alternate artwork, keep the button in Locked state
+  if (typeof ModalCardArtworkManager !== 'undefined' &&
+      ModalCardArtworkManager.currentArtworks.length > 0 &&
+      ModalCardArtworkManager.currentArtworks[ModalCardArtworkManager.currentIndex] &&
+      ModalCardArtworkManager.currentArtworks[ModalCardArtworkManager.currentIndex].is_alternate) {
+    deckBtn.style.display = 'inline-flex';
+    deckBtn.disabled = true;
+    deckBtn.className = 'btn-modal-locked';
+    deckBtn.innerHTML = '🔒 Locked';
+    deckBtn.title = 'Only the original artwork card can be added to decks';
+    if (removeBtn) removeBtn.style.display = 'none';
+    return;
+  }
+
+  deckBtn.className = 'btn-modal-primary';
+  deckBtn.title = '';
   deckBtn.style.display = 'inline-flex';
   const inDeck = (S.deck && name && S.deck[name]) || 0;
   if (inDeck > 0) {
@@ -2251,6 +2520,9 @@ function closeModal() {
   const modal = document.getElementById('cardModal');
   if (modal) modal.classList.remove('open');
   S.currentCard = null;
+  if (typeof ModalCardArtworkManager !== 'undefined') {
+    ModalCardArtworkManager.reset();
+  }
   ModalCardNavigator.currentList = [];
   ModalCardNavigator.currentIndex = -1;
   ModalCardNavigator.updateNavUI();
@@ -2265,6 +2537,16 @@ function closeModalBg(e) {
 }
 
 function addModalCardToDeck() {
+  // Prevent adding alternate artworks to deck!
+  if (typeof ModalCardArtworkManager !== 'undefined' &&
+      ModalCardArtworkManager.currentArtworks.length > 0 &&
+      ModalCardArtworkManager.currentArtworks[ModalCardArtworkManager.currentIndex] &&
+      ModalCardArtworkManager.currentArtworks[ModalCardArtworkManager.currentIndex].is_alternate) {
+    if (typeof showToast === 'function') {
+      showToast('🔒 Alternate artwork cards cannot be added to decks. Only the original artwork card is allowed.', 'warning');
+    }
+    return;
+  }
   const cardName = S.currentCard ? S.currentCard.name : (ModalCardNavigator ? ModalCardNavigator.currentCardName : '');
   if (cardName) {
     addToDeck(cardName);
@@ -3891,6 +4173,8 @@ if (typeof module !== 'undefined' && module.exports) {
     addModalCardToDeck,
     removeModalCardFromDeck,
     navigateCardModal,
+    ModalCardArtworkManager,
+    changeCardArtwork,
     formatEffectKeywordsInModal,
     initCardFoilTilt,
     SampleHandSimulator

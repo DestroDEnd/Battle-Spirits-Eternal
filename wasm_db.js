@@ -1067,6 +1067,36 @@
           });
         }
 
+        if (path.endsWith('/api/card-artworks')) {
+          const cardName = (params.name || '').toLowerCase().trim();
+          const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
+          let artworks = null;
+          try {
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            if (rawRes.ok) {
+              const allArts = await rawRes.json();
+              artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
+            }
+          } catch (e) {}
+
+          if (!artworks || !artworks.length) {
+            artworks = [{
+              name: 'Standard',
+              image_url: params.image_url || '',
+              is_alternate: false
+            }];
+          }
+
+          return new Response(JSON.stringify({
+            name: params.name || '',
+            card_number: params.card_number || '',
+            artworks
+          }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+
         if (path.endsWith('/api/featured-x-rares')) {
           const color = params.color || '';
           let cards = [];
@@ -1104,6 +1134,35 @@
           });
         }
 
+        if (path.endsWith('/api/card-artworks')) {
+          const cardName = (params.name || '').toLowerCase().trim();
+          const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
+          let artworks = null;
+          try {
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            if (rawRes.ok) {
+              const allArts = await rawRes.json();
+              artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
+            }
+          } catch (e) {}
+
+          if (!artworks || !artworks.length) {
+            artworks = [{
+              name: 'Standard',
+              image_url: params.image_url || '',
+              is_alternate: false
+            }];
+          }
+
+          return new Response(JSON.stringify({
+            name: params.name || '',
+            card_number: params.card_number || '',
+            artworks
+          }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
         if (path.endsWith('/api/cards-batch')) {
           let names = [];
           if (init && init.body) {
@@ -1181,6 +1240,35 @@
         if (path.endsWith('/api/card')) {
           return new Response(JSON.stringify({ error: 'Card not found' }), {
             status: 404,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        if (path.endsWith('/api/card-artworks')) {
+          const cardName = (params.name || '').toLowerCase().trim();
+          const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
+          let artworks = null;
+          try {
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            if (rawRes.ok) {
+              const allArts = await rawRes.json();
+              artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
+            }
+          } catch (e) {}
+
+          if (!artworks || !artworks.length) {
+            artworks = [{
+              name: 'Standard',
+              image_url: params.image_url || '',
+              is_alternate: false
+            }];
+          }
+
+          return new Response(JSON.stringify({
+            name: params.name || '',
+            card_number: params.card_number || '',
+            artworks
+          }), {
+            status: 200,
             headers: { 'Content-Type': 'application/json' }
           });
         }

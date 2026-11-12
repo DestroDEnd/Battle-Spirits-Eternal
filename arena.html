@@ -1127,8 +1127,17 @@
     <button class="modal-close" onclick="closeModal()">&times;</button>
     <div class="modal-nav-counter-pill" id="modalNavCounter" style="display:none;"></div>
     <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:center;">
-      <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
-        onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+      <div class="modal-art-stage" id="modalArtStage">
+        <button type="button" class="modal-art-nav-btn modal-art-nav-prev" id="modalArtPrevBtn" onclick="event.stopPropagation(); changeCardArtwork(-1)" title="Previous Artwork" style="display:none;" aria-label="Previous Artwork">
+          <span>‹</span>
+        </button>
+        <img class="modal-art" id="modalArt" src="" alt="Card artwork" referrerpolicy="no-referrer"
+          onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
+        <button type="button" class="modal-art-nav-btn modal-art-nav-next" id="modalArtNextBtn" onclick="event.stopPropagation(); changeCardArtwork(1)" title="Next Artwork" style="display:none;" aria-label="Next Artwork">
+          <span>›</span>
+        </button>
+        <div class="modal-art-indicator" id="modalArtIndicator" style="display:none;"></div>
+      </div>
       <div class="modal-actions">
         <button class="btn-modal-primary" id="modalDeckBtn" onclick="addModalCardToDeck()">+ Add to Deck</button>
         <button class="btn-modal-outline btn-modal-remove-card" id="modalRemoveDeckBtn" onclick="removeModalCardFromDeck()" style="display:none;">- Remove from Deck</button>
