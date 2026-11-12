@@ -1531,7 +1531,7 @@ const ModalCardArtworkManager = {
       // Fallback directly to static data/card_artworks.json for GitHub Pages
       if (!data || !data.artworks || data.artworks.length <= 1) {
         try {
-          const staticRes = await fetch('./data/card_artworks.json?v=6.0');
+          const staticRes = await fetch('./data/card_artworks.json?v=6.1');
           if (staticRes.ok) {
             const staticMap = await staticRes.json();
             const targetName = (card.name || '').toLowerCase().trim();
@@ -1746,7 +1746,7 @@ let altArtworksMap = null;
 async function initAltArtworksMap() {
   if (altArtworksMap) return altArtworksMap;
   try {
-    const res = await fetch('./data/card_artworks.json?v=6.0');
+    const res = await fetch('./data/card_artworks.json?v=6.1');
     if (res.ok) {
       altArtworksMap = await res.json();
       window.altArtworksMap = altArtworksMap;

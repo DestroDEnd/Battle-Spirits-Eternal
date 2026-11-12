@@ -48,16 +48,20 @@
     if (isJsonReady) return true;
     try {
       const candidates = [
-        getBaseDir() + 'data/cards_detailed.json?v=6.0',
-        './data/cards_detailed.json?v=6.0',
-        'data/cards_detailed.json?v=6.0',
-        '/data/cards_detailed.json?v=6.0'
+        getBaseDir() + 'data/cards_index.json?v=6.1',
+        './data/cards_index.json?v=6.1',
+        'data/cards_index.json?v=6.1',
+        getBaseDir() + 'data/cards_detailed.json?v=6.1',
+        './data/cards_detailed.json?v=6.1',
+        'data/cards_detailed.json?v=6.1',
+        '/data/cards_detailed.json?v=6.1'
       ];
       let res = null;
       for (const u of candidates) {
         try {
           const testRes = await (window._originalFetch || window.fetch)(u);
-          if (testRes.ok) {
+          const ct = (testRes.headers && testRes.headers.get('content-type')) || '';
+          if (testRes.ok && !ct.includes('text/html')) {
             res = testRes;
             break;
           }
@@ -65,20 +69,22 @@
       }
       if (res) {
         const raw = await res.json();
-        jsonCardsDetailed = raw;
+        const list = Array.isArray(raw) ? raw : Object.values(raw);
+        jsonCardsDetailed = {};
         jsonCardsByName = {};
         jsonCardsByNumber = {};
-        for (const [cNum, entry] of Object.entries(raw)) {
+        for (const entry of list) {
           if (!entry) continue;
+          const num = String(entry.card_number || entry.id || '').trim();
+          if (num) {
+            jsonCardsDetailed[num] = entry;
+            jsonCardsByNumber[num.toLowerCase()] = entry;
+          }
           if (entry.name) {
             const low = entry.name.toLowerCase().trim();
             jsonCardsByName[low] = entry;
             const norm = low.replace(/［/g, '[').replace(/］/g, ']');
             if (norm !== low) jsonCardsByName[norm] = entry;
-          }
-          const num = entry.card_number || cNum;
-          if (num) {
-            jsonCardsByNumber[String(num).toLowerCase().trim()] = entry;
           }
         }
         isJsonReady = true;
@@ -101,14 +107,13 @@
     if (cachedAltArtworksMap) return cachedAltArtworksMap;
     try {
       const fetchFn = (typeof window !== 'undefined' && window._originalFetch) ? window._originalFetch : fetch;
-      const res = await fetchFn(getBaseDir() + 'data/card_artworks.json?v=6.0');
+      const res = await fetchFn(getBaseDir() + 'data/card_artworks.json?v=6.1');
       if (res.ok) {
         cachedAltArtworksMap = await res.json();
         if (typeof window !== 'undefined') window.altArtworksMap = cachedAltArtworksMap;
       }
     } catch(e) {}
     return cachedAltArtworksMap;
-  }
   }
 
   function searchCardsFromJson(params = {}) {
@@ -302,10 +307,10 @@
         showLoadingBanner("Updating Battle Spirits Card Database (23 MB)...");
         let res = null;
         const candidateUrls = [
-          getDbUrl() + '?v=6.0',
-          './battle_spirits.db?v=6.0',
-          'battle_spirits.db?v=6.0',
-          '/battle_spirits.db?v=6.0'
+          getDbUrl() + '?v=6.1',
+          './battle_spirits.db?v=6.1',
+          'battle_spirits.db?v=6.1',
+          '/battle_spirits.db?v=6.1'
         ];
 
         for (const u of candidateUrls) {
@@ -1109,30 +1114,31 @@
       if (!isReady && !isJsonReady) {
         if (jsonFallbackPromise) {
           try {
-            await Promise.race([
-              jsonFallbackPromise,
-              new Promise(r => setTimeout(r, 2500))
-            ]);
+            await jsonFallbackPromise;
           } catch(e) {}
         }
         if (!isReady && !isJsonReady && initPromise) {
           try {
-            await Promise.race([
-              initPromise,
-              new Promise(r => setTimeout(r, 2500))
-            ]);
+            await initPromise;
           } catch(e) {}
         }
       }
 
-      if (isReady || isJsonReady) {
-        if (path.endsWith('/api/cards')) {
+      if (path.endsWith('/api/cards')) {
+        if (isReady || isJsonReady) {
           const data = WasmDB.searchCards(params);
           return new Response(JSON.stringify(data), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
           });
         }
+        return new Response(JSON.stringify({ cards: [], total: 0, loading: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (isReady || isJsonReady) {
 
         if (path.endsWith('/api/card')) {
           const card = WasmDB.getCardByName(params.name || '');
@@ -1153,7 +1159,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1230,7 +1236,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1349,7 +1355,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.1');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1394,6 +1400,12 @@
           headers: { 'Content-Type': 'application/json' }
         });
       }
+
+      // Safe JSON fallback for any unhandled /api/ request on static hosting:
+      return new Response(JSON.stringify({ total: 0, cards: [] }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     // Default fallback to native fetch

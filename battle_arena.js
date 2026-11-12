@@ -1031,12 +1031,12 @@
         // Modern engine dynamically loads modular ~20KB IR shards on demand via loadCardIrShard / loadSetIrShard.
         let idxData = null;
         try {
-          const idxRes = await fetch('./data/cards_index.json?v=6.0');
+          const idxRes = await fetch('./data/cards_index.json?v=6.1');
           if (idxRes.ok) idxData = await idxRes.json();
         } catch (e) {}
         if (!idxData) {
           try {
-            const idxRes = await fetch('/data/cards_index.json?v=6.0');
+            const idxRes = await fetch('/data/cards_index.json?v=6.1');
             if (idxRes.ok) idxData = await idxRes.json();
           } catch (e) {}
         }
