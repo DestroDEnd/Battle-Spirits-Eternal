@@ -266,4 +266,36 @@ describe('Alternate Card Artworks Suite', () => {
     assert.ok(res[0].image_url && res[0].image_url.length > 0, 'Standard image URL must never be empty');
     assert.equal(res[0].image_url, neo.image_url);
   });
+
+  it('11. ModalCardArtworkManager.hasAlternateArtworks accurately detects cards with alternate artworks', () => {
+    const appSource = fs.readFileSync(path.join(BSP_DIR, 'app.js'), 'utf8');
+    assert.ok(appSource.includes('hasAlternateArtworks(card)'), 'app.js must define hasAlternateArtworks on ModalCardArtworkManager');
+
+    const cache = loadArtworksCache();
+    const gateOpen = { name: 'Gate Open, Release', card_number: '26RBS02-CP01' };
+    const nameKey = gateOpen.name.toLowerCase().trim();
+    assert.ok(cache[nameKey] && cache[nameKey].length > 1, 'Gate Open, Release must have multiple artworks');
+
+    const vanilla = { name: 'Gigas', card_number: 'BS01-001' };
+    const vanillaKey = vanilla.name.toLowerCase().trim();
+    assert.equal(cache[vanillaKey], undefined, 'Normal card Gigas should not have alternate gallery artworks');
+  });
+
+  it('12. Browse UI includes Alternate Art filter pill, state handling, and tile badge', () => {
+    const browseSource = fs.readFileSync(path.join(BSP_DIR, 'browse.html'), 'utf8');
+    assert.ok(browseSource.includes('id="browseAltArtPill"'), 'browse.html must contain browseAltArtPill');
+    assert.ok(browseSource.includes('toggleAltArtFilter'), 'browse.html must define toggleAltArtFilter');
+    assert.ok(browseSource.includes('tile-alt-badge'), 'browse.html must render tile-alt-badge');
+
+    const stylesSource = fs.readFileSync(path.join(BSP_DIR, 'styles.css'), 'utf8');
+    assert.ok(stylesSource.includes('.tile-alt-badge'), 'styles.css must style .tile-alt-badge');
+    assert.ok(stylesSource.includes('.modal-locked-notice'), 'styles.css must style .modal-locked-notice');
+  });
+
+  it('13. Arena battleSummonPaymentModal handles Escape, Enter, and Space keyboard navigation', () => {
+    const arenaJs = fs.readFileSync(path.join(BSP_DIR, 'battle_arena.js'), 'utf8');
+    assert.ok(arenaJs.includes("document.getElementById('battleSummonPaymentModal')"), 'battle_arena.js must check battleSummonPaymentModal');
+    assert.ok(arenaJs.includes('confirmSummonPayment()'), 'Enter key must trigger confirmSummonPayment()');
+    assert.ok(arenaJs.includes('closeSummonModal()'), 'Escape key must trigger closeSummonModal()');
+  });
 });

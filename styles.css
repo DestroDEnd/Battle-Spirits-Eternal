@@ -2240,6 +2240,43 @@ body {
   color: #cbd5e1 !important;
 }
 
+.modal-locked-notice {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 0.4rem;
+  line-height: 1.35;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+}
+
+.tile-alt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(217, 119, 6, 0.12));
+  border: 1px solid rgba(245, 158, 11, 0.6);
+  color: #fbbf24;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.25);
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tile-alt-badge:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.35), rgba(217, 119, 6, 0.25));
+  border-color: #fbbf24;
+  color: #fef08a;
+  transform: translateY(-1px);
+}
+
 .modal-actions {
   display: flex;
   gap: 0.5rem;
@@ -5364,6 +5401,32 @@ body {
 }
 .summon-sc-option.is-selected.normal-core-theme .summon-sc-radio-dot {
   background: #38bdf8;
+}
+
+#btnConfirmSummonPayment:not(:disabled) {
+  animation: pulse-summon-confirm 2s infinite ease-in-out;
+  cursor: pointer;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  border-color: #60a5fa !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5) !important;
+}
+
+#btnConfirmSummonPayment:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+@keyframes pulse-summon-confirm {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4), inset 0 0 6px rgba(59, 130, 246, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(59, 130, 246, 0.8), inset 0 0 10px rgba(96, 165, 250, 0.4);
+    transform: scale(1.02);
+  }
 }
 
 

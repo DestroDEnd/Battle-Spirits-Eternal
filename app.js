@@ -1470,6 +1470,17 @@ const ModalCardArtworkManager = {
   currentIndex: 0,
   cardName: '',
 
+  hasAlternateArtworks(card) {
+    if (!card) return false;
+    if (card.artworks && Array.isArray(card.artworks) && card.artworks.length > 1) return true;
+    const map = (typeof window !== 'undefined' && window.altArtworksMap) ? window.altArtworksMap : null;
+    if (!map) return false;
+    const nameKey = (card.name || '').toLowerCase().trim();
+    const numKey = (card.card_number || '').toLowerCase().trim();
+    const arts = map[nameKey] || (numKey ? map[numKey] : null);
+    return Boolean(arts && Array.isArray(arts) && arts.length > 1);
+  },
+
   reset() {
     this.currentArtworks = [];
     this.currentIndex = 0;
@@ -1520,7 +1531,7 @@ const ModalCardArtworkManager = {
       // Fallback directly to static data/card_artworks.json for GitHub Pages
       if (!data || !data.artworks || data.artworks.length <= 1) {
         try {
-          const staticRes = await fetch('./data/card_artworks.json');
+          const staticRes = await fetch('./data/card_artworks.json?v=6.0');
           if (staticRes.ok) {
             const staticMap = await staticRes.json();
             const targetName = (card.name || '').toLowerCase().trim();
@@ -1691,6 +1702,16 @@ const ModalCardArtworkManager = {
       return;
     }
 
+    let lockedNotice = document.getElementById('modalLockedNotice');
+    if (!lockedNotice && deckBtn && deckBtn.parentNode) {
+      lockedNotice = document.createElement('div');
+      lockedNotice.id = 'modalLockedNotice';
+      lockedNotice.className = 'modal-locked-notice';
+      if (deckBtn.parentNode.parentNode) {
+        deckBtn.parentNode.parentNode.insertBefore(lockedNotice, deckBtn.parentNode.nextSibling);
+      }
+    }
+
     if (current.is_alternate) {
       // Alternate Art: Locked state! Only normal cards can be added to decks
       if (deckBtn) {
@@ -1703,16 +1724,39 @@ const ModalCardArtworkManager = {
       if (removeBtn) {
         removeBtn.style.display = 'none';
       }
+      if (lockedNotice) {
+        lockedNotice.textContent = '🔒 Eternal Format Rule: Alternate printings are for viewing only. Switch back to the Standard artwork to add this card to your deck.';
+        lockedNotice.style.display = 'block';
+      }
     } else {
       // Standard / Normal card: regular deck button!
       if (deckBtn) {
         deckBtn.className = 'btn-modal-primary';
         deckBtn.title = '';
       }
+      if (lockedNotice) {
+        lockedNotice.style.display = 'none';
+      }
       updateModalDeckButtons(this.cardName);
     }
   }
 };
+
+let altArtworksMap = null;
+async function initAltArtworksMap() {
+  if (altArtworksMap) return altArtworksMap;
+  try {
+    const res = await fetch('./data/card_artworks.json?v=6.0');
+    if (res.ok) {
+      altArtworksMap = await res.json();
+      window.altArtworksMap = altArtworksMap;
+    }
+  } catch (e) {}
+  return altArtworksMap || {};
+}
+if (typeof window !== 'undefined') {
+  initAltArtworksMap();
+}
 
 function changeCardArtwork(direction) {
   ModalCardArtworkManager.navigateArtwork(direction);
@@ -1720,6 +1764,7 @@ function changeCardArtwork(direction) {
 if (typeof window !== 'undefined') {
   window.changeCardArtwork = changeCardArtwork;
   window.ModalCardArtworkManager = ModalCardArtworkManager;
+  window.initAltArtworksMap = initAltArtworksMap;
 }
 
 if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
@@ -1732,11 +1777,21 @@ if (typeof window !== 'undefined' && typeof window.addEventListener === 'functio
 
     if (modalIsOpen) {
       if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        navigateCardModal(-1);
+        if (e.shiftKey) {
+          e.preventDefault();
+          if (typeof changeCardArtwork === 'function') changeCardArtwork(-1);
+        } else {
+          e.preventDefault();
+          navigateCardModal(-1);
+        }
       } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        navigateCardModal(1);
+        if (e.shiftKey) {
+          e.preventDefault();
+          if (typeof changeCardArtwork === 'function') changeCardArtwork(1);
+        } else {
+          e.preventDefault();
+          navigateCardModal(1);
+        }
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         if (typeof changeCardArtwork === 'function') changeCardArtwork(-1);

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=5.5">
+  <link rel="stylesheet" href="./styles.css?v=6.0">
 </head>
 <body>
 
@@ -96,6 +96,7 @@
           <button class="filter-pill kw-pill" data-kw="Rush" onclick="toggleKeywordFilter('Rush')">🔗 Rush</button>
           <button class="filter-pill kw-pill" data-kw="Spellbind" onclick="toggleKeywordFilter('Spellbind')">🕸️ Spellbind</button>
           <button class="filter-pill kw-pill" data-kw="Over Count" onclick="toggleKeywordFilter('Over Count')">📈 Over Count</button>
+          <button class="filter-pill" id="browseAltArtPill" onclick="toggleAltArtFilter()" style="border-color:#f59e0b; color:#fbbf24; font-weight:700;" title="Filter cards that have alternate artworks available">🎨 Alternate Art</button>
           <a href="./keywords.html" class="filter-pill" style="margin-left:auto;text-decoration:none;color:#38bdf8;border-color:rgba(56,189,248,0.3);background:rgba(56,189,248,0.08);font-weight:700;" title="Open full Keywords Directory">⚡ Explore All Keywords Directory ↗</a>
         </div>
       </div>
@@ -420,16 +421,16 @@ or JSON export from Battle Spirits Eternal" oninput="handlePasteInput()"></texta
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=3.3"></script>
+  <script src="./wasm_db.js?v=6.0"></script>
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
-  <script src="./firebase_service.js?v=1.1"></script>
+  <script src="./firebase_service.js?v=6.0"></script>
 
-  <script src="./app.js?v=5.4"></script>
+  <script src="./app.js?v=6.0"></script>
 <script>
 // ═══════════════════ BROWSE CONTROLLER ═══════════════════
 const browseState = {
@@ -443,6 +444,7 @@ const browseState = {
   family: 'all',
   set: '',
   sort: 'cost_asc',
+  altArt: false,
   page: 1,
   limit: 18,
   totalCards: 0
@@ -473,6 +475,9 @@ function parseUrlParams() {
   if (params.has('family')) browseState.family = params.get('family');
   if (params.has('set')) browseState.set = params.get('set');
   if (params.has('sort')) browseState.sort = params.get('sort');
+  if (params.has('alt_art') && (params.get('alt_art') === '1' || params.get('alt_art') === 'true')) {
+    browseState.altArt = true;
+  }
   if (params.has('page')) browseState.page = parseInt(params.get('page')) || 1;
 
   // Sync inputs
@@ -521,7 +526,20 @@ function syncPillsFromState() {
     });
   }
 
+  const altPill = document.getElementById('browseAltArtPill');
+  if (altPill) {
+    altPill.classList.toggle('active', Boolean(browseState.altArt));
+  }
+
   updateFamilyDropdownBtnState();
+}
+
+function toggleAltArtFilter() {
+  browseState.altArt = !browseState.altArt;
+  browseState.page = 1;
+  syncPillsFromState();
+  updateUrlHistory();
+  loadBrowseCards();
 }
 
 function toggleKeywordFilter(kw) {
@@ -623,6 +641,7 @@ function resetAllBrowseFilters() {
   browseState.family = 'all';
   browseState.set = '';
   browseState.sort = 'cost_asc';
+  browseState.altArt = false;
   browseState.page = 1;
 
   document.getElementById('browseSearchInput').value = '';
@@ -647,6 +666,7 @@ function updateUrlHistory() {
   if (browseState.family && browseState.family !== 'all') params.set('family', browseState.family);
   if (browseState.set) params.set('set', browseState.set);
   if (browseState.sort !== 'cost_asc') params.set('sort', browseState.sort);
+  if (browseState.altArt) params.set('alt_art', '1');
   if (browseState.page > 1) params.set('page', browseState.page);
 
   const qs = params.toString();
@@ -921,6 +941,7 @@ async function loadBrowseCards() {
   if (browseState.rarity !== 'all') p.set('rarity', browseState.rarity);
   if (browseState.family && browseState.family !== 'all') p.set('family', browseState.family);
   if (browseState.set) p.set('set', browseState.set);
+  if (browseState.altArt) p.set('alt_art', '1');
 
   try {
     const res = await fetch('/api/cards?' + p.toString());
@@ -994,6 +1015,11 @@ function buildCardTile(card) {
     ? `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}">${inDeck}x in Deck</span>`
     : `<span class="tile-deck-count-pill" id="tileDeckBadge-${safeName}" style="display:none;"></span>`;
 
+  const hasAlt = (typeof ModalCardArtworkManager !== 'undefined' && ModalCardArtworkManager.hasAlternateArtworks)
+    ? ModalCardArtworkManager.hasAlternateArtworks(card)
+    : (window.altArtworksMap && (window.altArtworksMap[(card.name || '').toLowerCase().trim()] || (card.card_number && window.altArtworksMap[card.card_number.toLowerCase().trim()])));
+  const altBadge = hasAlt ? `<span class="tile-alt-badge" title="Has alternate artworks available">🎨 Alt Art</span>` : '';
+
   return `
   <div class="card-tile" data-name="${safeName}">
     <div class="tile-art">
@@ -1010,6 +1036,7 @@ function buildCardTile(card) {
           <span>${esc(card.type || '—')}</span>
           ${codeBadge}
           <span>${esc(card.rarity || '')}</span>
+          ${altBadge}
           ${card.generation_name ? `<span class="tile-saga" style="color:#38bdf8;font-size:0.7rem;font-weight:600;">🏛️ ${esc(card.generation_name)}</span>` : ''}
         </div>
         ${families.length ? `<div class="tile-family">${esc(families.slice(0,2).join(' · '))}</div>` : ''}

@@ -694,6 +694,17 @@ const server = http.createServer((req, res) => {
           }
         }
 
+        const isAltArtOnly = parsedUrl.searchParams.get('alt_art') === '1' || parsedUrl.searchParams.get('alt_art') === 'true';
+        if (isAltArtOnly) {
+          const cache = loadArtworksCache();
+          const altKeys = Object.keys(cache || {});
+          if (altKeys.length > 0) {
+            const placeholders = altKeys.map(() => '?').join(',');
+            conditions.push(`(LOWER(name) IN (${placeholders}) OR LOWER(card_number) IN (${placeholders}))`);
+            sqlParams.push(...altKeys.map(k => k.toLowerCase()), ...altKeys.map(k => k.toLowerCase()));
+          }
+        }
+
         const whereClause = conditions.length ? 'WHERE ' + conditions.join(' AND ') : '';
 
         let orderClause = 'ORDER BY cost ASC, card_number ASC';

@@ -1031,12 +1031,12 @@
         // Modern engine dynamically loads modular ~20KB IR shards on demand via loadCardIrShard / loadSetIrShard.
         let idxData = null;
         try {
-          const idxRes = await fetch('./data/cards_index.json');
+          const idxRes = await fetch('./data/cards_index.json?v=6.0');
           if (idxRes.ok) idxData = await idxRes.json();
         } catch (e) {}
         if (!idxData) {
           try {
-            const idxRes = await fetch('/data/cards_index.json');
+            const idxRes = await fetch('/data/cards_index.json?v=6.0');
             if (idxRes.ok) idxData = await idxRes.json();
           } catch (e) {}
         }
@@ -10301,7 +10301,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       btnConfirm.disabled = !isCoreBudgetValid;
       btnConfirm.style.opacity = isCoreBudgetValid ? '1' : '0.4';
       btnConfirm.innerHTML = isCoreBudgetValid
-        ? `⚡ Confirm Summon (${totalCoresOnSpirit} Core${totalCoresOnSpirit > 1 ? 's' : ''}, LV${level})`
+        ? `⚡ Confirm Summon (${totalCoresOnSpirit} Core${totalCoresOnSpirit > 1 ? 's' : ''}, LV${level}) <span style="font-size:0.75rem; opacity:0.8; margin-left:3px;">[Enter ↵]</span>`
         : `Cannot Summon (Check Core Budget)`;
     }
   }
@@ -10512,6 +10512,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       card.currentBp = bp;
       card.isExhausted = false;
       card.hasAttacked = false;
+      if (card.type === 'Brave' && typeof parseBraveBonus === 'function') {
+        card.bpBonus = parseBraveBonus(card.raw_levels || card.levels, card.effect, card);
+      }
 
       // 5. Tribute Check (if applicable)
       const tributeReq = getCardTributeRequirement(card);
@@ -16976,7 +16979,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       // Escape closes open arena modals
       if (e.key === 'Escape') {
-        const coreModal = document.getElementById('battleSummonModal');
+        const coreModal = document.getElementById('battleSummonPaymentModal') || document.getElementById('battleSummonModal');
         if (coreModal && coreModal.classList.contains('active')) {
           e.preventDefault();
           closeSummonModal();
@@ -16999,7 +17002,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       // Enter confirms summon payment if core allocation modal is open
       if (e.key === 'Enter') {
-        const coreModal = document.getElementById('battleSummonModal');
+        const coreModal = document.getElementById('battleSummonPaymentModal') || document.getElementById('battleSummonModal');
         if (coreModal && coreModal.classList.contains('active')) {
           e.preventDefault();
           confirmSummonPayment();
@@ -17009,7 +17012,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       // Space advances turn phase if in duel and player's turn
       if (e.key === ' ' || e.code === 'Space') {
-        const anyModalActive = document.querySelector('.active-modal, .modal-overlay.open, #battleSummonModal.active, #battleAdventModal.active, #battleSacrificeModal.active');
+        const anyModalActive = document.querySelector('.active-modal, .modal-overlay.open, #battleSummonPaymentModal.active, #battleSummonModal.active, #battleAdventModal.active, #battleSacrificeModal.active');
         if (!anyModalActive && DuelState && DuelState.inDuel && DuelState.activePlayer === 'player') {
           e.preventDefault();
           nextPhase();

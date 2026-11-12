@@ -20,7 +20,7 @@
 
   const DB_NAME = 'BSEternal_Wasm_Storage';
   const STORE_NAME = 'db_binary';
-  const DB_KEY = 'battle_spirits.db_v3';
+  const DB_KEY = 'battle_spirits.db_v4';
 
   const isServerBackend = typeof window !== 'undefined' && window.location && (
     window.location.hostname === 'localhost' ||
@@ -48,10 +48,10 @@
     if (isJsonReady) return true;
     try {
       const candidates = [
-        getBaseDir() + 'data/cards_detailed.json',
-        './data/cards_detailed.json',
-        'data/cards_detailed.json',
-        '/data/cards_detailed.json'
+        getBaseDir() + 'data/cards_detailed.json?v=6.0',
+        './data/cards_detailed.json?v=6.0',
+        'data/cards_detailed.json?v=6.0',
+        '/data/cards_detailed.json?v=6.0'
       ];
       let res = null;
       for (const u of candidates) {
@@ -87,12 +87,28 @@
           readyCallbacks.forEach(cb => { try { cb(); } catch(e) {} });
           readyCallbacks = [];
         }
+        loadAltArtworksMap();
         return true;
       }
     } catch(err) {
       console.warn('[WasmDB] Fast JSON fallback load failed:', err);
     }
     return false;
+  }
+
+  let cachedAltArtworksMap = null;
+  async function loadAltArtworksMap() {
+    if (cachedAltArtworksMap) return cachedAltArtworksMap;
+    try {
+      const fetchFn = (typeof window !== 'undefined' && window._originalFetch) ? window._originalFetch : fetch;
+      const res = await fetchFn(getBaseDir() + 'data/card_artworks.json?v=6.0');
+      if (res.ok) {
+        cachedAltArtworksMap = await res.json();
+        if (typeof window !== 'undefined') window.altArtworksMap = cachedAltArtworksMap;
+      }
+    } catch(e) {}
+    return cachedAltArtworksMap;
+  }
   }
 
   function searchCardsFromJson(params = {}) {
@@ -151,6 +167,15 @@
       if (setFilter) {
         const sets = (c.sets || []).map(s => (s || '').toLowerCase());
         if (!sets.some(s => s.includes(setFilter))) return false;
+      }
+
+      if (params.alt_art === '1' || params.alt_art === 'true' || params.has_alt_art === '1') {
+        const altMap = cachedAltArtworksMap || (typeof window !== 'undefined' ? window.altArtworksMap : null);
+        if (altMap) {
+          const n = (c.name || '').toLowerCase().trim();
+          const num = (c.card_number || '').toLowerCase().trim();
+          if (!altMap[n] && (!num || !altMap[num])) return false;
+        }
       }
 
       return true;
@@ -224,12 +249,13 @@
         locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/${file}`
       });
 
-      // Proactively purge old v1 and v2 cache if present
+      // Proactively purge old v1, v2, and v3 cache if present
       try {
         const idb = await openIndexedDB();
         const tx = idb.transaction(STORE_NAME, 'readwrite');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v1');
         tx.objectStore(STORE_NAME).delete('battle_spirits.db_v2');
+        tx.objectStore(STORE_NAME).delete('battle_spirits.db_v3');
       } catch (e) {}
 
       let dbBuffer = await getCachedDbBuffer();
@@ -249,6 +275,19 @@
             needsFreshFetch = true;
           }
           testStmt.free();
+
+          // Check if database contains outdated unpurged records without artwork
+          if (!needsFreshFetch) {
+            const artStmt = dbInstance.prepare("SELECT COUNT(*) as cnt FROM cards WHERE image_url IS NULL OR TRIM(image_url) = ''");
+            if (artStmt.step()) {
+              const noArtCnt = artStmt.getAsObject().cnt;
+              if (noArtCnt > 0) {
+                console.warn('[WasmDB] Cached database contains cards without artwork. Refreshing to optimized database...');
+                needsFreshFetch = true;
+              }
+            }
+            artStmt.free();
+          }
         } catch (e) {
           console.warn('[WasmDB] Cache validation error, re-fetching:', e);
           needsFreshFetch = true;
@@ -263,10 +302,10 @@
         showLoadingBanner("Updating Battle Spirits Card Database (23 MB)...");
         let res = null;
         const candidateUrls = [
-          getDbUrl() + '?v=2.2',
-          './battle_spirits.db?v=2.2',
-          'battle_spirits.db?v=2.2',
-          '/battle_spirits.db?v=2.2'
+          getDbUrl() + '?v=6.0',
+          './battle_spirits.db?v=6.0',
+          'battle_spirits.db?v=6.0',
+          '/battle_spirits.db?v=6.0'
         ];
 
         for (const u of candidateUrls) {
@@ -893,6 +932,18 @@
         }
       }
 
+      if (params.alt_art === '1' || params.alt_art === 'true' || params.has_alt_art === '1') {
+        const altMap = cachedAltArtworksMap || (typeof window !== 'undefined' ? window.altArtworksMap : null);
+        if (altMap) {
+          const altKeys = Object.keys(altMap);
+          if (altKeys.length > 0) {
+            const placeholders = altKeys.map(() => '?').join(',');
+            conditions.push(`(LOWER(name) IN (${placeholders}) OR LOWER(card_number) IN (${placeholders}))`);
+            sqlParams.push(...altKeys.map(k => k.toLowerCase()), ...altKeys.map(k => k.toLowerCase()));
+          }
+        }
+      }
+
       const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
 
       // Count total
@@ -1102,7 +1153,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1179,7 +1230,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);
@@ -1298,7 +1349,7 @@
           const cardNum = (params.card_number || params.id || '').toLowerCase().trim();
           let artworks = null;
           try {
-            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json');
+            const rawRes = await window._originalFetch(getBaseDir() + 'data/card_artworks.json?v=6.0');
             if (rawRes.ok) {
               const allArts = await rawRes.json();
               artworks = allArts[cardName] || (cardNum ? allArts[cardNum] : null);

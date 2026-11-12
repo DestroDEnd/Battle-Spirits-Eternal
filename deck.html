@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=5.4">
+  <link rel="stylesheet" href="./styles.css?v=6.0">
 </head>
 <body>
 
@@ -378,7 +378,7 @@
 
   <!-- WebAssembly SQLite Engine (sql.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.12.0/sql-wasm.js"></script>
-  <script src="./wasm_db.js?v=3.3"></script>
+  <script src="./wasm_db.js?v=6.0"></script>
 
   <!-- Firebase Client SDK (Compat CDN for GitHub Pages) -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -386,8 +386,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
-  <script src="./firebase_service.js?v=1.1"></script>
-  <script src="./app.js?v=5.4"></script>
+  <script src="./firebase_service.js?v=6.0"></script>
+  <script src="./app.js?v=6.0"></script>
 <script>
 // Cache for card data objects
 const deckCardCache = {};
@@ -956,6 +956,10 @@ function renderVisualCardsGrid() {
     const cost = card.cost !== null && card.cost !== undefined ? card.cost : '-';
     const cardNum = card.card_number || 'BS';
     const artUrl = card.image_url || FALLBACK_CARD_ART;
+    const hasAlt = (typeof ModalCardArtworkManager !== 'undefined' && ModalCardArtworkManager.hasAlternateArtworks)
+      ? ModalCardArtworkManager.hasAlternateArtworks(card)
+      : (window.altArtworksMap && (window.altArtworksMap[(name || '').toLowerCase().trim()] || (cardNum && window.altArtworksMap[cardNum.toLowerCase().trim()])));
+    const altIcon = hasAlt ? `<span style="font-size:0.75rem;margin-left:4px;" title="Has alternate artworks available">🎨</span>` : '';
 
     return `
       <div class="deck-card-tile tile-color-${colorClass}" onclick="openCardDetail('${escapeJsStr(name)}', window.__deckVisibleCards)">
@@ -968,7 +972,7 @@ function renderVisualCardsGrid() {
         </div>
         <div class="tile-meta-bar">
           <span class="tile-code-tag">${esc(cardNum)}</span>
-          <div class="tile-card-name" title="${esc(name)}">${esc(name)}</div>
+          <div class="tile-card-name" title="${esc(name)}">${esc(name)}${altIcon}</div>
         </div>
         <!-- Quick Action Overlay -->
         <div class="tile-hover-actions" onclick="event.stopPropagation()">
@@ -1004,13 +1008,17 @@ function renderDeckRowsList() {
     const cost = card.cost !== null && card.cost !== undefined ? card.cost : '-';
     const cardNum = card.card_number || 'BS';
     const type = card.type || 'Card';
+    const hasAlt = (typeof ModalCardArtworkManager !== 'undefined' && ModalCardArtworkManager.hasAlternateArtworks)
+      ? ModalCardArtworkManager.hasAlternateArtworks(card)
+      : (window.altArtworksMap && (window.altArtworksMap[(name || '').toLowerCase().trim()] || (cardNum && window.altArtworksMap[cardNum.toLowerCase().trim()])));
+    const altIcon = hasAlt ? `<span style="font-size:0.75rem;margin-left:4px;" title="Has alternate artworks available">🎨</span>` : '';
 
     return `
       <div class="deck-list-row row-${colorClass}">
         <span class="row-card-code">${esc(cardNum)}</span>
         <span class="row-color-dot dot-${colorClass}"></span>
         <div class="deck-row-info" onclick="openCardDetail('${escapeJsStr(name)}', window.__deckVisibleCards)">
-          <div class="deck-row-name" title="${esc(name)}">${esc(name)}</div>
+          <div class="deck-row-name" title="${esc(name)}">${esc(name)}${altIcon}</div>
           <div class="deck-row-details">Cost ${cost} • ${esc(type)}</div>
         </div>
         <div class="qty-ctrl">
