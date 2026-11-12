@@ -1,17 +1,6 @@
 {
   "LM16-01": {
     "cardNumber": "LM16-01",
-    "name": "The FiftyFirstBeast Revol-Koleon",
-    "keywords": [
-      {
-        "name": "Accel",
-        "parameter": "Cost 4 ([Red Core",
-        "wave": 2,
-        "hook": "accel",
-        "bracketed": true,
-        "index": 6
-      }
-    ],
     "abilities": [
       {
         "id": "LM16-01#a0",
@@ -23,22 +12,24 @@
             3
           ],
           "levelExplicit": false,
-          "prefixes": [],
+          "prefixes": [
+            "Accel"
+          ],
           "timing": "MAIN",
           "timingLabel": "Main",
           "timingStep": "ANY",
           "limit": null,
           "cantStack": false,
-          "keyword": "Red Core",
+          "keyword": "Accel",
           "burstCondition": null,
           "isFlash": false,
           "isMain": true,
-          "cleanBody": "You can reveal three cards from your decktop. Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand. Discard any reemaining cards. After this effect resolves, put this card face-up onto the Removed Zone."
+          "cleanBody": "Reveal three cards from your deck. Add an Imagine family Brave and a God-King or Ten Crown Spirit among them to your hand, discard the rest, then place this card face-up in the Removed Zone."
         },
         "clauses": [
           {
             "rawText": "You can reveal three cards from your decktop.",
-            "cleanText": "You can reveal three cards from your decktop",
+            "cleanText": "Reveal three cards from your decktop",
             "link": null,
             "isOptional": true,
             "isCost": false,
@@ -50,20 +41,45 @@
             }
           },
           {
-            "rawText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand.",
-            "cleanText": "Among them, add an \"Imagine\" family Brave card and a \"God-King\"/\"Ten Crown\" family Spirit card to the Hand",
+            "rawText": "Add an Imagine family Brave card and a God-King or Ten Crown family Spirit card to your Hand.",
+            "cleanText": "Add the matching cards to your Hand",
             "link": null,
             "isOptional": false,
             "isCost": false,
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "ADD_TO_HAND",
+              "filterGroups": [
+                {
+                  "count": 1,
+                  "filter": {
+                    "types": [
+                      "Brave"
+                    ],
+                    "family": "Imagine"
+                  },
+                  "title": "Choose an Imagine Brave"
+                },
+                {
+                  "count": 1,
+                  "filter": {
+                    "types": [
+                      "Spirit"
+                    ],
+                    "familiesAny": [
+                      "God-King",
+                      "Ten Crown"
+                    ]
+                  },
+                  "title": "Choose a God-King or Ten Crown Spirit"
+                }
+              ]
             }
           },
           {
-            "rawText": "Discard any reemaining cards.",
-            "cleanText": "Discard any remaining cards",
+            "rawText": "Discard any remaining cards.",
+            "cleanText": "Discard any remaining revealed cards",
             "link": null,
             "isOptional": false,
             "isCost": false,
@@ -74,8 +90,8 @@
             }
           },
           {
-            "rawText": "put this card face-up onto the Removed Zone.",
-            "cleanText": "put this card face-up onto the Removed Zone",
+            "rawText": "After this effect resolves, put this card face-up onto the Removed Zone.",
+            "cleanText": "After this effect resolves, put this card face-up onto the Removed Zone",
             "link": "afterResolves",
             "isOptional": false,
             "isCost": false,
@@ -86,7 +102,39 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": [
+          {
+            "name": "Accel",
+            "parameter": null,
+            "wave": 2,
+            "hook": "accel",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "LM16-01#a0",
+            "cardNumber": "LM16-01",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [
+              "Accel"
+            ],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": true
+          }
+        ]
       },
       {
         "id": "LM16-01#a1",
@@ -100,7 +148,7 @@
           "levelExplicit": true,
           "prefixes": [],
           "timing": "WHEN_SUMMONED",
-          "timingLabel": "When summoned",
+          "timingLabel": "When Summoned",
           "timingStep": "ANY",
           "limit": null,
           "cantStack": false,
@@ -108,33 +156,93 @@
           "burstCondition": null,
           "isFlash": false,
           "isMain": false,
-          "cleanBody": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost."
+          "cleanBody": "When summoned from the Removed Zone, you can summon an Imagine family Brave card from your Hand without paying its cost."
         },
         "clauses": [
           {
-            "rawText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost.",
-            "cleanText": "from the Removed Zone, you can summon an \"Imagine\" family Brave card from your Hand, without paying the cost",
+            "rawText": "When summoned from the Removed Zone, you can summon an Imagine family Brave card from your Hand without paying its cost.",
+            "cleanText": "Summon an Imagine family Brave from your Hand without paying its cost",
             "link": null,
             "isOptional": true,
             "isCost": false,
-            "condition": null,
+            "condition": {
+              "type": "SUMMONED_FROM_ZONE",
+              "zone": "removed"
+            },
             "duration": null,
             "op": {
               "op": "SUMMON",
-              "free": true
+              "from": "hand",
+              "free": true,
+              "filter": {
+                "types": [
+                  "Brave"
+                ],
+                "family": "Imagine"
+              }
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 5,
     "unsupportedClausesCount": 0,
-    "isFullySupported": true
+    "isFullySupported": true,
+    "isVanilla": false,
+    "keywords": [
+      {
+        "name": "Accel",
+        "parameter": null,
+        "wave": 2,
+        "hook": "accel",
+        "bracketed": true,
+        "index": 0,
+        "abilityId": "LM16-01#a0",
+        "cardNumber": "LM16-01",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "MAIN",
+        "timingLabel": "Main",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [
+          "Accel"
+        ],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": true
+      }
+    ]
   },
   "LM16-04": {
     "cardNumber": "LM16-04",
     "name": "Battle Spirits Burning Soul (Card)",
+    "type": "Nexus",
+    "color": "Red",
+    "colors": [
+      "Red"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Red"
+    ],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Red": 3
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -182,7 +290,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       },
       {
         "id": "LM16-04#a1",
@@ -218,7 +327,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -228,6 +338,25 @@
   "LM16-05": {
     "cardNumber": "LM16-05",
     "name": "Battle Spirits Double Drive (Card)",
+    "type": "Nexus",
+    "color": "Red",
+    "colors": [
+      "Red",
+      "Green"
+    ],
+    "cost": 5,
+    "symbols": [
+      "Red",
+      "Green"
+    ],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Red": 2,
+        "Green": 1
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -268,7 +397,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       },
       {
         "id": "LM16-05#a1",
@@ -307,7 +437,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -317,6 +448,22 @@
   "LM16-09": {
     "cardNumber": "LM16-09",
     "name": "Fire & Wind",
+    "type": "Magic",
+    "color": "Red",
+    "colors": [
+      "Red",
+      "Green"
+    ],
+    "cost": 5,
+    "symbols": [],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Red": 2,
+        "Green": 1
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -385,7 +532,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -395,6 +543,26 @@
   "LM16-06": {
     "cardNumber": "LM16-06",
     "name": "It's New Year's! Battle Spirits",
+    "type": "Nexus",
+    "color": "Red",
+    "colors": [
+      "Red",
+      "Purple",
+      "Green",
+      "White",
+      "Yellow"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Red"
+    ],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Red": 3
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -433,7 +601,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       },
       {
         "id": "LM16-06#a1",
@@ -472,7 +641,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -482,6 +652,22 @@
   "LM16-07": {
     "cardNumber": "LM16-07",
     "name": "Mogami Family's Day Off",
+    "type": "Nexus",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Yellow": 3
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -520,7 +706,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       },
       {
         "id": "LM16-07#a1",
@@ -561,7 +748,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -571,6 +759,22 @@
   "LM16-08": {
     "cardNumber": "LM16-08",
     "name": "Professor Battleskii's BS Course!",
+    "type": "Nexus",
+    "color": "Blue",
+    "colors": [
+      "Blue"
+    ],
+    "cost": 3,
+    "symbols": [
+      "Blue"
+    ],
+    "reduction": {
+      "total": 2,
+      "by_color": {
+        "Blue": 2
+      }
+    },
+    "levels": {},
     "keywords": [],
     "abilities": [
       {
@@ -608,7 +812,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       },
       {
         "id": "LM16-08#a1",
@@ -652,7 +857,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 2,
@@ -662,14 +868,61 @@
   "LM16-03": {
     "cardNumber": "LM16-03",
     "name": "The FiftyEighthBird Gale-ChickenKnight",
+    "type": "Spirit",
+    "color": "Green",
+    "colors": [
+      "Green"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Green"
+    ],
+    "reduction": {
+      "total": 2,
+      "by_color": {
+        "Green": 2
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 4000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      }
+    },
     "keywords": [
       {
-        "name": "Accel",
-        "parameter": "Cost 4 ([Green Core",
-        "wave": 2,
-        "hook": "accel",
+        "name": "Green Core",
+        "parameter": null,
+        "wave": 1,
+        "hook": "green_core",
         "bracketed": true,
-        "index": 6
+        "index": 0,
+        "abilityId": "LM16-03#a0",
+        "cardNumber": "LM16-03",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "MAIN",
+        "timingLabel": "Main",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": true
       }
     ],
     "abilities": [
@@ -746,7 +999,37 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": [
+          {
+            "name": "Green Core",
+            "parameter": null,
+            "wave": 1,
+            "hook": "green_core",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "LM16-03#a0",
+            "cardNumber": "LM16-03",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": true
+          }
+        ]
       },
       {
         "id": "LM16-03#a1",
@@ -784,7 +1067,8 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 5,
@@ -794,14 +1078,66 @@
   "LM16-02": {
     "cardNumber": "LM16-02",
     "name": "The TwentyNinthDragon Ourovodra",
+    "type": "Spirit",
+    "color": "Purple",
+    "colors": [
+      "Purple"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Purple"
+    ],
+    "reduction": {
+      "total": 2,
+      "by_color": {
+        "Purple": 2
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 5000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 6,
+        "bp": 8000
+      }
+    },
     "keywords": [
       {
-        "name": "Accel",
-        "parameter": "Cost 4 ([Purple Core",
-        "wave": 2,
-        "hook": "accel",
+        "name": "Purple Core",
+        "parameter": null,
+        "wave": 1,
+        "hook": "purple_core",
         "bracketed": true,
-        "index": 6
+        "index": 0,
+        "abilityId": "LM16-02#a0",
+        "cardNumber": "LM16-02",
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "levelExplicit": false,
+        "timing": "MAIN",
+        "timingLabel": "Main",
+        "timingStep": "ANY",
+        "face": "A",
+        "prefixes": [],
+        "isSoulState": false,
+        "duringAdvent": false,
+        "duringSeal": false,
+        "burstCondition": null,
+        "limit": null,
+        "isFlash": false,
+        "isMain": true
       }
     ],
     "abilities": [
@@ -878,7 +1214,37 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": [
+          {
+            "name": "Purple Core",
+            "parameter": null,
+            "wave": 1,
+            "hook": "purple_core",
+            "bracketed": true,
+            "index": 0,
+            "abilityId": "LM16-02#a0",
+            "cardNumber": "LM16-02",
+            "levels": [
+              1,
+              2,
+              3
+            ],
+            "levelExplicit": false,
+            "timing": "MAIN",
+            "timingLabel": "Main",
+            "timingStep": "ANY",
+            "face": "A",
+            "prefixes": [],
+            "isSoulState": false,
+            "duringAdvent": false,
+            "duringSeal": false,
+            "burstCondition": null,
+            "limit": null,
+            "isFlash": false,
+            "isMain": true
+          }
+        ]
       },
       {
         "id": "LM16-02#a1",
@@ -917,10 +1283,745 @@
             }
           }
         ],
-        "unsupported": []
+        "unsupported": [],
+        "keywords": []
       }
     ],
     "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM16-D05": {
+    "cardNumber": "LM16-D05",
+    "name": "［Sacred Swords］Daiya Lune",
+    "type": "Spirit",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 4,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 2,
+      "by_color": {
+        "Yellow": 2
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 3000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 4000
+      }
+    },
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM16-D05#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D05#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "By arranging one refreshed \"Diva\" family Spirit you control on the right side of this Spirit, draw a card from the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "By arranging one refreshed \"Diva\" family Spirit you control on the right side of this Spirit",
+            "cleanText": "By arranging one refreshed \"Diva\" family Spirit you control on the right side of this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": true,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "REFRESH",
+              "target": {
+                "side": "either"
+              }
+            }
+          },
+          {
+            "rawText": "draw a card from the deckbottom.",
+            "cleanText": "draw a card from the deckbottom",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "DRAW",
+              "count": 1,
+              "chooser": "self",
+              "forEach": null
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM16-D02": {
+    "cardNumber": "LM16-D02",
+    "name": "［Sacred Swords］Griffiar d'Arc",
+    "type": "Spirit",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 7,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 4,
+      "by_color": {
+        "Yellow": 4
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 6000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 2,
+        "bp": 8000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 11000
+      }
+    },
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM16-D02#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D02#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "For each [Sacred Swords] Spirit you control, return an opposing Spirit to the Hand. For each Spirit returned to the Hand by this effect, put a core from the Void to this Spirit."
+        },
+        "clauses": [
+          {
+            "rawText": "For each [Sacred Swords] Spirit you control, return an opposing Spirit to the Hand.",
+            "cleanText": "For each [Sacred Swords] Spirit you control, return an opposing Spirit to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "opp",
+                "types": [
+                  "Spirit"
+                ]
+              },
+              "destination": "HAND"
+            }
+          },
+          {
+            "rawText": "For each Spirit returned to the Hand by this effect, put a core from the Void to this Spirit.",
+            "cleanText": "For each Spirit returned to the Hand by this effect, put a core from the Void to this Spirit",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "MOVE_CORE",
+              "count": 1,
+              "from": {
+                "zone": "void"
+              },
+              "to": {
+                "zone": "field",
+                "target": "self"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D02#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS_OR_BLOCKS",
+          "timingLabel": "When Attacks/Blocks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "During this turn, give all opposing Spirits -3000 BP."
+        },
+        "clauses": [
+          {
+            "rawText": "During this turn, give all opposing Spirits -3000 BP.",
+            "cleanText": "give all opposing Spirits -3000 BP",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": "DURING_THIS_TURN",
+            "op": {
+              "op": "BP_DEBUFF",
+              "amount": 3000
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      }
+    ],
+    "compiledClausesCount": 3,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM16-D04": {
+    "cardNumber": "LM16-D04",
+    "name": "［Sacred Swords］Jeanne Doraniece",
+    "type": "Spirit",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 9,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 6,
+      "by_color": {
+        "Yellow": 6
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 8000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 10000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 5,
+        "bp": 13000
+      }
+    },
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM16-D04#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D04#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your \"Rei-Ohba\" is summoned, you can summon this card from the Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When your \"Rei-Ohba\" is summoned, you can summon this card from the Hand, without paying the cost.",
+            "cleanText": "When your \"Rei-Ohba\" is summoned, you can summon this card from the Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D04#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_SUMMONED",
+          "timingLabel": "When Summoned",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control no Spirits/Ultimates except this one and one \"Rei-Ohba\", return every opposing Spirit/Ultimate to the Hand."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control no Spirits/Ultimates except this one and one \"Rei-Ohba\", return every opposing Spirit/Ultimate to the Hand.",
+            "cleanText": "return every opposing Spirit/Ultimate to the Hand",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control no Spirits/Ultimates except this one and one \"Rei-Ohba\"",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM16-D03": {
+    "cardNumber": "LM16-D03",
+    "name": "［Sacred Swords］Nei-Lanetail",
+    "type": "Spirit",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 8,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 5,
+      "by_color": {
+        "Yellow": 5
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 7000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 12000
+      }
+    },
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM16-D03#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D03#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "When your [Twilight Gothic]/[Sacred Swords] Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "When your [Twilight Gothic]/[Sacred Swords] Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost.",
+            "cleanText": "When your [Twilight Gothic]/[Sacred Swords] Spirits are destroyed by the opponent, you can summon this card from the Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON_THIS_CARD",
+              "from": "HAND_OR_BURST"
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D03#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "You can summon a Cost 7 or less [Twilight Gothic]/[Sacred Swords] Spirit card from your Hand, without paying the cost."
+        },
+        "clauses": [
+          {
+            "rawText": "You can summon a Cost 7 or less [Twilight Gothic]/[Sacred Swords] Spirit card from your Hand, without paying the cost.",
+            "cleanText": "You can summon a Cost 7 or less [Twilight Gothic]/[Sacred Swords] Spirit card from your Hand, without paying the cost",
+            "link": null,
+            "isOptional": true,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "SUMMON",
+              "free": true
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      }
+    ],
+    "compiledClausesCount": 2,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true
+  },
+  "LM16-D01": {
+    "cardNumber": "LM16-D01",
+    "name": "［Sacred Swords］Rei-Ohba",
+    "type": "Spirit",
+    "color": "Yellow",
+    "colors": [
+      "Yellow"
+    ],
+    "cost": 6,
+    "symbols": [
+      "Yellow"
+    ],
+    "reduction": {
+      "total": 3,
+      "by_color": {
+        "Yellow": 3
+      }
+    },
+    "levels": {
+      "LV1": {
+        "level": 1,
+        "cost": 1,
+        "bp": 5000
+      },
+      "LV2": {
+        "level": 2,
+        "cost": 3,
+        "bp": 7000
+      },
+      "LV3": {
+        "level": 3,
+        "cost": 4,
+        "bp": 10000
+      }
+    },
+    "keywords": [],
+    "abilities": [
+      {
+        "id": "LM16-D01#a0",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": false,
+          "prefixes": [],
+          "timing": "PASSIVE",
+          "timingLabel": "",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": ""
+        },
+        "clauses": [],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D01#a1",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "ATTACK_STEP",
+          "timingLabel": "Your Attack Step",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "All your [Shiny Hearts]/[Sacred Swords] Spirits can't be blocked by opposing 10000 BP or less Spirits."
+        },
+        "clauses": [
+          {
+            "rawText": "All your [Shiny Hearts]/[Sacred Swords] Spirits can't be blocked by opposing 10000 BP or less Spirits.",
+            "cleanText": "All your [Shiny Hearts]/[Sacred Swords] Spirits can't be blocked by opposing 10000 BP or less Spirits",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
+              "op": "UNBLOCKABLE"
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      },
+      {
+        "id": "LM16-D01#a2",
+        "type": "ABILITY",
+        "header": {
+          "levels": [
+            2,
+            3
+          ],
+          "levelExplicit": true,
+          "prefixes": [],
+          "timing": "WHEN_ATTACKS",
+          "timingLabel": "When Attacks",
+          "timingStep": "ANY",
+          "limit": null,
+          "cantStack": false,
+          "keyword": null,
+          "burstCondition": null,
+          "isFlash": false,
+          "isMain": false,
+          "cleanBody": "If you control five or more differently named [Sacred Swords] Spirits, return five opposing Spirits to the deckbottom."
+        },
+        "clauses": [
+          {
+            "rawText": "If you control five or more differently named [Sacred Swords] Spirits, return five opposing Spirits to the deckbottom.",
+            "cleanText": "return five opposing Spirits to the deckbottom",
+            "link": null,
+            "isOptional": false,
+            "isCost": false,
+            "condition": "If you control five or more differently named [Sacred Swords] Spirits",
+            "duration": null,
+            "op": {
+              "op": "BOUNCE",
+              "count": 1,
+              "target": {
+                "side": "either"
+              }
+            }
+          }
+        ],
+        "unsupported": [],
+        "keywords": []
+      }
+    ],
+    "compiledClausesCount": 2,
     "unsupportedClausesCount": 0,
     "isFullySupported": true
   }

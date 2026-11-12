@@ -18,6 +18,7 @@ export class AsyncResolver {
     }
 
     const results = [];
+    const abilityContext = { ...context };
     let previousResult = null;
     let chosenBranch = null; // Used for "Or" clauses
 
@@ -90,7 +91,7 @@ export class AsyncResolver {
 
       // Handle condition check (e.g. "if [Soul Core] was used to pay the cost", "if you control no Spirits", etc.)
       if (clause.condition) {
-        const condMet = evaluateCondition(state, clause.condition, context);
+        const condMet = evaluateCondition(state, clause.condition, abilityContext);
         if (!condMet) {
           continue;
         }
@@ -110,14 +111,20 @@ export class AsyncResolver {
       }
 
       // Execute typed operation
-      const res = await executeOp(state, clause.op, context, this.promptResolver, events);
+        const res = await executeOp(state, clause.op, abilityContext, this.promptResolver, events);
       results.push(res);
       previousResult = res;
+      abilityContext.previousResult = res;
+      if (Array.isArray(res.cards) && res.cards.length > 0) {
+        abilityContext.previousTarget = res.cards[0];
+      } else if (res.target) {
+        abilityContext.previousTarget = res.target;
+      }
     }
 
     // 2. Resolve "afterResolves" follow-up clauses
     for (const fClause of followUpClauses) {
-      const fRes = await executeOp(state, fClause.op, context, this.promptResolver, events);
+      const fRes = await executeOp(state, fClause.op, abilityContext, this.promptResolver, events);
       results.push(fRes);
     }
 
@@ -162,6 +169,9 @@ function evaluateCondition(state, conditionStr, context) {
   const s = conditionStr.toLowerCase();
   const controller = context.controller || 'player';
   const p = state.players[controller];
+
+  if (s === 'destroyed_by_opponent') return Boolean(context.wasDestroyedByOpponent);
+  if (s === 'summoned_from_removed') return Boolean(context.summonFromRemoved);
 
   if (s.includes('soul core') && (s.includes('pay') || s.includes('used') || s.includes('cost'))) {
     return Boolean(context.soulCoreUsed);

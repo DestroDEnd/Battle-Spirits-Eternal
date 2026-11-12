@@ -25,11 +25,17 @@ export function queryCandidates(state, selector = {}, context = {}) {
         if (!top) continue;
 
         // Type match (Rule: Ultimates are not Spirits)
-        if (!targetTypes.includes(top.type)) continue;
+        const isGrandwalker = String(top.type || '').toLowerCase().includes('nexus') &&
+          (Array.isArray(top.families) ? top.families : [top.family].filter(Boolean)).some(f => String(f).toLowerCase().includes('grandwalker'));
+        if (!targetTypes.includes(top.type) && !(isGrandwalker && targetTypes.some(type => String(type).toLowerCase() === 'grandwalker nexus'))) continue;
 
         // Armor / Heavy Armor immunity check
         const isOpposing = context.controller ? (s !== context.controller) : true;
-        if (isOpposing && context.sourceCard && isImmune(state, stack, context.sourceCard)) {
+        const targetedGrandwalker = isGrandwalker && (
+          targetTypes.some(type => String(type).toLowerCase() === 'grandwalker nexus') ||
+          String(filters.family || '').toLowerCase().includes('grandwalker')
+        );
+        if (isOpposing && context.sourceCard && isImmune(state, stack, context.sourceCard, 'effect', { bypassArmor: context.bypassArmor, targetedGrandwalker })) {
           continue;
         }
 
@@ -58,6 +64,17 @@ export function queryCandidates(state, selector = {}, context = {}) {
           if (!fams.some(f => f.toLowerCase() === filters.family.toLowerCase())) continue;
         }
 
+        if (filters.sameFamilyAsPrevious) {
+          const previous = context.previousTarget?.card || context.previousTarget;
+          const previousFamilies = Array.isArray(previous?.families)
+            ? previous.families
+            : (previous?.family ? [previous.family] : []);
+          const targetFamilies = Array.isArray(top.families)
+            ? top.families
+            : (top.family ? [top.family] : []);
+          if (!previousFamilies.some(f => targetFamilies.some(t => String(t).toLowerCase() === String(f).toLowerCase()))) continue;
+        }
+
         // Name filter
         if (filters.nameIncludes) {
           if (!top.name.toLowerCase().includes(filters.nameIncludes.toLowerCase())) continue;
@@ -71,6 +88,17 @@ export function queryCandidates(state, selector = {}, context = {}) {
           bp,
           cost
         });
+      }
+      // Braves remain targetable cards while attached to a Spirit stack.
+      // They share the field zone, but leaving them out made Brave-specific
+      // effects silently find no legal targets.
+      for (const stack of p.field || []) {
+        for (const brave of stack.braves || []) {
+          if (!targetTypes.includes('Brave') && !targetTypes.includes(brave.type)) continue;
+          if (filters.bpLte !== undefined && (brave.bp || 0) > filters.bpLte) continue;
+          if (filters.bpGte !== undefined && (brave.bp || 0) < filters.bpGte) continue;
+          results.push({ type: 'brave', stack, card: brave, side: s, bp: brave.bp || 0, cost: brave.cost || 0 });
+        }
       }
     } else if (zone === 'hand') {
       for (const card of p.hand || []) {

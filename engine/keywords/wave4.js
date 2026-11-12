@@ -264,6 +264,14 @@ export const BombardmentKeyword = {
   wave: 4,
   hooks: {
     async onAttackDeclared({ state, attackerStack, keyword, game }) {
+      // Cards with a compiled reveal operation are resolved by the structured
+      // ability engine. Running this legacy keyword shortcut as well would
+      // consume the top card first and duplicate its life/hand effects.
+      const hasStructuredBombardment = (attackerStack?.top?.compiledIr?.abilities || []).some(ability =>
+        (ability.clauses || []).some(clause => clause.op?.op === 'REVEAL_DECKTOP')
+      );
+      if (hasStructuredBombardment) return;
+
       // Official Bandai ruling: (When Attacks) You can reveal card(s) from your decktop.
       // If that card is an Emperor Beast family Spirit card (or meets condition), send 1 opposing Life to their Reserve.
       // Add the revealed card to the Hand.

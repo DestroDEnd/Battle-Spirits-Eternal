@@ -467,7 +467,23 @@
       handleDestroyedSpiritCores: typeof handleDestroyedSpiritCores === 'function' ? handleDestroyedSpiritCores : () => {},
       recalculateSpiritBp: typeof recalculateSpiritBp === 'function' ? recalculateSpiritBp : () => {},
       promptChoiceModal: typeof promptChoiceModal === 'function' ? promptChoiceModal : (opts, cb) => cb(0),
-      promptUniversalTargetModal: typeof promptUniversalTargetModal === 'function' ? promptUniversalTargetModal : (opts, cb) => cb([]),
+      promptUniversalTargetModal: (opts = {}, callback = null) => {
+        const modal = typeof promptUniversalTargetModal === 'function' ? promptUniversalTargetModal : (options, done) => done([]);
+        const open = done => modal({
+          card: opts.card || opts.sourceCard || null,
+          side: opts.side || 'player',
+          targetSide: opts.targetSide || 'opponent',
+          targetKind: opts.targetKind || 'spirit',
+          customPool: opts.candidates || opts.customPool || [],
+          title: opts.title || 'Select a target',
+          description: opts.subtitle || opts.description || '',
+          minCount: opts.minPick ?? opts.minCount ?? 1,
+          maxCount: opts.maxPick ?? opts.maxCount ?? 1,
+          allowSkip: Boolean(opts.allowSkip || opts.optional)
+        }, done);
+        if (typeof callback === 'function') return open(callback);
+        return new Promise(resolve => open(resolve));
+      },
       promptScryRevealModal: typeof promptScryRevealModal === 'function' ? promptScryRevealModal : (opts, cb) => cb(null),
       promptHandDiscardModal: typeof promptHandDiscardModal === 'function' ? promptHandDiscardModal : (c, s, max, f, u, cb) => cb([]),
       askOptionalEffect: typeof askOptionalEffect === 'function' ? askOptionalEffect : (c, t, y, n) => { if (y) y(); },
@@ -1693,7 +1709,7 @@
   }
 
   // ── SUMMON FROM OPEN (REMOVED) ZONE (ACCEL RECOVERY) ──
-  function summonCardFromOpen(cardUid, side = 'player') {
+  async function summonCardFromOpen(cardUid, side = 'player') {
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     if (!friendlyState.openCards) return;
     const cardIdx = friendlyState.openCards.findIndex(c => c.uid === cardUid);
@@ -1726,6 +1742,7 @@
 
     AudioFX.slash();
     addLog(`⚔️ **[OPEN ZONE SUMMON]**: "${card.name}" summoned from Open Zone to the field! Paid ${cost} cores.`, 'step');
+    await executeUniversalCardEffect(card, side, 'WHEN_SUMMONED', { summonFromRemoved: true });
     renderDuelTable();
     closeZoneModal();
   }
@@ -1862,6 +1879,31 @@
     document.body.appendChild(box);
   }
 
+  // Structured IR decisions pause effect resolution until the player answers.
+  function promptStructuredDecision(prompt, card, side) {
+    const chooser = prompt?.chooser || side;
+    if (prompt?.type === 'CONFIRM_OPTIONAL') {
+      if (chooser !== 'player') return Promise.resolve({ accepted: true });
+      return new Promise(resolve => askOptionalEffect(
+        card,
+        prompt.title || 'Activate this optional effect?',
+        () => resolve({ accepted: true }),
+        () => resolve({ declined: true })
+      ));
+    }
+    if (prompt?.type === 'CHOOSE_OR_BRANCH') {
+      const choices = Array.isArray(prompt.options) ? prompt.options : [];
+      if (chooser !== 'player' || !choices.length) return Promise.resolve(choices[0] || null);
+      return new Promise(resolve => promptChoiceModal({
+        card,
+        side: chooser,
+        title: prompt.title || 'Choose an effect',
+        choices: choices.map(option => ({ label: option.label || option.id || 'Option' }))
+      }, index => resolve(choices[index] || choices[0] || null)));
+    }
+    return null;
+  }
+
   // ?? CONTINUOUS RULES & BOARD AURAS ENGINE (PHASE 3) ??
   function dispatchContinuousRules() {
     if (!DuelState.inDuel) return;
@@ -1982,7 +2024,7 @@
     return { allowed: canAfford, cost: effCost, baseCost: rawCost };
   }
 
-  function castAccel(cardUid, side = 'player') {
+  async function castAccel(cardUid, side = 'player') {
     const friendlyState = side === 'player' ? DuelState.player : DuelState.opponent;
     const cardIdx = (friendlyState.hand || []).findIndex(c => c.uid === cardUid);
     if (cardIdx === -1) return;
@@ -2006,6 +2048,28 @@
     // Extract Accel effect block and execute
     const accelBlockMatch = card.effect.match(/(?:\[\s*)?Accel(?:\s*:\s*Cost[^\n\r\]<]+)?(?:\])?([\s\S]*?)(?=\[LV|\[During|\(When|$)/i);
     const accelText = accelBlockMatch ? accelBlockMatch[1].trim() : card.effect;
+
+    const structuredData = getCardEffectsData(card);
+    const accelAbility = structuredData?.abilities?.find(ability =>
+      (ability?.header?.prefixes || []).some(prefix => /\bAccel\b/i.test(prefix)) ||
+      String(ability?.header?.keyword || '').toLowerCase() === 'accel'
+    );
+    if (accelAbility) {
+      const result = await resolveStructuredCardAbility(card, accelAbility, side, { activated: true });
+      if (result?.success === false) {
+        if (typeof showToast === 'function') showToast(`Accel effect could not resolve: ${result.reason || 'effect failed'}.`, 'warning');
+      }
+      const liveHandIndex = (friendlyState.hand || []).findIndex(item => item.uid === cardUid);
+      if (liveHandIndex !== -1) friendlyState.hand.splice(liveHandIndex, 1);
+      if (!friendlyState.openCards) friendlyState.openCards = [];
+      friendlyState.voidCards = (friendlyState.voidCards || []).filter(item => item.uid !== cardUid);
+      if (!friendlyState.openCards.some(item => item.uid === cardUid)) friendlyState.openCards.push(card);
+      addLog(`🎴 **[ACCEL RESOLVED]**: "${card.name}" placed face-up into your Open Zone.`, 'magic');
+      if (side === 'player' && typeof showToast === 'function') showToast(`🎴 Accel resolved: "${card.name}" moved to Open Zone!`, 'success');
+      renderDuelTable();
+      if (side === 'player') renderPlayerHand();
+      return result;
+    }
 
     // Check PerCardRegistry first for deterministic card logic
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
@@ -2771,6 +2835,56 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
   const NO_PROMPT_TRIGGERS = new Set(['PASSIVE', 'BURST', 'FLASH', 'GRAND_SKILL', 'GRAND_FIELD']);
 
+  function structuredAbilityUsageKey(card, ability, side) {
+    const turn = DuelState.turn || DuelState.turnNumber || 1;
+    return `${turn}:${DuelState.activePlayer || side}:${side}:${card?.uid || card?.card_number || card?.cardNumber}:${ability?.id || ''}`;
+  }
+
+  function hasUsedStructuredAbility(card, ability, side) {
+    if (ability?.header?.limit !== 'ONCE_PER_TURN') return false;
+    if (!(DuelState.usedStructuredAbilities instanceof Set)) DuelState.usedStructuredAbilities = new Set();
+    return DuelState.usedStructuredAbilities.has(structuredAbilityUsageKey(card, ability, side));
+  }
+
+  async function resolveStructuredCardAbility(card, ability, side, context = {}) {
+    const adapter = typeof window !== 'undefined' && window.BSEngineAdapter;
+    if (!adapter || typeof adapter.resolveLegacyAbility !== 'function') {
+      throw new Error('Structured effect engine is unavailable.');
+    }
+    if (hasUsedStructuredAbility(card, ability, side)) {
+      return { success: false, reason: 'ABILITY_LIMIT_REACHED' };
+    }
+    const promptResolver = {
+      choose(prompt) {
+        const decision = promptStructuredDecision(prompt, card, side);
+        if (decision) return decision;
+        return new Promise(resolve => {
+          const candidates = (prompt.candidates || []).map(item => item.card || item.stack?.top || item);
+          if (!candidates.length) return resolve([]);
+          const chooser = prompt.chooser || side;
+          if (chooser !== 'player' || typeof document === 'undefined') {
+            return resolve(candidates.slice(0, prompt.max || 1));
+          }
+          promptUniversalTargetModal({
+            card, side: chooser, targetSide: prompt.controller === 'opponent' ? 'player' : 'opponent',
+            targetKind: prompt.targetType === 'NEXUS' ? 'nexus' : (prompt.targetType === 'ULTIMATE' ? 'ultimate' : 'spirit'),
+            customPool: candidates, title: prompt.title || 'Choose target',
+            description: prompt.description || '', minCount: prompt.min || 1,
+            maxCount: prompt.max || prompt.count || 1, allowSkip: Boolean(prompt.optional)
+          }, resolve);
+        });
+      }
+    };
+    const result = await adapter.resolveLegacyAbility(DuelState, card, ability, side, { promptResolver, context });
+    const opFailed = (result?.results || []).some(item => item && item.success === false);
+    if (ability?.header?.limit === 'ONCE_PER_TURN' && result?.success !== false && !opFailed) {
+      if (!(DuelState.usedStructuredAbilities instanceof Set)) DuelState.usedStructuredAbilities = new Set();
+      DuelState.usedStructuredAbilities.add(structuredAbilityUsageKey(card, ability, side));
+    }
+    renderDuelTable();
+    return result;
+  }
+
   function executeUniversalCardEffect(card, side, trigger, context = {}) {
     if (!card) return;
     const cardData = getCardEffectsData(card);
@@ -2790,24 +2904,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         console.error('[Structured effects] Engine adapter is unavailable; refusing legacy text fallback.', card.card_number || card.cardNumber);
         return;
       }
-      const promptResolver = {
-        choose(prompt) {
-          return new Promise(resolve => {
-            const candidates = (prompt.candidates || []).map(item => item.card || item.stack?.top || item);
-            if (!candidates.length || side !== 'player' || typeof document === 'undefined') return resolve([]);
-            promptUniversalTargetModal({
-              card, side, targetSide: prompt.controller === 'opponent' ? 'player' : 'opponent',
-              targetKind: prompt.targetType === 'NEXUS' ? 'nexus' : (prompt.targetType === 'ULTIMATE' ? 'ultimate' : 'spirit'),
-              customPool: candidates, title: prompt.title || 'Choose target',
-              description: prompt.description || '', minCount: prompt.min || 1,
-              maxCount: prompt.max || 1, allowSkip: Boolean(prompt.optional)
-            }, resolve);
-          });
-        }
-      };
       return abilities.reduce((chain, ability) => chain.then(async () => {
-        await adapter.resolveLegacyAbility(DuelState, card, ability, side, { promptResolver, context });
-        renderDuelTable();
+        await resolveStructuredCardAbility(card, ability, side, context);
       }), Promise.resolve());
     }
     if (!cardData || !cardData.triggers) return;
@@ -4926,10 +5024,12 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
               <div class="bnz-nexus-stats">
                 <span>LV${n.currentLevel || 1}</span>
                 <span class="bnz-core-badge">🔮 ${n.currentCores || 0}c</span>
-                <div class="bnz-core-controls">
-                  <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-</button>
-                  <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+</button>
-                </div>
+                ${isGrandwalkerNexus(n)
+                  ? '<span class="bnz-core-controls-locked" title="Grandwalker Nexus cores are controlled by effects">Effect controlled</span>'
+                  : `<div class="bnz-core-controls">
+                      <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-</button>
+                      <button class="bnz-btn-core" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+</button>
+                    </div>`}
                 ${(() => {
                   const check = canActivateGrandSkill(n, 'player');
                   if (check.allowed && check.gs) {
@@ -7170,7 +7270,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   // ── MANUAL ACTIVATED ABILITIES (MAIN / FLASH / GOD SKILLS ON FIELD & HAND) ──
-  function executeManualFieldAbility(cardUid, abilityType, side = 'player') {
+  async function executeManualFieldAbility(cardUid, abilityType, side = 'player') {
     const isPlayer = side === 'player';
     const friendlyState = isPlayer ? DuelState.player : DuelState.opponent;
     const field = friendlyState.field || [];
@@ -7208,6 +7308,35 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     if (!eligibleBlocks.length) {
       if (typeof showToast === 'function' && isPlayer) showToast(`No eligible [${abilityType}] abilities found on this card.`, 'info');
+      return;
+    }
+
+    const structuredData = getCardEffectsData(unit);
+    if (Array.isArray(structuredData?.abilities)) {
+      const timingSet = abilityType === 'MAIN'
+        ? new Set(['MAIN', 'MAIN_STEP'])
+        : new Set(['FLASH', 'ATTACK_STEP']);
+      const abilities = structuredData.abilities.filter(ability => {
+        if (!timingSet.has(ability?.header?.timing)) return false;
+        if ((ability?.header?.prefixes || []).some(prefix => /Grand Skill\s*:/i.test(prefix))) return false;
+        const levels = ability?.header?.levels || [];
+        return !levels.length || levels.includes(Number(unit.currentLevel || 1));
+      });
+      if (!abilities.length) {
+        if (typeof showToast === 'function' && isPlayer) showToast(`No structured [${abilityType}] ability is available at this level.`, 'info');
+        return;
+      }
+      for (const ability of abilities) {
+        const result = await resolveStructuredCardAbility(unit, ability, side, { activated: true });
+        if (result?.reason === 'ABILITY_LIMIT_REACHED') {
+          if (typeof showToast === 'function' && isPlayer) showToast('This ability has already been used this turn.', 'warning');
+          return result;
+        }
+      }
+      addLog(`✨ **[MANUAL ACTIVATION: ${unit.name}]**: Resolved structured [${abilityType}] ability.`, 'magic');
+      if (typeof showToast === 'function' && isPlayer) showToast(`Activated [${abilityType}] ability on "${unit.name}"!`, 'success');
+      renderDuelTable();
+      if (isPlayer) renderPlayerHand();
       return;
     }
 
@@ -10611,6 +10740,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     const card = (DuelState.player.nexus || []).find(n => n.uid === uid);
     if (!card) return;
+    if (isGrandwalkerNexus(card)) {
+      showToast('Grandwalker Nexus cores can only be increased by Core Charge or an effect that targets a Grandwalker Nexus.', 'warning');
+      return;
+    }
     if (DuelState.player.reserve < 1) {
       showToast("No cores available in Reserve to move to this Nexus!", 'warning');
       return;
@@ -10638,6 +10771,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
     const card = (DuelState.player.nexus || []).find(n => n.uid === uid);
     if (!card) return;
+    if (isGrandwalkerNexus(card)) {
+      showToast('Grandwalker Nexus cores cannot be moved manually; use an effect that targets a Grandwalker Nexus.', 'warning');
+      return;
+    }
     if ((card.currentCores || 0) <= 0) {
       showToast("No cores on this Nexus to remove!", 'warning');
       return;
@@ -10690,10 +10827,37 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     };
   }
 
+  function isGrandwalkerNexus(card) {
+    const families = [card?.family, ...(Array.isArray(card?.families) ? card.families : [])]
+      .filter(Boolean).join(' ').toLowerCase();
+    return families.includes('grandwalker') || String(card?.type || '').toLowerCase().includes('grandwalker nexus');
+  }
+
+  function findStructuredGrandSkillAbility(card, cost = null) {
+    const data = getCardEffectsData(card);
+    if (!Array.isArray(data?.abilities)) return null;
+    return data.abilities.find(ability => {
+      const prefixes = ability?.header?.prefixes || [];
+      return prefixes.some(prefix => {
+        const match = String(prefix).match(/Grand Skill:\s*(\d+)/i);
+        return match && (cost == null || Number(match[1]) === Number(cost));
+      });
+    }) || null;
+  }
+
   function canActivateGrandSkill(nexus, side = 'player') {
     if (!nexus) return { allowed: false, reason: 'No card' };
     const gs = parseGrandSkill(nexus);
     if (!gs) return { allowed: false, reason: 'No Grand Skill' };
+    const ability = findStructuredGrandSkillAbility(nexus, gs.cost);
+    if (!ability) return { allowed: false, reason: 'No structured effect is registered for this Grand Skill', gs };
+    if (hasUsedStructuredAbility(nexus, ability, side)) {
+      return { allowed: false, reason: 'This Grand Skill has already been used this turn', gs };
+    }
+    const levels = ability.header?.levels || [];
+    if (levels.length && !levels.includes(Number(nexus.currentLevel || 1))) {
+      return { allowed: false, reason: `This Grand Skill requires level ${levels.join(' or ')}`, gs };
+    }
 
     const isOurTurn = (DuelState.activePlayer === side);
     const phase = DuelState.phases[DuelState.phaseIndex];
@@ -10741,7 +10905,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     return { allowed: true, gs };
   }
 
-  function activateGrandSkill(nexusUid, side = 'player') {
+  async function activateGrandSkill(nexusUid, side = 'player') {
     const sideState = side === 'player' ? DuelState.player : DuelState.opponent;
     const enemySide = side === 'player' ? 'opponent' : 'player';
     const enemyState = side === 'player' ? DuelState.opponent : DuelState.player;
@@ -10759,39 +10923,16 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     const gs = check.gs;
-    nexus.currentCores -= gs.cost;
-    const pLevels = nexus.levels || parseLevels(nexus.levels || nexus.raw_levels);
-    const lv2req = (pLevels[1] && pLevels[1].cores !== undefined) ? pLevels[1].cores : 999;
-    nexus.currentLevel = (nexus.currentCores >= lv2req) ? 2 : 1;
-
-    AudioFX.burstIgnite ? AudioFX.burstIgnite() : AudioFX.coreChime();
-
-    const effLower = nexus.effect.toLowerCase();
-    if (effLower.includes('destroy an opposing exhausted spirit') || effLower.includes('destroy 1 opposing exhausted spirit') || effLower.includes('destroy an opposing spirit')) {
-      const exhaustedEnemies = (enemyState.field || []).filter(s => s.isExhausted);
-      const targetList = exhaustedEnemies.length > 0 ? exhaustedEnemies : (enemyState.field || []);
-
-      if (targetList.length > 0) {
-        targetList.sort((a, b) => (b.battleBp || b.currentBp || 0) - (a.battleBp || a.currentBp || 0));
-        const victim = targetList[0];
-        const vIdx = enemyState.field.findIndex(s => s.uid === victim.uid);
-        if (vIdx !== -1) {
-          const popped = enemyState.field.splice(vIdx, 1)[0];
-          recycleSpiritCoresToReserve(popped, enemySide);
-          sendToTrash(popped, enemySide, `Destroyed by ${nexus.name}'s [Grand Skill: ${gs.cost}]`);
-          AudioFX.destroy();
-          addLog(`⚡🏛️ **[GRAND SKILL: ${gs.cost} ACTIVATED: ${nexus.name}]**: Sent ${gs.cost} Cores from Nexus to Void! Destroyed opposing exhausted Spirit "${popped.name}"!`, 'damage');
-          if (typeof showToast === 'function') {
-            showToast(`⚡ [Grand Skill: ${gs.cost}]: Destroyed opposing "${popped.name}"!`, 'success');
-          }
-        }
-      } else {
-        addLog(`⚡🏛️ **[GRAND SKILL: ${gs.cost} ACTIVATED: ${nexus.name}]**: Sent ${gs.cost} Cores from Nexus to Void! (No opposing exhausted spirits on field).`, 'magic');
-      }
-    } else {
-      executeUniversalCardEffect(nexus, side, 'FLASH');
-      addLog(`⚡🏛️ **[GRAND SKILL: ${gs.cost} ACTIVATED: ${nexus.name}]**: Sent ${gs.cost} Cores from Nexus to Void! Triggered Flash effect.`, 'magic');
+    const ability = findStructuredGrandSkillAbility(nexus, gs.cost);
+    if (!ability) return;
+    const result = await resolveStructuredCardAbility(nexus, ability, side, { activated: true });
+    if (!result?.success || (result.results || []).some(item => item?.success === false)) {
+      if (typeof showToast === 'function') showToast(`Grand Skill could not resolve: ${result?.reason || 'cost or effect condition failed'}.`, 'warning');
+      renderDuelTable();
+      return result;
     }
+    AudioFX.burstIgnite ? AudioFX.burstIgnite() : AudioFX.coreChime();
+    addLog(`⚡🏛️ **[GRAND SKILL: ${gs.cost} ACTIVATED: ${nexus.name}]**: Resolved its structured effect.`, 'magic');
 
     renderDuelTable();
     const zoneModal = document.getElementById('battleZoneModal');
@@ -15916,10 +16057,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
                     <span>Cost ${n.cost ?? 0}</span>
                     <span style="color:#bae6fd;">🔮 ${n.currentCores || 0} Core${n.currentCores === 1 ? '' : 's'}</span>
                   </div>
-                  <div style="display:flex; justify-content:center; gap:0.4rem; margin:0.45rem 0;">
-                    <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(239,68,68,0.25); border-color:#f87171;" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-1 Core</button>
-                    <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(56,189,248,0.25); border-color:#38bdf8;" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+1 Core</button>
-                  </div>
+                  ${isGrandwalkerNexus(n) ? '<div style="font-size:0.75rem;color:#94a3b8;margin:0.45rem 0;">Cores are controlled by effects</div>' : `
+                    <div style="display:flex; justify-content:center; gap:0.4rem; margin:0.45rem 0;">
+                      <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(239,68,68,0.25); border-color:#f87171;" onclick="event.stopPropagation(); BattleArena.removeCoreFromNexus('${n.uid}')" title="Return 1 Core to Reserve">-1 Core</button>
+                      <button class="btn-duel-tool" style="padding:0.25rem 0.6rem; font-size:0.75rem; font-weight:700; background:rgba(56,189,248,0.25); border-color:#38bdf8;" onclick="event.stopPropagation(); BattleArena.addCoreToNexus('${n.uid}')" title="Add 1 Core from Reserve">+1 Core</button>
+                    </div>`}
                   <div style="font-size:0.75rem; color:#cbd5e1; margin-top:0.35rem; line-height:1.3; max-height:110px; overflow-y:auto;">
                     ${formatEffectKeywords(n.effect || n.summary || '')}
                   </div>

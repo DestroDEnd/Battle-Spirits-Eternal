@@ -117,7 +117,7 @@ export const SD46_OVERRIDES = {
           ],
           "levelExplicit": false,
           "prefixes": [],
-          "timing": "PASSIVE",
+          "timing": "WHEN_TARGET_SPIRIT_BRAVE_SUMMONED",
           "timingLabel": "",
           "timingStep": "ANY",
           "limit": null,
@@ -139,7 +139,10 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "MOVE_CORE",
-              "isCost": false
+              "count": 1,
+              "from": { "zone": "void" },
+              "to": { "zone": "field", "target": "self" },
+              "filter": { "costGte": 3, "familiesAny": ["Emperor Beast", "Ten Crown", "God-King", "Worldswalker", "Avatar"] }
             }
           }
         ],
@@ -156,7 +159,7 @@ export const SD46_OVERRIDES = {
           ],
           "levelExplicit": false,
           "prefixes": [],
-          "timing": "PASSIVE",
+          "timing": "WHEN_DEPLOYED",
           "timingLabel": "",
           "timingStep": "ANY",
           "limit": null,
@@ -178,25 +181,14 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "CORE_CHARGE_TRIGGER",
-              "millCount": 3
+              "millCount": 3,
+              "uniqueGrandwalkerName": true,
+              "filter": {
+                "costGte": 3,
+                "familiesAny": ["Emperor Beast", "Ten Crown", "God-King", "Worldswalker", "Avatar"]
+              }
             }
           },
-          {
-            "rawText": "For each target card among them, put a core from the Void onto this Nexus.",
-            "cleanText": "For each target card among them, put a core from the Void onto this Nexus",
-            "link": null,
-            "isOptional": false,
-            "isCost": false,
-            "condition": null,
-            "duration": null,
-            "op": {
-              "op": "MOVE_CORE",
-              "count": 1,
-              "source": "VOID",
-              "destination": "THIS_NEXUS",
-              "forEach": "TARGET_CARDS_COUNT"
-            }
-          }
         ],
         "unsupported": []
       },
@@ -211,7 +203,7 @@ export const SD46_OVERRIDES = {
           ],
           "levelExplicit": false,
           "prefixes": [],
-          "timing": "PASSIVE",
+          "timing": "WHEN_REVEALED_BY_BOMBARDMENT",
           "timingLabel": "",
           "timingStep": "ANY",
           "limit": null,
@@ -262,7 +254,7 @@ export const SD46_OVERRIDES = {
           "timing": "MAIN_STEP",
           "timingLabel": "Your Main Step",
           "timingStep": "ANY",
-          "limit": null,
+          "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
           "burstCondition": null,
@@ -280,10 +272,22 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
+              "op": "GRANDWALKER_ACTION",
+              "costCores": 2
+            }
+          },
+          {
+            "rawText": "Draw a card.",
+            "cleanText": "Draw a card",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
               "op": "DRAW",
               "count": 1,
-              "chooser": "self",
-              "forEach": null
+              "chooser": "self"
             }
           }
         ],
@@ -304,7 +308,7 @@ export const SD46_OVERRIDES = {
           "timing": "ATTACK_STEP",
           "timingLabel": "Either Attack Step",
           "timingStep": "ANY",
-          "limit": null,
+          "limit": "ONCE_PER_TURN",
           "cantStack": false,
           "keyword": null,
           "burstCondition": null,
@@ -322,12 +326,26 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
+              "op": "GRANDWALKER_ACTION",
+              "costCores": 1
+            }
+          },
+          {
+            "rawText": "Destroy an opposing 15000 BP or less Spirit/Ultimate.",
+            "cleanText": "Destroy an opposing 15000 BP or less Spirit/Ultimate",
+            "link": "byDoing",
+            "isOptional": false,
+            "isCost": false,
+            "condition": null,
+            "duration": null,
+            "op": {
               "op": "DESTROY",
               "count": 1,
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
+                  "Spirit",
+                  "Ultimate"
                 ],
                 "filters": {
                   "bpLte": 15000
@@ -391,6 +409,7 @@ export const SD46_OVERRIDES = {
             "op": {
               "op": "DESTROY",
               "count": 1,
+              "ignoreArmor": true,
               "target": {
                 "side": "opp",
                 "types": [
@@ -413,11 +432,16 @@ export const SD46_OVERRIDES = {
             "op": {
               "op": "DESTROY",
               "count": 1,
+              "ignoreArmor": true,
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
-                ]
+                  "Spirit",
+                  "Ultimate"
+                ],
+                "filters": {
+                  "sameFamilyAsPrevious": true
+                }
               }
             }
           },
@@ -469,7 +493,9 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "MOVE_SOUL_CORE"
+              "op": "MOVE_SOUL_CORE",
+              "destination": "life",
+              "requireSourceSoul": true
             }
           }
         ],
@@ -505,10 +531,13 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "BOUNCE",
+              "op": "SALVAGE",
               "count": 1,
               "target": {
-                "side": "either"
+                "side": "self",
+                "zone": "grave",
+                "types": ["Spirit"],
+                "filters": { "nameIncludes": "Z" }
               }
             }
           }
@@ -546,7 +575,7 @@ export const SD46_OVERRIDES = {
           ],
           "levelExplicit": false,
           "prefixes": [],
-          "timing": "PASSIVE",
+          "timing": "WHEN_GODKING_ATTACKS",
           "timingLabel": "",
           "timingStep": "ANY",
           "limit": null,
@@ -567,8 +596,10 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "SUMMON",
-              "free": true
+              "op": "SUMMON_FREE",
+              "target": "this_card",
+              "from": "BURST",
+              "costCores": 1
             }
           },
           {
@@ -580,7 +611,8 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "SET_BURST_FROM_HAND",
+              "count": 1
             }
           }
         ],
@@ -603,7 +635,7 @@ export const SD46_OVERRIDES = {
           "limit": null,
           "cantStack": false,
           "keyword": null,
-          "burstCondition": "AFTER_TRIGGER_CONDITION",
+          "burstCondition": "AFTER_OPPONENT_SUMMON_EFFECT",
           "isFlash": false,
           "isMain": false,
           "cleanBody": "Destroy three opposing 12000 BP or less Spirits. After this effect resolves, summon this card without paying the cost."
@@ -623,7 +655,8 @@ export const SD46_OVERRIDES = {
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
+                  "Spirit",
+                  "Brave"
                 ],
                 "filters": {
                   "bpLte": 12000
@@ -758,7 +791,9 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "MODIFY_LIFE"
+              "op": "MOVE_SOUL_CORE",
+              "destination": "life",
+              "requireSourceSoul": true
             }
           }
         ],
@@ -811,7 +846,10 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "GRANDWALKER_ACTION"
+              "op": "GRANDWALKER_ACTION",
+              "countFrom": "REVEALED_MATCHES",
+              "targetColor": "Red",
+              "filter": { "nameIncludesAny": ["Z", "Steel"] }
             }
           },
           {
@@ -824,7 +862,11 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "MOVE_CORE",
-              "isCost": false
+              "isCost": false,
+              "countFrom": "REVEALED_MATCHES",
+              "filter": { "nameIncludesAny": ["Z", "Steel"] },
+              "from": { "zone": "life", "side": "opp" },
+              "to": { "zone": "reserve", "side": "opp" }
             }
           },
           {
@@ -836,7 +878,8 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "ADD_TO_HAND"
+              "op": "ADD_TO_HAND",
+              "count": 2
             }
           }
         ],
@@ -878,7 +921,8 @@ export const SD46_OVERRIDES = {
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
+                  "Spirit",
+                  "Ultimate"
                 ],
                 "filters": {
                   "bpLte": 15000
@@ -920,7 +964,7 @@ export const SD46_OVERRIDES = {
           ],
           "levelExplicit": false,
           "prefixes": [],
-          "timing": "PASSIVE",
+          "timing": "WHEN_OPPONENT_WOULD_REDUCE_LIFE",
           "timingLabel": "",
           "timingStep": "ANY",
           "limit": null,
@@ -942,7 +986,9 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "SUMMON_THIS_CARD",
-              "from": "HAND_OR_BURST"
+              "from": "HAND_OR_REMOVED",
+              "costCores": 1,
+              "preventsLifeLoss": true
             }
           }
         ],
@@ -981,9 +1027,10 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "BOUNCE",
-              "count": 1,
+              "count": 3,
               "target": {
-                "side": "either"
+                "side": "opp",
+                "types": ["Spirit", "Ultimate"]
               }
             }
           },
@@ -1038,7 +1085,8 @@ export const SD46_OVERRIDES = {
               "target": {
                 "side": "opp",
                 "types": [
-                  "Spirit"
+                  "Spirit",
+                  "Ultimate"
                 ],
                 "filters": {
                   "bpLte": 10000
@@ -1055,7 +1103,8 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "UNBLOCKABLE"
+              "op": "UNBLOCKABLE",
+              "cannotBeBlockedByFilter": { "types": ["Spirit"] }
             }
           }
         ],
@@ -1121,7 +1170,7 @@ export const SD46_OVERRIDES = {
                   "Spirit"
                 ]
               },
-              "destination": "DECK"
+              "destination": "deck_bottom"
             }
           },
           {
@@ -1172,6 +1221,7 @@ export const SD46_OVERRIDES = {
             "op": {
               "op": "MOVE_CORE",
               "count": 1,
+              "countFrom": "OPPONENT_HAND_DIV3",
               "from": {
                 "zone": "void"
               },
@@ -1211,13 +1261,13 @@ export const SD46_OVERRIDES = {
             "link": null,
             "isOptional": true,
             "isCost": false,
-            "condition": null,
+            "condition": "destroyed_by_opponent",
             "duration": null,
             "op": {
               "op": "BOUNCE",
               "count": 1,
               "target": {
-                "side": "either"
+                "target": "self"
               }
             }
           }
@@ -1330,7 +1380,8 @@ export const SD46_OVERRIDES = {
             "duration": null,
             "op": {
               "op": "IMMUNITY",
-              "immuneTo": "OPPOSING_EFFECTS"
+              "immuneTo": "OPPOSING_EFFECTS",
+              "sourceTypes": ["Spirit", "Nexus"]
             }
           }
         ],
@@ -1369,8 +1420,10 @@ export const SD46_OVERRIDES = {
             "op": {
               "op": "BP_BUFF",
               "amount": 3000,
-              "target": "self",
-              "duration": "THIS_TURN"
+              "target": { "state": "attacking_or_blocking" },
+              "forEach": "EXHAUSTED_SPIRIT_COUNT",
+              "duration": "THIS_TURN",
+              "canBlockWhileExhausted": true
             }
           }
         ],
@@ -1515,15 +1568,16 @@ export const SD46_OVERRIDES = {
             "link": "also",
             "isOptional": false,
             "isCost": false,
-            "condition": null,
+            "condition": "summoned_from_removed",
             "duration": null,
             "op": {
               "op": "DESTROY",
               "count": 1,
               "target": {
-                "side": "either"
-              },
-              "isCost": false
+                "side": "opp",
+                "types": ["Spirit", "Ultimate"],
+                "filters": { "bpGte": 10000 }
+              }
             }
           }
         ],
@@ -1609,7 +1663,11 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "ADD_TO_HAND"
+              "op": "ADD_TO_HAND",
+              "filterGroups": [
+                { "count": 1, "filter": { "cardNumber": "SD46-CP01" } },
+                { "count": 1, "filter": { "types": ["Spirit"], "colorsAny": ["Red", "White"], "familiesAny": ["Worldswalker", "Ten Crown", "God-King"] } }
+              ]
             }
           },
           {
@@ -1697,9 +1755,41 @@ export const SD46_OVERRIDES = {
             "condition": null,
             "duration": null,
             "op": {
-              "op": "KEYWORD_RULE"
+              "op": "REVEAL_BONUS",
+              "amount": 3,
+              "appliesTo": "BOMBARDMENT"
             }
           }
+        ],
+        "unsupported": []
+      }
+    ],
+    "compiledClausesCount": 5,
+    "unsupportedClausesCount": 0,
+    "isFullySupported": true,
+    "isVanilla": false
+  },
+  "LM16-01": {
+    "cardNumber": "LM16-01",
+    "abilities": [
+      {
+        "id": "LM16-01#a0",
+        "type": "ABILITY",
+        "header": { "levels": [1, 2, 3], "levelExplicit": false, "prefixes": ["Accel"], "timing": "MAIN", "timingLabel": "Main", "timingStep": "ANY", "limit": null, "cantStack": false, "keyword": "Accel", "burstCondition": null, "isFlash": false, "isMain": true, "cleanBody": "Reveal three cards from your deck. Add an Imagine family Brave and a God-King or Ten Crown Spirit among them to your hand, discard the rest, then place this card face-up in the Removed Zone." },
+        "clauses": [
+          { "rawText": "You can reveal three cards from your decktop.", "cleanText": "Reveal three cards from your decktop", "link": null, "isOptional": true, "isCost": false, "condition": null, "duration": null, "op": { "op": "REVEAL_DECKTOP", "count": 3 } },
+          { "rawText": "Add an Imagine family Brave card and a God-King or Ten Crown family Spirit card to your Hand.", "cleanText": "Add the matching cards to your Hand", "link": null, "isOptional": false, "isCost": false, "condition": null, "duration": null, "op": { "op": "ADD_TO_HAND", "filterGroups": [ { "count": 1, "filter": { "types": ["Brave"], "family": "Imagine" }, "title": "Choose an Imagine Brave" }, { "count": 1, "filter": { "types": ["Spirit"], "familiesAny": ["God-King", "Ten Crown"] }, "title": "Choose a God-King or Ten Crown Spirit" } ] } },
+          { "rawText": "Discard any remaining cards.", "cleanText": "Discard any remaining revealed cards", "link": null, "isOptional": false, "isCost": false, "condition": null, "duration": null, "op": { "op": "DISCARD_REVEALED" } },
+          { "rawText": "After this effect resolves, put this card face-up onto the Removed Zone.", "cleanText": "After this effect resolves, put this card face-up onto the Removed Zone", "link": "afterResolves", "isOptional": false, "isCost": false, "condition": null, "duration": null, "op": { "op": "OPEN_ZONE" } }
+        ],
+        "unsupported": []
+      },
+      {
+        "id": "LM16-01#a1",
+        "type": "ABILITY",
+        "header": { "levels": [1, 2, 3], "levelExplicit": true, "prefixes": [], "timing": "WHEN_SUMMONED", "timingLabel": "When Summoned", "timingStep": "ANY", "limit": null, "cantStack": false, "keyword": null, "burstCondition": null, "isFlash": false, "isMain": false, "cleanBody": "When summoned from the Removed Zone, you can summon an Imagine family Brave card from your Hand without paying its cost." },
+        "clauses": [
+          { "rawText": "When summoned from the Removed Zone, you can summon an Imagine family Brave card from your Hand without paying its cost.", "cleanText": "Summon an Imagine family Brave from your Hand without paying its cost", "link": null, "isOptional": true, "isCost": false, "condition": "summoned_from_removed", "duration": null, "op": { "op": "SUMMON", "from": "hand", "free": true, "filter": { "types": ["Brave"], "family": "Imagine" } } }
         ],
         "unsupported": []
       }

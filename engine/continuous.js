@@ -119,7 +119,9 @@ export function computeEffectiveBP(state, stack) {
   if (state && state.players) {
     const controller = stack.owner || 'player';
     const ctrlPlayer = state.players[controller];
-    if (ctrlPlayer) {
+    const attackingStack = state.combat && Object.values(state.players).flatMap(player => player.field || []).find(st => st.id === state.combat.attackerStackId);
+    const isOpposingAttack = Boolean(attackingStack && attackingStack.owner !== controller);
+    if (ctrlPlayer && isOpposingAttack) {
       const allSources = [...(ctrlPlayer.field || []), ...(ctrlPlayer.nexus || []).map(n => ({ top: n, cores: { normal: 1, soul: 0 } }))];
       for (const sourceSt of allSources) {
         if (sourceSt && sourceSt.top && sourceSt.top.compiledIr) {
@@ -129,7 +131,7 @@ export function computeEffectiveBP(state, stack) {
               if (!ab.header.levels || ab.header.levels.includes(lv)) {
                 for (const cl of ab.clauses || []) {
                   if (cl.op && cl.op.op === 'BP_BUFF' && cl.op.target && cl.op.target.state === 'attacking_or_blocking') {
-                    if (state.combat && (state.combat.attackerStackId === stack.id || state.combat.blockerStackId === stack.id)) {
+                    if (state.combat && sourceSt.id === stack.id && (state.combat.attackerStackId === stack.id || !state.combat.blockerStackId || state.combat.blockerStackId === stack.id)) {
                       if (cl.op.forEach === 'EXHAUSTED_SPIRIT_COUNT') {
                         const count = (ctrlPlayer.field || []).filter(st =>
                           (st.state === 'EXHAUSTED' || st.state === 'HEAVY_EXHAUSTED') && (st.top.type || '').includes('Spirit')
@@ -166,6 +168,14 @@ export function computeColors(state, stackOrCard) {
   let colors = Array.isArray(card.colors)
     ? [...card.colors]
     : (card.colors ? [card.colors] : (card.color ? [card.color] : ['Red']));
+
+  for (const ability of card.compiledIr?.abilities || []) {
+    if (ability.header?.timing !== 'PASSIVE' || (ability.header.levels?.length && stack && !ability.header.levels.includes(computeLevel(stack, state)))) continue;
+    for (const clause of ability.clauses || []) {
+      const op = clause.op || {};
+      if (op.op === 'TREAT_COLOR_SYMBOL' && op.color && !colors.includes(op.color)) colors.push(op.color);
+    }
+  }
 
   if (stack && Array.isArray(stack.braves)) {
     for (const brave of stack.braves) {
@@ -256,6 +266,15 @@ export function computeSymbols(state, stack) {
   if (!stack || !stack.top) return [];
   const symbols = [...(stack.top.symbols || [stack.top.color || 'Red'])];
 
+  const activeLevel = computeLevel(stack, state);
+  for (const ability of stack.top.compiledIr?.abilities || []) {
+    if (ability.header?.timing !== 'PASSIVE' || (ability.header.levels?.length && !ability.header.levels.includes(activeLevel))) continue;
+    for (const clause of ability.clauses || []) {
+      const op = clause.op || {};
+      if (op.op === 'TREAT_COLOR_SYMBOL' && op.color && !symbols.includes(op.color)) symbols.push(op.color);
+    }
+  }
+
   // Add symbols from braved Braves
   for (const brave of stack.braves || []) {
     if (brave.symbols && brave.symbols.length > 0) {
@@ -344,7 +363,7 @@ export function getActiveStackKeywords(stack, state = null) {
   });
 }
 
-export function isImmune(state, stack, sourceCard, effectType = 'effect') {
+export function isImmune(state, stack, sourceCard, effectType = 'effect', options = {}) {
   if (!stack || !sourceCard) return false;
 
   // A card can never be immune to its own effect
@@ -380,6 +399,26 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   }
 
   const activeKeywords = getActiveStackKeywords(stack, state);
+  const sourceType = String(sourceCard.type || 'Spirit').toLowerCase();
+
+  // Declarative PASSIVE immunity is continuous and must not depend on a
+  // previously resolved trigger. Read it from the compiled IR by source type.
+  const level = computeLevel(stack, state);
+  for (const ability of stack.top?.compiledIr?.abilities || []) {
+    if (ability.header?.timing !== 'PASSIVE' || (ability.header.levels?.length && !ability.header.levels.includes(level))) continue;
+    if ((ability.clauses || []).some(cl => cl.op?.op === 'GRANDWALKER_PROTECTION') && !options.targetedGrandwalker) return true;
+  }
+  for (const ability of stack.top?.compiledIr?.abilities || []) {
+    if (ability.header?.timing !== 'PASSIVE' || (ability.header.levels && !ability.header.levels.includes(level))) continue;
+    for (const clause of ability.clauses || []) {
+      const op = clause.op || {};
+      if (op.op !== 'IMMUNITY' && op.op !== 'PROTECT') continue;
+      const allowed = op.sourceTypes || op.filter?.types || [];
+      if (op.immuneTo === 'OPPOSING_EFFECTS' || op.immuneTo === 'ALL') {
+        if (!allowed.length || allowed.some(t => sourceTypeMatches(t, sourceCard.type))) return true;
+      }
+    }
+  }
 
   // Official Bandai Fortress / True Fortress check:
   // Refreshed Spirits are unaffected by opposing effects
@@ -396,7 +435,6 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   }
 
   const sourceColors = computeColors(state, sourceCard).map(c => String(c).toLowerCase());
-  const sourceType = String(sourceCard.type || 'Spirit').toLowerCase();
 
   for (const mod of state.modifiers || []) {
     if (mod.type === 'IMMUNITY' && isModifierApplicable(mod, stack)) {
@@ -423,7 +461,7 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   }
 
   // Check Armor, Heavy Armor, Ultra Armor, Silver Wheel, Barrage
-  if (activeKeywords.length > 0) {
+  if (!options.bypassArmor && activeKeywords.length > 0) {
     if (activeKeywords.some(k => (k.name === 'Armor' || k.name === 'Ultra Armor') && String(k.parameter || '').toLowerCase() === 'all')) {
       return true;
     }
@@ -441,6 +479,7 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   }
 
   // Fallback to raw card text if keywords are not yet compiled on the card
+  if (options.bypassArmor) return false;
   const effectText = stack.top?.effect || '';
   if (effectText.toLowerCase().includes('armor: all') || effectText.toLowerCase().includes('ultra armor: all')) {
     return true;
@@ -459,6 +498,10 @@ export function isImmune(state, stack, sourceCard, effectType = 'effect') {
   }
 
   return false;
+}
+
+function sourceTypeMatches(expected, actual = '') {
+  return String(actual).toLowerCase().includes(String(expected).toLowerCase());
 }
 
 export function canAttack(state, stack) {
@@ -522,7 +565,12 @@ export function canBlock(state, stack) {
   const soarActive = Boolean(state.combat && state.combat.soarActive);
   const canBlockExhausted = soarActive ||
     (state.modifiers || []).some(m => (m.type === 'EXHAUSTED_BLOCK' || (m.type === 'COMBAT_RESTRICTION' && m.canBlockWhileExhausted)) && isModifierApplicable(m, stack)) ||
-    (stack.top?.effect && stack.top.effect.toLowerCase().includes('can block while exhausted'));
+    (stack.top?.effect && stack.top.effect.toLowerCase().includes('can block while exhausted')) ||
+    Boolean(state.combat && (stack.top?.compiledIr?.abilities || []).some(ab =>
+      ab.header?.timing === 'ATTACK_STEP' &&
+      (!ab.header.levels?.length || ab.header.levels.includes(computeLevel(stack, state))) &&
+      (ab.clauses || []).some(cl => cl.op?.canBlockWhileExhausted)
+    ));
 
   if (stack.state !== 'REFRESHED' && !canBlockExhausted) {
     return false;

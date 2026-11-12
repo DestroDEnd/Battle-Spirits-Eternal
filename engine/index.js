@@ -17,6 +17,7 @@ import { checkStateBasedActions } from './sba.js';
 import { createDefaultKeywordRegistry } from './keywords/index.js';
 import { TimingWindowManager } from './windows.js';
 import { PromptManager } from './prompt_manager.js';
+import { matchesCardFilter } from './ops/index.js';
 
 export function createGame(options = {}) {
   const playerDeckCards = (options.playerDeck || []).map(c => createCardInstance(c, 'player'));
@@ -142,7 +143,8 @@ export function createGame(options = {}) {
           card,
           stack,
           player: playerSide,
-          cause: 'summon'
+          cause: 'summon',
+          skipCardTriggers: true
         });
 
         // Trigger (When Summoned) abilities if compiled IR exists
@@ -151,11 +153,16 @@ export function createGame(options = {}) {
           for (const ab of card.compiledIr.abilities) {
             if (ab.header.timing === 'WHEN_SUMMONED' || ab.header.timing === 'WHEN_SUMMONED_OR_DESTROYED') {
               if (!ab.header.levels || ab.header.levels.includes(currentLevel)) {
-                await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card }, events);
+                await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: card, sourceStack: stack }, events);
               }
             }
           }
         }
+      } else if (card.type === 'Nexus' || String(card.type || '').includes('Nexus')) {
+        const nexusStack = createFieldStack(card, { normal: 0, soul: 0 });
+        p.field.push(nexusStack);
+        p.hand = p.hand.filter(c => c.id !== card.id);
+        await events.emit({ type: 'DEPLOYED', card, stack: nexusStack, player: playerSide, cause: 'deploy' });
       } else if (card.type === 'Magic') {
         // Magic card resolution
         p.hand = p.hand.filter(c => c.id !== card.id);
@@ -194,6 +201,31 @@ export function createGame(options = {}) {
 
       await checkStateBasedActions(state, events);
       return { success: true, card, costPaid: cost };
+    },
+
+    async activateAbility(cardId, abilityId, playerSide = 'player') {
+      const p = state.players[playerSide];
+      const stack = p.field.find(st => st.top.id === cardId);
+      if (!stack) return { success: false, reason: 'CARD_NOT_ON_FIELD' };
+      const ability = stack.top.compiledIr?.abilities?.find(ab => ab.id === abilityId);
+      if (!ability) return { success: false, reason: 'ABILITY_NOT_FOUND' };
+      const useKey = `${state.turnNumber}:${cardId}:${abilityId}`;
+      if (String(ability.header?.limit || '').toUpperCase() === 'ONCE_PER_TURN' && state.abilityUses[useKey]) {
+        return { success: false, reason: 'ABILITY_LIMIT_REACHED' };
+      }
+      const timing = String(ability.header?.timing || '').toUpperCase();
+      const mainTiming = timing === 'MAIN' || timing === 'MAIN_STEP' || timing === 'MAIN_SKILL';
+      const flashTiming = timing === 'FLASH' || timing === 'ATTACK_STEP' || timing === 'FLASH_TIMING';
+      if (mainTiming && state.step !== 'MAIN') return { success: false, reason: 'ABILITY_TIMING_MISMATCH' };
+      if (flashTiming && state.step !== 'ATTACK') return { success: false, reason: 'ABILITY_TIMING_MISMATCH' };
+      const level = computeLevel(stack, state);
+      if (ability.header.levels?.length && !ability.header.levels.includes(level)) return { success: false, reason: 'ABILITY_LEVEL_MISMATCH' };
+      const result = await resolver.resolveAbility(state, ability, { controller: playerSide, sourceCard: stack.top, sourceStack: stack }, events);
+      if (String(ability.header?.limit || '').toUpperCase() === 'ONCE_PER_TURN' && result.results?.some(item => item.success)) {
+        state.abilityUses[useKey] = true;
+      }
+      await checkStateBasedActions(state, events);
+      return { success: true, result };
     },
 
     async setBurst(cardId, playerSide = 'player') {
@@ -247,7 +279,7 @@ export function createGame(options = {}) {
         for (const ab of stack.top.compiledIr.abilities) {
           if (ab.header.timing === 'WHEN_ATTACKS' || ab.header.timing === 'WHEN_ATTACKS_OR_BLOCKS' || ab.header.timing === 'WHEN_BATTLES') {
             if (!ab.header.levels || ab.header.levels.includes(currentLevel)) {
-              await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: stack.top }, events);
+              await resolver.resolveAbility(state, ab, { controller: playerSide, sourceCard: stack.top, sourceStack: stack }, events);
             }
           }
         }
@@ -279,7 +311,7 @@ export function createGame(options = {}) {
         for (const ab of stack.top.compiledIr.abilities) {
           if (ab.header.timing === 'WHEN_BLOCKS' || ab.header.timing === 'WHEN_ATTACKS_OR_BLOCKS' || ab.header.timing === 'WHEN_BATTLES') {
             if (!ab.header.levels || ab.header.levels.includes(blockerLevel)) {
-              await resolver.resolveAbility(state, ab, { controller: blockerSide, sourceCard: stack.top }, events);
+              await resolver.resolveAbility(state, ab, { controller: blockerSide, sourceCard: stack.top, sourceStack: stack }, events);
             }
           }
         }
@@ -409,6 +441,119 @@ export function createGame(options = {}) {
     }
   };
 
+  // Resolve card-owned destruction triggers through the same compiled IR
+  // path as summon and attack triggers.
+  events.on('DESTROYED', async event => {
+    const card = event.card;
+    if (!card?.compiledIr?.abilities) return;
+    const controller = card.owner || event.fromSide || 'player';
+    for (const ability of card.compiledIr.abilities) {
+      if (ability.header.timing !== 'WHEN_DESTROYED' && ability.header.timing !== 'WHEN_SUMMONED_OR_DESTROYED') continue;
+      if (event.level && ability.header.levels?.length && !ability.header.levels.includes(event.level)) continue;
+      await resolver.resolveAbility(state, ability, {
+        controller,
+        sourceCard: card,
+        wasDestroyedByOpponent: (event.by === 'self' ? (event.sourceCard?.owner || event.fromSide) : event.by) !== controller,
+        destroyEvent: event
+      }, events);
+    }
+  });
+
+  events.on('SUMMONED', async event => {
+    if (event.skipCardTriggers) return;
+    const card = event.card;
+    if (!card?.compiledIr?.abilities) return;
+    for (const ability of card.compiledIr.abilities) {
+      if (ability.header.timing !== 'WHEN_SUMMONED' && ability.header.timing !== 'WHEN_SUMMONED_OR_DESTROYED') continue;
+      const level = event.stack ? computeLevel(event.stack, state) : 1;
+      if (ability.header.levels?.length && !ability.header.levels.includes(level)) continue;
+      await resolver.resolveAbility(state, ability, {
+        controller: event.player || card.owner,
+        sourceCard: card,
+        sourceStack: event.stack || null,
+        summonFromRemoved: event.fromZone === 'removed'
+      }, events);
+    }
+  });
+
+  events.on('ADVENTS', async event => {
+    const card = event.card;
+    if (!card || (card.type !== 'Spirit' && card.type !== 'Brave')) return;
+    for (const stack of state.players[event.player]?.field || []) {
+      for (const ability of stack.top?.compiledIr?.abilities || []) {
+        if (ability.header?.timing !== 'WHEN_TARGET_SPIRIT_BRAVE_SUMMONED') continue;
+        const level = computeLevel(stack, state);
+        if (ability.header.levels?.length && !ability.header.levels.includes(level)) continue;
+        const triggerOp = ability.clauses?.find(clause => clause.op)?.op;
+        if (!triggerOp || !matchesCardFilter(card, triggerOp.filter)) continue;
+        await resolver.resolveAbility(state, ability, { controller: event.player, sourceCard: stack.top, sourceStack: stack, summonedCard: card }, events);
+      }
+    }
+  });
+
+  events.on('SUMMONED', async event => {
+    const summoned = event.card;
+    const type = String(summoned?.type || '');
+    if (type !== 'Spirit' && type !== 'Brave') return;
+    for (const stack of state.players[event.player]?.field || []) {
+      for (const ability of stack.top?.compiledIr?.abilities || []) {
+        if (ability.header?.timing !== 'WHEN_TARGET_SPIRIT_BRAVE_SUMMONED') continue;
+        const level = computeLevel(stack, state);
+        if (ability.header.levels?.length && !ability.header.levels.includes(level)) continue;
+        const triggerOp = ability.clauses?.find(clause => clause.op)?.op;
+        if (!triggerOp || !matchesCardFilter(summoned, triggerOp.filter)) continue;
+        await resolver.resolveAbility(state, ability, { controller: event.player, sourceCard: stack.top, sourceStack: stack, summonedCard: summoned }, events);
+      }
+    }
+  });
+
+  events.on('DEPLOYED', async event => {
+    const card = event.card;
+    if (!card?.compiledIr?.abilities) return;
+    for (const ability of card.compiledIr.abilities) {
+      if (ability.header.timing !== 'WHEN_DEPLOYED') continue;
+      await resolver.resolveAbility(state, ability, { controller: event.player || card.owner, sourceCard: card, sourceStack: event.stack || null }, events);
+    }
+  });
+
+  events.on('ATTACK_DECLARED', async event => {
+    const attacker = event.attacker?.top || event.attacker?.card || event.card;
+    if (!attacker || !String(attacker.type || '').includes('Spirit')) return;
+    const families = Array.isArray(attacker.families) ? attacker.families : [attacker.family].filter(Boolean);
+    if (!families.some(family => String(family).toLowerCase() === 'god-king')) return;
+    const side = event.player || attacker.owner;
+    const burstCard = state.players[side]?.burst;
+    for (const ability of burstCard?.compiledIr?.abilities || []) {
+      if (ability.header?.timing !== 'WHEN_GODKING_ATTACKS') continue;
+      await resolver.resolveAbility(state, ability, { controller: side, sourceCard: burstCard }, events);
+    }
+  });
+
+  events.on('CARDS_REVEALED', async event => {
+    const isBombardment = (event.sourceCard?.compiledIr?.keywords || []).some(keyword => String(keyword.hook || '').toLowerCase() === 'bombardment');
+    if (!isBombardment) return;
+    for (const card of event.cards || []) {
+      for (const ability of card.compiledIr?.abilities || []) {
+        if (ability.header?.timing !== 'WHEN_REVEALED_BY_BOMBARDMENT') continue;
+        await resolver.resolveAbility(state, ability, { controller: event.player, sourceCard: card, revealEvent: event }, events);
+      }
+    }
+  });
+
+  events.on('BEFORE_LIFE_REDUCED', async event => {
+    const effectController = event?.by === 'self' ? event.sourceCard?.owner : event?.by;
+    if (!event || event.cause === 'cost' || event.cause === 'rule' || effectController === event.player) return;
+    const defender = state.players[event.player];
+    const availableCards = [...(defender.hand || []), ...(defender.removed || [])];
+    for (const card of availableCards) {
+      for (const ability of card.compiledIr?.abilities || []) {
+        if (ability.header?.timing !== 'WHEN_OPPONENT_WOULD_REDUCE_LIFE') continue;
+        await resolver.resolveAbility(state, ability, { controller: event.player, sourceCard: card, pendingLifeLoss: event }, events);
+        if (event.prevented) return;
+      }
+    }
+  });
+
   keywords.attachToGame(game);
 
   const windows = new TimingWindowManager(game);
@@ -419,6 +564,9 @@ export function createGame(options = {}) {
     await windows.openBurstWindow(ev);
   });
   events.on('DESTROYED', async (ev) => {
+    await windows.openBurstWindow(ev);
+  });
+  events.on('SUMMONED', async ev => {
     await windows.openBurstWindow(ev);
   });
   events.on('SUMMONED', async (ev) => {

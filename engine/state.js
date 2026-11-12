@@ -79,6 +79,7 @@ export function createInitialPlayerState(playerId, deckCards = []) {
       normal: 0,
       soul: 0
     },
+    voidCores: { normal: 0, soul: 0 },
     counters: 0,
     burst: null,
     mirage: null,
@@ -109,6 +110,7 @@ export function createGameState(playerDeck = [], opponentDeck = [], firstPlayer 
     },
     combat: null,
     modifiers: [], // Dynamic continuous modifiers
-    pendingPrompts: [] // Active decisions awaiting player input
+    pendingPrompts: [], // Active decisions awaiting player input
+    abilityUses: {} // Turn-scoped activation limits, keyed by card instance and ability ID
   };
 }

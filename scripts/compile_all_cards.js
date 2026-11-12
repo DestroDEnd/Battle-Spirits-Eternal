@@ -25,6 +25,7 @@ console.log(`Loaded ${totalCards} cards.`);
 if (!fs.existsSync(irShardsDir)) {
   fs.mkdirSync(irShardsDir, { recursive: true });
 }
+fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 
 let totalAbilities = 0;
 let totalClauses = 0;

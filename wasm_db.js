@@ -31,6 +31,9 @@
   function getBaseDir() {
     if (typeof window === 'undefined' || !window.location) return './';
     const loc = window.location;
+    if (loc.hostname && loc.hostname.includes('github.io')) {
+      return loc.origin + '/Battle-Spirits-Eternal/';
+    }
     const pathname = loc.pathname || '';
     const dir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
     return loc.origin + (dir || '/');
@@ -209,7 +212,7 @@
 
   // ── 2. DATABASE INITIALIZATION & LOADING ──
   async function initWasmDatabase() {
-    const startTime = performance.now();
+    const startTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
     try {
       if (typeof window.initSqlJs !== 'function') {
         console.warn('[WasmDB] sql.js not loaded. Falling back to server API.');
@@ -286,7 +289,7 @@
 
       isReady = true;
 
-      const dur = Math.round(performance.now() - startTime);
+      const dur = Math.round(((typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now()) - startTime);
       console.log(`[WasmDB] Database ready with 14,529 cards loaded in ${dur}ms!`);
 
       // Resolve queued ready callbacks
@@ -629,15 +632,6 @@
 
       return results;
     },
-          results.push(row);
-        }
-        stmt.free();
-        return results;
-      } catch (e) {
-        console.error('[WasmDB] getCardsBatch error:', e);
-        return [];
-      }
-    },
 
     getFeaturedXRares(color = '') {
       if (!dbInstance) return [];
@@ -973,10 +967,21 @@
       }
 
       // If database is currently initializing, wait for fast JSON fallback or WASM!
-      if (!isReady && initPromise) {
-        if (!isJsonReady && jsonFallbackPromise) {
+      if (!isReady && !isJsonReady) {
+        if (jsonFallbackPromise) {
           try {
-            await jsonFallbackPromise;
+            await Promise.race([
+              jsonFallbackPromise,
+              new Promise(r => setTimeout(r, 2500))
+            ]);
+          } catch(e) {}
+        }
+        if (!isReady && !isJsonReady && initPromise) {
+          try {
+            await Promise.race([
+              initPromise,
+              new Promise(r => setTimeout(r, 2500))
+            ]);
           } catch(e) {}
         }
       }
@@ -1085,13 +1090,29 @@
         }
       } else {
         // If on static hosting (e.g. GitHub Pages) and backend is not running, return safe empty JSON
-        if (window.location.hostname.includes('github.io') || window.location.protocol === 'file:') {
-          console.warn(`[WasmDB] Intercepted static API call to ${path} before DB ready.`);
-          return new Response(JSON.stringify({ total: 0, cards: [] }), {
+        console.warn(`[WasmDB] Intercepted static API call to ${path} before DB ready.`);
+        if (path.endsWith('/api/cards')) {
+          return new Response(JSON.stringify({ total: 0, cards: [], page: 1, pages: 1 }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
           });
         }
+        if (path.endsWith('/api/card')) {
+          return new Response(JSON.stringify({ error: 'Card not found' }), {
+            status: 404,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        if (path.endsWith('/api/cards-batch')) {
+          return new Response(JSON.stringify({ cards: [] }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        return new Response(JSON.stringify({ total: 0, cards: [] }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
       }
     }
 

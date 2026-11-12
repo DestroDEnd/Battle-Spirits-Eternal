@@ -14,6 +14,7 @@ export function matchesCardFilter(card, filter = {}, op = {}) {
   if (!card || typeof card !== 'object') return false;
   const f = filter || {};
   const o = op || {};
+  if (f.cardNumber && String(card.cardNumber || card.card_number || '') !== String(f.cardNumber)) return false;
 
   // Types filter
   let targetTypes = f.types || (o.cardType ? [o.cardType] : (f.type ? [f.type] : (o.types || [])));
@@ -38,6 +39,10 @@ export function matchesCardFilter(card, filter = {}, op = {}) {
     const rawColors = Array.isArray(card.colors) ? card.colors : (card.colors ? [card.colors] : (card.color ? [card.color] : []));
     if (!rawColors.some(c => c && String(c).toLowerCase() === String(targetColor).toLowerCase())) return false;
   }
+  if (Array.isArray(f.colorsAny) && f.colorsAny.length) {
+    const cardColors = Array.isArray(card.colors) ? card.colors : (card.color ? [card.color] : []);
+    if (!cardColors.some(color => f.colorsAny.some(wanted => String(color).toLowerCase() === String(wanted).toLowerCase()))) return false;
+  }
 
   // Yellow-only or single color only
   if (f.singleColorOnly || o.singleColorOnly) {
@@ -52,11 +57,17 @@ export function matchesCardFilter(card, filter = {}, op = {}) {
     if (!rawFams.some(fam => fam && String(fam).toLowerCase().includes(String(targetFamily).toLowerCase()))) return false;
   }
 
+  if (Array.isArray(f.familiesAny) && f.familiesAny.length) {
+    const cardFamilies = Array.isArray(card.families) ? card.families : (card.family ? [card.family] : []);
+    if (!cardFamilies.some(fam => f.familiesAny.some(wanted => String(fam).toLowerCase().includes(String(wanted).toLowerCase())))) return false;
+  }
+
   // Name includes filter
   const nameInc = f.nameIncludes || o.nameIncludes;
   if (nameInc) {
     if (!card.name || !String(card.name).toLowerCase().includes(String(nameInc).toLowerCase())) return false;
   }
+  if (Array.isArray(f.nameIncludesAny) && f.nameIncludesAny.length && !f.nameIncludesAny.some(part => String(card.name || '').toLowerCase().includes(String(part).toLowerCase()))) return false;
 
   // Cost filter
   const cost = typeof card.cost === 'number' ? card.cost : parseInt(card.cost || '0', 10);
@@ -130,15 +141,20 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     }
 
     case 'MOVE_CORE': {
-      const count = op.count || 1;
+      let count = op.count || 1;
+      if (op.countFrom === 'OPPONENT_HAND_DIV3') count = Math.floor((state.players[oppSide].hand || []).length / 3);
+      if (op.countFrom === 'REVEALED_MATCHES') count = (context.revealedCards || []).filter(card => matchesCardFilter(card, op.filter)).length;
       const isSoul = Boolean(op.isSoulCore);
-      const fromZone = op.from ? op.from.zone : 'reserve';
-      const toZone = op.to ? op.to.zone : 'reserve';
+      const fromZone = op.from ? op.from.zone : (op.source === 'VOID' ? 'void' : 'reserve');
+      const toZone = op.to ? op.to.zone : (op.destination === 'THIS_NEXUS' ? 'field' : 'reserve');
       const fromSide = op.from && op.from.side === 'opp' ? oppSide : controller;
       const toSide = op.to && op.to.side === 'opp' ? oppSide : controller;
       const minRemaining = typeof op.minCoresRemaining === 'number' ? op.minCoresRemaining : null;
 
       let totalMoved = 0;
+
+      const resolvedFromZone = op.source === 'VOID' ? 'void' : fromZone;
+      const resolvedToZone = op.destination === 'THIS_NEXUS' ? 'field' : toZone;
 
       if (fromZone === 'field' && minRemaining !== null) {
         const p = state.players[fromSide];
@@ -179,7 +195,7 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
             1,
             { zone: fromZone, side: fromSide, stackId: fromStackId },
             { zone: toZone, side: toSide, stackId: toStackId },
-            { isSoulCore: isSoul, cause: 'effect', by: controller, sourceCard, minCoresRemaining },
+            { isSoulCore: isSoul, cause: 'effect', by: controller, sourceCard, minCoresRemaining, targetsGrandwalker: op.from?.target === 'self' || op.to?.target === 'self' || op.destination === 'THIS_NEXUS' },
             events
           );
           if (res) totalMoved++;
@@ -213,7 +229,7 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
 
       if (toZone === 'field') {
         const p = state.players[toSide];
-        if (op.to.target === 'self' && sourceCard) {
+        if ((op.to?.target === 'self' || op.destination === 'THIS_NEXUS') && sourceCard) {
           const selfStack = p.field.find(st => st.top.id === sourceCard.id);
           if (selfStack) toStackId = selfStack.id;
         } else if (p.field.length > 0) {
@@ -224,9 +240,9 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
       const res = await moveCore(
         state,
         count,
-        { zone: fromZone, side: fromSide, stackId: fromStackId },
-        { zone: toZone, side: toSide, stackId: toStackId },
-        { isSoulCore: isSoul, cause: 'effect', by: controller, sourceCard },
+        { zone: resolvedFromZone, side: fromSide, stackId: fromStackId },
+        { zone: resolvedToZone, side: toSide, stackId: toStackId },
+        { isSoulCore: isSoul, cause: 'effect', by: controller, sourceCard, targetsGrandwalker: op.from?.target === 'self' || op.to?.target === 'self' || op.destination === 'THIS_NEXUS' },
         events
       );
 
@@ -234,7 +250,7 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     }
 
     case 'DESTROY': {
-      const candidates = queryCandidates(state, op.target || { side: 'opp', types: ['Spirit'] }, context);
+      const candidates = queryCandidates(state, op.target || { side: 'opp', types: ['Spirit'] }, { ...context, bypassArmor: Boolean(op.ignoreArmor) });
       if (candidates.length === 0) return { success: false, destroyedCount: 0 };
 
       let chosen = [];
@@ -261,6 +277,11 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     }
 
     case 'BOUNCE': {
+      if (op.target === 'self' || op.target?.target === 'self') {
+        if (!sourceCard) return { success: false, reason: 'NO_SOURCE_CARD' };
+        const moved = await moveCard(state, sourceCard, 'hand', controller, { cause: 'bounce', by: controller, sourceCard }, events);
+        return { success: Boolean(moved), cards: moved ? [sourceCard] : [] };
+      }
       const candidates = queryCandidates(state, op.target || { side: 'opp', types: ['Spirit'] }, context);
       if (candidates.length === 0) return { success: false };
 
@@ -272,8 +293,8 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
         chooser: controller
       });
 
-      const dest = (op.destination || 'HAND').toLowerCase();
-      const targetZone = dest === 'hand' ? 'hand' : (dest === 'deck_bottom' ? 'deck_bottom' : 'deck_top');
+      const dest = String(op.destination || 'HAND').toLowerCase().replace(/[\\s-]/g, '_');
+      const targetZone = dest === 'hand' ? 'hand' : (['deck_bottom', 'deckbottom', 'bottom'].includes(dest) ? 'deck_bottom' : 'deck_top');
 
       for (const item of chosen || []) {
         const card = item.card || item;
@@ -460,6 +481,13 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
       }
 
       if (!cardToSummon) return { success: false };
+      const originalFromZone = p.removed.some(card => card.id === cardToSummon.id) ? 'removed'
+        : p.grave.some(card => card.id === cardToSummon.id) ? 'grave'
+        : p.burst?.id === cardToSummon.id ? 'burst' : 'hand';
+
+      const extraCost = Math.max(0, Number(op.costCores || 0));
+      if ((p.reserve.normal || 0) < extraCost + 1) return { success: false, reason: 'INSUFFICIENT_CORES_FOR_BURST_SUMMON' };
+      if (extraCost) await moveCore(state, extraCost, { zone: 'reserve', side: controller }, { zone: 'trash', side: controller }, { cause: 'summon_cost', by: controller, sourceCard }, events);
 
       // Move card from hand/burst to field as new stack
       // Allocate 1 core from reserve to field so it satisfies LV1
@@ -484,7 +512,8 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
             stack: newStack,
             player: controller,
             cause: 'effect',
-            sourceCard
+            sourceCard,
+            fromZone: originalFromZone
           });
         }
       }
@@ -574,7 +603,19 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     case 'REVEAL_DECKTOP': {
       const p = state.players[controller];
       if (!p.revealed) p.revealed = [];
-      const count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      let count = typeof op.count === 'number' ? op.count : parseInt(op.count || '1', 10) || 1;
+      const isBombardment = (sourceCard?.compiledIr?.keywords || []).some(keyword => String(keyword.hook || '').toLowerCase() === 'bombardment');
+      if (isBombardment && state.step === 'ATTACK' && state.activePlayer === controller) {
+        for (const stack of p.field || []) {
+          const level = computeLevel(stack, state);
+          for (const ability of stack.top?.compiledIr?.abilities || []) {
+            if (ability.header?.timing !== 'ATTACK_STEP' || (ability.header.levels?.length && !ability.header.levels.includes(level))) continue;
+            for (const clause of ability.clauses || []) {
+              if (clause.op?.op === 'REVEAL_BONUS' && String(clause.op.appliesTo || '').toUpperCase() === 'BOMBARDMENT') count += clause.op.amount || 0;
+            }
+          }
+        }
+      }
       const actualCount = Math.min(count, p.deck.length);
       const revealed = p.deck.splice(0, actualCount);
       p.revealed.push(...revealed);
@@ -613,6 +654,36 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
         pool = p.removed;
       } else if (context.previousTarget) {
         pool = [context.previousTarget];
+      }
+
+      // Some effects specify a separate search group for each selected card.
+      if (Array.isArray(op.filterGroups) && op.filterGroups.length) {
+        let remaining = [...pool];
+        const groupedChoice = [];
+        for (const group of op.filterGroups) {
+          const groupFilter = group.filter || group;
+          const groupCount = group.count || 1;
+          const candidates = remaining.filter(card => matchesCardFilter(card, groupFilter));
+          if (!candidates.length) continue;
+          let selected = candidates.slice(0, groupCount);
+          if (candidates.length > groupCount && promptResolver) {
+            const answer = await promptResolver.choose({ type: 'SELECT_CARDS', title: group.title || 'Choose a matching revealed card', candidates: candidates.map(card => ({ card })), count: groupCount, chooser: controller });
+            if (answer?.length) selected = answer.map(item => item.card || item);
+          }
+          groupedChoice.push(...selected);
+          const selectedIds = new Set(selected.map(card => card.id));
+          remaining = remaining.filter(card => !selectedIds.has(card.id));
+        }
+        const added = [];
+        for (const card of groupedChoice) {
+          await moveCard(state, card, 'hand', controller, { cause: 'add_to_hand', sourceCard }, events);
+          if (isFromRevealed) {
+            if (p.revealed) p.revealed = p.revealed.filter(item => item.id !== card.id);
+            if (context.revealedCards) context.revealedCards = context.revealedCards.filter(item => item.id !== card.id);
+          }
+          added.push(card);
+        }
+        return { success: added.length > 0, addedCount: added.length, cards: added };
       }
 
       // Filter matching candidates
@@ -732,6 +803,10 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
 
       if (!cardToSummon) return { success: false };
 
+      const originalFromZone = p.removed.some(card => card.id === cardToSummon.id) ? 'removed'
+        : p.grave.some(card => card.id === cardToSummon.id) ? 'grave'
+        : p.burst?.id === cardToSummon.id ? 'burst' : (isRevealed ? 'revealed' : 'hand');
+
       // Atomic pre-check for cost + LV1 core requirements before mutating cores
       const isFree = op.free || op.noCost || op.withoutPayingCost;
       const cost = isFree ? 0 : (cardToSummon.cost || 0);
@@ -817,6 +892,13 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     case 'SUMMON_THIS_CARD': {
       if (!sourceCard) return { success: false, reason: 'NO_SOURCE_CARD' };
       const p = state.players[controller];
+      const originalFromZone = p.removed.some(card => card.id === sourceCard.id) ? 'removed'
+        : p.grave.some(card => card.id === sourceCard.id) ? 'grave'
+        : p.burst?.id === sourceCard.id ? 'burst' : 'hand';
+
+      const extraCost = Math.max(0, Number(op.costCores || 0));
+      if ((p.reserve.normal || 0) < extraCost + 1) return { success: false, reason: 'INSUFFICIENT_CORES_FOR_SUMMON' };
+      if (extraCost) await moveCore(state, extraCost, { zone: 'reserve', side: controller }, { zone: 'trash', side: controller }, { cause: 'summon_cost', by: controller, sourceCard }, events);
 
       const hasCores = p.reserve.normal > 0 || p.reserve.soul > 0;
       if (!hasCores) return { success: false, reason: 'INSUFFICIENT_LV1_CORES' };
@@ -847,10 +929,12 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
           stack: newStack,
           player: controller,
           cause: 'effect',
-          sourceCard
+          sourceCard,
+          fromZone: originalFromZone
         });
       }
 
+      if (op.preventsLifeLoss && context.pendingLifeLoss) context.pendingLifeLoss.prevented = true;
       return { success: true, card: sourceCard, stack: newStack };
     }
 
@@ -1727,6 +1811,22 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
       return { success: true, modifier: mod };
     }
 
+    case 'SET_BURST_FROM_HAND': {
+      const p = state.players[controller];
+      if (p.burstSetThisTurn) return { success: false, reason: 'BURST_ALREADY_SET_THIS_TURN' };
+      const candidates = (p.hand || []).filter(card => Boolean(card.isBurst || card.burst || card.compiledIr?.abilities?.some(ability => ability.header?.timing === 'BURST')));
+      if (!candidates.length) return { success: false, reason: 'NO_BURST_CARDS_IN_HAND' };
+      const chosen = await promptResolver.choose({ type: 'SELECT_CARDS', title: 'Choose a Burst card to set', candidates: candidates.map(card => ({ card })), count: 1, chooser: controller });
+      const card = chosen?.[0]?.card || chosen?.[0] || candidates[0];
+      const moved = await moveCard(state, card, 'burst', controller, { cause: 'set_burst', sourceCard }, events);
+      if (!moved) return { success: false, reason: 'BURST_SET_FAILED' };
+      p.burstSetThisTurn = true;
+      return { success: true, card };
+    }
+
+    case 'REVEAL_BONUS':
+      return { success: true, continuous: true, amount: op.amount || 0 };
+
     // -------------------------------------------------------------
     // MILESTONE 4: Modern Mechanics (Grandwalker, Rebirth & Advanced Keywords)
     // -------------------------------------------------------------
@@ -1734,9 +1834,14 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     case 'CORE_CHARGE_ADD': {
       const targetSide = op.side === 'opponent' ? oppSide : controller;
       const p = state.players[targetSide];
-      const gwStack = (sourceStack && ((sourceStack.top.type || '').toLowerCase().includes('grandwalker') || (sourceStack.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))))
+      const hasGrandwalker = card => String(card?.type || '').toLowerCase().includes('grandwalker') ||
+        (Array.isArray(card?.families) ? card.families : [card?.family].filter(Boolean)).some(f => String(f).toLowerCase().includes('grandwalker'));
+      if (op.op === 'CORE_CHARGE_TRIGGER' && op.uniqueGrandwalkerName && (p.field || []).some(st => st.top?.name === sourceCard?.name && st.top?.id !== sourceCard?.id)) {
+        return { success: false, reason: 'GRANDWALKER_NAME_ALREADY_CONTROLLED' };
+      }
+      const gwStack = (sourceStack && hasGrandwalker(sourceStack.top))
         ? sourceStack
-        : p.field.find(s => (s.top.type || '').toLowerCase().includes('grandwalker') || (s.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))) || sourceStack || p.field[0] || null;
+        : p.field.find(s => hasGrandwalker(s.top)) || sourceStack || p.field[0] || null;
 
       if (op.op === 'CORE_CHARGE_TRIGGER') {
         const millCount = typeof op.millCount === 'number' ? op.millCount : (typeof op.count === 'number' ? op.count : 3);
@@ -1814,9 +1919,24 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     case 'GRANDWALKER_ACTION': {
       const targetSide = op.side === 'opponent' ? oppSide : controller;
       const p = state.players[targetSide];
-      const gwStack = (sourceStack && ((sourceStack.top.type || '').toLowerCase().includes('grandwalker') || (sourceStack.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))))
+      const hasFamily = (card, fam) => (Array.isArray(card?.families) ? card.families : [card?.family].filter(Boolean)).some(f => String(f).toLowerCase().includes(fam));
+      let gwStack = (sourceStack && (String(sourceStack.top.type || '').toLowerCase().includes('grandwalker') || hasFamily(sourceStack.top, 'grandwalker')))
         ? sourceStack
-        : p.field.find(s => (s.top.type || '').toLowerCase().includes('grandwalker') || (s.top.family || []).some(f => f.toLowerCase().includes('grandwalker'))) || sourceStack || p.field[0] || null;
+        : p.field.find(s => String(s.top.type || '').toLowerCase().includes('grandwalker') || hasFamily(s.top, 'grandwalker')) || sourceStack || p.field[0] || null;
+
+      let addCores = typeof op.addCores === 'number' ? op.addCores : (typeof op.count === 'number' ? op.count : 0);
+      if (op.countFrom === 'REVEALED_MATCHES') {
+        addCores = (context.revealedCards || []).filter(card => matchesCardFilter(card, op.filter)).length;
+        const candidates = (state.players[controller].field || []).filter(st =>
+          String(st.top.type || '').toLowerCase().includes('nexus') && hasFamily(st.top, 'grandwalker') &&
+          (st.top.colors || [st.top.color]).some(color => String(color).toLowerCase() === String(op.targetColor || 'Red').toLowerCase())
+        );
+        if (candidates.length === 0) return { success: false, reason: 'NO_LEGAL_GRANDWALKER_NEXUS' };
+        if (candidates.length > 1) {
+          const selected = await promptResolver.choose({ type: 'SELECT_STACK', title: 'Choose a Red Grandwalker Nexus', candidates: candidates.map(stack => ({ stack, card: stack.top })), count: 1, chooser: controller });
+          if (selected?.[0]?.stack) gwStack = selected[0].stack;
+        } else gwStack = candidates[0];
+      }
 
       if (!gwStack) {
         return { success: false, reason: 'NO_GRANDWALKER_FOUND' };
@@ -1824,25 +1944,29 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
 
       const costCores = typeof op.costCores === 'number' ? op.costCores : (typeof op.sendToVoid === 'number' ? op.sendToVoid : 0);
       if (costCores > 0) {
-        const available = gwStack.cores.normal || 0;
+        const costStack = sourceStack || gwStack;
+        const available = costStack?.cores.normal || 0;
         if (available < costCores) {
           return { success: false, reason: 'INSUFFICIENT_GRANDWALKER_CORES', required: costCores, available };
         }
-        gwStack.cores.normal -= costCores;
+        const paid = await moveCore(state, costCores,
+          { zone: 'field', side: controller, stackId: costStack.id },
+          { zone: 'void', side: controller },
+          { cause: 'cost', by: controller, sourceCard, targetsGrandwalker: true }, events);
+        if (!paid) return { success: false, reason: 'GRANDWALKER_COST_FAILED' };
         if (events) {
           await events.emit({
             type: 'GRANDWALKER_ACTION_RESOLVED',
             player: targetSide,
             action: op.action || 'GRANDWALKER_SKILL',
             costPaid: costCores,
-            stackId: gwStack.id || gwStack.stackId,
+            stackId: costStack.id || costStack.stackId,
             sourceCard
           });
         }
         return { success: true, costPaid: costCores, remainingCores: gwStack.cores.normal };
       }
 
-      const addCores = typeof op.addCores === 'number' ? op.addCores : (typeof op.count === 'number' ? op.count : 0);
       if (addCores > 0) {
         gwStack.cores.normal = (gwStack.cores.normal || 0) + addCores;
       }
@@ -2195,7 +2319,23 @@ export async function executeOp(state, op, context = {}, promptResolver, events 
     case 'ADVENT_SOUL_CORE_ACTION': {
       const p = state.players[controller];
       const targetStack = sourceStack || (op.targetStackId ? p.field.find(s => (s.id || s.stackId) === op.targetStackId) : p.field[0]) || null;
-      const toZone = (op.to || 'field').toLowerCase();
+      const toZone = String(op.destination || op.to || 'field').toLowerCase();
+
+      if (op.requireSourceSoul) {
+        if (!sourceStack || !(sourceStack.cores.soul > 0)) return { success: false, reason: 'SOURCE_SOUL_CORE_NOT_AVAILABLE' };
+        sourceStack.cores.soul -= 1;
+        if (toZone === 'life') {
+          p.life += 1;
+          p.soulCoreInLife = true;
+        } else if (toZone === 'trash') {
+          p.trash.soul += 1;
+        } else if (toZone === 'void') {
+          p.voidCores.soul += 1;
+        } else {
+          p.reserve.soul += 1;
+        }
+        return { success: true, fromStackId: sourceStack.id, to: toZone };
+      }
 
       // Remove soul core from current location
       if ((p.reserve.soul || 0) > 0) p.reserve.soul = 0;

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { getCardOverride } from '../compiler/overrides/index.js';
 
 // Load battle arena script in isolated sandbox context to test exact client functions
 const arenaCode = readFileSync(resolve('./battle_arena.js'), 'utf8');
@@ -917,20 +918,23 @@ test('Phase 11 - getCardManualActions generates actionable buttons for manual ac
   DuelState.activePlayer = 'player';
   DuelState.player.reserve = 3;
 
-  // 1. Grandwalker Nexus on field with Grand Skill
+  // 1. Canonical Grandwalker Nexus on field with its structured Grand Skill
   const grandwalker = {
     uid: 'gw_nexus_01',
-    name: 'The Grandwalker Apollo',
-    type: 'Grandwalker Nexus',
+    card_number: 'SD46-CP01',
+    name: 'Mogami Shunta',
+    type: 'Nexus',
+    family: 'Grandwalker',
     currentCores: 4,
     cost: 2,
-    effect: '[Grand Skill: 3] [Main] Put 1 core from Void to Reserve.'
+    effect: '[Grand Skill: 2] [Main] (Once per turn, send two cores from this Nexus to the Void) Draw a card.',
+    compiledIr: getCardOverride('SD46-CP01')
   };
   DuelState.player.nexus = [grandwalker];
 
   const gwActions = BattleArena.getCardManualActions(grandwalker, 'field', grandwalker, 'player');
   assert.equal(gwActions.some(a => a.id === 'grand_skill'), true, 'Grand Skill action button generated');
-  assert.equal(gwActions.find(a => a.id === 'grand_skill').disabled, false, 'Grand Skill is enabled (has 4 cores >= 3)');
+  assert.equal(gwActions.find(a => a.id === 'grand_skill').disabled, false, 'Grand Skill is enabled (has 4 cores >= 2)');
 
   // 2. Spirit in Hand with Advent
   const adventCard = {

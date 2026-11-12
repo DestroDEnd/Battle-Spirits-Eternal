@@ -134,6 +134,7 @@ export async function commitStackExit(state, stack, toZone = null, options = {},
       await events.emit({
         type: 'DESTROYED',
         card: topCard,
+        level: standby.previousLevel || null,
         fromZone: 'field',
         fromSide: side,
         cause,
@@ -188,6 +189,8 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
       break;
     }
   }
+
+  const fromLevel = fromStack ? computeLevel(fromStack, state) : null;
 
   // 2. Remove card from its current zone
   if (fromZone && fromSide) {
@@ -286,6 +289,7 @@ export async function moveCard(state, card, toZone, toSide = null, options = {},
       await events.emit({
         type: 'DESTROYED',
         card,
+        level: fromZone === 'field' ? fromLevel : null,
         fromZone,
         fromSide,
         cause,
@@ -311,6 +315,11 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
 
   const fromPlayer = state.players[fromSide];
   const toPlayer = state.players[toSide];
+
+  const fromStack = fromZone === 'field' ? fromPlayer.field.find(stack => stack.id === from.stackId) : null;
+  const toStack = toZone === 'field' ? toPlayer.field.find(stack => stack.id === to.stackId) : null;
+  if (fromStack && hasGrandwalkerRule(fromStack, 'GRANDWALKER_CORE_RULE') && !options.targetsGrandwalker) return false;
+  if (toStack && hasGrandwalkerRule(toStack, 'GRANDWALKER_CORE_RULE') && !options.targetsGrandwalker && !options.coreCharge) return false;
 
   // Eternal Rule: Soul Core restrictions
   if (isSoul && toZone === 'void' && by === 'opp') {
@@ -339,7 +348,19 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
       if (fromPlayer.trash.normal < count) return false;
       fromPlayer.trash.normal -= count;
     }
+  } else if (fromZone === 'void') {
+    // Untracked Void cores represent the rules engine's shared supply; when a
+    // card sends cores into Void, those tracked cores are consumed first.
+    if (isSoul) {
+      if ((fromPlayer.voidCores?.soul || 0) > 0) fromPlayer.voidCores.soul -= 1;
+    } else {
+      fromPlayer.voidCores.normal = Math.max(0, (fromPlayer.voidCores?.normal || 0) - count);
+    }
   } else if (fromZone === 'life') {
+    if (events && cause !== 'cost' && cause !== 'rule') {
+      const replacement = await events.emit({ type: 'BEFORE_LIFE_REDUCED', player: fromSide, damage: count, by, cause, sourceCard: options.sourceCard || null, prevented: false });
+      if (replacement.prevented) return false;
+    }
     const hasLifeLossPrevented = (state.modifiers || []).some(m =>
       (m.type === 'PREVENT_LIFE_LOSS' || m.type === 'PREVENT_DAMAGE') && (m.side === fromSide || m.side === 'both' || !m.side)
     );
@@ -375,6 +396,10 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
   } else if (toZone === 'trash') {
     if (isSoul) toPlayer.trash.soul += 1;
     else toPlayer.trash.normal += count;
+  } else if (toZone === 'void') {
+    if (!toPlayer.voidCores) toPlayer.voidCores = { normal: 0, soul: 0 };
+    if (isSoul) toPlayer.voidCores.soul += 1;
+    else toPlayer.voidCores.normal += count;
   } else if (toZone === 'life') {
     toPlayer.life += count;
   } else if (toZone === 'field') {
@@ -423,4 +448,9 @@ export async function moveCore(state, count, from, to, options = {}, events = nu
   }
 
   return true;
+}
+
+function hasGrandwalkerRule(stack, opName) {
+  return (stack?.top?.compiledIr?.abilities || []).some(ability => ability.header?.timing === 'PASSIVE' &&
+    (ability.clauses || []).some(clause => clause.op?.op === opName));
 }
