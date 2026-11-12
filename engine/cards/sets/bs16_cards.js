@@ -306,9 +306,9 @@ export const BS16_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When this Spirit card is discarded from your deck due to opposing Spirit effect, destroy that Spirit."
           },
           {
             "op": "PASSIVE_RULE",
@@ -1627,9 +1627,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy an opposing non-\"Supreme Hero\"/\"Great General\" family Spirit."
           }
         ]
       }
@@ -1665,9 +1665,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing \"Supreme Hero\" family Spirit."
           }
         ]
       },
@@ -1681,9 +1681,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Supreme Hero\"/\"Great General\" family Spirit attacks, the opponent can't block unless they send two cores from their Reserve to their Trash."
           }
         ]
       }
@@ -2344,14 +2344,14 @@ export const BS16_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit that reduced your Life during this battle."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "destroy an opposing Spirit that reduced your Life when this Burst activates."
           }
         ]
       }
@@ -2442,9 +2442,9 @@ export const BS16_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy any number of opposing Spirits up to a total cost of the Spirit you control which was destroyed when this Burst activated."
           },
           {
             "op": "PASSIVE_RULE",
@@ -2825,9 +2825,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2][LV3] When your Nexuses are destroyed, by sending a core from this Spirit to your Trash, one of the Nexuses destroyed remains on your field in the same state."
           }
         ]
       }
@@ -2865,8 +2865,8 @@ export const BS16_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "TREAT_RULE",
-            "text": "Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Either Attack Step) Treat all your \"Ocean Emperor\" family Spirits as being 1 Lv higher."
           }
         ]
       }
@@ -2891,12 +2891,8 @@ export const BS16_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "TARGET_CARD",
-            "text": "from your Hand, you can target a Nexus you control."
-          },
-          {
-            "op": "DESTROY_NEXUS",
-            "count": 1
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] (When Deployed) When deployed from your Hand, you can target a Nexus you control. Destroy an opposing Spirit with the same cost as that Nexus."
           }
         ]
       },
@@ -2909,8 +2905,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "REFRESH_SPIRITS",
-            "scope": "TARGET"
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Either Attack Step) All Spirits can't be refreshed by Nexus/Magic effects."
           }
         ]
       }
@@ -2933,9 +2930,9 @@ export const BS16_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "ADD_EXTRA_SYMBOL",
-            "scope": "SELF",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] While you have a Burst set, this Nexus gains one extra Purple symbol."
           }
         ]
       },
@@ -2993,8 +2990,8 @@ export const BS16_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "KEYWORD_RULE",
-            "text": "When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] When your Burst activates, if that Burst is a Magic card, you can activate its Main/Flash effect without paying the cost."
           }
         ]
       }

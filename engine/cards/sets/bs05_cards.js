@@ -51,9 +51,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Gain 1 core in your Reserve."
           }
         ]
       }
@@ -210,9 +210,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Cores cannot be moved from any battling spirits."
           }
         ]
       },
@@ -666,9 +666,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with one core on it."
           }
         ]
       }
@@ -804,9 +804,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each time a nexus you control would be destroyed, you may move 1 core from this spirit to your Trash."
           },
           {
             "op": "REANIMATE_TRASH",
@@ -934,9 +934,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Each player chooses and destroys one Spirit they control."
           }
         ]
       }
@@ -1087,9 +1087,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Give this Spirit and every \"Dragon Emperor\"/\"Vanity Deity\" family Spirit you control the effect: \"(When Attacks) Put a number of cores from the Void, equal to the number of symbols on this Spirit, to your Reserve.\""
           }
         ]
       }
@@ -1404,9 +1404,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every Cost 1 or less Spirit."
           }
         ]
       }
@@ -1597,19 +1597,18 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When any Cost 1 or less Spirit is exhausted, send two cores from that Spirit to its owner's Trash."
           }
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "ATTACK_STEP",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -1645,12 +1644,11 @@ export const BS05_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "ATTACK_STEP",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -2039,9 +2037,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void each to every \"Ice Princess\" family Spirit you control."
           }
         ]
       },
@@ -2133,9 +2131,9 @@ export const BS05_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send all cores from one of your \"Artificial Soldier\" family Spirits to the Void."
           },
           {
             "op": "MILL_DECK",
@@ -2229,9 +2227,9 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "For each different color of Magic cards in the opposing Trash, destroy an opposing Spirit."
           }
         ]
       },
@@ -2297,14 +2295,14 @@ export const BS05_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy any number of opposing Spirits up to a total of cost 5."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When the Tribute was [The DragonEmperor Siegfried]/[The ImpregnableFortress Odin], destroy up to a total of cost 8."
           }
         ]
       },

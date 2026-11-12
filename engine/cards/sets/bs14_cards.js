@@ -786,9 +786,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When your \"Emperor Beast\" family Spirit attacks, destroy an opposing Spirit with BP equal or inferior to that Spirit's."
           }
         ]
       }
@@ -812,9 +812,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "At the start of the step, you can send as many cores as you like from your Trash to this Spirit."
           }
         ]
       },
@@ -1027,9 +1027,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a number of cores from the Void to this Spirit equal to the level of this Spirit."
           }
         ]
       }
@@ -1541,9 +1541,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed via BP comparison, destroy this Spirit."
           }
         ]
       },
@@ -2446,9 +2446,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all Red/Green/White/Blue Spirits refreshed by a Spirit/Magic effect."
           }
         ]
       }
@@ -2515,9 +2515,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending two cores from this Nexus to your Trash"
           },
           {
             "op": "PASSIVE_RULE",
@@ -2635,14 +2635,14 @@ export const BS14_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending three cores from any of your Spirits to your Trash"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "the opponent send three cores from any of their Spirits to their Trash."
           },
           {
             "op": "PASSIVE_RULE",
@@ -2696,14 +2696,14 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying one of your Spirits"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "the opponent destroy one of their Spirits."
           }
         ]
       }
@@ -2771,9 +2771,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           }
         ]
       }
@@ -2891,9 +2891,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put one core each from the Void to your Life and a White Spirit you control."
           }
         ]
       },
@@ -2933,9 +2933,9 @@ export const BS14_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing attacking Spirit that is in refreshed state."
           }
         ]
       }
@@ -3181,9 +3181,9 @@ export const BS14_SAGA_CARDS = [
             "text": "Target a cost equal or inferior to 4."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all opposing Spirits with the target cost."
           },
           {
             "op": "PASSIVE_RULE",
@@ -3254,9 +3254,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "If you have a Burst set, destroy an opposing Spirit with BP equal or inferior to this Spirit's."
           }
         ]
       }
@@ -3527,9 +3527,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with a cost equal or inferior to this Spirit's."
           }
         ]
       }
@@ -3548,7 +3548,8 @@ export const BS14_SAGA_CARDS = [
           "levels": [
             1,
             2
-          ]
+          ],
+          "turn": "YOUR"
         },
         "targetFilter": {
           "color": "Red"
@@ -3560,13 +3561,14 @@ export const BS14_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
-            "op": "CORE_DRAIN",
-            "count": 1,
-            "to": "RESERVE"
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Your Attack Step) When only the opposing Spirit is destroyed by comparing BP, send all the cores on the destroyed Spirit to the Trash."
           }
         ]
       }
@@ -3612,18 +3614,19 @@ export const BS14_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "ATTACK_STEP",
+        "overall": "START_STEP",
         "subConditions": {
           "levels": [
             1,
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
-            "op": "CORE_DRAIN",
-            "count": 1,
-            "to": "TRASH"
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[Lv1][Lv2] (Your Start Step) Send all cores from the opposing Reserve to their Trash."
           }
         ]
       },
@@ -3632,13 +3635,14 @@ export const BS14_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "KEYWORD_RULE",
-            "text": "At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[Lv2] (Opposing Attack Step) At the start of the step, separate an opposing Brave Spirit, the opponent will decide how the cores will be moved for the separation."
           }
         ]
       }
@@ -3656,13 +3660,14 @@ export const BS14_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             1
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "count": 2
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1] (Your Attack Step) When your Spirits are destroyed by the opponent, by discarding four cards from your decktop, one of the destroyed Spirits remains on your field, exhausted."
           }
         ]
       }
@@ -3686,8 +3691,8 @@ export const BS14_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "SET_RESTRICTION",
-            "text": "This Spirit cannot attack."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] This Spirit cannot attack."
           }
         ]
       },
@@ -3721,9 +3726,9 @@ export const BS14_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Awaken - You can put any number of cores from Spirits you control to this Spirit."
           }
         ]
       },

@@ -27,9 +27,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "You may move any number of cores from your Reserve to your Trash to summon an equal number of \"Divine Spirit\" spirit cards with a cost of 6 or less from your hand without paying their costs."
           },
           {
             "op": "PASSIVE_RULE",
@@ -233,9 +233,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Gain 1 core on target nexus you control."
           }
         ]
       }
@@ -295,9 +295,9 @@ export const BS04_SAGA_CARDS = [
             "text": "During Your Main Phase) At start of phase, you may discard a nexus card from your hand."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "TARGET_SPIRIT",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "In that case, gain 1 core on this spirit."
           }
         ]
       },
@@ -615,9 +615,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Remove 1 core from target spirit your opponent controls."
           }
         ]
       },
@@ -898,9 +898,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put cores from the Void to a Nexus you control until it reaches [LV2]."
           }
         ]
       },
@@ -1322,9 +1322,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit that blocked when the battle resolves at the end of battle."
           }
         ]
       }
@@ -1349,9 +1349,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit that blocked when the battle resolves at the end of battle."
           }
         ]
       }
@@ -1371,14 +1371,14 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "If you control 5 or more \"Magician\" spirits, destroy all of them."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "In that case, destroy all spirits your opponent controls."
           }
         ]
       },
@@ -1445,9 +1445,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "The effects of cards your opponent controls that increase the BP of 1 or more spirits are negated."
           }
         ]
       },
@@ -1486,9 +1486,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "2 target spirits your opponent controls must exchange all cores on them."
           }
         ]
       },
@@ -1533,9 +1533,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each time a nexus you control would be destroyed, you may move all cores from this spirit to your Trash."
           },
           {
             "op": "REANIMATE_TRASH",
@@ -1596,9 +1596,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Gain 1 core on each spirit you control with High Speed."
           }
         ]
       },
@@ -1636,9 +1636,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each time a spirit your opponent controls is destroyed due to the effect of Curse, remove 1 core from that spirit."
           }
         ]
       },
@@ -2031,9 +2031,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When putting cores onto this Spirit via Spirit/Nexus/Magic effects, put +1 core."
           }
         ]
       }
@@ -2470,9 +2470,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When your \"Ancient Dragon\"/\"Dragon Emperor\" family Spirit is summoned, destroy an opposing Spirit with BP equal or inferior to the summoned Spirit's."
           }
         ]
       }
@@ -2623,9 +2623,9 @@ export const BS04_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "During this turn, when only the opposing Spirit is destroyed by BP comparison with your \"Sieg\"-named Spirit, destroy every opposing Spirit with the same family as the destroyed Spirit."
           }
         ]
       }
@@ -2702,9 +2702,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each player sends four cores from their Spirits/Nexuses to the Void."
           },
           {
             "op": "ADD_EXTRA_SYMBOL",
@@ -2830,9 +2830,9 @@ export const BS04_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a Cost 6 or more Spirit you control to the Void."
           }
         ]
       },
@@ -2863,8 +2863,9 @@ export const BS04_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       }
@@ -3025,9 +3026,9 @@ export const BS04_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each time this spirit defeats a spirit, gain 1 core in your Reserve."
           }
         ]
       },

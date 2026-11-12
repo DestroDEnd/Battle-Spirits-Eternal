@@ -79,9 +79,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Move all but 1 core from target spirit your opponent controls to the owners reserve"
           }
         ]
       }
@@ -136,9 +136,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every Cost 3 or less Spirit."
           }
         ]
       }
@@ -176,9 +176,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When \"Fighting Spirit\" family Spirit you control is blocked, destroy another opposing Spirit with a cost equal to the blocking Spirit's."
           }
         ]
       }
@@ -568,9 +568,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Curse (During Opponent's Battle Phase) Each time this spirit blocks, destroy the spirit that attacked this spirit at End of Battle Step."
           }
         ]
       }
@@ -686,9 +686,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Move cores from target LV 2 or higher spirit your opponent controls to its owner's Trash until the number of cores on it is equal to its LV X cost."
           },
           {
             "op": "PASSIVE_RULE",
@@ -1426,9 +1426,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send cores from every Spirit to its owner's Reserve until only one core remains on each of them."
           }
         ]
       }
@@ -1453,9 +1453,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with two cores or less on it."
           }
         ]
       },
@@ -1514,9 +1514,9 @@ export const BS06_SAGA_CARDS = [
             "count": 1
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When you do, cores to be put on this Spirit and the cost must be paid from the Reserve."
           }
         ]
       },
@@ -1590,9 +1590,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any of your Spirit."
           }
         ]
       }
@@ -1641,9 +1641,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           }
         ]
       }
@@ -2258,9 +2258,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every opposing Cost 4 Spirit."
           }
         ]
       },
@@ -2324,37 +2324,23 @@ export const BS06_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       }
     ]
   },
@@ -2409,13 +2395,12 @@ export const BS06_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "WHEN_BATTLES",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -2478,36 +2463,23 @@ export const BS06_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
-          }
-        ]
+        "keyword": "Windstorm"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BOUNCE_TO_HAND",
-            "count": 1
-          }
-        ]
+        "keyword": "Windstorm"
       }
     ]
   },
@@ -2642,9 +2614,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send all cores from your Trash to your Reserve."
           }
         ]
       },
@@ -2832,25 +2804,17 @@ export const BS06_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "scaleByLevel": true,
-            "perLevel": 1
-          }
-        ]
+        "keyword": "Crush"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "END_STEP",
         "subConditions": {
           "levels": [
             2
@@ -3258,9 +3222,9 @@ export const BS06_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "this Spirit gains + (the exhausted Spirit's BP) BP."
           }
         ]
       },
@@ -3357,9 +3321,9 @@ export const BS06_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Move all but 1 core from target spirit your opponent controls to it's owner's reserve."
           }
         ]
       }

@@ -367,8 +367,9 @@ export const BS11_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 10000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -625,8 +626,8 @@ export const BS11_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "CONTINUOUS_RULE",
-            "text": "Your Attack Step  This Spirit's cost gets +3."
+            "rule": "BP_BUFF",
+            "text": "This Spirit's cost gets +3."
           }
         ]
       }
@@ -1179,9 +1180,9 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Unless the opponent sends a core from their Reserve to their Trash, they can't block."
           }
         ]
       }
@@ -1456,9 +1457,9 @@ export const BS11_SAGA_CARDS = [
             "count": 2
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with the same cost as the discarded card."
           }
         ]
       }
@@ -1650,9 +1651,9 @@ export const BS11_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When this Spirit is blocked, destroy an opposing Spirit with only three cores or less on it."
           }
         ]
       }
@@ -2224,9 +2225,9 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Green Nexus is destroyed, by sending a core from this Nexus to your Trash, one of the destroyed Nexus returns to your Field in the same condition."
           }
         ]
       },
@@ -2239,9 +2240,9 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Spirit is destroyed, by sending three cores from this Nexus to your Trash, that Spirit returns to your Field, exhausted."
           }
         ]
       }
@@ -2284,9 +2285,9 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending three cores from this Nexus to the Trash"
           },
           {
             "op": "END_ATTACK_STEP",
@@ -2360,20 +2361,13 @@ export const BS11_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "CORE_FROM_VOID",
-            "to": "LIFE",
-            "count": 1
-          }
-        ]
+        "keyword": "Holy Life"
       }
     ]
   },
@@ -2400,20 +2394,13 @@ export const BS11_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "CORE_FROM_VOID",
-            "to": "LIFE",
-            "count": 1
-          }
-        ]
+        "keyword": "Holy Life"
       }
     ]
   },
@@ -2425,22 +2412,14 @@ export const BS11_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "scaleByLevel": true,
-            "perLevel": 1
-          }
-        ]
+        "keyword": "Crush"
       },
       {
         "overall": "ATTACK_STEP",
@@ -2476,9 +2455,9 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither players can put cores from the Void to their Life."
           }
         ]
       },
@@ -2596,14 +2575,14 @@ export const BS11_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying a Spirit you control"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "the opponent destroys any number of their Spirits until the total cost of destroyed Spirits are equal or more than the cost of your destroyed Spirit."
           }
         ]
       },

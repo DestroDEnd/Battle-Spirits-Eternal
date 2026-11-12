@@ -158,10 +158,10 @@ function detectOverallAndTurn(block, cardType, hdr = {}) {
   if (/\(When Deployed\)/i.test(b) || hdr.timing === 'WHEN_DEPLOYED') {
     return { overall: 'WHEN_DEPLOYED', turn: 'YOUR' };
   }
-  if (/\(When Attacks\/Blocks\)/i.test(b) || hdr.timing === 'WHEN_ATTACKS_OR_BLOCKS') {
+  if (cardType !== 'Nexus' && (/\(When Attacks\/Blocks\)/i.test(b) || hdr.timing === 'WHEN_ATTACKS_OR_BLOCKS')) {
     return { overall: 'WHEN_ATTACKS', alsoTrigger: 'WHEN_BLOCKS', turn: 'EITHER' };
   }
-  if (/\(When (?:Brave )?Attacks\)|\[Clash\]|\[True-Clash\]|\[Windstorm|\[Crush\]|\[Great Demolition\]|\[Holy Life\]|\[Assault|\[Shine\]|\[Shoot\]|\[Rage\]/i.test(b) || hdr.timing === 'WHEN_ATTACKS') {
+  if (cardType !== 'Nexus' && (/\(When (?:Brave )?Attacks\)|\[Clash\]|\[True-Clash\]|\[Windstorm|\[Crush\]|\[Great Demolition\]|\[Holy Life\]|\[Assault|\[Shine\]|\[Shoot\]|\[Rage\]/i.test(b) || hdr.timing === 'WHEN_ATTACKS')) {
     return { overall: 'WHEN_ATTACKS', turn: 'YOUR' };
   }
   if (/\(When Blocks\)/i.test(b) || hdr.timing === 'WHEN_BLOCKS') {
@@ -293,13 +293,17 @@ function translateOverrideOpToSubEffect(clOp, rawText = '') {
   const op = clOp.op.toUpperCase();
 
   if (op === 'BP_BUFF') {
-    const amt = clOp.amount || 2000;
+    const amt = clOp.amount;
+    if (typeof amt !== 'number' || (!rawText.includes(String(Math.abs(amt))) && !/\[Excite\]/i.test(rawText))) {
+      return { op: 'PASSIVE_RULE', rule: op, text: rawText };
+    }
     if (amt < 0) return { op: 'BP_DEBUFF', amount: amt, count: 1 };
     if (clOp.target === 'self') return { op: 'BP_BUFF_SELF', amount: amt };
     if (clOp.target === 'all' || /all\s+/i.test(rawText)) return { op: 'BP_BUFF_ALLIES', amount: amt, filter: {} };
     return { op: 'BP_BUFF_TARGET', amount: amt, count: 1 };
   }
   if (op === 'DRAW') {
+    if (!/\bdraw\b/i.test(rawText)) return { op: 'PASSIVE_RULE', rule: op, text: rawText };
     return { op: 'DRAW_CARDS', count: clOp.count || 1 };
   }
   if (op === 'RECOVER_LIFE') {
@@ -312,14 +316,14 @@ function translateOverrideOpToSubEffect(clOp, rawText = '') {
     const fromZone = (clOp.from?.zone || '').toLowerCase();
     const toZone = (clOp.to?.zone || 'reserve').toUpperCase();
     const cnt = typeof clOp.count === 'number' ? clOp.count : 1;
-    if (fromZone === 'void') {
+    if (fromZone === 'void' && /\bvoid\b|\[charge|\bboost\b|\[holy life/i.test(rawText)) {
       const dest = toZone === 'FIELD' ? (clOp.to?.target === 'self' ? 'SELF' : 'TARGET_SPIRIT') : toZone;
       return { op: 'CORE_FROM_VOID', to: dest, count: cnt };
     }
-    if (clOp.from?.side === 'opponent' || /opposing|opponent's/i.test(rawText)) {
+    if (clOp.from?.side === 'opponent' || /opposing|opponent's|from a spirit to its owner's/i.test(rawText)) {
       return { op: 'CORE_DRAIN', count: cnt, to: toZone === 'FIELD' ? 'RESERVE' : toZone };
     }
-    return { op: 'CORE_FROM_VOID', to: 'RESERVE', count: cnt };
+    return { op: 'PASSIVE_RULE', rule: op, text: rawText };
   }
   if (op === 'DESTROY') {
     if (clOp.target?.types?.includes('Nexus') || /nexus/i.test(rawText)) {
@@ -328,16 +332,20 @@ function translateOverrideOpToSubEffect(clOp, rawText = '') {
     if (clOp.target?.types?.includes('Brave') || /\bbrave\b/i.test(rawText)) {
       return { op: 'DESTROY_BRAVE', count: clOp.count || 1 };
     }
-    if (clOp.target?.filters?.bpLte) {
+    if (clOp.target?.filters?.bpLte && rawText.includes(String(clOp.target.filters.bpLte))) {
       return { op: 'DESTROY_BY_BP', maxBp: clOp.target.filters.bpLte, count: clOp.count || 1 };
     }
-    if (clOp.target?.filters?.costLte !== undefined) {
+    if (clOp.target?.filters?.costLte !== undefined && new RegExp(`cost\\s*${clOp.target.filters.costLte}\\b`, 'i').test(rawText)) {
       return { op: 'DESTROY_BY_COST', maxCost: clOp.target.filters.costLte, count: clOp.count || 1 };
     }
     if (clOp.target?.filters?.exhausted || /exhausted/i.test(rawText)) {
       return { op: 'DESTROY_EXHAUSTED', count: clOp.count || 1 };
     }
-    return { op: 'DESTROY_BY_BP', maxBp: 5000, count: 1 };
+    const bpM = rawText.match(/(\d+)\s*BP(?:\s+or\s+less)?/i);
+    if (bpM) {
+      return { op: 'DESTROY_BY_BP', maxBp: parseInt(bpM[1], 10), count: clOp.count || 1, allMatching: /destroy\s+(?:all|every)/i.test(rawText) };
+    }
+    return { op: 'PASSIVE_RULE', rule: op, text: rawText };
   }
   if (op === 'BOUNCE' || op === 'BOUNCE_TO_DECKBOTTOM') {
     if (op === 'BOUNCE_TO_DECKBOTTOM' || /bottom\s+of.*?deck/i.test(rawText)) {
@@ -570,10 +578,10 @@ function parseSubEffects(block, overall, overrideClauses = []) {
   }
 
   // Destroy by BP
-  const destBpM = b.match(/destroy\s+(?:all\s+|any\s+number\s+of\s+|up\s+to\s+(\d+)\s+|(two|three|\d+|an?|one)\s+)?opposing\s+(?:spirits?\s+(?:up\s+to\s+a\s+total\s+of|with)\s+)?(\d+)\s*BP(?:\s+or\s+less)?/i);
+  const destBpM = b.match(/destroy\s+(?:all\s+|every\s+|any\s+number\s+of\s+|up\s+to\s+(\d+)\s+|(two|three|\d+|an?|one)\s+)?(?:opposing\s+)?(?:spirits?\s+(?:up\s+to\s+a\s+total\s+of|with)\s+)?(\d+)\s*BP(?:\s+or\s+less)?/i);
   if (destBpM) {
     const maxBp = parseInt(destBpM[3], 10);
-    const allMatching = /destroy\s+all|any\s+number/i.test(b);
+    const allMatching = /destroy\s+(?:all|every)|any\s+number/i.test(b);
     const cnt = destBpM[1] ? parseInt(destBpM[1], 10) : (destBpM[2] ? parseWordNum(destBpM[2]) : 1);
     const filter = /without\s+\[Tribute\]/i.test(b) ? { withoutKeyword: 'Tribute' } : undefined;
     effects.push({
@@ -763,8 +771,19 @@ function compileCardEntry(existingSpec) {
 
       if (overall === 'AURA_BP') {
         const bpM = bodyText.match(/(?:\+|gains?\s+\+|gets?\s+\+)(\d{3,5})\s*BP/i) || bodyText.match(/BP\s*\+\s*(\d{3,5})/i);
-        const clBp = (ab.clauses || []).find(c => c.op?.op === 'BP_BUFF')?.op?.amount;
-        const amount = clBp || (bpM ? parseInt(bpM[1], 10) : 1000);
+        const rawClBp = (ab.clauses || []).find(c => c.op?.op === 'BP_BUFF')?.op?.amount;
+        const clBp = (rawClBp && bodyText.includes(String(Math.abs(rawClBp)))) ? rawClBp : null;
+        const amount = clBp || (bpM ? parseInt(bpM[1], 10) : (/\[Excite\]/i.test(bodyText) ? 1000 : null));
+        if (!amount) {
+          const subEffects = parseSubEffects(bodyText, 'ATTACK_STEP', ab.clauses || []);
+          abilities.push({
+            overall: 'ATTACK_STEP',
+            subConditions,
+            ...(subCost ? { subCost } : {}),
+            subEffects,
+          });
+          continue;
+        }
         const targetFilter = {};
         const colM = bodyText.match(/(?:all|each|every)\s+(?:of\s+)?(?:your\s+)?(Red|Purple|Green|White|Yellow|Blue)\s+spirits?/i);
         if (colM) targetFilter.color = colM[1];

@@ -235,9 +235,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Move all but 1 core from target spirit to other spirits that have the same controller as it."
           }
         ]
       },
@@ -349,9 +349,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Gain 1 core in your reserve."
           }
         ]
       },
@@ -535,9 +535,9 @@ export const BS01_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send a core from your Reserve to your Life."
           }
         ]
       }
@@ -832,14 +832,14 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending a core from this Nexus to your Trash"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "destroy an opposing Spirit that blocked after this battle ends."
           }
         ]
       }
@@ -862,9 +862,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "At the start of the step, send all cores from the Trash to your Reserve."
           }
         ]
       },
@@ -1160,14 +1160,14 @@ export const BS01_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "put a core from the Void to your [The WindHero Dorcus-Ushiwaka], or [Grant-Benkei]."
           }
         ]
       }
@@ -1318,9 +1318,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send a core from this Spirit to the Reserve."
           },
           {
             "op": "PASSIVE_RULE",
@@ -1350,9 +1350,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send a core from your Field or your Trash to the Void."
           }
         ]
       }
@@ -1603,7 +1603,8 @@ export const BS01_SAGA_CARDS = [
           {
             "op": "DESTROY_BY_BP",
             "maxBp": 2000,
-            "count": 1
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -1726,7 +1727,8 @@ export const BS01_SAGA_CARDS = [
           {
             "op": "DESTROY_BY_BP",
             "maxBp": 3000,
-            "count": 1
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -1751,8 +1753,9 @@ export const BS01_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -1791,9 +1794,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "You can destroy a Spirit with [High Speed]."
           }
         ]
       }
@@ -2156,14 +2159,14 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Leaving only one core on a Spirit"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send every other core from it to its owner's Reserve."
           }
         ]
       }
@@ -2269,14 +2272,14 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Leaving only one core each on every Spirit"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send all other cores from them to their owner's Reserve."
           }
         ]
       },
@@ -3006,9 +3009,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send a core from your Trash to your Reserve."
           }
         ]
       }
@@ -3163,9 +3166,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending one core from your Reserve to your Trash"
           },
           {
             "op": "END_ATTACK_STEP",
@@ -3425,9 +3428,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy the opposing Red Spirit that battled with your Spirit at the end of the battle."
           }
         ]
       }
@@ -3536,7 +3539,8 @@ export const BS01_SAGA_CARDS = [
           {
             "op": "DESTROY_BY_BP",
             "maxBp": 4000,
-            "count": 1
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -3555,8 +3559,9 @@ export const BS01_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       }
@@ -3574,9 +3579,9 @@ export const BS01_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Both players destroy a Spirit they control."
           }
         ]
       }
@@ -3626,9 +3631,9 @@ export const BS01_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -3855,9 +3860,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -3993,9 +3998,9 @@ export const BS01_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each player moves 1 core from a spirit they control to the trash."
           }
         ]
       }

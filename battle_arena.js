@@ -675,14 +675,19 @@
 
   function getWhenBlocksBpBoost(spirit) {
     if (!spirit || !spirit.effect) return 0;
-    const m = spirit.effect.match(/((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)?\s*(?:\(When Blocks\)|『このスピリットのブロック時』)?[^\.]*?(?:gains|gets|\+)\s*(\d+)[\s]*BP/i);
-    if (m && m[2]) {
-      const levelTag = m[1] || '';
-      if (isEffectLevelMet(levelTag, spirit.currentLevel)) {
-        return parseInt(m[2], 10);
+    const blocks = typeof getCardAbilityBlocks === 'function' ? getCardAbilityBlocks(spirit.effect) : [spirit.effect];
+    let totalBoost = 0;
+    for (const b of blocks) {
+      if (!/\(When Blocks(?:[^)]*)\)|\(When Attacks\/Blocks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|『このスピリットのブロック時』/i.test(b)) continue;
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
+      const levelTag = lvlMatch ? lvlMatch[1] : '';
+      if (!isEffectLevelMet(levelTag, spirit.currentLevel)) continue;
+      const bpM = b.match(/(?:this\s+(?:spirit|ultimate|nexus)\s+(?:gains?|gets?)\s*\+?\s*(\d+)\s*BP|(?:gains?|gets?)\s*\+\s*(\d+)\s*BP)/i);
+      if (bpM) {
+        totalBoost += parseInt(bpM[1] || bpM[2], 10);
       }
     }
-    return 0;
+    return totalBoost;
   }
 
   function endOfBattleBpReset(spirit) {
@@ -3523,7 +3528,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
         // 2. Core Ramp: "put 1/2 cores from Void to your Reserve/Field/Spirit"
-        else if (descText.includes('core') && descText.includes('from the void')) {
+        if (descText.includes('core') && descText.includes('from the void')) {
           const coreMatch = descText.match(/(?:put|send|place|move)\s+(a|an|one|two|three|four|five|\d+)\s+cores?\s+from\s+(?:the\s+)?void/i);
           const coreCount = coreMatch ? parseWordNumber(coreMatch[1], 1) : 1;
           friendlyState.reserve = (friendlyState.reserve || 0) + coreCount;
@@ -3532,7 +3537,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           renderDuelTable();
         }
         // 3. Draw & Filter: "draw X cards" in special effect
-        else if (descText.includes('draw') && descText.includes('card')) {
+        if (descText.includes('draw') && descText.includes('card')) {
           const drawMatch = descText.match(/draw\s+(a|an|one|two|three|four|\d+)\s+cards?/i);
           const drawCount = drawMatch ? parseWordNumber(drawMatch[1], 1) : 1;
           let drawnCards = 0;
@@ -3550,7 +3555,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
         // 4. Exhaust enemy spirits (Strict check: must be an exhaust action, NEVER a destruction effect!)
-        else if (!/destroy/i.test(descText) && /\bexhaust\s+(a|an|one|two|three|\d+|all)?\s*(?:opposing|enemy)?\s*spirits?/i.test(descText)) {
+        if (!/destroy/i.test(descText) && /\bexhaust\s+(a|an|one|two|three|\d+|all)?\s*(?:opposing|enemy)?\s*spirits?/i.test(descText)) {
           const exMatch = descText.match(/exhaust\s+(a|an|one|two|three|\d+)?\s*(?:opposing|enemy)?\s*(?:exhausted|ready)?\s*spirits?/i);
           const exCount = exMatch && exMatch[1] ? parseWordNumber(exMatch[1], 1) : 1;
           const readies = (enemyState.field || []).filter(s => !s.isExhausted && (s.type === 'Spirit' || (!((s.type || '').includes('Ultimate')) && (s.type || '').includes('Spirit'))));
@@ -3576,7 +3581,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           }
         }
         // 5. Bounce enemy spirits: "return an opposing spirit to hand"
-        else if (descText.includes('return') && descText.includes('hand') && (descText.includes('opposing') || descText.includes('enemy'))) {
+        if (descText.includes('return') && descText.includes('hand') && (descText.includes('opposing') || descText.includes('enemy'))) {
           const bCandidates = enemyState.field || [];
           if (bCandidates.length > 0) {
             promptUniversalTargetModal({
@@ -8881,7 +8886,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const sNum = spirit.card_number || spirit.cardNumber || spirit.id;
-    if (pRegistry && sNum && pRegistry.has(sNum, 'WHEN_SUMMONED')) {
+    const hasExecSummon = pRegistry && sNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(sNum, 'WHEN_SUMMONED') : pRegistry.has(sNum, 'WHEN_SUMMONED'));
+    if (hasExecSummon) {
       pRegistry.execute(sNum, 'WHEN_SUMMONED', {
         card: spirit,
         side,
@@ -9086,7 +9092,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     let handledByRegistry = false;
     const aNum = attacker.card_number || attacker.cardNumber || attacker.id;
-    if (pRegistry && aNum && pRegistry.has(aNum, 'WHEN_ATTACKS')) {
+    const hasExecAttack = pRegistry && aNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(aNum, 'WHEN_ATTACKS') : pRegistry.has(aNum, 'WHEN_ATTACKS'));
+    if (hasExecAttack) {
       pRegistry.execute(aNum, 'WHEN_ATTACKS', {
         card: attacker,
         side,
@@ -9098,7 +9105,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // Also trigger attached Brave's WHEN_ATTACKS / [During Brave] effect from PerCardRegistry!
     if (pRegistry && attacker.brave) {
       const bNum = attacker.brave.card_number || attacker.brave.cardNumber || attacker.brave.id;
-      if (bNum && pRegistry.has(bNum, 'WHEN_ATTACKS')) {
+      const hasExecBraveAttack = bNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(bNum, 'WHEN_ATTACKS') : pRegistry.has(bNum, 'WHEN_ATTACKS'));
+      if (hasExecBraveAttack) {
         pRegistry.execute(bNum, 'WHEN_ATTACKS', {
           card: attacker,
           sourceCard: attacker.brave,
@@ -9329,7 +9337,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     let handledByRegistry = false;
     const blNum = blocker.card_number || blocker.cardNumber || blocker.id;
-    if (pRegistry && blNum && pRegistry.has(blNum, 'WHEN_BLOCKS')) {
+    const hasExecBlock = pRegistry && blNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(blNum, 'WHEN_BLOCKS') : pRegistry.has(blNum, 'WHEN_BLOCKS'));
+    if (hasExecBlock) {
       pRegistry.execute(blNum, 'WHEN_BLOCKS', {
         card: blocker,
         side: defSide,
@@ -9342,7 +9351,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     // Also trigger attached Brave's WHEN_BLOCKS effect from PerCardRegistry!
     if (pRegistry && blocker.brave) {
       const bNum = blocker.brave.card_number || blocker.brave.cardNumber || blocker.brave.id;
-      if (bNum && pRegistry.has(bNum, 'WHEN_BLOCKS')) {
+      const hasExecBraveBlock = bNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(bNum, 'WHEN_BLOCKS') : pRegistry.has(bNum, 'WHEN_BLOCKS'));
+      if (hasExecBraveBlock) {
         pRegistry.execute(bNum, 'WHEN_BLOCKS', {
           card: blocker,
           sourceCard: blocker.brave,
@@ -9379,7 +9389,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const dNum = destroyedSpirit.card_number || destroyedSpirit.cardNumber || destroyedSpirit.id;
-    if (pRegistry && dNum && pRegistry.has(dNum, 'WHEN_DESTROYED')) {
+    const hasExecDestroyed = pRegistry && dNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(dNum, 'WHEN_DESTROYED') : pRegistry.has(dNum, 'WHEN_DESTROYED'));
+    if (hasExecDestroyed) {
       pRegistry.execute(dNum, 'WHEN_DESTROYED', {
         card: destroyedSpirit,
         side,
@@ -9919,10 +9930,32 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   // ── BRAVE RULES (Rule 7.2): Uncombined Braves in Spirit Form cannot Attack or Block ──
   // ── KEYWORD RULES: Pursuit (attack while exhausted), Soar (block while exhausted), Clock Up ──
+  function hasOwnBracketedKeyword(unit, keywordPatterns) {
+    if (!unit) return false;
+    const patterns = Array.isArray(keywordPatterns) ? keywordPatterns : [keywordPatterns];
+    if (Array.isArray(unit.grantedKeywords) && unit.grantedKeywords.some(k => {
+      const s = typeof k === 'string' ? k : (k?.keyword || '');
+      return patterns.some(re => re.test(s));
+    })) return true;
+    if (Array.isArray(unit.grantedEffects) && unit.grantedEffects.some(e => {
+      const s = typeof e === 'string' ? e : (e?.text || e?.keyword || e?.type || '');
+      return patterns.some(re => re.test(s));
+    })) return true;
+    const texts = [unit.effect || '', unit.brave?.effect || ''].filter(Boolean);
+    for (const raw of texts) {
+      // Strip clauses that refer to opposing or other units having a keyword ("opposing Spirits with [Pursuit]", "unaffected by [Curse]")
+      const cleaned = raw.replace(/(?:opposing|opponent's|destroy\s+[^\n.]*?|return\s+[^\n.]*?|exhaust\s+[^\n.]*?|unaffected\s+by\s+[^\n.]*?|without)\s+\[[^\]]+\]/gi, '');
+      for (const re of patterns) {
+        if (re.test(cleaned)) return true;
+      }
+    }
+    return false;
+  }
+
   function canUnitAttack(unit) {
     if (!unit || unit.isSoulState) return false;
     if (unit.isExhausted) {
-      const hasPursuit = (unit.effect || '').toLowerCase().includes('pursuit');
+      const hasPursuit = hasOwnBracketedKeyword(unit, [/\[(?:[^:\]]*?\s+)?Pursuit(?::[^\]]*)?\]/i, /【?追撃】?/]);
       if (!hasPursuit || unit.isHeavyExhausted) return false;
     }
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
@@ -9945,7 +9978,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         return false;
       }
     }
-    const attackerHasSoar = currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('soar');
+    const attackerHasSoar = currentAttacker && hasOwnBracketedKeyword(currentAttacker, [/\[(?:[^:\]]*?\s+)?Soar(?::[^\]]*)?\]/i, /【?飛翔】?/]);
     if (unit.isExhausted && !attackerHasSoar) {
       const canBlockExhMatch = eff.match(/can\s+block\s+(?:opposing\s+cost\s+(\d+)\s+or\s+less\s+spirits?\s+)?while\s+exhausted/i);
       if (!canBlockExhMatch && !unit.canBlockWhileExhausted) return false;
@@ -9954,8 +9987,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         if ((currentAttacker.cost || 0) > maxAttCost) return false;
       }
     }
-    if (currentAttacker && (currentAttacker.effect || '').toLowerCase().includes('clock up')) {
-      if (!eff.includes('clock up')) return false;
+    if (currentAttacker && hasOwnBracketedKeyword(currentAttacker, [/\[(?:[^:\]]*?\s+)?Clock Up(?::[^\]]*)?\]/i, /【?クロックアップ】?/])) {
+      if (!hasOwnBracketedKeyword(unit, [/\[(?:[^:\]]*?\s+)?Clock Up(?::[^\]]*)?\]/i, /【?クロックアップ】?/])) return false;
     }
     const isBrave = unit.isBraveCard || unit.type === 'Brave' || (unit.type || '').includes('Brave');
     if (isBrave && !unit.isBraved && !unit.braveHost) {
@@ -11072,7 +11105,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     executeCoreCharge(nexusCard, side, 'DEPLOY');
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const nNum = nexusCard.card_number || nexusCard.cardNumber || nexusCard.id;
-    if (pRegistry && nNum && pRegistry.has(nNum, 'WHEN_DEPLOYED')) {
+    const hasExecDeploy = pRegistry && nNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(nNum, 'WHEN_DEPLOYED') : pRegistry.has(nNum, 'WHEN_DEPLOYED'));
+    if (hasExecDeploy) {
       pRegistry.execute(nNum, 'WHEN_DEPLOYED', {
         card: nexusCard,
         side,
@@ -11762,7 +11796,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (!spirit || !spirit.effect) return;
     const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     const adNum = spirit.card_number || spirit.cardNumber || spirit.id;
-    if (pRegistry && adNum && pRegistry.has(adNum, 'WHEN_ADVENTS')) {
+    const hasExecAdvent = pRegistry && adNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(adNum, 'WHEN_ADVENTS') : pRegistry.has(adNum, 'WHEN_ADVENTS'));
+    if (hasExecAdvent) {
       pRegistry.execute(adNum, 'WHEN_ADVENTS', {
         card: spirit,
         side,
@@ -12140,9 +12175,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
   const isSingleTargetBpBuff = isSingleTargetSpell;
 
-  function getMagicBpBoostAmount(card) {
+  function getMagicBpBoostAmount(card, castMode = null) {
     if (!card || !card.effect) return 2000;
-    const eff = card.effect.toLowerCase();
+    const phase = (DuelState && DuelState.phases && DuelState.phases[DuelState.phaseIndex]) || 'MAIN';
+    const textToCheck = typeof extractMagicTimingBlock === 'function'
+      ? extractMagicTimingBlock(card.effect || '', phase, 'hand', castMode)
+      : card.effect;
+    const eff = (textToCheck || card.effect || '').toLowerCase();
     const m = eff.match(/(?:\+|plus\s*)(\d+)\s*bp/i) || eff.match(/bp\s*(?:\+|plus\s*)(\d+)/i);
     return m ? parseInt(m[1], 10) : 2000;
   }
@@ -12708,8 +12747,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const cNum = card.card_number || card.cardNumber;
     const hasMainText = /\[Main\]|^Main\s*[-:]/im.test(card.effect || '');
     const canFallbackToFlash = !hasMainText;
-    if (pRegistry && card && cNum && (pRegistry.has(cNum, trig) || (canFallbackToFlash && pRegistry.has(cNum, 'FLASH')))) {
-      const activeTrig = pRegistry.has(cNum, trig) ? trig : 'FLASH';
+    const checkTrig = (t) => typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(cNum, t) : pRegistry.has(cNum, t);
+    if (pRegistry && card && cNum && (checkTrig(trig) || (canFallbackToFlash && checkTrig('FLASH')))) {
+      const activeTrig = checkTrig(trig) ? trig : 'FLASH';
       const execResult = pRegistry.execute(cNum, activeTrig, {
         card,
         side,
@@ -13466,27 +13506,13 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function hasCurse(spirit) {
     if (!spirit) return false;
     if (spirit.hasCurse) return true;
-    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /curse|jugeki|呪撃/i.test(k))) return true;
-    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
-      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
-      return /curse|jugeki|呪撃/i.test(txt);
-    })) return true;
-    if (!spirit.effect) return false;
-    const eff = spirit.effect.toLowerCase();
-    return eff.includes('curse') || eff.includes('true-curse') || eff.includes('grudging curse') || eff.includes('jugeki') || eff.includes('呪撃') || eff.includes('真・呪撃');
+    return hasOwnBracketedKeyword(spirit, [/\[(?:[^:\]]*?\s+)?(?:Curse|True-Curse|Grudging Curse|Jugeki)(?::[^\]]*)?\]/i, /【?(?:呪撃|真・呪撃)】?/]);
   }
 
   function hasCrush(spirit) {
     if (!spirit) return false;
     if (spirit.hasCrush) return true;
-    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /crush|funsai|粉砕/i.test(k))) return true;
-    if (Array.isArray(spirit.grantedEffects) && spirit.grantedEffects.some(e => {
-      const txt = typeof e === 'string' ? e : (e.text || e.keyword || e.type || '');
-      return /crush|funsai|粉砕/i.test(txt);
-    })) return true;
-    if (!spirit.effect) return false;
-    const eff = spirit.effect.toLowerCase();
-    return eff.includes('crush') || eff.includes('great crush') || eff.includes('wave crush') || eff.includes('xv crush') || eff.includes('funsai') || eff.includes('粉砕') || eff.includes('大粉砕');
+    return hasOwnBracketedKeyword(spirit, [/\[(?:[^:\]]*?\s+)?(?:Crush|Great Crush|Wave Crush|XV Crush|Funsai)(?::[^\]]*)?\]/i, /【?(?:粉砕|大粉砕)】?/]);
   }
 
   function hasArmor(spirit, color) {
@@ -13504,10 +13530,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function hasHolyLife(spirit) {
     if (!spirit) return false;
-    if (Array.isArray(spirit.grantedKeywords) && spirit.grantedKeywords.some(k => typeof k === 'string' && /holy life|heavenly light|聖命|極聖命/i.test(k))) return true;
-    if (!spirit.effect) return false;
-    const eff = spirit.effect.toLowerCase();
-    return eff.includes('holy life') || eff.includes('ultra holy life') || eff.includes('heavenly light') || eff.includes('divine holy life') || eff.includes('聖命') || eff.includes('極聖命');
+    return hasOwnBracketedKeyword(spirit, [/\[(?:[^:\]]*?\s+)?(?:Holy Life|Ultra Holy Life|Heavenly Light|Divine Holy Life)(?::[^\]]*)?\]/i, /【?(?:聖命|極聖命)】?/]);
   }
 
   function hasWindstorm(spirit) {
@@ -13527,9 +13550,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function hasAwaken(spirit) {
-    if (!spirit || !spirit.effect) return false;
-    const eff = spirit.effect.toLowerCase();
-    return eff.includes('awaken') || eff.includes('true-awaken') || eff.includes('dragon awaken') || eff.includes('覚醒') || eff.includes('真・覚醒');
+    if (!spirit) return false;
+    return hasOwnBracketedKeyword(spirit, [/\[(?:[^:\]]*?\s+)?(?:Awaken|True-Awaken|Ultra Awaken|Dragon Awaken)(?::[^\]]*)?\]/i, /【?(?:覚醒|真・覚醒|超覚醒)】?/]);
   }
 
   function hasConsecutiveBlade(spirit) {
@@ -13540,14 +13562,19 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function getWhenAttacksBpBoost(spirit) {
     if (!spirit || !spirit.effect) return 0;
-    const m = spirit.effect.match(/((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+)?\s*(?:\(When Attacks\)|『このスピリットのアタック時』)?[^\.]*?(?:gains|gets|\+)\s*(\d+)[\s]*BP/i);
-    if (m && m[2]) {
-      const levelTag = m[1] || '';
-      if (isEffectLevelMet(levelTag, spirit.currentLevel)) {
-        return parseInt(m[2], 10);
+    const blocks = typeof getCardAbilityBlocks === 'function' ? getCardAbilityBlocks(spirit.effect) : [spirit.effect];
+    let totalBoost = 0;
+    for (const b of blocks) {
+      if (!/\(When (?:Brave )?Attacks(?:[^)]*)\)|\(When Attacks\/Blocks(?:[^)]*)\)|\(When Battles(?:[^)]*)\)|『このスピリットのアタック時』/i.test(b)) continue;
+      const lvlMatch = b.match(/(?:(?:^|\s)(?:\[(?:During Advent|When Braved|During Brave|During Set)\]\s*)?((?:\[LV\d+\])+|LV\d+[-~]LV\d+|LV\d+))/i);
+      const levelTag = lvlMatch ? lvlMatch[1] : '';
+      if (!isEffectLevelMet(levelTag, spirit.currentLevel)) continue;
+      const bpM = b.match(/(?:this\s+(?:spirit|ultimate|nexus)\s+(?:gains?|gets?)\s*\+?\s*(\d+)\s*BP|(?:gains?|gets?)\s*\+\s*(\d+)\s*BP)/i);
+      if (bpM) {
+        totalBoost += parseInt(bpM[1] || bpM[2], 10);
       }
     }
-    return 0;
+    return totalBoost;
   }
 
   function getAttackSymbols(spirit, attackingSide = null) {
@@ -13885,7 +13912,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
       const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
       const brNum = burstCard.card_number || burstCard.cardNumber || burstCard.id;
-      if (pRegistry && brNum && pRegistry.has(brNum, 'BURST')) {
+      const hasExecSpiritBurst = pRegistry && brNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(brNum, 'BURST') : pRegistry.has(brNum, 'BURST'));
+      if (hasExecSpiritBurst) {
         pRegistry.execute(brNum, 'BURST', {
           card: burstCard,
           side,
@@ -13995,7 +14023,8 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       const burstText = extractMagicTimingBlock(burstCard.effect || '', currentPhase, 'burst');
       const pRegistry = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
       const bNum = burstCard.card_number || burstCard.cardNumber || burstCard.id;
-      if (pRegistry && bNum && pRegistry.has(bNum, 'BURST')) {
+      const hasExecMagicBurst = pRegistry && bNum && (typeof pRegistry.hasExecutable === 'function' ? pRegistry.hasExecutable(bNum, 'BURST') : pRegistry.has(bNum, 'BURST'));
+      if (hasExecMagicBurst) {
         pRegistry.execute(bNum, 'BURST', {
           card: burstCard,
           side,
@@ -14792,11 +14821,9 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
       s.hasCrush = false;
       s.cantBeBlocked = false;
       if (s.effect) {
-        const effLow = s.effect.toLowerCase();
-        if (effLow.includes('clash') || effLow.includes('激突')) s.hasClash = true;
-        if (effLow.includes('curse') || effLow.includes('呪撃')) s.hasCurse = true;
-        if (effLow.includes('crush') || effLow.includes('粉砕')) s.hasCrush = true;
-        if (effLow.includes("can't be blocked") || effLow.includes("cannot be blocked") || effLow.includes("ブロックされない")) s.cantBeBlocked = true;
+        if (hasOwnBracketedKeyword(s, [/\[(?:[^:\]]*?\s+)?(?:Clash|Confront|True-Clash|Supreme Clash|Ultra Clash)(?::[^\]]*)?\]/i, /【?(?:激突|真・激突)】?/])) s.hasClash = true;
+        if (hasCurse(s)) s.hasCurse = true;
+        if (hasCrush(s)) s.hasCrush = true;
       }
       delete s.battleBp;
       recalculateSpiritBp(s);

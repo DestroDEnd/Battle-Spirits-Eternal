@@ -1585,15 +1585,34 @@ export const SagaConditionDSL = (() => {
       if (params.rule === 'CAN_BLOCK_WHILE_EXHAUSTED') {
         card.canBlockWhileExhausted = true;
         if (params.maxAttackerCost !== undefined) card.exhaustedBlockMaxCost = params.maxAttackerCost;
+        return { applied: true, count: 1 };
       }
       if (params.rule === 'TREAT_AS_COLOR' && params.color) {
         if (!Array.isArray(card.colors)) card.colors = card.color ? [card.color] : [];
         if (!card.colors.includes(params.color)) card.colors.push(params.color);
+        return { applied: true, count: 1 };
       }
       if (params.rule === 'BRILLIANCE') {
         card.hasBrilliance = true;
+        return { applied: true, count: 1 };
       }
-      return { applied: true, count: 1 };
+      if (params.rule === 'DISCARD_HAND') {
+        const raw = String(params.text || card.effect || '');
+        const isOpponent = /opponent\s+discards/i.test(raw);
+        const targetState = isOpponent ? getEnemyState(ctx) : getFriendlyState(ctx);
+        const targetSide = isOpponent ? getEnemySide(ctx) : ctx.side;
+        if (targetState && Array.isArray(targetState.hand) && targetState.hand.length > 0) {
+          const discarded = targetState.hand.pop();
+          sendToTrash(ctx, discarded, targetSide, `Discarded by ${card.name || 'effect'}`);
+          render(ctx);
+          return { applied: true, count: 1 };
+        }
+        return { applied: false, count: 0 };
+      }
+      if (params.rule === 'STEP_MODIFIER') {
+        return fx.endAttackStep(ctx, { timing: 'IMMEDIATE' });
+      }
+      return { applied: true, count: 1, passivePlaceholder: true };
     },
 
     executeSubEffect(ctx, stepDef, prevResult = null) {

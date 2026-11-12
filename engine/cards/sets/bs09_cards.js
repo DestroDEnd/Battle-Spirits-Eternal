@@ -295,9 +295,9 @@ export const BS09_SAGA_CARDS = [
             "text": "Tribute: Cost 5 or more → Void -"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summon cost, you must send all cores from a Cost 5 or more Spirit you control to the Void."
           }
         ]
       },
@@ -516,9 +516,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void each to two of your Nexuses."
           }
         ]
       },
@@ -554,9 +554,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all opposing Spirits with Assault."
           }
         ]
       },
@@ -588,14 +588,14 @@ export const BS09_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending a core from your Spirits to the Trash"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "the opponent sends a core from their Spirits to their Trash."
           }
         ]
       }
@@ -618,9 +618,9 @@ export const BS09_SAGA_CARDS = [
             "count": 1
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every opposing Spirit with the same Cost as the discarded card."
           }
         ]
       }
@@ -908,9 +908,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When you have a Green Spirit on your Field, destroy one opposing Spirit with a Core Cost of 2 or less."
           }
         ]
       }
@@ -958,9 +958,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Fairy\" family Spirits is destroyed, by sending a core from that Spirit to the Trash, it returns to the Field, exhausted."
           }
         ]
       },
@@ -1109,9 +1109,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send two cores from your Trash to one of your Spirits."
           }
         ]
       }
@@ -1136,9 +1136,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send two cores from your Trash to one of your Spirits."
           }
         ]
       },
@@ -1322,9 +1322,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Both players destroy a non-[Tribute] Spirit they control."
           }
         ]
       }
@@ -1480,9 +1480,9 @@ export const BS09_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void each to two White Spirits you control."
           }
         ]
       },
@@ -2215,21 +2215,14 @@ export const BS09_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       },
       {
         "overall": "ATTACK_STEP",
@@ -2694,9 +2687,9 @@ export const BS09_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a Cost 6 or more Spirits you control to the Void."
           }
         ]
       },
@@ -2717,9 +2710,9 @@ export const BS09_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "If \"The IronKnight Yggdrasill\" was the [Tribute], also, put six cores from the Void to this Spirit."
           }
         ]
       },

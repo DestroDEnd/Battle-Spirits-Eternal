@@ -93,9 +93,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with one core on it."
           }
         ]
       }
@@ -584,6 +584,12 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": true
+          },
+          {
             "op": "DESTROY_NEXUS",
             "count": 1,
             "allMatching": true
@@ -713,9 +719,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Activate one (When Destroyed) effect of a Spirit you control without destroying that Spirit."
           }
         ]
       }
@@ -795,9 +801,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with the same BP as this Spirit's."
           }
         ]
       },
@@ -880,9 +886,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a \"Song Bird\" family Spirit you control to the Void."
           }
         ]
       },
@@ -918,9 +924,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying three \"Pentan\"-named Spirits you control"
           },
           {
             "op": "REFRESH_SPIRITS",
@@ -1158,6 +1164,12 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
             "op": "CORE_FROM_VOID",
             "to": "SELF",
             "count": 1
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -1414,9 +1426,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put two cores from the Void to a Nexus you control."
           }
         ]
       },
@@ -1601,9 +1613,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When you use a Magic effect, after its effect resolves, destroy an opposing Spirit with a cost equal or inferior to the Magic's."
           }
         ]
       }
@@ -1955,9 +1967,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "CORE_DRAIN",
+            "count": 1,
+            "to": "RESERVE"
           }
         ]
       }
@@ -2104,9 +2116,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": "EXHAUSTED_SPIRIT_BP",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "give this Spirit + (Exhausted Spirit's BP) BP."
           }
         ]
       },
@@ -2268,14 +2280,14 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy any number of opposing Spirits up to a total of cost 5."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When the Tribute was [The DragonEmperor Siegfried]/[The ImpregnableFortress Odin], destroy up to a total of cost 8."
           }
         ]
       },
@@ -2397,9 +2409,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send cores from every Spirit to its owner's Reserve until only one core remains on each of them."
           }
         ]
       }
@@ -2424,9 +2436,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any of your Spirit."
           }
         ]
       }
@@ -2629,9 +2641,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "this Spirit gains + (the exhausted Spirit's BP) BP."
           }
         ]
       },
@@ -3061,9 +3073,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a Cost 3 or more Spirit you control to the Trash."
           }
         ]
       },
@@ -3126,7 +3138,8 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
           {
             "op": "DESTROY_BY_BP",
             "maxBp": 5000,
-            "count": 1
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -3201,9 +3214,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a Cost 5 or more Spirits you control to the Void."
           }
         ]
       },
@@ -3401,9 +3414,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any of your Spirits."
           }
         ]
       },
@@ -3441,9 +3454,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither player can remove cores from the battling Spirits."
           }
         ]
       },
@@ -3827,9 +3840,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects."
           }
         ]
       }
@@ -3989,14 +4002,14 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying one of your battling Spirits"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send a core from that Spirit to your Life."
           }
         ]
       }
@@ -4045,24 +4058,8 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
             1,
             2,
             3
-          ]
-        },
-        "subEffects": [
-          {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "overall": "FLASH",
-        "subConditions": {
-          "levels": [
-            1,
-            2,
-            3
-          ]
+          ],
+          "requireBraved": true
         },
         "subEffects": [
           {
@@ -4203,9 +4200,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 3
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "The opponent sends three cores from any Spirits they control to their Reserve."
           },
           {
             "op": "PASSIVE_RULE",
@@ -4452,9 +4449,9 @@ export const SD03_BSC05_CONSTELLATION_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a number of cores equal to this Spirit's LV from the Void to a Nexus you control."
           }
         ]
       }

@@ -589,9 +589,9 @@ export const BS02_SAGA_CARDS = [
             "text": "Target a Spirit you control."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send all cores from this Spirit to the targeted Spirit you control instead of the Reserve."
           }
         ]
       }
@@ -685,9 +685,9 @@ export const BS02_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "At the end of battle, destroy this Spirit."
           }
         ]
       }
@@ -1087,9 +1087,9 @@ export const BS02_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy a Cost 4 or less you control."
           },
           {
             "op": "CORE_FROM_VOID",
@@ -1559,9 +1559,9 @@ export const BS02_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending all cores from a 7000 BP or more Spirit you control to the Void"
           },
           {
             "op": "CORE_DRAIN",
@@ -1630,9 +1630,9 @@ export const BS02_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 4
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Both players send a total of four cores from Spirits they control to the owner's Trash."
           }
         ]
       },
@@ -1668,9 +1668,9 @@ export const BS02_SAGA_CARDS = [
             "to": "VOID"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 6
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "If there are 20 cores or more, they send six cores among them to the Void."
           }
         ]
       },
@@ -1760,9 +1760,9 @@ export const BS02_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send every core from your Trash to a Spirit you control."
           },
           {
             "op": "PASSIVE_RULE",
@@ -1785,9 +1785,9 @@ export const BS02_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy a Spirit you control."
           },
           {
             "op": "CORE_FROM_VOID",
@@ -1973,14 +1973,14 @@ export const BS02_SAGA_CARDS = [
             "text": "When the battle resolves, instead of comparing BP, compare the Levels of the Spirits"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "destroy the Spirit with a lower Level."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "If their Levels are the same, destroy both players' Spirits."
           }
         ]
       }
@@ -2142,9 +2142,9 @@ export const BS02_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": "EXHAUSTED_SPIRIT_BP",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "give this Spirit + (Exhausted Spirit's BP) BP."
           }
         ]
       },

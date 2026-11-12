@@ -47,9 +47,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When your Cost 3 Spirits are destroyed by the opponent, you can destroy a Cost 3 or less Spirit."
           }
         ]
       }
@@ -1326,9 +1326,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither player can put cores from the Void to their Life."
           }
         ]
       },
@@ -1431,14 +1431,14 @@ export const BS17_SAGA_CARDS = [
             "to": "RESERVE"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "-If there are five or six cores, send cores until three remain."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "-If there are three or four cores, send cores until two remain."
           }
         ]
       }
@@ -1794,9 +1794,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Red \"Supreme Hero\" family Spirit is destroyed by the opponent, by sending a core from your Life to the Void, that Spirit remains on your Field, refreshed."
           }
         ]
       }
@@ -1861,9 +1861,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When your \"DarkKnight\"-named Spirits are destroyed by opposing Spirit/Magic effects, the opponent destroys a Spirit they control."
           }
         ]
       }
@@ -2110,9 +2110,9 @@ export const BS17_SAGA_CARDS = [
             "text": "Target an opposing Spirit with the same card name as at least one other Spirit on their Field."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all opposing Spirits with the same name as that Spirit."
           }
         ]
       }
@@ -2720,14 +2720,14 @@ export const BS17_SAGA_CARDS = [
             "to": "RESERVE"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "-If there are five or six cores, send cores until three remain."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "-If there are three or four cores, send cores until two remain."
           }
         ]
       }
@@ -2880,8 +2880,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "SALVAGE_TRASH",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV3] Brilliance (When Attacks) At the end of battle, return all Magic cards you used during this battle to your Hand."
           }
         ]
       }
@@ -2899,8 +2900,9 @@ export const BS17_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "REANIMATE_TRASH",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "Immortality: Cost 3 (Either Attack Step) - This Spirit card in your Trash can be summoned when your Cost 3 Spirit is destroyed."
           }
         ]
       }
@@ -2924,8 +2926,8 @@ export const BS17_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "COST_MODIFIER",
-            "text": "Cost 0/3/6 Spirits can't block."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] (Either Attack Step) Cost 0/3/6 Spirits can't block."
           }
         ]
       },
@@ -2938,9 +2940,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "SELF",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Either Attack Step) When only the opposing Spirits are destroyed by comparing BP with your \"Great General\" family Spirit, put a core from the Void to this Nexus."
           }
         ]
       }
@@ -2954,12 +2956,13 @@ export const BS17_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "FLASH",
+        "overall": "ATTACK_STEP",
         "subConditions": {
           "levels": [
             1,
             2
-          ]
+          ],
+          "turn": "YOUR"
         },
         "subEffects": [
           {
@@ -2981,9 +2984,9 @@ export const BS17_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "EXHAUST_SPIRITS",
-            "count": 1,
-            "allMatching": false
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Either Attack Step) When your Spirits with Brilliance/Evil Light are destroyed by the opponent, by exhausting this Nexus, one of the destroyed Spirits remain on your field, exhausted."
           }
         ]
       }
@@ -3007,13 +3010,8 @@ export const BS17_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "DISCARD_HAND",
-            "text": "When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand."
-          },
-          {
-            "op": "PASSIVE_RULE",
-            "rule": "DECK_IMMUNITY",
-            "text": "during this turn, cards cannot be discarded from your deck."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] When a card with Burst effect is discarded from your deck due to the opponent, add that card to your Hand. Also, during this turn, cards cannot be discarded from your deck."
           }
         ]
       },
@@ -3022,7 +3020,9 @@ export const BS17_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "YOUR",
+          "oncePerTurn": "opt_1"
         },
         "subEffects": [
           {

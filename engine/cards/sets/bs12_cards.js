@@ -464,9 +464,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy two opposing Spirits with one symbol."
           }
         ]
       },
@@ -480,9 +480,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with two symbols."
           }
         ]
       }
@@ -744,9 +744,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending three cores from your Field to the Void"
           },
           {
             "op": "CORE_DRAIN",
@@ -770,9 +770,9 @@ export const BS12_SAGA_CARDS = [
             "text": "Each player targets one of their Spirits."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all Spirits that aren't targeted."
           }
         ]
       }
@@ -1318,9 +1318,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "You can send a core from this Spirit to your Life."
           }
         ]
       }
@@ -1386,9 +1386,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Divine Spirit\" family Spirits are destroyed, you can send one core from your Field to your Life."
           }
         ]
       }
@@ -1475,9 +1475,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing battling refreshed Spirit."
           }
         ]
       }
@@ -2180,9 +2180,9 @@ export const BS12_SAGA_CARDS = [
             "text": "When you use a Magic card"
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "during this battle, the LV1/LV2/LV3 BP of the blocking opposing Spirits is treated as 2000."
           }
         ]
       }
@@ -3138,9 +3138,9 @@ export const BS12_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy a Spirit with the lowest cost on the opposing Field."
           }
         ]
       }
@@ -3401,9 +3401,9 @@ export const BS12_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all opposing Spirits with the same costs as your \"Beast Head\" family Spirits."
           }
         ]
       },

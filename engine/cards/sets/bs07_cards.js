@@ -279,9 +279,9 @@ export const BS07_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When your Spirit is blocking an opposing Spirit, destroy a Cost 4 or less Spirit you control, and you can destroy any number of opposing Spirits up to the cost of your destroyed Spirit."
           }
         ]
       }
@@ -401,9 +401,9 @@ export const BS07_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to a \"Vanity Deity\"/\"Deified General\" family Spirit you control."
           }
         ]
       },
@@ -439,8 +439,9 @@ export const BS07_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 2000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -1249,9 +1250,9 @@ export const BS07_SAGA_CARDS = [
             "text": "Tribute: Cost 3 or more → Trash -"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from one of your Cost 3 or more Spirits to the Trash."
           }
         ]
       },
@@ -1849,9 +1850,9 @@ export const BS07_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every opposing Cost 1 Spirit."
           }
         ]
       }
@@ -2083,32 +2084,21 @@ export const BS07_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_NEXUS",
-            "count": 1
+            "op": "DESTROY_BY_BP",
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          },
-          {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 3000,
-            "count": 1,
-            "allMatching": false
-          }
-        ]
+        "keyword": "Clash"
       }
     ]
   },
@@ -2184,8 +2174,9 @@ export const BS07_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DRAW_CARDS",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DRAW",
+            "text": "By not drawing a card"
           },
           {
             "op": "BOUNCE_TO_HAND",
@@ -2381,12 +2372,12 @@ export const BS07_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "WHEN_BLOCKS",
         "subConditions": {
           "levels": [
             2
           ],
-          "turn": "YOUR"
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {

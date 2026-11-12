@@ -169,9 +169,9 @@ export const BS15_SAGA_CARDS = [
             "text": "Compare the total amount of cores in either player's Field/Reserve/Trash."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "The player who has a higher total amount of cores must send cores from the Field/Reserve/Trash to the void until they have an equal amount to the player with a lower total."
           }
         ]
       },
@@ -705,9 +705,9 @@ export const BS15_SAGA_CARDS = [
             "text": "Either player target a color among those of their Spirits."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every Spirit of the colors that aren't targeted."
           }
         ]
       },
@@ -1507,9 +1507,9 @@ export const BS15_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "If you control only Yellow Spirits/Nexuses, send two cores from your Trash to your Reserve."
           }
         ]
       }
@@ -2287,22 +2287,14 @@ export const BS15_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "scaleByLevel": true,
-            "perLevel": 1
-          }
-        ]
+        "keyword": "Crush"
       },
       {
         "overall": "AURA_BP",
@@ -2717,9 +2709,9 @@ export const BS15_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "If there are three or more Yellow cards in your Trash, put a core from the Void to either your Life, or your Reserve."
           },
           {
             "op": "PASSIVE_RULE",
@@ -2743,14 +2735,14 @@ export const BS15_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending two cores from your Reserve to your Trash"
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "during this battle, an opposing Spirit's LV1/LV2/LV3/LV4 BP is treated as 2000."
           }
         ]
       }
@@ -2785,9 +2777,9 @@ export const BS15_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "For each LV this Spirit has, discard five cards from the opposing decktop, and when a card with Burst effects is discarded, destroy an opposing Spirit."
           }
         ]
       }
@@ -2916,18 +2908,19 @@ export const BS15_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "ADD_EXTRA_SYMBOL",
-            "scope": "SELF",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] All Spirit cards in your Hand with Windstorm gain 1 extra Green reduction symbol."
           }
         ]
       },
       {
-        "overall": "ATTACK_STEP",
+        "overall": "START_STEP",
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
@@ -2952,7 +2945,8 @@ export const BS15_SAGA_CARDS = [
           "levels": [
             1,
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
@@ -2967,13 +2961,14 @@ export const BS15_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] (Opposing Turn) When your Spirit uses an Ice Wall effect, by sending a core from this Nexus to the trash, refresh that Spirit."
           }
         ]
       }
@@ -2996,9 +2991,9 @@ export const BS15_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "EXHAUST_SPIRITS",
-            "count": 1,
-            "allMatching": false
+            "op": "PASSIVE_RULE",
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV1][LV2] All exhausted Spirits can only be refreshed during the Refresh Step."
           }
         ]
       },
@@ -3012,8 +3007,8 @@ export const BS15_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "PASSIVE_RULE",
-            "rule": "NEGATE_EFFECT",
-            "text": "While you have a Burst set, (When Destroyed) effects of Spirits can't activate."
+            "rule": "CONTINUOUS_RULE",
+            "text": "[LV2] While you have a Burst set, (When Destroyed) effects of Spirits can't activate."
           }
         ]
       }

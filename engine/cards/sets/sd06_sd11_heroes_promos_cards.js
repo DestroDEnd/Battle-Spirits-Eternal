@@ -389,6 +389,12 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": true
+          },
+          {
             "op": "DESTROY_NEXUS",
             "count": 1,
             "allMatching": true
@@ -690,9 +696,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit."
           }
         ]
       },
@@ -750,9 +756,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy an opposing Spirit with the same family as that Spirit."
           }
         ]
       }
@@ -902,9 +908,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
             "text": "You can target a Spirit you control."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with the same cost as that Spirit."
           }
         ]
       },
@@ -1660,9 +1666,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy an opposing Spirit."
           }
         ]
       }
@@ -1748,9 +1754,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending two cores from your Reserve to your Trash"
           },
           {
             "op": "PASSIVE_RULE",
@@ -1868,9 +1874,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put two cores from the Void to a Nexus you control."
           }
         ]
       },
@@ -2014,14 +2020,14 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "put a core from the Void to your [The WindHero Dorcus-Ushiwaka], or [Grant-Benkei]."
           }
         ]
       }
@@ -2102,9 +2108,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "The effects of cards your opponent controls that increase the BP of 1 or more spirits are negated."
           }
         ]
       },
@@ -2383,9 +2389,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Spirit is destroyed by the Opponent, send a core from your Trash to your Reserve."
           }
         ]
       }
@@ -2500,9 +2506,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy an opposing Spirit with one core on it."
           }
         ]
       }
@@ -2811,9 +2817,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Both players destroy a Spirit they control."
           }
         ]
       }
@@ -2968,9 +2974,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send every core from your Trash to a Spirit you control."
           },
           {
             "op": "PASSIVE_RULE",
@@ -3073,9 +3079,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "You can destroy a Spirit with three cores or less on it."
           }
         ]
       },
@@ -3104,39 +3110,23 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "scaleByLevel": true,
-            "perLevel": 1
-          }
-        ]
+        "keyword": "Crush"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "MILL_DECK",
-            "side": "OPPONENT",
-            "scaleByLevel": true,
-            "perLevel": 1
-          }
-        ]
+        "keyword": "Crush"
       }
     ]
   },
@@ -3501,9 +3491,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Each player sends four cores from their Spirits/Nexuses to the Void."
           },
           {
             "op": "ADD_EXTRA_SYMBOL",
@@ -3697,12 +3687,11 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "ATTACK_STEP",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -3726,9 +3715,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send all cores from one of your \"Artificial Soldier\" family Spirits to the Void."
           },
           {
             "op": "MILL_DECK",
@@ -3934,9 +3923,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Send cores from every Spirit to its owner's Reserve until only one core remains on each of them."
           }
         ]
       }
@@ -3961,9 +3950,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with two cores or less on it."
           }
         ]
       },
@@ -4045,9 +4034,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any of your Spirit."
           }
         ]
       }
@@ -4274,13 +4263,12 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "WHEN_BATTLES",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -4315,36 +4303,23 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
-          }
-        ]
+        "keyword": "Windstorm"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "BOUNCE_TO_HAND",
-            "count": 1
-          }
-        ]
+        "keyword": "Windstorm"
       }
     ]
   },
@@ -5274,9 +5249,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy all Spirits without [Tribute]."
           }
         ]
       }
@@ -5290,37 +5265,23 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       }
     ]
   },
@@ -5635,9 +5596,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Both players destroy a non-[Tribute] Spirit they control."
           }
         ]
       }
@@ -5661,9 +5622,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void each to two White Spirits you control."
           }
         ]
       },
@@ -5843,21 +5804,14 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
     "isVanilla": false,
     "abilities": [
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "AURA_KEYWORDS",
         "subConditions": {
           "levels": [
             1,
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
-        "subEffects": [
-          {
-            "op": "GRANT_KEYWORD",
-            "scope": "SELF",
-            "keyword": "Clash"
-          }
-        ]
+        "keyword": "Clash"
       },
       {
         "overall": "ATTACK_STEP",
@@ -6053,9 +6007,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from a Cost 6 or more Spirits you control to the Void."
           }
         ]
       },
@@ -6076,9 +6030,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "If \"The IronKnight Yggdrasill\" was the [Tribute], also, put six cores from the Void to this Spirit."
           }
         ]
       },
@@ -6991,9 +6945,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither player can remove cores from this Spirit."
           }
         ]
       },
@@ -7072,9 +7026,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Give all your \"Galaxian\"/\"Astral Soul\" family Spirits the effect: \"(When Attacks) Destroy an opposing non-braved Spirit with a cost equal or inferior to this Spirit's.\""
           }
         ]
       }
@@ -7898,9 +7852,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending three cores from this Nexus to the Trash"
           },
           {
             "op": "END_ATTACK_STEP",
@@ -7927,9 +7881,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither players can put cores from the Void to their Life."
           }
         ]
       },
@@ -8333,9 +8287,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy two opposing Spirits with one symbol."
           }
         ]
       },
@@ -8349,9 +8303,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with two symbols."
           }
         ]
       }
@@ -8860,9 +8814,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
             "text": "When you use a Magic card"
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "during this battle, the LV1/LV2/LV3 BP of the blocking opposing Spirits is treated as 2000."
           }
         ]
       }
@@ -9228,9 +9182,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy a Spirit with the lowest cost on the opposing Field."
           }
         ]
       }
@@ -9531,9 +9485,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a number of cores equal to this Spirit's LV from the Void to your Reserve."
           }
         ]
       }
@@ -9713,9 +9667,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Yellow Spirits are destroyed, by sending a core from your Life to your Reserve, one of your destroyed Yellow Spirits remains on the Field, exhausted."
           }
         ]
       },
@@ -9921,14 +9875,14 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying a Spirit you control"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "the opponent destroys a Spirit they control."
           }
         ]
       }
@@ -9956,9 +9910,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Activate the (When Destroyed) effect of a Spirit you control without destroying it."
           }
         ]
       },
@@ -10187,8 +10141,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -10756,9 +10711,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any of your Spirits."
           }
         ]
       },
@@ -11024,9 +10979,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy every Red/Green/Blue Spirit refreshed by Spirit/Magic effects."
           }
         ]
       }
@@ -11267,9 +11222,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with two or less cores on it."
           }
         ]
       }
@@ -11869,8 +11824,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -11918,9 +11874,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "If you control any \"Colonel\"-named Spirit, destroy an opposing Spirit with a BP equal or inferior to this Spirit's."
           }
         ]
       }
@@ -12028,9 +11984,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing (1000x the number of Spirits you control) BP or less Spirit."
           },
           {
             "op": "PASSIVE_RULE",
@@ -13855,6 +13811,12 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
           {
             "op": "DRAW_CARDS",
             "count": 1
+          },
+          {
+            "op": "DESTROY_BY_BP",
+            "maxBp": 3000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       },
@@ -14159,9 +14121,9 @@ export const SD06_SD11_HEROES_PROMOS_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit."
           }
         ]
       }

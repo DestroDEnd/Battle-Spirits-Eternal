@@ -76,9 +76,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with \"Antman\" in its name."
           }
         ]
       },
@@ -211,9 +211,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy an opposing Spirit."
           }
         ]
       }
@@ -392,9 +392,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with the same BP as this Spirit."
           }
         ]
       }
@@ -425,9 +425,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Awaken - You can put any number of cores from Spirits you control to this Spirit."
           }
         ]
       },
@@ -699,14 +699,14 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "The opponent sends cores from their Field/Reserve/Trash to the Void until they have five or less cores in total remaining."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "sends cores from your Field/Reserve/Trash to the Void until you have five or less cores in total remaining."
           }
         ]
       }
@@ -1205,9 +1205,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "At the end of battle, destroy this Spirit."
           }
         ]
       }
@@ -1692,9 +1692,9 @@ export const BS10_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When only the opposing Spirit is destroyed by comparing BP, destroy every opposing Spirit with the same family as that destroyed Spirit."
           }
         ]
       }
@@ -2204,8 +2204,9 @@ export const BS10_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 1,
+            "count": 1,
+            "allMatching": false
           }
         ]
       }
@@ -2275,12 +2276,11 @@ export const BS10_SAGA_CARDS = [
         ]
       },
       {
-        "overall": "WHEN_ATTACKS",
+        "overall": "WHEN_BATTLES",
         "subConditions": {
           "levels": [
             2
-          ],
-          "turn": "YOUR"
+          ]
         },
         "subEffects": [
           {
@@ -2396,9 +2396,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Life is reduced by the opponent, put a core from the Void each to every Brave Spirit you control."
           }
         ]
       }
@@ -2421,9 +2421,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Spirit with no printed effects blocks, put a core from the Void to that Spirit."
           }
         ]
       },
@@ -2586,9 +2586,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Astral Deity\"/\"Galaxian\"/\"Astral Soul\" family Spirit is summoned, send a core from your Reserve to your Life."
           }
         ]
       }
@@ -2746,9 +2746,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying a Spirit you control"
           },
           {
             "op": "REANIMATE_TRASH",
@@ -2823,8 +2823,9 @@ export const BS10_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": true
           }
         ]
       }
@@ -2877,9 +2878,9 @@ export const BS10_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "During this turn, when your Spirits with [Immortality] are destroyed, the opponent destroys a Spirit they control."
           }
         ]
       }
@@ -3037,14 +3038,14 @@ export const BS10_SAGA_CARDS = [
             "text": "Until (Your End Step) occurs for three times: cards can't be discarded from either decks; Attack Step doesn't occur for both players; and cores from the Void/Reserve can't be put to Life."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "put three cores from the Void next to your deck"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send one core to the Void on each of (Your End Step)."
           },
           {
             "op": "PASSIVE_RULE",
@@ -3116,9 +3117,9 @@ export const BS10_SAGA_CARDS = [
             "text": "When the battle resolves, instead of BP, compare the costs, and the Spirit with a lower cost is destroyed."
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "If the costs are the same, both players' Spirits are destroyed."
           }
         ]
       }
@@ -3272,9 +3273,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Neither player can remove cores from this Spirit."
           }
         ]
       },
@@ -3393,9 +3394,9 @@ export const BS10_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Give all your \"Galaxian\"/\"Astral Soul\" family Spirits the effect: \"(When Attacks) Destroy an opposing non-braved Spirit with a cost equal or inferior to this Spirit's.\""
           }
         ]
       }

@@ -68,6 +68,42 @@ export class CardRegistry {
   }
 
   /**
+   * Checks whether an explicit handler is registered AND contains at least one executable
+   * active operation (rather than only passive placeholder rules) so battle_arena.js
+   * knows whether to short-circuit or fall through to compiled IR (executeUniversalCardEffect).
+   * @param {string} cardNumber
+   * @param {string} trigger
+   * @returns {boolean}
+   */
+  hasExecutable(cardNumber, trigger) {
+    if (!this.has(cardNumber, trigger)) return false;
+    const canon = String(cardNumber).trim().toUpperCase();
+    const entry = this.registry.get(canon);
+    if (!entry || !Array.isArray(entry.sagaAbilities) || entry.sagaAbilities.length === 0) {
+      return true;
+    }
+    const trigKey = String(trigger).trim().toUpperCase();
+    const matching = entry.sagaAbilities.filter(ab => {
+      let ov = String(ab.overall || ab.trigger || 'PASSIVE').toUpperCase();
+      if (entry.cardType === 'Magic' && ov === 'MAIN_STEP') ov = 'MAIN';
+      return ov === trigKey;
+    });
+    if (matching.length === 0) return true;
+    const EXECUTABLE_PASSIVE_RULES = new Set([
+      'CAN_BLOCK_WHILE_EXHAUSTED',
+      'TREAT_AS_COLOR',
+      'BRILLIANCE',
+      'DISCARD_HAND',
+      'STEP_MODIFIER'
+    ]);
+    return matching.some(ab => {
+      if (ab.overall === 'AURA_BP' || ab.overall === 'AURA_KEYWORDS') return true;
+      const subs = ab.subEffects || [];
+      return subs.some(s => s.op !== 'PASSIVE_RULE' || EXECUTABLE_PASSIVE_RULES.has(s.rule));
+    });
+  }
+
+  /**
    * Returns the registered card entry.
    * @param {string} cardNumber 
    */

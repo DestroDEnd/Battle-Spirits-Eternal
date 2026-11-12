@@ -460,9 +460,9 @@ export const BS18_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit with a Cost equal to or less than the total number of Blue symbols on your field."
           }
         ]
       }
@@ -647,14 +647,14 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When cores are increased from the Void via a Spirit effect, send all the increased cores to the Void."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send all cores from the Spirit who activated such effect to the Void."
           }
         ]
       }
@@ -997,9 +997,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           }
         ]
       }
@@ -1147,9 +1147,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a core from the Void to any Spirit you control."
           }
         ]
       },
@@ -1274,9 +1274,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending one core from this Spirit to your Trash"
           },
           {
             "op": "CORE_DRAIN",
@@ -2184,9 +2184,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your \"Giant Beast\"/\"Machine Beast\" family Spirit blocks, put a core from the Void to that Spirit."
           }
         ]
       },
@@ -2625,9 +2625,9 @@ export const BS18_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put two cores from the Void to a Nexus you control."
           },
           {
             "op": "PASSIVE_RULE",
@@ -2675,18 +2675,18 @@ export const BS18_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "By sending all cores from a \"Supreme Hero\" family Spirit you control to the Void"
           },
           {
             "op": "REANIMATE_TRASH",
             "count": 1
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "put any number of cores from your Field/Reserve to your Life, until you have at most five Lives."
           }
         ]
       },
@@ -2957,9 +2957,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "For each Spirit with two symbols you control, destroy an opposing Spirit with one symbol."
           }
         ]
       },
@@ -3025,9 +3025,9 @@ export const BS18_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing \"Ancient Dragon\" family Spirit."
           }
         ]
       }

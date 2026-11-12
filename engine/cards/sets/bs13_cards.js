@@ -247,19 +247,19 @@ export const BS13_SAGA_CARDS = [
             "text": "Until (Your End Step) takes place three times, (When Summoned) effects of Spirits can't activate."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "take three cores from the Void and put beside your deck"
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "send one core to the Void every (Your End Step)."
           },
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "These cores can only be used for this effect."
           }
         ]
       },
@@ -404,9 +404,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Destroy an opposing Spirit that blocked when the battle resolves at the end of battle."
           }
         ]
       },
@@ -487,9 +487,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "At the end of battle, by destroying this Spirit and a Cost 3 or more Spirit you control, summon an \"Astral Deity\" family Spirit card from your Hand, without paying the cost."
           }
         ]
       }
@@ -553,8 +553,9 @@ export const BS13_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -643,9 +644,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "You can destroy any number of opposing Spirits up to (the total BP of your \"Dragon\" family Spirits) BP."
           }
         ]
       },
@@ -971,9 +972,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "Put a number of cores equal to this Spirit's LV from the Void to your Reserve."
           }
         ]
       }
@@ -1060,9 +1061,9 @@ export const BS13_SAGA_CARDS = [
             "allMatching": false
           },
           {
-            "op": "BP_BUFF_TARGET",
-            "amount": 1000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "BP_BUFF",
+            "text": "this Spirit gains + (the exhausted Spirit's BP) BP."
           }
         ]
       },
@@ -1361,9 +1362,9 @@ export const BS13_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from one of your \"Armed Machine\" family Spirits to the Void."
           }
         ]
       },
@@ -1510,9 +1511,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "When your Yellow Spirits are destroyed, by sending a core from your Life to your Reserve, one of your destroyed Yellow Spirits remains on the Field, exhausted."
           }
         ]
       },
@@ -1976,9 +1977,9 @@ export const BS13_SAGA_CARDS = [
         "subConditions": {},
         "subEffects": [
           {
-            "op": "CORE_FROM_VOID",
-            "to": "RESERVE",
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "MOVE_CORE",
+            "text": "After paying for the summoning cost, you must send all core from one of your \"Fusion Beast\" family Spirits to the Void."
           }
         ]
       },
@@ -2147,14 +2148,14 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "By destroying a Spirit you control"
           },
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "the opponent destroys a Spirit they control."
           }
         ]
       }
@@ -2182,9 +2183,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "Activate the (When Destroyed) effect of a Spirit you control without destroying it."
           }
         ]
       },
@@ -2477,8 +2478,9 @@ export const BS13_SAGA_CARDS = [
         "subEffects": [
           {
             "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "maxBp": 4000,
+            "count": 1,
+            "allMatching": false
           }
         ]
       },
@@ -2550,9 +2552,9 @@ export const BS13_SAGA_CARDS = [
         },
         "subEffects": [
           {
-            "op": "DESTROY_BY_BP",
-            "maxBp": 5000,
-            "count": 1
+            "op": "PASSIVE_RULE",
+            "rule": "DESTROY",
+            "text": "When a Spirit with two or less cores on it attacks, destroy that Spirit."
           }
         ]
       },
@@ -3483,7 +3485,8 @@ export const BS13_SAGA_CARDS = [
         "subConditions": {
           "levels": [
             2
-          ]
+          ],
+          "turn": "OPPONENT"
         },
         "subEffects": [
           {
