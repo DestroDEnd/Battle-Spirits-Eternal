@@ -835,7 +835,7 @@
 
     grid.innerHTML = filtered.map(([name, count]) => {
       const info = deckCardsData[name] || { name, cost: '?', type: 'Spirit' };
-      const art = (info.image_url ? info.image_url.split('/revision/latest')[0] : '') || '/assets/card_back.png';
+      const art = (info.image_url ? info.image_url.split('/revision/latest')[0] : '') || './assets/card_back.png';
       const num = info.card_number || '';
       const cost = info.cost !== undefined ? info.cost : '';
       const type = info.type || 'Spirit';
@@ -845,7 +845,7 @@
           <div class="deckview-art-wrap">
             <span class="deckview-cost-badge">Cost ${cost}</span>
             <span class="deckview-count-badge">${count}x</span>
-            <img class="deckview-art-img" src="${art}" alt="${name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='/assets/card_back.png'">
+            <img class="deckview-art-img" src="${art}" alt="${name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='./assets/card_back.png'">
           </div>
           <div class="deckview-card-name">${name}</div>
           <div class="deckview-card-sub">

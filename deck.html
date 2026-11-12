@@ -550,9 +550,9 @@ const DeckManagerUI = {
       const coverCards = Object.keys(d.cards || {}).slice(0, 3);
       const coverHtml = coverCards.map(cName => {
         const cached = deckCardCache[cName];
-        const rawArt = cached ? (cached.image_url || '/assets/card_back.png') : '/assets/card_back.png';
-        const art = (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(rawArt) : (rawArt ? rawArt.split('/revision/latest')[0] : '/assets/card_back.png');
-        return `<img class="saved-deck-mini-art" src="${art}" alt="${esc(cName)}" title="${esc(cName)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='/assets/card_back.png'">`;
+        const rawArt = cached ? (cached.image_url || './assets/card_back.png') : './assets/card_back.png';
+        const art = (typeof window.cleanCardImageUrl === 'function') ? window.cleanCardImageUrl(rawArt) : (rawArt ? rawArt.split('/revision/latest')[0] : './assets/card_back.png');
+        return `<img class="saved-deck-mini-art" src="${art}" alt="${esc(cName)}" title="${esc(cName)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.src='./assets/card_back.png'">`;
       }).join('');
 
       return `
@@ -955,7 +955,7 @@ function renderVisualCardsGrid() {
           <span class="tile-qty-pill">${count}x</span>
         </div>
         <div class="tile-img-box">
-          <img class="tile-img" src="${artUrl}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" data-art="${artUrl}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http') && !window.location.hostname.includes('github.io')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=FALLBACK_CARD_ART; }" />
+          <img class="tile-img" src="${artUrl}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" data-art="${artUrl}" onerror="this.onerror=null; this.src=FALLBACK_CARD_ART;" />
         </div>
         <div class="tile-meta-bar">
           <span class="tile-code-tag">${esc(cardNum)}</span>

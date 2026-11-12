@@ -33,11 +33,8 @@
         targetPage = 'login.html';
       }
 
-      let destination = './' + targetPage + search + hash;
-      // If opened at root domain without repository path on GitHub Pages
-      if (loc.hostname.includes('github.io') && !path.toLowerCase().includes('battle-spirits-eternal')) {
-        destination = '/Battle-Spirits-Eternal/' + targetPage + search + hash;
-      }
+      const base = loc.hostname.includes('github.io') ? '/Battle-Spirits-Eternal/' : './';
+      const destination = base + targetPage + search + hash;
 
       window.location.replace(destination);
     })();

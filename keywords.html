@@ -557,7 +557,7 @@ async function loadKeywordCards() {
         const safeName = esc(c.name);
         const artUrl = (typeof window.cleanCardImageUrl === 'function') 
           ? window.cleanCardImageUrl(c.image_url) 
-          : (c.image_url || '/placeholder.png');
+          : (c.image_url || './assets/card_back.png');
         const costStr = (c.cost !== null && c.cost !== undefined) ? `💎 ${c.cost}` : '—';
         const typeStr = c.type || 'Card';
         const codeBadge = c.card_number ? `<span class="tile-number">${esc(c.card_number)}</span>` : '';
@@ -580,7 +580,7 @@ async function loadKeywordCards() {
             <div class="tile-art">
               <span class="tile-cost">${costStr}</span>
               ${deckPill}
-              <img src="${esc(artUrl)}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='/placeholder.png';" />
+              <img src="${esc(artUrl)}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
             </div>
             <div class="tile-info">
               <div>

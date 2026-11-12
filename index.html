@@ -680,7 +680,7 @@ function renderFeaturedCards(cards) {
       <div class="featured-card-item card-theme-${colorLower}" data-name="${safeName}" onclick="openCardDetail(this.dataset.name)" title="Click to view ${safeName}">
         <div class="card-foil-sheen"></div>
         <div class="card-art-wrap">
-          <img src="${(typeof cleanCardImageUrl === 'function' ? cleanCardImageUrl(c.image_url) : c.image_url) || (window.FALLBACK_CARD_ART || '')}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="${c.image_url}" onerror="if(!this.dataset.retried && this.dataset.art && this.dataset.art.startsWith('http') && !window.location.hostname.includes('github.io')){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.dataset.art);} else { this.onerror=null; this.src=window.FALLBACK_CARD_ART || ''; }" />
+          <img src="${(typeof cleanCardImageUrl === 'function' ? cleanCardImageUrl(c.image_url) : c.image_url) || (window.FALLBACK_CARD_ART || '')}" alt="${safeName}" loading="lazy" referrerpolicy="no-referrer" class="card-art-img" data-art="${c.image_url}" onerror="this.onerror=null; this.src=window.FALLBACK_CARD_ART || '';" />
         </div>
         <div class="card-meta-top">
           <span class="card-color-tag color-tag-${colorLower}">${c.color}</span>

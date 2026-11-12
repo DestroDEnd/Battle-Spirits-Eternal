@@ -966,6 +966,64 @@
         } catch (e) {}
       }
 
+      if (path.endsWith('/api/decks')) {
+        return new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (path.endsWith('/api/local-decks')) {
+        return new Response(JSON.stringify({ success: true, decks: [] }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (path.endsWith('/api/captcha')) {
+        const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+        let code = '';
+        for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+        const token = 'wasm_' + Date.now();
+        const colors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#c084fc', '#38bdf8'];
+        let linesSvg = '';
+        for (let i = 0; i < 5; i++) {
+          const x1 = Math.floor(Math.random() * 180), y1 = Math.floor(Math.random() * 50);
+          const x2 = Math.floor(Math.random() * 180), y2 = Math.floor(Math.random() * 50);
+          linesSvg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${colors[i % colors.length]}" stroke-width="1.5" stroke-opacity="0.35"/>`;
+        }
+        let textSvg = '';
+        const xPos = [18, 44, 70, 96, 122, 148];
+        for (let i = 0; i < 6; i++) {
+          const rot = Math.floor(Math.random() * 30) - 15;
+          const y = 35 + Math.floor(Math.random() * 6) - 3;
+          textSvg += `<text x="${xPos[i]}" y="${y}" fill="${colors[i]}" font-family="JetBrains Mono, monospace" font-size="24" font-weight="bold" transform="rotate(${rot} ${xPos[i]} ${y})">${code[i]}</text>`;
+        }
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="50" viewBox="0 0 180 50"><rect width="180" height="50" fill="#0d1117" rx="6" stroke="#30363d" stroke-width="1"/>${linesSvg}${textSvg}</svg>`;
+        return new Response(JSON.stringify({ success: true, token, code, svg }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (path.endsWith('/api/ai-weights')) {
+        try {
+          const rawRes = await window._originalFetch(getBaseDir() + 'ai_weights.json');
+          if (rawRes.ok) return rawRes;
+        } catch (e) {}
+        return new Response(JSON.stringify({}), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
+      if (path.endsWith('/api/train-ai')) {
+        return new Response(JSON.stringify({ success: false, error: 'Static host uses pre-trained AI weights.' }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+
       // If database is currently initializing, wait for fast JSON fallback or WASM!
       if (!isReady && !isJsonReady) {
         if (jsonFallbackPromise) {
@@ -1069,6 +1127,29 @@
             });
           }
           return new Response(JSON.stringify(batchMap), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+
+        if (path.endsWith('/api/resolve-cards')) {
+          let items = [];
+          if (init && init.body) {
+            try {
+              const parsed = typeof init.body === 'string' ? JSON.parse(init.body) : init.body;
+              if (Array.isArray(parsed.items)) items = parsed.items;
+            } catch(e) {}
+          }
+          const resolved = {};
+          for (const item of items) {
+            const c = WasmDB.getCardByName(item);
+            if (c && c.name) {
+              resolved[item] = c.name;
+            } else {
+              resolved[item] = item;
+            }
+          }
+          return new Response(JSON.stringify({ success: true, resolved }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
           });

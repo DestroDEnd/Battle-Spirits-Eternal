@@ -5561,7 +5561,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         </div>
         ${coreStepperHtml}
         <div class="fsc-img-wrap">
-          <img src="${spirit.image_url}" alt="${spirit.name}" loading="lazy" referrerpolicy="no-referrer" onerror="if(!this.dataset.retried && this.src.startsWith('http') && (typeof window !== 'undefined' && !window.location.hostname.includes('github.io'))){this.dataset.retried='1'; this.src='/api/proxy-image?url=' + encodeURIComponent(this.src);} else { this.onerror=null; this.src='./assets/card_back.png'; }" />
+          <img src="${spirit.image_url}" alt="${spirit.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null; this.src='./assets/card_back.png';" />
         </div>
         <div class="fsc-name" title="${spirit.name}">${spirit.name}</div>
         <div class="fsc-status-pill" ${!canUnitAttack(spirit) && !spirit.isExhausted ? 'title="Rule 7.2: Uncombined Brave cannot attack or block"' : ''}>${spirit.isExhausted ? 'EXHAUSTED' : (!canUnitAttack(spirit) ? 'BRAVE (NO ATTACK)' : 'READY')}</div>
