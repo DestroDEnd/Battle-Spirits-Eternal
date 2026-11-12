@@ -9,14 +9,16 @@ const ARTWORKS_FILE = path.join(BSP_DIR, 'data', 'card_artworks.json');
 
 let cachedArtworksMap = null;
 
-const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
-const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
-const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
+const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview|promo\s*shot/i;
+const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d|ep\d+_|screenshot|screencap|capture|drawing|table|hand/i;
+const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b|\bdraws\b|\bstance\b|\blauncher\b|\bthrusters?\b|\bfiring\b|\bepilogue\b|\bsibling\b|\bholding\b|\battacking\b/i;
+const MULTI_CARD_SCENE_REGEX = /\d+\s+[\w\-]+,\s*\d+/i;
 
 function isActualCard(caption, file) {
   if (NON_CARD_REGEX.test(caption)) return false;
   if (NON_CARD_FILE_REGEX.test(file)) return false;
   if (SCENE_WORDS_REGEX.test(caption)) return false;
+  if (MULTI_CARD_SCENE_REGEX.test(caption)) return false;
   return true;
 }
 

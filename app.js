@@ -1579,9 +1579,10 @@ const ModalCardArtworkManager = {
     const parseRes = await (await fetch(parseUrl)).json();
     if (!parseRes.parse || !parseRes.parse.wikitext) return null;
 
-    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
-    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
-    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
+    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview|promo\s*shot/i;
+    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d|ep\d+_|screenshot|screencap|capture|drawing|table|hand/i;
+    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b|\bdraws\b|\bstance\b|\blauncher\b|\bthrusters?\b|\bfiring\b|\bepilogue\b|\bsibling\b|\bholding\b|\battacking\b/i;
+    const MULTI_CARD_SCENE_REGEX = /\d+\s+[\w\-]+,\s*\d+/i;
 
     const wikitext = parseRes.parse.wikitext['*'];
     const sections = wikitext.split(/(?===+[^=]+==+)/);
@@ -1601,7 +1602,7 @@ const ModalCardArtworkManager = {
           let caption = parts.slice(1).join('|').trim();
           caption = caption.replace(/<[^>]+>/g, '').replace(/https?:\/\/\S+/g, '').replace(/\([^)]*https?:[^)]*\)/g, '').trim();
           if (/core\.png|main\d*\.png|flash\d*\.png|soulcore/i.test(file)) continue;
-          if (NON_CARD_REGEX.test(caption) || NON_CARD_FILE_REGEX.test(file) || SCENE_WORDS_REGEX.test(caption)) continue;
+          if (NON_CARD_REGEX.test(caption) || NON_CARD_FILE_REGEX.test(file) || SCENE_WORDS_REGEX.test(caption) || MULTI_CARD_SCENE_REGEX.test(caption)) continue;
           if (/\.(png|jpe?g|webp)$/i.test(file)) {
             altFiles.push({ file, caption: caption || 'Alternate Art' });
           }

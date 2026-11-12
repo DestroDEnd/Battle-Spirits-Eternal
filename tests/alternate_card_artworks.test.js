@@ -6,6 +6,7 @@ import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 import {
   loadArtworksCache,
+  saveArtworksCache,
   getCachedArtworks,
   resolveCardArtworks,
   cacheArtworks
@@ -56,6 +57,7 @@ describe('Alternate Card Artworks Suite', () => {
     // Clean up mock
     const cache = loadArtworksCache();
     delete cache[testCard.toLowerCase()];
+    saveArtworksCache();
   });
 
   it('4. Modal HTML files contain artwork stage with navigation buttons and indicator', () => {
@@ -226,9 +228,13 @@ describe('Alternate Card Artworks Suite', () => {
   it('8. Concept art, sketches, anime screencaps, and full illustrations are strictly excluded from card artworks', () => {
     const raw = fs.readFileSync(path.join(BSP_DIR, 'data', 'card_artworks.json'), 'utf8');
     const artworksMap = JSON.parse(raw);
-    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview/i;
-    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d/i;
-    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b/i;
+    const NON_CARD_REGEX = /full\s*art|\bfa\b|concept|illustration|sketch|anime|character|setting|draft|rough|visual|twitter|pixiv|episode|scene|screenshot|screencap|preview|promo\s*shot/i;
+    const NON_CARD_FILE_REGEX = /_fa\b|fa\.(jpe?g|png|webp)|_concept|_sketch|_anime|_ill|_char|_setting|_draft|_scene|_ep\d|ep\d+_|screenshot|screencap|capture|drawing|table|hand/i;
+    const SCENE_WORDS_REGEX = /\bwants\b|\bdefeats?\b|\bfights?\b|\bscene\b|\bappearance\b|\bdraws\b|\bstance\b|\blauncher\b|\bthrusters?\b|\bfiring\b|\bepilogue\b|\bsibling\b|\bholding\b|\battacking\b/i;
+    const MULTI_CARD_SCENE_REGEX = /\d+\s+[\w\-]+,\s*\d+/i;
+
+    assert.equal(artworksMap['icemaiden'], undefined, 'Anime screencap Icemaiden must not be in alternate artworks map');
+    assert.equal(artworksMap['berserker-gun'], undefined, 'Anime screencap Berserker-Gun must not be in alternate artworks map');
 
     for (const [key, arts] of Object.entries(artworksMap)) {
       for (let i = 1; i < arts.length; i++) {
@@ -237,6 +243,7 @@ describe('Alternate Card Artworks Suite', () => {
         assert.ok(!NON_CARD_REGEX.test(a.name), `Card ${key} artwork "${a.name}" matches NON_CARD_REGEX`);
         assert.ok(!NON_CARD_FILE_REGEX.test(filename), `Card ${key} file "${filename}" matches NON_CARD_FILE_REGEX`);
         assert.ok(!SCENE_WORDS_REGEX.test(a.name), `Card ${key} artwork "${a.name}" matches SCENE_WORDS_REGEX`);
+        assert.ok(!MULTI_CARD_SCENE_REGEX.test(a.name), `Card ${key} artwork "${a.name}" matches MULTI_CARD_SCENE_REGEX`);
       }
     }
   });
