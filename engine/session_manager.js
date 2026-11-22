@@ -140,8 +140,8 @@ export class BattleSessionManager {
       usePromptManager: true,
       requireAuth: options.requireAuth !== false,
       players: {
-        player: { id: p1.id, name: p1.name, controlType: p1.controlType, authToken: p1.authToken },
-        opponent: { id: p2.id, name: p2.name, controlType: p2.controlType, authToken: p2.authToken }
+        player: { id: p1.id, name: p1.name, controlType: p1.controlType },
+        opponent: { id: p2.id, name: p2.name, controlType: p2.controlType }
       }
     });
 
@@ -202,11 +202,6 @@ export class BattleSessionManager {
       session: sessionData,
       clock: clockData,
       eventSeq: 1
-    });
-
-    this.authTokens.set(matchId, {
-      player: p1Token,
-      opponent: (initialStatus === SESSION_STATUS.WAITING_FOR_PLAYERS) ? null : p2Token
     });
 
     return {
@@ -286,20 +281,12 @@ export class BattleSessionManager {
             opponent: {
               id: p2.id,
               name: p2.name,
-              controlType: p2.controlType,
-              authToken: p2Token
+              controlType: p2.controlType
             }
           }
         });
       }
     }
-
-    let tokens = this.authTokens.get(matchId);
-    if (!tokens) {
-      tokens = {};
-      this.authTokens.set(matchId, tokens);
-    }
-    tokens.opponent = p2Token;
 
     // Record PLAYER_JOINED event
     const eventSeq = (active ? active.eventSeq : 1) + 1;
@@ -393,13 +380,6 @@ export class BattleSessionManager {
 
       this.store.updateSessionState(matchId, session.state, session.version, updates);
     }
-
-    let tokens = this.authTokens.get(matchId);
-    if (!tokens) {
-      tokens = {};
-      this.authTokens.set(matchId, tokens);
-    }
-    tokens[playerSide] = authToken;
 
     // Record & broadcast PLAYER_RECONNECTED event
     const active = this.activeGames.get(matchId);
@@ -622,13 +602,7 @@ export class BattleSessionManager {
         return evt;
       }
 
-      const p = { ...evt.payload };
-
-      // Never leak tokens or hashes in event payloads
-      delete p.authToken;
-      delete p.player1Token;
-      delete p.player2Token;
-      delete p.tokenHash;
+      const p = scrubCredentials(JSON.parse(JSON.stringify(evt.payload)));
 
       // Mask opponent private card info if present in action result
       if (p.result && typeof p.result === 'object') {
