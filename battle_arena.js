@@ -16676,6 +16676,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
 
   function exitDuelToLobby() {
     clearAllTimers();
+    stopClientTurnClock();
     DuelState.inDuel = false;
     renderArenaLobby();
   }

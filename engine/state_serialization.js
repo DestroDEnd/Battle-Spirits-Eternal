@@ -116,6 +116,44 @@ export function serializePlayerState(player) {
 }
 
 /**
+ * Recursively removes sensitive credential fields from any data structure.
+ */
+export function scrubCredentials(obj, visited = new WeakSet()) {
+  if (!obj || typeof obj !== 'object') return obj;
+  if (visited.has(obj)) return obj;
+  visited.add(obj);
+
+  const sensitiveKeys = new Set([
+    'authToken',
+    'player1Token',
+    'player2Token',
+    'tokenHash',
+    'player1_token_hash',
+    'player2_token_hash',
+    'secret',
+    'password',
+    'recoveryToken'
+  ]);
+
+  if (Array.isArray(obj)) {
+    for (let i = 0; i < obj.length; i++) {
+      if (typeof obj[i] === 'object' && obj[i] !== null) {
+        scrubCredentials(obj[i], visited);
+      }
+    }
+  } else {
+    for (const key of Object.keys(obj)) {
+      if (sensitiveKeys.has(key)) {
+        delete obj[key];
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        scrubCredentials(obj[key], visited);
+      }
+    }
+  }
+  return obj;
+}
+
+/**
  * Serializes the complete authoritative GameState into a JSON-safe snapshot.
  */
 export function serializeGameState(state) {
@@ -129,8 +167,18 @@ export function serializeGameState(state) {
     matchId: matchCtx.matchId,
     requireAuth: matchCtx.requireAuth,
     players: {
-      player: matchCtx.players?.player ? { ...matchCtx.players.player } : null,
-      opponent: matchCtx.players?.opponent ? { ...matchCtx.players.opponent } : null
+      player: matchCtx.players?.player ? {
+        id: matchCtx.players.player.id,
+        name: matchCtx.players.player.name,
+        side: matchCtx.players.player.side,
+        controlType: matchCtx.players.player.controlType
+      } : null,
+      opponent: matchCtx.players?.opponent ? {
+        id: matchCtx.players.opponent.id,
+        name: matchCtx.players.opponent.name,
+        side: matchCtx.players.opponent.side,
+        controlType: matchCtx.players.opponent.controlType
+      } : null
     }
   } : null;
 
@@ -189,6 +237,8 @@ export function serializeGameState(state) {
     },
     resolverContinuation: state.resolverContinuation ? JSON.parse(JSON.stringify(state.resolverContinuation)) : null
   };
+
+  return scrubCredentials(serialized);
 }
 
 /**
@@ -419,5 +469,5 @@ export function redactGameStateForViewer(state, viewerSideOrToken = null) {
     });
   }
 
-  return snapshot;
+  return scrubCredentials(snapshot);
 }
