@@ -1079,7 +1079,7 @@ export class BattleSessionManager {
     const clock = this.getClockState(matchId);
     const sanitizedState = redactGameStateForViewer(game.state, viewerSide);
 
-    return {
+    return scrubCredentials({
       matchId,
       status: session.status,
       version: session.version,
@@ -1088,7 +1088,7 @@ export class BattleSessionManager {
       state: sanitizedState,
       clock,
       pendingInteractions: sanitizedState.pendingInteractions || []
-    };
+    });
   }
 
   getActiveMatches(playerId = null) {
