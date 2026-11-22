@@ -8,7 +8,7 @@
  */
 
 import { getDefaultSessionStore, hashToken, SessionStore } from './session_store.js';
-import { serializeGameState, deserializeGameState, redactGameStateForViewer } from './state_serialization.js';
+import { serializeGameState, deserializeGameState, redactGameStateForViewer, scrubCredentials } from './state_serialization.js';
 import { createGame } from './index.js';
 import { EXECUTION_MODES, PLAYER_CONTROL_TYPES, generateSecureToken, MatchContext } from './session_mode.js';
 import { INTERACTION_STATUS } from './interaction.js';
@@ -31,7 +31,6 @@ export class BattleSessionManager {
   constructor(options = {}) {
     this.store = options.store || getDefaultSessionStore();
     this.activeGames = new Map(); // matchId -> { game, session, clock, eventSeq }
-    this.authTokens = new Map(); // matchId -> { player: token, opponent: token } (in-memory raw token cache)
     this.heartbeats = new Map(); // matchId -> { player: timestamp, opponent: timestamp }
     this.listeners = new Map(); // matchId -> Set of { viewerSide, callback }
     this.timeProvider = options.timeProvider || (() => Date.now());
@@ -82,11 +81,12 @@ export class BattleSessionManager {
    * Records an event in storage and broadcasts to subscribers.
    */
   _recordAndBroadcastEvent(matchId, seq, type, payload) {
-    this.store.recordEvent(matchId, seq, type, payload);
+    const cleanPayload = scrubCredentials(payload ? JSON.parse(JSON.stringify(payload)) : {});
+    this.store.recordEvent(matchId, seq, type, cleanPayload);
     this.broadcastEvent(matchId, {
       seq,
       type,
-      payload,
+      payload: cleanPayload,
       createdAt: this.now()
     });
   }
