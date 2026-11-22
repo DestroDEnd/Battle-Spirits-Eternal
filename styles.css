@@ -13315,33 +13315,49 @@ body.arena-in-duel .battle-clash-center {
 
 body.arena-in-duel .burst-center-turn-slot {
   flex: 0 0 auto !important;
+  min-height: 0 !important;
+  height: 30px !important;
+  max-height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 body.arena-in-duel .turn-badge {
-  height: 30px !important;
-  padding: 0 0.55rem !important;
-  border-radius: 0.4rem !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  padding: 0 0.6rem !important;
+  border-radius: 0.45rem !important;
   display: inline-flex !important;
+  flex-direction: row !important;
   align-items: center !important;
-  gap: 0.35rem !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
   box-sizing: border-box !important;
+  white-space: nowrap !important;
 }
 
 body.arena-in-duel .turn-badge-label {
-  font-size: 0.68rem !important;
+  font-size: 0.7rem !important;
   font-weight: 900 !important;
+  line-height: 1 !important;
+  margin-bottom: 0 !important;
 }
 
 body.arena-in-duel .turn-badge-player {
   font-size: 0.65rem !important;
   font-weight: 800 !important;
   text-transform: uppercase !important;
+  line-height: 1 !important;
 }
 
 body.arena-in-duel .turn-badge-step {
   font-size: 0.62rem !important;
   color: #fbbf24 !important;
   font-weight: 700 !important;
+  line-height: 1 !important;
+  margin-top: 0 !important;
 }
 
 /* Player Hand Zone */
@@ -13352,16 +13368,21 @@ body.arena-in-duel .player-hand-zone {
 }
 
 body.arena-in-duel .hand-label {
-  font-size: 0.65rem !important;
-  margin-bottom: 0.1rem !important;
+  font-size: 0.68rem !important;
+  margin-bottom: 0.15rem !important;
 }
 
-/* Dynamic Turn 1 Mulligan Prompt Bar inside Hand */
+/* Dedicated Starting Hand & Contract Partner Prompt Bar (Floating above hand) */
+#startingHandBannerContainer {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 body.arena-in-duel .mulligan-prompt-bar {
-  padding: 4px 10px !important;
-  margin-bottom: 4px !important;
-  border-radius: 6px !important;
-  font-size: 0.72rem !important;
+  padding: 6px 12px !important;
+  margin-bottom: 6px !important;
+  border-radius: 8px !important;
+  font-size: 0.75rem !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -13370,8 +13391,8 @@ body.arena-in-duel .mulligan-prompt-bar {
 }
 
 body.arena-in-duel .mulligan-prompt-bar button {
-  padding: 3px 9px !important;
-  font-size: 0.72rem !important;
+  padding: 4px 10px !important;
+  font-size: 0.75rem !important;
 }
 
 /* Static banner completely hidden */
@@ -13389,39 +13410,56 @@ body.arena-in-duel #deckQuickWidgetWrap,
 }
 
 body.arena-in-duel .hand-track {
-  gap: 0.4rem !important;
-  padding-bottom: 0.1rem !important;
-  align-items: flex-end !important;
+  gap: 0.55rem !important;
+  padding: 0.25rem 0.2rem 0.4rem 0.2rem !important;
+  align-items: center !important;
   overflow-x: auto !important;
-  overflow-y: hidden !important;
+  overflow-y: visible !important;
+  min-height: 125px !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(56, 189, 248, 0.4) transparent !important;
 }
 
 body.arena-in-duel .hand-card-item {
-  width: 74px !important;
-  height: 100px !important;
-  padding: 0.2rem !important;
-  border-radius: 0.4rem !important;
+  width: 90px !important;
+  height: 124px !important;
+  padding: 0.28rem !important;
+  border-radius: 0.45rem !important;
   flex-shrink: 0 !important;
   box-sizing: border-box !important;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+body.arena-in-duel .hand-card-item:hover {
+  transform: translateY(-8px) scale(1.08) !important;
+  z-index: 25 !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 12px rgba(56, 189, 248, 0.5) !important;
 }
 
 body.arena-in-duel .hc-cost-badge {
-  width: 17px !important;
-  height: 17px !important;
-  font-size: 0.62rem !important;
-  top: -3px !important;
-  left: -3px !important;
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  top: -4px !important;
+  left: -4px !important;
 }
 
 body.arena-in-duel .hc-img-wrap {
-  height: 48px !important;
+  height: 62px !important;
+  border-radius: 0.35rem !important;
 }
 
 body.arena-in-duel .hc-name {
-  font-size: 0.56rem !important;
-  line-height: 1.1 !important;
-  max-height: 20px !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  line-height: 1.15 !important;
+  max-height: 24px !important;
   overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: #e2e8f0 !important;
+  margin-top: 2px !important;
 }
 
 /* Duel Controls Toolbar */
