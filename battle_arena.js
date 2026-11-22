@@ -5571,6 +5571,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     AudioFX.coreChime();
     renderArenaLobby();
     renderDuelTable();
+    startClientTurnClock(240);
 
     // Scroll smoothly to battlefield (without forcing fullscreen)
     const arenaEl = document.getElementById('battleArena');
@@ -5648,6 +5649,11 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   function confirmStartingHandAndBegin() {
     DuelState.player.hasConfirmedHand = true;
     DuelState.player.hasMulliganed = true;
+    const bannerContainer = document.getElementById('startingHandBannerContainer');
+    if (bannerContainer) {
+      bannerContainer.style.display = 'none';
+      bannerContainer.innerHTML = '';
+    }
     if (typeof document !== 'undefined') {
       const oldBanners = document.querySelectorAll('.mulligan-banner, #turn1MulliganBanner, .mulligan-prompt-bar');
       oldBanners.forEach(el => {
