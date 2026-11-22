@@ -1,28 +1,28 @@
 # Test Disposition Audit Report (Phase M.1 — Work Package J)
 
-**Generated At:** 2026-11-22T11:56:47.132Z  
-**Total Discovered Test Files:** 263  
-**Master Regression Battery Suites:** 64  
+**Generated At:** 2026-11-22T17:01:04.598Z  
+**Total Discovered Test Files:** 264  
+**Master Regression Battery Suites:** 65  
 **Disposition Integrity Standard:** Zero Inferred Passes; Strict Process Execution Evidence  
 
 ---
 
 ## 1. Executive Summary & Disposition Breakdown
 
-In Phase M.1, all 263 test files across the repository have been audited under a strict mutually exclusive disposition taxonomy:
+In Phase M.1, all 264 test files across the repository have been audited under a strict mutually exclusive disposition taxonomy:
 
 | Disposition Category | File Count | Percentage (%) | Verification Evidence |
 |---|---:|---:|---|
-| **EXECUTED_PASS** | **64** | 24.33% | Synchronously executed by master verification runner with exit code 0 |
+| **EXECUTED_PASS** | **65** | 24.62% | Synchronously executed by master verification runner with exit code 0 |
 | **EXECUTED_FAIL** | **0** | 0.00% | None |
 | **BLOCKED_ENVIRONMENT** | **4** | 1.52% | Tests blocked by missing runtime environment prerequisites |
-| **EXCLUDED_WITH_REASON** | **5** | 1.90% | Explicitly excluded with documented technical rationale |
-| **HISTORICAL_NOT_CURRENTLY_EXECUTED** | **190** | 72.24% | Frozen historical phase baselines and milestone fixtures |
-| **Total Test Files Audited** | **263** | **100.00%** | Full discovery inventory without omission |
+| **EXCLUDED_WITH_REASON** | **5** | 1.89% | Explicitly excluded with documented technical rationale |
+| **HISTORICAL_NOT_CURRENTLY_EXECUTED** | **190** | 71.97% | Frozen historical phase baselines and milestone fixtures |
+| **Total Test Files Audited** | **264** | **100.00%** | Full discovery inventory without omission |
 
 ---
 
-## 2. Complete File-by-File Disposition Inventory (263 Files)
+## 2. Complete File-by-File Disposition Inventory (264 Files)
 
 | Test File | Assigned Disposition | Category | Rationale & Evidence |
 |---|---|---|---|
@@ -180,6 +180,7 @@ In Phase M.1, all 263 test files across the repository have been audited under a
 | `tests/playable_engine_local_match.test.js` | `EXECUTED_PASS` | `integration` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/prompt_manager_compatibility.test.js` | `EXECUTED_PASS` | `regression` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/public_release_e2e_match.test.js` | `EXECUTED_PASS` | `integration` | Active authoritative suite executed synchronously in master battery with exit code 0 |
+| `tests/random_matchmaking.test.js` | `EXECUTED_PASS` | `real-browser` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/real_browser_arena.test.js` | `EXECUTED_PASS` | `real-browser` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/real_card_semantic_validation.test.js` | `EXECUTED_PASS` | `semantic_card_validation` | Active authoritative suite executed synchronously in master battery with exit code 0 |
 | `tests/real_cards_17_strengthened_regression.test.js` | `EXECUTED_PASS` | `semantic_card_validation` | Active authoritative suite executed synchronously in master battery with exit code 0 |

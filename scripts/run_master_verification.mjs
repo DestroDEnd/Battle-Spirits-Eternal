@@ -167,7 +167,10 @@ const MASTER_SUITES = [
   { file: 'tests/phase_m1_connection_lease.test.js', category: 'regression', dataDep: false },
   { file: 'tests/phase_m1_realtime_sync.test.js', category: 'integration', dataDep: false },
   { file: 'tests/phase_m1_concurrency_recovery.test.js', category: 'regression', dataDep: false },
-  { file: 'tests/phase_m1_two_human_browser_e2e.test.js', category: 'real-browser', dataDep: true, isBrowser: true }
+  { file: 'tests/phase_m1_two_human_browser_e2e.test.js', category: 'real-browser', dataDep: true, isBrowser: true },
+
+  // Random Battle Assorting & Quick Matchmaking (Showdown Style)
+  { file: 'tests/random_matchmaking.test.js', category: 'real-browser', dataDep: true, isBrowser: true }
 ];
 
 // Verify configuration integrity

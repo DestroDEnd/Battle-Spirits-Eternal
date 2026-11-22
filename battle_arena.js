@@ -4196,6 +4196,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
             DuelState.turn = data.turnNumber || 1;
             DuelState.activePlayer = data.activePlayer || 'player';
             DuelState.phaseIndex = 4; // Main step by default
+            renderArenaLobby();
             renderDuelTable();
             renderPlayerHand();
             updateStepButtons();
@@ -4212,6 +4213,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   async function initBattleArena() {
     // 1. Immediately render the lobby synchronously so selectors and previews appear in frame 0!
     try {
+      populatePvpDeckSelects();
       renderArenaLobby();
       renderAiDashboard();
     } catch (e) {
@@ -4578,6 +4580,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     const duelEl = document.getElementById('battleDuelTable');
     const arenaEl = document.getElementById('battleArena');
     if (!lobbyEl) return;
+
+    try {
+      populatePvpDeckSelects();
+    } catch (_) {}
 
     if (DuelState.inDuel) {
       lobbyEl.style.display = 'none';
@@ -17662,7 +17668,17 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (typeof document === 'undefined' || typeof document.getElementById !== 'function' || typeof document.createElement !== 'function') return;
     const hostSel = document.getElementById('pvpHostDeckSelect');
     const joinSel = document.getElementById('pvpJoinDeckSelect');
+    const randSel = document.getElementById('pvpRandomDeckSelect');
     const registered = (window.DeckManager && window.DeckManager.getRegisteredDecks) ? window.DeckManager.getRegisteredDecks() : [];
+
+    const stdOptions = [
+      { val: 'deck_std_red', label: '🔴 Red: Hero Dragon (Standard)' },
+      { val: 'deck_std_purple', label: '🟣 Purple: Netherworld (Standard)' },
+      { val: 'deck_std_green', label: '🟢 Green: Emerald Gale (Standard)' },
+      { val: 'deck_std_white', label: '⚪ White: Armed Fortress (Standard)' },
+      { val: 'deck_std_yellow', label: '🟡 Yellow: Celestial Symphony (Standard)' },
+      { val: 'deck_std_blue', label: '🔵 Blue: Colosseum Titans (Standard)' }
+    ];
 
     [hostSel, joinSel].forEach(sel => {
       if (!sel || typeof sel.appendChild !== 'function') return;
@@ -17675,14 +17691,6 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
           sel.appendChild(opt);
         });
       } else {
-        const stdOptions = [
-          { val: 'deck_std_red', label: '🔴 Red: Hero Dragon (Standard)' },
-          { val: 'deck_std_purple', label: '🟣 Purple: Netherworld (Standard)' },
-          { val: 'deck_std_green', label: '🟢 Green: Emerald Gale (Standard)' },
-          { val: 'deck_std_white', label: '⚪ White: Armed Fortress (Standard)' },
-          { val: 'deck_std_yellow', label: '🟡 Yellow: Celestial Symphony (Standard)' },
-          { val: 'deck_std_blue', label: '🔵 Blue: Colosseum Titans (Standard)' }
-        ];
         stdOptions.forEach(s => {
           const opt = document.createElement('option');
           opt.value = s.val;
@@ -17691,6 +17699,29 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
         });
       }
     });
+
+    if (randSel && typeof randSel.appendChild === 'function') {
+      randSel.innerHTML = '';
+      const randOpt = document.createElement('option');
+      randOpt.value = 'random';
+      randOpt.textContent = '🎲 Random Realm Deck (Showdown Style)';
+      randSel.appendChild(randOpt);
+
+      if (registered && registered.length > 0) {
+        registered.forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d.id;
+          opt.textContent = `🃏 ${d.name} (${d.cardCount || 40} Cards)`;
+          randSel.appendChild(opt);
+        });
+      }
+      stdOptions.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.val;
+        opt.textContent = s.label;
+        randSel.appendChild(opt);
+      });
+    }
   }
 
   function copyMyDuelistId() {
@@ -17822,6 +17853,179 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     if (modal) modal.style.display = 'none';
     if (window.MultiplayerService) window.MultiplayerService.leaveRoom();
     if (typeof showToast === 'function') showToast('Cancelled duel room.', 'info');
+  }
+
+  // ── RANDOM MATCHMAKING & QUICK BATTLE ASSORTING (SHOWDOWN-STYLE) ──
+  let activeMatchmakingTicketId = null;
+  let matchmakingPollInterval = null;
+  let matchmakingTimerInterval = null;
+  let matchmakingStartTime = 0;
+
+  async function startRandomMatchmaking() {
+    if (typeof _RawAudioFX !== 'undefined' && _RawAudioFX.buttonTick) {
+      _RawAudioFX.buttonTick();
+    }
+
+    let duelistName = 'Challenger';
+    let duelistId = null;
+    if (window.FirebaseService) {
+      const user = window.FirebaseService.getUser();
+      if (user) duelistName = user.displayName || user.email || 'Challenger';
+      duelistId = window.FirebaseService.getDuelistId ? window.FirebaseService.getDuelistId() : null;
+    }
+    if (!duelistId) {
+      duelistId = safeGetStorage('bse_duelist_id', null);
+      if (!duelistId) {
+        duelistId = 'usr_' + Math.random().toString(36).substring(2, 10);
+        safeSetStorage('bse_duelist_id', duelistId);
+      }
+    }
+
+    const randSel = document.getElementById('pvpRandomDeckSelect');
+    let chosenDeck = randSel ? randSel.value : 'random';
+    if (!chosenDeck) chosenDeck = 'random';
+
+    const modal = document.getElementById('randomMatchmakingModal');
+    const searchingBox = document.getElementById('matchmakingSearchingBox');
+    const resultBox = document.getElementById('matchmakingResultBox');
+    const timerEl = document.getElementById('matchmakingTimerDisplay');
+    const statusEl = document.getElementById('matchmakingQueueStatus');
+
+    if (searchingBox) searchingBox.style.display = 'block';
+    if (resultBox) resultBox.style.display = 'none';
+    if (timerEl) timerEl.textContent = '00:00';
+    if (statusEl) statusEl.textContent = 'Contacting matchmaking network...';
+    if (modal) modal.style.display = 'flex';
+
+    matchmakingStartTime = Date.now();
+    if (matchmakingTimerInterval) clearInterval(matchmakingTimerInterval);
+    matchmakingTimerInterval = setInterval(() => {
+      const elapsedSec = Math.floor((Date.now() - matchmakingStartTime) / 1000);
+      const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+      const s = String(elapsedSec % 60).padStart(2, '0');
+      if (timerEl) timerEl.textContent = `${m}:${s}`;
+    }, 1000);
+
+    try {
+      const res = await fetch('/api/matchmaking/find', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          playerId: duelistId,
+          playerName: duelistName,
+          deckId: chosenDeck
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error(`Matchmaking service error: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      if (data.status === 'MATCHED') {
+        handleMatchFound(data);
+        return;
+      }
+
+      activeMatchmakingTicketId = data.ticketId;
+      if (statusEl) {
+        statusEl.textContent = `In matchmaking queue (${data.queueSize || 1} searching). Assorting opponents...`;
+      }
+
+      if (matchmakingPollInterval) clearInterval(matchmakingPollInterval);
+      matchmakingPollInterval = setInterval(async () => {
+        if (!activeMatchmakingTicketId) return;
+        try {
+          const pollRes = await fetch(`/api/matchmaking/status?ticketId=${encodeURIComponent(activeMatchmakingTicketId)}`);
+          if (pollRes.ok) {
+            const pollData = await pollRes.json();
+            if (pollData.status === 'MATCHED') {
+              if (matchmakingPollInterval) {
+                clearInterval(matchmakingPollInterval);
+                matchmakingPollInterval = null;
+              }
+              handleMatchFound(pollData);
+            } else if (pollData.status === 'EXPIRED' || pollData.status === 'CANCELLED') {
+              cancelRandomMatchmaking(false);
+              if (typeof showToast === 'function') showToast('Matchmaking search timed out. Please try again.', 'warning');
+            } else if (pollData.status === 'SEARCHING') {
+              if (statusEl) {
+                statusEl.textContent = `Assorting opponents... (${pollData.queueSize || 1} searching)`;
+              }
+            }
+          }
+        } catch (pollErr) {
+          // Retry next tick
+        }
+      }, 1500);
+
+    } catch (err) {
+      console.warn('Matchmaking start failed:', err);
+      cancelRandomMatchmaking(false);
+      if (typeof showToast === 'function') showToast(`Could not start matchmaking: ${err.message}`, 'error');
+    }
+  }
+
+  function handleMatchFound(matchData) {
+    if (matchmakingPollInterval) {
+      clearInterval(matchmakingPollInterval);
+      matchmakingPollInterval = null;
+    }
+    if (matchmakingTimerInterval) {
+      clearInterval(matchmakingTimerInterval);
+      matchmakingTimerInterval = null;
+    }
+    activeMatchmakingTicketId = null;
+
+    if (typeof AudioFX !== 'undefined' && AudioFX.superVictory) {
+      try { AudioFX.superVictory(); } catch(e){}
+    } else if (typeof _RawAudioFX !== 'undefined' && _RawAudioFX.playTone) {
+      _RawAudioFX.playTone(600, 'sine', 0.3, 0.15);
+    }
+
+    const searchingBox = document.getElementById('matchmakingSearchingBox');
+    const resultBox = document.getElementById('matchmakingResultBox');
+    const oppNameEl = document.getElementById('matchmakingOpponentName');
+
+    if (searchingBox) searchingBox.style.display = 'none';
+    if (resultBox) resultBox.style.display = 'block';
+    if (oppNameEl) oppNameEl.textContent = matchData.opponentName || 'Challenger';
+
+    safeSetStorage('bse_active_match_id', matchData.matchId);
+    safeSetStorage('bse_active_auth_token', matchData.authToken);
+    safeSetStorage('bse_player_side', matchData.playerSide);
+
+    setTimeout(async () => {
+      const modal = document.getElementById('randomMatchmakingModal');
+      if (modal) modal.style.display = 'none';
+      await resumeBattle(matchData.matchId, matchData.authToken);
+    }, 1200);
+  }
+
+  function cancelRandomMatchmaking(sendCancelRequest = true) {
+    if (matchmakingPollInterval) {
+      clearInterval(matchmakingPollInterval);
+      matchmakingPollInterval = null;
+    }
+    if (matchmakingTimerInterval) {
+      clearInterval(matchmakingTimerInterval);
+      matchmakingTimerInterval = null;
+    }
+    const ticketToCancel = activeMatchmakingTicketId;
+    activeMatchmakingTicketId = null;
+
+    const modal = document.getElementById('randomMatchmakingModal');
+    if (modal) modal.style.display = 'none';
+
+    if (sendCancelRequest && ticketToCancel && typeof fetch !== 'undefined') {
+      fetch('/api/matchmaking/cancel', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ticketId: ticketToCancel })
+      }).catch(() => {});
+      if (typeof showToast === 'function') showToast('Matchmaking search cancelled.', 'info');
+    }
   }
 
   function copyRoomLink() {
@@ -18224,7 +18428,10 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     startSessionHeartbeat,
     stopSessionHeartbeat,
     connectSessionStream,
-    currentSessionInfo
+    currentSessionInfo,
+    startRandomMatchmaking,
+    cancelRandomMatchmaking,
+    handleMatchFound
   };
 
   if (typeof globalThis !== 'undefined') {

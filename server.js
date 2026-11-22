@@ -10,6 +10,7 @@ import { resolveCardArtworks, getCachedArtworks, loadArtworksCache } from './eng
 import { getDefaultSessionManager } from './engine/session_manager.js';
 import { hashToken } from './engine/session_store.js';
 import { attachWebSocketServer } from './engine/websocket_server.js';
+import { getDefaultMatchmaker } from './engine/matchmaker.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -165,6 +166,63 @@ const server = http.createServer(async (req, res) => {
   let pathname = decodeURIComponent(parsedUrl.pathname);
 
   // ── API ROUTES ──
+
+  // ── RANDOM MATCHMAKING API (QUICK MATCH / BATTLE ASSORTING) ──
+  if (pathname.toLowerCase().startsWith('/api/matchmaking')) {
+    const matchmaker = getDefaultMatchmaker();
+    const parts = pathname.split('/').filter(Boolean); // ['api', 'matchmaking', ...]
+    const subRoute = parts[2] ? parts[2].toLowerCase() : '';
+
+    // POST /api/matchmaking/find
+    if (subRoute === 'find' && req.method === 'POST') {
+      try {
+        const body = await readJsonBody(req);
+        const result = await matchmaker.enterQueue(body);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
+      return;
+    }
+
+    // GET /api/matchmaking/status?ticketId=...
+    if (subRoute === 'status' && req.method === 'GET') {
+      const ticketId = parsedUrl.searchParams.get('ticketId');
+      if (!ticketId) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Missing ticketId parameter' }));
+        return;
+      }
+      const result = matchmaker.pollQueue(ticketId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(result));
+      return;
+    }
+
+    // POST /api/matchmaking/cancel
+    if (subRoute === 'cancel' && req.method === 'POST') {
+      try {
+        const body = await readJsonBody(req);
+        const result = matchmaker.leaveQueue(body.ticketId);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(result));
+      } catch (err) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: err.message, code: err.code }));
+      }
+      return;
+    }
+
+    // GET /api/matchmaking/stats
+    if (subRoute === 'stats' && req.method === 'GET') {
+      const stats = matchmaker.getQueueStats();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(stats));
+      return;
+    }
+  }
 
   // ── SESSION MANAGEMENT API (PHASE M) ──
   if (pathname.toLowerCase().startsWith('/api/sessions')) {

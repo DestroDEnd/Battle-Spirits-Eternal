@@ -1,17 +1,17 @@
 # Master Regression Test Results & Comprehensive Inventory
 **Project:** Battle Spirits Eternal (BSP)  
 **Phase:** Phase K — Work Package G Deliverable  
-**Date:** 2026-11-22T11:56:47.015Z  
-**Master Status:** **711 / 711 PASS (100% Pass Rate, 0 Failures)**  
+**Date:** 2026-11-22T17:01:04.404Z  
+**Master Status:** **714 / 714 PASS (100% Pass Rate, 0 Failures)**  
 
 ---
 
 ## 1. Executive Summary & Inventory Reconciliation
 
 Work Package G expands, repairs and hardens the Master Verification Runner (`scripts/run_master_verification.mjs`).
-All **263** discovered `.test.js` files across `tests/` have been deterministically mapped with explicit dispositions.
+All **264** discovered `.test.js` files across `tests/` have been deterministically mapped with explicit dispositions.
 
-The Master Regression Battery now integrates **64** active suites, explicitly incorporating:
+The Master Regression Battery now integrates **65** active suites, explicitly incorporating:
 - `tests/phase_k_evidence_adversarial.test.js` (**9 tests** — adversarial evidence tampering detection)
 - `tests/phase_k_mechanics.test.js` (**10 tests** — Brave separation, God Cores, Rebirth flip, compound conditions)
 - `tests/phase_k_engine_invariants.test.js` (**6 tests** — card-zone integrity, core conservation, restrictions, timing, combat, clone purity)
@@ -21,15 +21,15 @@ The Master Regression Battery now integrates **64** active suites, explicitly in
 - `tests/master_runner_adversarial.test.js` (**10 tests** — runner resilience against crashes, timeouts, malformed output)
 
 ### Master Totals
-- **Discovered Test Files in `tests/`:** **263**
-- **Active Master Battery Suites:** **64**
-- **Total Test Executions in Master:** **711**
-- **Unique Test Cases Executed:** **711**
-- **Total Passed:** **711**
+- **Discovered Test Files in `tests/`:** **264**
+- **Active Master Battery Suites:** **65**
+- **Total Test Executions in Master:** **714**
+- **Unique Test Cases Executed:** **714**
+- **Total Passed:** **714**
 - **Total Failed:** **0**
 - **Total Skipped:** **0**
 - **Duplicate Executions:** **0 (Strictly 0)**
-- **Real Browser E2E Tests:** **5** (`tests/real_browser_arena.test.js`)
+- **Real Browser E2E Tests:** **8** (`tests/real_browser_arena.test.js`)
 - **Mock-DOM Integration Tests:** **1** (`tests/browser_arena_gameplay.test.js`)
 
 ---
@@ -102,15 +102,16 @@ The Master Regression Battery now integrates **64** active suites, explicitly in
 | `tests/phase_m1_realtime_sync.test.js` | 1 | **PASS** | integration |
 | `tests/phase_m1_concurrency_recovery.test.js` | 5 | **PASS** | regression |
 | `tests/phase_m1_two_human_browser_e2e.test.js` | 1 | **PASS** | Real Browser (CDP Chrome) |
-| **Total Active Master Battery** | **711** | **PASS (100%)** | **Zero Double-Counting** |
+| `tests/random_matchmaking.test.js` | 3 | **PASS** | Real Browser (CDP Chrome) |
+| **Total Active Master Battery** | **714** | **PASS (100%)** | **Zero Double-Counting** |
 
 ---
 
-## 3. Discovered Test Corpus Dispositions (263 Files)
+## 3. Discovered Test Corpus Dispositions (264 Files)
 
 | Disposition | Count | Description |
 |---|---|---|
-| `EXECUTED_PASS` | **64** | Authoritative suites executed synchronously in master verification run with exit code 0. |
+| `EXECUTED_PASS` | **65** | Authoritative suites executed synchronously in master verification run with exit code 0. |
 | `EXECUTED_FAIL` | **0** | Suites that failed during master verification execution. |
 | `BLOCKED_ENVIRONMENT` | **4** | Tests blocked by missing runtime environment prerequisites. |
 | `EXCLUDED_WITH_REASON` | **5** | Specialized audit scripts or post-execution verification tools excluded with technical rationale. |
@@ -119,7 +120,7 @@ The Master Regression Battery now integrates **64** active suites, explicitly in
 ---
 
 ## 4. Runner Resilience Invariants Verified
-1. **Deterministic Discovery:** All 263 test files detected automatically without omission.
+1. **Deterministic Discovery:** All 264 test files detected automatically without omission.
 2. **Missing Suite Inclusion:** `runtime_activation_limits.test.js` and `real_card_semantic_validation.test.js` actively executed.
 3. **Adversarial Resilience:** 10 fixtures tested in `tests/master_runner_adversarial.test.js` (crashes, malformed lines, duplicates, timeouts, skip markers).
 4. **Zero Double-Counting:** Runner enforces strict deduplication by file, test ID, and test description.

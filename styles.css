@@ -11062,7 +11062,7 @@ body {
 
 .pvp-actions-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
 }
 @media (max-width: 800px) {
@@ -11114,6 +11114,46 @@ body {
 .btn-pvp-join:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.btn-pvp-matchmake {
+  background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+  border: none;
+  color: #fff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.6rem;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.35);
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: 1rem;
+}
+.btn-pvp-matchmake:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.matchmaking-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.matchmaking-content {
+  background: #0f172a;
+  border: 1px solid #8b5cf6;
+  border-radius: 1.25rem;
+  padding: 2.25rem 2.5rem;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(139, 92, 246, 0.3);
 }
 
 .pvp-waiting-modal {
@@ -12683,6 +12723,8 @@ body.arena-in-duel .battle-arena-section {
 body.arena-in-duel .arena-header,
 body.arena-in-duel .arena-mode-switch,
 body.arena-in-duel .online-pvp-lobby,
+body.arena-in-duel .active-battles-section,
+body.arena-in-duel #activeBattlesSection,
 body.arena-in-duel #battleLobby {
   display: none !important;
 }
@@ -13063,25 +13105,92 @@ body.arena-in-duel .soul-core-pill {
 
 /* Burst Field Zone (next to battle lines) */
 body.arena-in-duel .burst-field-zone {
-  flex: 0 0 80px !important;
-  width: 80px !important;
+  flex: 0 0 88px !important;
+  width: 88px !important;
   min-height: 0 !important;
   height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
   padding: 0.2rem !important;
   border-radius: 0.55rem !important;
   box-sizing: border-box !important;
+  position: relative !important;
 }
 
-body.arena-in-duel .burst-field-zone .bfz-lock {
-  font-size: 1.1rem !important;
+body.arena-in-duel .burst-zone-inner {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
 }
 
-body.arena-in-duel .burst-field-zone .bfz-title {
-  font-size: 0.62rem !important;
+body.arena-in-duel .burst-zone-header {
+  margin-bottom: 2px !important;
+  gap: 3px !important;
 }
 
-body.arena-in-duel .burst-field-zone .bfz-desc {
+body.arena-in-duel .burst-zone-badge {
+  font-size: 0.55rem !important;
+  padding: 1px 4px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+}
+
+body.arena-in-duel .burst-card-display {
+  margin: 1px 0 !important;
+}
+
+body.arena-in-duel .burst-card-thumb {
+  width: 44px !important;
+  height: 56px !important;
+  border-radius: 4px !important;
+}
+
+body.arena-in-duel .burst-card-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+}
+
+body.arena-in-duel .burst-info-block {
   display: none !important;
+}
+
+body.arena-in-duel .burst-btn-group {
+  margin-top: 2px !important;
+  gap: 3px !important;
+}
+
+body.arena-in-duel .btn-burst-view,
+body.arena-in-duel .btn-burst-trigger {
+  font-size: 0.58rem !important;
+  padding: 2px 5px !important;
+  border-radius: 3px !important;
+}
+
+body.arena-in-duel .burst-empty-icon {
+  font-size: 1.25rem !important;
+  margin: 2px 0 !important;
+  line-height: 1 !important;
+}
+
+body.arena-in-duel .burst-empty-title {
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+}
+
+body.arena-in-duel .burst-empty-sub {
+  font-size: 0.58rem !important;
+  color: #94a3b8 !important;
+  white-space: nowrap !important;
+  margin-top: 1px !important;
 }
 
 /* Center Hub (The Void, Nexus Field, Clash & Turn Indicator) */
