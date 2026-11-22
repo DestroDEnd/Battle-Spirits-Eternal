@@ -15808,7 +15808,15 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
     }
 
     DuelState.turn++;
+    DuelState.player.hasConfirmedHand = true;
+    DuelState.player.hasMulliganed = true;
+    const bannerContainer = document.getElementById('startingHandBannerContainer');
+    if (bannerContainer) {
+      bannerContainer.style.display = 'none';
+      bannerContainer.innerHTML = '';
+    }
     dispatchContinuousRules();
+    startClientTurnClock(240);
     if (DuelState.activePlayer === 'player') {
       addLog(`🛑 **END STEP**: Turn passed to Player! Commencing Turn ${DuelState.turn}. Click "Begin Turn" on the Step Navigator to start.`, 'step');
       renderDuelTable();
@@ -15824,6 +15832,14 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   // ── OPPONENT STEP CONTROLLER ──
   function advanceOpponentStep() {
     if (DuelState.activePlayer !== 'opponent') return;
+    if (DuelState.turn > 1 || DuelState.phaseIndex > 0) {
+      DuelState.player.hasConfirmedHand = true;
+      const bannerContainer = document.getElementById('startingHandBannerContainer');
+      if (bannerContainer) {
+        bannerContainer.style.display = 'none';
+        bannerContainer.innerHTML = '';
+      }
+    }
     const currentPhase = DuelState.phases[DuelState.phaseIndex];
     const pRegistryStep = (typeof window !== 'undefined' && window.PerCardRegistry) || (typeof globalThis !== 'undefined' && globalThis.PerCardRegistry);
     if (pRegistryStep && typeof pRegistryStep.dispatchStepEffects === 'function') {
@@ -16592,6 +16608,7 @@ const NO_PROMPT_TYPES = new Set(['SPECIAL_EFFECT', 'IMMUNITY', 'ARMOR', 'HEAVY A
   }
 
   function showGameOverModal(isVictory) {
+    stopClientTurnClock();
     const modal = document.getElementById('battleResultModal');
     if (!modal) return;
     const titleEl = document.getElementById('resultModalTitle');
